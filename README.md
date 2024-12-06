@@ -14,4 +14,4 @@ It contains:
 Directory format:
 
 
-packages/$NETWORK/0x$FIRST_2/$REMAINING_62/(bcs.json|bytecode/|decompiled/)
+packages/$NETWORK/0x$FIRST_2/$REMAINING_62/(bcs.json|bytecode_modules/|decompiled/)
