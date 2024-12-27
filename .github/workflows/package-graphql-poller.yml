@@ -1,0 +1,49 @@
+name: package-graphql-poller
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+env:
+  # APP_DIRS here
+  APP_DIR_PACKAGE_GRAPHQL_POLLER: src/python/package_graphql_poller
+  # app specific variables
+  PACKAGE_GRAPHQL_POLLER_IO_DIR: packages
+
+jobs:
+  package-graphql-poller:
+    runs-on: ubuntu-ghcloud
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install poetry and dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install poetry
+          poetry install --no-root --directory "$APP_DIR_PACKAGE_GRAPHQL_POLLER"
+
+      - name: Poetry run package-graphql-poller
+        run: |
+          echo "Running package graphql poller on mainnet and testnet" > /dev/stderr
+          poetry run --directory "$APP_DIR_PACKAGE_GRAPHQL_POLLER" \
+            python3 "$APP_DIR_PACKAGE_GRAPHQL_POLLER/main.py" \
+            --io-dir "$PACKAGE_GRAPHQL_POLLER_IO_DIR" \
+            --network mainnet
+
+      - name: Commit and Push Changes
+        id: commit-and-push
+        continue-on-error: true
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add "$PACKAGE_GRAPHQL_POLLER_IO_DIR"
+          git commit -m "package-graphql-poller: update package data"
+          git pull --rebase --depth=5
+          git push origin HEAD
