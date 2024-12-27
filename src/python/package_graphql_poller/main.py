@@ -233,7 +233,7 @@ def create_package_dir(io_dir, network, package_id):
 
 def get_and_create_bytecode_dir_for_package(io_dir, network, package_id):
     package_dir = get_package_dir(io_dir, network, package_id)
-    bytecode_dir = path.join(package_dir, "bytecode")
+    bytecode_dir = path.join(package_dir, "bytecode_modules")
     makedirs(bytecode_dir, exist_ok=True)
     return bytecode_dir
 
