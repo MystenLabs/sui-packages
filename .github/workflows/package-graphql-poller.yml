@@ -10,6 +10,7 @@ env:
   APP_DIR_PACKAGE_GRAPHQL_POLLER: src/python/package_graphql_poller
   # app specific variables
   PACKAGE_GRAPHQL_POLLER_IO_DIR: packages
+  MOVE_DECOMPILER_BIN: "$APP_DIR_PACKAGE_GRAPHQL_POLLER/move-decompiler-linux-x86_64"
 
 jobs:
   package-graphql-poller:
@@ -35,7 +36,8 @@ jobs:
           poetry run --directory "$APP_DIR_PACKAGE_GRAPHQL_POLLER" \
             python3 "$APP_DIR_PACKAGE_GRAPHQL_POLLER/main.py" \
             --io-dir "$PACKAGE_GRAPHQL_POLLER_IO_DIR" \
-            --network mainnet
+            --network mainnet \
+            --move-decompiler "$MOVE_DECOMPILER_BIN" 
 
       - name: Commit and Push Changes
         id: commit-and-push

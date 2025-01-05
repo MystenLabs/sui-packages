@@ -6,6 +6,7 @@ from os import listdir, makedirs, path
 import argparse
 import base64
 import json
+import subprocess
 import requests
 
 NETWORK_TO_ORIGIN = {
@@ -192,6 +193,7 @@ def get_packages_published_after_checkpoint(
     io_dir,
     checkpoint=None,
     on_package=lambda io_dir, network, package: None,
+    move_decompiler_path=None
 ):
     cursor = None
     has_next = True
@@ -208,7 +210,7 @@ def get_packages_published_after_checkpoint(
                 pkg = package_node_to_metadata_and_modules(p)
                 if pkg["metadata"]["sender"]:
                     # sender is only truthy for PTB packages, and not for system packages
-                    on_package(io_dir, network, pkg)
+                    on_package(io_dir, network, pkg, move_decompiler_path)
                     packages_with_metadata.append(pkg)
             has_next = body["data"]["packages"]["pageInfo"]["hasNextPage"]
             if has_next:
@@ -216,24 +218,27 @@ def get_packages_published_after_checkpoint(
     return packages_with_metadata
 
 
-def save_package_info(io_dir, network, package):
+def save_package_info(io_dir, network, package, move_decompiler_path):
     package_id = package["metadata"]["id"]
     create_package_dir(io_dir, network, package_id)
     write_package_bcs(io_dir, network, package)
     write_package_metadata(io_dir, network, package)
-    write_package_bytecode(io_dir, network, package)
+    write_package_bytecode_and_decompiled(io_dir, network, package, move_decompiler_path)
 
 
-def write_package_bytecode(io_dir, network, package):
+def write_package_bytecode_and_decompiled(io_dir, network, package, move_decompiler_path):
     metadata = package["metadata"]
-    package_dir = get_and_create_bytecode_dir_for_package(
+    bytecode_dir, decompiled_dir = get_and_create_bytecode_and_decompiled_dir_for_package(
         io_dir, network, metadata["id"]
     )
     modules = package["modules"]
     for m in modules:
-        module_file = path.join(package_dir, f"""{m["name"]}.mv""")
+        module_file = path.join(bytecode_dir, f"""{m["name"]}.mv""")
         with open(module_file, "wb") as f:
             f.write(m["bytes"])
+        
+        decompiled_file = path.join(decompiled_dir, f"""{m["name"]}.move""")
+        subprocess.run([move_decompiler_path, "--bytecode", module_file], stdout=open(decompiled_file, "w"))
 
 
 def write_package_bcs(io_dir, network, package):
@@ -265,11 +270,14 @@ def create_package_dir(io_dir, network, package_id):
     makedirs(package_dir, exist_ok=True)
 
 
-def get_and_create_bytecode_dir_for_package(io_dir, network, package_id):
+def get_and_create_bytecode_and_decompiled_dir_for_package(io_dir, network, package_id):
     package_dir = get_package_dir(io_dir, network, package_id)
     bytecode_dir = path.join(package_dir, "bytecode_modules")
-    makedirs(bytecode_dir, exist_ok=True)
-    return bytecode_dir
+    decompiled_dir = path.join(package_dir, "decompiled_modules")
+
+    makedirs(name=bytecode_dir, exist_ok=True)
+    makedirs(name=decompiled_dir, exist_ok=True)
+    return bytecode_dir, decompiled_dir
 
 
 if __name__ == "__main__":
@@ -277,6 +285,7 @@ if __name__ == "__main__":
         prog="package-graphql-poller",
         description="Polls GraphQL and writes package metadata, bcs, and bytecode",
     )
+
     arg_parser.add_argument(
         "--io-dir",
         required=True,
@@ -287,9 +296,15 @@ if __name__ == "__main__":
         "--network", required=True, help="The network (e.g. mainnet, testnet)"
     )
 
+    arg_parser.add_argument(
+        "--move-decompiler", required=True, help="The move-decopmiler binary to be used"
+    )
+
     args = arg_parser.parse_args()
     io_dir = args.io_dir
     network = args.network
+    move_decompiler_path = args.move_decompiler
+
 
     last_checkpoint_seen = get_last_checkpoint_seen(io_dir, network)
     print(f"Last checkpoint seen: {last_checkpoint_seen}")
@@ -299,5 +314,6 @@ if __name__ == "__main__":
         io_dir,
         checkpoint=last_checkpoint_seen,
         on_package=save_package_info,
+        move_decompiler_path=move_decompiler_path
     )
     new_metadata = [p["metadata"] for p in new_packages_with_metadata]
