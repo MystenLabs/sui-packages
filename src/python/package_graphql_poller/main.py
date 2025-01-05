@@ -45,6 +45,19 @@ query($cursor: String, $afterCheckpoint: UInt53) {
         nodes {
           name
           bytes
+          functions {
+            nodes {
+              visibility
+              isEntry
+              name
+              parameters {
+                repr
+              }
+              return {
+                repr
+              }
+            }
+          }
         }
       }
       linkage {
@@ -123,12 +136,33 @@ def package_node_to_metadata_and_modules(node):
     bcs["moduleMap"] = {}
     bcs["typeOriginTable"] = []
     bcs["linkageTable"] = {}
+    bcs["functionMap"] = {}
 
     module_nodes = node["modules"]["nodes"]
     modules = []
     for module_node in module_nodes:
         module_name = module_node["name"]
         module_b64 = module_node["bytes"]
+        
+        bcs["functionMap"][module_name] = {}
+        if module_node["functions"]:
+            module_functions = module_node["functions"]["nodes"]
+            for f in module_functions:
+                f_name = f["name"]
+                f_visibility = f["visibility"]
+                f_is_entry = f["isEntry"]
+                f_params = []
+                f_return = None
+                for param in f["parameters"]:
+                    f_params.append(param["repr"])
+                if f["return"] and 'repr' in f["return"]:
+                    f_return = f["return"]['repr']
+                bcs["functionMap"][module_name][f_name] = {
+                    "visibility": f_visibility,
+                    "is_entry": f_is_entry,
+                    "params": f_params,
+                    "return": f_return
+                }
 
         bcs["moduleMap"][module_name] = module_b64
 
