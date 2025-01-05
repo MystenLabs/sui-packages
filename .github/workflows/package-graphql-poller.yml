@@ -1,8 +1,8 @@
 name: package-graphql-poller
 
 on:
-  # schedule:
-  #   - cron: "*/15 * * * *"
+  schedule:
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 env:
@@ -26,7 +26,7 @@ jobs:
       - name: Install poetry and dependencies
         run: |
           python3 -m pip install --upgrade pip
-          pip install poetry
+          pip install poetry==1.8.5
           poetry install --no-root --directory "$APP_DIR_PACKAGE_GRAPHQL_POLLER"
 
       - name: Poetry run package-graphql-poller
