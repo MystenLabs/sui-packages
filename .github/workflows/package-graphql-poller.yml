@@ -28,16 +28,21 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           pip install poetry
-          poetry install --no-root --directory="$APP_DIR_PACKAGE_GRAPHQL_POLLER"
+          OLDDIR=$(pwd)
+          cd "$APP_DIR_PACKAGE_GRAPHQL_POLLER"
+          poetry install --no-root
+          cd "$OLDDIR"
 
       - name: Poetry run package-graphql-poller
         run: |
           echo "Running package graphql poller on mainnet and testnet" > /dev/stderr
-          poetry run --directory="$APP_DIR_PACKAGE_GRAPHQL_POLLER" \
-            python3 "$APP_DIR_PACKAGE_GRAPHQL_POLLER/main.py" \
-            --io-dir "$PACKAGE_GRAPHQL_POLLER_IO_DIR" \
+          OLDDIR=$(pwd)
+          cd "$APP_DIR_PACKAGE_GRAPHQL_POLLER"
+          poetry run 
+            python3 "$OLDDIR/$APP_DIR_PACKAGE_GRAPHQL_POLLER/main.py" \
+            --io-dir "$OLDDIR/$PACKAGE_GRAPHQL_POLLER_IO_DIR" \
             --network mainnet \
-            --move-decompiler "$MOVE_DECOMPILER_BIN" 
+            --move-decompiler "$OLDDIR/$MOVE_DECOMPILER_BIN" 
 
       - name: Commit and Push Changes
         id: commit-and-push
