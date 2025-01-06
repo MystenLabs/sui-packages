@@ -1,0 +1,14 @@
+module 0x3d4e44075fef95ca26fd5a2225223fbea356a18f641b1433324121ddd15c7d0c::kraken {
+    struct KRAKEN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: KRAKEN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<KRAKEN>(arg0, 6, b"KRAKEN", b"CaptainKraken", x"546865206c6567656e64617279206b72616b656e206f662074686520736576656e20736561732c2063616c6c732075706f6e20646172696e6720736f756c7320746f206a6f696e2068697320666561726c65737320637265772120546f6765746865722c207765e280996c6c207361696c2074686520726f6172696e672077617665732061626f61726420546865204162797373616c205469646520696e20736561726368206f6620746865206661626c6564204275726965642054726561737572652043686573742c207361696420746f20686f6c642073656372657473206265796f6e6420696d6167696e6174696f6e2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1736196364847.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<KRAKEN>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<KRAKEN>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
