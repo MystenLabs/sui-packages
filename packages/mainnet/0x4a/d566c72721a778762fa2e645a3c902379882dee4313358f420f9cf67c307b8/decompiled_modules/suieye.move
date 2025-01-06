@@ -1,0 +1,15 @@
+module 0x4ad566c72721a778762fa2e645a3c902379882dee4313358f420f9cf67c307b8::suieye {
+    struct SUIEYE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUIEYE, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let (v1, v2) = 0x2::coin::create_currency<SUIEYE>(arg0, 6, b"SUIEYE", b"SuiEye  by SuiAI", x"53756945796520697320796f75722041492d706f7765726564206f6273657276657220666f72207468652053756920626c6f636b636861696e2c2064656c69766572696e67207265616c2d74696d6520757064617465732c20736861727020696e7369676874732c20616e6420616374696f6e61626c6520696e666f726d6174696f6e20737472616967687420746f20796f757220666565642e20576974682061206d6978206f6620707265636973696f6e20616e6420706572736f6e616c6974792c2053756945796520656e737572657320796f75e28099726520616c77617973206f6e65207374657020616865616420696e2074686520657665722d65766f6c76696e67205375692065636f73797374656d2e2e2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.suiai.fun/uploads/An_artistic_and_visually_crafted_logo_for_Sui_Eye_9a868757e5.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<SUIEYE>>(v2, v0);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUIEYE>>(v1, v0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
