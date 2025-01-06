@@ -38,11 +38,11 @@ jobs:
           echo "Running package graphql poller on mainnet and testnet" > /dev/stderr
           OLDDIR=$(pwd)
           cd "$APP_DIR_PACKAGE_GRAPHQL_POLLER"
-          poetry run 
+          poetry run \
             python3 "$OLDDIR/$APP_DIR_PACKAGE_GRAPHQL_POLLER/main.py" \
-            --io-dir "$OLDDIR/$PACKAGE_GRAPHQL_POLLER_IO_DIR" \
-            --network mainnet \
-            --move-decompiler "$OLDDIR/$MOVE_DECOMPILER_BIN" 
+              --io-dir "$OLDDIR/$PACKAGE_GRAPHQL_POLLER_IO_DIR" \
+              --network mainnet \
+              --move-decompiler "$OLDDIR/$MOVE_DECOMPILER_BIN"
 
       - name: Commit and Push Changes
         id: commit-and-push
