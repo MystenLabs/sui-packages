@@ -27,13 +27,13 @@ jobs:
       - name: Install poetry and dependencies
         run: |
           python3 -m pip install --upgrade pip
-          pip install poetry==1.8.5
-          poetry install --no-root --directory "$APP_DIR_PACKAGE_GRAPHQL_POLLER"
+          pip install poetry
+          poetry install --no-root --directory="$APP_DIR_PACKAGE_GRAPHQL_POLLER"
 
       - name: Poetry run package-graphql-poller
         run: |
           echo "Running package graphql poller on mainnet and testnet" > /dev/stderr
-          poetry run --directory "$APP_DIR_PACKAGE_GRAPHQL_POLLER" \
+          poetry run --directory="$APP_DIR_PACKAGE_GRAPHQL_POLLER" \
             python3 "$APP_DIR_PACKAGE_GRAPHQL_POLLER/main.py" \
             --io-dir "$PACKAGE_GRAPHQL_POLLER_IO_DIR" \
             --network mainnet \
