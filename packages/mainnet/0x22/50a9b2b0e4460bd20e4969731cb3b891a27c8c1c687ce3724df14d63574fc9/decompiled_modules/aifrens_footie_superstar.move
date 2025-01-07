@@ -1,0 +1,360 @@
+module 0x2250a9b2b0e4460bd20e4969731cb3b891a27c8c1c687ce3724df14d63574fc9::aifrens_footie_superstar {
+    struct AIFRENS_FOOTIE_SUPERSTAR has drop {
+        dummy_field: bool,
+    }
+
+    struct AdminCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct TokenMetadata has copy, drop, store {
+        id: u64,
+        name: 0x1::string::String,
+        rating: u64,
+        position: 0x1::string::String,
+    }
+
+    struct AifrensFootieSuperstar has store, key {
+        id: 0x2::object::UID,
+        generation: u64,
+        birthdate: u64,
+        genes: vector<u8>,
+        birth_location: 0x1::string::String,
+        level: u64,
+        meta_id: u64,
+        name: 0x1::string::String,
+        rating: u64,
+        position: 0x1::string::String,
+        rarity: 0x1::string::String,
+        number: u64,
+    }
+
+    struct AifrensSeason has key {
+        id: 0x2::object::UID,
+        season: u64,
+        tier_list: vector<0x2::table::Table<u64, TokenMetadata>>,
+    }
+
+    struct AifrensSuperstarGlobal has key {
+        id: 0x2::object::UID,
+        fusion_price: u64,
+        recruit_price: u64,
+        balance: 0x2::balance::Balance<0x2::sui::SUI>,
+        start_time_ms: u64,
+        expired_time_ms: u64,
+        paused: bool,
+        rarity_rate: vector<u64>,
+    }
+
+    struct FusionEvent has copy, drop {
+        id: 0x2::object::ID,
+        creator: address,
+        generation: u64,
+        birthdate: u64,
+        genes: vector<u8>,
+        season: u64,
+        birth_location: 0x1::string::String,
+        meta_id: u64,
+        name: 0x1::string::String,
+        rating: u64,
+        position: 0x1::string::String,
+        rarity: 0x1::string::String,
+        number: u64,
+    }
+
+    public entry fun withdraw_all(arg0: &mut AifrensSuperstarGlobal, arg1: address, arg2: &AdminCap, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x2::balance::withdraw_all<0x2::sui::SUI>(&mut arg0.balance), arg3), arg1);
+    }
+
+    public fun birthdate(arg0: &AifrensFootieSuperstar) : u64 {
+        arg0.birthdate
+    }
+
+    public fun burn_token(arg0: AifrensFootieSuperstar) {
+        let AifrensFootieSuperstar {
+            id             : v0,
+            generation     : _,
+            birthdate      : _,
+            genes          : _,
+            birth_location : _,
+            level          : _,
+            meta_id        : _,
+            name           : _,
+            rating         : _,
+            position       : _,
+            rarity         : _,
+            number         : _,
+        } = arg0;
+        0x2::object::delete(v0);
+    }
+
+    public entry fun fusion(arg0: &mut AifrensSuperstarGlobal, arg1: &AifrensSeason, arg2: &0x2::clock::Clock, arg3: &mut 0x2::coin::Coin<0x2::sui::SUI>, arg4: u64, arg5: 0x6c830e5e4d2a083c77a0020c12b645b1647d2835170f9eab422e5ffb5cad6d44::aifrens_footie_legends::AifrensGenesis, arg6: 0x6c830e5e4d2a083c77a0020c12b645b1647d2835170f9eab422e5ffb5cad6d44::aifrens_footie_legends::AifrensGenesis, arg7: vector<0x5609295085042153b81e7453ee0eba7f173cc66d05d388e636e03a7d927b7368::aifrens_lol::AifrensLol>, arg8: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::clock::timestamp_ms(arg2);
+        assert!(v0 > arg0.start_time_ms, 1);
+        assert!(v0 < arg0.expired_time_ms, 2);
+        0x2::balance::join<0x2::sui::SUI>(&mut arg0.balance, 0x2::coin::into_balance<0x2::sui::SUI>(0x2::coin::split<0x2::sui::SUI>(arg3, arg0.fusion_price + arg4, arg8)));
+        let v1 = 0x1::vector::length<0x5609295085042153b81e7453ee0eba7f173cc66d05d388e636e03a7d927b7368::aifrens_lol::AifrensLol>(&arg7);
+        let v2 = 0;
+        while (v2 < v1) {
+            0x5609295085042153b81e7453ee0eba7f173cc66d05d388e636e03a7d927b7368::aifrens_lol::burn_token(0x1::vector::pop_back<0x5609295085042153b81e7453ee0eba7f173cc66d05d388e636e03a7d927b7368::aifrens_lol::AifrensLol>(&mut arg7));
+            v2 = v2 + 1;
+        };
+        0x1::vector::destroy_empty<0x5609295085042153b81e7453ee0eba7f173cc66d05d388e636e03a7d927b7368::aifrens_lol::AifrensLol>(arg7);
+        0x6c830e5e4d2a083c77a0020c12b645b1647d2835170f9eab422e5ffb5cad6d44::aifrens_footie_legends::burn_token(arg5);
+        0x6c830e5e4d2a083c77a0020c12b645b1647d2835170f9eab422e5ffb5cad6d44::aifrens_footie_legends::burn_token(arg6);
+        let v3 = mint_token(arg1, arg2, 0x6c830e5e4d2a083c77a0020c12b645b1647d2835170f9eab422e5ffb5cad6d44::aifrens_footie_legends::birthdate(&arg5), 0x6c830e5e4d2a083c77a0020c12b645b1647d2835170f9eab422e5ffb5cad6d44::aifrens_footie_legends::genes(&arg5), 0x6c830e5e4d2a083c77a0020c12b645b1647d2835170f9eab422e5ffb5cad6d44::aifrens_footie_legends::birth_location(&arg5), get_rate(arg0, arg4, v1), arg8);
+        0x2::transfer::public_transfer<AifrensFootieSuperstar>(v3, 0x2::tx_context::sender(arg8));
+    }
+
+    public fun genes(arg0: &AifrensFootieSuperstar) : vector<u8> {
+        arg0.genes
+    }
+
+    fun get_random(arg0: &0x2::clock::Clock, arg1: address, arg2: vector<u8>, arg3: u64) : u64 {
+        let v0 = get_random_vector(arg0, arg1, arg2);
+        let v1 = &mut v0;
+        to_u64(v1) % arg3
+    }
+
+    fun get_random_vector(arg0: &0x2::clock::Clock, arg1: address, arg2: vector<u8>) : vector<u8> {
+        let v0 = 0x2::clock::timestamp_ms(arg0);
+        let v1 = 0x1::vector::empty<u8>();
+        0x1::vector::append<u8>(&mut v1, 0x1::bcs::to_bytes<u64>(&v0));
+        0x1::vector::append<u8>(&mut v1, 0x1::bcs::to_bytes<address>(&arg1));
+        0x1::vector::append<u8>(&mut v1, arg2);
+        0x2::hash::keccak256(&v1)
+    }
+
+    fun get_rarity_str(arg0: u64) : 0x1::string::String {
+        let v0 = 0x1::vector::empty<0x1::string::String>();
+        let v1 = &mut v0;
+        0x1::vector::push_back<0x1::string::String>(v1, 0x1::string::utf8(b"N"));
+        0x1::vector::push_back<0x1::string::String>(v1, 0x1::string::utf8(b"R"));
+        0x1::vector::push_back<0x1::string::String>(v1, 0x1::string::utf8(b"SR"));
+        0x1::vector::push_back<0x1::string::String>(v1, 0x1::string::utf8(b"SSR"));
+        *0x1::vector::borrow<0x1::string::String>(&v0, arg0)
+    }
+
+    public fun get_rate(arg0: &AifrensSuperstarGlobal, arg1: u64, arg2: u64) : vector<u64> {
+        let v0 = arg0.rarity_rate;
+        let v1 = 0x1::vector::borrow_mut<u64>(&mut v0, 0);
+        let v2 = arg1 / 1000000000;
+        let v3 = if (*v1 - 20 < v2) {
+            20
+        } else {
+            *v1 - v2
+        };
+        *v1 = v3;
+        let v4 = 0;
+        while (v4 < arg2) {
+            *v1 = *v1 - 2;
+            v4 = v4 + 1;
+        };
+        v0
+    }
+
+    fun init(arg0: AIFRENS_FOOTIE_SUPERSTAR, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let v1 = 0x1::vector::empty<0x1::string::String>();
+        let v2 = &mut v1;
+        0x1::vector::push_back<0x1::string::String>(v2, 0x1::string::utf8(b"name"));
+        0x1::vector::push_back<0x1::string::String>(v2, 0x1::string::utf8(b"link"));
+        0x1::vector::push_back<0x1::string::String>(v2, 0x1::string::utf8(b"image_url"));
+        0x1::vector::push_back<0x1::string::String>(v2, 0x1::string::utf8(b"description"));
+        0x1::vector::push_back<0x1::string::String>(v2, 0x1::string::utf8(b"project_url"));
+        0x1::vector::push_back<0x1::string::String>(v2, 0x1::string::utf8(b"metadata"));
+        let v3 = 0x1::vector::empty<0x1::string::String>();
+        let v4 = &mut v3;
+        0x1::vector::push_back<0x1::string::String>(v4, 0x1::string::utf8(b"AIFRENS Footie SuperStar"));
+        0x1::vector::push_back<0x1::string::String>(v4, 0x1::string::utf8(b"https://explorer.sui.io/object/{id}"));
+        0x1::vector::push_back<0x1::string::String>(v4, 0x1::string::utf8(b"https://api.suifrens.ai/nft/aifrens-footie-superstar.png?id={id}&rarity={rarity}&number={number}&level={level}&rating={rating}&position={position}&meta={meta_id}"));
+        0x1::vector::push_back<0x1::string::String>(v4, 0x1::string::utf8(b"AIFRENS Footie SuperStar NFT is a limited edition digital collectible that grants holders access to exclusive rewards and benefits within the AIFRENS ecosystem, including eligibility for airdrops, access to AIFRENS Fi protocols, AIFRENS GameFi verse, AIFRENS private communities and Legend Fusion to unlock unique abilities."));
+        0x1::vector::push_back<0x1::string::String>(v4, 0x1::string::utf8(b"https://suifrens.ai/"));
+        0x1::vector::push_back<0x1::string::String>(v4, 0x1::string::utf8(b"https://api.suifrens.ai/nft-metadata/id={id}"));
+        let v5 = 0x2::package::claim<AIFRENS_FOOTIE_SUPERSTAR>(arg0, arg1);
+        let v6 = 0x2::display::new_with_fields<AifrensFootieSuperstar>(&v5, v1, v3, arg1);
+        0x2::display::update_version<AifrensFootieSuperstar>(&mut v6);
+        0x2::transfer::public_transfer<0x2::package::Publisher>(v5, v0);
+        0x2::transfer::public_transfer<0x2::display::Display<AifrensFootieSuperstar>>(v6, v0);
+        let v7 = 0x1::vector::empty<0x2::table::Table<u64, TokenMetadata>>();
+        let v8 = &mut v7;
+        0x1::vector::push_back<0x2::table::Table<u64, TokenMetadata>>(v8, 0x2::table::new<u64, TokenMetadata>(arg1));
+        0x1::vector::push_back<0x2::table::Table<u64, TokenMetadata>>(v8, 0x2::table::new<u64, TokenMetadata>(arg1));
+        0x1::vector::push_back<0x2::table::Table<u64, TokenMetadata>>(v8, 0x2::table::new<u64, TokenMetadata>(arg1));
+        0x1::vector::push_back<0x2::table::Table<u64, TokenMetadata>>(v8, 0x2::table::new<u64, TokenMetadata>(arg1));
+        let v9 = AifrensSeason{
+            id        : 0x2::object::new(arg1),
+            season    : 1,
+            tier_list : v7,
+        };
+        0x2::transfer::share_object<AifrensSeason>(v9);
+        let v10 = AifrensSuperstarGlobal{
+            id              : 0x2::object::new(arg1),
+            fusion_price    : 100000,
+            recruit_price   : 5000000,
+            balance         : 0x2::balance::zero<0x2::sui::SUI>(),
+            start_time_ms   : 1,
+            expired_time_ms : 16839828000000,
+            paused          : false,
+            rarity_rate     : vector[80, 12, 6, 2],
+        };
+        0x2::transfer::share_object<AifrensSuperstarGlobal>(v10);
+        let v11 = AdminCap{id: 0x2::object::new(arg1)};
+        0x2::transfer::public_transfer<AdminCap>(v11, v0);
+    }
+
+    public fun insert_multiple_token_metadata(arg0: &mut AifrensSeason, arg1: u64, arg2: vector<TokenMetadata>, arg3: &AdminCap) {
+        let v0 = 0;
+        while (v0 < 0x1::vector::length<TokenMetadata>(&arg2)) {
+            0x2::table::add<u64, TokenMetadata>(0x1::vector::borrow_mut<0x2::table::Table<u64, TokenMetadata>>(&mut arg0.tier_list, arg1), 0x2::table::length<u64, TokenMetadata>(0x1::vector::borrow<0x2::table::Table<u64, TokenMetadata>>(&arg0.tier_list, arg1)) + v0, *0x1::vector::borrow<TokenMetadata>(&arg2, v0));
+            v0 = v0 + 1;
+        };
+    }
+
+    public fun insert_token_metadata(arg0: &mut AifrensSeason, arg1: u64, arg2: TokenMetadata, arg3: &AdminCap) {
+        let v0 = 0x1::vector::borrow_mut<0x2::table::Table<u64, TokenMetadata>>(&mut arg0.tier_list, arg1 - 1);
+        0x2::table::add<u64, TokenMetadata>(v0, 0x2::table::length<u64, TokenMetadata>(v0), arg2);
+    }
+
+    public fun level(arg0: &AifrensFootieSuperstar) : u64 {
+        arg0.level
+    }
+
+    fun mint_token(arg0: &AifrensSeason, arg1: &0x2::clock::Clock, arg2: u64, arg3: vector<u8>, arg4: 0x1::string::String, arg5: vector<u64>, arg6: &mut 0x2::tx_context::TxContext) : AifrensFootieSuperstar {
+        let v0 = 0x2::tx_context::sender(arg6);
+        let v1 = 0;
+        let v2 = 0;
+        while (v2 < 0x1::vector::length<u64>(&arg5)) {
+            v1 = v1 + *0x1::vector::borrow<u64>(&arg5, v2);
+            v2 = v2 + 1;
+        };
+        let v3 = get_random(arg1, v0, arg3, v1);
+        let v4 = 0;
+        while (v3 > 0) {
+            let v5 = *0x1::vector::borrow<u64>(&arg5, v4);
+            let v6 = if (v3 >= v5) {
+                v4 = v4 + 1;
+                v3 - v5
+            } else {
+                0
+            };
+            v3 = v6;
+        };
+        let v7 = get_rarity_str(v4);
+        let v8 = 0x1::vector::borrow<0x2::table::Table<u64, TokenMetadata>>(&arg0.tier_list, v4);
+        let v9 = 0x2::table::borrow<u64, TokenMetadata>(v8, get_random(arg1, v0, arg3, 0x2::table::length<u64, TokenMetadata>(v8)));
+        let v10 = v9.position;
+        let v11 = v9.name;
+        let v12 = v9.rating;
+        let v13 = v9.id;
+        let v14 = AifrensFootieSuperstar{
+            id             : 0x2::object::new(arg6),
+            generation     : 1,
+            birthdate      : arg2,
+            genes          : arg3,
+            birth_location : arg4,
+            level          : 1,
+            meta_id        : v13,
+            name           : v11,
+            rating         : v12,
+            position       : v10,
+            rarity         : v7,
+            number         : v3,
+        };
+        let v15 = FusionEvent{
+            id             : 0x2::object::uid_to_inner(&v14.id),
+            creator        : v0,
+            generation     : 1,
+            birthdate      : arg2,
+            genes          : arg3,
+            season         : arg0.season,
+            birth_location : arg4,
+            meta_id        : v13,
+            name           : v11,
+            rating         : v12,
+            position       : v10,
+            rarity         : v7,
+            number         : v3,
+        };
+        0x2::event::emit<FusionEvent>(v15);
+        v14
+    }
+
+    public fun new_season(arg0: u64, arg1: &AdminCap, arg2: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x1::vector::empty<0x2::table::Table<u64, TokenMetadata>>();
+        let v1 = &mut v0;
+        0x1::vector::push_back<0x2::table::Table<u64, TokenMetadata>>(v1, 0x2::table::new<u64, TokenMetadata>(arg2));
+        0x1::vector::push_back<0x2::table::Table<u64, TokenMetadata>>(v1, 0x2::table::new<u64, TokenMetadata>(arg2));
+        0x1::vector::push_back<0x2::table::Table<u64, TokenMetadata>>(v1, 0x2::table::new<u64, TokenMetadata>(arg2));
+        0x1::vector::push_back<0x2::table::Table<u64, TokenMetadata>>(v1, 0x2::table::new<u64, TokenMetadata>(arg2));
+        let v2 = AifrensSeason{
+            id        : 0x2::object::new(arg2),
+            season    : arg0,
+            tier_list : v0,
+        };
+        0x2::transfer::share_object<AifrensSeason>(v2);
+    }
+
+    public fun number(arg0: &AifrensFootieSuperstar) : u64 {
+        arg0.number
+    }
+
+    public fun position(arg0: &AifrensFootieSuperstar) : 0x1::string::String {
+        arg0.position
+    }
+
+    public fun rarity(arg0: &AifrensFootieSuperstar) : 0x1::string::String {
+        arg0.rarity
+    }
+
+    public entry fun recruit(arg0: &mut AifrensSuperstarGlobal, arg1: &AifrensSeason, arg2: &0x2::clock::Clock, arg3: vector<u8>, arg4: vector<u8>, arg5: &mut 0x2::coin::Coin<0x2::sui::SUI>, arg6: u64, arg7: vector<0x5609295085042153b81e7453ee0eba7f173cc66d05d388e636e03a7d927b7368::aifrens_lol::AifrensLol>, arg8: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::clock::timestamp_ms(arg2);
+        assert!(v0 > arg0.start_time_ms, 1);
+        assert!(v0 < arg0.expired_time_ms, 2);
+        0x2::balance::join<0x2::sui::SUI>(&mut arg0.balance, 0x2::coin::into_balance<0x2::sui::SUI>(0x2::coin::split<0x2::sui::SUI>(arg5, arg0.recruit_price, arg8)));
+        let v1 = get_random_vector(arg2, 0x2::tx_context::sender(arg8), arg3);
+        let v2 = 0x1::vector::length<0x5609295085042153b81e7453ee0eba7f173cc66d05d388e636e03a7d927b7368::aifrens_lol::AifrensLol>(&arg7);
+        let v3 = 0;
+        while (v3 < v2) {
+            0x5609295085042153b81e7453ee0eba7f173cc66d05d388e636e03a7d927b7368::aifrens_lol::burn_token(0x1::vector::pop_back<0x5609295085042153b81e7453ee0eba7f173cc66d05d388e636e03a7d927b7368::aifrens_lol::AifrensLol>(&mut arg7));
+            v3 = v3 + 1;
+        };
+        0x1::vector::destroy_empty<0x5609295085042153b81e7453ee0eba7f173cc66d05d388e636e03a7d927b7368::aifrens_lol::AifrensLol>(arg7);
+        let v4 = mint_token(arg1, arg2, v0, v1, 0x1::string::utf8(arg4), get_rate(arg0, arg6, v2), arg8);
+        0x2::transfer::public_transfer<AifrensFootieSuperstar>(v4, 0x2::tx_context::sender(arg8));
+    }
+
+    fun to_u64(arg0: &mut vector<u8>) : u64 {
+        assert!(0x1::vector::length<u8>(arg0) >= 8, 5);
+        let v0 = 0;
+        let v1 = 1;
+        let v2 = 0;
+        while (v0 < 8) {
+            v2 = v2 + (0x1::vector::pop_back<u8>(arg0) as u64) * v1;
+            v0 = v0 + 1;
+            v1 = v1 * 255;
+        };
+        v2
+    }
+
+    public fun token_metadata(arg0: u64, arg1: 0x1::string::String, arg2: u64, arg3: 0x1::string::String) : TokenMetadata {
+        TokenMetadata{
+            id       : arg0,
+            name     : arg1,
+            rating   : arg2,
+            position : arg3,
+        }
+    }
+
+    public entry fun update_conf(arg0: &mut AifrensSuperstarGlobal, arg1: u64, arg2: u64, arg3: u64, arg4: u64, arg5: vector<u64>, arg6: bool, arg7: &AdminCap, arg8: &mut 0x2::tx_context::TxContext) {
+        arg0.fusion_price = arg1;
+        arg0.recruit_price = arg2;
+        arg0.start_time_ms = arg3;
+        arg0.expired_time_ms = arg4;
+        arg0.paused = arg6;
+        arg0.rarity_rate = arg5;
+    }
+
+    // decompiled from Move bytecode v6
+}
+

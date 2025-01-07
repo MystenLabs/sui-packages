@@ -1,0 +1,14 @@
+module 0x231949bdb4d254ecc18cda5dd316544f4ac743fec1da54a20dc942bb79941aa5::mef {
+    struct MEF has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MEF, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MEF>(arg0, 6, b"Mef", b"MeowFiend", x"4d656f774669656e64202d2049676e69746520746865204d656d6520436f696e20576f726c64210a0a4120646576696c6973682063617420776974682061206669657279207461696c2c20676c6f77696e672072656420657965732c20616e64206120676f6c64656e207368696e652c204d656f774669656e6420626c656e64732066756e20616e6420706f77657220696e207468652063727970746f2073706163652e2043686173652074686520666c616d657320616e64206a6f696e20746865207265766f6c7574696f6e212053776565742061732061206361742c20666965726365206173206669726521", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732050938176.58")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<MEF>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MEF>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

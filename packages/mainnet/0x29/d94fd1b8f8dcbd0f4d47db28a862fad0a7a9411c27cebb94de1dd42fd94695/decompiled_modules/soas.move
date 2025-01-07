@@ -1,0 +1,14 @@
+module 0x29d94fd1b8f8dcbd0f4d47db28a862fad0a7a9411c27cebb94de1dd42fd94695::soas {
+    struct SOAS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SOAS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SOAS>(arg0, 6, b"SOAS", b"Sheeps Of All Street", x"546865792063616c6c2075732064756d62206d6f6e65792c2062757420746869732068657264e2809973207374616d706564696e6720746f20746865206d6f6f6e2120f09f9091f09f9a802054686520677261737320697320677265656e6572206f6e206f7572207369646520f09f8cb12c207765e2809972652074686520736865657073206f6620616c6c207374726565747320f09f8c8d2c20616e642074686973206973207072656d69756d2068657264206d656e74616c6974792e20576174636820757320777265636b2074686520776f6c76657320616e642070756d702074686973206d656d652120f09f92a5f09f98822023536865657054616b656f766572", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732440837411.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SOAS>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SOAS>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

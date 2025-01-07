@@ -1,0 +1,14 @@
+module 0x2b3896aa9ec54e4cd3fb13eb55015f446fa1e9299dfc35be5f6dec50c8416110::aby3 {
+    struct ABY3 has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ABY3, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ABY3>(arg0, 9, b"ABY3", b"ABay ", x"41426179284142792920697320746865206e6577657374206d656d652073656e736174696f6e20746f20686974207468652063727970746f20776f726c642120426f726e206f7574206f66206120626c656e64206f6620746865206c6f766520666f722063727970746f20616e6420646563656e7472616c697a65642066696e616e63652e205768657468657220796f75e280997265206865726520666f7220746865206d656d6573206f7220746865206d6f6f6e2c2041426179206973206120746f6b656e207468617420656d62726163657320626f74682066756e20616e642066696e616e6369616c206578706572696d656e746174696f6e2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://file-walletapp.waveonsui.com/images/wave-pumps/34b4780f-0e32-4d57-b66d-893a4cea68ca.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ABY3>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<ABY3>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

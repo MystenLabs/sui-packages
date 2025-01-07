@@ -1,0 +1,14 @@
+module 0x2f578ab64128968f55d53bc49d283d80137989a300a34f545299b578307c0c8d::suipanda {
+    struct SUIPANDA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUIPANDA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUIPANDA>(arg0, 6, b"SUIPANDA", b"Sui Panda", b"Rolling onto Sui with a whole lot of fun, this token is all about chill vibes and a love for bamboo.", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/zodiac000z_rpg_item_icon_of_a_magical_pandaconcept_artart_gamec_ab031c07_e195_4557_abe8_172b972dd06b_1_f0be012fb9.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUIPANDA>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SUIPANDA>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0x29784d166a2626a6fcf1b98d6c18e2b61727734968b867b0196ccc6972db980c::pinosanta {
+    struct PINOSANTA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PINOSANTA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PINOSANTA>(arg0, 6, b"PINOSANTA", b"PINO SANTA", x"4865792074686572652c206665737469766520667269656e64732120497473206d652c2050696e6f2053616e7461746865206a6f6c6c696573742064696e6f20696e20612053616e7461206861742c206865726520746f20737072656164206a6f792c2067696674732c20616e642064696e6f2d73697a65642063686565722e204d7920736c65696768206d69676874206e6f7420666c79202874696e792061726d732c2062696720647265616d73292c206275742049766520676f7420706c656e7479206f6620686f6c69646179206d6167696320746f20676f2061726f756e642e20526561647920746f206a696e676c6520616e642073746f6d702077697468206d653f0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Qm_ZA_Yx_Mz_C693_Pc_Drvtq_U6_Tj_Spd_JRC_Rtb7s1_D_Tx9s_ND_7_X3_D_336b785e7c.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PINOSANTA>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<PINOSANTA>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

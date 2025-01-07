@@ -1,0 +1,14 @@
+module 0x25f8bff945b8d44636a0e318a1f6bc074db7a64392b6d926be64d83a93069967::chat {
+    struct CHAT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CHAT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CHAT>(arg0, 6, b"CHAT", b"SuiChat", x"5375694368617420697320796f7572206761746577617920746f20646563656e7472616c697a656420636f6d6d756e69636174696f6e206f6e2074686520535549206e6574776f726b2e2044657369676e656420666f7220626f746820696e646976696475616c7320616e642067726f7570732e204f7572206d697373696f6e2073696d706c653a200a0a43686174207365637572656c792e20436f6e6e65637420667265656c790a0a5769746820796f75722068656c702c2077652063616e20676574206f6e65207374657020636c6f73657220746f206368616e67696e6720686f706520776520636f6d6d756e696361746520666f7220414c4c2120", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/logo_02_517e5a5b15.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CHAT>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<CHAT>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

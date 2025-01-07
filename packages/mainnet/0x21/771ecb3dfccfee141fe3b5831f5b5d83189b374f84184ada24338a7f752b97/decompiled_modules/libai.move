@@ -1,0 +1,14 @@
+module 0x21771ecb3dfccfee141fe3b5831f5b5d83189b374f84184ada24338a7f752b97::libai {
+    struct LIBAI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: LIBAI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<LIBAI>(arg0, 6, b"LIBAI", b"LIBAI TANG Coin", x"4c69204261692c204368696e6127732066697273742067656e65726174696f6e20706f6574204b4f4c20284368696e6573653a203b2070696e79696e3a204c69204261692c20373031373632292c20666f726d65726c792070726f6e6f756e636564204c6920426f2c20636f757274657379206e616d65205461696261692c207761732061204368696e65736520706f6574206163636c61696d6564206173206f6e65206f662074686520677265617465737420616e64206d6f737420696d706f7274616e7420706f657473206f66207468652054616e672064796e6173747920616e6420696e204368696e65736520686973746f727920617320612077686f6c652e200a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/IMG_9151_9bd19c0b6c.JPG")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<LIBAI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<LIBAI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
