@@ -1,0 +1,45 @@
+module 0x520bcc0b1a6d7e0e2b669d1f0986a14d179000ecd35d0b25b47ff066e173411::chup {
+    struct CHUP has drop {
+        dummy_field: bool,
+    }
+
+    public entry fun burn(arg0: &mut 0x2::coin::TreasuryCap<CHUP>, arg1: 0x2::coin::Coin<CHUP>) {
+        0x2::coin::burn<CHUP>(arg0, arg1);
+    }
+
+    fun mint_and_transfer(arg0: &mut 0x2::coin::TreasuryCap<CHUP>, arg1: u64, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::coin::mint_and_transfer<CHUP>(arg0, arg1, arg2, arg3);
+    }
+
+    fun init(arg0: CHUP, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = trim_right(b"111111111   ");
+        let v1 = trim_right(b"https://dd.dexscreener.com/ds-data/tokens/solana/41cFk69T3m2PtePCHbFoZubZzCpraXfoqPQzUnRxpump.png?size=lg&key=9e3050                                                                                                                                                                                                            ");
+        let v2 = if (0x1::vector::length<u8>(&v1) == 0) {
+            0x1::option::none<0x2::url::Url>()
+        } else {
+            0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(v1))
+        };
+        let (v3, v4) = 0x2::coin::create_currency<CHUP>(arg0, (0x1::vector::length<u8>(&v0) as u8), 0x1::ascii::into_bytes(0x1::string::to_ascii(0x1::string::utf8(trim_right(b"CHUP      ")))), trim_right(b"Chup                            "), trim_right(b"CHUP                                                                                                                                                                                                                                                                                                                            "), v2, arg1);
+        let v5 = v3;
+        let v6 = &mut v5;
+        let v7 = 0x2::tx_context::sender(arg1);
+        mint_and_transfer(v6, 1000000000000000000, v7, arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<CHUP>>(v4);
+        0x2::transfer::public_freeze_object<0x2::coin::TreasuryCap<CHUP>>(v5);
+    }
+
+    fun trim_right(arg0: vector<u8>) : vector<u8> {
+        let v0 = 32;
+        let v1 = &v0;
+        while (0x1::vector::length<u8>(&arg0) > 0) {
+            if (0x1::vector::borrow<u8>(&arg0, 0x1::vector::length<u8>(&arg0) - 1) != v1) {
+                break
+            };
+            0x1::vector::pop_back<u8>(&mut arg0);
+        };
+        arg0
+    }
+
+    // decompiled from Move bytecode v6
+}
+

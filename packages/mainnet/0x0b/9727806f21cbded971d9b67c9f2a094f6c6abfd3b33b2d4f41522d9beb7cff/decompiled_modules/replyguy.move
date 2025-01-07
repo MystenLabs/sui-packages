@@ -1,0 +1,14 @@
+module 0xb9727806f21cbded971d9b67c9f2a094f6c6abfd3b33b2d4f41522d9beb7cff::replyguy {
+    struct REPLYGUY has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: REPLYGUY, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<REPLYGUY>(arg0, 6, b"REPLYGUY", b"JUST A REPLY GUY", x"4576657279626f647920696e2057656233206275696c64696e672061206272616e64206f7220747279696e6720746f206272696e672076616c75652068657265206973206a7573742061207265706c79206775792e0a0a486f6e6f7572696e672074686174206f6e6520757365722077686f20616c776179732068617320796f7572206261636b206f6e206576657279207820706f7374206f6620796f7572732e0a0a42757420796f752063616e2774207472756c792062652061207265706c792067757920776974686f757420686f6c64696e67205265706c7920477579206f6e205375692e0a0a5265706c79204775792021210a0a426167207570202121", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/708ab6e6_6d34_4693_938b_6e6f0eba279b_0c0a786b3a.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<REPLYGUY>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<REPLYGUY>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

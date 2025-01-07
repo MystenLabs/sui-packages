@@ -1,0 +1,39 @@
+module 0x9b219310ff65204a2b7cf6d81a07c4e01ad670a476b5f76771e2925d5ef3c59::kacy {
+    struct KACY has drop {
+        dummy_field: bool,
+    }
+
+    public fun mint(arg0: &mut 0x2::coin::TreasuryCap<KACY>, arg1: u64, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x2::coin::Coin<KACY>>(0x2::coin::mint<KACY>(arg0, arg1, arg3), arg2);
+    }
+
+    fun init(arg0: KACY, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = trim_right(b"111111111   ");
+        let v1 = trim_right(b"https://dd.dexscreener.com/ds-data/tokens/solana/6QSVGUEyBZWRshnXKhS96NQ97vGWiTu61SyHLAbYpump.png?size=lg&key=6d2900                                                                                                                                                                                                            ");
+        let v2 = if (0x1::vector::length<u8>(&v1) == 0) {
+            0x1::option::none<0x2::url::Url>()
+        } else {
+            0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(v1))
+        };
+        let (v3, v4) = 0x2::coin::create_currency<KACY>(arg0, (0x1::vector::length<u8>(&v0) as u8), 0x1::ascii::into_bytes(0x1::string::to_ascii(0x1::string::utf8(trim_right(b"KACY    ")))), trim_right(b"Mark Kacy                       "), trim_right(b"Mark Kacy your normie friend - Endorsed by the artist. Enjoy the meme culture, participate in community events, and potentially benefit from price movements. Engage in quests for free tokens through community interactionsit's all about the vibes!                                                                          "), v2, arg1);
+        let v5 = v3;
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<KACY>>(v4);
+        0x2::transfer::public_freeze_object<0x2::coin::TreasuryCap<KACY>>(v5);
+        0x2::transfer::public_transfer<0x2::coin::Coin<KACY>>(0x2::coin::mint<KACY>(&mut v5, 1000000000000000000, arg1), 0x2::tx_context::sender(arg1));
+    }
+
+    fun trim_right(arg0: vector<u8>) : vector<u8> {
+        let v0 = 32;
+        let v1 = &v0;
+        while (0x1::vector::length<u8>(&arg0) > 0) {
+            if (0x1::vector::borrow<u8>(&arg0, 0x1::vector::length<u8>(&arg0) - 1) != v1) {
+                break
+            };
+            0x1::vector::pop_back<u8>(&mut arg0);
+        };
+        arg0
+    }
+
+    // decompiled from Move bytecode v6
+}
+

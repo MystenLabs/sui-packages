@@ -1,0 +1,14 @@
+module 0x64123b5d6cdec8c59f9a16ffa0e3b20885ec757a36f6aea11a93006694c13cf::pct {
+    struct PCT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PCT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PCT>(arg0, 6, b"PCT", b"Pochita", b"meme of pochita", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/IMG_1018_ab4cca6dad.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PCT>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<PCT>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

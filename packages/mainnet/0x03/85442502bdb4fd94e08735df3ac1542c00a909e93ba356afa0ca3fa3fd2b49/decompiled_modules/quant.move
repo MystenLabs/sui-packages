@@ -1,0 +1,14 @@
+module 0x385442502bdb4fd94e08735df3ac1542c00a909e93ba356afa0ca3fa3fd2b49::quant {
+    struct QUANT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: QUANT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<QUANT>(arg0, 6, b"QUANT", b"QUANT the RUGGER", x"47656e205a206b696420224b69642042726f74686572222063726561746564206120245155414e54206d656d6520636f696e207768696c65206c6976652d73747265616d696e6720616e6420736f6c6420697420666f72203132382024534f4c20282433304b2055534429207768696368206c61746572207475726e656420696e746f2024344d205553440a0a4865207468656e2064756d70656420616c6c2068697320746f6b656e732c207275672d70756c6c696e67202074686520747261646572732077686f2068616420626f756768742074686520746f6b656e206d696e75746573206265666f726520616e64207468656e20666c69707065642061206d6964646c652066696e676572", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Gc2d_A53_W8_AE_Xx_RG_97758a6ad7.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<QUANT>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<QUANT>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

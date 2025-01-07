@@ -1,0 +1,14 @@
+module 0xc87f81b99fc0bbea6e206ae58fcad84592c9e5084204db199b7ecc5be9a0c88::fk {
+    struct FK has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: FK, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<FK>(arg0, 6, b"FK", b"Frog King", x"57656c636f6d6520746f2046726f674b696e67200a0a746865206d656d6520636f696e207468617420726569676e732073757072656d6520696e207468652063727970746f207377616d70210a0a496e7370697265642062792074686520696e7465726e65742773206c6f766520666f722066726f677320616e642074686520706c617966756c206e6174757265206f66206d656d652063756c747572652c2046726f674b696e67206f666665727320612066756e20616e6420656e676167696e672077617920746f206469766520696e746f2074686520776f726c64206f662063727970746f63757272656e636965732e0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/1727804179644_e266ec6b71226a5fdc949028026eaad4_1eee9cd868.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<FK>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<FK>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

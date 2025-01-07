@@ -1,0 +1,170 @@
+module 0xf8fe63da813888d8074b79f83208d25029a7c67c8013d551c88180840b3f4a::mockghost {
+    struct MOCKGHOST has drop {
+        dummy_field: bool,
+    }
+
+    struct Witness has drop {
+        dummy_field: bool,
+    }
+
+    struct MockGhost has store, key {
+        id: 0x2::object::UID,
+        name: 0x1::string::String,
+        url: 0x2::url::Url,
+        attributes: 0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::attributes::Attributes,
+    }
+
+    struct MockGhostMetadata has store, key {
+        id: 0x2::object::UID,
+        name: vector<0x1::string::String>,
+        url: vector<0x1::string::String>,
+        mint_count: vector<u64>,
+        attribute_key: 0x1::ascii::String,
+        attribute_value: vector<0x1::ascii::String>,
+    }
+
+    public entry fun delete_mint_cap(arg0: 0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_cap::MintCap<MockGhost>) {
+        0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_cap::delete_mint_cap<MockGhost>(arg0);
+    }
+
+    public entry fun disable_orderbook<T0>(arg0: &0x2::package::Publisher, arg1: &mut 0x4e0629fa51a62b0c1d7c7b9fc89237ec5b6f630d7798ad3f06d820afb93a995a::orderbook::Orderbook<MockGhost, T0>) {
+        0x4e0629fa51a62b0c1d7c7b9fc89237ec5b6f630d7798ad3f06d820afb93a995a::orderbook::disable_orderbook<MockGhost, T0>(arg0, arg1);
+    }
+
+    public entry fun enable_orderbook<T0>(arg0: &0x2::package::Publisher, arg1: &mut 0x4e0629fa51a62b0c1d7c7b9fc89237ec5b6f630d7798ad3f06d820afb93a995a::orderbook::Orderbook<MockGhost, T0>) {
+        0x4e0629fa51a62b0c1d7c7b9fc89237ec5b6f630d7798ad3f06d820afb93a995a::orderbook::enable_orderbook<MockGhost, T0>(arg0, arg1);
+    }
+
+    fun init(arg0: MOCKGHOST, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let (v1, v2) = 0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::collection::create_with_mint_cap<MOCKGHOST, MockGhost>(&arg0, 0x1::option::none<u64>(), arg1);
+        let v3 = v1;
+        let v4 = 0x2::package::claim<MOCKGHOST>(arg0, arg1);
+        let v5 = 0x2::display::new<MockGhost>(&v4, arg1);
+        0x2::display::add<MockGhost>(&mut v5, 0x1::string::utf8(b"name"), 0x1::string::utf8(b"{name}"));
+        0x2::display::add<MockGhost>(&mut v5, 0x1::string::utf8(b"url"), 0x1::string::utf8(b"{url}"));
+        0x2::display::update_version<MockGhost>(&mut v5);
+        0x2::transfer::public_transfer<0x2::display::Display<MockGhost>>(v5, v0);
+        let v6 = Witness{dummy_field: false};
+        0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::collection::add_domain<MockGhost, 0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::display_info::DisplayInfo>(0x16c5f17f2d55584a6e6daa442ccf83b4530d10546a8e7dedda9ba324e012fc40::witness::from_witness<MockGhost, Witness>(v6), &mut v3, 0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::display_info::new(0x1::string::utf8(b"MockGhost"), 0x1::string::utf8(b"Mock Ghost collection on Sui")));
+        let v7 = 0x1::vector::empty<0x1::string::String>();
+        let v8 = &mut v7;
+        0x1::vector::push_back<0x1::string::String>(v8, 0x1::string::utf8(b"Ghost1"));
+        0x1::vector::push_back<0x1::string::String>(v8, 0x1::string::utf8(b"Ghost2"));
+        0x1::vector::push_back<0x1::string::String>(v8, 0x1::string::utf8(b"Ghost3"));
+        0x1::vector::push_back<0x1::string::String>(v8, 0x1::string::utf8(b"Ghost4"));
+        0x1::vector::push_back<0x1::string::String>(v8, 0x1::string::utf8(b"Ghost5"));
+        let v9 = 0x1::vector::empty<0x1::string::String>();
+        let v10 = &mut v9;
+        0x1::vector::push_back<0x1::string::String>(v10, 0x1::string::utf8(b"https://ipfs.io/ipfs/QmPBtLG7vBKW7E5QYBX2snmc7NUZmPdJeQwJFwd3J6igNo"));
+        0x1::vector::push_back<0x1::string::String>(v10, 0x1::string::utf8(b"https://ipfs.io/ipfs/QmWnWKMMgxiDL8khTWShMV9kx4wX5ksqAGNxXtY8tHTfX9"));
+        0x1::vector::push_back<0x1::string::String>(v10, 0x1::string::utf8(b"https://ipfs.io/ipfs/QmQVa2nGsRVHpduNm8CQCLsNEn1Ff4wctJiNpZNzAs7Qno"));
+        0x1::vector::push_back<0x1::string::String>(v10, 0x1::string::utf8(b"https://ipfs.io/ipfs/QmZVehF3Kc93nekWBon1Layr9AmMj7hqdMreSqt8CPjVx3"));
+        0x1::vector::push_back<0x1::string::String>(v10, 0x1::string::utf8(b"https://ipfs.io/ipfs/QmYdjdvrqYeVVarZmkYafSoWXtKHhaiAzynhsGEWR85Uam"));
+        let v11 = 0x1::vector::empty<0x1::ascii::String>();
+        let v12 = &mut v11;
+        0x1::vector::push_back<0x1::ascii::String>(v12, 0x1::ascii::string(b"R"));
+        0x1::vector::push_back<0x1::ascii::String>(v12, 0x1::ascii::string(b"R"));
+        0x1::vector::push_back<0x1::ascii::String>(v12, 0x1::ascii::string(b"R"));
+        0x1::vector::push_back<0x1::ascii::String>(v12, 0x1::ascii::string(b"R"));
+        0x1::vector::push_back<0x1::ascii::String>(v12, 0x1::ascii::string(b"R"));
+        let v13 = MockGhostMetadata{
+            id              : 0x2::object::new(arg1),
+            name            : v7,
+            url             : v9,
+            mint_count      : vector[0, 0, 0, 0, 0],
+            attribute_key   : 0x1::ascii::string(b"rarity"),
+            attribute_value : v11,
+        };
+        let (v14, v15) = 0xe2c7a6843cb13d9549a9d2dc1c266b572ead0b4b9f090e7c3c46de2714102b43::transfer_request::init_policy<MockGhost>(&v4, arg1);
+        let v16 = v15;
+        let v17 = v14;
+        0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::transfer_allowlist::enforce<MockGhost>(&mut v17, &v16);
+        let (v18, v19) = 0xe2c7a6843cb13d9549a9d2dc1c266b572ead0b4b9f090e7c3c46de2714102b43::transfer_request::init_policy<MockGhost>(&v4, arg1);
+        let v20 = v19;
+        let v21 = v18;
+        0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::p2p_list::enforce<MockGhost>(&mut v21, &v20);
+        let (v22, v23) = 0x70e34fcd390b767edbddaf7573450528698188c84c5395af8c4b12e3e37622fa::allowlist::new(arg1);
+        let v24 = v23;
+        let v25 = v22;
+        0x70e34fcd390b767edbddaf7573450528698188c84c5395af8c4b12e3e37622fa::allowlist::insert_authority<0x4e0629fa51a62b0c1d7c7b9fc89237ec5b6f630d7798ad3f06d820afb93a995a::orderbook::Witness>(&v24, &mut v25);
+        0x70e34fcd390b767edbddaf7573450528698188c84c5395af8c4b12e3e37622fa::allowlist::insert_collection<MockGhost>(&mut v25, &v4);
+        0x2::transfer::public_transfer<0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_cap::MintCap<MockGhost>>(v2, v0);
+        0x2::transfer::public_transfer<0x2::package::Publisher>(v4, v0);
+        0x2::transfer::public_transfer<0x2::transfer_policy::TransferPolicyCap<MockGhost>>(v16, v0);
+        0x2::transfer::public_transfer<0x2::transfer_policy::TransferPolicyCap<MockGhost>>(v20, v0);
+        0x2::transfer::public_transfer<0x70e34fcd390b767edbddaf7573450528698188c84c5395af8c4b12e3e37622fa::allowlist::AllowlistOwnerCap>(v24, v0);
+        0x2::transfer::public_share_object<0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::collection::Collection<MockGhost>>(v3);
+        0x2::transfer::public_share_object<MockGhostMetadata>(v13);
+        0x2::transfer::public_share_object<0x2::transfer_policy::TransferPolicy<MockGhost>>(v17);
+        0x2::transfer::public_share_object<0x2::transfer_policy::TransferPolicy<MockGhost>>(v21);
+        0x2::transfer::public_share_object<0x70e34fcd390b767edbddaf7573450528698188c84c5395af8c4b12e3e37622fa::allowlist::Allowlist>(v25);
+    }
+
+    public entry fun mint_nft_to_address(arg0: u64, arg1: address, arg2: &0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_cap::MintCap<MockGhost>, arg3: &mut MockGhostMetadata, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0 >= 1 && arg0 <= 5, 1);
+        let v0 = 0x1::vector::borrow_mut<u64>(&mut arg3.mint_count, arg0 - 1);
+        let v1 = 0x1::string::utf8(b"");
+        0x1::string::append(&mut v1, *0x1::vector::borrow<0x1::string::String>(&arg3.name, arg0 - 1));
+        0x1::string::append(&mut v1, 0x1::string::utf8(b" #"));
+        0x1::string::append(&mut v1, u64ToString(*v0));
+        let v2 = 0x1::vector::empty<0x1::ascii::String>();
+        0x1::vector::push_back<0x1::ascii::String>(&mut v2, arg3.attribute_key);
+        let v3 = 0x1::vector::empty<0x1::ascii::String>();
+        0x1::vector::push_back<0x1::ascii::String>(&mut v3, *0x1::vector::borrow<0x1::ascii::String>(&arg3.attribute_value, arg0 - 1));
+        let v4 = MockGhost{
+            id         : 0x2::object::new(arg4),
+            name       : v1,
+            url        : 0x2::url::new_unsafe_from_bytes(*0x1::string::bytes(0x1::vector::borrow<0x1::string::String>(&arg3.url, arg0 - 1))),
+            attributes : 0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::attributes::from_vec(v2, v3),
+        };
+        let v5 = Witness{dummy_field: false};
+        0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_event::emit_mint<MockGhost>(0x16c5f17f2d55584a6e6daa442ccf83b4530d10546a8e7dedda9ba324e012fc40::witness::from_witness<MockGhost, Witness>(v5), 0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_cap::collection_id<MockGhost>(arg2), &v4);
+        *v0 = *v0 + 1;
+        0x2::transfer::public_transfer<MockGhost>(v4, arg1);
+    }
+
+    public entry fun mint_nft_to_kiosk(arg0: u64, arg1: &mut 0x2::kiosk::Kiosk, arg2: &0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_cap::MintCap<MockGhost>, arg3: &mut MockGhostMetadata, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0 >= 1 && arg0 <= 5, 1);
+        let v0 = 0x1::vector::borrow_mut<u64>(&mut arg3.mint_count, arg0 - 1);
+        let v1 = 0x1::string::utf8(b"");
+        0x1::string::append(&mut v1, *0x1::vector::borrow<0x1::string::String>(&arg3.name, arg0 - 1));
+        0x1::string::append(&mut v1, 0x1::string::utf8(b" #"));
+        0x1::string::append(&mut v1, u64ToString(*v0));
+        let v2 = 0x1::vector::empty<0x1::ascii::String>();
+        0x1::vector::push_back<0x1::ascii::String>(&mut v2, arg3.attribute_key);
+        let v3 = 0x1::vector::empty<0x1::ascii::String>();
+        0x1::vector::push_back<0x1::ascii::String>(&mut v3, *0x1::vector::borrow<0x1::ascii::String>(&arg3.attribute_value, arg0 - 1));
+        let v4 = MockGhost{
+            id         : 0x2::object::new(arg4),
+            name       : v1,
+            url        : 0x2::url::new_unsafe_from_bytes(*0x1::string::bytes(0x1::vector::borrow<0x1::string::String>(&arg3.url, arg0 - 1))),
+            attributes : 0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::attributes::from_vec(v2, v3),
+        };
+        let v5 = Witness{dummy_field: false};
+        0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_event::emit_mint<MockGhost>(0x16c5f17f2d55584a6e6daa442ccf83b4530d10546a8e7dedda9ba324e012fc40::witness::from_witness<MockGhost, Witness>(v5), 0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_cap::collection_id<MockGhost>(arg2), &v4);
+        *v0 = *v0 + 1;
+        0x95a441d389b07437d00dd07e0b6f05f513d7659b13fd7c5d3923c7d9d847199b::ob_kiosk::deposit<MockGhost>(arg1, v4, arg4);
+    }
+
+    public entry fun split_and_transfer_mint_cap(arg0: &mut 0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_cap::MintCap<MockGhost>, arg1: u64, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_cap::MintCap<MockGhost>>(0xbc3df36be17f27ac98e3c839b2589db8475fa07b20657b08e8891e3aaf5ee5f9::mint_cap::split<MockGhost>(arg0, arg1, arg3), arg2);
+    }
+
+    fun u64ToString(arg0: u64) : 0x1::string::String {
+        let v0 = 0x1::vector::empty<u8>();
+        if (arg0 == 0) {
+            0x1::vector::push_back<u8>(&mut v0, 48);
+        } else {
+            while (arg0 > 0) {
+                0x1::vector::push_back<u8>(&mut v0, ((arg0 % 10 + 48) as u8));
+                arg0 = arg0 / 10;
+            };
+            0x1::vector::reverse<u8>(&mut v0);
+        };
+        0x1::string::utf8(v0)
+    }
+
+    // decompiled from Move bytecode v6
+}
+

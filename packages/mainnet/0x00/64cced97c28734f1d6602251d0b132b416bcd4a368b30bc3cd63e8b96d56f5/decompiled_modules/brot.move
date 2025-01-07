@@ -1,0 +1,14 @@
+module 0x64cced97c28734f1d6602251d0b132b416bcd4a368b30bc3cd63e8b96d56f5::brot {
+    struct BROT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: BROT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<BROT>(arg0, 6, b"Brot", b"BROTT", x"746865206d656d65636f696e2074686174206272696e6773206a6f7920616e6420696e6e6f766174696f6e20746f207468652063727970746f20776f726c642e205769746820612064796e616d696320616e6420656e7468757369617374696320636f6d6d756e6974792c2042726f7474206973206e6f74206a757374206120746f6b656e3b206974e28099732061206d6f76656d656e74207468617420636f6d62696e65732068756d6f7220616e6420696e766573746d656e742e204a6f696e2074686973206a6f75726e657920616e6420646973636f76657220686f772042726f74742063616e2070726f7669646520612066756e2065787065", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1730971797601.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<BROT>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<BROT>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

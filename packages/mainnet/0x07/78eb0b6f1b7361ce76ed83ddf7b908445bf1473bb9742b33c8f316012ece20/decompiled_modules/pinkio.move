@@ -1,0 +1,14 @@
+module 0x778eb0b6f1b7361ce76ed83ddf7b908445bf1473bb9742b33c8f316012ece20::pinkio {
+    struct PINKIO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PINKIO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PINKIO>(arg0, 6, b"PINKIO", b"Pinkio", x"50696e6b696f202850494e4b494f290a50696e6b696f206f6e207468652053756920636861696e2069732074686520756c74696d617465206d656d65206c6567656e6421204869732062657374206275646479206973206e6f6e65206f74686572207468616e20506570652c20616e6420746f6765746865722c2074686579206c6f7665206b69636b696e67206261636b2077697468206472696e6b73206f6e20746865207765656b656e64732e204765742072656164792062656361757365207768656e2074686573652074776f207465616d2075702c20796f75206b6e6f77206974277320676f696e6720746f20626520612077696c64207269646521", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/12_1c78046f34.gif")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PINKIO>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<PINKIO>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

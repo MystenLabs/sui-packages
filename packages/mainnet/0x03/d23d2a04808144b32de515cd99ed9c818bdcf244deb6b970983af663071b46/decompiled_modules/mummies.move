@@ -1,0 +1,14 @@
+module 0x3d23d2a04808144b32de515cd99ed9c818bdcf244deb6b970983af663071b46::mummies {
+    struct MUMMIES has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MUMMIES, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MUMMIES>(arg0, 6, b"MUMMIES", b"SUI Mummy", x"4c6f6e672061676f2c2068696464656e20696e207468652073616e6473206f66206120666f72676f7474656e206c616e642c207468657265206c61792061206c6567656e646172790a706f74696f6e207361696420746f206772616e7420697473207573657220706f77657273206265796f6e6420696d6167696e6174696f6e2e2041667465720a63656e747572696573206f662073696c656e63652c206f6e2061206461726b20616e642073746f726d792048616c6c6f7765656e206e696768742c20776869737065727320746f6c64206f660a61206d756d6d792077686f20776f756c64207269736520616761696e20746f2066696e642074686973206c6f73742072656c6963207468652053554920536572756d21", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/MGA_LOGO_SOL_1_bd51e92b98.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MUMMIES>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<MUMMIES>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

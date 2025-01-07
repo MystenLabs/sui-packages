@@ -1,0 +1,222 @@
+module 0x72f3814fdd168c5f5706fe4642bf6cdf14b4bae20a4f13deeb9933bcfc89f0d::cetable {
+    struct CETABLE has drop {
+        dummy_field: bool,
+    }
+
+    struct AdminCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct BeneficiaryCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct CetableTreasury has key {
+        id: 0x2::object::UID,
+        version: u64,
+        cap: 0x2::coin::TreasuryCap<CETABLE>,
+    }
+
+    struct CetusLpVault has store, key {
+        id: 0x2::object::UID,
+        position: 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position,
+        target_tick: 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32,
+        target_sqrt_price: u128,
+        a_normalizer: u64,
+        b_normalizer: u64,
+        cetable_supply: u64,
+    }
+
+    struct NewVault<phantom T0, phantom T1> has copy, drop {
+        vault_id: 0x2::object::ID,
+        pool_id: 0x2::object::ID,
+        tick_lower: u32,
+        tick_upper: u32,
+    }
+
+    struct CollectFee<phantom T0> has copy, drop {
+        amount: u64,
+    }
+
+    struct CollectFeeFrom<phantom T0> has copy, drop {
+        pool_id: 0x2::object::ID,
+        amount: u64,
+    }
+
+    struct Deposit<phantom T0, phantom T1> has copy, drop {
+        vault_id: 0x2::object::ID,
+        amount_a: u64,
+        amount_b: u64,
+        cetable_amount: u64,
+    }
+
+    struct Withdraw<phantom T0, phantom T1> has copy, drop {
+        vault_id: 0x2::object::ID,
+        amount_a: u64,
+        amount_b: u64,
+        cetable_amount: u64,
+    }
+
+    struct BalanceType<phantom T0> has copy, drop, store {
+        dummy_field: bool,
+    }
+
+    fun burn(arg0: &mut CetableTreasury, arg1: &mut CetusLpVault, arg2: 0x2::coin::Coin<CETABLE>) {
+        let v0 = 0x2::coin::value<CETABLE>(&arg2);
+        assert!(v0 <= arg1.cetable_supply, 1);
+        arg1.cetable_supply = arg1.cetable_supply - v0;
+        0x2::coin::burn<CETABLE>(&mut arg0.cap, arg2);
+    }
+
+    fun mint(arg0: &mut CetableTreasury, arg1: &mut CetusLpVault, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<CETABLE> {
+        arg1.cetable_supply = arg1.cetable_supply + arg2;
+        0x2::coin::mint<CETABLE>(&mut arg0.cap, arg2, arg3)
+    }
+
+    fun assert_valid_package_version(arg0: &CetableTreasury) {
+        assert!(arg0.version == 1, 0);
+    }
+
+    fun borrow_balance_mut<T0>(arg0: &mut CetableTreasury) : &mut 0x2::balance::Balance<T0> {
+        let v0 = BalanceType<T0>{dummy_field: false};
+        let v1 = &mut arg0.id;
+        if (!0x2::dynamic_field::exists_<BalanceType<T0>>(v1, v0)) {
+            0x2::dynamic_field::add<BalanceType<T0>, 0x2::balance::Balance<T0>>(v1, v0, 0x2::balance::zero<T0>());
+        };
+        0x2::dynamic_field::borrow_mut<BalanceType<T0>, 0x2::balance::Balance<T0>>(v1, v0)
+    }
+
+    public fun borrow_cetus_position(arg0: &CetusLpVault) : &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position {
+        &arg0.position
+    }
+
+    public fun borrow_treasury_cap(arg0: &CetableTreasury) : &0x2::coin::TreasuryCap<CETABLE> {
+        &arg0.cap
+    }
+
+    public fun claim_all<T0>(arg0: &BeneficiaryCap, arg1: &mut CetableTreasury) : 0x2::balance::Balance<T0> {
+        assert_valid_package_version(arg1);
+        0x2::balance::withdraw_all<T0>(borrow_balance_mut<T0>(arg1))
+    }
+
+    public fun claim_fee<T0>(arg0: &BeneficiaryCap, arg1: &mut CetableTreasury, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T0> {
+        assert_valid_package_version(arg1);
+        0x2::coin::take<T0>(borrow_balance_mut<T0>(arg1), arg2, arg3)
+    }
+
+    public fun claim_fee_to<T0>(arg0: &BeneficiaryCap, arg1: &mut CetableTreasury, arg2: u64, arg3: address, arg4: &mut 0x2::tx_context::TxContext) {
+        assert_valid_package_version(arg1);
+        0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(claim_fee<T0>(arg0, arg1, arg2, arg4), arg3);
+    }
+
+    public fun claim_reward<T0, T1, T2>(arg0: &BeneficiaryCap, arg1: &CetusLpVault, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg3: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg4: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::rewarder::RewarderGlobalVault, arg5: &0x2::clock::Clock) : 0x2::balance::Balance<T2> {
+        0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::collect_reward<T0, T1, T2>(arg2, arg3, &arg1.position, arg4, true, arg5)
+    }
+
+    public fun claim_reward_to<T0, T1, T2>(arg0: &BeneficiaryCap, arg1: &CetusLpVault, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg3: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg4: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::rewarder::RewarderGlobalVault, arg5: &0x2::clock::Clock, arg6: address, arg7: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x2::coin::Coin<T2>>(0x2::coin::from_balance<T2>(claim_reward<T0, T1, T2>(arg0, arg1, arg2, arg3, arg4, arg5), arg7), arg6);
+    }
+
+    fun collect_fee<T0>(arg0: &mut CetableTreasury, arg1: 0x2::object::ID, arg2: 0x2::balance::Balance<T0>) {
+        0x2::balance::join<T0>(borrow_balance_mut<T0>(arg0), arg2);
+        let v0 = CollectFeeFrom<T0>{
+            pool_id : arg1,
+            amount  : 0x2::balance::value<T0>(&arg2),
+        };
+        0x2::event::emit<CollectFeeFrom<T0>>(v0);
+    }
+
+    public fun create_vault<T0, T1>(arg0: &AdminCap, arg1: &CetableTreasury, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg3: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg4: u32, arg5: u32, arg6: u32, arg7: u128, arg8: u64, arg9: u64, arg10: &mut 0x2::tx_context::TxContext) {
+        assert_valid_package_version(arg1);
+        assert!(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from_u32(arg5), 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from_u32(arg4)), 2);
+        let v0 = CetusLpVault{
+            id                : 0x2::object::new(arg10),
+            position          : 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::open_position<T0, T1>(arg2, arg3, arg4, arg5, arg10),
+            target_tick       : 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from_u32(arg6),
+            target_sqrt_price : arg7,
+            a_normalizer      : arg8,
+            b_normalizer      : arg9,
+            cetable_supply    : 0,
+        };
+        0x2::transfer::share_object<CetusLpVault>(v0);
+        let v1 = NewVault<T0, T1>{
+            vault_id   : 0x2::object::id<CetusLpVault>(&v0),
+            pool_id    : 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg3),
+            tick_lower : arg4,
+            tick_upper : arg5,
+        };
+        0x2::event::emit<NewVault<T0, T1>>(v1);
+    }
+
+    public fun deposit<T0, T1>(arg0: &mut CetableTreasury, arg1: &mut CetusLpVault, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg3: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg4: u128, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<CETABLE>, 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::AddLiquidityReceipt<T0, T1>) {
+        assert_valid_package_version(arg0);
+        let v0 = liquidity_to_cetable_amount(arg1, arg4);
+        let v1 = mint(arg0, arg1, v0, arg6);
+        let v2 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::add_liquidity<T0, T1>(arg2, arg3, &mut arg1.position, arg4, arg5);
+        let (v3, v4) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::add_liquidity_pay_amount<T0, T1>(&v2);
+        let v5 = Deposit<T0, T1>{
+            vault_id       : 0x2::object::id<CetusLpVault>(arg1),
+            amount_a       : v3,
+            amount_b       : v4,
+            cetable_amount : v0,
+        };
+        0x2::event::emit<Deposit<T0, T1>>(v5);
+        (v1, v2)
+    }
+
+    fun init(arg0: CETABLE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CETABLE>(arg0, 9, b"CETABLE", b"SCET-STABLE-LP", b"Fungible LP token for stable pair on Cetus", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://reb6vnedll4q6tlu63cmk7iu3y252525bgh3zf7tq5onis572pfq.arweave.net/iQPqtINa-Q9NdPbExX0U3jXdd10Jj7yX84dc1Eu_08s")), arg1);
+        let v2 = CetableTreasury{
+            id      : 0x2::object::new(arg1),
+            version : 1,
+            cap     : v0,
+        };
+        0x2::transfer::share_object<CetableTreasury>(v2);
+        let v3 = 0x2::tx_context::sender(arg1);
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<CETABLE>>(v1, v3);
+        let v4 = AdminCap{id: 0x2::object::new(arg1)};
+        0x2::transfer::transfer<AdminCap>(v4, v3);
+        let v5 = BeneficiaryCap{id: 0x2::object::new(arg1)};
+        0x2::transfer::transfer<BeneficiaryCap>(v5, v3);
+    }
+
+    public fun liquidity_to_cetable_amount(arg0: &CetusLpVault, arg1: u128) : u64 {
+        let (v0, v1) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::tick_range(&arg0.position);
+        let (v2, v3) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::get_amount_by_liquidity(v0, v1, arg0.target_tick, arg0.target_sqrt_price, arg1, false);
+        v2 * arg0.a_normalizer + v3 * arg0.b_normalizer
+    }
+
+    public fun update_version(arg0: &AdminCap, arg1: &mut CetableTreasury, arg2: u64) {
+        assert_valid_package_version(arg1);
+        arg1.version = arg2;
+    }
+
+    public fun vault_supply(arg0: &CetusLpVault) : u64 {
+        arg0.cetable_supply
+    }
+
+    public fun withdraw<T0, T1>(arg0: &mut CetableTreasury, arg1: &mut CetusLpVault, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg3: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg4: &0x2::clock::Clock, arg5: 0x2::coin::Coin<CETABLE>, arg6: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, 0x2::coin::Coin<T1>) {
+        assert_valid_package_version(arg0);
+        let v0 = &mut arg1.position;
+        let (v1, v2) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::collect_fee<T0, T1>(arg2, arg3, v0, true);
+        let v3 = 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg3);
+        collect_fee<T0>(arg0, v3, v1);
+        collect_fee<T1>(arg0, v3, v2);
+        let v4 = 0x2::coin::value<CETABLE>(&arg5);
+        let (v5, v6) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::remove_liquidity<T0, T1>(arg2, arg3, v0, 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::full_math_u128::mul_div_floor(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::liquidity(v0), (v4 as u128), (arg1.cetable_supply as u128)), arg4);
+        let v7 = v6;
+        let v8 = v5;
+        burn(arg0, arg1, arg5);
+        let v9 = Withdraw<T0, T1>{
+            vault_id       : 0x2::object::id<CetusLpVault>(arg1),
+            amount_a       : 0x2::balance::value<T0>(&v8),
+            amount_b       : 0x2::balance::value<T1>(&v7),
+            cetable_amount : v4,
+        };
+        0x2::event::emit<Withdraw<T0, T1>>(v9);
+        (0x2::coin::from_balance<T0>(v8, arg6), 0x2::coin::from_balance<T1>(v7, arg6))
+    }
+
+    // decompiled from Move bytecode v6
+}
+

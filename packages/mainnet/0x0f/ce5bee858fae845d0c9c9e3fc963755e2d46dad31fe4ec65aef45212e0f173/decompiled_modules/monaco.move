@@ -1,0 +1,14 @@
+module 0xfce5bee858fae845d0c9c9e3fc963755e2d46dad31fe4ec65aef45212e0f173::monaco {
+    struct MONACO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MONACO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MONACO>(arg0, 6, b"Monaco", b"Monaco club", x"4d6f6e61636f20636c7562200a28492057494c4c204e4556455220425559204d4f5245205448414e2024313030204f46204120434f494e2029616e6420492077696c6c206e6f742073656c6c20697420756e74696c206974207265616368203142206d6320492077696c6c206b65657020697420666f7220636f6d6d756e69747920746f207461636b206f766572200a4d6f6e61636f204d616b6520796f757220647265616d2061207265616c6974790a4d792077616c6c65743a200a30783164353932326335353963646233303531623834326538326134613764323861333064303265316265656465633038633935303838383938333839313734343249", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/2024106135547531_08f245cd62.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MONACO>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<MONACO>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
