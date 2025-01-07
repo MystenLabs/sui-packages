@@ -1,0 +1,14 @@
+module 0x5be7613d60922a3b927bcd93408df5aef4dd0f75aeba5369d0592e829e9daaa1::maniy {
+    struct MANIY has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MANIY, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MANIY>(arg0, 6, b"MANIY", b"MANIY SUI", x"4d414e49592069732061206d656d6520746f6b656e206f6e205375692c2064657369676e656420666f722074686f73652077686f2061737069726520746f2066696e616e6369616c2066726565646f6d20616e64206172656ee28099742061667261696420746f2074616b65207269736b7321204d414e495920656d626f6469657320636f75726167652c20746872696c6c2c20616e6420616d626974696f6e2c206272696e67696e6720746f6765746865722070656f706c652077686f2077616e7420746f206265206e6f74206a75737420706c61796572732062757420747275652077696e6e65727320696e207468652063727970746f20776f", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1730950956522.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<MANIY>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MANIY>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

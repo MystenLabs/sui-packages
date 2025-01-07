@@ -1,0 +1,15 @@
+module 0x5a352169ac1d335151520b4478b8918ebaa6e086bba337bd69d0f7111ac9233d::aik {
+    struct AIK has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: AIK, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let (v1, v2) = 0x2::coin::create_currency<AIK>(arg0, 6, b"AIK", b"AI Kitten by SuiAI", x"4149204b697474656e3a20596f757220667269656e646c792c20746563682d736176767920636f6d70616e696f6e2120f09f98bae29ca8205768657468657220796f75277265206c6f6f6b696e6720666f722068656c7066756c20696e7369676874732c2066756e20696e746572616374696f6e732c206f72206a757374206120637574652c20637572696f757320667269656e642c204149204b697474656e206973206865726520746f206173736973742077697468206120706c617966756c2073706972697420616e6420736d617274206164766963652e20416c77617973206c6561726e696e6720616e6420726561647920746f206c656e642061207061772120f09f90bef09f94a7", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.suiai.fun/uploads/AIK_ae9da7b759.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<AIK>>(v2, v0);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<AIK>>(v1, v0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

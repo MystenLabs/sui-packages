@@ -1,0 +1,14 @@
+module 0x55e81cff440771702f06a2f5a9cba35ee4095dabb10fe4cdb8a54ea0a456a570::girl {
+    struct GIRL has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GIRL, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GIRL>(arg0, 6, b"GIRL", b"PartyGirl", x"50617274794769726c206973206120626f6c6420616e64206361726566726565206d656d6520746f6b656e2074686174e280997320616c6c2061626f75742066756e2c2066726565646f6d2c20616e64206c6976696e67206c69666520746f207468652066756c6c657374212057697468206120766962652061732077696c64206173207468652064616e636520666c6f6f722c206974e28099732064657369676e656420666f72207472656e647365747465727320616e64207269736b2d74616b6572732077686f206c6f7665206d616b696e6720776176657320696e2063727970746f2e204a6f696e2074686520706172747921", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1734987411807.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<GIRL>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GIRL>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

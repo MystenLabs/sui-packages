@@ -1,0 +1,14 @@
+module 0x5273c30299851cac2dc5f60af8bab46165771f9f22a6174ffc716f5ddd1393d8::goldfishsui {
+    struct GOLDFISHSUI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GOLDFISHSUI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GOLDFISHSUI>(arg0, 6, b"GoldFishSui", b"GoldFish", x"5355492063616e2774206861766520616e20617175617469632065636f73797374656d20776974686f7574206120476f6c64466973682120204e6f20776f72726965732074686520476f6c644669736820686173206172726976656421202020204865792067757973212020436f6d65206a6f696e207468652054656c656772616d2120200a4920686176652065766572797468696e672073657420757021202068747470733a2f2f742e6d652f476f6c64466973686f6e5375690a0a486572657320547769747465722068747470733a2f2f782e636f6d2f476f6c64666973685355490a616e64206865726573206f757220776562736974652e20202068747470733a2f2f676f6c64666973687375692e63617272642e636f2f", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/pngtree_goldfish_in_aquarium_image_15976964_ec3eaaeb5f.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GOLDFISHSUI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<GOLDFISHSUI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

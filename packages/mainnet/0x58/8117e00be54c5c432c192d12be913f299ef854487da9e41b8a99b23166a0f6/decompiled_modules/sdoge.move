@@ -1,0 +1,14 @@
+module 0x588117e00be54c5c432c192d12be913f299ef854487da9e41b8a99b23166a0f6::sdoge {
+    struct SDOGE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SDOGE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SDOGE>(arg0, 6, b"SDOGE", b"SUI DOGE", x"53554920446f6765206973206e6f74206a75737420616e6f74686572206d656d6520636f696ee280946974e2809973206120636f6d6d756e6974792d64726976656e207265766f6c7574696f6e206f6e207468652053554920626c6f636b636861696e2c20626c656e64696e672074686520706f776572206f6620646563656e7472616c697a65642066696e616e63652028446546692920776974682074686520696e7465726e6574e2809973206661766f72697465206d656d65206d6173636f742c20446f67652e2044657369676e656420746f20626520666173742c2066756e2c20616e64206d656d6561626c652c2053554920446f67652061696d", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1736074853233.webp")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SDOGE>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SDOGE>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

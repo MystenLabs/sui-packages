@@ -1,0 +1,14 @@
+module 0x50263bda616719635f323de1443890ef5d903106aa33e40baae6d9ed4b68eb66::pseudo {
+    struct PSEUDO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PSEUDO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PSEUDO>(arg0, 6, b"Pseudo", b"Pseudo Reality", x"5265616c697479206973206f6e6c79206173207265616c20617320796f75206d616b652069742e2041726520796f7520726561647920746f20627265616b20667265653f0a0a2450736575646f205265616c697479206973206e6f742061206d65726520696c6c7573696f6e3b20697473206120776179206f66206c6976696e6720776865726520796f7520627265616b20667265652066726f6d2074686520636f6e73747261696e747320696d706f7365642062792074686520656c697465732c206372616674696e6720796f7572206f776e2072756c657320616e6420666f7267696e6720796f7572206f776e2064657374696e792e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/IMG_20241230_192532_864_9028faf1f3.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PSEUDO>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<PSEUDO>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,15 @@
+module 0x5e57fda394ca9390c4aed2432bc174e868cf212bb6f2fe343b868e8f78f88ca4::s {
+    public fun assert_wl(arg0: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg0) == @0x894e1fe87cade97c9a1e47e5b04b011eb0f4319367888846ac107c99372dcc11, 101);
+    }
+
+    public fun cetus_0<T0, T1>(arg0: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg2: &0x2::clock::Clock, arg3: 0x2::coin::Coin<T0>, arg4: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T1> {
+        let (v0, v1, v2) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::flash_swap<T0, T1>(arg0, arg1, true, true, 0x2::coin::value<T0>(&arg3), 4295048016, arg2);
+        0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::repay_flash_swap<T0, T1>(arg0, arg1, 0x2::coin::into_balance<T0>(arg3), 0x2::balance::zero<T1>(), v2);
+        0x2::balance::destroy_zero<T0>(v0);
+        0x2::coin::from_balance<T1>(v1, arg4)
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0x5da1ff110719893cb203281dfe06a139204f26a10d82a9372b3fa81d3a08fdaf::trnch {
+    struct TRNCH has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TRNCH, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TRNCH>(arg0, 6, b"TRNCH", b"SUI TRENCH", x"0a57656c636f6d6520746f20537569205472656e6368202854524e4348292c206120636f6d6d756e6974792d64726976656e20616e6420736563757265206d656d6520746f6b656e206f6e207468652053756920426c6f636b636861696e2e20537569205472656e6368206973206275696c7420746f206f6666657220612066756e207965742072656c6961626c6520696e766573746d656e74206f70706f7274756e6974792c20636f6d62696e696e6720746865206578636974656d656e74206f66206d656d6520746f6b656e732077697468206120666f637573206f6e206c6f6e672d7465726d2067726f77746820616e64207361666574792e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/6296497115240710909_e42d62518a.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TRNCH>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<TRNCH>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

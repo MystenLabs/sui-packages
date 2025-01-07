@@ -1,0 +1,14 @@
+module 0x5bf7e0ff4a93a41412956867cbd8264c2fb052fb1ce02c5f693671d837195f98::cms {
+    struct CMS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CMS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CMS>(arg0, 6, b"CMS", b"ChillMars On SUI", x"4368696c6c204d617273206f6e205375692061696d7320746f2073796d626f6c697a652066756e20616e6420626f6c646e65737320696e207468652063727970746f20776f726c642c206f66666572696e67206f70706f7274756e697469657320666f7220626f746820736d616c6c20616e64206c6172676520696e766573746f727320746f206a6f696e20616e206578636974696e67206a6f75726e657920746f776172642074686520224d61727322206f662063727970746f20737563636573732e0a0a5461676c696e653a202253746179204368696c6c2c2041696d20666f72204d6172732c20616e6420526964652074686520537569", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732354177184.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<CMS>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CMS>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

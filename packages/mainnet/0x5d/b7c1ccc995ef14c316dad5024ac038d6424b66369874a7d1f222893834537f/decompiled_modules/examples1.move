@@ -1,0 +1,12 @@
+module 0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::examples1 {
+    fun example(arg0: &0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::Rectangle, arg1: &0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::Box) : u64 {
+        0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::rectangle_base(arg0) * 0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::rectangle_height(arg0) + 0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::box_base(arg1) * 0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::box_height(arg1) * 0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::box_depth(arg1)
+    }
+
+    fun expanded_example(arg0: &0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::Rectangle, arg1: &0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::Box) : u64 {
+        0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::rectangle_base(arg0) * 0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::rectangle_height(arg0) + 0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::box_base(arg1) * 0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::box_height(arg1) * 0x5db7c1ccc995ef14c316dad5024ac038d6424b66369874a7d1f222893834537f::shapes::box_depth(arg1)
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0x5f0fe6f17f9eebf356a046fd55cd15bf429b42d8d36beebae99d58407fc9f5ae::caps {
+    struct CAPS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CAPS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CAPS>(arg0, 6, b"CAPS", b"Nuka-Cola Bottlecaps", x"46616c6c6f7574732063757272656e6379206f6e205355492e0a4e46545320496e636f6d696e6720666f72207374616b696e670a5175616e74756d202d20353525204150590a436865727279202d20333525204150590a51756172747a202d203f0a566963746f7279202d203f0a323525204e46545320646973747269627574656420746f206561726c792061646f7074657273207468656e20617661696c61626c6520666f72207075726368617365200a54686973206973206120636f6d706c65746520636f6d6d756e69747920746f6b656e2e204275696c6420612062657474657220776f726c6420696e205375692e0a576172206e65766572206368616e6765732e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/IMG_2664_6a729e3f07.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CAPS>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<CAPS>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
