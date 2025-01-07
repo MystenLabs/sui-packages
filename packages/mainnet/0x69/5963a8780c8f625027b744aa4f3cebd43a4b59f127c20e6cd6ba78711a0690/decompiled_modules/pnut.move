@@ -1,0 +1,14 @@
+module 0x695963a8780c8f625027b744aa4f3cebd43a4b59f127c20e6cd6ba78711a0690::pnut {
+    struct PNUT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PNUT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PNUT>(arg0, 6, b"PNUT", b"Peanut on Sui", x"5065616e75742074686520537175697272656c202d20414b412050e280994e7574202d2063617074757265642074686520686561727473206f66206d696c6c696f6e73206f6e20736f6369616c206d65646961206265666f7265206865207761732077726f6e6766756c6c792074616b656e20616e642065757468616e6973656420627920746865204e594445432e204e6f772c206865207374616e647320696d6d6f7274616c69736564206f6e2074686520626c6f636b636861696e20666f72657665722c20737065617268656164696e672061206d6f76656d656e7420746861742064656d616e6473207265666f726d20746f2063757272656e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1730954107190.webp")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<PNUT>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PNUT>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

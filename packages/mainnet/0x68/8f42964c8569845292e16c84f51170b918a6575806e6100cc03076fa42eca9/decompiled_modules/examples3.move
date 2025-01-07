@@ -1,0 +1,12 @@
+module 0x688f42964c8569845292e16c84f51170b918a6575806e6100cc03076fa42eca9::examples3 {
+    fun example(arg0: &0x688f42964c8569845292e16c84f51170b918a6575806e6100cc03076fa42eca9::shapes::Rectangle) : u64 {
+        0x688f42964c8569845292e16c84f51170b918a6575806e6100cc03076fa42eca9::shapes::rectangle_base(arg0) * 0x688f42964c8569845292e16c84f51170b918a6575806e6100cc03076fa42eca9::shapes::rectangle_height(arg0)
+    }
+
+    fun expanded_example(arg0: &0x688f42964c8569845292e16c84f51170b918a6575806e6100cc03076fa42eca9::shapes::Rectangle) : u64 {
+        0x688f42964c8569845292e16c84f51170b918a6575806e6100cc03076fa42eca9::shapes::rectangle_base(arg0) * 0x688f42964c8569845292e16c84f51170b918a6575806e6100cc03076fa42eca9::shapes::rectangle_height(arg0)
+    }
+
+    // decompiled from Move bytecode v6
+}
+

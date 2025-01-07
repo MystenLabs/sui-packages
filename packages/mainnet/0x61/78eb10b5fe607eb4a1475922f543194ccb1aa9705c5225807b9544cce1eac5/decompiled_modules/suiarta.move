@@ -1,0 +1,14 @@
+module 0x6178eb10b5fe607eb4a1475922f543194ccb1aa9705c5225807b9544cce1eac5::suiarta {
+    struct SUIARTA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUIARTA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUIARTA>(arg0, 6, b"SUIarta", b"This Is SUIarta!", x"5468652074696d652068617320636f6d652120536869656c647320757021205355496f77726473206f757421200a0a4a6f696e20746865205355492041726d7921204a6f696e20757320696e2054656c656772616d20746f207368617265207468652062657374206d656d657320746f20696e74726f647563652074686520776f726c6420746f207468652073757072656d616379206f6620245355492e2045786368616e676520626174746c6520696e74656c6c6967656e636520776974682066656c6c6f77205355492077617272696f72732063617276696e672061207061746820746f2066696e616e6369616c20766963746f727921", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1734539424599.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SUIARTA>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUIARTA>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

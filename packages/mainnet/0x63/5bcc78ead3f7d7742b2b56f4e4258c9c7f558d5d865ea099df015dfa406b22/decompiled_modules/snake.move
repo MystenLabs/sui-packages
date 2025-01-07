@@ -1,0 +1,14 @@
+module 0x635bcc78ead3f7d7742b2b56f4e4258c9c7f558d5d865ea099df015dfa406b22::snake {
+    struct SNAKE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SNAKE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SNAKE>(arg0, 6, b"SNAKE", b"Snake", x"4465736372697074696f6e3a0a536e616b65202824534e414b45292020756c74696d617465206d656d6520636f696e206f6e207468652053756920626c6f636b636861696e2e20496e737069726564206279207468652063756e6e696e6720616e642061646170746162696c697479206f6620736e616b65732c2024534e414b4520736c697468657273207468726f75676820746865206d61726b657420776974682067726163652c20726561647920746f20737472696b65207769746820706f7765722e204974e2809973206e6f74206a75737420616e6f74686572206d656d6520636f696e206974e28099732061206d6f76656d656e74", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1734643709443.webp")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SNAKE>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SNAKE>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0x6b3f8ed5ad790a8cd84a8d3a70343e3dc36df81cb718b6e1d32cd48c4ab15828::suits {
+    struct SUITS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUITS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUITS>(arg0, 6, b"SUITS", b"SUIPERSTAR", x"22496e207468652064796e616d6963206c616e647363617065206f66207468652063727970746f20776f726c642c2061206e65772070726f6a65637420656d65726765732066726f6d2074686520686f7474657374206669726573206f6620696e6e6f766174696f6e20616e64206372656174697669747920535549504552535441522e2054686973206973207768657265206461726b6e65737320616e64206c6967687420636f6e76657267652c206272696e67696e6720666f7274682061207265766f6c7574696f6e61727920667573696f6e206f66206d656d652063756c747572652c20616e64206120737570657273746172206f6620746865206d6f6e74682e220a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/12_4b23cab74b.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUITS>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SUITS>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

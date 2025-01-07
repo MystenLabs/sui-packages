@@ -1,0 +1,14 @@
+module 0x6c3da5d16c4ad3e622dd27e12e5e58a7df804a87553ac95243e056ebb42ad9e9::azur {
+    struct AZUR has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: AZUR, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<AZUR>(arg0, 6, b"Azur", b"AzurCryptus", x"43727970746f4361742077617320626f726e2066726f6d206120626c6f636b636861696e20676c6974636820696e20427974656f706f6c69732c2065766f6c76696e6720746f2070726f746563742063727970746f63757272656e63696573206166746572207769746e657373696e672063796265726372696d652e2041207461696c207468617420726573656d626c65732061206c696768746e696e6720626f6c742c2073796d626f6c697a696e6720746865207370656564206f66207472616374696f6e732c206163746976656c7920776f726b696e67206f6e20736176696e672063727970746f2061737365747320616e642070720a0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1735443140053.jpeg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<AZUR>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<AZUR>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

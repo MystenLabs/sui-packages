@@ -1,0 +1,15 @@
+module 0x6b65eeecdd6721b08ef645414f80bb58b4c951eb52ec3c1bb53dfcf93cdc8ef3::sam {
+    struct SAM has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SAM, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let (v1, v2) = 0x2::coin::create_currency<SAM>(arg0, 6, b"SAM", b"Samantha by SuiAI", x"53616d616e74686120697320616e2041492064657369676e656420746f20656d706f7765722063727970746f20696e766573746f7273207769746820696e7369676874732c207472656e64732c20616e6420616e616c797369732e205768657468657220796f75e280997265206e657720746f2063727970746f206f72206120736561736f6e6564207472616465722c2053616d616e7468612070726f76696465732067756964616e6365206f6e206d61726b6574206d6f76656d656e74732c207269736b206173736573736d656e742c20616e6420706f7274666f6c696f206d616e6167656d656e74e28094616c6c2077697468206120667269656e646c7920616e6420617070726f61636861626c65207374796c652e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.suiai.fun/uploads/Artboard_1_1_37c57e3dde.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<SAM>>(v2, v0);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SAM>>(v1, v0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

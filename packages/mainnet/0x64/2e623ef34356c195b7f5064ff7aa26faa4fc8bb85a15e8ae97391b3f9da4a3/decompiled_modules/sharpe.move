@@ -1,0 +1,14 @@
+module 0x642e623ef34356c195b7f5064ff7aa26faa4fc8bb85a15e8ae97391b3f9da4a3::sharpe {
+    struct SHARPE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SHARPE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SHARPE>(arg0, 6, b"SHARPE", b"Sharpe Ratio", x"53686172706520526174696f3a20546865205765623320496e766573746f72e28099732053656372657420576561706f6e2e20496d6167696e6520796f75e28099726520612063727970746f20616476656e7475726572206e617669676174696e67207468652077696c6420626c6f636b636861696e2066726f6e746965722e205468652053686172706520526174696f206973206c696b6520796f75722074727573747920636f6d706173732c2068656c70696e6720796f752064697374696e6775697368206265747765656e2067656e75696e6520696e766573746d656e742067656e69757320616e642070757265206c75636b2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732383589223.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SHARPE>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SHARPE>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
