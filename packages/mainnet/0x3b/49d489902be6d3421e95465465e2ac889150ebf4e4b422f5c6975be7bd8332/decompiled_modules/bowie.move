@@ -1,0 +1,12 @@
+module 0x3b49d489902be6d3421e95465465e2ac889150ebf4e4b422f5c6975be7bd8332::bowie {
+    struct BOWIE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: BOWIE, arg1: &mut 0x2::tx_context::TxContext) {
+        0x5c8657a6009556804585cd667be3b43487062195422ff586333721de0f8baeae::connector_v3::new<BOWIE>(arg0, 17921366828391452208, b"Elon Musk - Bowie First Dog", b"BOWIE", x"48657920477579732120456c6f6e204d75736b20616e6420446f6773202120576520617265205265616479206f722061726520796f752072656164790a0a536f6369616c73203a200a0a41726368697665203a2068747470733a2f2f617263686976652e6f72672f64657461696c732f656c6f6e2d6d75736b2d62792d77616c7465722d6973616163736f6e2f706167652f6e35352f6d6f64652f3275703f713d626f776965200a0a54776974746572203a2068747470733a2f2f782e636f6d2f456c6f6e4d75736b426f7769650a0a54656c656772616d203a2068747470733a2f2f742e6d652f656c6f6e6d75736b626f776965", b"https://images.hop.ag/ipfs/QmUabNSTZaLB6EW655wj39tcNB8oGwscDcW4fMHULYgk5P", 0x1::string::utf8(b"https://x.com/ElonMuskBowie"), 0x1::string::utf8(b"https://archive.org/details/elon-musk-by-walter-isaacson/page/n55/mode/2up?q=bowie"), 0x1::string::utf8(b"https://t.me/elonmuskbowie"), arg1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

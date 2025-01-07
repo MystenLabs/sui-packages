@@ -1,0 +1,14 @@
+module 0x31d65f517f23c521e9b6ef9ce187c1d5b55d99db32182879029691d38af947c0::mml {
+    struct MML has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MML, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MML>(arg0, 6, b"MML", b"Moon My Love", x"4d6f6f6e204d79204c6f76652069732061206d656d6520746f6b656e20696e7370697265642062792074727565206c6f76652e20437265617465642061732061207472696275746520746f20746865204d6f6f6e20616e64207468652074696573207468617420636f6e6e6563742075732c20746869732070726f6a656374206d6978657320696e6e6f766174696f6e2c2066756e20616e6420726f6d616e63652c20696e766974696e672074686520636f6d6d756e69747920746f20706172746963697061746520696e2061206a6f75726e6579207468617420636f6d62696e65732070617373696f6ec2a0616e64c2a070726f73706572697479", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732279153135.webp")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<MML>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MML>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

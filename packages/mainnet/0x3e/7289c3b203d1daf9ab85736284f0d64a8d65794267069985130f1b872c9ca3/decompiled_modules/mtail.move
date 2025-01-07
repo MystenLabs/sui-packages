@@ -1,0 +1,14 @@
+module 0x3e7289c3b203d1daf9ab85736284f0d64a8d65794267069985130f1b872c9ca3::mtail {
+    struct MTAIL has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MTAIL, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MTAIL>(arg0, 6, b"MTAIL", b"MeowTail", x"57656c636f6d6520746f204d656f777461696c2c207768657265207468650a776f726c64206f66206d656d65732c2067616d696e672c20616e64204e4654730a636f6c6c69646521204469766520696e746f20616e20657870657269656e63650a7768657265206576657279206d656f7720616e64207461696c2d73776973680a6272696e677320746872696c6c696e67206f70706f7274756e697469657320696e207468650a63727970746f2073706163652e204d656f777461696c2069736ee2809974206a75737420610a6d656d6520636f696e20e28093206974e280997320612066756c6c2d666c65646765640a6469676974616c2065636f73797374", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1730996688296.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<MTAIL>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MTAIL>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

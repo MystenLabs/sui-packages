@@ -1,0 +1,14 @@
+module 0x371edf2cd4c0402d5457f375a221172a5967024af291872cfe82b9380e93c104::gcatai {
+    struct GCATAI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GCATAI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GCATAI>(arg0, 6, b"GCATAI", b"Good Cat AI", x"4d65657420796f757220667269656e646c7920414920636174206167656e7420737072656164696e6720706f736974697669747920616e6420776973646f6d20696e2063727970746f2e20506f776572656420627920535549277320746563682c2024476f6f64436174206973206d6f7265207468616e2061206d656d65636f696ee28094697427732061206d6f76656d656e7420666f722066756e2c2074727573742c20616e6420636f6d6d756e6974792067726f7774682e204a6f696e2074686520707572722d66656374207265766f6c7574696f6e20616e64206c6574e2809973206d616b652063727970746f20706177736f6d652120f09f90be", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1736004685278.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<GCATAI>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GCATAI>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

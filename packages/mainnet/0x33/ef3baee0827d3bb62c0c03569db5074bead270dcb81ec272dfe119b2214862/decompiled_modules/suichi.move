@@ -1,0 +1,14 @@
+module 0x33ef3baee0827d3bb62c0c03569db5074bead270dcb81ec272dfe119b2214862::suichi {
+    struct SUICHI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUICHI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUICHI>(arg0, 6, b"Suichi", b"Suichi cat", b"Most memeable cat in sui", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/IMG_20240927_091857_978_e278316693.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUICHI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SUICHI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
