@@ -1,0 +1,14 @@
+module 0x4a58f28746df34d5e13a4265925cb53f50f602b2a81636ae7d792eb9b9449e5e::spring_sSui {
+    struct SPRING_SSUI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SPRING_SSUI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SPRING_SSUI>(arg0, 9, b"sysSUI", b"SY Spring Staked SUI", b"SY Spring Staked SUI", 0x1::option::none<0x2::url::Url>(), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SPRING_SSUI>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SPRING_SSUI>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

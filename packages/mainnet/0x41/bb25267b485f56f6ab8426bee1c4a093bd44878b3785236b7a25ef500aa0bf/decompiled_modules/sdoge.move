@@ -1,0 +1,14 @@
+module 0x41bb25267b485f56f6ab8426bee1c4a093bd44878b3785236b7a25ef500aa0bf::sdoge {
+    struct SDOGE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SDOGE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SDOGE>(arg0, 6, b"SDOGE", b"SUIDOGE", b"\"Doge on Sui\" brings the ultimate meme coin vibes to the Sui blockchain, where speed and low fees are king. We're talking lightning-fast transactions, almost zero gas, and all the chaotic, fun Doge energy you lovenow supercharged on a next-gen platform. ", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/photo_2024_10_08_04_25_29_879216c1a7.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SDOGE>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SDOGE>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

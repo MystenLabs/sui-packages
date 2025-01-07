@@ -1,0 +1,14 @@
+module 0x49971ced37684217c2e6d00011093358d8f4e0b2863d5c513fc67e1331debcbf::chonk {
+    struct CHONK has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CHONK, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CHONK>(arg0, 6, b"CHONK", b"ChonkCoin", x"43686f6e6b436f696e20282443484f4e4b292069732074686520756c74696d617465206d656d6520636f696e2063656c6562726174696e672074686520636861726d206f662063686f6e6b7920636174732e204275696c74206f6e2074686520536f6c616e6120626c6f636b636861696e2c206974e2809973206120746f6b656e206d61646520666f72207468652070656f706c652c206279207468652070656f706c65e28094353025206f662074686520746f74616c20737570706c7920686173206265656e2061697264726f7070656420746f2074686520636f6d6d756e69747920746f20656e73757265206661697220646973747269627574696f", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1731848238829.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<CHONK>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CHONK>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

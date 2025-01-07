@@ -1,0 +1,14 @@
+module 0x498711870a85e0886edb9861d1f7b3a1971c2314d25909ee6dac965f3f4b37ed::dildo {
+    struct DILDO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: DILDO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<DILDO>(arg0, 6, b"DILDO", b"dildo.ai", x"64696c646f2e6169202864696c646f290a546865203173742040616931367a64616f20616e6420456c697a614f5320706f77657265642041492073657820626f742e204b65792046656174757265733a202d20456c697a614f5320496e74656c6c6967656e63653a20506f77657265642062792074686520616476616e63656420456c697a614f532c20746869732073657820414920626f74206c6561726e7320796f757220707265666572656e636573206f7665722074696d652e20457665727920696e746572616374696f6e20636f6e747269627574657320746f206120636f6e7374616e746c792065766f6c76696e672070726f66696c65206f6620796f757220756e6971756520646573697265732e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Qmf_RW_5y_HY_9_Ua_Nvdxqcayv18_W2_Mx_Jy_EW_Byapma_Ph_A_Gx_Ri3h_ab8fe5e026.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<DILDO>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<DILDO>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0x44346202a437e8a037373b3389b3d8dbd2e545f43d91eb7e5acb1f5ff73c515b::sawfish {
+    struct SAWFISH has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SAWFISH, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SAWFISH>(arg0, 6, b"SAWFISH", b"SawFish", x"24534157464953482069732061206d656d65636f696e206f6e2074686520535549206e6574776f726b20696e7370697265642062792074686520736177666973682c206b6e6f776e20666f722069747320756e6971756520616e642066696572636520617070656172616e63652e200a57697468206120746f756368206f662068756d6f7220616e6420612076696272616e7420636f6d6d756e6974792c20245341574649534820697320726561647920746f20736c696365207468726f756768206d61726b657420726573697374616e636520776974682069747320736861727020227361772220616e6420756e73746f707061626c65207370697269742e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/We_are_live_at_Movepump_6_33dc5b9304.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SAWFISH>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SAWFISH>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

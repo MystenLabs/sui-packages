@@ -1,0 +1,14 @@
+module 0x4d7c49bb5e04ff828f40ce420ba0acf6186bdd23336c57ccb4fda07856a222f8::suifrog {
+    struct SUIFROG has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUIFROG, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUIFROG>(arg0, 6, b"SUIFROG", b"Sui Frog", x"5375692046726f6720697320616e20696e6e6f76617469766520746f6b656e206c61756e63686564206f6e2074686520537569206e6574776f726b2c20726570726573656e74656420627920612066757475726973746963206469676974616c2066726f672e2044657369676e656420746f2064726976652063727970746f63757272656e63792061646f7074696f6e2c20697420636f6d62696e65732063757474696e672d6564676520626c6f636b636861696e20746563686e6f6c6f6779207769746820612066756e20616e6420656e676167656420636f6d6d756e6974792e204a6f696e20746865206c65617020696e746f20746865206675747572652077697468205375692046726f67210a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Captura_de_tela_2024_10_07_133244_3c18fe2d0a.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUIFROG>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SUIFROG>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

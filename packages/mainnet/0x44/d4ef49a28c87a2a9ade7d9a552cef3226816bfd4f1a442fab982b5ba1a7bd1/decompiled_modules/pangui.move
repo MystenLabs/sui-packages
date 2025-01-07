@@ -1,0 +1,14 @@
+module 0x44d4ef49a28c87a2a9ade7d9a552cef3226816bfd4f1a442fab982b5ba1a7bd1::pangui {
+    struct PANGUI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PANGUI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PANGUI>(arg0, 6, b"PANGUI", b"PANGUI ON SUI", x"4d656574206f7572207065746974652079657420706f77657266756c2070656e6775696e2c2077686f206361727269657320610a746f756368206f662050657065207468652046726f672c20696e667573696e6720612066726573682077617665206f660a6372656174697669747920696e746f20535549277320646567656e207265616c6d2e20417320746865206c617465737420616e64206d6f73740a6578636974696e67206d656d6520746f6b656e2c202450414e475549206973206865726520746f207368616b65207468696e67730a75702e204a6f696e20757320696e20616464696e67207761726d746820616e64206c697175696469747920746f205355492e0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Pungui_Profile_a0a8e044fb.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PANGUI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<PANGUI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

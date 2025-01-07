@@ -1,0 +1,14 @@
+module 0x4c7d4c81f117b1f283d65072637fb29fa0b3a8a513e1047957253eeb2e63719e::saty {
+    struct SATY has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SATY, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SATY>(arg0, 6, b"SATY", b"SatoshiStyles", x"496e6e6f7661746976652046617368696f6e202620426c6f636b636861696e20467573696f6e3a205361746f7368695374796c6573206d6572676573206c75787572792066617368696f6e207769746820626c6f636b636861696e20746563686e6f6c6f67792c206372656174696e67206120756e6971756520657870657269656e636520666f722066617368696f6e20656e74687573696173747320616e642063727970746f206c6f7665727320616c696b652e0a68747470733a2f2f7777772e696e7374616772616d2e636f6d2f7361746f736869737374796c65733f696773683d64544635644842746144633563334274", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/1725287448446_e78babbe13cfbdb92b7675c244c125d4_cff1b4356e.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SATY>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SATY>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

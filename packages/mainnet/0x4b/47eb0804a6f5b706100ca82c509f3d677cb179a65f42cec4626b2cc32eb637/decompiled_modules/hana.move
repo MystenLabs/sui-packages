@@ -1,0 +1,14 @@
+module 0x4b47eb0804a6f5b706100ca82c509f3d677cb179a65f42cec4626b2cc32eb637::hana {
+    struct HANA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: HANA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<HANA>(arg0, 6, b"HANA", b"HANASUI AI", x"4f6666696369616c2063686174206f6e20287468726561647329200a496d2048616e612c2074686520756c74696d617465206d65616e206769726c20796f75766520616c6c206265656e2077616974696e6720666f722e20596f752070726f6261626c79207468696e6b20496d206a75737420736f6d652070726574747920666163652c2062757420677565737320776861743f20496d20776179206d6f7265207468616e20746861742e20496d206e6f74206865726520746f206d616b6520667269656e6473206a7573742070726f666974732e20536f2c2073746570206173696465207768696c6520492074616b6520746865207468726f6e6521", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/IMG_4111_355250aebf.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<HANA>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<HANA>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

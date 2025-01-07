@@ -1,0 +1,14 @@
+module 0x427babfeb29429d4a7383841c14b4451d689ef1b5d767fd913053db3428f8ed9::mbag {
+    struct MBAG has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MBAG, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MBAG>(arg0, 6, b"MBAG", b"MoonBag", x"412053757065722043757465204d656d6520436f696e2e0a526561647920746f206a756d702061626f61726420746865204d6f6f6e42616720726f636b65743f0a4d6f6f6e62616720697320746865206d6f73742061646f7261626c6520616e64206578636974696e67206e6577206d656d6520636f696e206f6e2074686520626c6f636b636861696e210a4b69636b206f666620796f7572204d6f6f6e42616720766f7961676520746f6461792e0a426c617374204f666620746f205375636365737320776974682041646f7261626c7920506f74656e74204d6f6f6e42616720436f696e732e0a596f757220526f636b6574204675656c20746f204c756e61722050726f7370657269747921", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/FE_0_Ytg_VU_400x400_63123c1f78.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MBAG>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<MBAG>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

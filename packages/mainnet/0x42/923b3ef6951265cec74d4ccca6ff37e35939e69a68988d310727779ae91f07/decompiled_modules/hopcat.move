@@ -1,0 +1,14 @@
+module 0x42923b3ef6951265cec74d4ccca6ff37e35939e69a68988d310727779ae91f07::hopcat {
+    struct HOPCAT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: HOPCAT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<HOPCAT>(arg0, 6, b"HOPCAT", b"HopCat", x"496e74726f647563696e6720486f704361743a2074686520707572722d66656374206d656d65636f696e206f6e2053756921200a486f7043617420636f6d62696e6573207468652066756e206f6620636174206d656d657320776974682074686520706f74656e7469616c20666f722070726f6669742e200a4a6f696e20612076696272616e7420636f6d6d756e697479206f6620636174206c6f7665727320616e642063727970746f20656e7468757369617374732c20616e6420656e6a6f79206578636c7573697665207265776172647320616e64206576656e74732e200a506c75732c206120706f7274696f6e206f6620656163682074", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1730997948655.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<HOPCAT>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<HOPCAT>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
