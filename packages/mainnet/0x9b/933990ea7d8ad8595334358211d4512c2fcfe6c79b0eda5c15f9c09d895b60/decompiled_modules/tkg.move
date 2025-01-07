@@ -1,0 +1,14 @@
+module 0x9b933990ea7d8ad8595334358211d4512c2fcfe6c79b0eda5c15f9c09d895b60::tkg {
+    struct TKG has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TKG, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TKG>(arg0, 6, b"TKG", b"Tokyo Ghoul", x"546f6b796f2047686f756c2069732061204a6170616e657365206461726b2066616e74617379206d616e676120736572696573207772697474656e20616e6420696c6c757374726174656420627920537569204973686964612e204974207761732073657269616c697a656420696e2053687565697368612773207365696e656e206d616e6761206d6167617a696e65205765656b6c7920596f756e67204a756d702066726f6d2053657074656d626572203230313120746f2053657074656d62657220323031342c20776974682069747320636861707465727320636f6c6c656374656420696e2031342074616e6bc58d626f6e20766f6c756d6573", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/ghoul_6e9a8388ff.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TKG>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<TKG>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,29 @@
+module 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::swap_test {
+    public fun consume_receipt_test<T0, T1, T2, T3>(arg0: 0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::PermissionedReceipt, arg1: &mut 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault::Vault<T0, T1, T2>, arg2: &0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::VaultAcl, arg3: &0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::version::Version, arg4: bool, arg5: &mut 0x2::tx_context::TxContext) {
+        0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::version::assert_supported_version(arg3);
+        if (arg4) {
+            0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault::add_reward_x<T0, T1, T2>(arg1, 0x2::coin::into_balance<T0>(0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::remove_data<vector<u8>, 0x2::coin::Coin<T0>, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::Access>(&mut arg0, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::access(arg2), b"funds")));
+        } else {
+            0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault::add_reward_y<T0, T1, T2>(arg1, 0x2::coin::into_balance<T1>(0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::remove_data<vector<u8>, 0x2::coin::Coin<T1>, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::Access>(&mut arg0, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::access(arg2), b"funds")));
+        };
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::remove_data<vector<u8>, u8, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::Access>(&mut arg0, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::access(arg2), b"current_index");
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::remove_data<vector<u8>, u8, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::Access>(&mut arg0, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::access(arg2), b"final_index");
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::burn(arg0);
+    }
+
+    public fun issue_receipt_test<T0, T1, T2, T3>(arg0: &mut 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault::Vault<T0, T1, T2>, arg1: &0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::VaultAcl, arg2: &0xb05f0ef6269d32fef323339cc30c4d45336e1e58a68fff167e4414287c3fe9a8::acl::RouterAcl, arg3: &0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::version::Version, arg4: vector<0xb05f0ef6269d32fef323339cc30c4d45336e1e58a68fff167e4414287c3fe9a8::bag_value::Value>, arg5: &mut 0x2::tx_context::TxContext) : 0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::PermissionedReceipt {
+        0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::version::assert_supported_version(arg3);
+        let v0 = 0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::issue<0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::Access>(0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::access(arg1), 0x1::option::some<0x2::object::ID>(0xb05f0ef6269d32fef323339cc30c4d45336e1e58a68fff167e4414287c3fe9a8::acl::access_id(arg2)), arg5);
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<vector<u8>, 0x2::coin::Coin<T3>, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::Access>(&mut v0, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::access(arg1), b"funds", 0x2::coin::from_balance<T3>(0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault::get_reward_balance<T0, T1, T2, T3>(arg0), arg5));
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<vector<u8>, u8, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::Access>(&mut v0, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::access(arg1), b"current_index", 0);
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<vector<u8>, u8, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::Access>(&mut v0, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::access(arg1), b"final_index", ((0x1::vector::length<0xb05f0ef6269d32fef323339cc30c4d45336e1e58a68fff167e4414287c3fe9a8::bag_value::Value>(&arg4) - 1) as u8));
+        while (!0x1::vector::is_empty<0xb05f0ef6269d32fef323339cc30c4d45336e1e58a68fff167e4414287c3fe9a8::bag_value::Value>(&arg4)) {
+            0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<u8, 0xb05f0ef6269d32fef323339cc30c4d45336e1e58a68fff167e4414287c3fe9a8::bag_value::Value, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::Access>(&mut v0, 0xd1d9337a6c415df934f39979c5f623f835c0b881830392b6a1c5f458d98d0c02::vault_acl::access(arg1), (0x1::vector::length<0xb05f0ef6269d32fef323339cc30c4d45336e1e58a68fff167e4414287c3fe9a8::bag_value::Value>(&arg4) as u8), 0x1::vector::pop_back<0xb05f0ef6269d32fef323339cc30c4d45336e1e58a68fff167e4414287c3fe9a8::bag_value::Value>(&mut arg4));
+        };
+        0x1::vector::destroy_empty<0xb05f0ef6269d32fef323339cc30c4d45336e1e58a68fff167e4414287c3fe9a8::bag_value::Value>(arg4);
+        v0
+    }
+
+    // decompiled from Move bytecode v6
+}
+

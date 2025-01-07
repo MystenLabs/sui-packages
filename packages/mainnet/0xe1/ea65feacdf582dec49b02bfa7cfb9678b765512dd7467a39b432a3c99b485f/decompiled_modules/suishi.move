@@ -1,0 +1,14 @@
+module 0xe1ea65feacdf582dec49b02bfa7cfb9678b765512dd7467a39b432a3c99b485f::suishi {
+    struct SUISHI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUISHI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUISHI>(arg0, 6, b"SUISHI", b"SuiShiCat", x"6c6f6c20636174206973207375697368690a4f6e63652075706f6e20612074696d652c20696e206120776f726c6420776865726520737573686920616e64206361747320636f6578697374656420696e2061207374617465206f6620626c69737366756c206861726d6f6e792c20736f6d657468696e67206d61676963616c2068617070656e65642e20496e2074686520686967682d737065656420756e697665727365206f66207468652053756920626c6f636b636861696e2c206120636f736d696320676c6974636820636175736564206120667573696f6e206f6620657069632070726f706f7274696f6e733a206f757420706f70706564202a53756953757368692a2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/suishilogo1_1_02948a168d.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUISHI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SUISHI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

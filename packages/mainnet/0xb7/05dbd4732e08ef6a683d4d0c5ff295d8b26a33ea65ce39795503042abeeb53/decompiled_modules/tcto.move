@@ -1,0 +1,14 @@
+module 0xb705dbd4732e08ef6a683d4d0c5ff295d8b26a33ea65ce39795503042abeeb53::tcto {
+    struct TCTO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TCTO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TCTO>(arg0, 6, b"TCTO", b"TheCommunityTakeOver", x"54686520436f6d6d756e6974792054616b65204f76657220206973206e6f74206a757374206120636f696e206974e28099732061207265766f6c7574696f6e206c65642062792074686520756e73746f707061626c652043727970746f46656c6c6173207465616d2e205443544f20656d626f6469657320746865207472756520737069726974206f6620646563656e7472616c697a6174696f6e2c20676976696e6720706f776572206261636b20746f207468652070656f706c6520616e642070726f76696e672074686174207768656e206120636f6d6d756e69747920756e697465732c20616e797468696e6720697320706f737369626c6520", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1733336130375.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<TCTO>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TCTO>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

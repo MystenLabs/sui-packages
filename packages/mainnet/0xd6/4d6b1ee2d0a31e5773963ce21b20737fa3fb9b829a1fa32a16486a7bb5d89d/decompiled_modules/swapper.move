@@ -1,0 +1,16 @@
+module 0xd64d6b1ee2d0a31e5773963ce21b20737fa3fb9b829a1fa32a16486a7bb5d89d::swapper {
+    fun init(arg0: &mut 0x2::tx_context::TxContext) {
+    }
+
+    public fun myswap<T0, T1>(arg0: u64, arg1: 0x2::coin::Coin<T0>, arg2: u64, arg3: &mut 0xb24b6789e088b876afabca733bed2299fbc9e2d6369be4d1acfa17d8145454d9::swap::Dex_Info, arg4: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T1> {
+        0xb24b6789e088b876afabca733bed2299fbc9e2d6369be4d1acfa17d8145454d9::router::swap_exact_input_<T0, T1>(arg0, arg1, arg2, arg3, arg4)
+    }
+
+    public fun test_random() {
+        0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::random::new(0);
+        0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i128::zero();
+    }
+
+    // decompiled from Move bytecode v6
+}
+

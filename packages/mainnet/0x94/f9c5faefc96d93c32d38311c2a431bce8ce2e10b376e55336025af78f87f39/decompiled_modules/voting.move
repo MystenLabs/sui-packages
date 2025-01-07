@@ -1,0 +1,729 @@
+module 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::voting {
+    struct DeployRecord has key {
+        id: 0x2::object::UID,
+        version: u64,
+        finished: 0x2::table_vec::TableVec<0x2::object::ID>,
+        open: 0x2::table::Table<0x2::object::ID, bool>,
+    }
+
+    struct TopicRedirect has key {
+        id: 0x2::object::UID,
+        version: u64,
+        get: 0x2::table::Table<0x1::string::String, TopicRecord>,
+    }
+
+    struct TopicRecord has store {
+        finished: 0x2::table_vec::TableVec<0x2::object::ID>,
+        open: 0x2::table::Table<0x2::object::ID, bool>,
+    }
+
+    struct VotingRecord has key {
+        id: 0x2::object::UID,
+        version: u64,
+        deployer: address,
+        topics: vector<0x1::string::String>,
+        description: 0x1::string::String,
+        option_a: vector<u8>,
+        option_b: vector<u8>,
+        description_a: 0x1::string::String,
+        description_b: 0x1::string::String,
+        deadline: u64,
+        settled: bool,
+        winner: bool,
+        burn: bool,
+        uncertain: bool,
+        a_queue: 0x2::table_vec::TableVec<address>,
+        b_queue: 0x2::table_vec::TableVec<address>,
+        a_ins_table: 0x2::table::Table<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>,
+        b_ins_table: 0x2::table::Table<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>,
+        a_amt_table: 0x2::table::Table<address, u64>,
+        b_amt_table: 0x2::table::Table<address, u64>,
+        reward_ins: vector<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>,
+        reward_sui: 0x2::balance::Balance<0x2::sui::SUI>,
+        a_sum: u128,
+        b_sum: u128,
+    }
+
+    struct VotingSettleCap has store, key {
+        id: 0x2::object::UID,
+        to: 0x2::object::ID,
+    }
+
+    struct ProtocalBank has key {
+        id: 0x2::object::UID,
+        ms_type: 0x2::table_vec::TableVec<0x1::ascii::String>,
+        ms_balance: 0x2::table::Table<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>,
+        sui_balance: 0x2::balance::Balance<0x2::sui::SUI>,
+    }
+
+    struct ProtocalBankCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct UpgradeBank has key {
+        id: 0x2::object::UID,
+        ms_type: 0x2::table_vec::TableVec<0x1::ascii::String>,
+        ms_balance: 0x2::table::Table<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>,
+        sui_balance: 0x2::balance::Balance<0x2::sui::SUI>,
+    }
+
+    struct UpgradeBankCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct ProfitRatio has key {
+        id: 0x2::object::UID,
+        creator: u128,
+        protocal: u128,
+    }
+
+    struct GlobalSetCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct Voting has copy, drop {
+        vote_to: 0x2::object::ID,
+        voter: address,
+        amount: u64,
+        type: 0x1::ascii::String,
+    }
+
+    struct DeployVoting has copy, drop {
+        voting_id: 0x2::object::ID,
+        creator: address,
+    }
+
+    struct SettleVote has copy, drop {
+        set_to: 0x2::object::ID,
+        sender: address,
+        result: 0x1::ascii::String,
+    }
+
+    struct NewTopic has copy, drop {
+        topic: 0x1::string::String,
+        creator: address,
+    }
+
+    struct Withdraw has copy, drop {
+        voting_id: 0x2::object::ID,
+        receiver: address,
+        amount: u64,
+        type: 0x1::ascii::String,
+    }
+
+    struct ClaimReward has copy, drop {
+        voting_id: 0x2::object::ID,
+        receiver: address,
+        amount: u64,
+        type: 0x1::ascii::String,
+    }
+
+    struct SetProfitRatio has copy, drop {
+        creator: u128,
+        protocal: u128,
+        base: u128,
+    }
+
+    public fun a_sum(arg0: &VotingRecord) : u64 {
+        (arg0.a_sum as u64)
+    }
+
+    public fun amount_in_a(arg0: &VotingRecord, arg1: address) : u64 {
+        if (0x2::table::contains<address, u64>(&arg0.a_amt_table, arg1)) {
+            *0x2::table::borrow<address, u64>(&arg0.a_amt_table, arg1)
+        } else {
+            0
+        }
+    }
+
+    public fun amount_in_b(arg0: &VotingRecord, arg1: address) : u64 {
+        if (0x2::table::contains<address, u64>(&arg0.b_amt_table, arg1)) {
+            *0x2::table::borrow<address, u64>(&arg0.b_amt_table, arg1)
+        } else {
+            0
+        }
+    }
+
+    public fun b_sum(arg0: &VotingRecord) : u64 {
+        (arg0.b_sum as u64)
+    }
+
+    public entry fun claim_reward_a(arg0: &mut VotingRecord, arg1: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::clock::timestamp_ms(arg2) >= arg0.deadline, 0);
+        assert!(arg0.version <= 1, 2);
+        assert!(arg0.settled, 3);
+        let v0 = 0x2::tx_context::sender(arg3);
+        let v1 = 0x2::object::id<VotingRecord>(arg0);
+        if (arg0.winner || arg0.uncertain) {
+            let v2 = 0x2::table::remove<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.a_ins_table, v0);
+            0x2::transfer::public_transfer<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(v2, v0);
+            if (arg0.uncertain) {
+                0x2::table::remove<address, u64>(&mut arg0.a_amt_table, v0);
+            };
+            let v3 = Withdraw{
+                voting_id : v1,
+                receiver  : v0,
+                amount    : 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::amount(&v2),
+                type      : 0x1::ascii::string(arg0.option_a),
+            };
+            0x2::event::emit<Withdraw>(v3);
+        };
+        if (arg0.winner && !arg0.uncertain) {
+            let v4 = 0x2::table::remove<address, u64>(&mut arg0.a_amt_table, v0);
+            if (0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::amount(0x1::vector::borrow<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&arg0.reward_ins, 0)) == v4) {
+                0x2::transfer::public_transfer<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(0x1::vector::pop_back<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.reward_ins), v0);
+            } else {
+                0x2::transfer::public_transfer<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_split(0x1::vector::borrow_mut<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.reward_ins, 0), v4, arg3), v0);
+            };
+            let v5 = ClaimReward{
+                voting_id : v1,
+                receiver  : v0,
+                amount    : v4,
+                type      : 0x1::ascii::string(arg0.option_b),
+            };
+            0x2::event::emit<ClaimReward>(v5);
+        };
+        0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::claim_vote(v1, arg1);
+    }
+
+    public entry fun claim_reward_b(arg0: &mut VotingRecord, arg1: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::clock::timestamp_ms(arg2) >= arg0.deadline, 0);
+        assert!(arg0.version <= 1, 2);
+        assert!(arg0.settled, 3);
+        let v0 = 0x2::tx_context::sender(arg3);
+        let v1 = 0x2::object::id<VotingRecord>(arg0);
+        if (!arg0.winner || arg0.uncertain) {
+            let v2 = 0x2::table::remove<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.b_ins_table, v0);
+            0x2::transfer::public_transfer<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(v2, v0);
+            if (arg0.uncertain) {
+                0x2::table::remove<address, u64>(&mut arg0.b_amt_table, v0);
+            };
+            let v3 = Withdraw{
+                voting_id : v1,
+                receiver  : v0,
+                amount    : 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::amount(&v2),
+                type      : 0x1::ascii::string(arg0.option_b),
+            };
+            0x2::event::emit<Withdraw>(v3);
+        };
+        if (!arg0.winner && !arg0.uncertain) {
+            let v4 = 0x2::table::remove<address, u64>(&mut arg0.b_amt_table, v0);
+            if (0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::amount(0x1::vector::borrow<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&arg0.reward_ins, 0)) == v4) {
+                0x2::transfer::public_transfer<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(0x1::vector::pop_back<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.reward_ins), v0);
+            } else {
+                0x2::transfer::public_transfer<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_split(0x1::vector::borrow_mut<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.reward_ins, 0), v4, arg3), v0);
+            };
+            let v5 = ClaimReward{
+                voting_id : v1,
+                receiver  : v0,
+                amount    : v4,
+                type      : 0x1::ascii::string(arg0.option_a),
+            };
+            0x2::event::emit<ClaimReward>(v5);
+        };
+        0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::claim_vote(v1, arg1);
+    }
+
+    public fun ddl(arg0: &VotingRecord) : u64 {
+        arg0.deadline
+    }
+
+    public entry fun deploy_w_kc(arg0: &mut 0x2::coin::Coin<0x32e26b26aec256b3fac5f8823d0d98955f9d4eda378a17994d88067299e9b473::kart::KART>, arg1: &mut 0x32e26b26aec256b3fac5f8823d0d98955f9d4eda378a17994d88067299e9b473::stake::StakePool, arg2: &mut DeployRecord, arg3: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg4: &mut TopicRedirect, arg5: vector<vector<u8>>, arg6: vector<u8>, arg7: vector<u8>, arg8: vector<u8>, arg9: vector<u8>, arg10: vector<u8>, arg11: u64, arg12: &0x2::clock::Clock, arg13: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg13);
+        do_deploy_w_kc(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, v0, arg12, arg13);
+    }
+
+    public entry fun deploy_w_ks(arg0: &mut 0x32e26b26aec256b3fac5f8823d0d98955f9d4eda378a17994d88067299e9b473::kartscription::KartScription, arg1: &mut 0x32e26b26aec256b3fac5f8823d0d98955f9d4eda378a17994d88067299e9b473::stake::StakePool, arg2: &mut DeployRecord, arg3: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg4: &mut TopicRedirect, arg5: vector<vector<u8>>, arg6: vector<u8>, arg7: vector<u8>, arg8: vector<u8>, arg9: vector<u8>, arg10: vector<u8>, arg11: u64, arg12: &0x2::clock::Clock, arg13: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg13);
+        do_deploy_w_ks(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, v0, arg12, arg13);
+    }
+
+    public fun description(arg0: &VotingRecord) : 0x1::string::String {
+        arg0.description
+    }
+
+    public fun description_a(arg0: &VotingRecord) : 0x1::string::String {
+        arg0.description_a
+    }
+
+    public fun description_b(arg0: &VotingRecord) : 0x1::string::String {
+        arg0.description_b
+    }
+
+    fun do_deploy(arg0: &mut DeployRecord, arg1: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg2: &mut TopicRedirect, arg3: vector<vector<u8>>, arg4: vector<u8>, arg5: vector<u8>, arg6: vector<u8>, arg7: vector<u8>, arg8: vector<u8>, arg9: u64, arg10: &0x2::clock::Clock, arg11: &mut 0x2::tx_context::TxContext) : (VotingSettleCap, u64) {
+        let v0 = 0x2::tx_context::sender(arg11);
+        let v1 = 0x1::vector::length<vector<u8>>(&arg3);
+        let v2 = v1;
+        if (v1 > 3) {
+            let v3 = v1 - 3;
+            while (v3 > 0) {
+                0x1::vector::pop_back<vector<u8>>(&mut arg3);
+                v3 = v3 - 1;
+            };
+            v2 = 0x1::vector::length<vector<u8>>(&arg3);
+        };
+        let v4 = 0x1::vector::empty<0x1::string::String>();
+        let v5 = 0;
+        let v6 = 0;
+        while (v2 > 0) {
+            let v7 = 0x1::string::utf8(*0x1::vector::borrow<vector<u8>>(&arg3, v5));
+            0x1::vector::push_back<0x1::string::String>(&mut v4, v7);
+            v5 = v5 + 1;
+            v2 = v2 - 1;
+            if (!0x2::table::contains<0x1::string::String, TopicRecord>(&arg2.get, v7)) {
+                let v8 = TopicRecord{
+                    finished : 0x2::table_vec::empty<0x2::object::ID>(arg11),
+                    open     : 0x2::table::new<0x2::object::ID, bool>(arg11),
+                };
+                0x2::table::add<0x1::string::String, TopicRecord>(&mut arg2.get, v7, v8);
+                v6 = v6 + 1;
+                let v9 = NewTopic{
+                    topic   : v7,
+                    creator : v0,
+                };
+                0x2::event::emit<NewTopic>(v9);
+            };
+        };
+        let v10 = new_voting_record(v4, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
+        let v11 = 0x2::object::id<VotingRecord>(&v10);
+        0x2::table::add<0x2::object::ID, bool>(&mut arg0.open, v11, true);
+        v2 = 0x1::vector::length<0x1::string::String>(&v4);
+        v5 = 0;
+        while (v2 > 0) {
+            0x2::table::add<0x2::object::ID, bool>(&mut 0x2::table::borrow_mut<0x1::string::String, TopicRecord>(&mut arg2.get, *0x1::vector::borrow<0x1::string::String>(&v4, v5)).open, v11, true);
+            v5 = v5 + 1;
+            v2 = v2 - 1;
+        };
+        let v12 = DeployVoting{
+            voting_id : v11,
+            creator   : v0,
+        };
+        0x2::event::emit<DeployVoting>(v12);
+        0x2::transfer::share_object<VotingRecord>(v10);
+        0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::new_deploy(v11, arg1);
+        let v13 = VotingSettleCap{
+            id : 0x2::object::new(arg11),
+            to : v11,
+        };
+        (v13, v6)
+    }
+
+    public fun do_deploy_w_kc(arg0: &mut 0x2::coin::Coin<0x32e26b26aec256b3fac5f8823d0d98955f9d4eda378a17994d88067299e9b473::kart::KART>, arg1: &mut 0x32e26b26aec256b3fac5f8823d0d98955f9d4eda378a17994d88067299e9b473::stake::StakePool, arg2: &mut DeployRecord, arg3: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg4: &mut TopicRedirect, arg5: vector<vector<u8>>, arg6: vector<u8>, arg7: vector<u8>, arg8: vector<u8>, arg9: vector<u8>, arg10: vector<u8>, arg11: u64, arg12: address, arg13: &0x2::clock::Clock, arg14: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = do_deploy(arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg13, arg14);
+        0x32e26b26aec256b3fac5f8823d0d98955f9d4eda378a17994d88067299e9b473::stake::pay_w_kartcoin(arg0, 100000000000 + v1 * 10000000000, arg1, arg14);
+        0x2::transfer::public_transfer<VotingSettleCap>(v0, arg12);
+    }
+
+    public fun do_deploy_w_ks(arg0: &mut 0x32e26b26aec256b3fac5f8823d0d98955f9d4eda378a17994d88067299e9b473::kartscription::KartScription, arg1: &mut 0x32e26b26aec256b3fac5f8823d0d98955f9d4eda378a17994d88067299e9b473::stake::StakePool, arg2: &mut DeployRecord, arg3: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg4: &mut TopicRedirect, arg5: vector<vector<u8>>, arg6: vector<u8>, arg7: vector<u8>, arg8: vector<u8>, arg9: vector<u8>, arg10: vector<u8>, arg11: u64, arg12: address, arg13: &0x2::clock::Clock, arg14: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = do_deploy(arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg13, arg14);
+        0x32e26b26aec256b3fac5f8823d0d98955f9d4eda378a17994d88067299e9b473::stake::pay_w_kartscription(arg0, 100000000000 + v1 * 10000000000, arg1, arg14);
+        0x2::transfer::public_transfer<VotingSettleCap>(v0, arg12);
+    }
+
+    fun do_set_uncertain(arg0: &mut DeployRecord, arg1: &mut VotingRecord, arg2: &mut TopicRedirect, arg3: &0x2::tx_context::TxContext) {
+        assert!(arg1.version <= 1, 2);
+        let v0 = 0x2::table_vec::length<address>(&arg1.a_queue);
+        while (v0 > 0) {
+            0x2::table_vec::pop_back<address>(&mut arg1.a_queue);
+            v0 = v0 - 1;
+        };
+        let v1 = 0x2::table_vec::length<address>(&arg1.b_queue);
+        while (v1 > 0) {
+            0x2::table_vec::pop_back<address>(&mut arg1.b_queue);
+            v1 = v1 - 1;
+        };
+        let v2 = 0x2::object::id<VotingRecord>(arg1);
+        arg1.settled = true;
+        arg1.uncertain = true;
+        0x2::table::remove<0x2::object::ID, bool>(&mut arg0.open, v2);
+        0x2::table_vec::push_back<0x2::object::ID>(&mut arg0.finished, v2);
+        let v3 = arg1.topics;
+        let v4 = 0x1::vector::length<0x1::string::String>(&v3);
+        while (v4 > 0) {
+            let v5 = 0x2::table::borrow_mut<0x1::string::String, TopicRecord>(&mut arg2.get, 0x1::vector::pop_back<0x1::string::String>(&mut v3));
+            0x2::table::remove<0x2::object::ID, bool>(&mut v5.open, v2);
+            0x2::table_vec::push_back<0x2::object::ID>(&mut v5.finished, v2);
+            v4 = v4 - 1;
+        };
+        let v6 = SettleVote{
+            set_to : v2,
+            sender : 0x2::tx_context::sender(arg3),
+            result : 0x1::ascii::string(b"UnCertain"),
+        };
+        0x2::event::emit<SettleVote>(v6);
+    }
+
+    public fun do_withdraw_protocal_bank(arg0: &ProtocalBankCap, arg1: &mut ProtocalBank, arg2: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg2);
+        let v1 = 0x2::table_vec::length<0x1::ascii::String>(&arg1.ms_type);
+        while (v1 > 0) {
+            0x2::transfer::public_transfer<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(0x2::table::remove<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg1.ms_balance, 0x2::table_vec::pop_back<0x1::ascii::String>(&mut arg1.ms_type)), v0);
+            v1 = v1 - 1;
+        };
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x2::balance::withdraw_all<0x2::sui::SUI>(&mut arg1.sui_balance), arg2), v0);
+    }
+
+    public fun do_withdraw_upgrade_bank(arg0: &UpgradeBankCap, arg1: &mut UpgradeBank, arg2: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg2);
+        let v1 = 0x2::table_vec::length<0x1::ascii::String>(&arg1.ms_type);
+        while (v1 > 0) {
+            0x2::transfer::public_transfer<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(0x2::table::remove<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg1.ms_balance, 0x2::table_vec::pop_back<0x1::ascii::String>(&mut arg1.ms_type)), v0);
+            v1 = v1 - 1;
+        };
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x2::balance::withdraw_all<0x2::sui::SUI>(&mut arg1.sui_balance), arg2), v0);
+    }
+
+    fun init(arg0: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg0);
+        let v1 = DeployRecord{
+            id       : 0x2::object::new(arg0),
+            version  : 1,
+            finished : 0x2::table_vec::empty<0x2::object::ID>(arg0),
+            open     : 0x2::table::new<0x2::object::ID, bool>(arg0),
+        };
+        0x2::transfer::share_object<DeployRecord>(v1);
+        let v2 = TopicRedirect{
+            id      : 0x2::object::new(arg0),
+            version : 1,
+            get     : 0x2::table::new<0x1::string::String, TopicRecord>(arg0),
+        };
+        0x2::transfer::share_object<TopicRedirect>(v2);
+        let v3 = ProtocalBank{
+            id          : 0x2::object::new(arg0),
+            ms_type     : 0x2::table_vec::empty<0x1::ascii::String>(arg0),
+            ms_balance  : 0x2::table::new<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(arg0),
+            sui_balance : 0x2::balance::zero<0x2::sui::SUI>(),
+        };
+        0x2::transfer::share_object<ProtocalBank>(v3);
+        let v4 = ProtocalBankCap{id: 0x2::object::new(arg0)};
+        0x2::transfer::public_transfer<ProtocalBankCap>(v4, v0);
+        let v5 = UpgradeBank{
+            id          : 0x2::object::new(arg0),
+            ms_type     : 0x2::table_vec::empty<0x1::ascii::String>(arg0),
+            ms_balance  : 0x2::table::new<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(arg0),
+            sui_balance : 0x2::balance::zero<0x2::sui::SUI>(),
+        };
+        0x2::transfer::share_object<UpgradeBank>(v5);
+        let v6 = UpgradeBankCap{id: 0x2::object::new(arg0)};
+        0x2::transfer::public_transfer<UpgradeBankCap>(v6, v0);
+        let v7 = ProfitRatio{
+            id       : 0x2::object::new(arg0),
+            creator  : 25000,
+            protocal : 25000,
+        };
+        0x2::transfer::share_object<ProfitRatio>(v7);
+        let v8 = GlobalSetCap{id: 0x2::object::new(arg0)};
+        0x2::transfer::public_transfer<GlobalSetCap>(v8, v0);
+    }
+
+    fun inject_ms_to_protocalbank(arg0: &mut ProtocalBank, arg1: 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription) {
+        let v0 = 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::tick(&arg1);
+        if (!0x2::table::contains<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&arg0.ms_balance, v0)) {
+            0x2::table::add<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.ms_balance, v0, arg1);
+            0x2::table_vec::push_back<0x1::ascii::String>(&mut arg0.ms_type, v0);
+        } else {
+            0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_merge(0x2::table::borrow_mut<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.ms_balance, v0), arg1);
+        };
+    }
+
+    fun inject_ms_to_upgradebank(arg0: &mut UpgradeBank, arg1: 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription) {
+        let v0 = 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::tick(&arg1);
+        if (!0x2::table::contains<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&arg0.ms_balance, v0)) {
+            0x2::table::add<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.ms_balance, v0, arg1);
+            0x2::table_vec::push_back<0x1::ascii::String>(&mut arg0.ms_type, v0);
+        } else {
+            0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_merge(0x2::table::borrow_mut<0x1::ascii::String, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.ms_balance, v0), arg1);
+        };
+    }
+
+    fun new_voting_record(arg0: vector<0x1::string::String>, arg1: vector<u8>, arg2: vector<u8>, arg3: vector<u8>, arg4: vector<u8>, arg5: vector<u8>, arg6: u64, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) : VotingRecord {
+        assert!(arg6 - 0x2::clock::timestamp_ms(arg7) > 86400000, 0);
+        assert!(0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::tick_name::is_tick_name_valid(arg2) && 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::tick_name::is_tick_name_valid(arg3), 6);
+        0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::string_util::to_uppercase(&mut arg2);
+        0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::string_util::to_uppercase(&mut arg3);
+        VotingRecord{
+            id            : 0x2::object::new(arg8),
+            version       : 1,
+            deployer      : 0x2::tx_context::sender(arg8),
+            topics        : arg0,
+            description   : 0x1::string::utf8(arg1),
+            option_a      : arg2,
+            option_b      : arg3,
+            description_a : 0x1::string::utf8(arg4),
+            description_b : 0x1::string::utf8(arg5),
+            deadline      : arg6,
+            settled       : false,
+            winner        : false,
+            burn          : false,
+            uncertain     : false,
+            a_queue       : 0x2::table_vec::empty<address>(arg8),
+            b_queue       : 0x2::table_vec::empty<address>(arg8),
+            a_ins_table   : 0x2::table::new<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(arg8),
+            b_ins_table   : 0x2::table::new<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(arg8),
+            a_amt_table   : 0x2::table::new<address, u64>(arg8),
+            b_amt_table   : 0x2::table::new<address, u64>(arg8),
+            reward_ins    : 0x1::vector::empty<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(),
+            reward_sui    : 0x2::balance::zero<0x2::sui::SUI>(),
+            a_sum         : 0,
+            b_sum         : 0,
+        }
+    }
+
+    public fun option_a(arg0: &VotingRecord) : vector<u8> {
+        arg0.option_a
+    }
+
+    public fun option_b(arg0: &VotingRecord) : vector<u8> {
+        arg0.option_b
+    }
+
+    public fun set_ratio(arg0: &GlobalSetCap, arg1: &mut ProfitRatio, arg2: u128, arg3: u128) {
+        assert!(arg2 + arg3 < 1000000, 7);
+        arg1.creator = arg2;
+        arg1.protocal = arg3;
+        let v0 = SetProfitRatio{
+            creator  : arg2,
+            protocal : arg3,
+            base     : 1000000,
+        };
+        0x2::event::emit<SetProfitRatio>(v0);
+    }
+
+    public entry fun set_uncertain_cap(arg0: VotingSettleCap, arg1: &mut DeployRecord, arg2: &mut VotingRecord, arg3: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg4: &mut TopicRedirect, arg5: &0x2::clock::Clock, arg6: &0x2::tx_context::TxContext) {
+        assert!(0x2::clock::timestamp_ms(arg5) >= arg2.deadline, 0);
+        assert!(arg0.to == 0x2::object::id<VotingRecord>(arg2), 4);
+        assert!(!arg2.settled, 5);
+        let VotingSettleCap {
+            id : v0,
+            to : v1,
+        } = arg0;
+        0x2::object::delete(v0);
+        0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::settle_deploy(v1, arg3);
+        do_set_uncertain(arg1, arg2, arg4, arg6);
+    }
+
+    public entry fun set_uncertain_public(arg0: &mut DeployRecord, arg1: &mut VotingRecord, arg2: &mut TopicRedirect, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) {
+        assert!(0x2::clock::timestamp_ms(arg3) >= arg1.deadline + 2592000000, 0);
+        assert!(!arg1.settled, 5);
+        do_set_uncertain(arg0, arg1, arg2, arg4);
+    }
+
+    public entry fun settle_a_as_winner(arg0: VotingSettleCap, arg1: &mut DeployRecord, arg2: &mut VotingRecord, arg3: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg4: &mut TopicRedirect, arg5: &mut ProtocalBank, arg6: &mut UpgradeBank, arg7: &ProfitRatio, arg8: &0x2::clock::Clock, arg9: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0.to == 0x2::object::id<VotingRecord>(arg2), 4);
+        assert!(0x2::clock::timestamp_ms(arg8) >= arg2.deadline, 0);
+        assert!(arg2.version <= 1, 2);
+        let VotingSettleCap {
+            id : v0,
+            to : v1,
+        } = arg0;
+        0x2::object::delete(v0);
+        let v2 = 0x2::table_vec::length<address>(&arg2.b_queue);
+        if (v2 > 0) {
+            let v3 = 0x2::table_vec::pop_back<address>(&mut arg2.b_queue);
+            let v4 = 0x2::table::remove<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg2.b_ins_table, v3);
+            0x2::table::remove<address, u64>(&mut arg2.b_amt_table, v3);
+            let v5 = v2 - 1;
+            while (v5 > 0) {
+                let v6 = 0x2::table_vec::pop_back<address>(&mut arg2.b_queue);
+                0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_merge(&mut v4, 0x2::table::remove<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg2.b_ins_table, v6));
+                0x2::table::remove<address, u64>(&mut arg2.b_amt_table, v6);
+                v5 = v5 - 1;
+            };
+            0x1::vector::push_back<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg2.reward_ins, v4);
+        };
+        if (arg2.b_sum > 0) {
+            let v7 = arg2.b_sum * arg7.creator / 1000000;
+            let v8 = arg2.b_sum * arg7.protocal / 1000000;
+            arg2.b_sum = arg2.b_sum - v7 - v8;
+            let v9 = 0;
+            let v10 = 0x2::table_vec::length<address>(&arg2.a_queue);
+            while (v10 > 0) {
+                let v11 = 0x2::table::borrow_mut<address, u64>(&mut arg2.a_amt_table, 0x2::table_vec::pop_back<address>(&mut arg2.a_queue));
+                *v11 = (((*v11 as u128) * arg2.b_sum / arg2.a_sum) as u64);
+                v9 = v9 + *v11;
+                v10 = v10 - 1;
+            };
+            let v12 = (v7 as u64);
+            let v13 = (v8 as u64);
+            let v14 = (arg2.b_sum as u64) - v9;
+            let v15 = 0x1::vector::borrow_mut<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg2.reward_ins, 0);
+            if (v12 > 0) {
+                0x2::transfer::public_transfer<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_split(v15, v12, arg9), 0x2::tx_context::sender(arg9));
+            };
+            if (v13 > 0) {
+                inject_ms_to_protocalbank(arg5, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_split(v15, v13, arg9));
+            };
+            if (v14 > 0) {
+                inject_ms_to_upgradebank(arg6, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_split(v15, v14, arg9));
+            };
+        };
+        arg2.settled = true;
+        arg2.winner = true;
+        arg2.uncertain = false;
+        0x2::table::remove<0x2::object::ID, bool>(&mut arg1.open, v1);
+        0x2::table_vec::push_back<0x2::object::ID>(&mut arg1.finished, v1);
+        let v16 = arg2.topics;
+        let v17 = 0x1::vector::length<0x1::string::String>(&v16);
+        while (v17 > 0) {
+            let v18 = 0x2::table::borrow_mut<0x1::string::String, TopicRecord>(&mut arg4.get, 0x1::vector::pop_back<0x1::string::String>(&mut v16));
+            0x2::table::remove<0x2::object::ID, bool>(&mut v18.open, v1);
+            0x2::table_vec::push_back<0x2::object::ID>(&mut v18.finished, v1);
+            v17 = v17 - 1;
+        };
+        0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::settle_deploy(v1, arg3);
+        let v19 = SettleVote{
+            set_to : v1,
+            sender : 0x2::tx_context::sender(arg9),
+            result : 0x1::ascii::string(arg2.option_a),
+        };
+        0x2::event::emit<SettleVote>(v19);
+    }
+
+    public entry fun settle_b_as_winner(arg0: VotingSettleCap, arg1: &mut DeployRecord, arg2: &mut VotingRecord, arg3: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg4: &mut TopicRedirect, arg5: &mut ProtocalBank, arg6: &mut UpgradeBank, arg7: &ProfitRatio, arg8: &0x2::clock::Clock, arg9: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0.to == 0x2::object::id<VotingRecord>(arg2), 4);
+        assert!(0x2::clock::timestamp_ms(arg8) >= arg2.deadline, 0);
+        assert!(arg2.version <= 1, 2);
+        let VotingSettleCap {
+            id : v0,
+            to : v1,
+        } = arg0;
+        0x2::object::delete(v0);
+        let v2 = 0x2::table_vec::length<address>(&arg2.a_queue);
+        if (v2 > 0) {
+            let v3 = 0x2::table_vec::pop_back<address>(&mut arg2.a_queue);
+            let v4 = 0x2::table::remove<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg2.a_ins_table, v3);
+            0x2::table::remove<address, u64>(&mut arg2.a_amt_table, v3);
+            let v5 = v2 - 1;
+            while (v5 > 0) {
+                let v6 = 0x2::table_vec::pop_back<address>(&mut arg2.a_queue);
+                0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_merge(&mut v4, 0x2::table::remove<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg2.a_ins_table, v6));
+                0x2::table::remove<address, u64>(&mut arg2.a_amt_table, v6);
+                v5 = v5 - 1;
+            };
+            0x1::vector::push_back<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg2.reward_ins, v4);
+        };
+        if (arg2.a_sum > 0) {
+            let v7 = arg2.b_sum * arg7.creator / 1000000;
+            let v8 = arg2.b_sum * arg7.protocal / 1000000;
+            arg2.a_sum = arg2.a_sum - v7 - v8;
+            let v9 = 0;
+            let v10 = 0x2::table_vec::length<address>(&arg2.b_queue);
+            while (v10 > 0) {
+                let v11 = 0x2::table::borrow_mut<address, u64>(&mut arg2.b_amt_table, 0x2::table_vec::pop_back<address>(&mut arg2.b_queue));
+                *v11 = (((*v11 as u128) * arg2.a_sum / arg2.b_sum) as u64);
+                v9 = v9 + *v11;
+                v10 = v10 - 1;
+            };
+            let v12 = (v7 as u64);
+            let v13 = (v8 as u64);
+            let v14 = (arg2.a_sum as u64) - v9;
+            let v15 = 0x1::vector::borrow_mut<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg2.reward_ins, 0);
+            if (v12 > 0) {
+                0x2::transfer::public_transfer<0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_split(v15, v12, arg9), 0x2::tx_context::sender(arg9));
+            };
+            if (v13 > 0) {
+                inject_ms_to_protocalbank(arg5, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_split(v15, v13, arg9));
+            };
+            if (v14 > 0) {
+                inject_ms_to_upgradebank(arg6, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_split(v15, v14, arg9));
+            };
+        };
+        arg2.settled = true;
+        arg2.winner = false;
+        arg2.uncertain = false;
+        0x2::table::remove<0x2::object::ID, bool>(&mut arg1.open, v1);
+        0x2::table_vec::push_back<0x2::object::ID>(&mut arg1.finished, v1);
+        let v16 = arg2.topics;
+        let v17 = 0x1::vector::length<0x1::string::String>(&v16);
+        while (v17 > 0) {
+            let v18 = 0x2::table::borrow_mut<0x1::string::String, TopicRecord>(&mut arg4.get, 0x1::vector::pop_back<0x1::string::String>(&mut v16));
+            0x2::table::remove<0x2::object::ID, bool>(&mut v18.open, v1);
+            0x2::table_vec::push_back<0x2::object::ID>(&mut v18.finished, v1);
+            v17 = v17 - 1;
+        };
+        0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::settle_deploy(v1, arg3);
+        let v19 = SettleVote{
+            set_to : v1,
+            sender : 0x2::tx_context::sender(arg9),
+            result : 0x1::ascii::string(arg2.option_b),
+        };
+        0x2::event::emit<SettleVote>(v19);
+    }
+
+    public fun topics(arg0: &VotingRecord) : vector<0x1::string::String> {
+        arg0.topics
+    }
+
+    public entry fun vote_a(arg0: &mut VotingRecord, arg1: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg2: 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription, arg3: &0x2::clock::Clock, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0.deadline >= 0x2::clock::timestamp_ms(arg3), 0);
+        assert!(0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::check_tick(&arg2, arg0.option_a), 1);
+        assert!(arg0.version <= 1, 2);
+        let v0 = 0x2::tx_context::sender(arg4);
+        let v1 = 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::amount(&arg2);
+        let v2 = 0x2::object::id<VotingRecord>(arg0);
+        let v3 = Voting{
+            vote_to : v2,
+            voter   : v0,
+            amount  : v1,
+            type    : 0x1::ascii::string(arg0.option_a),
+        };
+        0x2::event::emit<Voting>(v3);
+        if (0x2::table::contains<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&arg0.a_ins_table, v0)) {
+            0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_merge(0x2::table::borrow_mut<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.a_ins_table, v0), arg2);
+            let v4 = 0x2::table::borrow_mut<address, u64>(&mut arg0.a_amt_table, v0);
+            *v4 = *v4 + v1;
+        } else {
+            0x2::table_vec::push_back<address>(&mut arg0.a_queue, v0);
+            0x2::table::add<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.a_ins_table, v0, arg2);
+            0x2::table::add<address, u64>(&mut arg0.a_amt_table, v0, v1);
+        };
+        arg0.a_sum = arg0.a_sum + (v1 as u128);
+        0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::new_vote(v2, arg1);
+    }
+
+    public entry fun vote_b(arg0: &mut VotingRecord, arg1: &mut 0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::HandBook, arg2: 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription, arg3: &0x2::clock::Clock, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0.deadline >= 0x2::clock::timestamp_ms(arg3), 0);
+        assert!(0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::check_tick(&arg2, arg0.option_b), 1);
+        assert!(arg0.version <= 1, 2);
+        let v0 = 0x2::tx_context::sender(arg4);
+        let v1 = 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::amount(&arg2);
+        let v2 = 0x2::object::id<VotingRecord>(arg0);
+        let v3 = Voting{
+            vote_to : v2,
+            voter   : v0,
+            amount  : v1,
+            type    : 0x1::ascii::string(arg0.option_b),
+        };
+        0x2::event::emit<Voting>(v3);
+        if (0x2::table::contains<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&arg0.b_ins_table, v0)) {
+            0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::do_merge(0x2::table::borrow_mut<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.b_ins_table, v0), arg2);
+            let v4 = 0x2::table::borrow_mut<address, u64>(&mut arg0.b_amt_table, v0);
+            *v4 = *v4 + v1;
+        } else {
+            0x2::table_vec::push_back<address>(&mut arg0.b_queue, v0);
+            0x2::table::add<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&mut arg0.b_ins_table, v0, arg2);
+            0x2::table::add<address, u64>(&mut arg0.b_amt_table, v0, v1);
+        };
+        arg0.b_sum = arg0.b_sum + (v1 as u128);
+        0x94f9c5faefc96d93c32d38311c2a431bce8ce2e10b376e55336025af78f87f39::handbook::new_vote(v2, arg1);
+    }
+
+    public fun vote_in_a(arg0: &VotingRecord, arg1: address) : u64 {
+        if (0x2::table::contains<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&arg0.a_ins_table, arg1)) {
+            0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::amount(0x2::table::borrow<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&arg0.a_ins_table, arg1))
+        } else {
+            0
+        }
+    }
+
+    public fun vote_in_b(arg0: &VotingRecord, arg1: address) : u64 {
+        if (0x2::table::contains<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&arg0.b_ins_table, arg1)) {
+            0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::amount(0x2::table::borrow<address, 0x830fe26674dc638af7c3d84030e2575f44a2bdc1baa1f4757cfe010a4b106b6a::movescription::Movescription>(&arg0.b_ins_table, arg1))
+        } else {
+            0
+        }
+    }
+
+    // decompiled from Move bytecode v6
+}
+

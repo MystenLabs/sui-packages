@@ -1,0 +1,14 @@
+module 0xd474c671fd26a3ddb814b490279dc131d45e50247bf21b9ecb14226c0663f3cd::trump {
+    struct TRUMP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TRUMP, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TRUMP>(arg0, 6, b"TRUMP", b"Donald Trump", x"446f6e616c64205472756d7020666f7220507265736964656e7420323032343a204120626f6c642072657475726e20746f20274d616b6520416d657269636120477265617420416761696e272077697468206120666f637573206f6e206e6174696f6e616c2073656375726974792c2065636f6e6f6d69632067726f7774682c20616e642070757474696e6720416d65726963612066697273742e20486973206c6561646572736869702c20706f6c69636965732c20616e6420706572736f6e6120636f6e74696e756520746f20696e7370697265206d696c6c696f6e73206675656c696e672061206d6f76656d656e7420666f722061207374726f6e6765722c206d6f72652070726f737065726f7573206675747572652e0a0a0a0a0a0a0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Donald_Trump_Butler_PA_Shooting_05_0d083bce9c.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TRUMP>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<TRUMP>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

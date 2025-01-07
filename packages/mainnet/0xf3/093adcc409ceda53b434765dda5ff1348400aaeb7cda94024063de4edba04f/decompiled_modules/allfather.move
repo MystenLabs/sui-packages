@@ -1,0 +1,14 @@
+module 0xf3093adcc409ceda53b434765dda5ff1348400aaeb7cda94024063de4edba04f::allfather {
+    struct ALLFATHER has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ALLFATHER, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ALLFATHER>(arg0, 6, b"ALLFATHER", b"AllFather of the SUI devs", b"ALLFATHER of Sui devs, he thinks he's Odin but codes in Move. He's got the whole blockchain wrapped around his finger, or at least he'd like you to think so with his divine tech wisdom!", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://pbs.twimg.com/profile_images/1821959939197177858/1QiIq0i3_400x400.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ALLFATHER>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<ALLFATHER>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

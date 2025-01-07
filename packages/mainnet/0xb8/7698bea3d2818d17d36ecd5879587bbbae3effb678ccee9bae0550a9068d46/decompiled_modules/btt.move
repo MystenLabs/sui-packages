@@ -1,0 +1,14 @@
+module 0xb87698bea3d2818d17d36ecd5879587bbbae3effb678ccee9bae0550a9068d46::btt {
+    struct BTT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: BTT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<BTT>(arg0, 6, b"BTT", b"Bit-Tom", b"Bit-tom the next generation of Bitcoin", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/1000003087_ad93820885.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<BTT>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<BTT>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,13 @@
+module 0xcaf3074df34e92af55fa51b962fd76c525e22294abbb260586725149fbe8c7df::ca_init {
+    public fun new<T0>(arg0: &mut 0xcaf3074df34e92af55fa51b962fd76c525e22294abbb260586725149fbe8c7df::credit_manager::CreditManager, arg1: &0xcaf3074df34e92af55fa51b962fd76c525e22294abbb260586725149fbe8c7df::tier_registry::TierRegistry, arg2: 0x2::object::ID, arg3: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x1::type_name::get<T0>();
+        assert!(0xcaf3074df34e92af55fa51b962fd76c525e22294abbb260586725149fbe8c7df::tier_registry::tier_exists(arg1, arg2), 0);
+        assert!(0xcaf3074df34e92af55fa51b962fd76c525e22294abbb260586725149fbe8c7df::credit_manager::is_tier_whitelisted(arg0, v0, arg2), 1);
+        let (v1, v2) = 0xcaf3074df34e92af55fa51b962fd76c525e22294abbb260586725149fbe8c7df::credit_account::new(arg2, v0, arg3);
+        0x2::transfer::public_share_object<0xcaf3074df34e92af55fa51b962fd76c525e22294abbb260586725149fbe8c7df::credit_account::CreditAccount>(v1);
+        0x2::transfer::public_transfer<0xcaf3074df34e92af55fa51b962fd76c525e22294abbb260586725149fbe8c7df::credit_account::OwnerKey>(v2, 0x2::tx_context::sender(arg3));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

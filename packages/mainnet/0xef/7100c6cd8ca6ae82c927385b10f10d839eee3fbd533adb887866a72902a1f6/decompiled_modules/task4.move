@@ -1,0 +1,74 @@
+module 0xef7100c6cd8ca6ae82c927385b10f10d839eee3fbd533adb887866a72902a1f6::task4 {
+    struct TASK4 has drop {
+        dummy_field: bool,
+    }
+
+    struct PrizePool has key {
+        id: 0x2::object::UID,
+        prize: 0x2::balance::Balance<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>,
+        brainsk: address,
+    }
+
+    struct PrizePoolCap has key {
+        id: 0x2::object::UID,
+    }
+
+    public fun withdraw_all(arg0: &mut PrizePool, arg1: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0.brainsk == 0x2::tx_context::sender(arg1), 0);
+        0x2::transfer::public_transfer<0x2::coin::Coin<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>>(0x2::coin::from_balance<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(0x2::balance::withdraw_all<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(&mut arg0.prize), arg1), 0x2::tx_context::sender(arg1));
+    }
+
+    fun get_random_num(arg0: &mut 0x2::tx_context::TxContext) : u8 {
+        let v0 = 0x2::bcs::new(*0x2::tx_context::digest(arg0));
+        0x2::bcs::peel_u8(&mut v0) % 3
+    }
+
+    fun init(arg0: TASK4, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = PrizePoolCap{id: 0x2::object::new(arg1)};
+        0x2::transfer::transfer<PrizePoolCap>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    public entry fun initialize_pool(arg0: PrizePoolCap, arg1: 0x2::coin::Coin<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>, arg2: &mut 0x2::tx_context::TxContext) {
+        let v0 = PrizePool{
+            id      : 0x2::object::new(arg2),
+            prize   : 0x2::coin::into_balance<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(arg1),
+            brainsk : 0x2::tx_context::sender(arg2),
+        };
+        0x2::transfer::share_object<PrizePool>(v0);
+        let PrizePoolCap { id: v1 } = arg0;
+        0x2::object::delete(v1);
+    }
+
+    public fun query_prize(arg0: &mut PrizePool) : u64 {
+        0x2::balance::value<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(&arg0.prize)
+    }
+
+    public entry fun start_game(arg0: &mut PrizePool, arg1: u8, arg2: 0x2::coin::Coin<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>, arg3: &mut 0x2::tx_context::TxContext) : bool {
+        let v0 = 0x2::coin::into_balance<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(arg2);
+        let v1 = 0x2::balance::value<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(&v0);
+        let v2 = false;
+        assert!(v1 < 100 && v1 > 10, 1);
+        0x2::balance::join<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(&mut arg0.prize, v0);
+        let v3 = get_random_num(arg3);
+        let v4 = 0x1::string::utf8(b"The right number is:");
+        0x1::debug::print<0x1::string::String>(&v4);
+        0x1::debug::print<u8>(&v3);
+        if (arg1 == v3) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>>(0x2::coin::from_balance<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(0x2::balance::split<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(&mut arg0.prize, 2 * v1), arg3), 0x2::tx_context::sender(arg3));
+            v2 = true;
+        };
+        v2
+    }
+
+    public entry fun top_up(arg0: &mut PrizePool, arg1: 0x2::coin::Coin<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>) {
+        0x2::coin::put<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(&mut arg0.prize, arg1);
+    }
+
+    public entry fun withdraw(arg0: &mut PrizePool, arg1: u64, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0.brainsk == 0x2::tx_context::sender(arg2), 0);
+        0x2::transfer::public_transfer<0x2::coin::Coin<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>>(0x2::coin::from_balance<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(0x2::balance::split<0xf55b7f267fbf88f6e195bdb979316293ec492882273e7deffc078a6615ec2bfd::faucetcoin::FAUCETCOIN>(&mut arg0.prize, arg1), arg2), 0x2::tx_context::sender(arg2));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

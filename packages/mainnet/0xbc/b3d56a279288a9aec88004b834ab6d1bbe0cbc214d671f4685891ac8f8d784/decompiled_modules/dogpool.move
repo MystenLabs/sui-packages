@@ -1,0 +1,14 @@
+module 0xbcb3d56a279288a9aec88004b834ab6d1bbe0cbc214d671f4685891ac8f8d784::dogpool {
+    struct DOGPOOL has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: DOGPOOL, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<DOGPOOL>(arg0, 6, b"DOGPOOL", b"DogPool SUI", x"53756920746f70206d656d6520646f6720697320686572652c2074686520626164617373206865726f2076696c6c69616e207468617420636f6d62696e65732063727970746f20616e64206d656d6520746f6765746865722e2020446f67706f6f6c20436f696e2069732074686520756c74696d617465207472696275746520746f2074686520526567656e65726174696e6720446567656e65726174652c20636f6d62696e696e672068697320756e7072656469637461626c65206e617475726520776974682063757474696e672d6564676520626c6f636b636861696e20746563686e6f6c6f677920746f2067697665207265776172647320616e64206761696e200a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Dog_Pool_ae5475308a.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<DOGPOOL>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<DOGPOOL>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0x97de47877ee6049d0944facc8086b52f78e31e7ffc2717fac55244fa8ce83018::acats {
+    struct ACATS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ACATS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ACATS>(arg0, 9, b"ACATS", b"AlienCats", x"54686520416c69656e436174732c20612067726f7570206f66206578747261746572726573747269616c2066656c696e65732c206861696c2066726f6d20746865206661722d6f666620706c616e657420e2809c467572726f6e2d392ee2809d204166746572207761746368696e67204561727468e2809973206f6273657373696f6e20776974682063617473207468726f756768206d7973746572696f757320e2809c7370616365206265616d732ce2809d2074686579e2809976652064657363656e64656420746f20736861726520746865697220e2809c696e74657267616c61637469632063757272656e6379e2809d20776974682068756d616e6974792e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://file-walletapp.waveonsui.com/images/wave-pumps/0b7321f5-a2fc-45f4-97d4-38ba52c68dd6.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ACATS>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<ACATS>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

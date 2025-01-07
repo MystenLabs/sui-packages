@@ -1,0 +1,61 @@
+module 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::deposit {
+    struct DepositEvent has copy, drop, store {
+        vault_id: 0x2::object::ID,
+        user: address,
+        deposit_amount: u64,
+        lp_shares_minted: u64,
+        total_deposited_a: u64,
+        total_borrowed_b: u64,
+        aum_in_a: u64,
+        total_lp_supply: u64,
+    }
+
+    fun calc_vt_shares<T0, T1, T2>(arg0: &0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::Vault<T0, T1, T2>, arg1: &0xce7e9b076229e914dc87900323fa122fb6869f39fda82b85770d1aa27f61ad8e::oracle::KriyaOracle, arg2: &0xdf3da4bcc7939caf6486ecc104e1cbd69f97f2025195d270649566301d15eb96::registry::CoinDecimalsRegistry, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation, arg4: u64, arg5: &0x2::clock::Clock) : u64 {
+        let v0 = 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::total_vt_supply<T0, T1, T2>(arg0);
+        if (v0 == 0) {
+            return arg4
+        };
+        let (v1, _, _) = 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::utils::calc_aum<T0, T1, T2>(arg0, arg1, arg2, arg3, arg5);
+        (((arg4 as u256) * (v0 as u256) / (v1 as u256)) as u64)
+    }
+
+    fun get_deposit_flash_swap_amount(arg0: u64, arg1: u64) : u64 {
+        (((arg1 as u256) * ((arg0 - 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::leverage_scaling()) as u256) / (0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::leverage_scaling() as u256)) as u64)
+    }
+
+    public fun get_deposit_receipt<T0, T1, T2>(arg0: &0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::Vault<T0, T1, T2>, arg1: 0x2::coin::Coin<T0>, arg2: &0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::VaultAcl, arg3: &0x313b01d4468faa7b7b8940783622f141fbc1614adfe5cb12ac92764a3586a214::acl::AggregatorAcl, arg4: &mut 0x2::tx_context::TxContext) : 0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::PermissionedReceipt {
+        let v0 = 0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::issue<0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::access(arg2), 0x1::option::some<0x2::object::ID>(0x313b01d4468faa7b7b8940783622f141fbc1614adfe5cb12ac92764a3586a214::acl::access_id(arg3)), arg4);
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<vector<u8>, 0x2::balance::Balance<T0>, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(&mut v0, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::access(arg2), b"deposit_balance", 0x2::coin::into_balance<T0>(arg1));
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<vector<u8>, u64, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(&mut v0, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::access(arg2), b"amount", get_deposit_flash_swap_amount(0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::leverage<T0, T1, T2>(arg0), 0x2::coin::value<T0>(&arg1)));
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<vector<u8>, 0x1::type_name::TypeName, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(&mut v0, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::access(arg2), b"input_type", 0x1::type_name::get<T1>());
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<vector<u8>, bool, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(&mut v0, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::access(arg2), b"fix_input", false);
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<vector<u8>, u64, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(&mut v0, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::access(arg2), b"slippage", 1);
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<vector<u8>, 0x2::object::ID, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(&mut v0, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::access(arg2), b"pool_id", 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::pool_id<T0, T1, T2>(arg0));
+        v0
+    }
+
+    public fun process_deposit_receipt<T0, T1, T2>(arg0: &mut 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::Vault<T0, T1, T2>, arg1: &0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::VaultAcl, arg2: &mut 0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::PermissionedReceipt, arg3: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation, arg5: &0x1478a432123e4b3d61878b629f2c692969fdb375644f1251cd278a4b1e7d7cd6::x_oracle::XOracle, arg6: &0xca5a5a62f01c79a104bf4d31669e29daa387f325c241de4edbe30986a9bc8b0d::coin_decimals_registry::CoinDecimalsRegistry, arg7: &0xce7e9b076229e914dc87900323fa122fb6869f39fda82b85770d1aa27f61ad8e::oracle::KriyaOracle, arg8: &0xdf3da4bcc7939caf6486ecc104e1cbd69f97f2025195d270649566301d15eb96::registry::CoinDecimalsRegistry, arg9: &0x2875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_config::IncentiveConfig, arg10: &mut 0x2875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_pool::IncentivePools, arg11: &mut 0x2875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_account::IncentiveAccounts, arg12: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation_access::ObligationAccessStore, arg13: &0x2::clock::Clock, arg14: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg15: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T2> {
+        let v0 = 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::access(arg1);
+        let v1 = 0x2::coin::from_balance<T0>(0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::remove_data<vector<u8>, 0x2::balance::Balance<T0>, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(arg2, v0, b"deposit_balance"), arg15);
+        let v2 = 0x2::coin::value<T0>(&v1);
+        0x2::coin::join<T0>(&mut v1, 0x2::coin::from_balance<T0>(0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::remove_data<vector<u8>, 0x2::balance::Balance<T0>, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(arg2, v0, b"funds"), arg15));
+        0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::add_data<vector<u8>, 0x2::balance::Balance<T1>, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(arg2, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::access(arg1), b"funds", 0x2::coin::into_balance<T1>(0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::deposit<T0, T1, T2>(arg0, v1, arg14, arg4, arg3, arg6, arg5, 0xfe579a58d32d38e154a8c0d4aa646238851f340258d10c7482cef9bea165b823::receipt::remove_data<vector<u8>, u64, 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault_acl::Access>(arg2, v0, b"repay_amount"), arg9, arg10, arg11, arg12, arg13, arg15)));
+        let v3 = 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::mint_vt<T0, T1, T2>(arg0, calc_vt_shares<T0, T1, T2>(arg0, arg7, arg8, arg4, v2, arg13), arg15);
+        let (v4, v5, v6) = 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::utils::calc_aum<T0, T1, T2>(arg0, arg7, arg8, arg4, arg13);
+        let v7 = DepositEvent{
+            vault_id          : 0x2::object::id<0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::Vault<T0, T1, T2>>(arg0),
+            user              : 0x2::tx_context::sender(arg15),
+            deposit_amount    : v2,
+            lp_shares_minted  : 0x2::coin::value<T2>(&v3),
+            total_deposited_a : v5,
+            total_borrowed_b  : v6,
+            aum_in_a          : v4,
+            total_lp_supply   : 0xac1ea1d03f8c714426f40ba10ac53a290757a5c62edea07db39e7cc29133b552::vault::total_vt_supply<T0, T1, T2>(arg0),
+        };
+        0x2::event::emit<DepositEvent>(v7);
+        v3
+    }
+
+    // decompiled from Move bytecode v6
+}
+

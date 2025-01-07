@@ -1,0 +1,14 @@
+module 0x9c20abc42f58c2d4d3b30377db3e05b86b9ab9866db72afb4f102956765baf9b::masky {
+    struct MASKY has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MASKY, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MASKY>(arg0, 6, b"MASKY", b"SUI MASKY ", x"4a6f696e207468652063727970746f63757272656e6379207265766f6c7574696f6e207769746820612064617368206f662068756d6f72212057697468204d61736b792c207765e280997265207472616e73666f726d696e67207468652077617920796f752076696577207468652066696e616e6369616c20776f726c642c206f66666572696e67206120756e6971756520616e642066756e20617070726f61636820746f20696e76657374696e6720616e6420656e676167696e672e204a6f696e20757320616e642062652070617274206f66206120636f6d6d756e69747920746861742076616c75657320637265617469766974792c2066756e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1735408895566.14")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<MASKY>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MASKY>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

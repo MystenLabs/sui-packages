@@ -1,0 +1,14 @@
+module 0x9c38e1daab52acc456ed9e7e0b200dced979c6ff5b4958bf8d1bcd4453533733::wra {
+    struct WRA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: WRA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<WRA>(arg0, 6, b"WRA", b"Walras", x"57616c72617320697320746865206d656d6520636f696e2074686174206469766573206465657020696e746f20746865206f6365616e206f66207765616c74682120496e73706972656420627920746865206d69676874792077616c7275732c207468697320746f6b656e206973206865726520746f206272696e672066696e616e6369616c20776176657320746f2069747320686f6c646572732e20526964652074686520746964652077697468202457524120616e64206c657420746865206f6365616e277320776973646f6d206c65616420796f7520746f207269636865732120f09f8c8a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732083036105.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<WRA>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<WRA>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

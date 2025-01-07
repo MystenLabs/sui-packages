@@ -1,0 +1,14 @@
+module 0xe68d0f12a5f2d7090715c244a93a88f12b0ea227cfe58e492ba38f9548dc1ee7::suna {
+    struct SUNA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUNA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUNA>(arg0, 9, b"SUNA", b"Suinami", x"4469766520696e746f207468652063727970746f206f6365616e2077697468205375696e616d692c20746865206d656d6520636f696e20726964696e672074686520537569206e6574776f726b2120466173742c2066756e2c20616e642066726f7468792c207765e280997265206865726520746f20666c6f6f6420796f757220706f7274666f6c696f2028696e206120676f6f6420776179292e204e6f2070726f6d69736573206f66204c616d626f732c20627574206865792c206174206c65617374207765e280997265206e6f7420616e6f7468657220646f6720636f696e2e2053757266e2809973207570e28094646f6ee2809974206d69737320746865207761766521", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://file-walletapp.waveonsui.com/images/wave-pumps/9472dba5-d647-41c9-8f3d-b0283e72c979.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUNA>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SUNA>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

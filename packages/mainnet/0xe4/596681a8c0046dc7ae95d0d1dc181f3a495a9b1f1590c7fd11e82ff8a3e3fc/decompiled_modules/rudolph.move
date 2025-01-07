@@ -1,0 +1,14 @@
+module 0xe4596681a8c0046dc7ae95d0d1dc181f3a495a9b1f1590c7fd11e82ff8a3e3fc::rudolph {
+    struct RUDOLPH has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: RUDOLPH, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<RUDOLPH>(arg0, 6, b"RUDOLPH", b"Angry Rudolph", x"416e677279205275646f6c70682069736e7420746865207265696e6465657220796f75206772657720757020776974682e20466f726765742074686520726564206e6f73652074686174207361766564204368726973746d6173746869732069732061205275646f6c70682077686f7320666564207570207769746820736c656967682062656c6c732c206361726f6c696e672c20616e64206861756c696e672053616e746173206f76657273697a6564207361636b206f66206e6f6e73656e7365206163726f73732074686520676c6f62652e20486573207469726564206f66206265696e672074686520686f6c6964617920776f722e2e2e0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/1000049406_896f5b0eb7.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<RUDOLPH>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<RUDOLPH>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

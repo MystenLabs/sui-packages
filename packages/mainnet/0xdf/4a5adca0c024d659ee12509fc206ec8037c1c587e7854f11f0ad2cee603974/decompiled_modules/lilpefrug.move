@@ -1,0 +1,14 @@
+module 0xdf4a5adca0c024d659ee12509fc206ec8037c1c587e7854f11f0ad2cee603974::lilpefrug {
+    struct LILPEFRUG has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: LILPEFRUG, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<LILPEFRUG>(arg0, 6, b"LilpeFrug", b"LIL PEPE FRUG", x"4c494c205045504520465255470a0a446973636f76657220746865206c61746573742073656e736174696f6e20696e20746865206d656d6520746f6b656e20756e697665727365202d2042616279205065706520546f6b656e2120496e737069726564206279204d61747420467572696527732061646f7261626c652074776565742073686f77636173696e67206120637564646c7920626162792050657065207374756666656420646f6c6c2c2042616279205065706520546f6b656e206973206865726520746f206272696e67206120706c617966756c20747769737420746f20796f75722063727970746f20657870657269656e63652e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/photo_2024_10_12_19_45_31_eb57694450.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<LILPEFRUG>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<LILPEFRUG>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0xf6e50ca5d78f75021f2ca090abc6c85b3938dd0a32837da5233d17eccd67b223::bio {
+    struct BIO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: BIO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<BIO>(arg0, 6, b"BIO", b"bionic ", x"496e74726f647563696e672042696f6e6963e28094746865206d656d6520636f696e206d657267696e6720726f626f7469637320776974682068756d6f72212057697468206120756e6971756520766973696f6e20726f6f74656420696e2062696f6e69636e6573732c20776527726520706f6b696e672066756e206174207468652063727970746f20776f726c64207768696c652070696f6e656572696e67206120726f626f746963207265766f6c7574696f6e2e204a6f696e20757320696e206275696c64696e67206120667574757265207768657265206d656d657320616e64206d616368696e657320756e69746521", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1731707515303.webp")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<BIO>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<BIO>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

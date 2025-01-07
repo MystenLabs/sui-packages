@@ -1,0 +1,14 @@
+module 0xffceab948b169033f66ea4f0561d3c7305a54854c5b32c6cf182d594e13270f0::moray {
+    struct MORAY has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MORAY, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MORAY>(arg0, 6, b"MORAY", b"MORAY SUI", x"68747470733a2f2f742e6d652f7375696d6f7261796d6f766570756d70204d4f524159205355492069732061206d656d6520746f6b656e206f6e207468652053756920626c6f636b636861696e20696e7370697265642062792074686520756e69717565206d6f7261792065656c73206f6620746865207365612e205769746820612066756e20616e64206361707469766174696e67207468656d652c204d4f52415920535549206f6666657273207a65726f20746178206f6e20616c6c207472616e73616374696f6e732c20616c6c6f77696e6720686f6c6465727320746f20667265656c7920747261646520776974686f757420666565732e0a5745204c41554e4348204f4e204d4f564550554d50", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/zxczxczxccxz_4d410685af.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MORAY>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<MORAY>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

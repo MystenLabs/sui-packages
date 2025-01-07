@@ -1,0 +1,14 @@
+module 0xbe270126e8354384a38397915774c279be4642139141e51b761e9c7848f90f8e::chan {
+    struct CHAN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CHAN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CHAN>(arg0, 6, b"Chan", b"Sui-Chan", x"416d6f6e672074686520666f7572207369626c696e67732c20686520697320746865206d6f737420636c696e677920616e6420616666656374696f6e61746520746f776172647320686973206d6f746865722e0a5768656e207468657265206172652070656f706c652061726f756e642c206865206a757374207761746368657320686973207369626c696e677320706c6179696e67202c206275740a7768656e20746865726520617265206e6f2070656f706c652061726f756e642c2068652074616b657320746865206c65616420616e642072756e732061726f756e6420706c6179696e672e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/c38271_150x150_c55ce45671.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CHAN>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<CHAN>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

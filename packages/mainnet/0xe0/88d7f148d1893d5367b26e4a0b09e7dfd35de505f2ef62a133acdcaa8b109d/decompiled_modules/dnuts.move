@@ -1,0 +1,14 @@
+module 0xe088d7f148d1893d5367b26e4a0b09e7dfd35de505f2ef62a133acdcaa8b109d::dnuts {
+    struct DNUTS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: DNUTS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<DNUTS>(arg0, 6, b"Dnuts", b"Deez Nuts", x"4465657a204e7574732028444e555429206973206e6f74206a757374206120746f6b656e3b206974732061206d6f76656d656e7420706f77657265642062792068756d6f722c20636f6d6d756e6974792c20616e642074686520756e72656c656e74696e6720737069726974206f66206d656d65732e204275696c74206f6e2074686520535549206e6574776f726b2c20444e5554206861726e6573736573207468652070737963686f6c6f676963616c20696d70616374206f66206c6175676874657220616e6420636f6e6e656374696f6e2c206372656174696e6720616e20656e676167696e672065636f73797374656d2077686572652066756e20616e642066696e616e636520636f6c6c6964652e0a0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/IMG_3153_40067cb6fd.JPG")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<DNUTS>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<DNUTS>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

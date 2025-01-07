@@ -1,0 +1,14 @@
+module 0x917400c1d5f7a26f38903aedf6957df0c977243c81a616ca7fff3bd39274f9e0::dorae {
+    struct DORAE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: DORAE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<DORAE>(arg0, 6, b"DORAE", b"DORAEMON ON SUI", b"ppp", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/photo_2024_10_08_14_51_25_50f1a8c450.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<DORAE>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<DORAE>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

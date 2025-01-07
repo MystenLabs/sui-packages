@@ -1,0 +1,76 @@
+module 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird_entries {
+    public entry fun claimPreyReward(arg0: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdArchieve, arg1: &0x2::clock::Clock, arg2: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg3: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::claimPreyReward(arg0, arg1, arg2, arg3);
+    }
+
+    public entry fun claimReferallReward(arg0: vector<u8>, arg1: vector<u8>, arg2: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdStore, arg3: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdArchieve, arg4: &0x2::clock::Clock, arg5: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg6: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::claimReferallReward(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    public entry fun claimReward<T0>(arg0: vector<u8>, arg1: vector<u8>, arg2: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::RewardPool<T0>, arg3: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdStore, arg4: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdArchieve, arg5: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::claimReward<T0>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    }
+
+    public entry fun configRewardPool<T0>(arg0: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::AdminCap, arg1: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::RewardPool<T0>, arg2: bool, arg3: u64, arg4: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::configRewardPool<T0>(arg0, arg1, arg2, arg3, arg4);
+    }
+
+    public entry fun createRewardPool<T0>(arg0: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::AdminCap, arg1: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg2: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::createRewardPool<T0>(arg0, arg1, arg2);
+    }
+
+    public fun deposit<T0: store + key>(arg0: address, arg1: 0x2::coin::Coin<T0>, arg2: &0x2::clock::Clock, arg3: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg4: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::deposit<T0>(arg0, arg1, arg2, arg3, arg4);
+    }
+
+    public entry fun depositReward<T0>(arg0: 0x2::coin::Coin<T0>, arg1: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::RewardPool<T0>, arg2: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::depositReward<T0>(arg0, arg1, arg2, arg3, arg4);
+    }
+
+    public entry fun emergencyRewardWithdraw<T0>(arg0: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::TreasureCap, arg1: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::RewardPool<T0>, arg2: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg3: &0x2::clock::Clock, arg4: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::emergencyRewardWithdraw<T0>(arg0, arg1, arg2, arg3, arg4);
+    }
+
+    public fun feedWorm(arg0: vector<u8>, arg1: vector<u8>, arg2: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdStore, arg3: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdArchieve, arg4: &0x2::clock::Clock, arg5: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg6: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::feedWorm(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    public entry fun infoBirdGhost(arg0: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdArchieve) : (address, u64, u128) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::infoBirdGhost(arg0)
+    }
+
+    public entry fun mineBird(arg0: vector<u8>, arg1: vector<u8>, arg2: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdStore, arg3: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdArchieve, arg4: &0x2::clock::Clock, arg5: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg6: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::mineBird(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    public entry fun preyBird(arg0: vector<u8>, arg1: vector<u8>, arg2: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdStore, arg3: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdArchieve, arg4: &0x2::clock::Clock, arg5: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg6: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::preyBird(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    public entry fun register(arg0: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdReg, arg1: &0x2::clock::Clock, arg2: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version, arg3: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::register(arg0, arg1, arg2, arg3);
+    }
+
+    public entry fun sponsor_gas(arg0: 0x2::coin::Coin<0x2::sui::SUI>, arg1: vector<address>, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::sponsor_gas(arg0, arg1, arg2, arg3);
+    }
+
+    public entry fun updateValidator(arg0: &0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::AdminCap, arg1: vector<u8>, arg2: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::BirdStore, arg3: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::version::Version) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::bird::updateValidator(arg0, arg1, arg2, arg3);
+    }
+
+    public entry fun claim_cap<T0: store + key>(arg0: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::cap_vault::CapVault<T0>, arg1: &0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<T0>(0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::cap_vault::claim_cap<T0>(arg0, arg1), 0x2::tx_context::sender(arg1));
+    }
+
+    public entry fun revoke_cap<T0: store + key>(arg0: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::cap_vault::CapVault<T0>, arg1: &0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<T0>(0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::cap_vault::revoke_cap<T0>(arg0, arg1), 0x2::tx_context::sender(arg1));
+    }
+
+    public entry fun transfer_cap<T0: store + key>(arg0: T0, arg1: address, arg2: &mut 0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::cap_vault::CapVault<T0>, arg3: &0x2::tx_context::TxContext) {
+        0xff99092cf210626b203b88172c039a70b3e88712ccb51bfb641cab5e1cfda8a5::cap_vault::transfer_cap<T0>(arg0, arg1, arg2, arg3);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

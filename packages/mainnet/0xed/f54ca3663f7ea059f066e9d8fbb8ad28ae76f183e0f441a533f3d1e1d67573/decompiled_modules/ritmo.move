@@ -1,0 +1,14 @@
+module 0xedf54ca3663f7ea059f066e9d8fbb8ad28ae76f183e0f441a533f3d1e1d67573::ritmo {
+    struct RITMO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: RITMO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<RITMO>(arg0, 6, b"RITMO", b"Ritmo", x"4f776e696e67205269746d6f20546f6b656e732069736ee2809974206a7573742061626f757420696e766573746d656e743b206974e28099732061626f7574206265696e672070617274206f6620616e20656e6572676574696320636f6d6d756e697479207768657265206576657279206265617420636f756e74732e20f09f8eb62046726f6d206578636c7573697665206576656e747320746f207370656369616c20636f6e74656e742c205269746d6f20546f6b656e20686f6c646572732077696c6c2067726f6f766520746865697220776179207468726f756768206120756e6971756520616e6420746872696c6c696e6720657870657269656e6365", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1731257057883.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<RITMO>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<RITMO>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

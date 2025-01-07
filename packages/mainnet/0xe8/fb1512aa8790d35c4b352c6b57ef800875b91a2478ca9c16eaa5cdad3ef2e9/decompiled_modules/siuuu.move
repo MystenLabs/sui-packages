@@ -1,0 +1,14 @@
+module 0xe8fb1512aa8790d35c4b352c6b57ef800875b91a2478ca9c16eaa5cdad3ef2e9::siuuu {
+    struct SIUUU has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SIUUU, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SIUUU>(arg0, 6, b"SIUUU", b"SIUUVIRUS", x"434154434820544845205649525553204f4620564943544f5259210a5349555555206f6e2053554920626c6f636b636861696e2c20656173792e0a0a5349555556495255532069732074686520766972616c206d656d6520636f696e2074616b696e67206f766572207468652063727970746f20776f726c642c20696e73706972656420627920746865206c6567656e6461727920e2809c534955555521e2809d2063656c6562726174696f6e206f6620666f6f7462616c6c2069636f6e20437269737469616e6f20526f6e616c646f2e206974e28099732061206d6f76656d656e742c20612063656c6562726174696f6e206163726f73732063727970746f", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1731243214758.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SIUUU>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SIUUU>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

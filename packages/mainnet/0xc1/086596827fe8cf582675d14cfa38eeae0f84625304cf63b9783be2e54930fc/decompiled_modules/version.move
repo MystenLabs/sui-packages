@@ -1,0 +1,20 @@
+module 0xc1086596827fe8cf582675d14cfa38eeae0f84625304cf63b9783be2e54930fc::version {
+    struct Version has store {
+        version: u16,
+    }
+
+    public(friend) fun check_version(arg0: &Version) {
+        assert!(arg0.version == 0, 0);
+    }
+
+    public(friend) fun get_version(arg0: &Version) : u16 {
+        arg0.version
+    }
+
+    public(friend) fun init_version() : Version {
+        Version{version: 0}
+    }
+
+    // decompiled from Move bytecode v6
+}
+

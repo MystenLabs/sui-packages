@@ -1,0 +1,14 @@
+module 0xb5237efd95ada28df7906abc513a014ca501e37fe42ac72552dbf1951e111ee2::luckycalf {
+    struct LUCKYCALF has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: LUCKYCALF, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<LUCKYCALF>(arg0, 6, b"LUCKYCALF", b"Lucky Calf", x"54686973206973206120746f6b656e206372656174656420666f7220746865207570636f6d696e672072656c65617365206f6620746865204c75636b792043616c66204e46542e20497420686173206e6f2076616c75652c20616e64207468697320697320616c736f20746f2061646420736f6d65206865617420746f2074686520636f6d6d756e69747920696e20616476616e6365210a54686520636f696e20686f6c64696e6720616464726573732068617320746865206f70706f7274756e69747920746f206f627461696e204e46542c2077686963682077696c6c2062652061697264726f70706564206166746572206974206973206973737565642e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/1000049744_5dba69bf6b.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<LUCKYCALF>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<LUCKYCALF>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

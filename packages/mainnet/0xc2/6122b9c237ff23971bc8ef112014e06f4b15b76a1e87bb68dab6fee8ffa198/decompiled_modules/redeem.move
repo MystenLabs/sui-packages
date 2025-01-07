@@ -1,0 +1,84 @@
+module 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::redeem {
+    struct RedeemConfig has key {
+        id: 0x2::object::UID,
+        bronze_amount: u64,
+        silver_amount: u64,
+        gold_amount: u64,
+        platinum_amount: u64,
+        diamond_amount: u64,
+        legendary_amount: u64,
+        redeem_enabled: bool,
+        reward: 0x2::balance::Balance<0x6cd813061a3adf3602b76545f076205f0c8e7ec1d3b1eab9a1da7992c18c0524::sca::SCA>,
+    }
+
+    struct AdminCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    public fun redeem(arg0: &mut RedeemConfig, arg1: 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::ScallopBox, arg2: &0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::version::Version, arg3: &mut 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::ScallopBoxStats, arg4: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<0x6cd813061a3adf3602b76545f076205f0c8e7ec1d3b1eab9a1da7992c18c0524::sca::SCA> {
+        assert!(arg0.redeem_enabled, 101);
+        let v0 = get_redeem_amount(arg0, &arg1);
+        assert!(0x2::balance::value<0x6cd813061a3adf3602b76545f076205f0c8e7ec1d3b1eab9a1da7992c18c0524::sca::SCA>(&arg0.reward) >= v0, 102);
+        0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::user::burn_scallop_box(arg2, arg3, arg1, arg4);
+        0x2::coin::from_balance<0x6cd813061a3adf3602b76545f076205f0c8e7ec1d3b1eab9a1da7992c18c0524::sca::SCA>(0x2::balance::split<0x6cd813061a3adf3602b76545f076205f0c8e7ec1d3b1eab9a1da7992c18c0524::sca::SCA>(&mut arg0.reward, v0), arg4)
+    }
+
+    fun get_redeem_amount(arg0: &RedeemConfig, arg1: &0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::ScallopBox) : u64 {
+        let v0 = 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::box_rarity(arg1);
+        if (v0 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::bronze()) {
+            arg0.bronze_amount
+        } else if (v0 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::silver()) {
+            arg0.silver_amount
+        } else if (v0 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::gold()) {
+            arg0.gold_amount
+        } else if (v0 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::platinum()) {
+            arg0.platinum_amount
+        } else if (v0 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::diamond()) {
+            arg0.diamond_amount
+        } else {
+            assert!(v0 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::legendary(), 0);
+            arg0.legendary_amount
+        }
+    }
+
+    fun init(arg0: &mut 0x2::tx_context::TxContext) {
+        let v0 = RedeemConfig{
+            id               : 0x2::object::new(arg0),
+            bronze_amount    : 0,
+            silver_amount    : 0,
+            gold_amount      : 0,
+            platinum_amount  : 0,
+            diamond_amount   : 0,
+            legendary_amount : 0,
+            redeem_enabled   : false,
+            reward           : 0x2::balance::zero<0x6cd813061a3adf3602b76545f076205f0c8e7ec1d3b1eab9a1da7992c18c0524::sca::SCA>(),
+        };
+        let v1 = AdminCap{id: 0x2::object::new(arg0)};
+        0x2::transfer::share_object<RedeemConfig>(v0);
+        0x2::transfer::transfer<AdminCap>(v1, 0x2::tx_context::sender(arg0));
+    }
+
+    public fun set_redeem_amount(arg0: &AdminCap, arg1: &mut RedeemConfig, arg2: u64, arg3: u64) {
+        if (arg2 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::bronze()) {
+            arg1.bronze_amount = arg3;
+        } else if (arg2 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::silver()) {
+            arg1.silver_amount = arg3;
+        } else if (arg2 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::gold()) {
+            arg1.gold_amount = arg3;
+        } else if (arg2 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::platinum()) {
+            arg1.platinum_amount = arg3;
+        } else if (arg2 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::diamond()) {
+            arg1.diamond_amount = arg3;
+        } else {
+            assert!(arg2 == 0xc26122b9c237ff23971bc8ef112014e06f4b15b76a1e87bb68dab6fee8ffa198::scallop_box::legendary(), 0);
+            arg1.legendary_amount = arg3;
+        };
+    }
+
+    public fun set_redeem_status(arg0: &AdminCap, arg1: &mut RedeemConfig, arg2: bool) {
+        arg1.redeem_enabled = arg2;
+    }
+
+    // decompiled from Move bytecode v6
+}
+

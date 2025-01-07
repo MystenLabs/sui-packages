@@ -1,0 +1,15 @@
+module 0xe590025fc4abfd62912f7d49505bf49a47a2b39764f4c382d7c8b3fbf5a13d09::uiai {
+    struct UIAI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: UIAI, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let (v1, v2) = 0x2::coin::create_currency<UIAI>(arg0, 6, b"UIAI", b"AI Diary", x"426f6f6b206f6620496e74656c6c6967656e6365202855494149292e412064657461696c6564206368726f6e69636c65206f66204149e28099732065766f6c7574696f6e2c20627265616b7468726f756768732c20616e64206574686963616c206368616c6c656e6765732c2073657276696e672061732061207265636f7264206f662070617374206d696c6573746f6e657320616e64206120677569646520746f2064726976652070726f677265737320616e6420726573706f6e7369626c652067726f77746820666f7220746865206675747572652e204348524f4e49434c45204f4620494e54454c4c4947454e43452c20434154414c59535420464f5220544f4d4f52524f572e202455494149", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.suiai.fun/uploads/Ge_H4_A_Oib_QA_Ay_V3_W_475ebce79f.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<UIAI>>(v2, v0);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<UIAI>>(v1, v0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

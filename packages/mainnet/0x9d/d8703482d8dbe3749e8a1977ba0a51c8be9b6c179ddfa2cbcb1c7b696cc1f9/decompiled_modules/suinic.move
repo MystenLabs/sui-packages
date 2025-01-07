@@ -1,0 +1,14 @@
+module 0x9dd8703482d8dbe3749e8a1977ba0a51c8be9b6c179ddfa2cbcb1c7b696cc1f9::suinic {
+    struct SUINIC has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUINIC, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUINIC>(arg0, 6, b"SUINIC", b"Suinic Inu on Sui", x"4d656574205375696e6963496e752c20746865207370656564792073656e736174696f6e20696e737069726564206279207468652069636f6e696320636172746f6f6e206368617261637465722c20536f6e696320746865204865646765686f67212041732074686520666173746573742072756e6e6572206f6e2074686520537569206e6574776f726b2c205375696e6963496e75206973206e6f74206a7573742061206d656d653b2069742773206120636f6d6d756e6974792d64726976656e2070726f6a6563742064656469636174656420746f2070726f766964696e672061207361666520616e6420656e6a6f7961626c6520657870657269656e636520666f722065766572796f6e652e0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Suinic_Inu_on_Sui_497186c70b.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUINIC>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SUINIC>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

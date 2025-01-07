@@ -1,0 +1,14 @@
+module 0xd9e349a46725dfa7ad0a94080ace4e31b356f5bc588afba59b3cd28ccfd6779f::grok {
+    struct GROK has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GROK, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GROK>(arg0, 6, b"GROK", b"GROK AI", x"5472792047726f6b20666f7220616e73776572696e6720616e79207175657374696f6e2c206372656174696e6720616e7920696d61676573202620616e616c797a696e6720616e7920696d616765732c206576656e206d65646963616c207363616e73210a0a4974e28099732062792066617220746865206265737420617420616e737765727320726571756972696e67206c617465737420696e666f726d6174696f6e2c2064756520746f20696e746567726174696f6e207769746820f09d958f2e0a0a596f75e280996c6c2062652073757270726973656420617420686f77206d7563682047726f6b2063616e20646f2026206974206f6e6c7920676574", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1734264070783.JPG")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<GROK>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GROK>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

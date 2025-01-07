@@ -1,0 +1,14 @@
+module 0xb7070253f32fa9238b5d8ed684abc8ed05bef239f290c7d1cd53baab7fe77c2b::cyan {
+    struct CYAN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CYAN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CYAN>(arg0, 6, b"CYAN", b"Color Of SUI", x"546f206d616b65202334444132464620746865206d6f73742076697375616c6c7920646f6d696e616e7420636f6c6f7220696e207468652063727970746f2073706163652c20746865726562792070757368696e67207468652053554920636f696e20616e64206272696e67696e67206d6173732061646f7074696f6e20746f20535549204e6574776f726b20627920636f766572696e672065766572797468696e6720776974682054484520434f4c4f52204f460a53554920284359414e2920233444413246460a0a4f682c20776520617265206372656174696e6720612067616d65206368616e67696e6720424f5420616c736f210a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1731003523419.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<CYAN>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CYAN>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

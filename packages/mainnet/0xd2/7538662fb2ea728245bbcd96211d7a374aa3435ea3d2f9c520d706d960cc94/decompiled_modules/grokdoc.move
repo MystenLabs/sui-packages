@@ -1,0 +1,14 @@
+module 0xd27538662fb2ea728245bbcd96211d7a374aa3435ea3d2f9c520d706d960cc94::grokdoc {
+    struct GROKDOC has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GROKDOC, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GROKDOC>(arg0, 6, b"GROKDOC", b"Grok Doc", x"5745204e4545442047524f4b20444f43202d20656c6f6e206d75736b0a546865206e616d6520636f6d65732066726f6d204d75736b732074776565742c20225745204e4545442047524f4b20444f432c22207369676e616c696e6720746865206e65656420666f72206120746f6f6c2074686174207365616d6c6573736c7920696e746567726174657320616e64206578706c61696e7320636f6d706c657820646174612e2047726f6b20446f632061696d7320746f2073696d706c696679207468652065786368616e6765206f6620696e666f726d6174696f6e20696e20576562332c20666f637573696e67206f6e20636c61726974792c207472616e73706172656e63792c20616e64206163636573736962696c6974792e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/k_G_Yuu_Ut_W_400x400_1a24e9cad7.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GROKDOC>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<GROKDOC>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0xc1bee10ea1271e14da4d69cc2df95274114e15040cd9eafed59f47c2000d909d::sbbtc {
+    struct SBBTC has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SBBTC, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SBBTC>(arg0, 6, b"SBBTC", b"Small Butt Bitcoin", x"536d616c6c204275747420426974636f696e20282453424254432920697320612068696c6172696f75736c792063726561746976652063727970746f63757272656e637920696e7370697265642062792074686520706c617966756c20636861726d206f66206120646f67e280997320736d616c6c207265617220656e642e204974e28099732061206c696768746865617274656420686f6d61676520746f20426974636f696e2c20636f6d62696e696e672068756d6f7220616e6420696e6e6f766174696f6e20746f207368616b652075702074686520736572696f75736e657373206f66207468652063727970746f20776f726c642e202453424254", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1731848794276.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SBBTC>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SBBTC>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0xe34d8867b7c8fec943372207bda6924788cff62cf40582445e1653af4dd138d5::genki {
+    struct GENKI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GENKI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GENKI>(arg0, 6, b"GENKI", b"Genki", x"47454e4b49206d65616e7320676f6f64206865616c74682e2045786163746c7920776861742077652077616e7420746f20707573682e20546869732077617320706f73746564206279207468652073616d6520666f756e64657220746861742068616420726563656e746c7920676f7420506f63686974612e2057652061696d20746f2072756e206a757374206173206869676820746f20616c736f2073707265616420676f6f64206865616c74682e200a0a4f776e546865446f676520616c736f20656e676167656420776974682074686520747765657420776974682074686520776f72642047454e4b492e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/photo_2024_10_03_14_29_37_2281c7760f.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GENKI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<GENKI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

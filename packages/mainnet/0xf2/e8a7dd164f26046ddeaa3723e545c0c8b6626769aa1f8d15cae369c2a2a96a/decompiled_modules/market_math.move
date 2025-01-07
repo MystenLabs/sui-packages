@@ -1,0 +1,35 @@
+module 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::market_math {
+    public fun get_exchange_rate(arg0: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign, arg1: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign, arg2: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign, arg3: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign, arg4: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign) : 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign {
+        assert!(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::greater_or_equal(arg1, arg4), 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::error::market_exchange_rate_negative());
+        let v0 = 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::math_fixed64_with_sign::div(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::sub(arg1, arg4), 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::add(arg1, arg0));
+        assert!(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::less(v0, 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::create_from_rational(96, 100, true)), 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::error::market_proportion_too_high());
+        let v1 = 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::add(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::math_fixed64_with_sign::div(log_proportion(v0), arg2), arg3);
+        assert!(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::greater_or_equal(v1, 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::one()), 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::error::market_exchange_rate_below_one());
+        0x1::debug::print<0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign>(&v1);
+        v1
+    }
+
+    public fun get_exchange_rate_from_implied_rate(arg0: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64::FixedPoint64, arg1: u64) : 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign {
+        0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::math_fixed64_with_sign::exp(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::create_from_raw_value(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64::get_raw_value(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::math_fixed64::mul_div(arg0, 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64::from_uint64(arg1), 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64::from_uint64(31536000000))), true))
+    }
+
+    public fun get_rate_anchor(arg0: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64::FixedPoint64, arg1: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64::FixedPoint64, arg2: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64::FixedPoint64, arg3: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign, arg4: u64) : 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign {
+        let v0 = get_exchange_rate_from_implied_rate(arg1, arg4);
+        assert!(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::greater_or_equal(v0, 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::one()), 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::error::market_exchange_rate_below_one());
+        0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::sub(v0, 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::math_fixed64_with_sign::div(log_proportion(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::create_from_raw_value(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64::get_raw_value(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64::divDown(arg0, 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64::add(arg0, arg2))), true)), arg3))
+    }
+
+    public fun get_rate_scalar(arg0: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign, arg1: u64) : 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign {
+        let v0 = 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::math_fixed64_with_sign::divDown(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::math_fixed64_with_sign::mul(arg0, 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::from_uint64(31536000000)), 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::from_uint64(arg1));
+        assert!(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::is_positive(v0), 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::error::market_rate_scalar_negative());
+        v0
+    }
+
+    fun log_proportion(arg0: 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign) : 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::FixedPoint64WithSign {
+        assert!(!0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::is_equal(arg0, 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::one()), 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::error::market_proportion_can_not_be_one());
+        0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::math_fixed64_with_sign::ln(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::math_fixed64_with_sign::div(arg0, 0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::sub(0xf2e8a7dd164f26046ddeaa3723e545c0c8b6626769aa1f8d15cae369c2a2a96a::fixed_point64_with_sign::one(), arg0)))
+    }
+
+    // decompiled from Move bytecode v6
+}
+

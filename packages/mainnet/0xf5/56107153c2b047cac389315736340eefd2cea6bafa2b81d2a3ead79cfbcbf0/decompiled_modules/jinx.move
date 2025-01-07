@@ -1,0 +1,14 @@
+module 0xf556107153c2b047cac389315736340eefd2cea6bafa2b81d2a3ead79cfbcbf0::jinx {
+    struct JINX has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: JINX, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<JINX>(arg0, 6, b"Jinx", b"Jinx Lil Dance", x"f09f94a5204a494e5820495320484552452c20414e4420534845e2809953204f4e205448452053554920434841494e2120f09f94a50a0a546869732069736ee2809974206a75737420616e79206d656d6520636f696ee280946974e28099732061206368616f746963206d6173746572706965636520666f722074686520747275652066616e73206f6620417263616e652e20496e737069726564206279204a696e78e28099732077696c6420656e6572677920616e6420746861742069636f6e696320657069736f646520322064616e63652c207468697320636f696e2069732073657420746f20626c6f772074686520726f6f66206f66662120f09f9283f09f92a3f09f9a80", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732924548474.gif")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<JINX>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<JINX>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

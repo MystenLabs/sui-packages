@@ -1,0 +1,14 @@
+module 0xf1309c4f70242058612da3c1f0e85504f80c622d2d1b557e652c9ed3091837e3::kpl {
+    struct KPL has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: KPL, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<KPL>(arg0, 6, b"KPL", b"Kupal Coin", x"4b7570616c20436f696e20284b5043293a2054686520756c74696d617465206d656d6520636f696e20666f722074686f73652077686f20746872697665206f6e2062616e74657220616e6420646f6e27742074616b65206c69666520746f6f20736572696f75736c7921204b7570616c20436f696e206973206865726520746f207265766f6c7574696f6e697a652074686520776f726c64206f662063727970746f20776974682069747320756e61706f6c6f67657469632068756d6f7220616e6420636861726d2e0a0a205461676c696e653a20426177616c2070696b6f6e2c20626177616c20736572796f736fe280944b7570616c206c616e67", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732841669323.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<KPL>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<KPL>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

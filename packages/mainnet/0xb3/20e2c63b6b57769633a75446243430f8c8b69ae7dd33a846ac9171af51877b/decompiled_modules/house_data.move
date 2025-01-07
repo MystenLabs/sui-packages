@@ -1,0 +1,114 @@
+module 0xb320e2c63b6b57769633a75446243430f8c8b69ae7dd33a846ac9171af51877b::house_data {
+    struct HouseData has key {
+        id: 0x2::object::UID,
+        balance: 0x2::balance::Balance<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>,
+        house: address,
+        public_key: vector<u8>,
+        max_stake: u64,
+        min_stake: u64,
+        fees: 0x2::balance::Balance<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>,
+        base_fee_in_bp: u16,
+    }
+
+    struct HouseCap has key {
+        id: 0x2::object::UID,
+    }
+
+    struct HOUSE_DATA has drop {
+        dummy_field: bool,
+    }
+
+    public(friend) fun borrow(arg0: &HouseData) : &0x2::object::UID {
+        &arg0.id
+    }
+
+    public(friend) fun borrow_mut(arg0: &mut HouseData) : &mut 0x2::object::UID {
+        &mut arg0.id
+    }
+
+    public fun balance(arg0: &HouseData) : u64 {
+        0x2::balance::value<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>(&arg0.balance)
+    }
+
+    public fun base_fee_in_bp(arg0: &HouseData) : u16 {
+        arg0.base_fee_in_bp
+    }
+
+    public(friend) fun borrow_balance_mut(arg0: &mut HouseData) : &mut 0x2::balance::Balance<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN> {
+        &mut arg0.balance
+    }
+
+    public(friend) fun borrow_fees_mut(arg0: &mut HouseData) : &mut 0x2::balance::Balance<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN> {
+        &mut arg0.fees
+    }
+
+    public fun claim_fees(arg0: &mut HouseData, arg1: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg1) == house(arg0), 0);
+        0x2::transfer::public_transfer<0x2::coin::Coin<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>>(0x2::coin::take<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>(&mut arg0.fees, fees(arg0), arg1), house(arg0));
+    }
+
+    public fun fees(arg0: &HouseData) : u64 {
+        0x2::balance::value<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>(&arg0.fees)
+    }
+
+    public fun house(arg0: &HouseData) : address {
+        arg0.house
+    }
+
+    fun init(arg0: HOUSE_DATA, arg1: &mut 0x2::tx_context::TxContext) {
+        0x2::package::claim_and_keep<HOUSE_DATA>(arg0, arg1);
+        let v0 = HouseCap{id: 0x2::object::new(arg1)};
+        0x2::transfer::transfer<HouseCap>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    public fun initialize_house_data(arg0: HouseCap, arg1: 0x2::coin::Coin<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>, arg2: vector<u8>, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::coin::value<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>(&arg1) > 0, 1);
+        let v0 = HouseData{
+            id             : 0x2::object::new(arg3),
+            balance        : 0x2::coin::into_balance<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>(arg1),
+            house          : 0x2::tx_context::sender(arg3),
+            public_key     : arg2,
+            max_stake      : 50000000000,
+            min_stake      : 1000000000,
+            fees           : 0x2::balance::zero<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>(),
+            base_fee_in_bp : 100,
+        };
+        let HouseCap { id: v1 } = arg0;
+        0x2::object::delete(v1);
+        0x2::transfer::share_object<HouseData>(v0);
+    }
+
+    public fun max_stake(arg0: &HouseData) : u64 {
+        arg0.max_stake
+    }
+
+    public fun min_stake(arg0: &HouseData) : u64 {
+        arg0.min_stake
+    }
+
+    public fun public_key(arg0: &HouseData) : vector<u8> {
+        arg0.public_key
+    }
+
+    public fun top_up(arg0: &mut HouseData, arg1: 0x2::coin::Coin<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>, arg2: &mut 0x2::tx_context::TxContext) {
+        0x2::coin::put<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>(&mut arg0.balance, arg1);
+    }
+
+    public fun update_max_stake(arg0: &mut HouseData, arg1: u64, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg2) == house(arg0), 0);
+        arg0.max_stake = arg1;
+    }
+
+    public fun update_min_stake(arg0: &mut HouseData, arg1: u64, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg2) == house(arg0), 0);
+        arg0.min_stake = arg1;
+    }
+
+    public fun withdraw(arg0: &mut HouseData, arg1: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg1) == house(arg0), 0);
+        0x2::transfer::public_transfer<0x2::coin::Coin<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>>(0x2::coin::take<0xde58bd8642d18edc4b8ae5eb22f2f50bd88fb0edf4da7ef0326a0aacb81ca043::faucetucoin::FAUCETUCOIN>(&mut arg0.balance, balance(arg0), arg1), house(arg0));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

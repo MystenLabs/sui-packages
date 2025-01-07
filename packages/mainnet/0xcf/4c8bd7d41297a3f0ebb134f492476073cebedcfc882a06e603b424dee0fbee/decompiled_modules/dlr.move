@@ -1,0 +1,14 @@
+module 0xcf4c8bd7d41297a3f0ebb134f492476073cebedcfc882a06e603b424dee0fbee::dlr {
+    struct DLR has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: DLR, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<DLR>(arg0, 6, b"DLR", b"Dilerium", x"44696c657269756d2028444c522920697320612066756e2c20636f6d6d756e6974792d64726976656e206d656d6520636f696e206275696c74206f6e20746865206661737420616e64206c6f772d636f737420537569204e6574776f726b2e204372656174656420666f72206c617567687320616e64206761696e732c20444c52206f6666657273206c696768746e696e672d66617374207472616e73616374696f6e7320616e642061206465666c6174696f6e61727920737570706c792c206d616b696e67206974206120756e69717565206d656d6520636f696e20657870657269656e63652077697468696e207468652063727970746f2073706163652e0a0a0a0a0a0a0a0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/1000000643_4055e15022.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<DLR>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<DLR>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

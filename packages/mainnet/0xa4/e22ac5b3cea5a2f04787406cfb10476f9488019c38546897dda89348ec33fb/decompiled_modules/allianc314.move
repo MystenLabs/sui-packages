@@ -1,0 +1,14 @@
+module 0xa4e22ac5b3cea5a2f04787406cfb10476f9488019c38546897dda89348ec33fb::allianc314 {
+    struct ALLIANC314 has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ALLIANC314, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ALLIANC314>(arg0, 6, b"Allianc314", b"314", x"486920436f696e626173652c20776520736565206974206e6f7720212040636f696e62617365200a546869732069732077686174207765277665206265656e20776f726b696e67206f6e20616c6c20616c6f6e672e200a4e6f6e65206f66207468697320697320696d706f737369626c657768657468657220697427732070726f6d6f74696e67206e6577207472616e73616374696f6e206d6f64656c73206f72206465706c6f79696e672063726f73732d636861696e20736f6c7574696f6e732c207765277665206e657665722073746f70706564206d6f76696e6720666f72776172642e0a0a57696c6c20796f752068656c7020757320213f20", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/IMG_0239_a87ecae204.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ALLIANC314>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<ALLIANC314>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

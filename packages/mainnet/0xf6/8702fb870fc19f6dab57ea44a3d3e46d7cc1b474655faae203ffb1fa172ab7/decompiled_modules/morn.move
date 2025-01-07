@@ -1,0 +1,22 @@
+module 0xf68702fb870fc19f6dab57ea44a3d3e46d7cc1b474655faae203ffb1fa172ab7::morn {
+    struct MORN has drop {
+        dummy_field: bool,
+    }
+
+    public entry fun burn(arg0: &mut 0x2::coin::TreasuryCap<MORN>, arg1: 0x2::coin::Coin<MORN>) {
+        0x2::coin::burn<MORN>(arg0, arg1);
+    }
+
+    public entry fun mint(arg0: &mut 0x2::coin::TreasuryCap<MORN>, arg1: u64, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x2::coin::Coin<MORN>>(0x2::coin::mint<MORN>(arg0, arg1, arg3), arg2);
+    }
+
+    fun init(arg0: MORN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MORN>(arg0, 9, b"morn", b"MORN", b"test", 0x1::option::none<0x2::url::Url>(), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<MORN>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MORN>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,15 @@
+module 0xa3327db1d97b439ca85dfee9b7019230ba2ee5c0add1829495b91e777d34934c::alp {
+    struct ALP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ALP, arg1: &mut 0x2::tx_context::TxContext) {
+        0xa3327db1d97b439ca85dfee9b7019230ba2ee5c0add1829495b91e777d34934c::admin::create_admin_cap(arg1);
+        let (v0, v1) = 0x2::coin::create_currency<ALP>(arg0, 6, b"ALP", b"ABEx LP Token", b"LP Token for ABEx Market", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://arweave.net/_doZFc5BTE7z9RXATSRI0yN5tUC69jZqwoLflk2vQu8")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<ALP>>(v1);
+        0xa3327db1d97b439ca85dfee9b7019230ba2ee5c0add1829495b91e777d34934c::market::create_market<ALP>(0x2::coin::treasury_into_supply<ALP>(v0), 0xa3327db1d97b439ca85dfee9b7019230ba2ee5c0add1829495b91e777d34934c::rate::from_percent(5), arg1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

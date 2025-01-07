@@ -1,0 +1,15 @@
+module 0xf2f0c832a660da865241f928f437b547beb6bee594f8559ff2326dd0b5975a60::aiplu {
+    struct AIPLU has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: AIPLU, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let (v1, v2) = 0x2::coin::create_currency<AIPLU>(arg0, 6, b"AIPLU", b"Plurality Community AI", b"The future of.collaborative technology.and democracy..https://vitalik.eth.limo/general/2024/08/21/plurality.html..https://youtu.be/kQJs58AoQO8?si=QAoyHt14ACt58pFi", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.suiai.fun/uploads/Plurality_png_cd74ed7d89.PNG")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<AIPLU>>(v2, v0);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<AIPLU>>(v1, v0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

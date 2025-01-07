@@ -1,0 +1,14 @@
+module 0xbbd82b09083e17bb7c5f6cf986b47ca3305cc4f2b9a6093bbe542c661c70b719::csm {
+    struct CSM has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CSM, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CSM>(arg0, 6, b"CSM", b"Chicken Supreme", x"f09f9094f09f9a80205448452053555052454d4520434849434b454e20495320484552452120f09f9a80f09f90940a54686520636869636b656e732061726520726561647920746f2074616b65206f7665722074686520776f726c6421204a6f696e207468652053757072656d6520436869636b656e207265766f6c7574696f6e20616e642062652070617274206f6620746865207374726f6e676573742c206d6f737420666c61766f7266756c2063727970746f2061726d792065766572212047657420796f757220746f6b656e73206e6f7720616e642068656c7020757320646f6d696e617465207468652063727970746f20776f726c6421", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732059097725.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<CSM>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CSM>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

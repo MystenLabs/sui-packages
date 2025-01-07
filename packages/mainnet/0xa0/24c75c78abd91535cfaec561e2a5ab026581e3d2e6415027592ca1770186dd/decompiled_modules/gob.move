@@ -1,0 +1,14 @@
+module 0xa024c75c78abd91535cfaec561e2a5ab026581e3d2e6415027592ca1770186dd::gob {
+    struct GOB has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GOB, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GOB>(arg0, 6, b"GOB", b"gobba", b"Are you based", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/proof_of_based_60860b8fb8.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GOB>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<GOB>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

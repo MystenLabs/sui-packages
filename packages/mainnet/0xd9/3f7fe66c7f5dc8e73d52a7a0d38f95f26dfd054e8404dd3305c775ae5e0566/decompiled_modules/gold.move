@@ -1,0 +1,14 @@
+module 0xd93f7fe66c7f5dc8e73d52a7a0d38f95f26dfd054e8404dd3305c775ae5e0566::gold {
+    struct GOLD has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GOLD, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GOLD>(arg0, 6, b"GOLD", b"Goldfish", x"476f6c646669736820546f6b656e206f6e207468652053756920626c6f636b636861696e2069732061206d656d6520746f6b656e2074686174206272696e67732066756e20746f2063727970746f20776974682069747320e2809c73686f7274206d656d6f7279e2809d207468656d652e20466561747572696e67204669736820426f776c207374616b696e672c2072616e646f6d20726577617264732c20616e6420636f6c6c65637469626c6520676f6c64656e2066697368204e4654732c206974e2809973207065726665637420666f72206c69676874686561727465642074726164657273206c6f6f6b696e6720746f207377696d20696e205375692e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1731521584569.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<GOLD>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GOLD>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

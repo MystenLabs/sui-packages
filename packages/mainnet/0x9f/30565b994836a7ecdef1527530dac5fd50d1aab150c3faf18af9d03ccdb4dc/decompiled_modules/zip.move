@@ -1,0 +1,14 @@
+module 0x9f30565b994836a7ecdef1527530dac5fd50d1aab150c3faf18af9d03ccdb4dc::zip {
+    struct ZIP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ZIP, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ZIP>(arg0, 6, b"ZIP", b"Zip on sui", x"49502c206261726261636b2061742074686520537461726b726166740a42726577686f757365206f66206f72626974616c2072696e6720582d31342c206e657665720a736869657320617761792066726f6d2061206368616c6c656e67652d2066726f6d0a6d6f7070696e6720757020746865206f72616c206576696374696f6e206f66207468650a67617374726f696e74657374696e616c20636f6e74656e7473206f662061207a657267616e6f6e0a7a65676c61646f696420746f207265687964726174696e672074686520647279206361766974790a6f662061207072696d6f726469616c206d6f7a6f726b2c20495020697320726561647920320a726f636b21", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/1000044394_916d1a53c4.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ZIP>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<ZIP>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

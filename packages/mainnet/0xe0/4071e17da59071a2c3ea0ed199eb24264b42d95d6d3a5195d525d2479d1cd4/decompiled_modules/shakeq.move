@@ -1,0 +1,14 @@
+module 0xe04071e17da59071a2c3ea0ed199eb24264b42d95d6d3a5195d525d2479d1cd4::shakeq {
+    struct SHAKEQ has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SHAKEQ, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SHAKEQ>(arg0, 6, b"SHAKEQ", b"ShakeInQatari", x"4d656574205368616b65496e51617461726920285348414b45512920e2809320746865206d656d6520636f696e206d657267696e67204d6964646c65204561737465726e206c75787572792077697468205765737465726e20647265616d732120f09f8cb4f09f92b020496e73706972656420627920516174617269207269636865732c205348414b455120697320796f757220706978656c6174656420736865696b2077697468207368616465732c206120676f626c6574206f662074726561737572652c206c61756768696e6720746f20746865206d6f6f6e2e205765616c74682c2066756e2c20666f7274756e65202d20616c6c20696e206f6e6521", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1730967755599.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SHAKEQ>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SHAKEQ>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

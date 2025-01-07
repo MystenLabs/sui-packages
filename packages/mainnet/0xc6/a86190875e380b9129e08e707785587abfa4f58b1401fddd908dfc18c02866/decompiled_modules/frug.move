@@ -1,0 +1,16 @@
+module 0xc6a86190875e380b9129e08e707785587abfa4f58b1401fddd908dfc18c02866::frug {
+    struct FRUG has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: FRUG, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<FRUG>(arg0, 8, b"FRUG", b"Frug", x"46525547207374616e647320666f7220e280984640244b20525547532ee2809920426f726e2066726f6d20746865206672757374726174696f6e206f6620636f6e7374616e74207275672070756c6c732c204652554720656d626f64696573207468652077656172696e65737320616e6420726573696c69656e6365206f662074686f7365207469726564206f66206265696e67207363616d6d65642e20496e737069726564206279204c757263682066726f6d2074686520416464616d732046616d696c792c2046525547206973206c6169642d6261636b2c20656d6f74696f6e6c6573732c20616e6420696e646966666572656e74202d20612066726f672074686174e2809973207365656e20697420616c6c2026206a757374206b6565707320676f696e672e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://dd.dexscreener.com/ds-data/tokens/solana/GmTH6V13rHVXeNdmDfh7VQeS2Lj9YWRKT5XjDEA2pump.png?size=lg&key=c10ab6")), arg1);
+        let v2 = v0;
+        0x2::coin::mint_and_transfer<FRUG>(&mut v2, 500000000000000000, 0x2::tx_context::sender(arg1), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<FRUG>>(v2, @0x0);
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<FRUG>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
