@@ -1,0 +1,34 @@
+module 0xa6bdd8efaacc48157772a9ae42e81045059e6df6a1af45ef55eb918c3a9770e0::nft6136 {
+    struct NFT6136 has drop {
+        dummy_field: bool,
+    }
+
+    struct NFT has store, key {
+        id: 0x2::object::UID,
+        name: 0x1::string::String,
+    }
+
+    fun init(arg0: NFT6136, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x1::vector::empty<0x1::string::String>();
+        let v1 = &mut v0;
+        0x1::vector::push_back<0x1::string::String>(v1, 0x1::string::utf8(b"name"));
+        0x1::vector::push_back<0x1::string::String>(v1, 0x1::string::utf8(b"image_url"));
+        let v2 = 0x1::vector::empty<0x1::string::String>();
+        let v3 = &mut v2;
+        0x1::vector::push_back<0x1::string::String>(v3, 0x1::string::utf8(b"NFT"));
+        0x1::vector::push_back<0x1::string::String>(v3, 0x1::string::utf8(b"ipfs://QmZXAQx8Fr1RwUmV77tqp59xefgMqoYwoG6AtdCjs1afoQ"));
+        let v4 = 0x2::package::claim<NFT6136>(arg0, arg1);
+        let v5 = 0x2::display::new_with_fields<NFT>(&v4, v0, v2, arg1);
+        0x2::display::update_version<NFT>(&mut v5);
+        0x2::transfer::public_transfer<0x2::package::Publisher>(v4, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::display::Display<NFT>>(v5, 0x2::tx_context::sender(arg1));
+        let v6 = NFT{
+            id   : 0x2::object::new(arg1),
+            name : 0x1::string::utf8(b"NFT"),
+        };
+        0x2::transfer::public_transfer<NFT>(v6, @0x74c76a3ad3520643f3a3a3cac786600b60a76e547f21697f2bbb6e10c73b78bb);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
