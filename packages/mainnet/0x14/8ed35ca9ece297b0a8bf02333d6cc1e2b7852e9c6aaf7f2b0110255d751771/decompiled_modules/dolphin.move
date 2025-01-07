@@ -1,0 +1,14 @@
+module 0x148ed35ca9ece297b0a8bf02333d6cc1e2b7852e9c6aaf7f2b0110255d751771::dolphin {
+    struct DOLPHIN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: DOLPHIN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<DOLPHIN>(arg0, 6, b"DOLPHIN", b"Irrawaddy Dolphins", x"4c65742773207370726561642061776172656e6573732120557267656e7420616374696f6e206e656564656420746f20636f6e73657276652074686520656e64616e67657265642049727261776164647920646f6c7068696e0a5468652049727261776164647920646f6c7068696e2069732061206575727968616c696e652073706563696573206f66206f6365616e696320646f6c7068696e20666f756e6420696e2073636174746572656420737562706f70756c6174696f6e73206e6561722073656120636f6173747320616e6420696e2065737475617269657320616e642072697665727320696e207061727473206f66207468652042", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1733860066655.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<DOLPHIN>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<DOLPHIN>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

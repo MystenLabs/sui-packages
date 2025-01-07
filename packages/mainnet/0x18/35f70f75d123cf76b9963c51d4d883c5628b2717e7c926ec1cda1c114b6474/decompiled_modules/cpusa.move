@@ -1,0 +1,14 @@
+module 0x1835f70f75d123cf76b9963c51d4d883c5628b2717e7c926ec1cda1c114b6474::cpusa {
+    struct CPUSA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CPUSA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CPUSA>(arg0, 6, b"CPUSA", b"Communist Party USA", x"466f756e64656420696e20313931392c2074686520436f6d6d756e6973742050617274792055534120686173206368616d70696f6e656420746865207374727567676c657320666f722064656d6f63726163792c206c61626f72207269676874732c20776f6d656ee280997320657175616c6974792c2072616369616c206a75737469636520616e6420706561636520666f72203130302079656172732e205468697320746f6b656e206d65616e73207468617420796f75206964656e74696679207769746820746865206964656173206f6620636f6d6d756e69736d20616e6420776f726b20746f67657468657220666f72204d4147412e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1731731777103.jpeg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<CPUSA>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CPUSA>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

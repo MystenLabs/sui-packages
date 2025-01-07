@@ -1,0 +1,14 @@
+module 0x1b5bf4b667de082fda3c77219cb8b5ab861e182281e81d3335fb0be5e325a738::mememe {
+    struct MEMEME has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MEMEME, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MEMEME>(arg0, 6, b"MEMEME", b"Meme & Me", x"496e206120776f726c642077686572652066616b65206e6577732073707265616473206c696b652077696c64666972652c207765e280997265206f6e2061206d697373696f6e20746f207370726561642074686520747275746820e280932061626f75742074686520616d617a696e67204d654d6573202620416c7420436f696e732077686f20617265206368616e67696e67207468652063727970746f2067616d6520f09f9a802e204d656574204d654d652054562c20746865206e6574776f726b2074686174e28099732064656469636174656420746f2070726f6d6f74696e6720746865206c617465737420696e2063727970746f2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1731686418220.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<MEMEME>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MEMEME>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

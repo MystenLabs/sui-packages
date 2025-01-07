@@ -1,0 +1,14 @@
+module 0x1e4a800ef0be7f452c8431c2803c880f5dc12b433b5a4ec1d120026e537debb5::goat {
+    struct GOAT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GOAT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GOAT>(arg0, 6, b"GOAT", b"Goatseus Maximus", b"Goatseus Maximus will fulfill the prophecies of the ancient memeers On Sui ", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Free_Simple_Modern_Circle_Design_Studio_Logo_200_x_200_px_98a4b5c2eb.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GOAT>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<GOAT>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

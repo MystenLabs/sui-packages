@@ -1,0 +1,86 @@
+module 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::scallop {
+    public fun deposit<T0>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg1: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg2: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg3: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg4: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) : vector<u64> {
+        let (v0, v1) = 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::withdraw_for_lending<T0>(arg0);
+        let v2 = v1;
+        let v3 = v0;
+        if (0x2::balance::value<T0>(&v3) == 0) {
+            0x2::balance::destroy_zero<T0>(v3);
+            return vector[0, 0, 0]
+        };
+        let v4 = 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::mint::mint<T0>(arg1, arg2, 0x2::coin::from_balance<T0>(v3, arg6), arg5, arg6);
+        0x1::vector::push_back<u64>(&mut v2, 0x2::coin::value<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(&v4));
+        0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::user::stake<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(arg3, arg4, v4, arg5, arg6);
+        v2
+    }
+
+    public fun deposit_basic_lending<T0>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg1: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg2: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg3: &0x2::clock::Clock, arg4: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, vector<u64>) {
+        let (v0, v1) = 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::withdraw_for_lending<T0>(arg0);
+        let v2 = v1;
+        let v3 = v0;
+        if (0x2::balance::value<T0>(&v3) == 0) {
+            0x2::balance::destroy_zero<T0>(v3);
+            return (0x2::coin::zero<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(arg4), vector[0, 0, 0])
+        };
+        let v4 = 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::mint::mint<T0>(arg1, arg2, 0x2::coin::from_balance<T0>(v3, arg4), arg3, arg4);
+        0x1::vector::push_back<u64>(&mut v2, 0x2::coin::value<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(&v4));
+        (v4, v2)
+    }
+
+    public fun new_spool_account<T0>(arg0: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg1: &0x2::clock::Clock, arg2: &mut 0x2::tx_context::TxContext) : 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>> {
+        0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::user::new_spool_account<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(arg0, arg1, arg2)
+    }
+
+    public fun withdraw<T0, T1>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::balance_pool::BalancePool, arg1: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg2: &mut 0x2::balance::Balance<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg6: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::rewards_pool::RewardsPool<T1>, arg7: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg8: bool, arg9: &0x2::clock::Clock, arg10: &mut 0x2::tx_context::TxContext) : vector<u64> {
+        let v0 = 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::stake_amount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(arg7);
+        if (v0 == 0) {
+            return vector[0, 0, 0, 0, 0, 0, 0, 0]
+        };
+        0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::deposit_from_lending<T0, T1>(arg0, arg1, arg2, 0x2::coin::into_balance<T0>(0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::redeem::redeem<T0>(arg3, arg4, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::user::unstake<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(arg5, arg7, v0, arg9, arg10), arg9, arg10)), 0x2::coin::into_balance<T1>(0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::user::redeem_rewards<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>, T1>(arg5, arg6, arg7, arg9, arg10)), arg8)
+    }
+
+    public fun withdraw_additional_lending<T0, T1>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::balance_pool::BalancePool, arg1: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg2: &mut 0x2::balance::Balance<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg6: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::rewards_pool::RewardsPool<T1>, arg7: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg8: &0x2::clock::Clock, arg9: &mut 0x2::tx_context::TxContext) : vector<u64> {
+        0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::deprecated();
+        abort 0
+    }
+
+    public fun withdraw_basic_lending<T0>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::balance_pool::BalancePool, arg1: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg2: &mut 0x2::balance::Balance<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: 0x2::coin::Coin<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) : vector<u64> {
+        0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::deprecated();
+        abort 0
+    }
+
+    public fun withdraw_basic_lending_v2<T0>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::balance_pool::BalancePool, arg1: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg2: &mut 0x2::balance::Balance<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: 0x2::coin::Coin<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg6: bool, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) : vector<u64> {
+        if (0x2::coin::value<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(&arg5) == 0) {
+            0x2::coin::destroy_zero<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(arg5);
+            return vector[0, 0, 0, 0, 0, 0, 0, 0]
+        };
+        0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::deposit_from_lending<T0, T0>(arg0, arg1, arg2, 0x2::coin::into_balance<T0>(0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::redeem::redeem<T0>(arg3, arg4, arg5, arg7, arg8)), 0x2::balance::zero<T0>(), arg6)
+    }
+
+    public fun withdraw_basic_lending_xy<T0>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::balance_pool::BalancePool, arg1: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg2: &mut 0x2::balance::Balance<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: 0x2::coin::Coin<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) : vector<u64> {
+        0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::deprecated();
+        abort 0
+    }
+
+    public fun withdraw_xxx<T0>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::balance_pool::BalancePool, arg1: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg2: &mut 0x2::balance::Balance<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg6: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::rewards_pool::RewardsPool<T0>, arg7: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg8: &0x2::clock::Clock, arg9: &mut 0x2::tx_context::TxContext) : vector<u64> {
+        0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::deprecated();
+        abort 0
+    }
+
+    public fun withdraw_xyx<T0>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::balance_pool::BalancePool, arg1: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg2: &mut 0x2::balance::Balance<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg6: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::rewards_pool::RewardsPool<T0>, arg7: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg8: &0x2::clock::Clock, arg9: &mut 0x2::tx_context::TxContext) : vector<u64> {
+        0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::deprecated();
+        abort 0
+    }
+
+    public fun withdraw_xyy<T0, T1>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::balance_pool::BalancePool, arg1: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg2: &mut 0x2::balance::Balance<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg6: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::rewards_pool::RewardsPool<T1>, arg7: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg8: &0x2::clock::Clock, arg9: &mut 0x2::tx_context::TxContext) : vector<u64> {
+        0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::deprecated();
+        abort 0
+    }
+
+    public fun withdraw_xyz<T0, T1>(arg0: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::balance_pool::BalancePool, arg1: &mut 0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::DepositVault, arg2: &mut 0x2::balance::Balance<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg6: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::rewards_pool::RewardsPool<T1>, arg7: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg8: &0x2::clock::Clock, arg9: &mut 0x2::tx_context::TxContext) : vector<u64> {
+        0x8b3ec6814a0613c96fd35931dad7f6bc380e5de89e7a66691852fe8f10b9387::vault::deprecated();
+        abort 0
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0x17675f5659a1b354afbeba34c69bbf3c881db455c69a4d2122d7d704eb909087::StarterPack3 {
+    struct STARTERPACK3 has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: STARTERPACK3, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<STARTERPACK3>(arg0, 0, b"PACK", b"Starter Pack 3", b"Dress up your Aurahma with Trait Packs, the perfect way to create your very own unique combination! With randomly generated traits of varying rarities, you can craft, trade and merge your way to creating a look that stands out!  This pack contains 3 random Traits. Rarity distribution: 97% Common, 2.5% Uncommon, 0.5% Rare.", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://aurahma-canvas-test-bucket.s3.eu-west-3.amazonaws.com/packs/Common_Trait_Pack_LVL_1.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<STARTERPACK3>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<STARTERPACK3>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

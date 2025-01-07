@@ -1,0 +1,22 @@
+module 0x160478a5970369bf3dc1d75cee94cf6f37f640ea8794cd0a8cdc4ac7c1f8a7f2::ADC {
+    struct ADC has drop {
+        dummy_field: bool,
+    }
+
+    public entry fun burn(arg0: &mut 0x2::coin::TreasuryCap<ADC>, arg1: 0x2::coin::Coin<ADC>) {
+        0x2::coin::burn<ADC>(arg0, arg1);
+    }
+
+    fun init(arg0: ADC, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ADC>(arg0, 9, b"ADC", b"ADC", b"ADC Coin", 0x1::option::none<0x2::url::Url>(), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ADC>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<ADC>>(v1);
+    }
+
+    public entry fun mint(arg0: &mut 0x2::coin::TreasuryCap<ADC>, arg1: u64, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::coin::mint_and_transfer<ADC>(arg0, arg1, arg2, arg3);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

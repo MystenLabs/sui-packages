@@ -1,0 +1,14 @@
+module 0x1f72696348824c4614137b590fca8340cae10f34cf66a1490e70ac331beeabb3::nye {
+    struct NYE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: NYE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<NYE>(arg0, 6, b"NYE", b"SUI NEW YEARS EVE!", x"4e59452073796d626f6c697a657320626f6c642063686f6963657320616e64207468652070726f6d697365206f66207472616e73666f726d6174696f6e2e204d6f7265207468616e206a75737420612063727970746f63757272656e63792c206974e28099732061206d6f76656d656e7420666f722074686f736520636f6d6d697474656420746f206c6f6e672d7465726d20766973696f6ee28094686f6c64696e6720737465616479207468726f7567682074686520686967687320616e64206c6f7773206f6620746865206d61726b65742c206d756368206c696b652074686520737069726974206f66206120667265736820737461727421", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1735088800456.PNG")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<NYE>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<NYE>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

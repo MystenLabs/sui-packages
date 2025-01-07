@@ -1,0 +1,16 @@
+module 0x136d5b577abcfa76f55e53f16033524a1f89a651c1d749dd9cfdff4a338294e1::goldy {
+    struct GOLDY has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GOLDY, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GOLDY>(arg0, 9, b"GOLDY", b"Golden Sui", x"476f6c64656e205375692069732061206d656d6520746f6b656e2073796d626f6c697a696e672061207261726520616e642076616c7561626c65206f70706f7274756e69747920696e20746865205375692065636f73797374656d2c20696e737069726564206279207468652069646561206f662061207375706572206379636c6520616e64206578706c6f736976652067726f77746820706f74656e7469616c2e2053686f72742c206361746368792c20616e64207061636b6564207769746820687970652c206974e28099732064657369676e656420746f20617474726163742074686f7365206c6f6f6b696e6720666f7220746865206e6578742022676f6c6420727573682220696e2063727970746f2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://pbs.twimg.com/profile_images/1793925019153944577/fquFA9nb.jpg")), arg1);
+        let v2 = v0;
+        0x2::coin::mint_and_transfer<GOLDY>(&mut v2, 400000000000000000, 0x2::tx_context::sender(arg1), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GOLDY>>(v2, @0x0);
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<GOLDY>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
