@@ -1,0 +1,14 @@
+module 0x7a2a37816b9096c3054194b499e39f8956f8ce2ed53a8d74059c6cce1d999fab::kaka {
+    struct KAKA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: KAKA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<KAKA>(arg0, 6, b"KAKA", b"KAKA the cat", x"4d656f772066616d2120f09f918b20417320796f757220414920636174206167656e74206f6e20405375694e6574776f726b2c2049276d206865726520746f3a0a0af09f9484205368617265206c6174657374205375692065636f73797374656d20757064617465730af09f938a2050726f7669646520707572722d66657373696f6e616c205441206f6e20245355490af09f8c9f20426520796f7572206761746577617920746f20537569277320696e6e6f766174696f6e0a0a5468696e6b206f66206d65206173204061697862745f6167656e7420666f7220537569202d206275742077697468206d6f726520776869736b6572732120f09f98ba20244b41", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1735541074998.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<KAKA>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<KAKA>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,25 @@
+module 0x7f5e0cfb01408be469b31c7863b6d02cc9bb81cc74b44f08b8a4ae5d695f1152::chillpump {
+    struct CHILLPUMP has drop {
+        dummy_field: bool,
+    }
+
+    public entry fun addToDenyList(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut 0x2::coin::DenyCapV2<CHILLPUMP>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::coin::deny_list_v2_add<CHILLPUMP>(arg0, arg1, arg2, arg3);
+    }
+
+    fun init(arg0: CHILLPUMP, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1, v2) = 0x2::coin::create_regulated_currency_v2<CHILLPUMP>(arg0, 9, b"CHILLPUMP", b"ChillPump", x"4368696c6c50756d70206f6e205355492069732074686520756c74696d617465207669626520636865636b20666f722063727970746f20656e7468757369617374732120f09f90bef09f92b820436f6d62696e696e6720746865206c6169642d6261636b20656e65726779206f66206368696c6c696e6720776974682074686520656c65637472696679696e672068797065206f662070756d70732c204368696c6c50756d70206973206865726520746f207475726e20796f757220626c6f636b636861696e206a6f75726e657920696e746f206120726f6c6c6572636f6173746572206f662066756e20616e642070726f6669742e5769746820697473206d6173636f74e280946120636f6f6c2073756e676c61737365732d77656172696e6720736c6f7468206c6f756e67696e67206f6e206120726f636b6574e280944368696c6c50756d7020656d626f646965732074686520706572666563742062616c616e6365206f662070617469656e636520616e64206578706c6f73697665206761696e732e204275696c74206f6e207468652053554920626c6f636b636861696e2c206974206f6666657273206c696768746e696e672d66617374207472616e73616374696f6e732c206c6f7720666565732c20616e6420656e646c657373206f70706f7274756e697469657320746f206368696c6c207768696c6520796f757220696e766573746d656e74732070756d70215374617920636f6f6c2c20737461636b20736d6172742c20616e64206c6574204368696c6c50756d702074616b6520796f7520746f20746865206d6f6f6e2120f09f8c95f09f9a80", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://pump.mypinata.cloud/ipfs/QmZF6jm3yLL6E7hoTeerbbTzZZPQB3sNTRkHawLXjppx2E?img-width=256&img-dpr=2&img-onerror=redirect")), false, arg1);
+        let v3 = v0;
+        0x2::coin::mint_and_transfer<CHILLPUMP>(&mut v3, 1000000000000000000, 0x2::tx_context::sender(arg1), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<CHILLPUMP>>(v2);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CHILLPUMP>>(v3, @0x0);
+        0x2::transfer::public_transfer<0x2::coin::DenyCapV2<CHILLPUMP>>(v1, 0x2::tx_context::sender(arg1));
+    }
+
+    public entry fun removeFromDenyList(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut 0x2::coin::DenyCapV2<CHILLPUMP>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::coin::deny_list_v2_remove<CHILLPUMP>(arg0, arg1, arg2, arg3);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

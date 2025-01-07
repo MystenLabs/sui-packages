@@ -1,0 +1,14 @@
+module 0x74d1810a104cff44a1fc82ad7db391a11979f43f57ace96d2c59c5ef5c208b5f::suipepe {
+    struct SUIPEPE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUIPEPE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUIPEPE>(arg0, 6, b"SUIPEPE", b"buSUIness Pepe", x"48656c6c6f2065766572796f6e65210a0a496d2042755355496e65737320506570652c207468652073686172706573742066726f67206f6e2053756921202057697468206d7920737569742c207469652c20616e6420656e7472657072656e65757269616c207370697269742c20496d206865726520746f2073686f7720686f7720627573696e65737320616e642066756e2063616e2074687269766520746f67657468657220696e2074686520626c6f636b636861696e20776f726c642e204c65747320696e6e6f766174652c20636f6c6c61626f726174652c20616e64207375636365656421200a0a596f75727320696e20737563636573732c0a42755355496e6573732050657065", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/d366985c_06ac_4979_b0b8_2ad569c6a86f_a4ee7f32fe.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUIPEPE>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SUIPEPE>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

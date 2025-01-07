@@ -1,0 +1,14 @@
+module 0x78f16b2069fb70f01a69ce476eaa1df77a4147886f135a3cb5fea9b999a23518::spx6900 {
+    struct SPX6900 has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SPX6900, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SPX6900>(arg0, 6, b"SPX6900", b"SPX6900onSui", x"496e74726f647563696e6720535058363930303a2041207265766f6c7574696f6e617279206d656d65636f696e207468617427732074616b696e67207468652066696e616e6369616c20776f726c642062792073746f726d21200a0a3639303020747261646572732068617665206c61756e6368656420616e206175646163696f757320706c616e20746f207265706c616365207468652069636f6e6963205326502035303020776974682074686520616d626974696f757320535058363930302c2061696d696e6720666f722061206d61726b657420636170206f6620243639207472696c6c696f6e2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/spx6900on_Sui_Logo_8efe06b7b7.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SPX6900>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SPX6900>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

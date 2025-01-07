@@ -1,0 +1,14 @@
+module 0x7d7f9262343af47cd1746ad3f4b23cd3993b13e4fad06f472a5640d3f1f7fb0f::xeno {
+    struct XENO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: XENO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<XENO>(arg0, 6, b"XENO", b"XENOBOT", x"57656c636f6d6520746f2058454e4f2c2058454e4f424f540a737072656164696e67206a6f7920746f207468652074726164657273206f6620535549210a5769746820612068656172742066756c6c206f662063686565722c2058454e4f2069730a6865726520746f2067696674207265776172647320616e6420676f6f6420766962657320666f720a68697320686f6c646572732e2047657420726561647920666f722061206d6572727920616e640a6272696768742074726164696e6720657870657269656e63652061732058454e4f0a70756d7073206869732077617920696e746f20746865204e657720596561727321", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1735403712670.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<XENO>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<XENO>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

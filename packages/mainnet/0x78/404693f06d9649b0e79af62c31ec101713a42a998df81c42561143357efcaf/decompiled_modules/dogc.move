@@ -1,0 +1,14 @@
+module 0x78404693f06d9649b0e79af62c31ec101713a42a998df81c42561143357efcaf::dogc {
+    struct DOGC has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: DOGC, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<DOGC>(arg0, 9, b"DOGC", b"COLDOG", x"5775726d70204d656d6520436f696e20736f756e6473206c696b652061206a6f6b652062757420492063616ee28099742068656c70206265696e6720696e7465726573746564", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://file-walletapp.waveonsui.com/images/wave-pumps/a384196c-581d-4113-8717-a8b4111e2b36.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<DOGC>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<DOGC>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

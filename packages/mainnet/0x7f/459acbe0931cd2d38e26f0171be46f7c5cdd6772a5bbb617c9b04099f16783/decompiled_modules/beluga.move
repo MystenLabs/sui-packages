@@ -1,0 +1,14 @@
+module 0x7f459acbe0931cd2d38e26f0171be46f7c5cdd6772a5bbb617c9b04099f16783::beluga {
+    struct BELUGA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: BELUGA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<BELUGA>(arg0, 6, b"BELUGA", b"Beluga", b"$Beluga on SUI", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/4_2_c0688530c6.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<BELUGA>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<BELUGA>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

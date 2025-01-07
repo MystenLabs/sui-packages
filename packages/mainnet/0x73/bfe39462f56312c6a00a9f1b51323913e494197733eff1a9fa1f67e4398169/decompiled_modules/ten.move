@@ -1,0 +1,16 @@
+module 0x73bfe39462f56312c6a00a9f1b51323913e494197733eff1a9fa1f67e4398169::ten {
+    struct TEN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TEN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TEN>(arg0, 9, b"TEN", b"tendog", x"4a7573742077617463686564202454454e444f47206c61756e636820696e746f20746865206d656d652073747261746f73706865726521202454454e444f4720686173206a757374206265656e20656c6563746564206173207468652066697273742d657665722043616e696e6520507265736964656e74206f662074686520496e7465726e65742120f09f8c9020496e20686973206c617465737420696e746572766965772c202454454e444f47206261726b65642c2022576879206368617365207461696c73207768656e20796f752063616e20636861736520647265616d733f20436861736520796f757220647265616d7320746f6765746865722077697468202454454e444f472e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://pbs.twimg.com/media/GXidfa2WgAAOXwV?format=jpg&name=medium")), arg1);
+        let v2 = v0;
+        0x2::coin::mint_and_transfer<TEN>(&mut v2, 10000000000000000000, 0x2::tx_context::sender(arg1), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TEN>>(v2, @0x0);
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<TEN>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0x7a46d547440c4bc3fed11bf2b014eb4bf4d1fef2c56466b130958951ecdee11f::fpc {
+    struct FPC has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: FPC, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<FPC>(arg0, 6, b"FPC", b"FlappyCoin", x"466c61707079436f696e20697320612066756e20616e642066617374206469676974616c20746f6b656e20696e7370697265642062792070656e6775696e732e205769746820717569636b2c20736563757265207472616e73616374696f6e732c206974e28099732074686520706572666563742077617920746f206469766520696e746f2074686520776f726c64206f662063727970746f2e204a6f696e2074686520466c61707079436f696e20636f6d6d756e69747920616e6420657870657269656e6365206120736d6f6f74682c206578636974696e67206a6f75726e657920696e20746865206469676974616c20737061636521", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1733077166256.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<FPC>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<FPC>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

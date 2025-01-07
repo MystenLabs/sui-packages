@@ -1,0 +1,14 @@
+module 0x72532ee7e81f780856a8d6eb0fbc0e4fb88e37dc4ce8d2f4fe6574a4062e36a3::smyro {
+    struct SMYRO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SMYRO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SMYRO>(arg0, 6, b"SMYRO", b"SuiMyro", b"SuiMyro ($MYRO) is a community driven memecin inspired by solanas popularr myro token,with the goal of uniting sui ethusiast through fun, accessible and decentralised engagement . Rooted in a love for lighthearted internet culture, SuiMyro brings exclusive digital collectibles, community voting rights and a platform for meme sharing .With a focus on low fees and fast transactions on sui ,sui myro aims to become a staple for meme culture in the ecosystem", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/myrro_309bd40301.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SMYRO>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SMYRO>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

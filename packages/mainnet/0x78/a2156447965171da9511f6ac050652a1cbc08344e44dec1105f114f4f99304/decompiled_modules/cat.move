@@ -1,0 +1,14 @@
+module 0x78a2156447965171da9511f6ac050652a1cbc08344e44dec1105f114f4f99304::cat {
+    struct CAT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CAT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CAT>(arg0, 6, b"CAT", b"Suiyan Cat", x"5468652069636f6e6963206e79616e2063617420697320706f756e63696e672069747320776179206f6e205355492c2061206c6567656e64617279206d656d6520776974682061206c6567656e64617279206272616e64696e67200a0a4c6f6f6b206c6566742c207269676874206f7220696e20616e7920646972656374696f6e2c206275742074686973206361742077696c6c20736f6f6e206265206a756d70696e672066726f6e7420616e642063656e747265206f6620616c6c2065796573206f6e205375692e200a0a53756979616e204361742077696c6c2062652072756e6e696e67207468652073747265657473206f662053756921", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Screenshot_2024_10_23_013033_d756164f63.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CAT>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<CAT>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

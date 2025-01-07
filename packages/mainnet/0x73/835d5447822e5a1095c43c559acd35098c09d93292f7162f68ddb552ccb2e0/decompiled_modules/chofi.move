@@ -1,0 +1,14 @@
+module 0x73835d5447822e5a1095c43c559acd35098c09d93292f7162f68ddb552ccb2e0::chofi {
+    struct CHOFI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CHOFI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CHOFI>(arg0, 6, b"CHOFI", b"Choad fi", b"LoFi's Choad, its a movement", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Untitled_1_a873dd9905.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CHOFI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<CHOFI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
