@@ -1,0 +1,14 @@
+module 0x804e837adad23957d0cd0b3c4731fcf0fb837ab31964cb9b37426c61a5ab3e45::sb {
+    struct SB has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SB, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SB>(arg0, 6, b"SB", b"Shiny Bants", x"7368696e792062616e7473202d20245342202d2054686520467572736f6d61206f66205068696c69702042616e6b730a0a5342206973206120636861726163746572206372656174656420627920617274697374205068696c69702042616e6b732c206b6e6f776e20666f722068697320776f726b206f6e20224368696c6c204775792c2220776869636820696e7370697265642074686520746f6b656e2074686174206761696e6564207369676e69666963616e7420706f70756c61726974792e20534220697320646573637269626564206173205068696c697027732022667572736f6d6122", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732327086696.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SB>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SB>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

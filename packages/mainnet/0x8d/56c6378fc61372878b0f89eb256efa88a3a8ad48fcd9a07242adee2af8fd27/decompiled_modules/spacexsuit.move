@@ -1,0 +1,14 @@
+module 0x8d56c6378fc61372878b0f89eb256efa88a3a8ad48fcd9a07242adee2af8fd27::spacexsuit {
+    struct SPACEXSUIT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SPACEXSUIT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SPACEXSUIT>(arg0, 6, b"SPACExSUIT", b"SpaceX Suit", x"53706163655820535549542069732061206d656d6520636f696e2070726f6a6563742074686174206d657267657320746865206578636974656d656e74206f662063727970746f20776974682074686520746872696c6c206f66207370616365206578706c6f726174696f6e2e20496e73706972656420627920537061636558e28099732067726f756e64627265616b696e6720616368696576656d656e747320616e642074686520737069726974206f662074686520245355492063727970746f63757272656e637920636f6d6d756e6974792c20544849532049532054484154205349474e20594f55204152452057414954494e4720464f522e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1731243437508.jpeg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SPACEXSUIT>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SPACEXSUIT>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

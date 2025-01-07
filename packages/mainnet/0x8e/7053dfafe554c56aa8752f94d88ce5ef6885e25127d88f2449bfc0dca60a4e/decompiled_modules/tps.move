@@ -1,0 +1,14 @@
+module 0x8e7053dfafe554c56aa8752f94d88ce5ef6885e25127d88f2449bfc0dca60a4e::tps {
+    struct TPS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TPS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TPS>(arg0, 6, b"TPS", b"TrumpSUI", x"57656c636f6d6520746f207468652053756920446f6e616c64205472756d70204d656d6520546f6b656e2c20776865726520636f6c6f7373616c20647265616d7320616e64206576656e0a626967676572206d656d657320756e6974652120496e7370697265642062792074686520756e6d617463686564206368617269736d61206f6620446f6e616c64205472756d702c20776572650a6865726520746f206d616b652063727970746f20677265617420616761696e206f6e2074686520537569206e6574776f726b2e2047657420726561647920666f722070726f66697473206265796f6e640a796f75722077696c6465737420696d6167696e6174696f6e21", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/TTTT_be291520f7.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TPS>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<TPS>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

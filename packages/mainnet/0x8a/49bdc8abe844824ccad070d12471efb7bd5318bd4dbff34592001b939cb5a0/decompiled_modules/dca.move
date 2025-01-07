@@ -1,0 +1,446 @@
+module 0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::dca {
+    struct DCACap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct DCAReg has key {
+        id: 0x2::object::UID,
+        treasury: 0x2::bag::Bag,
+        fee_rate: u64,
+        total_vaults: 0x2::vec_set::VecSet<0x2::object::ID>,
+        vaults_of: 0x2::table::Table<address, 0x2::vec_set::VecSet<0x2::object::ID>>,
+    }
+
+    struct Escrow<phantom T0, phantom T1> has key {
+        id: 0x2::object::UID,
+        owner: address,
+        frequency: u64,
+        divided_amount: u64,
+        last_claimed: u64,
+        filled_orders: u64,
+        balance_x: 0x2::balance::Balance<T0>,
+        balance_y: 0x2::balance::Balance<T1>,
+        decimals_x: u8,
+        decimals_y: u8,
+        price_enabled: bool,
+        min_price: u128,
+        max_price: u128,
+        deposit_time: u64,
+        end_time: u64,
+        total_spent: u64,
+        total_withdrawn_amount: u64,
+    }
+
+    struct SwapReceipt<phantom T0, phantom T1> {
+        vault_id: 0x2::object::ID,
+        ts: u64,
+        spent: u64,
+        amount: u64,
+    }
+
+    public fun id<T0, T1>(arg0: &Escrow<T0, T1>) : 0x2::object::ID {
+        0x2::object::id<Escrow<T0, T1>>(arg0)
+    }
+
+    public(friend) fun add_filled_orders<T0, T1>(arg0: &mut Escrow<T0, T1>, arg1: u64) {
+        arg0.filled_orders = arg0.filled_orders + arg1;
+    }
+
+    fun add_new_vault_to_owner(arg0: &mut DCAReg, arg1: address, arg2: 0x2::object::ID) {
+        0x2::vec_set::insert<0x2::object::ID>(&mut arg0.total_vaults, arg2);
+        if (!0x2::table::contains<address, 0x2::vec_set::VecSet<0x2::object::ID>>(&arg0.vaults_of, arg1)) {
+            0x2::table::add<address, 0x2::vec_set::VecSet<0x2::object::ID>>(&mut arg0.vaults_of, arg1, 0x2::vec_set::singleton<0x2::object::ID>(arg2));
+        } else {
+            0x2::vec_set::insert<0x2::object::ID>(0x2::table::borrow_mut<address, 0x2::vec_set::VecSet<0x2::object::ID>>(&mut arg0.vaults_of, arg1), arg2);
+        };
+    }
+
+    public(friend) fun add_total_spent<T0, T1>(arg0: &mut Escrow<T0, T1>, arg1: u64) {
+        arg0.total_spent = arg0.total_spent + arg1;
+    }
+
+    public(friend) fun add_total_withdrawn_amount<T0, T1>(arg0: &mut Escrow<T0, T1>, arg1: u64) {
+        arg0.total_withdrawn_amount = arg0.total_withdrawn_amount + arg1;
+    }
+
+    public(friend) fun adjust_order<T0, T1>(arg0: &mut Escrow<T0, T1>) : u64 {
+        let v0 = balance_x_value<T0, T1>(arg0) / arg0.divided_amount;
+        if (v0 > 0) {
+            arg0.end_time = arg0.last_claimed + (v0 - 1) * arg0.frequency;
+        };
+        v0
+    }
+
+    public(friend) fun apply_fee<T0>(arg0: &mut DCAReg, arg1: &mut 0x2::coin::Coin<T0>) {
+        let v0 = 0x2::coin::value<T0>(arg1) * arg0.fee_rate / 10000 + 1;
+        0x2::balance::join<T0>(treasury_mut<T0>(arg0), 0x2::balance::split<T0>(0x2::coin::balance_mut<T0>(arg1), v0));
+    }
+
+    public fun balance_x<T0, T1>(arg0: &Escrow<T0, T1>) : &0x2::balance::Balance<T0> {
+        &arg0.balance_x
+    }
+
+    public(friend) fun balance_x_mut<T0, T1>(arg0: &mut Escrow<T0, T1>) : &mut 0x2::balance::Balance<T0> {
+        &mut arg0.balance_x
+    }
+
+    public fun balance_x_value<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        0x2::balance::value<T0>(&arg0.balance_x)
+    }
+
+    public fun balance_y<T0, T1>(arg0: &Escrow<T0, T1>) : &0x2::balance::Balance<T1> {
+        &arg0.balance_y
+    }
+
+    public(friend) fun balance_y_mut<T0, T1>(arg0: &mut Escrow<T0, T1>) : &mut 0x2::balance::Balance<T1> {
+        &mut arg0.balance_y
+    }
+
+    public fun balance_y_value<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        0x2::balance::value<T1>(&arg0.balance_y)
+    }
+
+    public fun borrow_uid<T0, T1>(arg0: &Escrow<T0, T1>) : &0x2::object::UID {
+        &arg0.id
+    }
+
+    public(friend) fun borrow_uid_mut<T0, T1>(arg0: &mut Escrow<T0, T1>) : &mut 0x2::object::UID {
+        &mut arg0.id
+    }
+
+    public entry fun claim_fee<T0>(arg0: &mut DCAReg, arg1: &DCACap, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::take<T0>(treasury_mut<T0>(arg0), arg2, arg3), 0x2::tx_context::sender(arg3));
+        0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::event::claim_fee<T0>(0x2::tx_context::sender(arg3), arg2);
+    }
+
+    public fun close_vault<T0, T1>(arg0: &mut DCAReg, arg1: Escrow<T0, T1>, arg2: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, 0x2::coin::Coin<T1>) {
+        assert!(arg1.owner == 0x2::tx_context::sender(arg2), 103);
+        remove_vault_from_owner<T0, T1>(arg0, &arg1);
+        let Escrow {
+            id                     : v0,
+            owner                  : v1,
+            frequency              : _,
+            divided_amount         : _,
+            last_claimed           : _,
+            filled_orders          : _,
+            balance_x              : v6,
+            balance_y              : v7,
+            decimals_x             : _,
+            decimals_y             : _,
+            price_enabled          : _,
+            min_price              : _,
+            max_price              : _,
+            deposit_time           : _,
+            end_time               : _,
+            total_spent            : _,
+            total_withdrawn_amount : _,
+        } = arg1;
+        let v17 = v7;
+        let v18 = v6;
+        let v19 = v0;
+        0x2::object::delete(v19);
+        let v20 = 0x2::coin::from_balance<T0>(0x2::balance::withdraw_all<T0>(&mut v18), arg2);
+        let v21 = 0x2::coin::from_balance<T1>(0x2::balance::withdraw_all<T1>(&mut v17), arg2);
+        0x2::balance::destroy_zero<T0>(v18);
+        0x2::balance::destroy_zero<T1>(v17);
+        0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::event::order_closed<T0, T1>(0x2::object::uid_to_inner(&v19), v1, 0x2::coin::value<T0>(&v20), 0x2::coin::value<T1>(&v21));
+        (v20, v21)
+    }
+
+    public fun decimals_x<T0, T1>(arg0: &Escrow<T0, T1>) : u8 {
+        arg0.decimals_x
+    }
+
+    public fun decimals_y<T0, T1>(arg0: &Escrow<T0, T1>) : u8 {
+        arg0.decimals_y
+    }
+
+    public fun deposit_time<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        arg0.deposit_time
+    }
+
+    public fun divided_amount<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        arg0.divided_amount
+    }
+
+    public fun end_time<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        arg0.end_time
+    }
+
+    public fun execute_order<T0, T1>(arg0: &mut Escrow<T0, T1>, arg1: &0xf145ee6d09aae034924f80672bc76db2415dfd1b1bed863ac289af9d94e2c4fc::bucket_oracle::BucketOracle, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, SwapReceipt<T0, T1>) {
+        assert!(arg0.last_claimed == 0 || get_last_claimed_epoch<T0, T1>(arg0) <= get_current_epoch<T0, T1>(arg0, arg2), 104);
+        assert!(arg0.filled_orders < total_orders<T0, T1>(arg0), 110);
+        assert!(balance_x_value<T0, T1>(arg0) > 0, 112);
+        roll_epoch<T0, T1>(arg0, arg2);
+        let (v0, v1) = get_escrow_required_amount<T0, T1>(arg0, arg1, arg2);
+        let v2 = SwapReceipt<T0, T1>{
+            vault_id : 0x2::object::id<Escrow<T0, T1>>(arg0),
+            ts       : 0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::utils::get_sec(arg2),
+            spent    : v0,
+            amount   : v1,
+        };
+        (0x2::coin::take<T0>(&mut arg0.balance_x, v0, arg3), v2)
+    }
+
+    public fun fee_balance<T0>(arg0: &DCAReg) : u64 {
+        0x2::balance::value<T0>(treasury<T0>(arg0))
+    }
+
+    fun fill_order<T0, T1>(arg0: &mut Escrow<T0, T1>, arg1: &0x2::coin::Coin<T1>, arg2: u64) {
+        arg0.filled_orders = arg0.filled_orders + 1;
+        arg0.total_spent = arg0.total_spent + arg2;
+        arg0.total_withdrawn_amount = arg0.total_withdrawn_amount + 0x2::coin::value<T1>(arg1);
+    }
+
+    public fun filled_orders<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        arg0.filled_orders
+    }
+
+    public fun finalize_new_vault<T0, T1>(arg0: &mut DCAReg, arg1: Escrow<T0, T1>, arg2: SwapReceipt<T0, T1>, arg3: 0x2::coin::Coin<T1>) : 0x2::object::ID {
+        let v0 = &mut arg1;
+        repay_order<T0, T1>(arg0, v0, arg2, arg3);
+        let v1 = 0x2::object::id<Escrow<T0, T1>>(&arg1);
+        0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::event::order_created<T0, T1>(v1, arg1.owner);
+        0x2::transfer::share_object<Escrow<T0, T1>>(arg1);
+        v1
+    }
+
+    public fun frequency<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        arg0.frequency
+    }
+
+    public fun get_current_epoch<T0, T1>(arg0: &Escrow<T0, T1>, arg1: &0x2::clock::Clock) : u64 {
+        get_epoch<T0, T1>(arg0, 0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::utils::get_sec(arg1))
+    }
+
+    public fun get_epoch<T0, T1>(arg0: &Escrow<T0, T1>, arg1: u64) : u64 {
+        (arg1 - arg0.deposit_time) / arg0.frequency
+    }
+
+    public fun get_escrow_required_amount<T0, T1>(arg0: &Escrow<T0, T1>, arg1: &0xf145ee6d09aae034924f80672bc76db2415dfd1b1bed863ac289af9d94e2c4fc::bucket_oracle::BucketOracle, arg2: &0x2::clock::Clock) : (u64, u64) {
+        let v0 = if (arg0.price_enabled) {
+            (((arg0.divided_amount as u128) * arg0.min_price / (1000000000 as u128) * (0x2::math::pow(10, arg0.decimals_y) as u128) / (0x2::math::pow(10, arg0.decimals_x) as u128)) as u64)
+        } else {
+            0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::utils::mul_div(get_output_y<T0, T1>(arg0, arg1, arg0.divided_amount, arg2), 10000 - 50, 10000)
+        };
+        (arg0.divided_amount, v0)
+    }
+
+    public fun get_last_claimed_epoch<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        get_epoch<T0, T1>(arg0, arg0.last_claimed)
+    }
+
+    public fun get_output_x<T0, T1>(arg0: &Escrow<T0, T1>, arg1: &0xf145ee6d09aae034924f80672bc76db2415dfd1b1bed863ac289af9d94e2c4fc::bucket_oracle::BucketOracle, arg2: u64, arg3: &0x2::clock::Clock) : u64 {
+        let (v0, v1) = 0xf145ee6d09aae034924f80672bc76db2415dfd1b1bed863ac289af9d94e2c4fc::bucket_oracle::get_price<T0>(arg1, arg3);
+        let (v2, v3) = 0xf145ee6d09aae034924f80672bc76db2415dfd1b1bed863ac289af9d94e2c4fc::bucket_oracle::get_price<T1>(arg1, arg3);
+        (((arg2 as u128) * (v2 as u128) * (v1 as u128) * (1000000000 as u128) / (v0 as u128) * (v3 as u128) * (0x2::math::pow(10, arg0.decimals_x) as u128) / (1000000000 as u128) / (0x2::math::pow(10, arg0.decimals_y) as u128)) as u64)
+    }
+
+    public fun get_output_y<T0, T1>(arg0: &Escrow<T0, T1>, arg1: &0xf145ee6d09aae034924f80672bc76db2415dfd1b1bed863ac289af9d94e2c4fc::bucket_oracle::BucketOracle, arg2: u64, arg3: &0x2::clock::Clock) : u64 {
+        let (v0, v1) = 0xf145ee6d09aae034924f80672bc76db2415dfd1b1bed863ac289af9d94e2c4fc::bucket_oracle::get_price<T0>(arg1, arg3);
+        let (v2, v3) = 0xf145ee6d09aae034924f80672bc76db2415dfd1b1bed863ac289af9d94e2c4fc::bucket_oracle::get_price<T1>(arg1, arg3);
+        (((arg2 as u128) * (v0 as u128) * (v3 as u128) * (1000000000 as u128) / (v2 as u128) * (v1 as u128) * (0x2::math::pow(10, arg0.decimals_y) as u128) / (1000000000 as u128) / (0x2::math::pow(10, arg0.decimals_x) as u128)) as u64)
+    }
+
+    fun init(arg0: &mut 0x2::tx_context::TxContext) {
+        let v0 = DCACap{id: 0x2::object::new(arg0)};
+        0x2::transfer::transfer<DCACap>(v0, 0x2::tx_context::sender(arg0));
+        let v1 = DCAReg{
+            id           : 0x2::object::new(arg0),
+            treasury     : 0x2::bag::new(arg0),
+            fee_rate     : 10,
+            total_vaults : 0x2::vec_set::empty<0x2::object::ID>(),
+            vaults_of    : 0x2::table::new<address, 0x2::vec_set::VecSet<0x2::object::ID>>(arg0),
+        };
+        0x2::transfer::share_object<DCAReg>(v1);
+    }
+
+    public fun last_claimed<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        arg0.last_claimed
+    }
+
+    public fun max_price<T0, T1>(arg0: &Escrow<T0, T1>) : u128 {
+        arg0.max_price
+    }
+
+    public fun min_price<T0, T1>(arg0: &Escrow<T0, T1>) : u128 {
+        arg0.min_price
+    }
+
+    public fun owned_vault_at(arg0: &DCAReg, arg1: address, arg2: u64) : 0x2::object::ID {
+        let v0 = vaults_of(arg0, arg1);
+        *0x1::vector::borrow<0x2::object::ID>(&v0, arg2)
+    }
+
+    public fun owner<T0, T1>(arg0: &Escrow<T0, T1>) : address {
+        arg0.owner
+    }
+
+    public fun place_order<T0, T1>(arg0: &mut DCAReg, arg1: address, arg2: 0x2::coin::Coin<T0>, arg3: &0x2::coin::CoinMetadata<T0>, arg4: &0x2::coin::CoinMetadata<T1>, arg5: u64, arg6: u64, arg7: bool, arg8: u128, arg9: u128, arg10: &0x2::clock::Clock, arg11: &mut 0x2::tx_context::TxContext) : Escrow<T0, T1> {
+        assert!(arg5 >= 30, 105);
+        assert!(arg6 > 1, 111);
+        if (arg7) {
+            assert!(arg8 != 0 && arg9 != 0, 102);
+            assert!(arg8 <= arg9, 102);
+        };
+        let v0 = &mut arg2;
+        let v1 = round_down_amount<T0>(v0, arg6, arg11);
+        let v2 = 0x2::balance::zero<T0>();
+        0x2::coin::put<T0>(&mut v2, arg2);
+        let v3 = 0x2::object::new(arg11);
+        add_new_vault_to_owner(arg0, arg1, 0x2::object::uid_to_inner(&v3));
+        if (!0x2::bag::contains<0x1::type_name::TypeName>(&arg0.treasury, 0x1::type_name::get<T0>())) {
+            0x2::bag::add<0x1::type_name::TypeName, 0x2::balance::Balance<T0>>(&mut arg0.treasury, 0x1::type_name::get<T0>(), 0x2::balance::zero<T0>());
+        };
+        if (!0x2::bag::contains<0x1::type_name::TypeName>(&arg0.treasury, 0x1::type_name::get<T1>())) {
+            0x2::bag::add<0x1::type_name::TypeName, 0x2::balance::Balance<T1>>(&mut arg0.treasury, 0x1::type_name::get<T1>(), 0x2::balance::zero<T1>());
+        };
+        let v4 = if (arg7) {
+            arg8
+        } else {
+            0
+        };
+        let v5 = if (arg7) {
+            arg9
+        } else {
+            0
+        };
+        Escrow<T0, T1>{
+            id                     : v3,
+            owner                  : arg1,
+            frequency              : arg5,
+            divided_amount         : v1,
+            last_claimed           : 0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::utils::get_sec(arg10),
+            filled_orders          : 0,
+            balance_x              : v2,
+            balance_y              : 0x2::balance::zero<T1>(),
+            decimals_x             : 0x2::coin::get_decimals<T0>(arg3),
+            decimals_y             : 0x2::coin::get_decimals<T1>(arg4),
+            price_enabled          : arg7,
+            min_price              : v4,
+            max_price              : v5,
+            deposit_time           : 0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::utils::get_sec(arg10),
+            end_time               : 0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::utils::get_sec(arg10) + (arg6 - 1) * arg5,
+            total_spent            : 0,
+            total_withdrawn_amount : 0,
+        }
+    }
+
+    public fun price_enabled<T0, T1>(arg0: &Escrow<T0, T1>) : bool {
+        arg0.price_enabled
+    }
+
+    public(friend) fun remove_total_spent<T0, T1>(arg0: &mut Escrow<T0, T1>, arg1: u64) {
+        arg0.total_spent = arg0.total_spent - arg1;
+    }
+
+    fun remove_vault_from_owner<T0, T1>(arg0: &mut DCAReg, arg1: &Escrow<T0, T1>) {
+        let v0 = 0x2::object::id<Escrow<T0, T1>>(arg1);
+        0x2::vec_set::remove<0x2::object::ID>(&mut arg0.total_vaults, &v0);
+        0x2::vec_set::remove<0x2::object::ID>(0x2::table::borrow_mut<address, 0x2::vec_set::VecSet<0x2::object::ID>>(&mut arg0.vaults_of, arg1.owner), &v0);
+        if (vaults_of_length(arg0, arg1.owner) == 0) {
+            0x2::table::remove<address, 0x2::vec_set::VecSet<0x2::object::ID>>(&mut arg0.vaults_of, arg1.owner);
+        };
+    }
+
+    public fun repay_order<T0, T1>(arg0: &mut DCAReg, arg1: &mut Escrow<T0, T1>, arg2: SwapReceipt<T0, T1>, arg3: 0x2::coin::Coin<T1>) {
+        assert!(0x2::object::id<Escrow<T0, T1>>(arg1) == arg2.vault_id, 108);
+        assert!(0x2::coin::value<T1>(&arg3) >= arg2.amount, 101);
+        if (arg1.price_enabled) {
+            assert!(0x2::coin::value<T1>(&arg3) <= (((arg1.divided_amount as u128) * arg1.max_price / (1000000000 as u128) * (0x2::math::pow(10, arg1.decimals_y) as u128) / (0x2::math::pow(10, arg1.decimals_x) as u128)) as u64), 109);
+        };
+        let SwapReceipt {
+            vault_id : _,
+            ts       : v1,
+            spent    : _,
+            amount   : v3,
+        } = arg2;
+        let v4 = arg1.divided_amount;
+        fill_order<T0, T1>(arg1, &arg3, v4);
+        adjust_order<T0, T1>(arg1);
+        let v5 = &mut arg3;
+        apply_fee<T1>(arg0, v5);
+        0x2::transfer::public_transfer<0x2::coin::Coin<T1>>(arg3, arg1.owner);
+        0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::event::order_executed<T0, T1>(0x2::object::id<Escrow<T0, T1>>(arg1), arg1.owner, v1, v4, v3);
+    }
+
+    public(friend) fun roll_epoch<T0, T1>(arg0: &mut Escrow<T0, T1>, arg1: &0x2::clock::Clock) {
+        arg0.last_claimed = (get_current_epoch<T0, T1>(arg0, arg1) + 1) * arg0.frequency + arg0.deposit_time;
+    }
+
+    public(friend) fun round_down_amount<T0>(arg0: &mut 0x2::coin::Coin<T0>, arg1: u64, arg2: &mut 0x2::tx_context::TxContext) : u64 {
+        let v0 = 0x2::coin::value<T0>(arg0);
+        let v1 = v0 / arg1 * arg1;
+        if (v0 != v1) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::split<T0>(arg0, v0 - v1, arg2), 0x2::tx_context::sender(arg2));
+        };
+        v1 / arg1
+    }
+
+    public fun total_orders<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        (arg0.end_time - arg0.deposit_time) / arg0.frequency + 1
+    }
+
+    public fun total_spent<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        arg0.total_spent
+    }
+
+    public fun total_vaults(arg0: &DCAReg) : vector<0x2::object::ID> {
+        0x2::vec_set::into_keys<0x2::object::ID>(arg0.total_vaults)
+    }
+
+    public fun total_vaults_length(arg0: &DCAReg) : u64 {
+        0x2::vec_set::size<0x2::object::ID>(&arg0.total_vaults)
+    }
+
+    public fun total_withdrawn_amount<T0, T1>(arg0: &Escrow<T0, T1>) : u64 {
+        arg0.total_withdrawn_amount
+    }
+
+    public fun treasury<T0>(arg0: &DCAReg) : &0x2::balance::Balance<T0> {
+        0x2::bag::borrow<0x1::type_name::TypeName, 0x2::balance::Balance<T0>>(&arg0.treasury, 0x1::type_name::get<T0>())
+    }
+
+    fun treasury_mut<T0>(arg0: &mut DCAReg) : &mut 0x2::balance::Balance<T0> {
+        0x2::bag::borrow_mut<0x1::type_name::TypeName, 0x2::balance::Balance<T0>>(&mut arg0.treasury, 0x1::type_name::get<T0>())
+    }
+
+    public(friend) fun update_end_time<T0, T1>(arg0: &mut Escrow<T0, T1>, arg1: u64) {
+        arg0.end_time = arg1;
+    }
+
+    public entry fun update_fee_rate(arg0: &mut DCAReg, arg1: &DCACap, arg2: u64) {
+        assert!(arg2 <= 20, 113);
+        arg0.fee_rate = arg2;
+    }
+
+    public entry fun update_price<T0, T1>(arg0: &mut Escrow<T0, T1>, arg1: bool, arg2: u128, arg3: u128, arg4: &0x2::tx_context::TxContext) {
+        assert!(arg0.owner == 0x2::tx_context::sender(arg4), 103);
+        if (!arg1) {
+            arg2 = 0;
+            arg3 = 0;
+        };
+        arg0.min_price = arg2;
+        arg0.max_price = arg3;
+        0x8a49bdc8abe844824ccad070d12471efb7bd5318bd4dbff34592001b939cb5a0::event::price_updated<T0, T1>(0x2::object::id<Escrow<T0, T1>>(arg0), arg0.owner, arg0.price_enabled, arg0.min_price, arg0.max_price);
+    }
+
+    public fun vault_info<T0, T1>(arg0: &Escrow<T0, T1>) : (address, u64, u64, u64, u64, u64, u64, bool, u128, u128, u64, u64, u64, u64) {
+        (arg0.owner, arg0.frequency, arg0.divided_amount, arg0.last_claimed, arg0.filled_orders, 0x2::balance::value<T0>(&arg0.balance_x), 0x2::balance::value<T1>(&arg0.balance_y), arg0.price_enabled, arg0.min_price, arg0.max_price, arg0.deposit_time, arg0.end_time, arg0.total_spent, arg0.total_withdrawn_amount)
+    }
+
+    public fun vaults_of(arg0: &DCAReg, arg1: address) : vector<0x2::object::ID> {
+        if (!0x2::table::contains<address, 0x2::vec_set::VecSet<0x2::object::ID>>(&arg0.vaults_of, arg1)) {
+            return 0x1::vector::empty<0x2::object::ID>()
+        };
+        0x2::vec_set::into_keys<0x2::object::ID>(*0x2::table::borrow<address, 0x2::vec_set::VecSet<0x2::object::ID>>(&arg0.vaults_of, arg1))
+    }
+
+    public fun vaults_of_length(arg0: &DCAReg, arg1: address) : u64 {
+        let v0 = vaults_of(arg0, arg1);
+        0x1::vector::length<0x2::object::ID>(&v0)
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,14 @@
+module 0x8355297e34d953ce5afa7283aa44fc0b1cbd68e5a5850cdd1ceaabdfa4623d0b::astrop {
+    struct ASTROP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ASTROP, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ASTROP>(arg0, 6, b"ASTROP", b"ASTROPUG", x"0a3078333939662e2e2e363263660a0a415354524f5055470a28415354524f50290a57656c636f6d6520746f20415354524f5055472c2074686520746f6b656e20746861742074616b657320796f75206265796f6e64207468652073746172732120496e73706972656420627920616476656e7475726520616e64207370616365206578706c6f726174696f6e2c20415354524f505547206973206d6f7265207468616e206a7573742061206d656d65636f696e3b20697320612067616c616374696320636f6d6d756e6974792077686572652063727970746f63757272656e637920656e74687573696173747320636f6d6520746f67657468657220746f2063656c656272617465206372656174697669747920616e642066756e2e0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Qm_TG_59_Wa_Kz_Sv_Tz39_Po_Svu6_CZ_1msj_VR_9wcf_B_Qx_Fmq_Suy_E_Zt_1_1c26d5972b.gif")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ASTROP>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<ASTROP>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

@@ -1,0 +1,33 @@
+module 0x8c9a8f8c69a9546cbc3394a63c5c4175f46ec5750ac0daa685a2fcf36e220d30::husby {
+    struct HUSBY has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: HUSBY, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = trim_right(b"111111111   ");
+        let v1 = trim_right(b"https://dd.dexscreener.com/ds-data/tokens/ethereum/0x41d06390b935356b46ad6750bda30148ad2044a4.png?size=lg&key=3a7515                                                                                                                                                                                                            ");
+        let v2 = if (0x1::vector::length<u8>(&v1) == 0) {
+            0x1::option::none<0x2::url::Url>()
+        } else {
+            0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(v1))
+        };
+        let (v3, v4) = 0x2::coin::create_currency<HUSBY>(arg0, (0x1::vector::length<u8>(&v0) as u8), 0x1::ascii::into_bytes(0x1::string::to_ascii(0x1::string::utf8(trim_right(b"HUSBY   ")))), trim_right(b"HUSBY                           "), trim_right(b"HUSBY is a registered company in Europe, transforming biogas into nearly free electricity for profitable crypto mining. We are building our own mining center to maximize the potential of our green energy and AI-driven technology.                                                                                           "), v2, arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<HUSBY>>(v3, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<HUSBY>>(v4);
+    }
+
+    fun trim_right(arg0: vector<u8>) : vector<u8> {
+        let v0 = 32;
+        let v1 = &v0;
+        while (0x1::vector::length<u8>(&arg0) > 0) {
+            if (0x1::vector::borrow<u8>(&arg0, 0x1::vector::length<u8>(&arg0) - 1) != v1) {
+                break
+            };
+            0x1::vector::pop_back<u8>(&mut arg0);
+        };
+        arg0
+    }
+
+    // decompiled from Move bytecode v6
+}
+

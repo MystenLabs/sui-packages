@@ -1,0 +1,14 @@
+module 0x8cdbef02ab434120206f849253f3841b6a41e8299dcd1e8553c80b02cdb081b4::az {
+    struct AZ has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: AZ, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<AZ>(arg0, 6, b"AZ", b"Arizona Tea", x"4172697a6f6e61204963656420546561206973206f6e65206f6620746865206d6f7374207265636f676e697a61626c6520616e642062656c6f766564206265766572616765206272616e647320696e2074686520776f726c642e0a546869732069732061206d757374206275792063757a207468697320626162792069732061206d6f6f6e2062616720666f727265616c732e20536f20646f6e7420626520706c6179656e2067616d65732077697468207468697320312063617a206c696b6520692073616964206234204d4f4f4e4241472121212120444f4e542042452043484541502046414d200a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/cec5898a_9f91_4863_81be_de5e43634c0c_1_a46ed5c51e990ab2cbc678d53a8d9da7_db148bad88.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<AZ>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<AZ>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+

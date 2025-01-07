@@ -1,0 +1,14 @@
+module 0x8ff40fa7a1779747db7683d5fbe74d908589d5150b252abca0197f7eaf32cdf9::sheep {
+    struct SHEEP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SHEEP, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SHEEP>(arg0, 6, b"SHEEP", b"Sheepus Maximus", x"4261612d6161212049e280996d206e6f7420796f75722061766572616765206261612d6261612e20546865206e616d65e2809973204d6178696d75732c20746865206261612d6164646573742073686565702e20596f2c206c697374656e207570e2809474696d657320617265206368616e67696ee280992c20616e6420736fe2809973207468652067616d652e204361747320616e6420646f67733f20506c61796564206f75742e205765e280997265207374657070696ee28099207570207769746820736f6d657468696e6720667265736865722c2061207368656570207769746820736572696f7573206261612d737761672e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1732392752372.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SHEEP>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SHEEP>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+

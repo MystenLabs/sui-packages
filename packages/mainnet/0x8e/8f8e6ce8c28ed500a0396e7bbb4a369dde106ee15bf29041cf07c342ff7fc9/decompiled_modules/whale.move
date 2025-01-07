@@ -1,0 +1,14 @@
+module 0x8e8f8e6ce8c28ed500a0396e7bbb4a369dde106ee15bf29041cf07c342ff7fc9::whale {
+    struct WHALE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: WHALE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<WHALE>(arg0, 6, b"Whale", b"SuiWhale", x"526561647920746f20726964652074686520776176653f205768616c65535549202824575355492920697320746865206d656d6520636f696e20696e73706972656420627920746865205375692065636f73797374656d2c206f66666572696e672061207768616c652d73697a6564206f70706f7274756e69747920746f206a6f696e206120636f6d6d756e6974792d64726976656e2070726f6a65637420776974682062696720706f74656e7469616c2e205768657468657220796f75e280997265206865726520666f722066756e2c20636f6d6d756e6974792c206f72206761696e732c205768616c6553554920696e766974657320796f7520", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1730987904657.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<WHALE>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<WHALE>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
