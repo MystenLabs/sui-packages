@@ -1,0 +1,14 @@
+module 0xe1a82e6d96b58b002f9091cea10907c11b924392f92a4561368189219cb07b1b::kafra {
+    struct KAFRA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: KAFRA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<KAFRA>(arg0, 6, b"KAFRA", b"Sui Kafra Corp", x"69736e2774206a7573742063757272656e63793b206974277320612070726563696f75732074726561737572652120546869732061646f7261626c65204b61667261206769726c206861732074686520756c74696d6174652073746f7261676520736f6c7574696f6e2c206b656570696e6720796f7572205a656e79207361666520696e2068657220656e6368616e746564207661756c742e2054727573742068657220636865657266756c20736d696c6520616e64206d61676963616c20746f75636820746f206d616b6520736176696e67205a656e792061732066756e206173206561726e696e67206974210a244b41465241", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/Tak_berjudul75_20250108033932_74fcb98aa1.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<KAFRA>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<KAFRA>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
