@@ -1,0 +1,15 @@
+module 0xc38eb9be4b07106bfccc7004ef66ae067587ef1f8f99380cdfaf0da86ace396a::unknownai {
+    struct UNKNOWNAI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: UNKNOWNAI, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let (v1, v2) = 0x2::coin::create_currency<UNKNOWNAI>(arg0, 6, b"UNKNOWNAI", b"Unknown AI by SuiAI", x"556e6b6e6f776e20414920697320616e20696e6e6f76617469766520746f6b656e20666561747572696e672061206d7973746572696f75732c20696e636f676e69746f2d7374796c6520414920636861742e2044657369676e656420746f20616e7377657220616e79207175657374696f6ee2809466726f6d20636f6d6d6f6e20746f7069637320746f207461626f6f207375626a65637473e28094556e6b6e6f776e2041492070726f766964657320756e6c696d697465642066726565646f6d206f662065787072657373696f6e2e204578706c6f726520746865206469676974616c20776f726c6420707269766174656c792077697468206120756e6971756520616e6420756e7072656469637461626c6520414920657870657269656e63652e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.suiai.fun/uploads/1_73a381d1af.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<UNKNOWNAI>>(v2, v0);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<UNKNOWNAI>>(v1, v0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
