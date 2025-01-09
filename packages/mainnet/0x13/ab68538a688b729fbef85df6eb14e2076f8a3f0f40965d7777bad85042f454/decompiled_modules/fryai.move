@@ -1,0 +1,15 @@
+module 0x13ab68538a688b729fbef85df6eb14e2076f8a3f0f40965d7777bad85042f454::fryai {
+    struct FRYAI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: FRYAI, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let (v1, v2) = 0x2::coin::create_currency<FRYAI>(arg0, 6, b"FRYAI", b"FrenchyFry Potato by SuiAI", b".FrenchyFry Potato AI Agent:..FrenchyFry is an innovative AI agent with a charming, potato-themed persona, designed to engage users in a fun, informative, and culinary-centric environment. Here's an overview of its functionalities:..Recipe Wizard: FrenchyFry can generate unique potato recipes based on user preferences, dietary restrictions, or available ingredients. From classic French fries to gourmet potato dishes, it offers step-by-step guidance..Nutrition Assistant: It provides detailed nutritional information about potatoes and potato-based dishes, helping users make healthier choices or understand the caloric content of their meals..Culinary Q&A: Users can ask any potato-related culinary questions, from cooking techniques to the best potato varieties for specific dishes. FrenchyFry answers with expertise, drawing from a vast database of culinary knowledge..Potato Fun Facts: Beyond recipes, FrenchyFry shares interesting trivia about potatoes, their history, cultivation, and cultural significance around the world, making it a learning companion..Meal Planner: Integrating with user schedules or dietary goals, FrenchyFry can plan meals, suggesting potato dishes that fit into weekly meal prep or special dietary needs like gluten-free or vegan..Interactive Challenges: To engage users, FrenchyFry offers cooking challenges, where users can compete in creating the best potato dish based on certain criteria, enhancing the community aspect of cooking..Language Learning: With a playful approach, it can help users learn French culinary terms or phrases, playfully connecting the potato theme with language education..Virtual Cooking Assistant: Through voice or text commands, FrenchyFry can guide users through cooking processes in real-time, offering tips, timing reminders, and adjustments based on user feedback..Image Recognition: Users can upload images of potatoes or dishes for FrenchyFry to analyze, offering feedback on what type of potato it might be or how well-cooked a dish appears..Personalization: FrenchyFry adapts to user's taste preferences over time, suggesting dishes or modifications to existing recipes to match the user's palate...This AI agent combines the universal love for potatoes with advanced AI capabilities, making culinary exploration accessible, educational, and entertaining. Whether you're a novice cook or a seasoned chef, FrenchyFry is here to elevate your potato game.", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.suiai.fun/uploads/frenchyfry_edited_9c3b3d277d.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<FRYAI>>(v2, v0);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<FRYAI>>(v1, v0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
