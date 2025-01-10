@@ -1,0 +1,16 @@
+module 0x347f52e4ec5ac43891db555d09affba5357e3d743c2c66a3543d8cbc9d48f722::FE {
+    struct FE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: FE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<FE>(arg0, 9, b"FE", b"FE", b"", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://caposui.xyz/assets/img/nobgcapo.png")), arg1);
+        let v2 = v0;
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<FE>>(v1);
+        0x2::transfer::public_freeze_object<0x2::coin::TreasuryCap<FE>>(v2);
+        0x2::transfer::public_transfer<0x2::coin::Coin<FE>>(0x2::coin::mint<FE>(&mut v2, 1000000000000000000, arg1), 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
