@@ -1,0 +1,14 @@
+module 0x8a81043034f46a1235644c745a534f57607245a674d382a069a7a2c38580338::suialien {
+    struct SUIALIEN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUIALIEN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUIALIEN>(arg0, 6, b"SUIALIEN", b"SUI ALIEN", x"535549414c49454e20697320746865206c6174657374206d656d6520636f696e206f6e2074686520537569206e6574776f726b2c206f66666572696e67206120756e69717565206578747261746572726573747269616c207468656d652e2057697468207374726f6e6720636f6d6d756e69747920737570706f727420616e6420696e6e6f76617469766520746563686e6f6c6f67792c206974277320706f6973656420666f72207369676e69666963616e742067726f7774682e204a6f696e2074686520535549414c49454e207265766f6c7574696f6e20616e64206c657420796f75722063727970746f20706f7274666f6c696f20736f617221200a0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/6782819a90d93108bf712f3f_photo_2025_01_11_19_33_41_c158c7460c.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUIALIEN>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SUIALIEN>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
