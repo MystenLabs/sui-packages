@@ -1,0 +1,14 @@
+module 0x86bbae8fbd0d8f7f46c7cf3a77f92a6b5c1fdf9a4ed64ecc0e424d4b0229536b::m3m3 {
+    struct M3M3 has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: M3M3, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<M3M3>(arg0, 6, b"M3M3", b"M3M3 on SUI", x"f09f9a80204d334d333a20746865206e6577657374206d656d65636f696e206f6e2074686520535549206e6574776f726b2120466173742c20766972616c2c204d334d33206272696467657320626c6f636b636861696e207465636820616e6420707572652066756e2e20f09f8e89204a6f696e2074686520636f6d6d756e6974792c20656e6a6f79206576656e747320616e64206769766561776179732c20616e6420657870657269656e636520746865206d6f737420706c617966756c20616e6420656e676167696e672073696465206f662063727970746f2e20446f6ee2809974206d69737320746865204d334d3320747261696e2120f09f928e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1736692253235.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<M3M3>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<M3M3>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
