@@ -1,0 +1,15 @@
+module 0xeea9cd2ad63be292917575ba2c05de85be3947deb610860a80ba2201b04c3cad::tirex {
+    struct TIREX has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TIREX, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let (v1, v2) = 0x2::coin::create_currency<TIREX>(arg0, 6, b"TIREX", b"TIREX SUI by SuiAI", x"f09fa696204465657020756e64657267726f756e64206c69657320612073656372657420e2809420544952455820746f6b656e732c20686f6c64696e672074686520616e6369656e7420706f776572206f662064696e6f73617572732e20546865736520726172652061737365747320696e63726561736520696e2076616c756520616e64206772616e742061636365737320746f20746865206d69676874206f662074686520706173742e202ef09fa695204f776e696e67206120546972657820746f6b656e206973206120636f6e6e656374696f6e20746f20616e20616e6369656e74206c6567616379207468617420616363756d756c617465732076616c7565206f7665722074696d65", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.suiai.fun/uploads/IMG_3854_ac481fcac1.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<TIREX>>(v2, v0);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TIREX>>(v1, v0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
