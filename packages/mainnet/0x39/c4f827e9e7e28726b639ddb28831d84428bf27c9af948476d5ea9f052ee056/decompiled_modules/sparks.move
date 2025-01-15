@@ -1,0 +1,14 @@
+module 0x39c4f827e9e7e28726b639ddb28831d84428bf27c9af948476d5ea9f052ee056::sparks {
+    struct SPARKS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SPARKS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SPARKS>(arg0, 6, b"Sparks", b"AiSparks", x"496e74726f647563696e6720537061726b732d20546865205265766f6c7574696f6e617279204469676974616c2043757272656e63790a537061726b7320697320612063757474696e672d656467652063727970746f63757272656e63792064657369676e656420746f20656d706f77657220696e646976696475616c7320616e6420627573696e657373657320776f726c64776964652e20576974682069747320736c65656b20676f6c64656e2064657369676e20616e64207368696e792066696e6973682c20537061726b7320726570726573656e747320696e6e6f766174696f6e2c2076616c75652c20616e642070726f67726573732e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/IMG_2147_0e7ff9225b.jpeg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SPARKS>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SPARKS>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
