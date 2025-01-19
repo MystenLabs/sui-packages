@@ -1,0 +1,14 @@
+module 0x3705de75c281c4e83f5b87e75345a3d0422482a8a028be9ac81a45686e72a102::elon {
+    struct ELON has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ELON, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ELON>(arg0, 6, b"ELON", b"$ELON", x"24454c4f4e20697320746865207365636f6e64206d656d626572206f662074686520666967687420666967687420666967687420636c75622c6973206120636f6d6d756e6974792d64726976656e206d656d65636f696e206f6e20746865206661737420616e64207363616c61626c652053756920626c6f636b636861696e2c2064657369676e656420746f206272696e672066756e2c2068756d6f722c20616e64206578636974656d656e7420746f2074686520776f726c64206f662063727970746f2e2024454c4f4e20626967206e6577732069732050726573616c6520636f6d696e672e0a446f6e2774206d697373206974", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1737312171779.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<ELON>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ELON>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
