@@ -1,0 +1,14 @@
+module 0x7d375e9b3ef476255b2b96b9a98886ab89c1f3805c32c070f168356a1754a370::ovi {
+    struct OVI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: OVI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<OVI>(arg0, 9, b"OVI", b"Ovechkin", x"496e73706972656420627920416c6578616e646572204f766563686b696e2c2064657374696e656420746f207375727061737320477265747a6b79e280997320676f616c207265636f72642e2043656c6562726174696e672067726561746e6573732c204f564920636f6d62696e657320686f636b65792070617373696f6e20776974682063727970746f2066756e2e204c696d6974656420737570706c792c20636f6d6d756e6974792d64726976656e2c20616e642064657369676e656420666f722066616e73206f662074686520474f41542e2042652070617274206f6620746865206c6567616379e2809473636f72652077697468204f564921", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://file-walletapp.waveonsui.com/images/wave-pumps/fcca32cc-ebdf-40e6-811d-9ea4c6e39f77.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<OVI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<OVI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
