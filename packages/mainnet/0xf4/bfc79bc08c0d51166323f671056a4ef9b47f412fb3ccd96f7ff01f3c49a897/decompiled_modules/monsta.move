@@ -1,0 +1,14 @@
+module 0xf4bfc79bc08c0d51166323f671056a4ef9b47f412fb3ccd96f7ff01f3c49a897::monsta {
+    struct MONSTA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MONSTA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MONSTA>(arg0, 6, b"MONSTA", b"Monsta Sui Game", x"4d6f6e737461202063727970746f2d74726164696e672067616d652077697468207265616c206561726e696e67206d656368616e6963732e204275792c2073656c6c2c206f72207374616b6520696e2d67616d6520636f696e732074686174206d6972726f72207468652064796e616d696373206f66207265616c2063727970746f20726174657321205465737420796f75722074726164696e67207374726174656769657320616e642063686f6f73652066726f6d20612076617269657479206f6620696e2d67616d6520636f696e7320796f752062656c696576652077696c6c2070756d702e0a0a506c6179206c696b652061204d6f6e7374612e204561726e206c696b6520612050726f210a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/IMG_20250121_032159_948_0eaf0e41a5.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MONSTA>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<MONSTA>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
