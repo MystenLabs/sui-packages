@@ -1,0 +1,14 @@
+module 0xa7bed9143c45fa1ffccd5426a14135800fd85298a125ceceb60002f0ee52de80::mis {
+    struct MIS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MIS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MIS>(arg0, 6, b"MIS", b"MADE IN SUI", x"546865204d61646520696e2053554920546f6b656e20697320796f7572206761746577617920746f2074686520696e6e6f766174697665205355492065636f73797374656d2c206f66666572696e673a0a0a416476616e63656420426c6f636b636861696e20546563686e6f6c6f67793a204661737420616e6420656666696369656e74207472616e73616374696f6e732e0a436f6d6d756e69747920466f6375733a20456d706f776572696e672075736572732077697468207265616c2076616c756520616e6420726577617264732e0a42652070617274206f662074686520667574757265696e7665737420696e204d61646520696e2053554920546f6b656e20746f64617921", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/MADEINSUI_89d0a5e8f7.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MIS>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<MIS>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
