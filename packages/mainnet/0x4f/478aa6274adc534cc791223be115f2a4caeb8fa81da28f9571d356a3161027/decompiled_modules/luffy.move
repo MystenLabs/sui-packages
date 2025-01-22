@@ -1,0 +1,14 @@
+module 0x4f478aa6274adc534cc791223be115f2a4caeb8fa81da28f9571d356a3161027::luffy {
+    struct LUFFY has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: LUFFY, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<LUFFY>(arg0, 6, b"LUFFY", b"Luffy The Pirate", x"4c756666792069732074686565206d656d6520636f696e207361696c696e67207468652053756920626c6f636b636861696e2c2069676e6974696e672074686520737069726974206f6620616476656e7475726520776974682069747320626f6c6420706972617465207468656d6520616e64202069747320636f6d6d756e6974792e204675656c6564206279205375692773206c696768746e696e672d6661737420696e6672617374727563747572652c204c756666792061696d7320746f20636f6e71756572207468652063727970746f20736561732c204c455453204255494c4420544f47455448455220e280bcefb88f", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1737532877618.jpg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<LUFFY>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<LUFFY>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
