@@ -1,0 +1,14 @@
+module 0xe231872183435789363f68e4221f274f58f9037489ee2b8395685f1f0d590198::mtrump {
+    struct MTRUMP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MTRUMP, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MTRUMP>(arg0, 6, b"MTRUMP", b"Melania Trump", x"57656c636f6d6520746f204d656c616e69615472756d70436f696e2c200a746865206d656d65636f696e20746861742063656c6562726174657320746865207374796c6520616e64206772616365206f66204d656c616e6961205472756d702e204469766520696e746f206120776f726c64207768657265206576657279207472616e73616374696f6e20697320612066617368696f6e2073746174656d656e7420616e64206561636820696e766573746d656e742c20616e206f646520746f207468652069636f6e2e204d656c616e6961436f696e202d2042656361757365206576656e20696e2063727970746f2c2063686963206861732069747320706c6163652e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/gif4_b9ed985ca6.gif")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MTRUMP>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<MTRUMP>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
