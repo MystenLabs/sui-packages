@@ -1,0 +1,33 @@
+module 0xba52a3ea06ab62c91fc34f5781fa845083bac5c057e42a4b95092a65ea5e98d6::sequoai {
+    struct SEQUOAI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SEQUOAI, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = trim_right(b"111111111   ");
+        let v1 = trim_right(b"https://dd.dexscreener.com/ds-data/tokens/solana/7F1u9MsGCsDnE1x8ES8w7nL6cvZoQCipeH67cDZYpump.png?claimId=tm96579NKUWfmWnZ                                                                                                                                                                                                      ");
+        let v2 = if (0x1::vector::length<u8>(&v1) == 0) {
+            0x1::option::none<0x2::url::Url>()
+        } else {
+            0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(v1))
+        };
+        let (v3, v4) = 0x2::coin::create_currency<SEQUOAI>(arg0, (0x1::vector::length<u8>(&v0) as u8), 0x1::ascii::into_bytes(0x1::string::to_ascii(0x1::string::utf8(trim_right(b"SEQUOAI     ")))), trim_right(b"SEQUOAI                         "), trim_right(b"The rivalry between Sequoia Capital and Andreessen Horowitz hits the blockchain. SequoAI is here with an  narrative that revolves around 1 goal: prove we can flip ai16z with 0 utility.                                                                                                                                        "), v2, arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SEQUOAI>>(v3, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SEQUOAI>>(v4);
+    }
+
+    fun trim_right(arg0: vector<u8>) : vector<u8> {
+        let v0 = 32;
+        let v1 = &v0;
+        while (0x1::vector::length<u8>(&arg0) > 0) {
+            if (0x1::vector::borrow<u8>(&arg0, 0x1::vector::length<u8>(&arg0) - 1) != v1) {
+                break
+            };
+            0x1::vector::pop_back<u8>(&mut arg0);
+        };
+        arg0
+    }
+
+    // decompiled from Move bytecode v6
+}
+
