@@ -54,3 +54,17 @@ jobs:
           git commit -m "package-graphql-poller: update package data"
           git pull --rebase --depth=5
           git push origin HEAD
+
+      - name: Process Packages
+        run: |
+          curl -L \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer $PACKAGE_PROCESS_TOKEN" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          "$PACKAGE_PROCESS_API" \
+          --data-raw '{"ref":"main","inputs":{}}'
+        env:
+          PACKAGE_PROCESS_TOKEN: ${{ secrets.PACKAGE_PROCESS_TOKEN }}
+          PACKAGE_PROCESS_API: ${{ secrets.PACKAGE_PROCESS_API }}
+
