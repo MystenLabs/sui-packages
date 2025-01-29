@@ -1,0 +1,14 @@
+module 0x646bddf44196f0c26755d77a4d92e08eb5b2cab0b094ac2626de4a5b97615075::inss {
+    struct INSS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: INSS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<INSS>(arg0, 6, b"INSS", b"Inspector SuiShiba", x"f09f948ef09f90b620496e73706563746f72205375695368696261202824494e535329e2809474686520756c74696d61746520646574656374697665206f6620746865205355492065636f73797374656d2120536f6c76652063727970746f206d79737465726965732c20706c61792d746f2d6561726e20696e20547572626f732e46756e2c20616e6420756e6c6f636b20726577617264732e20466173742c2066756e2c20616e6420636f6d6d756e6974792d64726976656ee280946a6f696e20746865207261636520616e6420637261636b20746865206e65787420626967206d656d6520636f696e206d7973746572792120f09f9a80f09f92b02023494e5353", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1738175676607.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<INSS>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<INSS>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
