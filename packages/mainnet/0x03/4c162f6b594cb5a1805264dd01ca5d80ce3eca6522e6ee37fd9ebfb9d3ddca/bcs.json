@@ -274,5 +274,963 @@
       "upgraded_id": "0xa99166e802527eeb5439cbda12b0a02851bf2305d3c96a592b1440014fcb8975",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "admin": {
+      "destroy_admin_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::ADMIN",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "internal_create_admin_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap"
+        ]
+      },
+      "superadmin_issue_admin_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::SuperadminCap",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_admin_cap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "attributes": {
+      "create_attributes_cap_id": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::attributes::CreateAttributesCap"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "issue_create_attributes_cap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u16",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::attributes::CreateAttributesCap"
+        ]
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::attributes::CreateAttributesCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::attributes::Attributes"
+        ]
+      },
+      "number": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::attributes::Attributes"
+        ],
+        "return": [
+          "u16"
+        ]
+      }
+    },
+    "collection": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::collection::COLLECTION",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "size": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u16"
+        ]
+      }
+    },
+    "coloring": {
+      "admin_fulfill_coloring": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::FulfillColoringCap",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringStudio"
+        ],
+        "return": []
+      },
+      "admin_issue_coloring_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "u8",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_set_coloring_prices": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringSettings",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "buy_coloring_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa99166e802527eeb5439cbda12b0a02851bf2305d3c96a592b1440014fcb8975::koto::KOTO>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringSettings",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringTicket"
+        ]
+      },
+      "claim_coloring": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringReceipt>",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringStudio",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringStudioRegistry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::DeleteImagePromise"
+        ]
+      },
+      "create_coloring_ticket_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringTicket"
+        ]
+      },
+      "destroy_coloring_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringTicket"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::COLORING",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "request_coloring": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringTicket",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::coloring::ColoringStudioRegistry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "factory": {
+      "admin_destroy_factory": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::Factory",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_initialize_factory": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::Factory",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::registry::Registry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_remove_from_factory": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "vector<u16>",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::Factory",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "vector<0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin>"
+        ]
+      },
+      "id": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "image": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin"
+        ],
+        "return": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::FACTORY",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "kiosk_id": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "kiosk_owner_cap_id": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "lvl1_colored_by": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>"
+        ]
+      },
+      "lvl2_colored_by": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>"
+        ]
+      },
+      "number": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "set_attributes": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::attributes::Attributes"
+        ],
+        "return": []
+      },
+      "set_image": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image"
+        ],
+        "return": []
+      },
+      "set_lvl1_colored_by_address": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "address"
+        ],
+        "return": []
+      },
+      "set_lvl2_colored_by_address": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "address"
+        ],
+        "return": []
+      },
+      "set_minted_by_address": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "address"
+        ],
+        "return": []
+      },
+      "set_rarity": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::rarity::Rarity"
+        ],
+        "return": []
+      },
+      "swap_image": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::DeleteImagePromise"
+        ]
+      },
+      "uid_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin"
+        ],
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
+      },
+      "unset_image": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image"
+        ]
+      }
+    },
+    "image": {
+      "create_and_transfer_image_chunk": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::CreateImageChunkCap",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_image": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::CreateImageCap",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_image_cap_id": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::CreateImageCap"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "delete_image": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::DeleteImagePromise"
+        ],
+        "return": []
+      },
+      "id": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::IMAGE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "issue_create_image_cap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u16",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::CreateImageCap"
+        ]
+      },
+      "issue_delete_image_promise": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::DeleteImagePromise"
+        ]
+      },
+      "level": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "number": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "receive_and_destroy_image_chunk": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::ImageChunk>"
+        ],
+        "return": []
+      },
+      "receive_and_register_image_chunk": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::RegisterImageChunkCap>"
+        ],
+        "return": []
+      },
+      "verify_image_chunks_registered": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image"
+        ],
+        "return": []
+      }
+    },
+    "mint": {
+      "admin_add_to_migration_warehouse": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "vector<0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin>",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MigrationWarehouse",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_add_to_mint_warehouse": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "vector<0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin>",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintWarehouse",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_destroy_migration_warehouse": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MigrationWarehouse",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_destroy_mint_warehouse": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintWarehouse",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_issue_migration_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "u16",
+          "address",
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MigrationWarehouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_issue_whitelist_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "u8",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_refund_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::Mint",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_reveal_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::RevealMintCap",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::Mint",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::attributes::Attributes",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::image::Image",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::rarity::Rarity"
+        ],
+        "return": []
+      },
+      "admin_set_mint_phase": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "u8",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintSettings",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_set_mint_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "u64",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintSettings",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "admin_set_mint_status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "u8",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintSettings",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintReceipt",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::Mint",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "destroy_migration_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MigrationTicket"
+        ],
+        "return": []
+      },
+      "destroy_mint_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::Mint"
+        ],
+        "return": []
+      },
+      "destroy_mint_receipt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::DestroyMintReceiptCap",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintReceipt"
+        ],
+        "return": []
+      },
+      "destroy_whitelist_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::WhitelistTicket"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MINT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "migration_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MigrationTicket",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MigrationWarehouse",
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintSettings",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "public_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintWarehouse",
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintSettings",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "whitelist_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::WhitelistTicket",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintWarehouse",
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::mint::MintSettings",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "rarity": {
+      "create_rarity": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::rarity::CreateRarityCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u16",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::rarity::Rarity"
+        ]
+      },
+      "create_rarity_cap_id": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::rarity::CreateRarityCap"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "issue_create_rarity_cap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u16",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::rarity::CreateRarityCap"
+        ]
+      },
+      "number": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::rarity::Rarity"
+        ],
+        "return": [
+          "u16"
+        ]
+      }
+    },
+    "receive": {
+      "admin_set_receive_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::receive::ReceiveSettings",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::receive::RECEIVE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "receive": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa99166e802527eeb5439cbda12b0a02851bf2305d3c96a592b1440014fcb8975::koto::KOTO>",
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::receive::ReceiveSettings"
+        ],
+        "return": [
+          "T0"
+        ]
+      },
+      "receive_kiosk_owner_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::receive::ReturnKioskOwnerCapPromise"
+        ]
+      },
+      "receive_koto": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::factory::PrimeMachin",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa99166e802527eeb5439cbda12b0a02851bf2305d3c96a592b1440014fcb8975::koto::KOTO>>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa99166e802527eeb5439cbda12b0a02851bf2305d3c96a592b1440014fcb8975::koto::KOTO>"
+        ]
+      },
+      "return_kiosk_owner_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::receive::ReturnKioskOwnerCapPromise"
+        ],
+        "return": []
+      }
+    },
+    "registry": {
+      "add": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u16",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::registry::Registry"
+        ],
+        "return": []
+      },
+      "admin_freeze_registry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::admin::AdminCap",
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::registry::Registry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::registry::REGISTRY",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_frozen": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::registry::Registry"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_initialized": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::registry::Registry"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "pfp_id_from_number": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u16",
+          "&0x034c162f6b594cb5a1805264dd01ca5d80ce3eca6522e6ee37fd9ebfb9d3ddca::registry::Registry"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      }
+    }
   }
 }

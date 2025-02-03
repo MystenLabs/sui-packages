@@ -160,5 +160,1029 @@
       "upgraded_id": "0x7d861b0e12694e099aba07b1fb49349abb06c96294739b5487b8d8261a60e17d",
       "upgraded_version": 4
     }
+  },
+  "functionMap": {
+    "event": {
+      "deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "strategy_loss": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "strategy_profit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "sbuck_saving_vault": {
+      "assert_admin": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy"
+        ],
+        "return": []
+      },
+      "assert_sbuck_flask": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::Flask<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>"
+        ],
+        "return": []
+      },
+      "assert_sbuck_fountain": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::Fountain<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ],
+        "return": []
+      },
+      "assert_version": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy"
+        ],
+        "return": []
+      },
+      "collected_profit_buck": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>"
+        ]
+      },
+      "collected_profit_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK, 0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>"
+        ]
+      },
+      "deposit_sold_profits": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK, 0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "join_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK, 0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "migrate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "rebalance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK, 0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::RebalanceAmounts",
+          "&mut 0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::Fountain<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::Flask<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "rebalance_v1": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK, 0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::RebalanceAmounts",
+          "&mut 0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BucketProtocol",
+          "&mut 0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::Fountain<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::Flask<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_from_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "&mut 0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::Fountain<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::Flask<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::StrategyRemovalTicket<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK, 0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>"
+        ]
+      },
+      "skim_base_profits": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "&mut 0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::Fountain<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::Flask<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "skim_base_profits_v1": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "&mut 0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BucketProtocol",
+          "&mut 0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::Fountain<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::Flask<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_proof": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy"
+        ],
+        "return": [
+          "&0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::StakeProof<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "staked_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "take_profits_for_selling": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::AdminCap",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "&mut 0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::Fountain<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "underlying_nominal_value_buck": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "underlying_profits": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "&0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::Fountain<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "vault_access_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "&mut 0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::Fountain<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::Flask<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::WithdrawTicket<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK, 0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_v1": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::sbuck_saving_vault::Strategy",
+          "&mut 0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BucketProtocol",
+          "&mut 0x75b23bde4de9aca930d8c1f1780aa65ee777d8b33c3045b053a178b452222e82::fountain_core::Fountain<0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::SBUCK, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1798f84ee72176114ddbf5525a6d964c5f8ea1b3738d08d50d0d3de4cf584884::sbuck::Flask<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::WithdrawTicket<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK, 0xd01d27939064d79e4ae1179cd11cfeeff23943f32b1a842ea1a1e15a0045d77d::st_sbuck::ST_SBUCK>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "time_locked_balance": {
+      "calc_final_unlock_ts_sec": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "change_unlock_per_second": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "change_unlock_start_ts_sec": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ]
+      },
+      "destroy_empty": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ],
+        "return": []
+      },
+      "extraneous_locked_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "final_unlock_ts_sec": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_values": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "locked_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "max_withdrawable": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "previous_unlock_at": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "remaining_unlock": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "skim_extraneous_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "top_up": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "unlock": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "unlock_per_second": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "unlock_start_ts_sec": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "unlockable_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "unlocked_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "withdraw_all": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      }
+    },
+    "utils": {
+      "mul_div": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "mul_div_round_up": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "timestamp_sec": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "vault": {
+      "add_strategy": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<T1>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::VaultAccess"
+        ]
+      },
+      "assert_upgrade_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::UpgradeCap"
+        ],
+        "return": []
+      },
+      "assert_version": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": []
+      },
+      "calc_rebalance_amounts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::RebalanceAmounts"
+        ]
+      },
+      "create_withdraw_ticket": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::WithdrawTicket<T0, T1>"
+        ]
+      },
+      "deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>"
+        ]
+      },
+      "free_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "migrate": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<T1>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_strategy_removal_ticket": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::VaultAccess",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": [
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::StrategyRemovalTicket<T0, T1>"
+        ]
+      },
+      "new_with_upgrade_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::UpgradeCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "performance_fee_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>"
+        ]
+      },
+      "performance_fee_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "profit_unlock_duration_sec": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "pull_unlocked_profits_to_free_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<T1>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "rebalance_amounts_get": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::RebalanceAmounts",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::VaultAccess"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "redeem_withdraw_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::WithdrawTicket<T0, T1>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "remove_strategy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<T1>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::StrategyRemovalTicket<T0, T1>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "vector<u64>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "set_performance_fee_bps": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<T1>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_profit_unlock_duration_sec": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<T1>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_strategy_max_borrow": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<T1>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ],
+        "return": []
+      },
+      "set_strategy_target_alloc_weights_bps": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<T1>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "vector<u64>"
+        ],
+        "return": []
+      },
+      "set_tvl_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<T1>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ],
+        "return": []
+      },
+      "strategies": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID, 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::StrategyState>"
+        ]
+      },
+      "strategy_borrow": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::VaultAccess",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "strategy_hand_over_profit": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::VaultAccess",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "strategy_repay": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::VaultAccess",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "strategy_state": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::StrategyState"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "strategy_withdraw_priority_order": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "strategy_withdraw_to_ticket": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::WithdrawTicket<T0, T1>",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::VaultAccess",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "time_locked_profit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::time_locked_balance::TimeLockedBalance<T0>"
+        ]
+      },
+      "total_available_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_yt_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "tvl_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "vault_access_id": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::VaultAccess"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "vault_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "u64"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::WithdrawTicket<T0, T1>"
+        ]
+      },
+      "withdraw_performance_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::AdminCap<T1>",
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>"
+        ]
+      },
+      "withdraw_t_amt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::WithdrawTicket<T0, T1>"
+        ]
+      },
+      "withdraw_ticket_issued": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "withdraw_ticket_to_withdraw": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::WithdrawTicket<T0, T1>",
+          "&0x2a721777dc1fcf7cda19492ad7c2272ee284214652bde3e9740e2f49c3bff457::vault::VaultAccess"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    }
   }
 }

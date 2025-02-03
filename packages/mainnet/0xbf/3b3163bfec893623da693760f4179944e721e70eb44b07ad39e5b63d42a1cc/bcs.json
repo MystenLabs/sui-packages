@@ -94,5 +94,340 @@
       "upgraded_id": "0xfdbd3d8dac427ef4fdbfb83553c5ac1f0f82f0ce01add04b738dcea7da6bd52a",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "utils": {
+      "calc_aum": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "&0xce7e9b076229e914dc87900323fa122fb6869f39fda82b85770d1aa27f61ad8e::oracle::KriyaOracle",
+          "&0xdf3da4bcc7939caf6486ecc104e1cbd69f97f2025195d270649566301d15eb96::registry::CoinDecimalsRegistry",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_cur_leverage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "&0xce7e9b076229e914dc87900323fa122fb6869f39fda82b85770d1aa27f61ad8e::oracle::KriyaOracle",
+          "&0xdf3da4bcc7939caf6486ecc104e1cbd69f97f2025195d270649566301d15eb96::registry::CoinDecimalsRegistry",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_slippage_adjusted_sqrt_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "bool",
+          "u128",
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "scale": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      }
+    },
+    "vault": {
+      "assert_vault_cap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::VaultCap"
+        ],
+        "return": []
+      },
+      "assert_vault_ownership": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation"
+        ],
+        "return": []
+      },
+      "burn_vt": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T2>"
+        ],
+        "return": []
+      },
+      "collect_fees": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "deposit": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market",
+          "&0xca5a5a62f01c79a104bf4d31669e29daa387f325c241de4edbe30986a9bc8b0d::coin_decimals_registry::CoinDecimalsRegistry",
+          "&0x1478a432123e4b3d61878b629f2c692969fdb375644f1251cd278a4b1e7d7cd6::x_oracle::XOracle",
+          "u64",
+          "&0x002875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_config::IncentiveConfig",
+          "&mut 0x002875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_pool::IncentivePools",
+          "&mut 0x002875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_account::IncentiveAccounts",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation_access::ObligationAccessStore",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "fee_scaling": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_adjusted_borrow_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::fixed_point32::FixedPoint32"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "initialize": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "u128",
+          "u128",
+          "&0x002875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_config::IncentiveConfig",
+          "&mut 0x002875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_pool::IncentivePools",
+          "&mut 0x002875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_account::IncentiveAccounts",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation_access::ObligationAccessStore",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "leverage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "leverage_scaling": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "mint_vt": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T2>"
+        ]
+      },
+      "obligation_key": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>"
+        ],
+        "return": [
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::ObligationKey"
+        ]
+      },
+      "obligation_key_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>"
+        ],
+        "return": [
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::ObligationKey"
+        ]
+      },
+      "pool_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "slippage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>"
+        ],
+        "return": [
+          "u128",
+          "u128"
+        ]
+      },
+      "slippage_scaling": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u128"
+        ]
+      },
+      "total_vt_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_withdrawal_fees": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "u64"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market",
+          "&0xca5a5a62f01c79a104bf4d31669e29daa387f325c241de4edbe30986a9bc8b0d::coin_decimals_registry::CoinDecimalsRegistry",
+          "&0x1478a432123e4b3d61878b629f2c692969fdb375644f1251cd278a4b1e7d7cd6::x_oracle::XOracle",
+          "&0x002875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_config::IncentiveConfig",
+          "&mut 0x002875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_pool::IncentivePools",
+          "&mut 0x002875153e09f8145ab63527bc85c00f2bd102e12f9573c47f8cdf1a1cb62934::incentive_account::IncentiveAccounts",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation_access::ObligationAccessStore",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_fees": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "withdrawal_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault::Vault<T0, T1, T2>"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      }
+    },
+    "vault_acl": {
+      "access": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault_acl::VaultAcl"
+        ],
+        "return": [
+          "&0xbf3b3163bfec893623da693760f4179944e721e70eb44b07ad39e5b63d42a1cc::vault_acl::Access"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

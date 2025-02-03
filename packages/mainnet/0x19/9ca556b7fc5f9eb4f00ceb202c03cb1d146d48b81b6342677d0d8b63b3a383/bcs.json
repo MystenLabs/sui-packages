@@ -65,5 +65,149 @@
       "upgraded_id": "0x8a61e975537193d5a3257af8f5eee4703e426b94e54a2ce6a4df79c5e17270d4",
       "upgraded_version": 2
     }
+  },
+  "functionMap": {
+    "game_2048": {
+      "convert_weather_to_seed": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u32",
+          "u32",
+          "u32",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "create_tiles_panel": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+          "&0x8378b3bd39931aa74a6aa3a820304c1109d327426e4275183ed0b797eb6660a8::weather::WeatherOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x199ca556b7fc5f9eb4f00ceb202c03cb1d146d48b81b6342677d0d8b63b3a383::game_2048::Game2048"
+        ]
+      },
+      "generateTile": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x199ca556b7fc5f9eb4f00ceb202c03cb1d146d48b81b6342677d0d8b63b3a383::game_2048::Game2048",
+          "&0x8378b3bd39931aa74a6aa3a820304c1109d327426e4275183ed0b797eb6660a8::weather::WeatherOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "generate_random": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_random": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x8378b3bd39931aa74a6aa3a820304c1109d327426e4275183ed0b797eb6660a8::weather::WeatherOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_score": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x199ca556b7fc5f9eb4f00ceb202c03cb1d146d48b81b6342677d0d8b63b3a383::game_2048::Game2048"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_state": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x199ca556b7fc5f9eb4f00ceb202c03cb1d146d48b81b6342677d0d8b63b3a383::game_2048::Game2048"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "get_tiles": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x199ca556b7fc5f9eb4f00ceb202c03cb1d146d48b81b6342677d0d8b63b3a383::game_2048::Game2048"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u64, 0x199ca556b7fc5f9eb4f00ceb202c03cb1d146d48b81b6342677d0d8b63b3a383::game_2048::Tile>"
+        ]
+      },
+      "get_top_tiles": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u64, 0x199ca556b7fc5f9eb4f00ceb202c03cb1d146d48b81b6342677d0d8b63b3a383::game_2048::Tile>"
+        ],
+        "return": [
+          "0x199ca556b7fc5f9eb4f00ceb202c03cb1d146d48b81b6342677d0d8b63b3a383::game_2048::TopTiles"
+        ]
+      },
+      "judge": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u64, 0x199ca556b7fc5f9eb4f00ceb202c03cb1d146d48b81b6342677d0d8b63b3a383::game_2048::Tile>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "log2": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "move_tile": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x199ca556b7fc5f9eb4f00ceb202c03cb1d146d48b81b6342677d0d8b63b3a383::game_2048::Game2048",
+          "&0x8378b3bd39931aa74a6aa3a820304c1109d327426e4275183ed0b797eb6660a8::weather::WeatherOracle",
+          "u8",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_game": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x8378b3bd39931aa74a6aa3a820304c1109d327426e4275183ed0b797eb6660a8::weather::WeatherOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

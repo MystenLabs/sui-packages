@@ -108,5 +108,535 @@
       "upgraded_id": "0x34cc6762780f4f6f153c924c0680cfe2a1fb4601e7d33cc28a92297b62de1e0e",
       "upgraded_version": 3
     }
+  },
+  "functionMap": {
+    "admin": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::admin::AdminCap",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_operator": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::admin::AdminCap",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_treasury_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::admin::AdminCap",
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "attributes": {
+      "new_from_vec": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>"
+        ],
+        "return": [
+          "0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::attributes::Attributes"
+        ]
+      }
+    },
+    "collection": {
+      "display": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::collection::Collection"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::collection::Collection"
+        ]
+      }
+    },
+    "custodian": {
+      "add_nft_by_address": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "address",
+          "0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian"
+        ],
+        "return": []
+      },
+      "add_nft_by_id": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian"
+        ],
+        "return": []
+      },
+      "add_treasury_balance": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ],
+        "return": []
+      },
+      "get_nft_by_address": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "address",
+          "u64"
+        ],
+        "return": [
+          "vector<0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian>"
+        ]
+      },
+      "get_nft_by_id": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian"
+        ]
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_treasury_balance": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "mint": {
+      "claim_and_create_kiosk_by_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_by_address": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian>"
+        ],
+        "return": []
+      },
+      "claim_by_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_to_kiosk_by_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x434b5bd8f6a7b05fede0ff46c6e511d71ea326ed38056e3bcd681d2d7c2a7879::personal_kiosk::PersonalKioskCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_to_kiosk_by_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x434b5bd8f6a7b05fede0ff46c6e511d71ea326ed38056e3bcd681d2d7c2a7879::personal_kiosk::PersonalKioskCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::mint::ProtectedTP<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_to_kiosk_by_nfts": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x434b5bd8f6a7b05fede0ff46c6e511d71ea326ed38056e3bcd681d2d7c2a7879::personal_kiosk::PersonalKioskCap",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::mint::ProtectedTP<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "setup_policy": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unlock_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "T0"
+        ]
+      }
+    },
+    "operator": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_nft_to_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::operator::OperatorCap",
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_nft_to_custodian_by_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::operator::OperatorCap",
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_nft_to_custodian_by_id": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::operator::OperatorCap",
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::custodian::Custodian",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_nft_to_kiosk": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::operator::OperatorCap",
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_operator": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "setup_policy": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::operator::OperatorCap",
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "upgrade": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::VersionCap",
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "pandorian": {
+      "get_description": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::PANDORIAN",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_nft": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::pandorian::Pandorian"
+        ]
+      }
+    },
+    "state": {
+      "add": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::state::State",
+          "T0",
+          "T1"
+        ],
+        "return": []
+      },
+      "borrow": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::state::State",
+          "T0"
+        ],
+        "return": [
+          "&T1"
+        ]
+      },
+      "borrow_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::state::State",
+          "T0"
+        ],
+        "return": [
+          "&mut T1"
+        ]
+      },
+      "contain": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::state::State",
+          "T0"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "version": {
+      "assert_current_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_current_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "upgrade": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::VersionCap",
+          "&mut 0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version"
+        ],
+        "return": []
+      },
+      "value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd02195d3a7d8701a9b9cd3b59cafa40fdcf61836f934197eec7009259adaa27d::version::Version"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    }
   }
 }

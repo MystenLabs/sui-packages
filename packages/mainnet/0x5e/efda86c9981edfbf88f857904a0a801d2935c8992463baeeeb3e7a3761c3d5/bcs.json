@@ -150,7 +150,7 @@
           "u8",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "add_performance_reward": {
         "visibility": "PUBLIC",
@@ -161,7 +161,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "add_referral_reward": {
         "visibility": "PUBLIC",
@@ -173,33 +173,33 @@
           "u8",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "admin_withdraw": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<$0>",
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
           "u64",
           "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::AdminCap",
           "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::AdminStorage",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_withdraw_rewards": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<$0>",
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
           "u64",
           "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::AdminCap",
           "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::AdminStorage",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_monthly_roi": {
         "visibility": "PRIVATE",
@@ -208,16 +208,20 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_performance_bonus": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<$0>",
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_referral_rewards": {
         "visibility": "PRIVATE",
@@ -225,7 +229,9 @@
         "params": [
           "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::Stake"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_rewards": {
         "visibility": "PUBLIC",
@@ -234,7 +240,9 @@
           "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::Stake",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_roi_affiliate_reward": {
         "visibility": "PRIVATE",
@@ -243,7 +251,306 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_total_affiliate_rewards": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::Stake"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "claim_performance_bonus": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::Stake",
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_user_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::UserRewards"
+        ]
+      },
+      "decrease_stake_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "address"
+        ],
+        "return": []
+      },
+      "deposit_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_business_volume": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_full_referral_chain": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "address",
+          "u8"
+        ],
+        "return": [
+          "vector<address>"
+        ]
+      },
+      "get_pool_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_stake_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::Stake"
+        ],
+        "return": [
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_total_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::UserRewards"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_user_referrer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "address"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_user_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "address"
+        ],
+        "return": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::UserRewards"
+        ]
+      },
+      "has_active_stakes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "increment_stake_count": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "address"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::STAKE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init_performance_thresholds": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "vector<0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::PerformanceThreshold>"
+        ]
+      },
+      "init_user_stake": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "address"
+        ],
+        "return": []
+      },
+      "is_admin": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::AdminCap",
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::AdminStorage",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_month_passed": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "process_affiliate_rewards": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::Stake",
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "process_referral_rewards": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::Stake",
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "process_roi_affiliate_rewards": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::Stake",
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_user_referrer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "address",
+          "address"
+        ],
+        "return": []
+      },
+      "unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::Stake",
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_business_volume": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5eefda86c9981edfbf88f857904a0a801d2935c8992463baeeeb3e7a3761c3d5::stake::StakingPool<T0>",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

@@ -177,5 +177,676 @@
       "upgraded_id": "0xbd8d4489782042c6fafad4de4bc6a5e0b84a43c6c00647ffd7062d1e2bb7549e",
       "upgraded_version": 2
     }
+  },
+  "functionMap": {
+    "admin_cap": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "commission": {
+      "is_direct_transfer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::commission::Commission"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u8",
+          "u64",
+          "bool",
+          "bool"
+        ],
+        "return": [
+          "0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::commission::Commission"
+        ]
+      },
+      "on_input": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::commission::Commission"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "partner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::commission::Commission"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::commission::Commission"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::commission::Commission"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "commission_type": {
+      "flat": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u8"
+        ]
+      },
+      "percentage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u8"
+        ]
+      }
+    },
+    "math": {
+      "mul_div": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "partner_manager": {
+      "collect": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bag::Bag",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "collect_commission_if_necessary": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::partner_manager::PartnerRegistry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::commission::Commission",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "config_max_comission_percentage": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::admin_cap::AdminCap",
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::partner_manager::PartnerRegistry",
+          "u64",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "max_comission_percentage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::partner_manager::PartnerRegistry"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "register_partner_if_necessary": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::partner_manager::PartnerRegistry",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::partner_manager::PartnerRegistry",
+          "u64",
+          "address",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "trade_id_tracker": {
+      "current": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::trade_id_tracker::TradeIdTracker"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "decrement": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::trade_id_tracker::TradeIdTracker"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "increment": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::trade_id_tracker::TradeIdTracker"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "reset": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::trade_id_tracker::TradeIdTracker"
+        ],
+        "return": []
+      }
+    },
+    "universal_router": {
+      "aftermath_swap_exact_input": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&0xefe170ec0be4d762196bedecd7a065816576198a6527c99282a2551aaa7da38c::pool_registry::PoolRegistry",
+          "&mut 0xefe170ec0be4d762196bedecd7a065816576198a6527c99282a2551aaa7da38c::pool::Pool<T0>",
+          "&0x2d9316f1f1a95f6d7c85a4e690ef7c359e6649773ef2c37ad7d9857adb6bef06::vault::ProtocolFeeVault",
+          "&mut 0x64213b0e4a52bac468d4ac3f140242f70714381653a1919a6d57cd49c628207a::treasury::Treasury",
+          "&mut 0xa6baab1e668c7868991c1c3c11e144100f5734c407d020f72a01b9d1a8bcb97f::insurance_fund::InsuranceFund",
+          "&mut 0xc66fabf1a9253e43c70f1cc02d40a1d18db183140ecaae2a3f58fa6b66c55acf::referral_vault::ReferralVault",
+          "u64",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "bluemove_swap_exact_input": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0xb24b6789e088b876afabca733bed2299fbc9e2d6369be4d1acfa17d8145454d9::swap::Dex_Info",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "borrow_mut_current_path": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route"
+        ],
+        "return": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Path<T0, T1>"
+        ]
+      },
+      "build": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::trade_id_tracker::TradeIdTracker",
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::partner_manager::PartnerRegistry",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "u64",
+          "u64",
+          "vector<u64>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::commission::Commission>",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Trade<T0, T1>"
+        ]
+      },
+      "cetus_swap_exact_x_to_y": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "u128",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "cetus_swap_exact_y_to_x": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "u128",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "check_path_exists": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route"
+        ],
+        "return": []
+      },
+      "collect": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deepbook_prune_input": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deepbook_swap_exact_base_for_quote": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Treasury",
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0x000000000000000000000000000000000000000000000000000000000000dee9::clob_v2::Pool<T0, T1>",
+          "u64",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deepbook_swap_exact_quote_for_base": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Treasury",
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0x000000000000000000000000000000000000000000000000000000000000dee9::clob_v2::Pool<T0, T1>",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "extract_from_current_path": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "finish_routing": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Trade<T0, T1>",
+          "0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned"
+        ],
+        "return": []
+      },
+      "flowx_clmm_swap_exact_input": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0x25929e7f29e0a30eb4e692952ba1b5b65a3a4d65ab5f2a32e1ba3edcb587f26d::pool_manager::PoolRegistry",
+          "u64",
+          "u128",
+          "&mut 0x25929e7f29e0a30eb4e692952ba1b5b65a3a4d65ab5f2a32e1ba3edcb587f26d::versioned::Versioned",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "flowx_swap_exact_input": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0xba153169476e8c3114962261d1edc70de5ad9781b83cc617ecc8c1923191cae0::factory::Container",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "initialize_path": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": [
+          "0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Path<T0, T1>"
+        ]
+      },
+      "kriya_clmm_swap_exact_x_to_y": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::pool::Pool<T0, T1>",
+          "u128",
+          "&0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::version::Version",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "kriya_clmm_swap_exact_y_to_x": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::pool::Pool<T0, T1>",
+          "u128",
+          "&0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::version::Version",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "kriya_swap_exact_x_to_y": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0xa0eba10b173538c8fecca1dff298e488402cc9ff374f8a12ca7758eebe830b66::spot_dex::Pool<T0, T1>",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "kriya_swap_exact_y_to_x": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0xa0eba10b173538c8fecca1dff298e488402cc9ff374f8a12ca7758eebe830b66::spot_dex::Pool<T0, T1>",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "next": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned"
+        ],
+        "return": []
+      },
+      "path_index_key": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::PathIndex"
+        ]
+      },
+      "pay_router_fee_if_necessary": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Treasury",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "push": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Path<T0, T1>"
+        ],
+        "return": []
+      },
+      "refund_if_necessary": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "address"
+        ],
+        "return": []
+      },
+      "set_fee_on": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::admin_cap::AdminCap",
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Treasury",
+          "bool",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned"
+        ],
+        "return": []
+      },
+      "settle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Treasury",
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::partner_manager::PartnerRegistry",
+          "0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Trade<T0, T1>",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "start_routing": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Trade<T0, T1>",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route"
+        ]
+      },
+      "turbos_swap_exact_x_to_y": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "u128",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "turbos_swap_exact_y_to_x": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Route",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "u128",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::admin_cap::AdminCap",
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::universal_router::Treasury",
+          "u64",
+          "address",
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "utils": {
+      "check_amount_threshold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "check_deadline": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64"
+        ],
+        "return": []
+      },
+      "check_slippage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "versioned": {
+      "check_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "upgrade": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::admin_cap::AdminCap",
+          "&mut 0x0e34c84cc4289b0b06371a11a3db9d1c79b13ba8cc21b90d6a69dbe08f6d50b2::versioned::Versioned"
+        ],
+        "return": []
+      }
+    }
   }
 }

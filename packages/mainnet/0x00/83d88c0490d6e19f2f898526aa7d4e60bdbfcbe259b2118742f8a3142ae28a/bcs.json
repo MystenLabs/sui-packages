@@ -31,5 +31,60 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 4
     }
+  },
+  "functionMap": {
+    "oracle": {
+      "get_timestamp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "get_token_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0083d88c0490d6e19f2f898526aa7d4e60bdbfcbe259b2118742f8a3142ae28a::oracle::PriceOracle",
+          "address"
+        ],
+        "return": [
+          "u256",
+          "u8"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "register_token_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0083d88c0490d6e19f2f898526aa7d4e60bdbfcbe259b2118742f8a3142ae28a::oracle::OracleCap",
+          "&mut 0x0083d88c0490d6e19f2f898526aa7d4e60bdbfcbe259b2118742f8a3142ae28a::oracle::PriceOracle",
+          "u256",
+          "u8"
+        ],
+        "return": []
+      },
+      "update_token_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0083d88c0490d6e19f2f898526aa7d4e60bdbfcbe259b2118742f8a3142ae28a::oracle::OracleCap",
+          "&mut 0x0083d88c0490d6e19f2f898526aa7d4e60bdbfcbe259b2118742f8a3142ae28a::oracle::PriceOracle",
+          "u256"
+        ],
+        "return": []
+      }
+    }
   }
 }

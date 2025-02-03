@@ -54,14 +54,14 @@
         "is_entry": true,
         "params": [
           "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig",
-          "&mut 0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::RedPacket<$0>",
+          "&mut 0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::RedPacket<T0>",
           "u64",
           "vector<u64>",
           "vector<address>",
           "vector<u64>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_red_packet": {
         "visibility": "PUBLIC",
@@ -70,7 +70,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "u64",
           "u64",
@@ -80,7 +80,7 @@
           "vector<vector<u8>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "executor": {
         "visibility": "PUBLIC",
@@ -88,7 +88,9 @@
         "params": [
           "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -96,7 +98,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "keccak_create_message": {
         "visibility": "PUBLIC",
@@ -108,7 +110,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "keccak_refund_message": {
         "visibility": "PUBLIC",
@@ -117,7 +121,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "migration": {
         "visibility": "PUBLIC",
@@ -126,7 +132,7 @@
           "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::AdminCap",
           "&mut 0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig"
         ],
-        "return": null
+        "return": []
       },
       "pause": {
         "visibility": "PUBLIC",
@@ -135,7 +141,7 @@
           "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::AdminCap",
           "&mut 0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig"
         ],
-        "return": null
+        "return": []
       },
       "paused": {
         "visibility": "PUBLIC",
@@ -143,7 +149,9 @@
         "params": [
           "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "red_packet_id": {
         "visibility": "PUBLIC",
@@ -152,7 +160,109 @@
           "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "refund": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "refund_red_packet": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig",
+          "&mut 0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::RedPacket<T0>",
+          "u64",
+          "u64",
+          "vector<vector<u8>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_executor": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::AdminCap",
+          "&mut 0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig",
+          "address"
+        ],
+        "return": []
+      },
+      "set_signer": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::AdminCap",
+          "&mut 0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig",
+          "vector<vector<u8>>",
+          "u64"
+        ],
+        "return": []
+      },
+      "signer_length": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "threshold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "unpause": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::AdminCap",
+          "&mut 0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig"
+        ],
+        "return": []
+      },
+      "version_verify": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig"
+        ],
+        "return": []
+      },
+      "when_not_paused": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig"
+        ],
+        "return": []
+      },
+      "when_paused": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xa5e7db30d097dc057171c1b9d7efb06d977ba7a52c82614a3576d6d078104744::gift::GiftConfig"
+        ],
+        "return": []
       }
     }
   }

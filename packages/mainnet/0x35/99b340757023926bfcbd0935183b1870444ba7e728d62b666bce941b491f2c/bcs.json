@@ -37,5 +37,111 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 10
     }
+  },
+  "functionMap": {
+    "asset_pair_price": {
+      "create_oracle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::asset_pair_price::Price"
+        ]
+      },
+      "price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::asset_pair_price::Price"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u256>"
+        ]
+      },
+      "set_oracle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::asset_pair_price::Price",
+          "u256",
+          "u256",
+          "&mut vector<vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      }
+    },
+    "stork_pricing_oracle": {
+      "add_oracle": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::stork_pricing_oracle::Admin",
+          "&mut 0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::stork_pricing_oracle::Prices",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_all_oracles": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::stork_pricing_oracle::Prices"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object_table::ObjectTable<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::asset_pair_price::Price>"
+        ]
+      },
+      "get_assets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::stork_pricing_oracle::Prices"
+        ],
+        "return": [
+          "&vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
+      },
+      "get_oracle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::stork_pricing_oracle::Prices",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "&0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::asset_pair_price::Price"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_oracle": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::stork_pricing_oracle::Admin",
+          "&mut 0x3599b340757023926bfcbd0935183b1870444ba7e728d62b666bce941b491f2c::stork_pricing_oracle::Prices",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u256",
+          "u256",
+          "vector<vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

@@ -53,5 +53,293 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 29
     }
+  },
+  "functionMap": {
+    "my_module": {
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::my_module::MyObject",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "nft_market": {
+      "buy_print": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::NFT",
+          "u64",
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::Config",
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_treasury::Treasury",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_revenue": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::NFT",
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_treasury::Treasury",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_all_users_nfts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry"
+        ],
+        "return": [
+          "vector<address>",
+          "vector<vector<vector<u8>>>"
+        ]
+      },
+      "get_authorized_nfts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "vector<vector<u8>>"
+        ]
+      },
+      "get_current_user_data": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "address",
+          "vector<vector<u8>>",
+          "vector<vector<u8>>",
+          "vector<vector<u8>>"
+        ]
+      },
+      "get_or_create_user": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::User"
+        ]
+      },
+      "get_print_history": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "vector<vector<u8>>"
+        ]
+      },
+      "get_vote_history": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "vector<vector<u8>>"
+        ]
+      },
+      "has_printed_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "has_voted_for_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::NFT_MARKET",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_nft_authorized": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "register_wormhole_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "vector<u8>",
+          "vector<u8>",
+          "u64",
+          "vector<u8>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "revoke_nft_authorization": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::NFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "setup_config": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::Config",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_commission_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::Config",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_vote_threshold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::Config",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "vote_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::UserRegistry",
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::NFT",
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_market::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "nft_treasury": {
+      "allowance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_treasury::Treasury",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_treasury::Treasury"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_treasury::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_allowance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_treasury::Treasury",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "withdraw_allowance": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x312e37f368c306b2b7f66c8d42c7113026deb53f2a000fe06d3ec8b87c4432a6::nft_treasury::Treasury",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

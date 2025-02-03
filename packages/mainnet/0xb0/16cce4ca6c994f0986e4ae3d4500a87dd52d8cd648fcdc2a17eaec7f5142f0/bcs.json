@@ -90,5 +90,274 @@
       "upgraded_id": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "cetus_invest": {
+      "swap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "bool",
+          "bool",
+          "u64",
+          "u64",
+          "u128",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "invest": {
+      "buy_coin": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T1>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::invest::God<T0>",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>"
+        ]
+      },
+      "create_god": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "donate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::invest::God<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::invest::INVEST",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "sale_coin": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::invest::God<T1>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>"
+        ]
+      }
+    },
+    "puddle": {
+      "arbitrage": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleCap<T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T1>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::invest::God<T1>",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "buy_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::SaleItem<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "cancel_sale_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::SaleItem<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "close_puddle": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleCap<T0>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleStatistics",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_puddle": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleStatistics",
+          "u64",
+          "address",
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "divide_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleShares<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "give_out_bonus": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "invest": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T1>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::invest::God<T0>",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "merge_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleShares<T0>",
+          "0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleShares<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_puddle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "address",
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>"
+        ]
+      },
+      "restart_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleCap<T0>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "sale_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>",
+          "0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleShares<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stop_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleCap<T0>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>",
+          "0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleShares<T0>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_puddle_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::PuddleCap<T0>",
+          "&mut 0xb016cce4ca6c994f0986e4ae3d4500a87dd52d8cd648fcdc2a17eaec7f5142f0::puddle::Puddles<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

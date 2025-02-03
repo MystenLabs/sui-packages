@@ -32,5 +32,49 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 4
     }
+  },
+  "functionMap": {
+    "public_sale": {
+      "deposit_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x20dba53805b9bfe1e5351eceb4b360c3d7a8f2cf20e79431d570208befd2fd97::recsui::GlobalStorage",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "recsui": {
+      "borrow_mut_supply": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x20dba53805b9bfe1e5351eceb4b360c3d7a8f2cf20e79431d570208befd2fd97::recsui::GlobalStorage"
+        ],
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Supply<0x20dba53805b9bfe1e5351eceb4b360c3d7a8f2cf20e79431d570208befd2fd97::recsui::RECSUI>"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x20dba53805b9bfe1e5351eceb4b360c3d7a8f2cf20e79431d570208befd2fd97::recsui::RECSUI",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

@@ -90,5 +90,768 @@
       "upgraded_id": "0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "arithmetic": {
+      "inv_128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "mul_128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "sqrt_128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "to_128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u128"
+        ]
+      }
+    },
+    "cetus": {
+      "add_prices": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode>",
+          "u64",
+          "u64",
+          "u16",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>"
+        ],
+        "return": []
+      },
+      "add_prices_no_fee": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode>",
+          "u64",
+          "u64",
+          "u16",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>"
+        ],
+        "return": []
+      },
+      "get_sqrt_price": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "bool"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "swap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "bool",
+          "bool",
+          "u64",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_bag": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut u128",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bag::Bag",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "u16",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_buy": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_sell": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      }
+    },
+    "fee": {
+      "check_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u16",
+          "address",
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::Fee"
+        ],
+        "return": []
+      },
+      "get_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::Fee"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_recipient": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::Fee"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::AdminCap",
+          "address"
+        ],
+        "return": []
+      },
+      "new_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::AdminCap",
+          "u16",
+          "bool",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::Fee"
+        ]
+      },
+      "new_fee_with_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::AdminCap",
+          "u16",
+          "bool",
+          "u64",
+          "address",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::Fee"
+        ]
+      },
+      "set_values": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::AdminCap",
+          "u16",
+          "u64",
+          "bool",
+          "&mut 0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::Fee"
+        ],
+        "return": []
+      }
+    },
+    "paths": {
+      "add_all": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut vector<T0>",
+          "&mut vector<T0>"
+        ],
+        "return": []
+      },
+      "copy_price_node": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode"
+        ],
+        "return": [
+          "0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode"
+        ]
+      },
+      "emit_prices": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode>"
+        ],
+        "return": []
+      },
+      "emit_route": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::Route"
+        ],
+        "return": []
+      },
+      "evolve": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut vector<vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::Route>>",
+          "&vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "get_route_route": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::Route"
+        ],
+        "return": [
+          "vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode>"
+        ]
+      },
+      "get_route_sqrt_price": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::Route"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "insert": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::Route",
+          "&mut vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::Route>",
+          "u64"
+        ],
+        "return": []
+      },
+      "new_price_node": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u16",
+          "u128"
+        ],
+        "return": [
+          "0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode"
+        ]
+      },
+      "new_state": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "vector<vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::Route>>"
+        ]
+      },
+      "price_node_arg": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "price_node_from": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "price_node_sqrt_price": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "price_node_to": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "test": {
+      "check_profit_arb": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u128"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "compute_multiple": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128",
+          "u128",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "find_best_arb": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u128",
+          "u128",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T8, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xa99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX, 0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xa99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T10, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, T8>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0::BLUB::BLUB, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T6, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, 0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T5>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, 0xd0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, 0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T5, T8>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xd0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH, T4>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T9, T8>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T4, T8>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xd976fda9a9786cda1a36dee360013d775a5e5f206f8e20f84fad3385e99eeb2d::aaa::AAA, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T8, 0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T8, T3>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T8>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T5, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T6>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T3, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T7, T8, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T7, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T10, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee500bps::FEE500BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0::BLUB::BLUB, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T1, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T8, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x5d1f47ea69bb0de31c313d7acf89b890dbb8991ea8e03c6c355171f84bb1ba4a::turbos::TURBOS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T9, T8, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T2, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0xd976fda9a9786cda1a36dee360013d775a5e5f206f8e20f84fad3385e99eeb2d::aaa::AAA, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x5d1f47ea69bb0de31c313d7acf89b890dbb8991ea8e03c6c355171f84bb1ba4a::turbos::TURBOS, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T6, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee500bps::FEE500BPS>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::fee::Fee",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "find_prices": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xa99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX, 0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xa99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T9, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T6, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0::BLUB::BLUB, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T5, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T4>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0xd0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T4, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xd0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH, T3>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T8, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T3, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xd976fda9a9786cda1a36dee360013d775a5e5f206f8e20f84fad3385e99eeb2d::aaa::AAA, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, 0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, T2>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T4, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T5>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T6, T7, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T6, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T9, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee500bps::FEE500BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0::BLUB::BLUB, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T0, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T7, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x5d1f47ea69bb0de31c313d7acf89b890dbb8991ea8e03c6c355171f84bb1ba4a::turbos::TURBOS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T8, T7, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T1, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0xd976fda9a9786cda1a36dee360013d775a5e5f206f8e20f84fad3385e99eeb2d::aaa::AAA, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x5d1f47ea69bb0de31c313d7acf89b890dbb8991ea8e03c6c355171f84bb1ba4a::turbos::TURBOS, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T5, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee500bps::FEE500BPS>"
+        ],
+        "return": [
+          "vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode>"
+        ]
+      },
+      "find_prices_no_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xa99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX, 0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xa99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T9, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T6, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0::BLUB::BLUB, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T5, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T4>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0xd0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T4, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xd0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH, T3>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T8, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T3, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xd976fda9a9786cda1a36dee360013d775a5e5f206f8e20f84fad3385e99eeb2d::aaa::AAA, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, 0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, T2>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T4, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T5>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T6, T7, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T6, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T9, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee500bps::FEE500BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0::BLUB::BLUB, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T0, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T7, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x5d1f47ea69bb0de31c313d7acf89b890dbb8991ea8e03c6c355171f84bb1ba4a::turbos::TURBOS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T8, T7, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T1, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0xd976fda9a9786cda1a36dee360013d775a5e5f206f8e20f84fad3385e99eeb2d::aaa::AAA, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x5d1f47ea69bb0de31c313d7acf89b890dbb8991ea8e03c6c355171f84bb1ba4a::turbos::TURBOS, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T5, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee500bps::FEE500BPS>"
+        ],
+        "return": [
+          "vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode>"
+        ]
+      },
+      "find_route": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xa99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX, 0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xa99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T9, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T6, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0::BLUB::BLUB, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T5, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T4>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0xd0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T4, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xd0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH, T3>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T8, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T3, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xd976fda9a9786cda1a36dee360013d775a5e5f206f8e20f84fad3385e99eeb2d::aaa::AAA, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, 0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, T2>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T7>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T4, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T5>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T6, T7, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T6, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T9, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee500bps::FEE500BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0::BLUB::BLUB, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T0, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T7, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x5d1f47ea69bb0de31c313d7acf89b890dbb8991ea8e03c6c355171f84bb1ba4a::turbos::TURBOS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T8, T7, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T1, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0xd976fda9a9786cda1a36dee360013d775a5e5f206f8e20f84fad3385e99eeb2d::aaa::AAA, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x5d1f47ea69bb0de31c313d7acf89b890dbb8991ea8e03c6c355171f84bb1ba4a::turbos::TURBOS, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T5, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee500bps::FEE500BPS>"
+        ],
+        "return": [
+          "vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::Route>"
+        ]
+      },
+      "swap_route_static": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut u128",
+          "vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T9, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xa99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX, 0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xa99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T11, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T8, T9>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0::BLUB::BLUB, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T7, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, 0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, T6>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, 0xd0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T3, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, 0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T6, T9>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xd0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH, T5>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T10, T9>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T5, T9>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0xd976fda9a9786cda1a36dee360013d775a5e5f206f8e20f84fad3385e99eeb2d::aaa::AAA, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T9, 0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T9, T4>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, T9>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T6, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, T7>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T4, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T8, T9, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T8, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T11, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee500bps::FEE500BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0xfa7ac3951fdca92c5200d468d31a365eb03b2be9936fde615e69f0c1274ad3a0::BLUB::BLUB, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T2, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, T9, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x5d1f47ea69bb0de31c313d7acf89b890dbb8991ea8e03c6c355171f84bb1ba4a::turbos::TURBOS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T10, T9, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee100bps::FEE100BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T3, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee3000bps::FEE3000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0xd976fda9a9786cda1a36dee360013d775a5e5f206f8e20f84fad3385e99eeb2d::aaa::AAA, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x5d1f47ea69bb0de31c313d7acf89b890dbb8991ea8e03c6c355171f84bb1ba4a::turbos::TURBOS, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee10000bps::FEE10000BPS>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T7, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::fee500bps::FEE500BPS>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      }
+    },
+    "turbos": {
+      "add_prices": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode>",
+          "u64",
+          "u64",
+          "u16",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>"
+        ],
+        "return": []
+      },
+      "add_prices_no_fee": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x51c8d6fee9336237cd56584aecaef70479a8ea23ee1245788680900ca38d7026::paths::PriceNode>",
+          "u64",
+          "u64",
+          "u16",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>"
+        ],
+        "return": []
+      },
+      "get_sqrt_price": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T1, T2, T0>",
+          "bool"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "swap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "bool",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_bag": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut u128",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bag::Bag",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T1, T2, T0>",
+          "u16",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_buy": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T1, T0, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_sell": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      }
+    }
   }
 }

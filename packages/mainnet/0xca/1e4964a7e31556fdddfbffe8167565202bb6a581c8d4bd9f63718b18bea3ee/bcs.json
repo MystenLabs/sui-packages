@@ -161,23 +161,26 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "$0",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "T0",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::escrow::OfferWrapper<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>"
+        ]
       },
       "confirm_offer_accepted": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::escrow::OfferWrapper<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::escrow::OfferWrapper<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "decline_offer": {
         "visibility": "PUBLIC",
@@ -185,10 +188,10 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&$0",
+          "&T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "emit_accept_offer_event": {
         "visibility": "FRIEND",
@@ -201,7 +204,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_decline_offer_event": {
         "visibility": "FRIEND",
@@ -214,7 +217,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_offer_event": {
         "visibility": "FRIEND",
@@ -227,7 +230,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_revoke_offer_event": {
         "visibility": "FRIEND",
@@ -240,7 +243,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "get_offer_fee": {
         "visibility": "PUBLIC",
@@ -248,9 +251,12 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&$0"
+          "&T0"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "get_offer_price": {
         "visibility": "PUBLIC",
@@ -258,9 +264,11 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&$0"
+          "&T0"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "new_offer": {
         "visibility": "PRIVATE",
@@ -271,11 +279,42 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::escrow::Offer<T0>",
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::escrow::OfferCap<T0>"
+        ]
+      },
+      "offer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "revoke_offer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::escrow::OfferCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "escrow_simple": {
@@ -285,10 +324,10 @@
         "params": [
           "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "$0",
+          "T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "decline_offer": {
         "visibility": "PUBLIC",
@@ -296,10 +335,10 @@
         "params": [
           "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&$0",
+          "&T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "new_offer": {
         "visibility": "PUBLIC",
@@ -311,7 +350,10 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::escrow_simple::Offer<T0>",
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::escrow_simple::OfferCap<T0>"
+        ]
       },
       "offer": {
         "visibility": "PUBLIC",
@@ -323,7 +365,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "revoke_offer": {
         "visibility": "PUBLIC",
@@ -332,10 +374,10 @@
           "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::escrow_simple::OfferCap<$0>",
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::escrow_simple::OfferCap<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "marketplace": {
@@ -348,7 +390,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_balance": {
         "visibility": "PUBLIC",
@@ -357,17 +399,17 @@
           "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
         ],
-        "return": null
+        "return": []
       },
       "add_simple_offer": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
-          "$0",
-          "$1"
+          "T0",
+          "T1"
         ],
-        "return": null
+        "return": []
       },
       "buy": {
         "visibility": "PUBLIC",
@@ -377,22 +419,24 @@
           "&0x434b5bd8f6a7b05fede0ff46c6e511d71ea326ed38056e3bcd681d2d7c2a7879::personal_kiosk::PersonalKioskCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<$0>",
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>"
+        ]
       },
       "confirm_purchase": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>"
         ],
-        "return": null
+        "return": []
       },
       "create_kiosk": {
         "visibility": "PUBLIC",
@@ -400,19 +444,21 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "delist": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<$0>",
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<T0>",
           "&0x434b5bd8f6a7b05fede0ff46c6e511d71ea326ed38056e3bcd681d2d7c2a7879::personal_kiosk::PersonalKioskCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "emit_buy_event": {
         "visibility": "FRIEND",
@@ -424,7 +470,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_delist_event": {
         "visibility": "FRIEND",
@@ -435,7 +481,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_listing_event": {
         "visibility": "FRIEND",
@@ -448,7 +494,198 @@
           "u64",
           "address"
         ],
-        "return": null
+        "return": []
+      },
+      "emit_update_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "address"
+        ],
+        "return": []
+      },
+      "get_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
+          "&0xb2bcc2f98f2dca101e74ff12d00584bc1de682a33db5c05b2545ee21642b8ebf::access_control::SRoles<0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MARKETPLACE>",
+          "&0xb2bcc2f98f2dca101e74ff12d00584bc1de682a33db5c05b2545ee21642b8ebf::access_control::RoleCap<0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::AdminCap>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
+          "address"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "get_fee_by_pc": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_item_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_kiosk_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_owner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<T0>"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_purchase_cap_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MARKETPLACE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "list": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
+          "&0x434b5bd8f6a7b05fede0ff46c6e511d71ea326ed38056e3bcd681d2d7c2a7879::personal_kiosk::PersonalKioskCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "T0",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_simple_offer": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
+          "T0"
+        ],
+        "return": [
+          "T1"
+        ]
+      },
+      "revoke_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb2bcc2f98f2dca101e74ff12d00584bc1de682a33db5c05b2545ee21642b8ebf::access_control::OwnerCap<0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MARKETPLACE>",
+          "&mut 0xb2bcc2f98f2dca101e74ff12d00584bc1de682a33db5c05b2545ee21642b8ebf::access_control::SRoles<0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MARKETPLACE>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_base_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
+          "&0xb2bcc2f98f2dca101e74ff12d00584bc1de682a33db5c05b2545ee21642b8ebf::access_control::RoleCap<0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::AdminCap>",
+          "&0xb2bcc2f98f2dca101e74ff12d00584bc1de682a33db5c05b2545ee21642b8ebf::access_control::SRoles<0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MARKETPLACE>",
+          "u16"
+        ],
+        "return": []
+      },
+      "set_personal_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
+          "&0xb2bcc2f98f2dca101e74ff12d00584bc1de682a33db5c05b2545ee21642b8ebf::access_control::RoleCap<0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::AdminCap>",
+          "&0xb2bcc2f98f2dca101e74ff12d00584bc1de682a33db5c05b2545ee21642b8ebf::access_control::SRoles<0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MARKETPLACE>",
+          "address",
+          "u16"
+        ],
+        "return": []
+      },
+      "update_listing": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
+          "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::SItemWithPurchaseCap<T0>",
+          "&0x434b5bd8f6a7b05fede0ff46c6e511d71ea326ed38056e3bcd681d2d7c2a7879::personal_kiosk::PersonalKioskCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_profit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb2bcc2f98f2dca101e74ff12d00584bc1de682a33db5c05b2545ee21642b8ebf::access_control::RoleCap<0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::AdminCap>",
+          "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "simple": {
@@ -457,77 +694,85 @@
         "is_entry": false,
         "params": [
           "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
-          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<$0>",
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delist": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<$0>",
+          "0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_fee": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<$0>"
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_item_id": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<$0>"
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<T0>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "get_owner": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<$0>"
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<T0>"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_price": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<$0>"
+          "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "list": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
-          "$0",
+          "T0",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "update_listing": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::marketplace::MarketPlace",
-          "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<$0>",
+          "&mut 0xca1e4964a7e31556fdddfbffe8167565202bb6a581c8d4bd9f63718b18bea3ee::simple::ListItem<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }

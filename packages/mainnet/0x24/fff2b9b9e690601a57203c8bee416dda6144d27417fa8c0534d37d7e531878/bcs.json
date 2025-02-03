@@ -99,5 +99,442 @@
       "upgraded_id": "0x2e3ad81c2c7c9afff77d42b1174abafacf03d5499514eb976a9d84029909b946",
       "upgraded_version": 8
     }
+  },
+  "functionMap": {
+    "bluefin_vault": {
+      "claim_withdrawn_funds": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::bluefin_vault::Queue<T0>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_queue": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::AdminCap",
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::Safe",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_vault": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::AdminCap",
+          "vector<u8>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pause_vault": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::AdminCap",
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::bluefin_vault::Vault",
+          "bool",
+          "bool"
+        ],
+        "return": []
+      },
+      "process_queue": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::QueueProcessorCap",
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::Safe",
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::bluefin_vault::Queue<T0>",
+          "&0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::roles::Sequencer",
+          "u128",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "request_deposit_to_vault": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::bluefin_vault::Queue<T0>",
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::bluefin_vault::Vault",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "request_withdraw_from_vault": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::bluefin_vault::Queue<T0>",
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::bluefin_vault::Vault",
+          "u64",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_vault_operator": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::AdminCap",
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::bluefin_vault::Vault",
+          "address"
+        ],
+        "return": []
+      },
+      "update_version_for_queue": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::AdminCap",
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::bluefin_vault::Queue<T0>"
+        ],
+        "return": []
+      },
+      "update_version_for_vault": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::AdminCap",
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::bluefin_vault::Vault"
+        ],
+        "return": []
+      }
+    },
+    "constants": {
+      "base_uint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "deposit_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u8"
+        ]
+      },
+      "get_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "withdraw_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u8"
+        ]
+      }
+    },
+    "errors": {
+      "deposit_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "inactive_queue_processor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "insufficient_funds": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "queue_alread_created": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "version_mismatch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "withdraw_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "events": {
+      "emit_created_vault_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address"
+        ],
+        "return": []
+      },
+      "emit_event_processed_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "address",
+          "u64",
+          "u128",
+          "u8"
+        ],
+        "return": []
+      },
+      "emit_funds_claimed_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_request_queued_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "address",
+          "u64",
+          "u64",
+          "u128",
+          "u128",
+          "u8"
+        ],
+        "return": []
+      },
+      "emit_vault_operator_update_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address"
+        ],
+        "return": []
+      },
+      "emit_vault_pause_update_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "bool",
+          "bool"
+        ],
+        "return": []
+      }
+    },
+    "maths": {
+      "base_div": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "base_mul": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "roles": {
+      "check_queue_processor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::Safe",
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::QueueProcessorCap"
+        ],
+        "return": []
+      },
+      "check_safe_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::Safe"
+        ],
+        "return": []
+      },
+      "create_new_queue_processor": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::AdminCap",
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::Safe",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_queue_created": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::Safe"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "queue_is_created": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::Safe"
+        ],
+        "return": []
+      },
+      "transfer_admin_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::AdminCap",
+          "address"
+        ],
+        "return": []
+      },
+      "transfer_qprocessing_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::QueueProcessorCap",
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::Safe",
+          "address"
+        ],
+        "return": []
+      },
+      "update_version_for_safe": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::AdminCap",
+          "&mut 0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::roles::Safe"
+        ],
+        "return": []
+      }
+    },
+    "signed_number": {
+      "add_uint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::signed_number::Number",
+          "u64"
+        ],
+        "return": [
+          "0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::signed_number::Number"
+        ]
+      },
+      "gt_uint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::signed_number::Number",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "lt_uint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::signed_number::Number",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::signed_number::Number"
+        ]
+      },
+      "sub_uint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::signed_number::Number",
+          "u64"
+        ],
+        "return": [
+          "0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::signed_number::Number"
+        ]
+      },
+      "value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x24fff2b9b9e690601a57203c8bee416dda6144d27417fa8c0534d37d7e531878::signed_number::Number"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    }
   }
 }

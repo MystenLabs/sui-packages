@@ -98,5 +98,798 @@
       "upgraded_id": "0xdc3da7a71b6d83f4022be832fd03e8004a23d537467d7d5b11b58fe0ca63707c",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "coinFlip": {
+      "play": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::game_controller::Controller",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "drand": {
+      "derive_randomness": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "get_genesis_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "safe_selection": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&vector<u8>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "verify_drand_signature": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      },
+      "verify_time_has_passed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "vector<u8>",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "event": {
+      "EmitGamePlay": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "game_controller": {
+      "coin_flip": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T2>",
+          "address",
+          "u64",
+          "u64",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_game": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::game_controller::Controller",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "provide": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::game_controller::Controller",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::Reward<T2>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "vector<u8>",
+          "vector<u8>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "provide_with_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::game_controller::Controller",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T2>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "vector<u8>",
+          "vector<u8>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "raffle": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T2>",
+          "address",
+          "u64",
+          "u64",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "range": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T2>",
+          "address",
+          "u64",
+          "u64",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "wheel": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T2>",
+          "address",
+          "u64",
+          "u64",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "raffle": {
+      "play": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::game_controller::Controller",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "random": {
+      "bytes_to_u64": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "rand_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "rand_u64_range": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "rand_u64_range_with_seed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "rand_u64_with_seed": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "seed": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      }
+    },
+    "range": {
+      "play": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::game_controller::Controller",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "vault": {
+      "add_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "change_host_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "change_liquidity_reward_basis_points": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "change_player_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "change_staking_reward_basis_points": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "change_treasury_reward_basis_points": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "change_vault_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "check_pool_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "claim_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_staking": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "cliam_treasury": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "collect_fee": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "collect_host_fee": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "collect_player_fee": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "collect_vault_fee": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "create_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_player_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_vault_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "lose": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "lose_amount": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "lost_multiple_times": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "pool_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "remove_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "return_bet": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "take_bet": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "take_treasury": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "win": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      }
+    },
+    "wheel": {
+      "play": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::vault::Vault<T0, T1>",
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::game_controller::Controller",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "xluck_reward": {
+      "add_point": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::Reward<T0>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "change_luck_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T0>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_luck_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::Reward<T0>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_reward": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x1c7e4548a40742d9545125a815941067bfe9720ef3ded3f1a10999e589cc5fd5::nonTransferCoin::NonTransferCoin<T0>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_boost": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::Reward<T0>",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_new_boost": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T0>",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_nft_level": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::Reward<T0>",
+          "address"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "get_nft_point": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::Reward<T0>",
+          "address"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "get_reward": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::Reward<T0>",
+          "vector<u8>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "migrate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::Reward<T0>",
+          "&mut 0xaff8c4874f0145d8d586aff69fdd8de07276200c985ce4878d05bddc6854a0ba::admin::Manage",
+          "0x8e19b4b730e0c47c656f7479047e09776a35d7d3c06bef415fa27eca0c7291ea::lucky::LevelCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_add_point": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T0>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_get_nft_level": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T0>",
+          "address"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "new_get_reward": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T0>",
+          "vector<u8>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "nft_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T0>",
+          "0x8e19b4b730e0c47c656f7479047e09776a35d7d3c06bef415fa27eca0c7291ea::lucky::LuckyNFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "nft_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::NewReward<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::Reward<T0>",
+          "0xdc3da7a71b6d83f4022be832fd03e8004a23d537467d7d5b11b58fe0ca63707c::lucky::LuckyNFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unstake_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x81f077d146435758456c9962dffc03425af3c47f0b442869af63bf898b6c3ecf::xluck_reward::Reward<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

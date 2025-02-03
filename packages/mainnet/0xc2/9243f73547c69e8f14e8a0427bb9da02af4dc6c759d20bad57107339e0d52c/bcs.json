@@ -127,7 +127,7 @@
           "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard",
           "0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::Points"
         ],
-        "return": null
+        "return": []
       },
       "admin_create_points": {
         "visibility": "PUBLIC",
@@ -138,7 +138,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_issue_mint_ticket": {
         "visibility": "PUBLIC",
@@ -150,7 +150,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_mint": {
         "visibility": "PUBLIC",
@@ -167,7 +167,7 @@
           "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::CardRegistry",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_update_card_tracker_max_count": {
         "visibility": "PUBLIC",
@@ -177,7 +177,7 @@
           "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::CardTracker",
           "u16"
         ],
-        "return": null
+        "return": []
       },
       "admin_update_mint_settings": {
         "visibility": "PUBLIC",
@@ -188,17 +188,17 @@
           "u64",
           "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::MintSettings"
         ],
-        "return": null
+        "return": []
       },
       "claim_token": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "destroy_redeemed_points": {
         "visibility": "PRIVATE",
@@ -207,7 +207,7 @@
           "0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::Points",
           "0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::DestroyPointsCap"
         ],
-        "return": null
+        "return": []
       },
       "get_level": {
         "visibility": "PUBLIC",
@@ -215,7 +215,9 @@
         "params": [
           "&0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard"
         ],
-        "return": null
+        "return": [
+          "u16"
+        ]
       },
       "get_tier": {
         "visibility": "PUBLIC",
@@ -223,7 +225,170 @@
         "params": [
           "&0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::CARD",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "internal_destroy_points": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::Points"
+        ],
+        "return": []
+      },
+      "level_up": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "max_count_for_tier": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u8"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "mint": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard>",
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::CardTracker",
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::CardRegistry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_with_mint_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::MintTicket",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard>",
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::CardTracker",
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::CardRegistry",
+          "&0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::MintSettings",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "openLootbox": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard",
+          "&mut 0xd2e44dc1311833ddb0427f2141e2935720cf5454cf0ef39141fc80c19e1e6caa::lootbox::LootboxTreasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0xd2e44dc1311833ddb0427f2141e2935720cf5454cf0ef39141fc80c19e1e6caa::lootbox::Lootbox>",
+          "&0xd2e44dc1311833ddb0427f2141e2935720cf5454cf0ef39141fc80c19e1e6caa::lootbox::LootboxSettings",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "openLootboxWithAmount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard",
+          "&mut 0xd2e44dc1311833ddb0427f2141e2935720cf5454cf0ef39141fc80c19e1e6caa::lootbox::LootboxTreasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0xd2e44dc1311833ddb0427f2141e2935720cf5454cf0ef39141fc80c19e1e6caa::lootbox::LootboxWithAmount<T0>>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "points_needed_for_level_up": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "public_mint_silver_card": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard>",
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::CardTracker",
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::CardRegistry",
+          "&0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::MintSettings",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "receive": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<T0>"
+        ],
+        "return": [
+          "T0"
+        ]
+      },
+      "receive_points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::Points>"
+        ],
+        "return": [
+          "0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::Points"
+        ]
+      },
+      "receive_token": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "redeem_points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "kiosk_lock_rule": {
@@ -231,19 +396,19 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<$0>"
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<T0>"
         ],
-        "return": null
+        "return": []
       },
       "prove": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk"
         ],
-        "return": null
+        "return": []
       }
     },
     "kiosk_royalty_rule": {
@@ -251,31 +416,33 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<T0>",
           "u16",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "fee_amount": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "pay": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
         ],
-        "return": null
+        "return": []
       }
     }
   }

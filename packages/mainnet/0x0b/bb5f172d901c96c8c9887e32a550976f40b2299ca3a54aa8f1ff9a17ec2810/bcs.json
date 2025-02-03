@@ -126,5 +126,761 @@
       "upgraded_id": "0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "dsui_vault": {
+      "admin_emergency_pause_update": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::config::DegenHiveDeployerCap",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "bool"
+        ],
+        "return": []
+      },
+      "calculate_staked_sui_rewards": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000003::staking_pool::StakedSui",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_validator_pool_rewards_increase": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "address",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::ValidatorPool",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "claim_collected_lsd_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::config::HiveDaoCapability",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "&mut 0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::config::Treasury<0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::dsui::DSUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "claim_unstake_epoch": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "claim_unstaked_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::UnstakeRequest",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "destroy_ticket": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::UnstakeRequest"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "destroy_unstake_epoch": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::RequestsForEpoch"
+        ],
+        "return": [
+          "u64",
+          "bool"
+        ]
+      },
+      "destroy_validator_pool": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "address",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "do_before_unstake": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "emergency_pause_update": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::config::HiveDaoCapability",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "bool"
+        ],
+        "return": []
+      },
+      "execute_validator_unstake": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "address",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "bool"
+        ]
+      },
+      "get_dsui_by_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_split_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000003::staking_pool::StakedSui",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_sui_by_dsui": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_sui_claimable_per_dsui": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "get_total_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init_dsui_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::dsui::DSUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "migrate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault"
+        ],
+        "return": []
+      },
+      "process_stake_sui_requests": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "process_unstake_sui_requests": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "query_all_selected_validator_mapping": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "u64"
+        ],
+        "return": [
+          "vector<address>",
+          "vector<u64>",
+          "u64"
+        ]
+      },
+      "query_all_staked_sui_objs_for_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "u64"
+        ]
+      },
+      "query_dsui_vault_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault"
+        ],
+        "return": [
+          "bool",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "query_request_delayed_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "query_request_instant_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "query_selected_validator_mapping": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "query_stake_sui_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "query_staked_sui_obj_for_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "query_sui_available_with_vault_overview": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "query_unstake_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::UnstakeRequest"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "query_unstake_request_claim_epoch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::UnstakeRequest"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "query_unstake_request_for_epoch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "bool"
+        ]
+      },
+      "query_unstake_request_for_epochs": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "u64"
+        ],
+        "return": [
+          "vector<u64>",
+          "vector<u64>",
+          "vector<bool>",
+          "u64"
+        ]
+      },
+      "query_validator_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "address"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "query_validator_pools": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "u64"
+        ],
+        "return": [
+          "vector<address>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "u64"
+        ]
+      },
+      "query_vault_overview": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u128"
+        ]
+      },
+      "query_whitelisted_validators": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault"
+        ],
+        "return": [
+          "vector<address>"
+        ]
+      },
+      "request_delayed_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::dsui::DSUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::UnstakeRequest"
+        ]
+      },
+      "request_instant_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::dsui::DSUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "sort_vals_in_decreasing_order": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault"
+        ],
+        "return": [
+          "vector<address>"
+        ]
+      },
+      "stake_sui_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::dsui::DSUI>"
+        ]
+      },
+      "stake_user_selected_validators": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "vector<address>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "stake_with_validator": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unstake_from_validator_pools": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "unstake_inactive_validators": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_calculated_accrued_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_dsui_fee_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::config::HiveDaoCapability",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_validator_list": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::config::HiveDaoCapability",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "vector<address>",
+          "bool"
+        ],
+        "return": []
+      },
+      "withdraw_staked_sui": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "0x0000000000000000000000000000000000000000000000000000000000000003::staking_pool::StakedSui",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      }
+    },
+    "entry_script": {
+      "claim_unstaked_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::UnstakeRequest",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "destroy_or_transfer_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "request_delayed_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::dsui::DSUI>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "request_instant_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x871a0a84f6711bbcef294ba68d20cc4f629398eff30691c3accb114ed8141cff::dsui::DSUI>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_with_validator": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x0bbb5f172d901c96c8c9887e32a550976f40b2299ca3a54aa8f1ff9a17ec2810::dsui_vault::DSuiVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "helper": {
+      "calculate_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_sui_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000003::staking_pool::PoolTokenExchangeRate"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_token_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000003::staking_pool::PoolTokenExchangeRate"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "pool_token_exchange_rate_at_epoch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<u64, 0x0000000000000000000000000000000000000000000000000000000000000003::staking_pool::PoolTokenExchangeRate>",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000003::staking_pool::PoolTokenExchangeRate"
+        ]
+      }
+    }
   }
 }

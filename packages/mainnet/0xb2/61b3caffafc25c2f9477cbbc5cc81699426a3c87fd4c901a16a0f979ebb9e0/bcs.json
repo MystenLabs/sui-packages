@@ -38,5 +38,184 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 9
     }
+  },
+  "functionMap": {
+    "admin_cap": {
+      "create_admin_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb261b3caffafc25c2f9477cbbc5cc81699426a3c87fd4c901a16a0f979ebb9e0::admin_cap::AdminCap",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_partner_policy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb261b3caffafc25c2f9477cbbc5cc81699426a3c87fd4c901a16a0f979ebb9e0::admin_cap::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "address",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_partner_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb261b3caffafc25c2f9477cbbc5cc81699426a3c87fd4c901a16a0f979ebb9e0::admin_cap::PartnerPolicy"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "address",
+          "u64",
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_partner_policy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb261b3caffafc25c2f9477cbbc5cc81699426a3c87fd4c901a16a0f979ebb9e0::admin_cap::AdminCap",
+          "&mut 0xb261b3caffafc25c2f9477cbbc5cc81699426a3c87fd4c901a16a0f979ebb9e0::admin_cap::PartnerPolicy",
+          "address",
+          "address",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "umi_aggregator": {
+      "swap_begin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "swap_end": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "take_fee_for_partner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0xb261b3caffafc25c2f9477cbbc5cc81699426a3c87fd4c901a16a0f979ebb9e0::admin_cap::PartnerPolicy",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      }
+    },
+    "utils": {
+      "calc_quantity": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "check_amount_sufficient": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "maybe_split_coin_and_transfer_rest": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "maybe_split_coins_and_transfer_rest": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "maybe_transfer_or_destroy_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "merge_coins": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "split_coin_by_weights": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "vector<u64>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>"
+        ]
+      }
+    }
   }
 }

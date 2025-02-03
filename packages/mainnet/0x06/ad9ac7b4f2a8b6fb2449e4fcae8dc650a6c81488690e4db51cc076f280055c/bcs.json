@@ -111,5 +111,833 @@
       "upgraded_id": "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "calculator": {
+      "caculate_utilization": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "calculate_borrow_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "calculate_compounded_interest": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "calculate_linear_interest": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "calculate_repay_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "calculate_supply_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "calculate_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "u256",
+          "u8"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "calculate_withdraw_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      }
+    },
+    "lending": {
+      "borrow": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "&mut 0x3221fa03e8eb2a35409e6b2582ff89fb4af4745d0729f97d37bc3ee9adf2a653::pool::Pool<T0>",
+          "u8",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "&mut 0x3221fa03e8eb2a35409e6b2582ff89fb4af4745d0729f97d37bc3ee9adf2a653::pool::Pool<T0>",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "repay": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "&mut 0x3221fa03e8eb2a35409e6b2582ff89fb4af4745d0729f97d37bc3ee9adf2a653::pool::Pool<T0>",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "when_not_paused": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "&mut 0x3221fa03e8eb2a35409e6b2582ff89fb4af4745d0729f97d37bc3ee9adf2a653::pool::Pool<T0>",
+          "u8",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "logic": {
+      "decrease_borrow_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "decrease_supply_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "execute_borrow": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "execute_deposit": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "execute_repay": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "execute_withdraw": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "increase_borrow_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "increase_supply_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "is_collateral": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_health": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_loan": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "update_interest_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u256"
+        ],
+        "return": []
+      },
+      "update_state": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": []
+      },
+      "user_collateral_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "user_collateral_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "user_health_collateral_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "address"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "user_health_factor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "address"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "user_health_loan_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "address"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "user_loan_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "user_loan_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::PriceOracle",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": [
+          "u256"
+        ]
+      }
+    },
+    "storage": {
+      "borrow_reserve": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "&0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::ReserveData"
+        ]
+      },
+      "borrow_reserve_mut": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::ReserveData"
+        ]
+      },
+      "decrease_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::TokenBalance",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "decrease_borrow_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::ReserveData",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "decrease_supply_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "get_asset_ltv": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "get_borrow_cap_ceiling_ratio": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "get_borrow_rate_factors": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "u256",
+          "u256",
+          "u256",
+          "u256",
+          "u256"
+        ]
+      },
+      "get_coin_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ]
+      },
+      "get_current_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "u256",
+          "u256"
+        ]
+      },
+      "get_index": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "u256",
+          "u256"
+        ]
+      },
+      "get_last_update_timestamp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_liquidation_factors": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "u256",
+          "u256",
+          "u256"
+        ]
+      },
+      "get_supply_cap_ceiling": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "get_total_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8"
+        ],
+        "return": [
+          "u256",
+          "u256"
+        ]
+      },
+      "get_user_assets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "address"
+        ],
+        "return": [
+          "vector<u8>",
+          "vector<u8>"
+        ]
+      },
+      "get_user_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": [
+          "u256",
+          "u256"
+        ]
+      },
+      "increase_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::TokenBalance",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "increase_borrow_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "increase_supply_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address",
+          "u256"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init_reserve": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "bool",
+          "u256",
+          "u256",
+          "u256",
+          "u256",
+          "u256",
+          "u256",
+          "u256",
+          "u256",
+          "u256",
+          "u256",
+          "u256",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "only_configurator": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "only_owner": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "remove_user_collaterals": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": []
+      },
+      "remove_user_loans": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": []
+      },
+      "reserve_validation": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage"
+        ],
+        "return": []
+      },
+      "set_configurator": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "address",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_interest_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u256",
+          "u256"
+        ],
+        "return": []
+      },
+      "update_state": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u256",
+          "u256",
+          "u64",
+          "u256"
+        ],
+        "return": []
+      },
+      "update_user_collaterals": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": []
+      },
+      "update_user_loans": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "address"
+        ],
+        "return": []
+      }
+    },
+    "validation": {
+      "validate_borrow": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u64"
+        ],
+        "return": []
+      },
+      "validate_deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u64"
+        ],
+        "return": []
+      },
+      "validate_repay": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x06ad9ac7b4f2a8b6fb2449e4fcae8dc650a6c81488690e4db51cc076f280055c::storage::Storage",
+          "u8",
+          "u64"
+        ],
+        "return": []
+      }
+    }
   }
 }

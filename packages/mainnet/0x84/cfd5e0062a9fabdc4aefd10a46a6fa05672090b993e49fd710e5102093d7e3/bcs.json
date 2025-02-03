@@ -49,5 +49,114 @@
       "upgraded_id": "0x4979543452f609ff272d504755966ff5e70122256101c17adbe8bd27d35116c3",
       "upgraded_version": 3
     }
+  },
+  "functionMap": {
+    "rule": {
+      "calc_price_feed": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x5d8fbbf6f908a4af8c6d072669a462d53e03eb3c1d863bd0359dc818c69ea706::SupraSValueFeed::OracleHolder",
+          "&vector<u32>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x2a5743e9350dbcd2461b84ec90c26c47129e86594180ec1acf8ae81acb87b057::price_feed::PriceFeed"
+        ]
+      },
+      "set_price_as_primary": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a5743e9350dbcd2461b84ec90c26c47129e86594180ec1acf8ae81acb87b057::x_oracle::XOraclePriceUpdateRequest<T0>",
+          "&0x5d8fbbf6f908a4af8c6d072669a462d53e03eb3c1d863bd0359dc818c69ea706::SupraSValueFeed::OracleHolder",
+          "&0x84cfd5e0062a9fabdc4aefd10a46a6fa05672090b993e49fd710e5102093d7e3::supra_registry::SupraRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "set_price_as_secondary": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2a5743e9350dbcd2461b84ec90c26c47129e86594180ec1acf8ae81acb87b057::x_oracle::XOraclePriceUpdateRequest<T0>",
+          "&0x5d8fbbf6f908a4af8c6d072669a462d53e03eb3c1d863bd0359dc818c69ea706::SupraSValueFeed::OracleHolder",
+          "&0x84cfd5e0062a9fabdc4aefd10a46a6fa05672090b993e49fd710e5102093d7e3::supra_registry::SupraRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      }
+    },
+    "supra_adaptor": {
+      "convert_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u16",
+          "u128",
+          "u16",
+          "u8"
+        ],
+        "return": [
+          "u128",
+          "u16"
+        ]
+      },
+      "get_supra_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5d8fbbf6f908a4af8c6d072669a462d53e03eb3c1d863bd0359dc818c69ea706::SupraSValueFeed::OracleHolder",
+          "u32"
+        ],
+        "return": [
+          "u64",
+          "u8",
+          "u64"
+        ]
+      },
+      "scale_price": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u16"
+        ],
+        "return": [
+          "u256"
+        ]
+      }
+    },
+    "supra_registry": {
+      "get_supra_pairs_sequence": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x84cfd5e0062a9fabdc4aefd10a46a6fa05672090b993e49fd710e5102093d7e3::supra_registry::SupraRegistry"
+        ],
+        "return": [
+          "vector<u32>"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "register_supra_pairs_sequence": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x84cfd5e0062a9fabdc4aefd10a46a6fa05672090b993e49fd710e5102093d7e3::supra_registry::SupraRegistry",
+          "&0x84cfd5e0062a9fabdc4aefd10a46a6fa05672090b993e49fd710e5102093d7e3::supra_registry::SupraRegistryCap",
+          "vector<u32>"
+        ],
+        "return": []
+      }
+    }
   }
 }

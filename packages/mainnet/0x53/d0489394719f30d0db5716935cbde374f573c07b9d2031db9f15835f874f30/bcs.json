@@ -67,5 +67,280 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 29
     }
+  },
+  "functionMap": {
+    "base64": {
+      "decode": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "encode": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_char_map": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u8, u32>"
+        ]
+      }
+    },
+    "multisig": {
+      "approve_proposal": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Storage",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_multi_signature": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<vector<u8>>",
+          "&vector<0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Signer>",
+          "u16"
+        ],
+        "return": [
+          "0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::MultiSignature"
+        ]
+      },
+      "create_multisig_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<vector<u8>>",
+          "vector<u8>",
+          "u16"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "create_proposal": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Storage",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "execute_event": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Storage",
+          "u64"
+        ],
+        "return": []
+      },
+      "get_execute_command": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Storage",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_intent_message": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "get_proposal_id": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Storage"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_proposals": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Storage"
+        ],
+        "return": [
+          "vector<0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Proposal>"
+        ]
+      },
+      "get_pub_key_index": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&vector<0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Signer>",
+          "vector<u8>"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "get_pubkey": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::MultisigWallet",
+          "address"
+        ],
+        "return": [
+          "u64",
+          "vector<u8>"
+        ]
+      },
+      "get_wallets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Storage"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<address, 0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::MultisigWallet>"
+        ]
+      },
+      "has_member_voted": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Storage",
+          "u64",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "multisig_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::MultisigWallet"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "new_signer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "u8"
+        ],
+        "return": [
+          "0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Signer"
+        ]
+      },
+      "only_member": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::MultisigWallet",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "register_wallet": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::Storage",
+          "&0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::AdminCap",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "vector<u8>",
+          "u16"
+        ],
+        "return": []
+      },
+      "serialize_multisig": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x53d0489394719f30d0db5716935cbde374f573c07b9d2031db9f15835f874f30::multisig::MultiSignature"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "slice_vector": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "split_signature": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "vector<u8>",
+          "vector<u8>",
+          "u8"
+        ]
+      },
+      "verify_pubkey": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>",
+          "&vector<u8>",
+          "&vector<u8>",
+          "bool"
+        ],
+        "return": [
+          "bool"
+        ]
+      }
+    }
   }
 }

@@ -60,5 +60,243 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 29
     }
+  },
+  "functionMap": {
+    "app": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "config": {
+      "assert_address_is_not_trading_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config"
+        ],
+        "return": []
+      },
+      "assert_address_is_trading_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config"
+        ],
+        "return": []
+      },
+      "assert_interacting_with_most_up_to_date_package": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config"
+        ],
+        "return": []
+      },
+      "create_config": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::CONFIG",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::CONFIG",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "trading_manager_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "update_trading_manager_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::app::AdminCap",
+          "&mut 0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "address"
+        ],
+        "return": []
+      }
+    },
+    "trade_account": {
+      "borrow_asset_for_trading": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::trade_account::TradeAsset<T0>",
+          "u64",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "deposit_existing_asset": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::trade_account::TradeAsset<T0>",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config"
+        ],
+        "return": []
+      },
+      "deposit_new_asset": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "deposit_new_asset_as_trading_manager": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "withdraw_all_asset": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::trade_account::TradeAsset<T0>",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "withdraw_asset": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::trade_account::TradeAsset<T0>",
+          "u64",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "trading_manager_actions": {
+      "borrow_asset_for_trading": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::trade_account::TradeAsset<T0>",
+          "u64",
+          "address",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "deposit_existing_asset_as_trading_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::trade_account::TradeAsset<T0>",
+          "address",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deposit_new_asset_as_trading_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "address",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "user_actions": {
+      "deposit_existing_asset_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::trade_account::TradeAsset<T0>",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deposit_new_asset_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_all_assets_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::trade_account::TradeAsset<T0>",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_asset_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::trade_account::TradeAsset<T0>",
+          "u64",
+          "&0x699288d15692332058bfb674662218c31c5859002418c01f977c89f18d3fdec8::config::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

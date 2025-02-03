@@ -88,44 +88,48 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Order<$0, $1, $2>",
+          "0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Order<T0, T1, T2>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_signed_permission_data": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Order<$0, $1, $2>",
+          "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Order<T0, T1, T2>",
           "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::SignedPermissionData",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_tokens": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<$0, $2>",
-          "0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Order<$0, $1, $2>",
+          "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<T0, T2>",
+          "0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Order<T0, T1, T2>",
           "vector<u8>",
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "collect_protocol_fees": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::AdminCap",
-          "&mut 0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<$0, $1>",
+          "&mut 0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<T0, T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "create_guard": {
         "visibility": "PUBLIC",
@@ -135,14 +139,14 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_order": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<$0, $2>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<T0, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u64",
           "u64",
           "u32",
@@ -151,7 +155,7 @@
           "u128",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "decode_signed_permission_data": {
         "visibility": "PRIVATE",
@@ -159,7 +163,9 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::SignedPermissionData"
+        ]
       },
       "decode_signed_success_confirmation_data": {
         "visibility": "PRIVATE",
@@ -167,17 +173,21 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::SignedSuccessConfirmationData"
+        ]
       },
       "decode_start_permission_and_check_signature": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<$0, $1>",
+          "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<T0, T1>",
           "vector<u8>",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::SignedPermissionData"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -185,7 +195,90 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "pre_start_order_execution": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<T0, T2>",
+          "&mut 0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Order<T0, T1, T2>",
+          "vector<u8>",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::SwapReceipt"
+        ]
+      },
+      "send_coins_and_destroy_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_auctioneer_pub_key": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::AdminCap",
+          "&mut 0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<T0, T1>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "start_order_execution": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<T0, T2>",
+          "&mut 0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Order<T0, T1, T2>",
+          "vector<u8>",
+          "vector<u8>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "start_order_execution_after_swap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<T0, T2>",
+          "&mut 0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Order<T0, T1, T2>",
+          "vector<u8>",
+          "vector<u8>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T2>",
+          "0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::SwapReceipt",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "start_order_execution_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Guard<T0, T2>",
+          "&mut 0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::Order<T0, T1, T2>",
+          "0xe6ce2cf45860eaca526f27423a349912ede86f297b55fba86f857d679d41eae9::source_chain_guard::SignedPermissionData",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

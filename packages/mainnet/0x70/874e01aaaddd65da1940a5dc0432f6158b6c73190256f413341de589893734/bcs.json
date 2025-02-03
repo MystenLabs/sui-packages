@@ -59,5 +59,237 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 18
     }
+  },
+  "functionMap": {
+    "royalty_basis": {
+      "basis": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_basis::RoyaltyBasis<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "T0",
+          "u64"
+        ],
+        "return": [
+          "0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_basis::RoyaltyBasis<T0>"
+        ]
+      }
+    },
+    "royalty_fixed_rule": {
+      "add": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<T0>",
+          "&0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_fixed_rule::RoyaltyFixed"
+        ],
+        "return": []
+      },
+      "distribute": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_fixed_rule::RoyaltyFixed",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_fixed_rule::RoyaltyFixed"
+        ]
+      },
+      "pay": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
+          "&mut 0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_fixed_rule::RoyaltyFixed",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ],
+        "return": []
+      }
+    },
+    "royalty_proportional_rule": {
+      "add": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<T1>",
+          "&0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_proportional_rule::RoyaltyProportional<T0>"
+        ],
+        "return": []
+      },
+      "distribute": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_proportional_rule::RoyaltyProportional<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares",
+          "u16",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_proportional_rule::RoyaltyProportional<T0>"
+        ]
+      },
+      "pay": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T1>",
+          "&mut 0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_proportional_rule::RoyaltyProportional<T0>",
+          "0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_basis::RoyaltyBasis<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ],
+        "return": []
+      }
+    },
+    "royalty_share": {
+      "assert_total_shares": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<address, u16>"
+        ],
+        "return": []
+      },
+      "borrow": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<address, u16>"
+        ]
+      },
+      "borrow_share": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares",
+          "&address"
+        ],
+        "return": [
+          "&u16"
+        ]
+      },
+      "borrow_share_mut": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares",
+          "&address"
+        ],
+        "return": [
+          "&mut u16"
+        ]
+      },
+      "contains": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares",
+          "&address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "distribute": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "distribute_inner": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<address, u16>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "from_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address"
+        ],
+        "return": [
+          "0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares"
+        ]
+      },
+      "from_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<address, u16>"
+        ],
+        "return": [
+          "0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares"
+        ]
+      },
+      "transfer_partial_share": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares",
+          "address",
+          "u16",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_share": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x70874e01aaaddd65da1940a5dc0432f6158b6c73190256f413341de589893734::royalty_share::Shares",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

@@ -59,5 +59,318 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 29
     }
+  },
+  "functionMap": {
+    "lbtc": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::lbtc::LBTC",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "multisig": {
+      "address_from_bytes": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>",
+          "u8"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "derive_multisig_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<vector<u8>>",
+          "vector<u8>",
+          "u16"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "ed25519_key_to_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "is_sender_multisig": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<vector<u8>>",
+          "vector<u8>",
+          "u16",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "secp256k1_key_to_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "secp256r1_key_to_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "address"
+        ]
+      }
+    },
+    "pk_util": {
+      "is_valid_key": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "validate_pks": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<vector<u8>>"
+        ],
+        "return": []
+      }
+    },
+    "treasury": {
+      "add_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "address",
+          "T1"
+        ],
+        "return": []
+      },
+      "add_capability": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "address",
+          "T1",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "burn": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deconstruct": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::DenyCapV2<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::Bag"
+        ]
+      },
+      "disable_global_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
+          "vector<vector<u8>>",
+          "vector<u8>",
+          "u16",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "enable_global_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
+          "vector<vector<u8>>",
+          "vector<u8>",
+          "u16",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "address"
+        ],
+        "return": [
+          "&T1"
+        ]
+      },
+      "get_cap_mut": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "address"
+        ],
+        "return": [
+          "&mut T1"
+        ]
+      },
+      "has_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_global_pause_enabled": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "list_roles": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "address"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
+      },
+      "mint_and_transfer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "u64",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
+          "vector<vector<u8>>",
+          "vector<u8>",
+          "u16",
+          "vector<u8>",
+          "u32",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::DenyCapV2<T0>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>"
+        ]
+      },
+      "new_admin_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::AdminCap"
+        ]
+      },
+      "new_minter_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::MinterCap"
+        ]
+      },
+      "new_pauser_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::PauserCap"
+        ]
+      },
+      "remove_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "address"
+        ],
+        "return": [
+          "T1"
+        ]
+      },
+      "remove_capability": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "share": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::treasury::ControlledTreasury<T0>"
+        ],
+        "return": []
+      }
+    }
   }
 }

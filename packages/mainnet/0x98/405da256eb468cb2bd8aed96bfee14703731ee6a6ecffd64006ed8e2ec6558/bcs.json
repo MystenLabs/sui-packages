@@ -106,5 +106,176 @@
       "upgraded_id": "0x00c2f85e07181b90c140b15c5ce27d863f93c4d9159d2a4e7bdaeb40e286d6f5",
       "upgraded_version": 3
     }
+  },
+  "functionMap": {
+    "vesting": {
+      "accept_proposed_new_beneficiary": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingAdminCapability",
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingSchedule",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "add_hive_for_vesting": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingVault",
+          "&0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingAdminCapability",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x145cc4aff56ac7f3aa994bc8aee09e3e5fbdb3b3a138c5fc51ef79861865e2cf::hive::HIVE>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "add_to_vesting_schedule": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingAdminCapability",
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingVault",
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingSchedule",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "calc_vested_amt": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "claim_released_tokens": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingVault",
+          "&0x3043d4128313dc032b1b702acb29ecfc0a06ebd0337d372e8104adfde63cb359::honey_trade::HoneyManager<0x145cc4aff56ac7f3aa994bc8aee09e3e5fbdb3b3a138c5fc51ef79861865e2cf::honey::HONEY>",
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingSchedule",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<0x145cc4aff56ac7f3aa994bc8aee09e3e5fbdb3b3a138c5fc51ef79861865e2cf::honey::HONEY>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "clawback_unvested_gems": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingAdminCapability",
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingVault",
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingSchedule",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_released_and_claimable_hive_for_schedule": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingSchedule",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "increment_schedule": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingSchedule"
+        ],
+        "return": []
+      },
+      "increment_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingVault"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init_vesting_schedule": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingVault",
+          "&0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingAdminCapability",
+          "address",
+          "u64",
+          "u64",
+          "bool",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "kraft_genesis_honey": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingVault",
+          "&mut 0xd1f149fed5ebf01f7107e08fa088900fbb65943189881a53cef389e68de11d28::dragon_food::DragonFood",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x145cc4aff56ac7f3aa994bc8aee09e3e5fbdb3b3a138c5fc51ef79861865e2cf::honey::HONEY>",
+          "&mut 0x15f53b90602b3d8e2450cc7df0a593b904fa023ba348d1c8df4c8148a51c29ce::dragon_trainer::BeesManager",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "kraft_vesting_vault_obj": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x145cc4aff56ac7f3aa994bc8aee09e3e5fbdb3b3a138c5fc51ef79861865e2cf::yield_flow::VoteByVestedTokensCapability",
+          "&0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingAdminCapability",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_proposed_new_beneficiary": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x98405da256eb468cb2bd8aed96bfee14703731ee6a6ecffd64006ed8e2ec6558::vesting::VestingSchedule",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

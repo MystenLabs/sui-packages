@@ -137,5 +137,644 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 16
     }
+  },
+  "functionMap": {
+    "admin": {
+      "create_operator_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OperatorCap<T0>"
+        ]
+      },
+      "create_owner_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "T0",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<T0>"
+        ]
+      },
+      "destroy_operator_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OperatorCap<T0>"
+        ],
+        "return": []
+      },
+      "destroy_owner_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<T0>"
+        ],
+        "return": []
+      },
+      "transfer_owner_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<T0>",
+          "address"
+        ],
+        "return": []
+      }
+    },
+    "bond": {
+      "bond": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondAsset<T0>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondVesting"
+        ]
+      },
+      "bond_to_sender": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondAsset<T0>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_vapor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondVesting",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR>"
+        ]
+      },
+      "claim_vapor_to_sender": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondVesting",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_bond_asset": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BOND_ADMIN>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "destroy_asset_oracle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BOND_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondAsset<T0>"
+        ],
+        "return": []
+      },
+      "destroy_vapor_mint_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BOND_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager"
+        ],
+        "return": []
+      },
+      "get_asset_bcv": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondAsset<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_asset_exec_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager",
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondAsset<T0>",
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_debt_ratio": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager",
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_treasury": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>"
+        ]
+      },
+      "get_vapor_outstanding": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_vapor_rfv": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_vest_duration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_asset_bcv": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BOND_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondAsset<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_asset_bond_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BOND_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondAsset<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_asset_oracle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BOND_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondAsset<T0>",
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::price_oracle::PriceOracle"
+        ],
+        "return": []
+      },
+      "set_oracle_admin_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OperatorCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::price_oracle::ORACLE_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondAsset<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_treasury": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BOND_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager",
+          "address"
+        ],
+        "return": []
+      },
+      "set_vapor_mint_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BOND_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager",
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::MintCap"
+        ],
+        "return": []
+      },
+      "set_vapor_rfv": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BOND_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_vest_duration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BOND_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::bond::BondManager",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "price_oracle": {
+      "create_oracle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::price_oracle::ORACLE_ADMIN>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::price_oracle::PriceOracle"
+        ]
+      },
+      "destroy_oracle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::price_oracle::PriceOracle"
+        ],
+        "return": []
+      },
+      "get_oracle_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::price_oracle::PriceOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_admin_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OperatorCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::price_oracle::ORACLE_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::price_oracle::PriceOracle",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "stake": {
+      "destroy_vapor_mint_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::STAKE_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool"
+        ],
+        "return": []
+      },
+      "get_epoch_num": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_rebase_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_redeem_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_stake_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_staked_vapor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::STAKE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "rebase": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OperatorCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::STAKE_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "set_rebase_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::STAKE_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_vapor_mint_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::STAKE_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool",
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::MintCap"
+        ],
+        "return": []
+      },
+      "stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::STAKE>"
+        ]
+      },
+      "stake_to_sender": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::STAKE>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR>"
+        ]
+      },
+      "unstake_to_sender": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::RebasePool",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::stake::STAKE>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "team_vesting": {
+      "claim_vapor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::team_vesting::TeamVesting",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR>"
+        ]
+      },
+      "claim_vapor_to_sender": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::team_vesting::TeamVesting",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "distribute_vapor": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "vapor": {
+      "burn": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR>"
+        ],
+        "return": []
+      },
+      "create_mint_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR_ADMIN>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "destroy_mint_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::MintCap"
+        ],
+        "return": []
+      },
+      "get_invalid_mint_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_total_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "invalidate_mint_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::admin::OwnerCap<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR_ADMIN>",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": []
+      },
+      "mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::MintCap",
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::Treasury",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vapor::VAPOR>"
+        ]
+      }
+    },
+    "vesting": {
+      "claim_vested": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vesting::VestingSchedule<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "vest_tokens": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x46956f33fbd3b3396cb2bc5aa6de2702d6832fad38c762092561bb332028d471::vesting::VestingSchedule<T0>"
+        ]
+      }
+    }
   }
 }

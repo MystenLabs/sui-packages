@@ -93,5 +93,411 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 23
     }
+  },
+  "functionMap": {
+    "admin": {
+      "burn": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap"
+        ]
+      }
+    },
+    "drand_utils": {
+      "derive_randomness": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "safe_selection": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "vector<u8>",
+          "vector<u8>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "verify_drand_signature": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "raffle": {
+      "add_accepted_coin_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "add_ticket_options": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "vector<u64>",
+          "vector<u64>"
+        ],
+        "return": []
+      },
+      "buy_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle",
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "buy_tickets_from_option": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle",
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "collected": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "commit_winner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "address"
+        ],
+        "return": []
+      },
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Prize",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_treasury": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "derive_next_drand_round": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "disable_accepted_coin_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap"
+        ],
+        "return": []
+      },
+      "drand_round": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "enable_accepted_coin_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap"
+        ],
+        "return": []
+      },
+      "end_date": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "extend_raffle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "get_valid_coin_type": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_participant": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "lucky_number": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "vector<u8>",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "my_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "vector<vector<u64>>"
+        ]
+      },
+      "new_prize": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Prize"
+        ]
+      },
+      "prize_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Prize"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "prize_value_raffle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "remove_accepted_coin_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap"
+        ],
+        "return": []
+      },
+      "remove_ticket_option": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "tickets_bought": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_participants": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_price_per_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_ticket_options": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "vector<u64>",
+          "vector<u64>"
+        ],
+        "return": []
+      },
+      "winner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "winning_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::Raffle"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "withdraw_proceeds": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::raffle::RaffleTreasury",
+          "&0xc8171b0e54392d94bbfffeaeb12ffde7d124d72e39fdeafd4ac61251ab0cca4c::admin::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      }
+    }
   }
 }

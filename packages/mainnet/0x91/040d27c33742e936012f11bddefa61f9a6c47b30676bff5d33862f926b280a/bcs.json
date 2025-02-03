@@ -59,5 +59,307 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 20
     }
+  },
+  "functionMap": {
+    "drand_lib": {
+      "derive_randomness": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "safe_selection": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&vector<u8>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "verify_drand_signature": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      },
+      "verify_time_has_passed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "lottery": {
+      "buy_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool_manager::PoolAdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::lottery::LOTTERY",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "settle_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_pool_status": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool_manager::PoolAdminCap",
+          "&mut 0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>",
+          "u8"
+        ],
+        "return": []
+      }
+    },
+    "pool": {
+      "buy_ticket": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "copy_pool_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::PoolTicket"
+        ],
+        "return": [
+          "0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::WinerPoolTicket"
+        ]
+      },
+      "create_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "distribute_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>",
+          "0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::WinerPoolTicket",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_end_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_max_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_sold_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_start_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table_vec::TableVec<0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::PoolTicket>"
+        ]
+      },
+      "is_inprocess": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u8"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "reset_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_pool_status": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>",
+          "u8"
+        ],
+        "return": []
+      }
+    },
+    "pool_manager": {
+      "create_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_pool_admin_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool_manager::PoolAdminCap"
+        ]
+      },
+      "distribute_and_reset_pool": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>",
+          "0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::WinerPoolTicket",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_pool_admin_cap_and_take": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "settle_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_pool_status": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91040d27c33742e936012f11bddefa61f9a6c47b30676bff5d33862f926b280a::pool::Pool<T0>",
+          "u8"
+        ],
+        "return": []
+      }
+    }
   }
 }

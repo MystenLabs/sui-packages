@@ -39,5 +39,76 @@
       "upgraded_id": "0xc7abe17a209fcab08e2d7d939cf3df11f5b80cf03d10b50893f38df12fdebb07",
       "upgraded_version": 2
     }
+  },
+  "functionMap": {
+    "oracle": {
+      "add_price_pair_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8b1ad0a46da6dffe84a7bdd8d4beb39c965daeb3b833a4723428ba7c05da7527::oracle::KriyaOracle",
+          "u32",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "get_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8b1ad0a46da6dffe84a7bdd8d4beb39c965daeb3b833a4723428ba7c05da7527::oracle::KriyaOracle",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "initialize": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x8b1ad0a46da6dffe84a7bdd8d4beb39c965daeb3b833a4723428ba7c05da7527::oracle::KriyaOracle"
+        ]
+      },
+      "update_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8b1ad0a46da6dffe84a7bdd8d4beb39c965daeb3b833a4723428ba7c05da7527::oracle::KriyaOracle",
+          "&mut 0x5d8fbbf6f908a4af8c6d072669a462d53e03eb3c1d863bd0359dc818c69ea706::SupraSValueFeed::OracleHolder",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      }
+    },
+    "supra_adapter": {
+      "get_supra_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5d8fbbf6f908a4af8c6d072669a462d53e03eb3c1d863bd0359dc818c69ea706::SupraSValueFeed::OracleHolder",
+          "u32"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "scale_price_to_formatted_decimals": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u8"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    }
   }
 }

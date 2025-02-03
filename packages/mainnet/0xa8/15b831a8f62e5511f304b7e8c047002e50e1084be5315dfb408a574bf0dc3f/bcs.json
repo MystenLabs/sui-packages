@@ -38,5 +38,133 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 20
     }
+  },
+  "functionMap": {
+    "dex": {
+      "swap_from_x_to_y": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::Pool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_X>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_Y>"
+        ]
+      },
+      "swap_from_y_to_x": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::Pool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_Y>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_X>"
+        ]
+      }
+    },
+    "flash_loan": {
+      "borrow_x": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::Pool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_X>",
+          "0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::flash_loan::FlashLoan<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_X>"
+        ]
+      },
+      "borrow_y": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::Pool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_Y>",
+          "0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::flash_loan::FlashLoan<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_Y>"
+        ]
+      },
+      "repay_x": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::Pool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_X>",
+          "0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::flash_loan::FlashLoan<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_X>"
+        ],
+        "return": []
+      },
+      "repay_y": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::Pool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_Y>",
+          "0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::flash_loan::FlashLoan<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_Y>"
+        ],
+        "return": []
+      }
+    },
+    "pool": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "put_coin_x": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::Pool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_X>"
+        ],
+        "return": []
+      },
+      "put_coin_y": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::Pool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_Y>"
+        ],
+        "return": []
+      },
+      "take_coin_x": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::Pool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_X>"
+        ]
+      },
+      "take_coin_y": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::Pool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa815b831a8f62e5511f304b7e8c047002e50e1084be5315dfb408a574bf0dc3f::pool::COIN_Y>"
+        ]
+      }
+    }
   }
 }

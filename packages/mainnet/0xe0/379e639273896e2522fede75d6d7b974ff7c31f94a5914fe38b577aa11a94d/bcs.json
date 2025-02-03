@@ -55,7 +55,7 @@
         "params": [
           "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::message::Message"
         ],
-        "return": null
+        "return": []
       },
       "message_sent_event": {
         "visibility": "FRIEND",
@@ -63,7 +63,7 @@
         "params": [
           "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::message::Message"
         ],
-        "return": null
+        "return": []
       }
     },
     "messenger": {
@@ -74,7 +74,7 @@
           "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "gas_balance_value": {
         "visibility": "FRIEND",
@@ -82,7 +82,9 @@
         "params": [
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_gas_usage": {
         "visibility": "FRIEND",
@@ -90,7 +92,9 @@
         "params": [
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<u8, u64>"
+        ]
       },
       "get_id": {
         "visibility": "FRIEND",
@@ -98,7 +102,9 @@
         "params": [
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
       },
       "get_other_chain_ids": {
         "visibility": "FRIEND",
@@ -106,7 +112,9 @@
         "params": [
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger"
         ],
-        "return": null
+        "return": [
+          "&vector<bool>"
+        ]
       },
       "get_received_messages": {
         "visibility": "FRIEND",
@@ -114,7 +122,9 @@
         "params": [
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger"
         ],
-        "return": null
+        "return": [
+          "&0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::set::Set<0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::message::Message>"
+        ]
       },
       "get_sent_messages": {
         "visibility": "FRIEND",
@@ -122,7 +132,9 @@
         "params": [
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger"
         ],
-        "return": null
+        "return": [
+          "&0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::set::Set<0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::message::Message>"
+        ]
       },
       "get_transaction_cost": {
         "visibility": "FRIEND",
@@ -132,13 +144,17 @@
           "&0xadfe831a90bc86f1b3cdf073ba4e2c20546e1dc88139e70fe2bbfe55164e3387::gas_oracle::GasOracle",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_version": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -146,7 +162,88 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "migrate": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::AdminCap",
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger"
+        ],
+        "return": []
+      },
+      "receive_message": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::message::Message",
+          "vector<u8>",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "remove_secondary_validator": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "send_message": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "&0xadfe831a90bc86f1b3cdf073ba4e2c20546e1dc88139e70fe2bbfe55164e3387::gas_oracle::GasOracle",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::message::Message",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ],
+        "return": []
+      },
+      "set_gas_usage": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "u8",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_other_chains": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "vector<bool>"
+        ],
+        "return": []
+      },
+      "set_primary_validator": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "withdraw_fee": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       }
     },
     "messenger_interface": {
@@ -158,7 +255,7 @@
           "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "gas_balance_value": {
         "visibility": "PUBLIC",
@@ -166,7 +263,9 @@
         "params": [
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_gas_usage": {
         "visibility": "PUBLIC",
@@ -175,7 +274,9 @@
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_other_chain_ids": {
         "visibility": "PUBLIC",
@@ -183,7 +284,9 @@
         "params": [
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger"
         ],
-        "return": null
+        "return": [
+          "&vector<bool>"
+        ]
       },
       "get_transaction_cost": {
         "visibility": "PUBLIC",
@@ -193,7 +296,9 @@
           "&0xadfe831a90bc86f1b3cdf073ba4e2c20546e1dc88139e70fe2bbfe55164e3387::gas_oracle::GasOracle",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "has_received_message": {
         "visibility": "PUBLIC",
@@ -202,7 +307,9 @@
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
           "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::message::Message"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "has_sent_messages": {
         "visibility": "PUBLIC",
@@ -211,7 +318,9 @@
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
           "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::message::Message"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "migrate": {
         "visibility": "PUBLIC",
@@ -220,7 +329,7 @@
           "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::AdminCap",
           "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger"
         ],
-        "return": null
+        "return": []
       },
       "receive_message": {
         "visibility": "PUBLIC",
@@ -231,7 +340,7 @@
           "vector<u8>",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "remove_secondary_validator": {
         "visibility": "PUBLIC",
@@ -241,7 +350,63 @@
           "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
+      },
+      "send_message": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "&0xadfe831a90bc86f1b3cdf073ba4e2c20546e1dc88139e70fe2bbfe55164e3387::gas_oracle::GasOracle",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::message::Message",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ],
+        "return": []
+      },
+      "set_gas_usage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::AdminCap",
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "u8",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_other_chains": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::AdminCap",
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "vector<bool>"
+        ],
+        "return": []
+      },
+      "set_primary_validator": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::AdminCap",
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "withdraw_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::AdminCap",
+          "&mut 0xe0379e639273896e2522fede75d6d7b974ff7c31f94a5914fe38b577aa11a94d::messenger::Messenger",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       }
     }
   }

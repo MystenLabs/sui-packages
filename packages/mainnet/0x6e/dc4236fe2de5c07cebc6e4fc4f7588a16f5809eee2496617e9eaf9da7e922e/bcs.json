@@ -116,5 +116,515 @@
       "upgraded_id": "0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "events": {
+      "emit_changed_leverage_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_staked_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_unstaked_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "interface": {
+      "borrow_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market",
+          "&0xca5a5a62f01c79a104bf4d31669e29daa387f325c241de4edbe30986a9bc8b0d::coin_decimals_registry::CoinDecimalsRegistry",
+          "u64",
+          "&0x1478a432123e4b3d61878b629f2c692969fdb375644f1251cd278a4b1e7d7cd6::x_oracle::XOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "complete_change_leverage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "complete_leverage_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "complete_leverage_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_leveraged_action_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState"
+        ],
+        "return": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap"
+        ]
+      },
+      "deposit_afsui_collateral": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc::afsui::AFSUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "initiate_change_leverage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState"
+        ],
+        "return": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap"
+        ]
+      },
+      "initiate_leverage_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc::afsui::AFSUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap"
+        ]
+      },
+      "initiate_leverage_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "u64"
+        ],
+        "return": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap"
+        ]
+      },
+      "repay_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_afsui_collateral": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::interface::LeveragedActionCap",
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market",
+          "&0xca5a5a62f01c79a104bf4d31669e29daa387f325c241de4edbe30986a9bc8b0d::coin_decimals_registry::CoinDecimalsRegistry",
+          "u64",
+          "&0x1478a432123e4b3d61878b629f2c692969fdb375644f1251cd278a4b1e7d7cd6::x_oracle::XOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc::afsui::AFSUI>"
+        ]
+      }
+    },
+    "leveraged_afsui_position": {
+      "afsui_collateral": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "base_afsui_collateral": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "leverage_ratio": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "loan_to_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "obligation_key": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::ObligationKey"
+        ]
+      },
+      "obligation_key_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::ObligationKey"
+        ]
+      },
+      "open_obligation": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::open_obligation::ObligationHotPotato"
+        ]
+      },
+      "position_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata"
+        ]
+      },
+      "return_obligation": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
+          "0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::open_obligation::ObligationHotPotato"
+        ],
+        "return": []
+      },
+      "set_position_metadata": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata"
+        ],
+        "return": []
+      },
+      "sui_debt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "leveraged_afsui_state": {
+      "assert_protocol_version": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState"
+        ],
+        "return": []
+      },
+      "decrease_total_afsui_collateral": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "u64"
+        ],
+        "return": []
+      },
+      "decrease_total_sui_debt": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "u64"
+        ],
+        "return": []
+      },
+      "increase_total_afsui_collateral": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "u64"
+        ],
+        "return": []
+      },
+      "increase_total_sui_debt": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState",
+          "u64"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "total_afsui_collateral": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_sui_debt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::leveraged_afsui_state::LeveragedAfSuiState"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "position_metadata": {
+      "afsui_collateral": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "base_afsui_collateral": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "decrease_base_afsui_collateral": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata",
+          "u64"
+        ],
+        "return": []
+      },
+      "decrease_total_afsui_collateral": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata",
+          "u64"
+        ],
+        "return": []
+      },
+      "decrease_total_sui_debt": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata",
+          "u64"
+        ],
+        "return": []
+      },
+      "increase_base_afsui_collateral": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata",
+          "u64"
+        ],
+        "return": []
+      },
+      "increase_total_afsui_collateral": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata",
+          "u64"
+        ],
+        "return": []
+      },
+      "increase_total_sui_debt": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata",
+          "u64"
+        ],
+        "return": []
+      },
+      "leverage_ratio": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "loan_to_value": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata"
+        ]
+      },
+      "sui_debt": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x89320a452c04a3381f1e997d4f99300b795af4645008b31e79d870a568b74cc0::position_metadata::PositionMetadata"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "utils": {
+      "calc_leverage_ratio": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calc_loan_to_value": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    }
   }
 }

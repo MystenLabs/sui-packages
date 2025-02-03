@@ -45,5 +45,85 @@
       "upgraded_id": "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "pyth_adaptor": {
+      "assert_price_conf_within_range": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "assert_price_not_stale": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::Price",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "get_pyth_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State",
+          "&mut 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u8",
+          "u64"
+        ]
+      }
+    },
+    "pyth_registry": {
+      "assert_pyth_price_info_object": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x260d36c4e48f4ea34e8bfccb49736780b8ebc8ae76b163c10ed36b62f440ec5a::pyth_registry::PythRegistry",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "register_pyth_price_info_object": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x260d36c4e48f4ea34e8bfccb49736780b8ebc8ae76b163c10ed36b62f440ec5a::pyth_registry::PythRegistry",
+          "&0x260d36c4e48f4ea34e8bfccb49736780b8ebc8ae76b163c10ed36b62f440ec5a::pyth_registry::PythRegistryCap",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject"
+        ],
+        "return": []
+      }
+    },
+    "rule": {
+      "set_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8148535d4a3f22d09468a9e101ec10ef8803c94e7aae3993897907aeec288f32::x_oracle::XOraclePriceUpdateRequest<T0>",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State",
+          "&mut 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x260d36c4e48f4ea34e8bfccb49736780b8ebc8ae76b163c10ed36b62f440ec5a::pyth_registry::PythRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      }
+    }
   }
 }

@@ -66,5 +66,585 @@
       "upgraded_id": "0xe93247b408fe44ed0ee5b6ac508b36325b239d6333e44ffa240dcc0c1a69cdd8",
       "upgraded_version": 4
     }
+  },
+  "functionMap": {
+    "arithmetic": {
+      "inv_128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "mul_128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "sqrt_128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "to_128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u128"
+        ]
+      }
+    },
+    "cetus": {
+      "add_prices": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode>",
+          "u64",
+          "u64",
+          "u16",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>"
+        ],
+        "return": []
+      },
+      "add_prices_no_fee": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode>",
+          "u64",
+          "u64",
+          "u16",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>"
+        ],
+        "return": []
+      },
+      "get_sqrt_price": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "bool"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "swap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "bool",
+          "bool",
+          "u64",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_bag": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut u128",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bag::Bag",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "u16",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_buy": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_sell": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      }
+    },
+    "fee": {
+      "check_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u16",
+          "address",
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::Fee"
+        ],
+        "return": []
+      },
+      "get_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::Fee"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_recipient": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::Fee"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::AdminCap",
+          "address"
+        ],
+        "return": []
+      },
+      "new_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::AdminCap",
+          "u16",
+          "bool",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::Fee"
+        ]
+      },
+      "new_fee_with_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::AdminCap",
+          "u16",
+          "bool",
+          "u64",
+          "address",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::Fee"
+        ]
+      },
+      "set_values": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::AdminCap",
+          "u16",
+          "u64",
+          "bool",
+          "&mut 0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::Fee"
+        ],
+        "return": []
+      }
+    },
+    "paths": {
+      "add_all": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut vector<T0>",
+          "&mut vector<T0>"
+        ],
+        "return": []
+      },
+      "copy_price_node": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode"
+        ],
+        "return": [
+          "0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode"
+        ]
+      },
+      "emit_prices": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode>"
+        ],
+        "return": []
+      },
+      "emit_route": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::Route"
+        ],
+        "return": []
+      },
+      "evolve": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut vector<vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::Route>>",
+          "&vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "get_route_route": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::Route"
+        ],
+        "return": [
+          "vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode>"
+        ]
+      },
+      "get_route_sqrt_price": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::Route"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "insert": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::Route",
+          "&mut vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::Route>",
+          "u64"
+        ],
+        "return": []
+      },
+      "new_price_node": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u16",
+          "u128"
+        ],
+        "return": [
+          "0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode"
+        ]
+      },
+      "new_state": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "vector<vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::Route>>"
+        ]
+      },
+      "price_node_arg": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "price_node_from": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "price_node_sqrt_price": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "price_node_to": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "test": {
+      "check_profit_arb": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u128"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "compute_multiple": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128",
+          "u128",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "find_best_arb": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u128",
+          "u128",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::fee::Fee",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "find_prices": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ],
+        "return": [
+          "vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode>"
+        ]
+      },
+      "find_prices_no_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ],
+        "return": [
+          "vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode>"
+        ]
+      },
+      "find_route": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ],
+        "return": [
+          "vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::Route>"
+        ]
+      },
+      "swap_route_static": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut u128",
+          "vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      }
+    },
+    "turbos": {
+      "add_prices": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode>",
+          "u64",
+          "u64",
+          "u16",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>"
+        ],
+        "return": []
+      },
+      "add_prices_no_fee": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x1402770e1148bedb0a1fdbf5bc407847a7a5bdf9541ad2971ac29579e438eeea::paths::PriceNode>",
+          "u64",
+          "u64",
+          "u16",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>"
+        ],
+        "return": []
+      },
+      "get_sqrt_price": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T1, T2, T0>",
+          "bool"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "swap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "bool",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_bag": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut u128",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bag::Bag",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T1, T2, T0>",
+          "u16",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_buy": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T1, T0, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_sell": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      }
+    }
   }
 }

@@ -198,5 +198,1414 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 26
     }
+  },
+  "functionMap": {
+    "game_structs": {
+      "ball_outcome": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "vector<u8>"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::game_structs::BallOutcome"
+        ]
+      },
+      "bet_result": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::game_structs::BetResult<T0>"
+        ]
+      },
+      "blackjack_hand": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "u64",
+          "u8",
+          "u64",
+          "bool",
+          "bool",
+          "bool",
+          "u64"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::game_structs::BlackjackHand"
+        ]
+      },
+      "range_game": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::game_structs::RangeGame"
+        ]
+      }
+    },
+    "house": {
+      "deposit": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::StakedHouseCoin<T0>>"
+        ]
+      },
+      "deposit_house_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "fee_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "house_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "house_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "join": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "join_from_pipe": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::PoolDebt<T0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::HouseDebt<T0>>"
+        ],
+        "return": []
+      },
+      "join_with_fee": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "max_risk": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>"
+        ]
+      },
+      "pool_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "pool_changes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "redeem": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::StakedHouseCoin<T0>>",
+          "address"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "set_max_supply": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "split": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "split_for_pipe": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::PoolDebt<T0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::HouseDebt<T0>>"
+        ]
+      },
+      "split_for_voucher": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "split_with_reimbursement": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "total_house_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_pool_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "voucher_deposit": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "withdraw_house_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      }
+    },
+    "math": {
+      "bytes_to_u256": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "max_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "mul_and_div": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "mul_and_div_m_u128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u128"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "mul_and_div_u128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "mul_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "pow": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u8"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "precision": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "partners": {
+      "add_partner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::partners::PartnerList"
+        ],
+        "return": []
+      },
+      "contains": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::partners::PartnerList"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "create_partner_list": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_partner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::partners::PartnerList"
+        ],
+        "return": []
+      }
+    },
+    "pipe": {
+      "destroy": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>"
+        ],
+        "return": []
+      },
+      "destroy_input_carrier": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>",
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::InputCarrier<T0, T1>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::PoolDebt<T0>>"
+        ]
+      },
+      "destroy_input_carrier_for_house": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>",
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::InputCarrier<T0, T1>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::HouseDebt<T0>>"
+        ]
+      },
+      "destroy_output_carrier": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::OutputCarrier<T0, T1>",
+          "T1"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "err_destroy_non_empty_pipe": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_input_too_much": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "house_debt_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "input": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "T1"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::InputCarrier<T0, T1>"
+        ]
+      },
+      "input_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::InputCarrier<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "new_pipe": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>"
+        ]
+      },
+      "new_type": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::PipeType<T0, T1>"
+        ]
+      },
+      "output": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::PoolDebt<T0>>"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::OutputCarrier<T0, T1>"
+        ]
+      },
+      "output_from_house": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::HouseDebt<T0>>"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::OutputCarrier<T0, T1>"
+        ]
+      },
+      "output_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::OutputCarrier<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "pool_debt_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_debt_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "range": {
+      "contains": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::range::Range",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "len": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::range::Range"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::range::Range"
+        ]
+      },
+      "new_with_len": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::range::Range"
+        ]
+      },
+      "singleton": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::range::Range"
+        ]
+      }
+    },
+    "ranges": {
+      "borrow_inner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::ranges::Ranges"
+        ],
+        "return": [
+          "&vector<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::range::Range>"
+        ]
+      },
+      "borrow_inner_mut": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::ranges::Ranges"
+        ],
+        "return": [
+          "&mut vector<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::range::Range>"
+        ]
+      },
+      "contains": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::ranges::Ranges",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "empty": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::ranges::Ranges"
+        ]
+      },
+      "from_number_vec": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u64>"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::ranges::Ranges"
+        ]
+      },
+      "from_range_vec": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::range::Range>"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::ranges::Ranges"
+        ]
+      },
+      "from_single_range": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::ranges::Ranges"
+        ]
+      },
+      "push_back": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::ranges::Ranges",
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::range::Range"
+        ],
+        "return": []
+      },
+      "singleton": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::range::Range"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::ranges::Ranges"
+        ]
+      }
+    },
+    "unihouse": {
+      "add_game_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "add_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "admin_reset_daily_limit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "assert_game_supported": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": []
+      },
+      "assert_rule_supported": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": []
+      },
+      "assert_valid_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "address"
+        ],
+        "return": []
+      },
+      "assert_valid_version": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": []
+      },
+      "assert_within_risk": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "T1",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "bet_result": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "address",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::BetResult<T0, T1>"
+        ]
+      },
+      "borrow_house": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>"
+        ]
+      },
+      "borrow_house_mut": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::House<T0>"
+        ]
+      },
+      "borrow_mut_config": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::GameConfig"
+        ]
+      },
+      "collect": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "T1",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "create_house": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_pipe": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": []
+      },
+      "deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::StakedHouseCoin<T0>>"
+        ]
+      },
+      "deposit_house_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "destroy_pipe": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": []
+      },
+      "emit_bet_results": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "vector<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::BetResult<T0, T1>>"
+        ],
+        "return": []
+      },
+      "emit_blackjack_game_result": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "u64",
+          "vector<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::game_structs::BlackjackHand>",
+          "vector<u8>",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "emit_game_result": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "u64",
+          "u64",
+          "u64",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ],
+        "return": []
+      },
+      "emit_plinko_game_result": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "u8",
+          "u64",
+          "u64",
+          "u64",
+          "vector<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::game_structs::BallOutcome>",
+          "vector<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::game_structs::BetResult<T0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "emit_range_game_results": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::game_structs::RangeGame>"
+        ],
+        "return": []
+      },
+      "err_invalid_manager": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_pipe_not_exists": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_rule_not_supported": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "fulfill_redeem_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "game_config_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "house_debt_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "house_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "house_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "input": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::InputCarrier<T0, T1>"
+        ],
+        "return": []
+      },
+      "input_to_house": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::InputCarrier<T0, T1>"
+        ],
+        "return": []
+      },
+      "is_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_rule_supported": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "join": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "T1",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "join_with_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "T1",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "max_risk": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "output": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "u64"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::OutputCarrier<T0, T1>"
+        ]
+      },
+      "output_from_house": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "u64"
+        ],
+        "return": [
+          "0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::OutputCarrier<T0, T1>"
+        ]
+      },
+      "package_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "pipe": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>"
+        ]
+      },
+      "pipe_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "pipe_mut": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::pipe::Pipe<T0, T1>"
+        ]
+      },
+      "pool_debt_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "put": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "T1",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "put_with_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "T1",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "redeem_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::house::StakedHouseCoin<T0>>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "remove_game_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": []
+      },
+      "remove_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap"
+        ],
+        "return": []
+      },
+      "remove_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "reset_daily_limit": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::GameConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_house_max_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>"
+        ],
+        "return": []
+      },
+      "split": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "T1",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "split_with_reimbursement": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "T1",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "take": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "T1",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "take_with_fee_reimbursement": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "T1",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "total_debt_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_game_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "u64"
+        ],
+        "return": []
+      },
+      "version_set": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<u64>"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_house_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_to": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::AdminCap",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

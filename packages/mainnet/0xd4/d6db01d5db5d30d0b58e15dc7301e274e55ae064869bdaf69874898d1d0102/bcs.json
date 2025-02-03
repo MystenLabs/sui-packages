@@ -94,17 +94,17 @@
           "&0xadfe831a90bc86f1b3cdf073ba4e2c20546e1dc88139e70fe2bbfe55164e3387::gas_oracle::GasOracle",
           "&0x2aa6c5d56376c371f88a6cc42e852824994993cb9bab8d3e6450cbe3cb32b94e::state::State",
           "&mut 0x08d87d37ba49e785dde270a83f8e979605b03dc552b5548f26fdf2f49bf7ed1b::state::State",
-          "&mut 0xecf47609d7da919ea98e7fd04f6e0648a0a79b337aaad373fa37aac8febf19c8::treasury::Treasury<$0>",
+          "&mut 0xecf47609d7da919ea98e7fd04f6e0648a0a79b337aaad373fa37aac8febf19c8::treasury::Treasury<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u8",
           "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::bytes32::Bytes32",
           "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::bytes32::Bytes32",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "change_recipient": {
         "visibility": "FRIEND",
@@ -118,7 +118,7 @@
           "&0x08d87d37ba49e785dde270a83f8e979605b03dc552b5548f26fdf2f49bf7ed1b::state::State",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deserialize_nonce": {
         "visibility": "PRIVATE",
@@ -126,7 +126,9 @@
         "params": [
           "&vector<u8>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "fee_value": {
         "visibility": "FRIEND",
@@ -134,7 +136,9 @@
         "params": [
           "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "gas_usage": {
         "visibility": "FRIEND",
@@ -143,7 +147,9 @@
           "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_bridging_cost_in_tokens": {
         "visibility": "FRIEND",
@@ -153,7 +159,9 @@
           "&0xadfe831a90bc86f1b3cdf073ba4e2c20546e1dc88139e70fe2bbfe55164e3387::gas_oracle::GasOracle",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_domain_by_chain_id": {
         "visibility": "FRIEND",
@@ -162,7 +170,9 @@
           "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u32"
+        ]
       },
       "get_id": {
         "visibility": "FRIEND",
@@ -170,7 +180,9 @@
         "params": [
           "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
       },
       "get_transaction_cost": {
         "visibility": "FRIEND",
@@ -180,13 +192,113 @@
           "&0xadfe831a90bc86f1b3cdf073ba4e2c20546e1dc88139e70fe2bbfe55164e3387::gas_oracle::GasOracle",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_version": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_message_processed": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "&0x08d87d37ba49e785dde270a83f8e979605b03dc552b5548f26fdf2f49bf7ed1b::state::State",
+          "u8",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "migrate": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::AdminCap",
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge"
+        ],
+        "return": []
+      },
+      "receive_tokens": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2aa6c5d56376c371f88a6cc42e852824994993cb9bab8d3e6450cbe3cb32b94e::state::State",
+          "&mut 0x08d87d37ba49e785dde270a83f8e979605b03dc552b5548f26fdf2f49bf7ed1b::state::State",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
+          "&mut 0xecf47609d7da919ea98e7fd04f6e0648a0a79b337aaad373fa37aac8febf19c8::treasury::Treasury<T0>",
+          "address",
+          "vector<u8>",
+          "vector<u8>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "register_bridge_destination": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "u8",
+          "u32"
+        ],
+        "return": []
+      },
+      "set_admin_fee_share": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_gas_usage": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "u8",
+          "u64"
+        ],
+        "return": []
+      },
+      "unregister_bridge_destination": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "u8"
+        ],
+        "return": []
+      },
+      "withdraw_fee": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     },
     "cctp_bridge_interface": {
@@ -198,17 +310,17 @@
           "&0xadfe831a90bc86f1b3cdf073ba4e2c20546e1dc88139e70fe2bbfe55164e3387::gas_oracle::GasOracle",
           "&0x2aa6c5d56376c371f88a6cc42e852824994993cb9bab8d3e6450cbe3cb32b94e::state::State",
           "&mut 0x08d87d37ba49e785dde270a83f8e979605b03dc552b5548f26fdf2f49bf7ed1b::state::State",
-          "&mut 0xecf47609d7da919ea98e7fd04f6e0648a0a79b337aaad373fa37aac8febf19c8::treasury::Treasury<$0>",
+          "&mut 0xecf47609d7da919ea98e7fd04f6e0648a0a79b337aaad373fa37aac8febf19c8::treasury::Treasury<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u8",
           "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::bytes32::Bytes32",
           "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::bytes32::Bytes32",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "change_recipient": {
         "visibility": "PUBLIC",
@@ -222,7 +334,7 @@
           "&0x08d87d37ba49e785dde270a83f8e979605b03dc552b5548f26fdf2f49bf7ed1b::state::State",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "fee_value": {
         "visibility": "PUBLIC",
@@ -230,7 +342,9 @@
         "params": [
           "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "gas_usage": {
         "visibility": "PUBLIC",
@@ -239,7 +353,9 @@
           "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_bridging_cost_in_tokens": {
         "visibility": "PUBLIC",
@@ -249,7 +365,9 @@
           "&0xadfe831a90bc86f1b3cdf073ba4e2c20546e1dc88139e70fe2bbfe55164e3387::gas_oracle::GasOracle",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_domain_by_chain_id": {
         "visibility": "PUBLIC",
@@ -258,7 +376,9 @@
           "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u32"
+        ]
       },
       "get_transaction_cost": {
         "visibility": "PUBLIC",
@@ -268,7 +388,9 @@
           "&0xadfe831a90bc86f1b3cdf073ba4e2c20546e1dc88139e70fe2bbfe55164e3387::gas_oracle::GasOracle",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "is_message_processed": {
         "visibility": "PUBLIC",
@@ -279,7 +401,9 @@
           "u8",
           "u64"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "migrate": {
         "visibility": "PRIVATE",
@@ -288,7 +412,7 @@
           "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::AdminCap",
           "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge"
         ],
-        "return": null
+        "return": []
       },
       "receive_tokens": {
         "visibility": "PUBLIC",
@@ -297,14 +421,69 @@
           "&mut 0x2aa6c5d56376c371f88a6cc42e852824994993cb9bab8d3e6450cbe3cb32b94e::state::State",
           "&mut 0x08d87d37ba49e785dde270a83f8e979605b03dc552b5548f26fdf2f49bf7ed1b::state::State",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
-          "&mut 0xecf47609d7da919ea98e7fd04f6e0648a0a79b337aaad373fa37aac8febf19c8::treasury::Treasury<$0>",
+          "&mut 0xecf47609d7da919ea98e7fd04f6e0648a0a79b337aaad373fa37aac8febf19c8::treasury::Treasury<T0>",
           "address",
           "vector<u8>",
           "vector<u8>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "register_bridge_destination": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::AdminCap",
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "u8",
+          "u32"
+        ],
+        "return": []
+      },
+      "set_admin_fee_share": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::AdminCap",
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_gas_usage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::AdminCap",
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "u8",
+          "u64"
+        ],
+        "return": []
+      },
+      "unregister_bridge_destination": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::AdminCap",
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "u8"
+        ],
+        "return": []
+      },
+      "withdraw_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::AdminCap",
+          "&mut 0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::cctp_bridge::CctpBridge",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     },
     "events": {
@@ -317,7 +496,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "recipient_replaced": {
         "visibility": "FRIEND",
@@ -327,7 +506,7 @@
           "u64",
           "0x954b21497d350ad9d06a16dba1b5d7b95a15e56733d43da256ba5f2a5ea254b0::bytes32::Bytes32"
         ],
-        "return": null
+        "return": []
       },
       "tokens_received_event": {
         "visibility": "FRIEND",
@@ -337,7 +516,7 @@
           "vector<u8>",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "tokens_sent_event": {
         "visibility": "FRIEND",
@@ -351,7 +530,7 @@
           "u8",
           "u64"
         ],
-        "return": null
+        "return": []
       }
     },
     "message_transmitter_authenticator": {
@@ -359,7 +538,9 @@
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0xd4d6db01d5db5d30d0b58e15dc7301e274e55ae064869bdaf69874898d1d0102::message_transmitter_authenticator::MessageTransmitterAuthenticator"
+        ]
       }
     }
   }

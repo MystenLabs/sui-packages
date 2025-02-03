@@ -72,5 +72,231 @@
       "upgraded_id": "0xc66fabf1a9253e43c70f1cc02d40a1d18db183140ecaae2a3f58fa6b66c55acf",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "admin": {
+      "authorize": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::admin::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_authorized": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "revoke_auth": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::admin::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ],
+        "return": []
+      },
+      "transfer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::admin::AdminCap",
+          "address"
+        ],
+        "return": []
+      }
+    },
+    "swap_cap": {
+      "assert_valid_swap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ],
+        "return": []
+      },
+      "emit_swap_completed_event": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::SwapMetadata",
+          "0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::SwapMetadata",
+          "0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterFeeMetadata",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "initiate_path": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "is_same_type": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_valid_swap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "obtain_router_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ],
+        "return": [
+          "0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>"
+        ]
+      },
+      "pay_protocol_and_router_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID",
+          "&mut 0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&0x50b4040c270ab7a2bd071218814a33f7c97e4d69c280e5132d26f1f4cff08ff0::vault::ProtocolFeeVault",
+          "&mut 0x64213b0e4a52bac468d4ac3f140242f70714381653a1919a6d57cd49c628207a::treasury::Treasury",
+          "&mut 0xa6baab1e668c7868991c1c3c11e144100f5734c407d020f72a01b9d1a8bcb97f::insurance_fund::InsuranceFund",
+          "&0xc66fabf1a9253e43c70f1cc02d40a1d18db183140ecaae2a3f58fa6b66c55acf::referral_vault::ReferralVault",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pay_protocol_and_router_fee_inner": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&0x50b4040c270ab7a2bd071218814a33f7c97e4d69c280e5132d26f1f4cff08ff0::vault::ProtocolFeeVault",
+          "&mut 0x64213b0e4a52bac468d4ac3f140242f70714381653a1919a6d57cd49c628207a::treasury::Treasury",
+          "&mut 0xa6baab1e668c7868991c1c3c11e144100f5734c407d020f72a01b9d1a8bcb97f::insurance_fund::InsuranceFund",
+          "&0xc66fabf1a9253e43c70f1cc02d40a1d18db183140ecaae2a3f58fa6b66c55acf::referral_vault::ReferralVault",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "previous_swap_was_valid": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "return_router_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&0x50b4040c270ab7a2bd071218814a33f7c97e4d69c280e5132d26f1f4cff08ff0::vault::ProtocolFeeVault",
+          "&mut 0x64213b0e4a52bac468d4ac3f140242f70714381653a1919a6d57cd49c628207a::treasury::Treasury",
+          "&mut 0xa6baab1e668c7868991c1c3c11e144100f5734c407d020f72a01b9d1a8bcb97f::insurance_fund::InsuranceFund",
+          "&0xc66fabf1a9253e43c70f1cc02d40a1d18db183140ecaae2a3f58fa6b66c55acf::referral_vault::ReferralVault",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "return_router_cap_already_payed_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_router_fee": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterFeeMetadata",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "type_to_bytes": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "update_final_swap_metadata": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>"
+        ],
+        "return": []
+      },
+      "update_path_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID",
+          "&mut 0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_path_metadata_inner": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe16daff2fcdfff4075ec5a87eb33e5836368817a50c2d76f0b9b9fc5ffe0a55f::swap_cap::RouterSwapCap<T0>",
+          "u64"
+        ],
+        "return": []
+      }
+    }
   }
 }

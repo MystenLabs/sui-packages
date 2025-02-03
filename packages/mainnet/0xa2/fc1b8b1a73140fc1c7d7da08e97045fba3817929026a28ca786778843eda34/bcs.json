@@ -188,5 +188,793 @@
       "upgraded_id": "0x886e15afb96d4b0f4ce7c062caf98e1c75575e1a5f2f64414c986ca5fb4dfbad",
       "upgraded_version": 2
     }
+  },
+  "functionMap": {
+    "bee": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_rules": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicyCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "burn_bees": {
+      "bees_tokens_to_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::Token<T0>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::burn_bees::BurnCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "get_burn_percent": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>"
+        ]
+      },
+      "kraft_burn_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicyCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_burn_percent": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicyCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "testing_update_policy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<T0>",
+          "&mut 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::burn_bees::BurnCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_bees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::Token<T0>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::burn_bees::BurnCap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<T0>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_bees_to_recepient": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<T0>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::burn_bees::BurnCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::ActionRequest<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "infusion": {
+      "allowed_withdrawal_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "burn_bees_from_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_unbondable_lp_shares": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::UserInfusionPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_user_hive_incentives": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::UserInfusionPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_user_lp_shares": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::UserInfusionPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "claim_bees_for_farming": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::config::HiveEntryCap",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>"
+        ]
+      },
+      "claim_gems_and_increment_states": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>",
+          "&mut 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::UserInfusionPosition",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::burn_bees::BurnCap<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "claim_pol_from_streamer_buzz": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::config::HiveEntryCap",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::PoolRegistry",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HiveVault",
+          "&mut 0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LiquidityPool<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>",
+          "&mut 0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LiquidityPool<T0, 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "claim_rewards_and_shares_0_fruits": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolsGovernor",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolHive<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::burn_bees::BurnCap<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "claim_rewards_and_shares_1_fruits": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolsGovernor",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolHive<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::burn_bees::BurnCap<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "claim_rewards_and_shares_2_fruits": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolsGovernor",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolHive<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::burn_bees::BurnCap<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "claim_rewards_and_shares_3_fruits": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolsGovernor",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolHive<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicy<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::burn_bees::BurnCap<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "delegate_hive_airdrop": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "delegate_hive_from_lockdrop": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::config::HiveEntryCap",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&0xb92b489396c59d4951b1705dd72795247191c205f9639e74cce01e01cac908a2::lockdrop::LockdropRewardsCapabilityHolder",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "deposit_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_user_participation_position": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "bool",
+          "u64",
+          "bool",
+          "u64"
+        ]
+      },
+      "handle_withdraw_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "increment_bee_fruit_indexes": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>",
+          "&mut 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::UserInfusionPosition",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>"
+        ]
+      },
+      "infuse_hive_incentives": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HiveVault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "infuse_sui_hive_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::config::HiveEntryCap",
+          "&mut 0xb92b489396c59d4951b1705dd72795247191c205f9639e74cce01e01cac908a2::lockdrop::LockdropRewardsCapabilityHolder",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LiquidityPool<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>",
+          "&mut 0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LiquidityPool<T0, 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>",
+          "&mut 0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::PoolRegistry",
+          "&mut 0x3e57ad73202188fc5aae42a1d2be522e913a301fbb08e6e735bce22564f348b9::three_pool::PoolRegistry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "initialize_infusion_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::ProfileDofOwnershipCapability",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::bee::BEE>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x15e885fafd862469b64c04a7e0da9d46e06429283e51d7fae0981a8a9d68ba5c::hsui_vault::HSuiVault",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfileMappingStore",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HSuiDisperser<0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::hsui::HSUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "internal_claim_unlocked_lps": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolHive<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>",
+          "&mut 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::UserInfusionPosition",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>"
+        ]
+      },
+      "internal_extract_lps_for_staking": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>"
+        ]
+      },
+      "is_deposit_open": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "kraft_user_position": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::UserInfusionPosition"
+        ]
+      },
+      "lock_in_sui_bee_pool_addr": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::config::HiveEntryCap",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x15e885fafd862469b64c04a7e0da9d46e06429283e51d7fae0981a8a9d68ba5c::hsui_vault::HSuiVault",
+          "&mut 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::config::Config",
+          "&mut 0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::PoolRegistry",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HSuiDisperser<0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::hsui::HSUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T1>",
+          "vector<u64>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u256>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u64>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "lock_in_sui_hive_pool_addr": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::config::HiveEntryCap",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x15e885fafd862469b64c04a7e0da9d46e06429283e51d7fae0981a8a9d68ba5c::hsui_vault::HSuiVault",
+          "&mut 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::config::Config",
+          "&mut 0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::PoolRegistry",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HSuiDisperser<0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::hsui::HSUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T1>",
+          "vector<u64>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u256>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u64>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "make_vote_on_proposal": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::config::DegenHiveDeployerCap",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolHive<T1>",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>",
+          "u64",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "query_infusion_vault_bees_metrixs": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u256",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "u64"
+        ]
+      },
+      "query_infusion_vault_pol_metrixs": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "query_infusion_vault_state": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "u256",
+          "u256"
+        ]
+      },
+      "simulate_delegate_hive": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "simulate_deposit_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "simulate_withdraw_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveProfile",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "bool"
+        ]
+      },
+      "stake_lp_tokens_0_fruits": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolsGovernor",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolHive<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_lp_tokens_one_fruits": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolsGovernor",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolHive<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_lp_tokens_three_fruits": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolsGovernor",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolHive<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_lp_tokens_two_fruits": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolsGovernor",
+          "&mut 0xdace967a913388e4723e76095cc964559fbd5f05ebf2cc747600d3b47550ae32::dex_dao::PoolHive<0xab8d514de87aaf42bb089daa4ff846c220f6ba97d889bbe0e88f338e84bc4202::two_pool::LP<T0, 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive::HIVE, 0x37a0fdbfe809f23fe6f8a5e4b7f350b77019823e8f5c54b9382508578ff573c3::curves::Curved>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_staked_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verification_and_update_states": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::InfusionVault<T0>",
+          "&mut 0x030c54cc0593068a1f2a2ca7758e0e7315401adf5bf44b198683a49ee49b811e::infusion::UserInfusionPosition",
+          "bool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "withdraw_hive": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::AdminDofOwnershipCapability",
+          "&mut 0x4b5d50178f0510ba6e1f13f7a104c7213adc4542f9d0511c483a9575546b2190::hive_profile::HiveManager",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

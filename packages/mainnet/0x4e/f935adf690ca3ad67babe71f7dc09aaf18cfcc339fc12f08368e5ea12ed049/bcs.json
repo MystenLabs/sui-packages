@@ -73,7 +73,7 @@
           "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "add_version": {
         "visibility": "PUBLIC",
@@ -83,7 +83,7 @@
           "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "admin_deposit_custodial_pool": {
         "visibility": "PUBLIC",
@@ -93,9 +93,9 @@
           "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
           "vector<address>",
           "vector<u64>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": []
       },
       "assert_sender_is_manager": {
         "visibility": "PRIVATE",
@@ -104,7 +104,7 @@
           "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "assert_valid_package_version": {
         "visibility": "PRIVATE",
@@ -112,7 +112,7 @@
         "params": [
           "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse"
         ],
-        "return": null
+        "return": []
       },
       "balance": {
         "visibility": "PUBLIC",
@@ -120,7 +120,9 @@
         "params": [
           "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "balance_mut": {
         "visibility": "PRIVATE",
@@ -128,7 +130,9 @@
         "params": [
           "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse"
         ],
-        "return": null
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "batch_spend_custodial_pool": {
         "visibility": "PUBLIC",
@@ -140,7 +144,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "burn": {
         "visibility": "PUBLIC",
@@ -149,17 +155,311 @@
           "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::treats::TREATS>"
         ],
-        "return": null
+        "return": []
       },
       "buy_treats": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::treats::TREATS>"
+        ]
+      },
+      "buy_treats_for_account": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "address"
+        ],
+        "return": []
+      },
+      "claim": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "create_custodial_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_doghouse": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::treats::TREATS>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "custodial_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::CustodialPool<T0>"
+        ]
+      },
+      "custodial_pool_mut": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::CustodialPool<T0>"
+        ]
+      },
+      "deposit_custodial_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "vector<address>",
+          "vector<u64>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "err_address_len_mismatch": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_deposit_invalid": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_invalid_coin_type": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_invalid_package_version": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_no_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_sender_is_not_manager": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DOGHOUSE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "lifetime_points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address, u64>"
+        ]
+      },
+      "managers": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<address>"
+        ]
+      },
+      "mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::treats::TREATS>"
+        ]
+      },
+      "mint_admin_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap"
+        ]
+      },
+      "mint_to": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "package_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "price_of": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "prices": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName, u64>"
+        ]
+      },
+      "remove_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "address"
+        ],
+        "return": []
+      },
+      "remove_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "remove_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "spend_custodial_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "address",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "update_icon_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::treats::TREATS>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ],
+        "return": []
+      },
+      "versions": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<u64>"
+        ]
+      },
+      "view_balances": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::doghouse::DogHouse",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
       }
     },
     "treats": {
@@ -170,7 +470,7 @@
           "0x0dadb7fa2771c2952f96161fc1f0c105d1f22d53926b9ff2498a8eea2f6eb204::treats::TREATS",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }

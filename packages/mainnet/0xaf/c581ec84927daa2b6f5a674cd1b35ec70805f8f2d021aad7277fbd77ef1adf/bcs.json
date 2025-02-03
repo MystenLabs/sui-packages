@@ -73,5 +73,232 @@
       "upgraded_id": "0x9a4bcdf5ecf025749a16878d9baaf991b334e7b44895503529c66c6a405d6244",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "admin": {
+      "add_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_rewards_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::admin::AdminCap",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_rewards_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::admin::AdminCap",
+          "&mut 0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::admin::AdminCap",
+          "&mut 0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "rewards_pool": {
+      "add_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>"
+        ]
+      },
+      "query_claimed": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>",
+          "address",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "redeem_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>",
+          "vector<u8>",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "update_signer_pk": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "withdraw_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      }
+    },
+    "signature": {
+      "get_bytes41_key": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::signature::VSM"
+        ],
+        "return": [
+          "0x9a4bcdf5ecf025749a16878d9baaf991b334e7b44895503529c66c6a405d6244::bytes41::Bytes41"
+        ]
+      },
+      "get_bytes41_key_direct": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64"
+        ],
+        "return": [
+          "0x9a4bcdf5ecf025749a16878d9baaf991b334e7b44895503529c66c6a405d6244::bytes41::Bytes41"
+        ]
+      },
+      "get_message": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::signature::VSM"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "get_reward_key": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "vector<u8>",
+          "address",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::signature::VSM"
+        ]
+      },
+      "verify_signature_ed25519": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::signature::VSM",
+          "vector<u8>"
+        ],
+        "return": [
+          "bool"
+        ]
+      }
+    },
+    "user": {
+      "query_claimed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>",
+          "address",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "redeem_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xafc581ec84927daa2b6f5a674cd1b35ec70805f8f2d021aad7277fbd77ef1adf::rewards_pool::RewardsPool<T0>",
+          "vector<u8>",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

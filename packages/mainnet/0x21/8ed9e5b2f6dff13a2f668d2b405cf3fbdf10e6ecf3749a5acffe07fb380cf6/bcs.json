@@ -75,5 +75,941 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 22
     }
+  },
+  "functionMap": {
+    "core": {
+      "bump_registry_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::Registry",
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap"
+        ],
+        "return": []
+      },
+      "burn_admincap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_valid_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::Registry"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "new_admincap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap"
+        ]
+      }
+    },
+    "identity": {
+      "admin_new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::identity::Identity"
+        ]
+      },
+      "admin_transfer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::identity::Identity",
+          "address"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::identity::Identity"
+        ]
+      },
+      "transfer": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::identity::Identity",
+          "address"
+        ],
+        "return": []
+      }
+    },
+    "master": {
+      "add_hashtag": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "burn_master": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "burn_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": []
+      },
+      "claim": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": []
+      },
+      "export": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": []
+      },
+      "image_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "import": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::MASTER",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "list": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": []
+      },
+      "media_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "meta_creator_profile_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "meta_description": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "meta_expressions": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "meta_hashtags": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "&vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
+      },
+      "meta_image_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "meta_master_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "meta_media_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "meta_origin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "meta_parent": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "meta_revenue_available": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "meta_revenue_paid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "meta_revenue_pending": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "meta_revenue_total": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "meta_royalty_percentage_bp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "meta_title": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "metadata_ref": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u16",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ]
+      },
+      "remove_hashtag": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "sale_status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "set_description": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "set_expressions": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_hashtags": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ],
+        "return": []
+      },
+      "set_image_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "set_media_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "set_metadata_origin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ],
+        "return": []
+      },
+      "set_metadata_parent": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ],
+        "return": []
+      },
+      "set_revenue_available": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_revenue_paid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_revenue_pending": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_revenue_total": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_royalty_percentage_bp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "u16"
+        ],
+        "return": []
+      },
+      "set_title": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "suspend": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": []
+      },
+      "sync_image_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>",
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": []
+      },
+      "sync_media_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>",
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": []
+      },
+      "sync_title": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>",
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Metadata<T0>"
+        ],
+        "return": []
+      },
+      "title": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "unlist": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": []
+      },
+      "unsuspend": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ],
+        "return": []
+      },
+      "update_sale_status": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>",
+          "u8"
+        ],
+        "return": []
+      }
+    },
+    "profile": {
+      "access_rights": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "address"
+        ],
+        "return": [
+          "&u8"
+        ]
+      },
+      "ad_revenue": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "admin_receive_master": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>>"
+        ],
+        "return": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ]
+      },
+      "adverts_watched": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "authorize": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "address",
+          "u8"
+        ],
+        "return": []
+      },
+      "borrow_master": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>",
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Promise"
+        ]
+      },
+      "buy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>>",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::receipt::Receipt>"
+        ],
+        "return": []
+      },
+      "commission_revenue": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "deauthorize": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "address"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "number_of_followers": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "number_of_following": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "receive_master_": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>>"
+        ],
+        "return": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>"
+        ]
+      },
+      "return_master": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>",
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Promise"
+        ],
+        "return": []
+      },
+      "update_ad_revenue": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_adverts_watched": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_authorization": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "address",
+          "u8"
+        ],
+        "return": []
+      },
+      "update_authorization_": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "address",
+          "u8"
+        ],
+        "return": []
+      },
+      "update_commission_revenue": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_number_of_followers": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_number_of_following": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_user_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_username": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_videos_watched": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_watch_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "user_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "username": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "videos_watched": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "watch_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::profile::Profile"
+        ],
+        "return": [
+          "&u64"
+        ]
+      }
+    },
+    "receipt": {
+      "burn": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::receipt::Receipt"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address"
+        ]
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::AdminCap",
+          "&mut 0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::master::Master<T0>",
+          "address",
+          "&0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::core::Registry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "receive": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::receipt::Receipt>"
+        ],
+        "return": [
+          "0x218ed9e5b2f6dff13a2f668d2b405cf3fbdf10e6ecf3749a5acffe07fb380cf6::receipt::Receipt"
+        ]
+      }
+    }
   }
 }

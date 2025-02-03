@@ -102,5 +102,853 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 10
     }
+  },
+  "functionMap": {
+    "quest": {
+      "add_space_creator": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::AdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "available_spaces_to_create": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "check_hub_version": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub"
+        ],
+        "return": []
+      },
+      "check_space_admin": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": []
+      },
+      "check_space_version": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": []
+      },
+      "complete_journey": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "complete_quest": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::VerifierCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "create_journey": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "create_quest": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "create_space": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "fee_for_creating_journey": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "fee_for_starting_quest": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::QUEST",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "journey": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Journey"
+        ]
+      },
+      "journey_completed_user": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "journey_completed_users": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address, bool>"
+        ]
+      },
+      "journey_description": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "journey_end_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "journey_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "journey_quests": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object_table::ObjectTable<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID, 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Quest>"
+        ]
+      },
+      "journey_reward_image_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
+      },
+      "journey_reward_required_points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "journey_reward_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "journey_start_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "journey_total_completed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "journey_user_completed_quests": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "journey_user_points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "journey_users_completed_quests": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address, u64>"
+        ]
+      },
+      "journey_users_points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address, u64>"
+        ]
+      },
+      "migrate_hub": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::AdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub"
+        ],
+        "return": []
+      },
+      "migrate_space": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::AdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": []
+      },
+      "quest": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Quest"
+        ]
+      },
+      "quest_arguments": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
+      },
+      "quest_call_to_action_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
+      },
+      "quest_completed_user": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "quest_completed_users": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address, bool>"
+        ]
+      },
+      "quest_description": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "quest_function_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "quest_module_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "quest_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "quest_package_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "quest_points_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "quest_started_user": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "quest_total_completed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "remove_journey": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": []
+      },
+      "remove_quest": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": []
+      },
+      "space": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ]
+      },
+      "space_description": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "space_image_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
+      },
+      "space_journeys": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object_table::ObjectTable<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID, 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Journey>"
+        ]
+      },
+      "space_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "space_points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address, u64>"
+        ]
+      },
+      "space_twitter_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
+      },
+      "space_user_points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "space_website_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
+      },
+      "spaces": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table_vec::TableVec<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "start_quest": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_address_to_u64_table": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address, u64>",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_fee_for_creating_journey": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::AdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_fee_for_start_quest": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::AdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_journey_description": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_journey_end_time": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_journey_name": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_journey_reward_image_url": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_journey_start_time": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_space_description": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_space_image_url": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_space_name": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_space_twitter_url": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_space_website_url": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceAdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::Space",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_verifier_address": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::AdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub",
+          "address"
+        ],
+        "return": []
+      },
+      "verifier_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::AdminCap",
+          "&mut 0x9e12e57e4f8cc69fdbd219b43a6091db828bd6fc0ec490ef16533a07f13b85bc::quest::SpaceHub",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "utils": {
+      "handle_payment": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "handle_transfer": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_balance": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

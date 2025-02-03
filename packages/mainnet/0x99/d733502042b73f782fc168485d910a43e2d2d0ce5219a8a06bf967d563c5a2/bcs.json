@@ -116,7 +116,7 @@
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::main_coin::MAIN_COIN",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -127,7 +127,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "payment": {
@@ -139,17 +139,22 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       },
       "take_from": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     },
     "project": {
@@ -157,20 +162,22 @@
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>"
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::ProjectCreatedEvent"
+        ]
       },
       "buy": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "change_admin": {
         "visibility": "PUBLIC",
@@ -179,34 +186,34 @@
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::AdminCap",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "claim_refund": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>",
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_token": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>",
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_project": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
@@ -216,26 +223,26 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "distribute_raised_fund": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>",
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "emergency_withdraw": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>",
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -244,16 +251,61 @@
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::PROJECT",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "swap_token": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
           "u64",
-          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>"
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "validate_buy": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
+          "u64"
+        ],
+        "return": []
+      },
+      "validate_claim": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>"
+        ],
+        "return": []
+      },
+      "validate_distribute_fund": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_project_ownership": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::ProjectOwnerCap"
+        ],
+        "return": []
+      },
+      "validate_refund": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>"
+        ],
+        "return": []
       }
     },
     "project_entries": {
@@ -261,12 +313,12 @@
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "change_admin": {
         "visibility": "PUBLIC",
@@ -275,34 +327,34 @@
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::AdminCap",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "claim_refund": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>",
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_token": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>",
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_project": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
@@ -312,16 +364,16 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "distribute_raised_fund": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<$0, $1>",
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::project::Project<T0, T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "sale_coin": {
@@ -332,7 +384,7 @@
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::sale_coin::SALE_COIN",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -343,7 +395,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "u256": {
@@ -354,7 +406,9 @@
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
         ],
-        "return": null
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
       },
       "add_mul": {
         "visibility": "PUBLIC",
@@ -364,7 +418,9 @@
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
         ],
-        "return": null
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
       },
       "add_mul_u128": {
         "visibility": "PUBLIC",
@@ -374,7 +430,9 @@
           "u128",
           "u128"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "add_mul_u64": {
         "visibility": "PUBLIC",
@@ -384,7 +442,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "add_u128": {
         "visibility": "PUBLIC",
@@ -393,7 +453,9 @@
           "u128",
           "u128"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "add_u64": {
         "visibility": "PUBLIC",
@@ -402,7 +464,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "as_u128": {
         "visibility": "PUBLIC",
@@ -410,7 +474,9 @@
         "params": [
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "as_u64": {
         "visibility": "PUBLIC",
@@ -418,7 +484,9 @@
         "params": [
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "bitand": {
         "visibility": "PRIVATE",
@@ -427,7 +495,9 @@
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
         ],
-        "return": null
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
       },
       "bitor": {
         "visibility": "PRIVATE",
@@ -436,7 +506,344 @@
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
           "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
         ],
-        "return": null
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
+      },
+      "bits": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "bitxor": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
+      },
+      "compare": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "div": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
+      },
+      "div_u128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "div_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "du256_to_u256": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::DU256"
+        ],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "bool"
+        ]
+      },
+      "from_u128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128"
+        ],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
+      },
+      "from_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
+      },
+      "get": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_d": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::DU256",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "increment_u128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "increment_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "leading_zeros_u64": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "mul": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
+      },
+      "mul_add": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
+      },
+      "mul_add_u128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "mul_add_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "mul_u128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "mul_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "overflowing_add": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "bool"
+        ]
+      },
+      "overflowing_sub": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "bool"
+        ]
+      },
+      "put": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "put_d": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::DU256",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "shl": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "u8"
+        ],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
+      },
+      "shr": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "u8"
+        ],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
+      },
+      "split_u128": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u128"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "sub": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256",
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
+      },
+      "sub_u128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "sub_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "zero": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x99d733502042b73f782fc168485d910a43e2d2d0ce5219a8a06bf967d563c5a2::u256::U256"
+        ]
       }
     }
   }

@@ -51,5 +51,106 @@
       "upgraded_id": "0x0820453d29a70f37b4555f7e8340c278119a84b8de48d701eaf34e61489246cf",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "game": {
+      "game_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x03ae976ef1345716195c811464ea8957499fcda338211ca0e65e68a58ca7c774::house_data::HouseData",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "play_game": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "&mut 0x03ae976ef1345716195c811464ea8957499fcda338211ca0e65e68a58ca7c774::house_data::HouseData",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "start_game": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0820453d29a70f37b4555f7e8340c278119a84b8de48d701eaf34e61489246cf::lihuazhang_faucet_coin::LIHUAZHANG_FAUCET_COIN>",
+          "&mut 0x03ae976ef1345716195c811464ea8957499fcda338211ca0e65e68a58ca7c774::house_data::HouseData",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      }
+    },
+    "house_data": {
+      "balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x03ae976ef1345716195c811464ea8957499fcda338211ca0e65e68a58ca7c774::house_data::HouseData"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "borrow": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x03ae976ef1345716195c811464ea8957499fcda338211ca0e65e68a58ca7c774::house_data::HouseData"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
+      },
+      "borrow_balance_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x03ae976ef1345716195c811464ea8957499fcda338211ca0e65e68a58ca7c774::house_data::HouseData"
+        ],
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0820453d29a70f37b4555f7e8340c278119a84b8de48d701eaf34e61489246cf::lihuazhang_faucet_coin::LIHUAZHANG_FAUCET_COIN>"
+        ]
+      },
+      "borrow_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x03ae976ef1345716195c811464ea8957499fcda338211ca0e65e68a58ca7c774::house_data::HouseData"
+        ],
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x03ae976ef1345716195c811464ea8957499fcda338211ca0e65e68a58ca7c774::house_data::HOUSE_DATA",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "initialize_house_data": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x03ae976ef1345716195c811464ea8957499fcda338211ca0e65e68a58ca7c774::house_data::HouseCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x0820453d29a70f37b4555f7e8340c278119a84b8de48d701eaf34e61489246cf::lihuazhang_faucet_coin::LIHUAZHANG_FAUCET_COIN>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

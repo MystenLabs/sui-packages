@@ -53,5 +53,505 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 20
     }
+  },
+  "functionMap": {
+    "constants": {
+      "MAINTAINER": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      },
+      "PARTICIPANTS_LIMIT_PREDICTION_RAFFLE": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "PARTICIPANTS_LIMIT_TOMBOLA": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "TREASURY_PREDICTION_RAFFLE": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      },
+      "TREASURY_TOMBOLA": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      }
+    },
+    "drand": {
+      "derive_randomness": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "safe_selection": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&vector<u8>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "verify_drand_signature": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      },
+      "verify_time_has_passed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "vector<u8>",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "errors": {
+      "ECannotEnterAfterCloseTime": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "ECannotParticipateInLockedGame": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "ECannotParticipateLimit": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "ECloseTimeNotReached": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "EGameNeedsToBeClosed": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "EGameNotInProgress": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "EInvalidPayment": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "house": {
+      "change_percentage": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::House",
+          "u64"
+        ],
+        "return": []
+      },
+      "create_admin_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_fee_percentage": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::House"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "prediction": {
+      "change_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::prediction::PredictionGame<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "close": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::prediction::PredictionGame<T0>"
+        ],
+        "return": []
+      },
+      "complete": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::prediction::PredictionGame<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "emergency": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::prediction::PredictionGame<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "length_in_table_vec": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table_vec::TableVec<0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::prediction::Prediction>",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "open": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::prediction::PredictionGame<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "participate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::House",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::prediction::PredictionGame<T0>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "ticket_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::prediction::PredictionGame<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "raffle": {
+      "change_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::raffle::LotteryGame<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "clear_table_emergency": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::raffle::LotteryGame<T0>"
+        ],
+        "return": []
+      },
+      "close": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::raffle::LotteryGame<T0>"
+        ],
+        "return": []
+      },
+      "complete": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::raffle::LotteryGame<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "vector<u8>",
+          "vector<u8>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "emergency": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::raffle::LotteryGame<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "length_in_table_vec": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table_vec::TableVec<T0>",
+          "T0"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "open": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::raffle::LotteryGame<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "participate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::House",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::raffle::LotteryGame<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "ticket_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::raffle::LotteryGame<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "tombola": {
+      "change_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "u64",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::tombola::TombolaGame<T0>"
+        ],
+        "return": []
+      },
+      "change_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::tombola::TombolaGame<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "close": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::tombola::TombolaGame<T0>"
+        ],
+        "return": []
+      },
+      "complete": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::tombola::TombolaGame<T0>",
+          "u64",
+          "vector<u8>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "length_in_table_vec": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table_vec::TableVec<T0>",
+          "T0"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "open": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::house::AdminCap",
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::tombola::TombolaGame<T0>"
+        ],
+        "return": []
+      },
+      "participate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::tombola::TombolaGame<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "ticket_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x40529984528fb46b602d824b9240038c5e341476b3c3cd564223149019c188cf::tombola::TombolaGame<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "utils": {
+      "clear_table_vec": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::table_vec::TableVec<T0>"
+        ],
+        "return": []
+      }
+    }
   }
 }

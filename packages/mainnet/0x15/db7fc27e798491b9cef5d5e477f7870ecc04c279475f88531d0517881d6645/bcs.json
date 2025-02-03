@@ -109,7 +109,9 @@
           "u64",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Layer"
+        ]
       },
       "DenseSignedFixed": {
         "visibility": "PUBLIC",
@@ -121,7 +123,9 @@
           "vector<u8>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::SignedFixedLayer"
+        ]
       },
       "Input": {
         "visibility": "PUBLIC",
@@ -130,7 +134,9 @@
           "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Graph",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Layer"
+        ]
       },
       "ReLu": {
         "visibility": "PUBLIC",
@@ -138,7 +144,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "add_layer": {
         "visibility": "PUBLIC",
@@ -150,7 +158,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "apply_conv2d": {
         "visibility": "PUBLIC",
@@ -160,7 +168,9 @@
           "&vector<u64>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
       },
       "apply_dense": {
         "visibility": "PUBLIC",
@@ -171,7 +181,9 @@
           "&vector<u64>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
       },
       "apply_dense_signed_fixed": {
         "visibility": "PUBLIC",
@@ -181,7 +193,9 @@
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor",
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
       },
       "apply_dense_signed_fixed_2": {
         "visibility": "PUBLIC",
@@ -192,7 +206,9 @@
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
       },
       "apply_relu_element": {
         "visibility": "PRIVATE",
@@ -201,7 +217,180 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Graph"
+        ]
+      },
+      "create_signed_graph": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::SignedFixedGraph"
+        ]
+      },
+      "get_bias": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Layer"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "get_bias_tensor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::SignedFixedLayer"
+        ],
+        "return": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
+      },
+      "get_layer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Graph",
+          "vector<u8>"
+        ],
+        "return": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Layer"
+        ]
+      },
+      "get_layer_signed_fixed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::SignedFixedGraph",
+          "vector<u8>"
+        ],
+        "return": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::SignedFixedLayer"
+        ]
+      },
+      "get_layer_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Layer"
+        ],
+        "return": [
+          "&vector<u8>"
+        ]
+      },
+      "get_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Layer"
+        ],
+        "return": [
+          "&vector<u8>"
+        ]
+      },
+      "get_output_nodes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Layer"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_weight_tensor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::SignedFixedLayer"
+        ],
+        "return": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
+      },
+      "get_weights": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Layer"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "initialize_bias": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "initialize_weights": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "set_layer_weights": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::Graph",
+          "vector<u8>",
+          "vector<u64>",
+          "vector<u64>"
+        ],
+        "return": []
+      },
+      "set_layer_weights_signed_fixed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::SignedFixedGraph",
+          "vector<u8>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "signed_add_element": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
       }
     },
     "graph_ptb": {
@@ -214,7 +403,9 @@
           "u64",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Layer"
+        ]
       },
       "DenseSignedFixed": {
         "visibility": "PUBLIC",
@@ -226,7 +417,9 @@
           "vector<u8>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedLayer"
+        ]
       },
       "Input": {
         "visibility": "PUBLIC",
@@ -235,7 +428,9 @@
           "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Graph",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Layer"
+        ]
       },
       "ReLu": {
         "visibility": "PUBLIC",
@@ -243,7 +438,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "add_layer": {
         "visibility": "PUBLIC",
@@ -255,7 +452,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "apply_conv2d": {
         "visibility": "PUBLIC",
@@ -265,7 +462,9 @@
           "&vector<u64>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
       },
       "apply_dense": {
         "visibility": "PUBLIC",
@@ -276,7 +475,9 @@
           "&vector<u64>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
       },
       "apply_dense_signed_fixed": {
         "visibility": "PUBLIC",
@@ -286,7 +487,9 @@
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor",
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
       },
       "apply_dense_signed_fixed_2": {
         "visibility": "PUBLIC",
@@ -297,7 +500,9 @@
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
       },
       "apply_relu_element": {
         "visibility": "PUBLIC",
@@ -306,7 +511,241 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Graph"
+        ]
+      },
+      "create_signed_graph": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph"
+        ]
+      },
+      "get_bias": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Layer"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "get_bias_tensor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedLayer"
+        ],
+        "return": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
+      },
+      "get_layer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Graph",
+          "vector<u8>"
+        ],
+        "return": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Layer"
+        ]
+      },
+      "get_layer_at": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph",
+          "u64"
+        ],
+        "return": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedLayer"
+        ]
+      },
+      "get_layer_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_layer_in_dim": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedLayer"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_layer_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedLayer"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "get_layer_out_dim": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedLayer"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_layer_signed_fixed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph",
+          "vector<u8>"
+        ],
+        "return": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedLayer"
+        ]
+      },
+      "get_layer_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Layer"
+        ],
+        "return": [
+          "&vector<u8>"
+        ]
+      },
+      "get_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Layer"
+        ],
+        "return": [
+          "&vector<u8>"
+        ]
+      },
+      "get_output_nodes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Layer"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_weight_tensor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedLayer"
+        ],
+        "return": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
+      },
+      "get_weights": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Layer"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "initialize_bias": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "initialize_weights": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "set_layer_weights": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::Graph",
+          "vector<u8>",
+          "vector<u64>",
+          "vector<u64>"
+        ],
+        "return": []
+      },
+      "set_layer_weights_signed_fixed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph",
+          "vector<u8>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "share_graph": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph"
+        ],
+        "return": []
+      },
+      "signed_add_element": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
       }
     },
     "inference": {
@@ -318,13 +757,13 @@
           "vector<u64>",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "test_check2": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       }
     },
     "inference_ptb": {
@@ -334,13 +773,13 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "test_check2": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "test_inference": {
         "visibility": "PUBLIC",
@@ -349,7 +788,7 @@
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph",
           "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::model_ptb::PartialDenses"
         ],
-        "return": null
+        "return": []
       }
     },
     "model": {
@@ -360,7 +799,7 @@
           "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::SignedFixedGraph",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "run_inference_signed_fixed": {
         "visibility": "PUBLIC",
@@ -369,7 +808,9 @@
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor",
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph::SignedFixedGraph"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
       }
     },
     "model_ptb": {
@@ -381,7 +822,7 @@
           "u64",
           "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::model_ptb::PartialDenses"
         ],
-        "return": null
+        "return": []
       },
       "add_partials_for_all_but_last": {
         "visibility": "PUBLIC",
@@ -390,7 +831,7 @@
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph",
           "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::model_ptb::PartialDenses"
         ],
-        "return": null
+        "return": []
       },
       "create_model_signed_fixed": {
         "visibility": "PUBLIC",
@@ -399,7 +840,7 @@
           "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "create_partial_denses": {
         "visibility": "PUBLIC",
@@ -407,7 +848,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::model_ptb::PartialDenses"
+        ]
       },
       "get_partial_by_name_mut": {
         "visibility": "PUBLIC",
@@ -416,7 +859,9 @@
           "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::model_ptb::PartialDenses",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::model_ptb::PartialDense"
+        ]
       },
       "ptb_chunk": {
         "visibility": "PUBLIC",
@@ -431,7 +876,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "ptb_finalize": {
         "visibility": "PUBLIC",
@@ -440,7 +885,11 @@
           "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::model_ptb::PartialDenses",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u64>",
+          "vector<u64>",
+          "u64"
+        ]
       },
       "ptb_graph_1": {
         "visibility": "PUBLIC",
@@ -451,7 +900,11 @@
           "vector<u64>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u64>",
+          "vector<u64>",
+          "u64"
+        ]
       },
       "ptb_graph_2": {
         "visibility": "PUBLIC",
@@ -462,7 +915,11 @@
           "vector<u64>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u64>",
+          "vector<u64>",
+          "u64"
+        ]
       },
       "ptb_graph_2_compute_chunk": {
         "visibility": "PUBLIC",
@@ -476,7 +933,56 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
+      },
+      "ptb_graph_3": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph",
+          "vector<u64>",
+          "vector<u64>",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "ptb_graph_compute_chunk": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph",
+          "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::model_ptb::PartialDenses",
+          "vector<u8>",
+          "vector<u64>",
+          "vector<u64>",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "ptb_graph_finalize": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::graph_ptb::SignedFixedGraph",
+          "&mut 0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::model_ptb::PartialDenses",
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u64>",
+          "vector<u64>",
+          "u64"
+        ]
+      },
+      "share_partial": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::model_ptb::PartialDenses"
+        ],
+        "return": []
       }
     },
     "tensor": {
@@ -487,7 +993,9 @@
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor",
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
       },
       "append_bytes": {
         "visibility": "PRIVATE",
@@ -496,7 +1004,7 @@
           "&mut vector<u8>",
           "&vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "argmax": {
         "visibility": "PUBLIC",
@@ -504,7 +1012,9 @@
         "params": [
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create": {
         "visibility": "PUBLIC",
@@ -513,7 +1023,9 @@
           "vector<u64>",
           "vector<u64>"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::Tensor"
+        ]
       },
       "create_signed_fixed": {
         "visibility": "PUBLIC",
@@ -524,7 +1036,9 @@
           "vector<u64>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
       },
       "debug_print_tensor": {
         "visibility": "PUBLIC",
@@ -532,7 +1046,7 @@
         "params": [
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
         ],
-        "return": null
+        "return": []
       },
       "divide": {
         "visibility": "PUBLIC",
@@ -541,7 +1055,9 @@
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor",
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
       },
       "from_input": {
         "visibility": "PUBLIC",
@@ -552,7 +1068,9 @@
           "vector<u64>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
       },
       "get_data": {
         "visibility": "PUBLIC",
@@ -560,7 +1078,9 @@
         "params": [
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::Tensor"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
       },
       "get_magnitude": {
         "visibility": "PUBLIC",
@@ -568,7 +1088,168 @@
         "params": [
           "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "get_scale": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_shape": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "get_sign": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "is_a_greater_than_b": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "max_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ],
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
+      },
+      "multiply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor",
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ],
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
+      },
+      "num_elements": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u64>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "reverse_bytes": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>"
+        ],
+        "return": []
+      },
+      "safe_to_u8": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "scale_up": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "signed_add_element": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "subtract": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor",
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ],
+        "return": [
+          "0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ]
+      },
+      "to_input": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ],
+        "return": [
+          "vector<u64>",
+          "vector<u64>"
+        ]
+      },
+      "to_string": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15db7fc27e798491b9cef5d5e477f7870ecc04c279475f88531d0517881d6645::tensor::SignedFixedTensor"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "u64_to_bytes": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
       }
     }
   }

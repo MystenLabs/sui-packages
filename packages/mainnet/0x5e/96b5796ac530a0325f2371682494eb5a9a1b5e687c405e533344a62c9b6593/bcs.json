@@ -58,5 +58,430 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 26
     }
+  },
+  "functionMap": {
+    "game": {
+      "borrow_game": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ]
+      },
+      "borrow_mut": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ]
+      },
+      "borrow_total_stake_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ],
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "cancel_game": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_game": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::ticket::Ticket",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ]
+      },
+      "end_game": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "fee_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u16"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "fee_in_bp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "game_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "guess": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "guess_epoch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "player": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "start_game": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::ticket::Ticket",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "start_guess": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::ticket::Ticket",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "total_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "vrf_input": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::game::Game"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      }
+    },
+    "house_data": {
+      "balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "base_fee_in_bp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "borrow": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
+      },
+      "borrow_balance_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "borrow_fees_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "borrow_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
+      },
+      "claim_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "fees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "houser": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HOUSE_DATA",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "initialize_house_data": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "max_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "min_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "public_key": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "top_up": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_max_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_min_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::house_data::HouseData",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "ticket": {
+      "burn": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::ticket::Ticket",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::ticket::Ticket"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_vrf_input_and_increment": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::ticket::Ticket"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "increment": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::ticket::Ticket"
+        ],
+        "return": []
+      },
+      "mint": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "player": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5e96b5796ac530a0325f2371682494eb5a9a1b5e687c405e533344a62c9b6593::ticket::Ticket"
+        ],
+        "return": [
+          "address"
+        ]
+      }
+    }
   }
 }

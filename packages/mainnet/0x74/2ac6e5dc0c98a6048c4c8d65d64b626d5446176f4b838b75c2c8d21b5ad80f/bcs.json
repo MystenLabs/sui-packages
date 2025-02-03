@@ -61,5 +61,192 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 26
     }
+  },
+  "functionMap": {
+    "artfilocker": {
+      "admin_update_lapsed_claims": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::AdminCap",
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LockerStorage",
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LapsedClaimsRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "admin_withdraw_lapsed": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::AdminCap",
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LockerStorage",
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LapsedClaimsRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LockerStorage",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_claimable_and_lapsed": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::Locker<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "claim": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LockerStorage",
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LapsedClaimsRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_interval": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LockerStorage",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "create_locker": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LockerStorage",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "u64",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "duration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LockerStorage",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "handle_lapsed_claims": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::Locker<T0>",
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LapsedClaimsRegistry",
+          "address",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "has_lapsed_claims": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LapsedClaimsRegistry",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "initialize": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "last_claim_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LockerStorage",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "start": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LockerStorage",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "unlock": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::Locker<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LapsedClaimsRegistry",
+          "address"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "unlocked": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x742ac6e5dc0c98a6048c4c8d65d64b626d5446176f4b838b75c2c8d21b5ad80f::artfilocker::LockerStorage",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    }
   }
 }

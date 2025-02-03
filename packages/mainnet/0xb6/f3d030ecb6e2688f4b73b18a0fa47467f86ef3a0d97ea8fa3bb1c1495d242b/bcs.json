@@ -37,5 +37,93 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 29
     }
+  },
+  "functionMap": {
+    "farm": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xb6f3d030ecb6e2688f4b73b18a0fa47467f86ef3a0d97ea8fa3bb1c1495d242b::farm::FARM",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xb6f3d030ecb6e2688f4b73b18a0fa47467f86ef3a0d97ea8fa3bb1c1495d242b::farm::FARM>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "token_staking": {
+      "create_staking_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xb6f3d030ecb6e2688f4b73b18a0fa47467f86ef3a0d97ea8fa3bb1c1495d242b::token_staking::StakingAdmin",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_stake_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb6f3d030ecb6e2688f4b73b18a0fa47467f86ef3a0d97ea8fa3bb1c1495d242b::token_staking::Stake"
+        ],
+        "return": [
+          "address",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_total_staked": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb6f3d030ecb6e2688f4b73b18a0fa47467f86ef3a0d97ea8fa3bb1c1495d242b::token_staking::StakingPool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb6f3d030ecb6e2688f4b73b18a0fa47467f86ef3a0d97ea8fa3bb1c1495d242b::token_staking::StakingPool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xb6f3d030ecb6e2688f4b73b18a0fa47467f86ef3a0d97ea8fa3bb1c1495d242b::farm::FARM>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb6f3d030ecb6e2688f4b73b18a0fa47467f86ef3a0d97ea8fa3bb1c1495d242b::token_staking::StakingPool",
+          "0xb6f3d030ecb6e2688f4b73b18a0fa47467f86ef3a0d97ea8fa3bb1c1495d242b::token_staking::Stake",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

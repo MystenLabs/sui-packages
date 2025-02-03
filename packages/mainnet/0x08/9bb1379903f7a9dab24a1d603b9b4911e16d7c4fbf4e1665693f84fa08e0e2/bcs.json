@@ -39,7 +39,7 @@
           "&0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::admin::AdminCap",
           "&mut 0x089bb1379903f7a9dab24a1d603b9b4911e16d7c4fbf4e1665693f84fa08e0e2::router::MetaStableRouterWrapper"
         ],
-        "return": null
+        "return": []
       },
       "deauthorize": {
         "visibility": "PUBLIC",
@@ -48,21 +48,23 @@
           "&0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::admin::AdminCap",
           "&mut 0x089bb1379903f7a9dab24a1d603b9b4911e16d7c4fbf4e1665693f84fa08e0e2::router::MetaStableRouterWrapper"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x089bb1379903f7a9dab24a1d603b9b4911e16d7c4fbf4e1665693f84fa08e0e2::router::MetaStableRouterWrapper",
-          "&mut 0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::RouterSwapCap<$0>",
-          "&mut 0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::Vault<$1>",
+          "&mut 0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::RouterSwapCap<T0>",
+          "&mut 0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::Vault<T1>",
           "&0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::version::Version",
-          "0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::DepositCap<$1, $2>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$2>",
+          "0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::DepositCap<T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T2>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -70,36 +72,40 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "swap": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x089bb1379903f7a9dab24a1d603b9b4911e16d7c4fbf4e1665693f84fa08e0e2::router::MetaStableRouterWrapper",
-          "&mut 0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::RouterSwapCap<$0>",
-          "&mut 0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::Vault<$1>",
+          "&mut 0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::RouterSwapCap<T0>",
+          "&mut 0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::Vault<T1>",
           "&0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::version::Version",
-          "0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::DepositCap<$1, $2>",
-          "0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::WithdrawCap<$1, $3>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$2>",
+          "0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::DepositCap<T1, T2>",
+          "0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::WithdrawCap<T1, T3>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T2>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T3>"
+        ]
       },
       "withdraw": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x089bb1379903f7a9dab24a1d603b9b4911e16d7c4fbf4e1665693f84fa08e0e2::router::MetaStableRouterWrapper",
-          "&mut 0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::RouterSwapCap<$0>",
-          "&mut 0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::Vault<$1>",
+          "&mut 0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::RouterSwapCap<T0>",
+          "&mut 0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::Vault<T1>",
           "&0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::version::Version",
-          "0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::WithdrawCap<$1, $2>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0xbb1d1a2e9635ed8a1733f591eede33ad525983186ac2c0dd1eb3a1bf336adc23::vault::WithdrawCap<T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T2>"
+        ]
       }
     }
   }

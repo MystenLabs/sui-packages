@@ -130,5 +130,328 @@
       "upgraded_id": "0xf6cff19d320c04530fbeed2c9f2ddbaea5d75e89b33fcc4e52141152cca571c3",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "queen_maker": {
+      "add_to_bid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "&mut 0x283004ccb8d55ec1a7203686a5cfcc8d8db5d0b0759f11fca9f6c7afb425f4c6::dragon_trainer::DragonTrainer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "compete_to_be_a_queen": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "&mut 0x283004ccb8d55ec1a7203686a5cfcc8d8db5d0b0759f11fca9f6c7afb425f4c6::dragon_trainer::BeesManager",
+          "&mut 0x283004ccb8d55ec1a7203686a5cfcc8d8db5d0b0759f11fca9f6c7afb425f4c6::dragon_trainer::DragonTrainer",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_user_position": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x283004ccb8d55ec1a7203686a5cfcc8d8db5d0b0759f11fca9f6c7afb425f4c6::dragon_trainer::MysticalBee",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::ParticipationPosition"
+        ]
+      },
+      "destroy_user_position": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::ParticipationPosition"
+        ],
+        "return": [
+          "0x283004ccb8d55ec1a7203686a5cfcc8d8db5d0b0759f11fca9f6c7afb425f4c6::dragon_trainer::MysticalBee",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_bid_pool_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_bid_pools_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "u64"
+        ],
+        "return": [
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<u64>",
+          "u64"
+        ]
+      },
+      "get_leading_bees_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "u64"
+        ],
+        "return": [
+          "vector<u64>",
+          "vector<address>",
+          "vector<u64>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "vector<u64>",
+          "u64"
+        ]
+      },
+      "get_positions_for_all_trainers": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "u64"
+        ],
+        "return": [
+          "vector<u64>",
+          "vector<address>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<bool>",
+          "u64"
+        ]
+      },
+      "get_queen_competition_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker"
+        ],
+        "return": [
+          "bool",
+          "u64",
+          "u8",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_queen_custody_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "address"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_user_position_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "address"
+        ],
+        "return": [
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "u64"
+        ]
+      },
+      "increment_energy_and_health": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x76edbed77a22cdae87fe5a92a8d9fec34f1ea4c9005976ffce5ca89f43297bac::yield_flow::TwoAmmFlowAccess",
+          "&mut 0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "increment_queen_maker": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x76edbed77a22cdae87fe5a92a8d9fec34f1ea4c9005976ffce5ca89f43297bac::yield_flow::TwoAmmFlowAccess",
+          "&mut 0x283004ccb8d55ec1a7203686a5cfcc8d8db5d0b0759f11fca9f6c7afb425f4c6::dragon_trainer::BeesManager",
+          "&mut 0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "increment_queen_maker_obj": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init_queen_maker": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x76edbed77a22cdae87fe5a92a8d9fec34f1ea4c9005976ffce5ca89f43297bac::hive::HIVE>",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "limit_deposits_for_existing_bidders": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "max_addable_to_bid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "bool",
+          "u64"
+        ]
+      },
+      "mint_hive_for_dragon_bees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x76edbed77a22cdae87fe5a92a8d9fec34f1ea4c9005976ffce5ca89f43297bac::yield_flow::DragonDaoCapability",
+          "&mut 0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "&mut 0x283004ccb8d55ec1a7203686a5cfcc8d8db5d0b0759f11fca9f6c7afb425f4c6::dragon_trainer::BeesManager",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x76edbed77a22cdae87fe5a92a8d9fec34f1ea4c9005976ffce5ca89f43297bac::hive::HIVE>"
+        ]
+      },
+      "update_leading_bees": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&mut 0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_queen_maker": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x76edbed77a22cdae87fe5a92a8d9fec34f1ea4c9005976ffce5ca89f43297bac::yield_flow::DragonDaoCapability",
+          "&mut 0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "bool",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_bee_after_competition": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3bbc7ffbd248dcbea1bfa55c5c67e793578411546f7c4ef8850670c9fae2a307::queen_maker::QueenMaker",
+          "&mut 0x283004ccb8d55ec1a7203686a5cfcc8d8db5d0b0759f11fca9f6c7afb425f4c6::dragon_trainer::BeesManager",
+          "&mut 0x283004ccb8d55ec1a7203686a5cfcc8d8db5d0b0759f11fca9f6c7afb425f4c6::dragon_trainer::DragonTrainer",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

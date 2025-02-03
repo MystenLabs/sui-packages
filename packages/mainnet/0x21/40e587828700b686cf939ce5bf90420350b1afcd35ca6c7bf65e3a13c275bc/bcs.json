@@ -383,7 +383,12 @@
           "&0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::ManagerCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object_table::ObjectTable<address, 0xbd147bc7f12f38f175d78947a61364e8e077b9b188b00e7094bc0c3623162196::typus_nft::Tails>",
+          "0xbd147bc7f12f38f175d78947a61364e8e077b9b188b00e7094bc0c3623162196::typus_nft::ManagerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xbd147bc7f12f38f175d78947a61364e8e077b9b188b00e7094bc0c3623162196::typus_nft::Tails>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       }
     },
     "typus_dov_single": {
@@ -397,7 +402,7 @@
           "u8",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "drop_bid_nodes": {
         "visibility": "PRIVATE",
@@ -409,7 +414,7 @@
           "vector<address>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "drop_deposit_nodes": {
         "visibility": "PRIVATE",
@@ -421,7 +426,7 @@
           "vector<address>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_additional_config": {
         "visibility": "PRIVATE",
@@ -430,7 +435,9 @@
           "&0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::AdditionalConfigRegistry",
           "0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::AdditionalConfigKey"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<T0>"
+        ]
       },
       "get_additional_configs": {
         "visibility": "FRIEND",
@@ -440,7 +447,9 @@
           "&0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::AdditionalConfigRegistry",
           "vector<u64>"
         ],
-        "return": null
+        "return": [
+          "vector<vector<u8>>"
+        ]
       },
       "get_incentive_fund_value": {
         "visibility": "FRIEND",
@@ -448,7 +457,9 @@
         "params": [
           "&0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::Registry"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_mut_bid_vault": {
         "visibility": "PRIVATE",
@@ -457,7 +468,9 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID",
           "u64"
         ],
-        "return": null
+        "return": [
+          "&mut 0xd60bbb359c55e2c60c2360defa75a5e8446c36cc794ac55bb14cf339f5a62bf5::vault::BidVault<0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::ManagerCap, T0>"
+        ]
       },
       "get_mut_deposit_vault": {
         "visibility": "PRIVATE",
@@ -466,7 +479,9 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID",
           "u64"
         ],
-        "return": null
+        "return": [
+          "&mut 0xd60bbb359c55e2c60c2360defa75a5e8446c36cc794ac55bb14cf339f5a62bf5::vault::DepositVault<0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::ManagerCap, T0>"
+        ]
       },
       "get_user_shares": {
         "visibility": "FRIEND",
@@ -476,7 +491,9 @@
           "vector<u64>",
           "address"
         ],
-        "return": null
+        "return": [
+          "vector<0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::UserShare>"
+        ]
       },
       "registry_uid": {
         "visibility": "FRIEND",
@@ -484,7 +501,44 @@
         "params": [
           "&0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::Registry"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
+      },
+      "send_fee": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::Registry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "upgrade_registry": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::Registry"
+        ],
+        "return": []
+      },
+      "version_check": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::Registry"
+        ],
+        "return": []
+      },
+      "withdraw_all_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa76499eda1d37751473de5f30e106f35943ada2f6ea764861243e7f5aa5bcc97::typus_dov_single::Registry",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

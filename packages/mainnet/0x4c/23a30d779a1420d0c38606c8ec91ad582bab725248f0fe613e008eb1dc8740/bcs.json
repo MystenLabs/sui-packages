@@ -98,7 +98,9 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "navi_events": {
@@ -108,7 +110,7 @@
         "params": [
           "address"
         ],
-        "return": null
+        "return": []
       },
       "navi_vault_deposit": {
         "visibility": "FRIEND",
@@ -117,7 +119,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "navi_vault_rewards_claimed": {
         "visibility": "FRIEND",
@@ -126,7 +128,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "navi_vault_withdraw": {
         "visibility": "FRIEND",
@@ -135,7 +137,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       }
     },
     "navi_subvault": {
@@ -143,9 +145,11 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<$0, $1>"
+          "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "create_vault": {
         "visibility": "FRIEND",
@@ -154,32 +158,36 @@
           "u8",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposits_open": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<$0, $1>"
+          "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "toggle_deposits": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<$0, $1>",
+          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<T0, T1>",
           "bool"
         ],
-        "return": null
+        "return": []
       },
       "uid": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<$0, $1>"
+          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
       }
     },
     "navi_subvault_interface": {
@@ -187,8 +195,8 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<$0, $1>",
-          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::IncentiveFundsPool<$2>",
+          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<T0, T1>",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::IncentiveFundsPool<T2>",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive",
           "&0xc3ad71130e000268b4f098db9137babe318551a7bdd5365204117ace8fcb048c::admin::AdminCap",
@@ -197,7 +205,9 @@
           "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T2>"
+        ]
       },
       "create_vault": {
         "visibility": "PUBLIC",
@@ -207,51 +217,53 @@
           "u8",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "public_deposit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage",
-          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<$0>",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive::Incentive",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive",
-          "&mut 0xe8b64e5c5fb006a7cca7c1f516ae66ac087884524948a033fc3822ee93e8da93::session_async::SessionAsync<$0, $1>",
+          "&mut 0xe8b64e5c5fb006a7cca7c1f516ae66ac087884524948a033fc3822ee93e8da93::session_async::SessionAsync<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "public_withdraw": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<$0, $1>",
+          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<T0, T1>",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage",
-          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<$0>",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>",
           "&0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f::oracle::PriceOracle",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive::Incentive",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive",
-          "&mut 0xe8b64e5c5fb006a7cca7c1f516ae66ac087884524948a033fc3822ee93e8da93::session_async::SessionAsync<$0, $1>",
+          "&mut 0xe8b64e5c5fb006a7cca7c1f516ae66ac087884524948a033fc3822ee93e8da93::session_async::SessionAsync<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "start_admin_withdraw": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0xc3ad71130e000268b4f098db9137babe318551a7bdd5365204117ace8fcb048c::admin::AdminCap",
-          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<$0, $1>",
+          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<T0, T1>",
           "u64",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage",
-          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<$0>",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>",
           "&0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f::oracle::PriceOracle",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive::Incentive",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive",
@@ -259,34 +271,41 @@
           "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0xe8b64e5c5fb006a7cca7c1f516ae66ac087884524948a033fc3822ee93e8da93::session_async::SessionAsync<T0, T1>"
+        ]
       },
       "toggle_deposits": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0xc3ad71130e000268b4f098db9137babe318551a7bdd5365204117ace8fcb048c::admin::AdminCap",
-          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<$0, $1>",
+          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<T0, T1>",
           "bool"
         ],
-        "return": null
+        "return": []
       },
       "total_assets": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault_interface::NaviVaultParams<$0, $1>"
+          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault_interface::NaviVaultParams<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "uid": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0xc3ad71130e000268b4f098db9137babe318551a7bdd5365204117ace8fcb048c::admin::AdminCap",
-          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<$0, $1>"
+          "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::navi_subvault::NaviSubVault<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
       }
     },
     "version": {
@@ -296,7 +315,7 @@
         "params": [
           "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::version::Version"
         ],
-        "return": null
+        "return": []
       },
       "create_version": {
         "visibility": "FRIEND",
@@ -304,7 +323,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_current_version": {
         "visibility": "PUBLIC",
@@ -312,7 +331,9 @@
         "params": [
           "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::version::Version"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "upgrade": {
         "visibility": "PUBLIC",
@@ -321,7 +342,7 @@
           "&mut 0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::version::Version",
           "&0xc3ad71130e000268b4f098db9137babe318551a7bdd5365204117ace8fcb048c::admin::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "value": {
         "visibility": "PUBLIC",
@@ -329,7 +350,9 @@
         "params": [
           "&0x4c23a30d779a1420d0c38606c8ec91ad582bab725248f0fe613e008eb1dc8740::version::Version"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     }
   }

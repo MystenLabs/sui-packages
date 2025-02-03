@@ -110,5 +110,354 @@
       "upgraded_id": "0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "calculations": {
+      "leverage_ratio": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7f6ce7ade63857c4fd16ef7783fed2dfc4d7fb7e40615abdb653030b76aef0c6::staked_sui_vault::StakedSuiVault",
+          "&0x0b572349baf4526c92c4e5242306e07a1658fa329ae93d1b9db0fc38b8a592bb::safe::Safe<0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc::afsui::AFSUI>>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "loan_to_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7f6ce7ade63857c4fd16ef7783fed2dfc4d7fb7e40615abdb653030b76aef0c6::staked_sui_vault::StakedSuiVault",
+          "&0x0b572349baf4526c92c4e5242306e07a1658fa329ae93d1b9db0fc38b8a592bb::safe::Safe<0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc::afsui::AFSUI>>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "normalized_leverage_ratio": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "normalized_loan_to_value": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "events": {
+      "emit_changed_leverage_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_staked_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_unstaked_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "interface": {
+      "afsui_collateral": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "assert_correct_position": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": []
+      },
+      "complete_action": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::interface::LeveragedActionCap",
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState",
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation",
+          "&0x7f6ce7ade63857c4fd16ef7783fed2dfc4d7fb7e40615abdb653030b76aef0c6::staked_sui_vault::StakedSuiVault",
+          "&0x0b572349baf4526c92c4e5242306e07a1658fa329ae93d1b9db0fc38b8a592bb::safe::Safe<0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc::afsui::AFSUI>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_leveraged_action_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState",
+          "u8"
+        ],
+        "return": [
+          "0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::interface::LeveragedActionCap"
+        ]
+      },
+      "initiate_change_leverage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState"
+        ],
+        "return": [
+          "0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::interface::LeveragedActionCap"
+        ]
+      },
+      "initiate_leverage_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc::afsui::AFSUI>"
+        ],
+        "return": [
+          "0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::interface::LeveragedActionCap"
+        ]
+      },
+      "initiate_leverage_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState",
+          "u64"
+        ],
+        "return": [
+          "0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::interface::LeveragedActionCap"
+        ]
+      },
+      "sui_debt": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::Obligation"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "leveraged_afsui_position": {
+      "base_afsui_collateral": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "decrease_base_afsui_collateral": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "u64"
+        ],
+        "return": []
+      },
+      "increase_base_afsui_collateral": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "u64"
+        ],
+        "return": []
+      },
+      "leverage_ratio": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&0x7f6ce7ade63857c4fd16ef7783fed2dfc4d7fb7e40615abdb653030b76aef0c6::staked_sui_vault::StakedSuiVault",
+          "&0x0b572349baf4526c92c4e5242306e07a1658fa329ae93d1b9db0fc38b8a592bb::safe::Safe<0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc::afsui::AFSUI>>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "loan_to_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "&0x7f6ce7ade63857c4fd16ef7783fed2dfc4d7fb7e40615abdb653030b76aef0c6::staked_sui_vault::StakedSuiVault",
+          "&0x0b572349baf4526c92c4e5242306e07a1658fa329ae93d1b9db0fc38b8a592bb::safe::Safe<0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xf325ce1300e8dac124071d3152c5c5ee6174914f8bc2161e88329cf579246efc::afsui::AFSUI>>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "new_leveraged_afsui_position": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState",
+          "0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::ObligationKey",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ]
+      },
+      "obligation_key": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::ObligationKey"
+        ]
+      },
+      "obligation_key_mut": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::ObligationKey"
+        ]
+      },
+      "total_afsui_collateral": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_sui_debt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_position": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_position::LeveragedAfSuiPosition",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "leveraged_afsui_state": {
+      "assert_protocol_version": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState"
+        ],
+        "return": []
+      },
+      "decrease_state_counters": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "increase_state_counters": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "total_afsui_collateral": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_sui_debt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8bc419c437c91885a008de52b0c70c026de2ff2cec639cb9681a5e34c65b3d81::leveraged_afsui_state::LeveragedAfSuiState"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    }
   }
 }

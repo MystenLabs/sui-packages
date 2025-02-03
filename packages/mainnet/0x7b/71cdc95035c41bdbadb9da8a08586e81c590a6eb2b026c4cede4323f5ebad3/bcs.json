@@ -36,5 +36,61 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 26
     }
+  },
+  "functionMap": {
+    "dialog_management": {
+      "get_chat_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7b71cdc95035c41bdbadb9da8a08586e81c590a6eb2b026c4cede4323f5ebad3::dialog_management::ChatCounts",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_last_n_messages": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x7b71cdc95035c41bdbadb9da8a08586e81c590a6eb2b026c4cede4323f5ebad3::dialog_management::UserDialogs",
+          "vector<u8>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "send_message": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x7b71cdc95035c41bdbadb9da8a08586e81c590a6eb2b026c4cede4323f5ebad3::dialog_management::UserDialogs",
+          "vector<u8>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_chat_count": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x7b71cdc95035c41bdbadb9da8a08586e81c590a6eb2b026c4cede4323f5ebad3::dialog_management::ChatCounts",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

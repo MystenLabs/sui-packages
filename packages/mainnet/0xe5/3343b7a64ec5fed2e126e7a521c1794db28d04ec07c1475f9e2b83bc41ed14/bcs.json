@@ -27,5 +27,71 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 21
     }
+  },
+  "functionMap": {
+    "drand_lib": {
+      "derive_randomness": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "safe_selection": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&vector<u8>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "verify_drand_signature": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      },
+      "verify_time_has_passed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "sui_winner": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "random": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xe53343b7a64ec5fed2e126e7a521c1794db28d04ec07c1475f9e2b83bc41ed14::sui_winner::Round",
+          "u64",
+          "vector<u8>"
+        ],
+        "return": [
+          "0xe53343b7a64ec5fed2e126e7a521c1794db28d04ec07c1475f9e2b83bc41ed14::sui_winner::Winner"
+        ]
+      }
+    }
   }
 }

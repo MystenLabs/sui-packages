@@ -67,7 +67,9 @@
           "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create_delegation": {
         "visibility": "PUBLIC",
@@ -81,7 +83,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delegated_amount": {
         "visibility": "PUBLIC",
@@ -91,7 +93,9 @@
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "delegated_amount_solver": {
         "visibility": "PUBLIC",
@@ -102,17 +106,19 @@
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "deposit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -120,7 +126,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_frozen": {
         "visibility": "PUBLIC",
@@ -130,7 +136,9 @@
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "is_resource_vault_exists": {
         "visibility": "PUBLIC",
@@ -140,7 +148,9 @@
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "owner": {
         "visibility": "PUBLIC",
@@ -149,7 +159,9 @@
           "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "register_vault": {
         "visibility": "PUBLIC",
@@ -158,7 +170,66 @@
           "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "set_frozen": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "address",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_fee_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_fee_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_by_solver": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "address",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_by_user": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "address",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     },
     "vault_core": {
@@ -169,7 +240,9 @@
           "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "borrow_mut_resource_vault": {
         "visibility": "FRIEND",
@@ -178,7 +251,9 @@
           "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
           "address"
         ],
-        "return": null
+        "return": [
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::ResourceVault<T0>"
+        ]
       },
       "borrow_resource_vault": {
         "visibility": "PUBLIC",
@@ -187,13 +262,15 @@
           "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
           "address"
         ],
-        "return": null
+        "return": [
+          "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::ResourceVault<T0>"
+        ]
       },
       "create_delegation": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::ResourceVault<$0>",
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::ResourceVault<T0>",
           "vector<u8>",
           "address",
           "u64",
@@ -201,7 +278,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_resource_vault": {
         "visibility": "FRIEND",
@@ -210,7 +287,7 @@
           "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delegated_amount": {
         "visibility": "PUBLIC",
@@ -220,17 +297,19 @@
           "vector<u8>",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "deposit": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::ResourceVault<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::ResourceVault<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "generate_resource_vault_id": {
         "visibility": "FRIEND",
@@ -238,7 +317,9 @@
         "params": [
           "address"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "get_fee_address": {
         "visibility": "FRIEND",
@@ -246,7 +327,9 @@
         "params": [
           "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_fee_amount": {
         "visibility": "FRIEND",
@@ -255,7 +338,107 @@
           "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
           "u128"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
+      },
+      "get_fee_bps": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_frozen": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "vector<u8>",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "owner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "vector<u8>"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "resource_vault_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "vector<u8>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "set_frozen": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "vector<u8>",
+          "address",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_fee_address": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "address",
+          "address"
+        ],
+        "return": []
+      },
+      "update_fee_bps": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::VaultRegistry",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe0d9aafae9356d3768b85b63e9fffbe674d99aff2775c5a2f337b7f2f67b1033::vault_core::ResourceVault<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     }
   }

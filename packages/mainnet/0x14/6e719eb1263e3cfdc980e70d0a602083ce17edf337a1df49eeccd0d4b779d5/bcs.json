@@ -91,5 +91,363 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 25
     }
+  },
+  "functionMap": {
+    "admin": {
+      "migrate": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::package::PackageAdminCap",
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::lucky_bag::DrawConfig",
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::Treasury",
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuMinter",
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuFontConfig"
+        ],
+        "return": []
+      },
+      "set_draw_price": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::TreasuryAdminCap",
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::lucky_bag::DrawConfig",
+          "u64"
+        ],
+        "return": []
+      },
+      "view_treasury_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::Treasury"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "withdraw_from_treasury": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::TreasuryAdminCap",
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::Treasury",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "fu": {
+      "add_stroke": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuCharacter",
+          "0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::stroke::Stroke"
+        ],
+        "return": []
+      },
+      "font": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuCharacter"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FU",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_complete": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuCharacter"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "max_fonts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuFontConfig"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "migrate": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuMinter",
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuFontConfig"
+        ],
+        "return": []
+      },
+      "mint_to_sender": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuMinter",
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuFontConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuCharacter"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "remove_stroke": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuCharacter",
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "required_strokes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuFontConfig",
+          "u8"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "stroke_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuCharacter"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "synthesize": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuCharacter"
+        ],
+        "return": []
+      }
+    },
+    "lucky_bag": {
+      "draw": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuFontConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "vector<0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::stroke::Stroke>"
+        ]
+      },
+      "draw_and_transfer": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::lucky_bag::DrawConfig",
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::fu::FuFontConfig",
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "migrate": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::lucky_bag::DrawConfig"
+        ],
+        "return": []
+      },
+      "price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::lucky_bag::DrawConfig"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "set_price": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::lucky_bag::DrawConfig",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "package": {
+      "check_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_migrate_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "stroke": {
+      "create": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u8",
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::stroke::Stroke"
+        ]
+      },
+      "font": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::stroke::Stroke"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::stroke::STROKE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stroke_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::stroke::Stroke"
+        ],
+        "return": [
+          "u8"
+        ]
+      }
+    },
+    "treasury": {
+      "balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::Treasury"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::Treasury",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "migrate": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::Treasury"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::TreasuryAdminCap",
+          "&mut 0x146e719eb1263e3cfdc980e70d0a602083ce17edf337a1df49eeccd0d4b779d5::treasury::Treasury",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      }
+    }
   }
 }

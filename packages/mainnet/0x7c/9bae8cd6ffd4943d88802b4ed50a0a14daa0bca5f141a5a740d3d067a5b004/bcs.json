@@ -150,7 +150,7 @@
         "params": [
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig"
         ],
-        "return": null
+        "return": []
       },
       "assert_current_version_invalid": {
         "visibility": "FRIEND",
@@ -158,7 +158,7 @@
         "params": [
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig"
         ],
-        "return": null
+        "return": []
       },
       "assert_reward_info_registered": {
         "visibility": "FRIEND",
@@ -167,7 +167,7 @@
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
           "&0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": []
       },
       "check_is_allow_staking": {
         "visibility": "PUBLIC",
@@ -175,7 +175,9 @@
         "params": [
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "get_all_reward_coin_types": {
         "visibility": "PUBLIC",
@@ -183,7 +185,9 @@
         "params": [
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>"
+        ]
       },
       "get_config_emission_rate": {
         "visibility": "PUBLIC",
@@ -192,7 +196,9 @@
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
           "&0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_config_open_staking": {
         "visibility": "PUBLIC",
@@ -200,7 +206,9 @@
         "params": [
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "get_config_reward_end_time": {
         "visibility": "PUBLIC",
@@ -209,7 +217,9 @@
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
           "&0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_config_reward_start_time": {
         "visibility": "PUBLIC",
@@ -218,7 +228,9 @@
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
           "&0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_config_version": {
         "visibility": "PUBLIC",
@@ -226,7 +238,66 @@
         "params": [
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "package_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "set_reward_config": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::AdminCap",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "start_staking": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::AdminCap",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig"
+        ],
+        "return": []
+      },
+      "stop_staking": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::AdminCap",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig"
+        ],
+        "return": []
+      },
+      "update_package_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::AdminCap",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "u64"
+        ],
+        "return": []
       }
     },
     "errors": {
@@ -234,61 +305,81 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "error_invalid_time": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "error_not_allow_stake": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "error_not_enough_balance": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "error_not_exist_reward_config": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "error_reward_info_not_registered": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "error_stake_position_staked_amount_not_zero": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "error_user_position_not_exist": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "error_value_overflow": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "error_waiting_claim_reward_not_empty": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "events": {
@@ -299,7 +390,7 @@
           "vector<u64>",
           "vector<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>"
         ],
-        "return": null
+        "return": []
       },
       "emit_calculate_pending_reward": {
         "visibility": "PUBLIC",
@@ -308,7 +399,7 @@
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": []
       },
       "emit_claim_reward": {
         "visibility": "PUBLIC",
@@ -318,7 +409,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_close_stake_position": {
         "visibility": "PUBLIC",
@@ -327,7 +418,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_create_stake_position": {
         "visibility": "PUBLIC",
@@ -336,7 +427,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_deposit": {
         "visibility": "PUBLIC",
@@ -347,7 +438,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_destroy_reward_manager": {
         "visibility": "PUBLIC",
@@ -356,7 +447,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_init_config": {
         "visibility": "PUBLIC",
@@ -365,7 +456,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": []
       },
       "emit_init_reward_manager": {
         "visibility": "PUBLIC",
@@ -373,7 +464,7 @@
         "params": [
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": []
       },
       "emit_init_vault": {
         "visibility": "PUBLIC",
@@ -381,7 +472,68 @@
         "params": [
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": []
+      },
+      "emit_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "u64",
+          "u64",
+          "address"
+        ],
+        "return": []
+      },
+      "emit_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "address"
+        ],
+        "return": []
+      },
+      "emit_update_package_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_update_reward_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_update_staking_status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "bool"
+        ],
+        "return": []
+      },
+      "emit_withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "address"
+        ],
+        "return": []
       }
     },
     "math": {
@@ -394,7 +546,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "check_div_ceil_u64": {
         "visibility": "PUBLIC",
@@ -403,7 +557,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "check_mul_div_ceil_u64": {
         "visibility": "PUBLIC",
@@ -413,7 +569,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "check_mul_div_u64": {
         "visibility": "PUBLIC",
@@ -423,7 +581,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "check_mul_u64": {
         "visibility": "PUBLIC",
@@ -432,7 +592,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "check_u128_to_u64_overflow": {
         "visibility": "PUBLIC",
@@ -440,7 +602,7 @@
         "params": [
           "u128"
         ],
-        "return": null
+        "return": []
       },
       "div_ceil": {
         "visibility": "PUBLIC",
@@ -449,7 +611,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "div_floor": {
         "visibility": "PUBLIC",
@@ -458,7 +622,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "eq_one": {
         "visibility": "PUBLIC",
@@ -466,7 +632,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "get_square_root": {
         "visibility": "PRIVATE",
@@ -476,7 +644,79 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "gt_one": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "gte_one": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "lt_one": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "lte_one": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "mul": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "mul_ceil": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "one": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
       }
     },
     "staking": {
@@ -488,7 +728,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "add_user_position_record": {
         "visibility": "PRIVATE",
@@ -498,7 +738,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "all_reward_types": {
         "visibility": "PRIVATE",
@@ -506,7 +746,9 @@
         "params": [
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>"
+        ]
       },
       "assert_not_enough_balance": {
         "visibility": "PRIVATE",
@@ -515,7 +757,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "calculate_all_pending_rewards": {
         "visibility": "PUBLIC",
@@ -526,7 +768,7 @@
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "calculate_new_reward_per_share": {
         "visibility": "PRIVATE",
@@ -537,7 +779,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_pending_reward": {
         "visibility": "PUBLIC",
@@ -548,7 +792,7 @@
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "claim_reward": {
         "visibility": "PUBLIC",
@@ -561,7 +805,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "clear_position_waiting_claim_reward": {
         "visibility": "PRIVATE",
@@ -570,7 +816,7 @@
           "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": []
       },
       "close_stake_position": {
         "visibility": "PUBLIC",
@@ -580,7 +826,280 @@
           "0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "create_stake_position": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition"
+        ]
+      },
+      "create_stake_position_and_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition"
+        ]
+      },
+      "destroy": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition"
+        ],
+        "return": []
+      },
+      "entry_claim_reward": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "entry_create_stake_position": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "entry_create_stake_position_and_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "entry_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "entry_unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_position_reward_debt": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_position_waiting_claim_reward": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init_reward_info": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "pre_calculate_pending_reward": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "register_reward": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::AdminCap",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_user_position_record": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address, 0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID, bool>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "reward_info_size": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "update_position_when_claim": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_position_when_stake": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_position_when_unstake": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_reward_debt": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::StakePosition",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_reward_info_status": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::ProtocolConfig",
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::staking::RewardManager",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
       }
     },
     "vault": {
@@ -591,25 +1110,25 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::bag::Bag",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": []
       },
       "deposit_reward": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "deposit_reward_coin": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": []
       },
       "deposit_staked": {
         "visibility": "FRIEND",
@@ -618,16 +1137,16 @@
           "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
           "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
         ],
-        "return": null
+        "return": []
       },
       "entry_deposit_reward_coin": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": []
       },
       "entry_withdraw_reward_coin": {
         "visibility": "PUBLIC",
@@ -638,7 +1157,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_vault_reward_balance": {
         "visibility": "PUBLIC",
@@ -646,7 +1165,9 @@
         "params": [
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_vault_staked_balance": {
         "visibility": "PUBLIC",
@@ -654,7 +1175,9 @@
         "params": [
           "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -662,7 +1185,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "withdraw_reward": {
         "visibility": "FRIEND",
@@ -671,7 +1194,33 @@
           "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "withdraw_reward_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
+          "&0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::config::AdminCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_staked": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7c9bae8cd6ffd4943d88802b4ed50a0a14daa0bca5f141a5a740d3d067a5b004::vault::Vault",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       }
     }
   }

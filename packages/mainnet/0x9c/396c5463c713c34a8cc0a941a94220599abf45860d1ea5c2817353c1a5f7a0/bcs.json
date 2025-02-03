@@ -126,5 +126,416 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 25
     }
+  },
+  "functionMap": {
+    "coinflip": {
+      "bet": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::coinflip::CoinFlipGame<T0>",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_coinflip_game": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::AdminCap",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "edit_coinflip_game": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::AdminCap",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::coinflip::CoinFlipGame<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "reveal_bet_onchain_randomness": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::coinflip::CoinFlipGame<T0>",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "events": {
+      "emit_bet_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "address"
+        ],
+        "return": []
+      },
+      "emit_nft_minted_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "emit_purchased_lootbox_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address"
+        ],
+        "return": []
+      },
+      "emit_revealed_bet_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "bool",
+          "u64",
+          "address"
+        ],
+        "return": []
+      },
+      "emit_revealed_lootbox_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "global_chat": {
+      "add_message": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::global_chat::ChatRoom",
+          "u64",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "house": {
+      "claim_referee_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_referrer_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_house": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "distribute_referral_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "u64",
+          "address"
+        ],
+        "return": []
+      },
+      "edit_referal_ratios": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::AdminCap",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "join_balance": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "set_referer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "take_fund_balance": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::AdminCap",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      }
+    },
+    "lootbox": {
+      "assert_reward": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u64>",
+          "vector<u64>"
+        ],
+        "return": []
+      },
+      "create_lootbox": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::AdminCap",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::lootbox::LootboxGame<T0>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u64>",
+          "vector<u64>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "edit_lootbox": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::AdminCap",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::lootbox::LootboxGame<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "bool",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u64>",
+          "vector<u64>"
+        ],
+        "return": []
+      },
+      "get_lootbox": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID, 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::lootbox::LootBox>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::lootbox::LootBox"
+        ]
+      },
+      "get_mut_lootbox": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID, 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::lootbox::LootBox>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::lootbox::LootBox"
+        ]
+      },
+      "get_reward_index": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&vector<u64>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "purchase_lootbox": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::lootbox::LootboxGame<T0>",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "reveal_lootbox_onchain_randomness": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::lootbox::LootboxGame<T0>",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "nft": {
+      "burn": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::nft::Nft",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_spec": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::AdminCap",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::nft::Factory",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::nft::NFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_to_sender": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::nft::Factory",
+          "&mut 0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::house::House<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x9c396c5463c713c34a8cc0a941a94220599abf45860d1ea5c2817353c1a5f7a0::nft::Nft"
+        ]
+      }
+    }
   }
 }

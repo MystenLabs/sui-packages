@@ -54,5 +54,213 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 19
     }
+  },
+  "functionMap": {
+    "access": {
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::access::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::access::AdminCap"
+        ]
+      }
+    },
+    "drand_lib": {
+      "derive_randomness": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "safe_selection": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&vector<u8>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "verify_drand_signature": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      },
+      "verify_time_has_passed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "ec_ops": {
+      "bls_min_sig_verify": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G2>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "elgamal_decrypt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::Scalar>",
+          "&0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::ec_ops::ElGamalEncryption"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>"
+        ]
+      },
+      "equility_verify": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>",
+          "&0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::ec_ops::ElGamalEncryption",
+          "&0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::ec_ops::ElGamalEncryption",
+          "&0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::ec_ops::EqualityProof"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "fiat_shamir_challenge": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>",
+          "&0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::ec_ops::ElGamalEncryption",
+          "&0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::ec_ops::ElGamalEncryption",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::Scalar>"
+        ]
+      },
+      "ibe_decrypt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::ec_ops::IbeEncryption",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::group_ops::Element<0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::G1>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>"
+        ]
+      },
+      "ibe_encryption_from_bytes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::ec_ops::IbeEncryption"
+        ]
+      },
+      "modulo_order": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "try_substract": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>"
+        ]
+      }
+    },
+    "encrypted_nfts": {
+      "decrypt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::encrypted_nfts::TimeCapsule",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::encrypted_nfts::LuckyCard"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::encrypted_nfts::ENCRYPTED_NFTS",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_encrypted": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::access::AdminCap",
+          "vector<u8>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xab56e915166e33c59d22101c1015e5903cd90d84c2b9b450aaa5bef473f2fee0::encrypted_nfts::TimeCapsule"
+        ]
+      },
+      "remove_padding": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      }
+    }
   }
 }

@@ -52,5 +52,139 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 29
     }
+  },
+  "functionMap": {
+    "icon": {
+      "get_icon_url": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
+      }
+    },
+    "spam": {
+      "admin_destroy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::AdminCap"
+        ],
+        "return": []
+      },
+      "admin_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::Director",
+          "&0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::AdminCap"
+        ],
+        "return": []
+      },
+      "admin_resume": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::Director",
+          "&0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::AdminCap"
+        ],
+        "return": []
+      },
+      "claim_user_counter": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::Director",
+          "0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::UserCounter",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::SPAM>"
+        ]
+      },
+      "destroy_user_counter": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::UserCounter"
+        ],
+        "return": []
+      },
+      "get_or_create_epoch_counter": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::Director",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "&mut 0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::EpochCounter"
+        ]
+      },
+      "increment_user_counter": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::UserCounter",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::SPAM",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_user_counter": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::Director",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "register_user_counter": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::Director",
+          "&mut 0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::UserCounter",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stats_for_recent_epochs": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::Director",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::Stats"
+        ]
+      },
+      "stats_for_specific_epochs": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::Director",
+          "vector<u64>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xf7f2afc9a0a9558e950b4d369c84f2fd0d406ea42579424972b115faf8918b35::spam::Stats"
+        ]
+      }
+    }
   }
 }

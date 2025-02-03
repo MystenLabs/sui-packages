@@ -52,79 +52,183 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<$0>"
+          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "compute_vested_amount": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<$0>",
+          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create": {
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "u64",
           "u64",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "destroy_empty": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<$0>"
+          "0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>"
         ],
-        "return": null
+        "return": []
       },
       "duration": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<$0>"
+          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "end": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<$0>"
+          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_cannot_destroy_non_empty_lock": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "err_duration_cannot_be_zero": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "err_invalid_cliff": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "err_invalid_portion": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
+      },
+      "err_zero_releaseable_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>"
+        ]
+      },
+      "releasable_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "release": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "release_to": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "released_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "split": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>"
+        ]
+      },
+      "split_to": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x70def7106e477281dfa543efec0160b8a3b62a9034bdc91e1f18e26c1b852414::vesting_lock::VestingLock<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
       }
     }
   }

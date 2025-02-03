@@ -32,5 +32,216 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 15
     }
+  },
+  "functionMap": {
+    "leaderboard": {
+      "add_top_game_sorted": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::SprintLeaderboard",
+          "0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::TopSprintGame"
+        ],
+        "return": []
+      },
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "game_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::SprintLeaderboard"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "max_duration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::SprintLeaderboard"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "merge": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "vector<0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::TopSprintGame>",
+          "vector<0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::TopSprintGame>"
+        ],
+        "return": [
+          "vector<0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::TopSprintGame>"
+        ]
+      },
+      "merge_sort_top_games": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "vector<0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::TopSprintGame>"
+        ],
+        "return": [
+          "vector<0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::TopSprintGame>"
+        ]
+      },
+      "submit_game": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::sprint_game::SprintGame",
+          "&mut 0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::SprintLeaderboard"
+        ],
+        "return": []
+      },
+      "top_game_at": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::SprintLeaderboard",
+          "u64"
+        ],
+        "return": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::TopSprintGame"
+        ]
+      },
+      "top_game_at_has_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::SprintLeaderboard",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "top_game_duration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::TopSprintGame"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "top_game_game_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::TopSprintGame"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "top_games": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::SprintLeaderboard"
+        ],
+        "return": [
+          "&vector<0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::leaderboard::TopSprintGame>"
+        ]
+      }
+    },
+    "sprint_game": {
+      "create_game": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "delete_game": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::sprint_game::SprintGame"
+        ],
+        "return": []
+      },
+      "duration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::sprint_game::SprintGame"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "end_game": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::sprint_game::SprintGame",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "end_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::sprint_game::SprintGame"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::sprint_game::SprintGame"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "player": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::sprint_game::SprintGame"
+        ],
+        "return": [
+          "&address"
+        ]
+      },
+      "start_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdddd53a9719c5c4f593e55261093cd410baeb26935273accc769e1e40e824cd5::sprint_game::SprintGame"
+        ],
+        "return": [
+          "&u64"
+        ]
+      }
+    }
   }
 }

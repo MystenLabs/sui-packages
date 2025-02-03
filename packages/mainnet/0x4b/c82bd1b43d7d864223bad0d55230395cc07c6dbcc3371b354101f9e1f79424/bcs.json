@@ -84,7 +84,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_new_operator": {
         "visibility": "PUBLIC",
@@ -94,7 +94,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "assert_lp_value_is_increased_or_not_changed": {
         "visibility": "PRIVATE",
@@ -105,7 +105,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "assert_pool_not_completed": {
         "visibility": "PUBLIC",
@@ -114,7 +114,7 @@
           "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "assert_version": {
         "visibility": "PRIVATE",
@@ -122,42 +122,45 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "buy": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_direct": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
           "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
-          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Pool<$0, $1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Pool<T0, T1>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_returns": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "change_fee_recepient": {
         "visibility": "PUBLIC",
@@ -168,7 +171,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_pool_exist": {
         "visibility": "PUBLIC",
@@ -176,7 +179,376 @@
         "params": [
           "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "create": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_and_first_buy": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "estimate_amount_out": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "estimate_amount_out_for_buy_direct": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "estimate_amount_out_without_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "generate_pool_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ]
+      },
+      "get_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_creator_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_fee_recepient": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_graduated_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_hardcap_per_raise_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_initial_virtual_raise_coin_reserves": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_initial_virtual_reserves_per_raise_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_initial_virtual_token_reserves": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_operators": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "vector<address>"
+        ]
+      },
+      "get_platform_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Pool<T0, T1>"
+        ]
+      },
+      "get_remain_token_reserves": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_token_decimals": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "get_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "migrate_version": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_operator": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "sell": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "sell_returns": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "skim": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_on_bluemove": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0xb24b6789e088b876afabca733bed2299fbc9e2d6369be4d1acfa17d8145454d9::swap::Dex_Info",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_config": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u8",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_hardcap_per_raise_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_initial_virtual_reserves_per_raise_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4bc82bd1b43d7d864223bad0d55230395cc07c6dbcc3371b354101f9e1f79424::akasui::Configuration",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "curves": {
@@ -188,7 +560,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_remove_liquidity_return": {
         "visibility": "PUBLIC",
@@ -198,7 +572,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_token_amount_received": {
         "visibility": "PUBLIC",
@@ -208,7 +584,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "utils": {
@@ -219,7 +597,9 @@
           "u256",
           "u256"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "as_u64": {
         "visibility": "PUBLIC",
@@ -227,7 +607,9 @@
         "params": [
           "u256"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "div": {
         "visibility": "PUBLIC",
@@ -236,7 +618,9 @@
           "u256",
           "u256"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "from_u64": {
         "visibility": "PUBLIC",
@@ -244,7 +628,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "mul": {
         "visibility": "PUBLIC",
@@ -253,7 +639,9 @@
           "u256",
           "u256"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "sub": {
         "visibility": "PUBLIC",
@@ -262,7 +650,9 @@
           "u256",
           "u256"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       }
     }
   }

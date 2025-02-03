@@ -31,5 +31,85 @@
       "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
       "upgraded_version": 4
     }
+  },
+  "functionMap": {
+    "oracle": {
+      "create_price_feed": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x63f930881f4207460a67846db62bc89a82d87570a3dc2bedb546b30bd4c6ff19::oracle::AdminCap",
+          "&mut 0x63f930881f4207460a67846db62bc89a82d87570a3dc2bedb546b30bd4c6ff19::oracle::Root",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x63f930881f4207460a67846db62bc89a82d87570a3dc2bedb546b30bd4c6ff19::oracle::Root",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_uid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x63f930881f4207460a67846db62bc89a82d87570a3dc2bedb546b30bd4c6ff19::oracle::Root"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_price_feed": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x63f930881f4207460a67846db62bc89a82d87570a3dc2bedb546b30bd4c6ff19::oracle::PriceFeed"
+        ]
+      },
+      "update_owner": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x63f930881f4207460a67846db62bc89a82d87570a3dc2bedb546b30bd4c6ff19::oracle::AdminCap",
+          "&mut 0x63f930881f4207460a67846db62bc89a82d87570a3dc2bedb546b30bd4c6ff19::oracle::Root",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x63f930881f4207460a67846db62bc89a82d87570a3dc2bedb546b30bd4c6ff19::oracle::Root",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    }
   }
 }

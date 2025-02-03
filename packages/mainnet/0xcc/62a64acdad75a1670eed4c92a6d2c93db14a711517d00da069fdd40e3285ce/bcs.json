@@ -121,5 +121,788 @@
       "upgraded_id": "0xca5a5a62f01c79a104bf4d31669e29daa387f325c241de4edbe30986a9bc8b0d",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "admin": {
+      "add_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ],
+        "return": []
+      },
+      "create_incentive_pools": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::admin::AdminCap",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "take_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::admin::AdminCap",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "update_pool_config": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::admin::AdminCap",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T1>",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "update_reward_pool_config": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::admin::AdminCap",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      }
+    },
+    "app_error": {
+      "reward_exchange_rate_numerator_zero": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "incentive_account": {
+      "accrue_all_points": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "accrue_points": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccount",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "add_all_debts_from_obligation": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccount",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>"
+        ],
+        "return": []
+      },
+      "amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "assert_incentive_pools": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>"
+        ],
+        "return": []
+      },
+      "claim_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "create_if_not_exists": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_incentive_accounts": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts"
+        ]
+      },
+      "force_unstake_unhealthy": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&mut 0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::market::Market",
+          "&0xca5a5a62f01c79a104bf4d31669e29daa387f325c241de4edbe30986a9bc8b0d::coin_decimals_registry::CoinDecimalsRegistry",
+          "&0x1478a432123e4b3d61878b629f2c692969fdb375644f1251cd278a4b1e7d7cd6::x_oracle::XOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "incentive_account": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation"
+        ],
+        "return": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccount"
+        ]
+      },
+      "incentive_state": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccount",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveState"
+        ]
+      },
+      "incentive_types": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccount"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>"
+        ]
+      },
+      "index": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "pool_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveState"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ]
+      },
+      "remove_all_amount_from_incentive_state": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccount",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>"
+        ],
+        "return": []
+      },
+      "stake": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::ObligationKey",
+          "&mut 0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation_access::ObligationAccessStore",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>"
+        ],
+        "return": []
+      },
+      "total_points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "unstake": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::ObligationKey",
+          "&mut 0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>"
+        ],
+        "return": []
+      }
+    },
+    "incentive_pool": {
+      "accrue_all_points": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "accrue_points": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "add_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "base_index_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "claim_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "create_incentive_pools": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>"
+        ]
+      },
+      "created_at": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "distributed_point": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "distributed_point_per_period": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "incentive_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ]
+      },
+      "index": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "is_points_up_to_date": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_pool_exist": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "last_update": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "max_distributed_point": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "max_stakes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "point_distribution_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "pool_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ]
+      },
+      "pool_types": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>"
+        ]
+      },
+      "pools": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName, 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool>"
+        ]
+      },
+      "reward_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>"
+        ],
+        "return": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>"
+        ]
+      },
+      "stake": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "u64"
+        ],
+        "return": []
+      },
+      "stakes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "take_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "unstake": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T1>",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "update_reward_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "reward_pool": {
+      "add_reward": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "calculate_points_to_reward": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_reward_to_points": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "claim_reward": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "claimed_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "exchange_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "left_reward_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>"
+        ]
+      },
+      "remove_reward": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "update_reward_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::reward_pool::RewardPool<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "typed_id": {
+      "as_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::typed_id::TypedID<T0>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "equals_object": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::typed_id::TypedID<T0>",
+          "&T0"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&T0"
+        ],
+        "return": [
+          "0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::typed_id::TypedID<T0>"
+        ]
+      },
+      "to_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::typed_id::TypedID<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      }
+    },
+    "user": {
+      "force_unstake_unhealthy": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&mut 0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&mut 0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::market::Market",
+          "&0xca5a5a62f01c79a104bf4d31669e29daa387f325c241de4edbe30986a9bc8b0d::coin_decimals_registry::CoinDecimalsRegistry",
+          "&0x1478a432123e4b3d61878b629f2c692969fdb375644f1251cd278a4b1e7d7cd6::x_oracle::XOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "redeem_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::ObligationKey",
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "stake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::ObligationKey",
+          "&mut 0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation_access::ObligationAccessStore",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::ObligationKey",
+          "&mut 0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_points": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_pool::IncentivePools<T0>",
+          "&mut 0xcc62a64acdad75a1670eed4c92a6d2c93db14a711517d00da069fdd40e3285ce::incentive_account::IncentiveAccounts",
+          "&0x882e90a50f55bf72ce05ebab5603bac84668542d47cf1e2462894e9821aed23b::obligation::Obligation",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      }
+    }
   }
 }

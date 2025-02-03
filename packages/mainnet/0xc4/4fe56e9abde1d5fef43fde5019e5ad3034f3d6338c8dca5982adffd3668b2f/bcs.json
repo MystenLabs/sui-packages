@@ -81,5 +81,275 @@
       "upgraded_id": "0x84b27ddadc6139c7e8837fef6759eba4670ba3fc0679acd118b4e9252f834e29",
       "upgraded_version": 1
     }
+  },
+  "functionMap": {
+    "config": {
+      "add_staking_rule": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::AdminCap",
+          "&mut 0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::StakingConfig",
+          "u64",
+          "u16",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "annualized_interest_rate_bp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::StakingRule"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "get_staking_rule": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::StakingConfig",
+          "u64"
+        ],
+        "return": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::StakingRule"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::CONFIG",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mul_div_round": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "remove_staking_rule": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::AdminCap",
+          "&mut 0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::StakingConfig",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::StakingRule"
+        ]
+      },
+      "staking_quantity_range": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::StakingRule"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "staking_reward": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::StakingConfig",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      }
+    },
+    "staking": {
+      "calculate_locking_time": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "e4c_tokens_request": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::GameLiquidityPool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x84b27ddadc6139c7e8837fef6759eba4670ba3fc0679acd118b4e9252f834e29::e4c::E4C>"
+        ]
+      },
+      "e4c_tokens_withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::AdminCap",
+          "&mut 0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::GameLiquidityPool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x84b27ddadc6139c7e8837fef6759eba4670ba3fc0679acd118b4e9252f834e29::e4c::E4C>"
+        ]
+      },
+      "game_liquidity_pool_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::GameLiquidityPool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_staking_receipt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x84b27ddadc6139c7e8837fef6759eba4670ba3fc0679acd118b4e9252f834e29::e4c::E4C>",
+          "&mut 0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::GameLiquidityPool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::config::StakingConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::StakingReceipt"
+        ]
+      },
+      "place_in_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::GameLiquidityPool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x84b27ddadc6139c7e8837fef6759eba4670ba3fc0679acd118b4e9252f834e29::e4c::E4C>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "staking_receipt_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::StakingReceipt"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "staking_receipt_applied_interest_rate_bp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::StakingReceipt"
+        ],
+        "return": [
+          "u16"
+        ]
+      },
+      "staking_receipt_applied_staking_days": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::StakingReceipt"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "staking_receipt_reward": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::StakingReceipt"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "staking_receipt_staked_at": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::StakingReceipt"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "staking_receipt_staking_end_at": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::StakingReceipt"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "staking_receipt_staking_remain_period": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::StakingReceipt",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "staking_receipt_total_reward_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::StakingReceipt"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xc44fe56e9abde1d5fef43fde5019e5ad3034f3d6338c8dca5982adffd3668b2f::staking::StakingReceipt",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x84b27ddadc6139c7e8837fef6759eba4670ba3fc0679acd118b4e9252f834e29::e4c::E4C>"
+        ]
+      }
+    }
   }
 }
