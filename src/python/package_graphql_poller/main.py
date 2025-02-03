@@ -368,7 +368,7 @@ def get_packages_published_after_checkpoint(
         if resp.status_code == 200:
             body = json.loads(resp.content)
 
-            packages_graphql = body["data"]["packages"]["nodes"] if "data" in body and "packages" in body["data"] and "nodes" in body["data"]["packages"] else []
+            packages_graphql = body.get("data", {}).get("packages", {}).get("nodes", [])
             if no_trans_graphql:
                 add_previous_transaction_data(network, packages_graphql)
                 
