@@ -9,12 +9,17 @@ import json
 import subprocess
 import requests
 
-NETWORK_TO_ORIGIN = {
+NETWORK_TO_ORIGIN_GRAPHQL = {
     "mainnet": "https://sui-mainnet.mystenlabs.com",
     "testnet": "https://sui-testnet.mystenlabs.com",
 }
 
-QUERY = """
+NETWORK_TO_ORIGIN_JSONRPC = {
+    "mainnet": "https://fullnode.mainnet.sui.io",
+    "testnet": "https://fullnode.testnet.sui.io",
+}
+
+PACKAGES_QUERY = """
 query($cursor: String, $afterCheckpoint: UInt53) {
   packages(first: 50  after: $cursor, filter: {afterCheckpoint: $afterCheckpoint}) {
     pageInfo {
@@ -76,9 +81,89 @@ query($cursor: String, $afterCheckpoint: UInt53) {
 }
 """
 
+PACKAGES_QUERY_NO_TRANS = """
+query($cursor: String, $afterCheckpoint: UInt53) {
+  packages(first: 50  after: $cursor, filter: {afterCheckpoint: $afterCheckpoint}) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    nodes {
+      address
+      version
+      digest
+      packageVersions(first: 1) {
+        nodes {
+          address
+          version
+        }
+      }
+      modules {
+        nodes {
+          name
+          bytes
+          functions {
+            nodes {
+              visibility
+              isEntry
+              name
+              parameters {
+                repr
+              }
+              return {
+                repr
+              }
+            }
+          }
+        }
+      }
+      linkage {
+        originalId
+        upgradedId
+        version
+      }
+      typeOrigins {
+        module
+        struct
+        definingId
+      }
+    }
+  }
+}
+"""
+
+TRANSACTION_BLOCK_QUERY = """
+query($cursor: String, $afterCheckpoint: UInt53) {
+	  transactionBlocks(
+    first: 50
+    after: $cursor
+    filter: {afterCheckpoint: $afterCheckpoint, kind: PROGRAMMABLE_TX}
+  ) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    nodes {
+      digest
+      sender {
+        address
+      }
+      effects {
+       checkpoint {
+          sequenceNumber
+        }
+        objectChanges {
+          nodes {
+   				address
+          }
+        }
+      }
+    }
+  }
+"""
 
 def query_graphql(network, query, variables):
-    origin = NETWORK_TO_ORIGIN.get(network)
+    origin = NETWORK_TO_ORIGIN_GRAPHQL.get(network)
     if not origin:
         raise Exception(f"unknown network: {network}")
     body = {"query": query, "variables": variables}
@@ -92,6 +177,57 @@ def query_graphql(network, query, variables):
     )
     return resp
 
+def query_jsonrpc(network, query):
+    origin = NETWORK_TO_ORIGIN_JSONRPC.get(network)
+    if not origin:
+        raise Exception(f"unknown network: {network}")
+    resp = requests.post(
+        origin,
+        headers={
+            "User-Agent": "sui-integrity (https://github.com/MystenLabs/sui-integrity)",
+            "Content-Type": "application/json",
+        },
+        json=query,
+    )
+    return resp
+
+def multiGetObject_jsonrpc(network, objects, options):
+    query = {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "sui_multiGetObjects",
+            "params": [
+                objects,
+                options
+            ]
+    }
+    resp = query_jsonrpc(network, query)
+    objects = {}
+    if resp.status_code == 200:
+        resp_json = resp.json()
+        for data in resp_json["result"]:
+            objects[data['data']['objectId']] = data['data']
+    
+    return objects
+
+def multiGetTransactionBlocks_jsonrpc(network, transactions, options):
+    query = {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "sui_multiGetTransactionBlocks",
+            "params": [
+                transactions,
+                options
+            ]
+    }
+    resp = query_jsonrpc(network, query)
+    transactions = {}
+    if resp.status_code == 200:
+        resp_json = resp.json()
+        for data in resp_json["result"]:
+            transactions[data['digest']] = data
+    
+    return transactions
 
 def get_last_checkpoint_seen(io_dir, network):
     "Iterates over $io_dir/$network/$first_4/$last_n/metadata.json and returns the highest checkpoint number"
@@ -187,7 +323,19 @@ def package_node_to_metadata_and_modules(node):
     res = {"bcs": bcs, "metadata": metadata, "modules": modules}
     return res
 
-
+def add_previous_transaction_data(network, packages):
+    package_ids = [p["address"] for p in packages]
+    packages_metadata = multiGetObject_jsonrpc(network, package_ids, {"showPreviousTransaction": True})
+    previous_transaction_digests = [p['previousTransaction'] for p in packages_metadata.values()]
+    transactions = multiGetTransactionBlocks_jsonrpc(network, previous_transaction_digests, {"showEffects": True, "showInput": True})
+    for p in packages:
+        previous_transaction_digest = packages_metadata[p["address"]]['previousTransaction']
+        p["previousTransactionBlock"] = {'digest': previous_transaction_digest, 
+                                         'sender': {'address': transactions[previous_transaction_digest]['transaction']['data']['sender']} if transactions[previous_transaction_digest]['transaction']['data']['sender']  else  None,
+                                         'effects': {'checkpoint': {'sequenceNumber': int(transactions[previous_transaction_digest]['checkpoint'])}}}
+    
+    
+    
 def get_packages_published_after_checkpoint(
     network,
     io_dir,
@@ -198,14 +346,32 @@ def get_packages_published_after_checkpoint(
     cursor = None
     has_next = True
     packages_with_metadata = []
+    package_query = PACKAGES_QUERY
+    no_trans_graphql = False
+
     while has_next:
         resp = query_graphql(
-            network, QUERY, {"cursor": cursor, "afterCheckpoint": checkpoint}
-        )
+            network, package_query, {"cursor": cursor, "afterCheckpoint": checkpoint}
+         )
+        if resp.status_code != 200 or not  json.loads(resp.content)['data']:
+            if cursor:
+               checkpoint =  max(p['metadata']['checkpoint'] for p in packages_with_metadata.values())
+               cursor = None
+
+            package_query = PACKAGES_QUERY_NO_TRANS
+            no_trans_graphql = True            
+
+            resp = query_graphql(
+                    network, package_query, {"cursor": cursor, "afterCheckpoint": checkpoint}
+                )
+        
         if resp.status_code == 200:
             body = json.loads(resp.content)
 
             packages_graphql = body["data"]["packages"]["nodes"] if "data" in body and "packages" in body["data"] and "nodes" in body["data"]["packages"] else []
+            if no_trans_graphql:
+                add_previous_transaction_data(network, packages_graphql)
+                
             for p in packages_graphql:
                 pkg = package_node_to_metadata_and_modules(p)
                 if pkg["metadata"]["sender"]:
@@ -215,6 +381,8 @@ def get_packages_published_after_checkpoint(
             has_next = body["data"]["packages"]["pageInfo"]["hasNextPage"]
             if has_next:
                 cursor = body["data"]["packages"]["pageInfo"]["endCursor"]
+        else:
+            print(f"Failed to query packages: {resp.status_code}")
     return packages_with_metadata
 
 
