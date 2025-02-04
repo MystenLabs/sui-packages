@@ -465,7 +465,7 @@ if __name__ == "__main__":
     )
 
     arg_parser.add_argument(
-        "--move-decompiler", required=True, help="The move-decopmiler binary to be used"
+        "--move-decompiler", required=True, help="The move-decompiler binary to be used"
     )
 
     args = arg_parser.parse_args()
