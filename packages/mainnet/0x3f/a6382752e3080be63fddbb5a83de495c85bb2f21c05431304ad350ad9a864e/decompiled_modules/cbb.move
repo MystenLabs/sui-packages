@@ -1,0 +1,14 @@
+module 0x3fa6382752e3080be63fddbb5a83de495c85bb2f21c05431304ad350ad9a864e::cbb {
+    struct CBB has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CBB, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CBB>(arg0, 6, b"CBB", b"Chibebe", x"457665722077616e74656420746f2062652070617274206f6620736f6d657468696e672077656972646c7920617765736f6d653f204d6565742048554d414e746865206d656d6520636f696e2074686174732061637475616c6c792068756d616e2e204e6f20726f626f74732c206e6f20616c676f726974686d732c206a75737420612062756e6368206f662077656972646f732c20647265616d6572732c20616e64206d656d652d6c6f76657273206275696c64696e67206120636f6d6d756e6974792074686174207669626573206c696b6520796f7572206661766f72697465206c6174652d6e696768742063686174207769746820667269656e64732e0a0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/logo_01_62af6b2d05.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CBB>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<CBB>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
