@@ -1,0 +1,14 @@
+module 0xfcae1292d71636735f41773bc759366ff52b558237068d86c080ee7885038885::duckster {
+    struct DUCKSTER has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: DUCKSTER, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<DUCKSTER>(arg0, 6, b"DUCKSTER", b"DUCKSTER SUI", x"2048454c4c4f2c206920616d20746865206475636b737465720a4455434b535445522069732061206d656d6520746f6b656e20626c656e64696e672068756d6f722c20756e697175656e6573732c20616e6420636f6d6d756e69747920706f7765722e20466561747572696e6720616e2061646f7261626c652079656c6c6f77206475636b2077697468206120726564206861742c20636f6f6c20676c61737365732c20616e642061207374796c69736820677265656e206f75746669742c204455434b53544552206973206865726520746f20656e7465727461696e20616e6420627269676874656e207468652063727970746f20776f726c642e0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/1000007363_9549cea703.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<DUCKSTER>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<DUCKSTER>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
