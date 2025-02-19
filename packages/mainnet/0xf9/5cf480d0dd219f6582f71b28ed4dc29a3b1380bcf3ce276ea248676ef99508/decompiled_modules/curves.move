@@ -1,0 +1,25 @@
+module 0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::curves {
+    public fun calculate_add_liquidity_cost(arg0: u64, arg1: u64, arg2: u64) : u64 {
+        let v0 = 0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::sub(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::from_u64(arg1), 0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::from_u64(arg2));
+        assert!(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::as_u64(v0) > 0, 100);
+        let v1 = 0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::from_u64(arg0);
+        0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::as_u64(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::sub(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::from_u64(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::as_u64(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::div(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::mul(v1, 0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::from_u64(arg1)), v0))), v1))
+    }
+
+    public fun calculate_remove_liquidity_return(arg0: u64, arg1: u64, arg2: u64) : u64 {
+        calculate_token_exchange(arg0, arg1, arg2)
+    }
+
+    public fun calculate_token_amount_received(arg0: u64, arg1: u64, arg2: u64) : u64 {
+        calculate_token_exchange(arg0, arg1, arg2)
+    }
+
+    fun calculate_token_exchange(arg0: u64, arg1: u64, arg2: u64) : u64 {
+        let v0 = 0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::from_u64(arg0);
+        let v1 = 0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::from_u64(arg1);
+        0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::as_u64(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::sub(v0, 0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::from_u64(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::as_u64(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::div(0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::mul(v0, v1), 0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::add(v1, 0xf95cf480d0dd219f6582f71b28ed4dc29a3b1380bcf3ce276ea248676ef99508::utils::from_u64(arg2)))))))
+    }
+
+    // decompiled from Move bytecode v6
+}
+
