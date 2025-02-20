@@ -271,7 +271,7 @@
           "vector<address>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_registry_whitelist": {
         "visibility": "FRIEND",
@@ -281,7 +281,7 @@
           "vector<address>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "close_game": {
         "visibility": "FRIEND",
@@ -292,7 +292,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "close_game_": {
         "visibility": "PRIVATE",
@@ -303,7 +303,7 @@
           "0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Game",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "close_playground": {
         "visibility": "FRIEND",
@@ -314,7 +314,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_stakes": {
         "visibility": "FRIEND",
@@ -322,11 +322,11 @@
         "params": [
           "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
           "u64",
-          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "draw": {
         "visibility": "PUBLIC",
@@ -339,7 +339,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "draw_game_id": {
         "visibility": "PUBLIC",
@@ -352,7 +352,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "generate_answer": {
         "visibility": "PRIVATE",
@@ -361,7 +361,9 @@
           "u64",
           "&vector<u8>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_first_game_index_for_player": {
         "visibility": "PUBLIC",
@@ -371,7 +373,289 @@
           "u64",
           "address"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "get_game_index_for_game_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "get_latest_game_index_for_player": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "address"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "get_mut_playground": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID",
+          "u64"
+        ],
+        "return": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Playground"
+        ]
+      },
+      "get_playground": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID",
+          "u64"
+        ],
+        "return": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Playground"
+        ]
+      },
+      "new_game": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_playground": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "vector<u8>",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "odds": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "bool",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "play": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "bool",
+          "u64",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "registry_or_playground_whitelist_check": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "registry_whitelist_check": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_playground_whitelist": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "vector<address>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_registry_whitelist": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "vector<address>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "resume_playground": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_max_single_game_loss": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "suspend_playground": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_exp_config": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "u64",
+          "vector<u64>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_game_config": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "vector<u64>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_public_key": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "upgrade_version": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "version_check": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry"
+        ],
+        "return": []
+      },
+      "vrf_input": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64"
+        ],
+        "return": [
+          "vector<u8>",
+          "vector<u8>"
+        ]
+      },
+      "vrf_input_from_player": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "address"
+        ],
+        "return": [
+          "vector<u8>",
+          "vector<u8>"
+        ]
+      },
+      "withdraw_stakes": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::combo_dice::Registry",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "tails_exp": {
@@ -384,7 +668,7 @@
           "vector<address>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_registry_whitelist": {
         "visibility": "FRIEND",
@@ -394,7 +678,7 @@
           "vector<address>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "burn_exp_token": {
         "visibility": "PUBLIC",
@@ -403,7 +687,9 @@
           "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x37816d28c34cc0df82655ca97b3f066112a5f3c202cbb4aaa76c8af54e779750::tails_exp::TAILS_EXP>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "close_game": {
         "visibility": "FRIEND",
@@ -414,7 +700,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "close_game_": {
         "visibility": "PRIVATE",
@@ -425,7 +711,7 @@
           "0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Game",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "close_playground": {
         "visibility": "FRIEND",
@@ -436,7 +722,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "consume_exp_coin_staked": {
         "visibility": "PUBLIC",
@@ -448,7 +734,7 @@
           "address",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x37816d28c34cc0df82655ca97b3f066112a5f3c202cbb4aaa76c8af54e779750::tails_exp::TAILS_EXP>"
         ],
-        "return": null
+        "return": []
       },
       "consume_exp_coin_unstaked": {
         "visibility": "PUBLIC",
@@ -462,19 +748,19 @@
           "address",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x37816d28c34cc0df82655ca97b3f066112a5f3c202cbb4aaa76c8af54e779750::tails_exp::TAILS_EXP>"
         ],
-        "return": null
+        "return": []
       },
       "deposit_stakes_emergency": {
         "visibility": "FRIEND",
         "is_entry": true,
         "params": [
           "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
-          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "u64",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "generate_answer": {
         "visibility": "PRIVATE",
@@ -483,7 +769,202 @@
           "u64",
           "&vector<u8>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_mut_playground": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID",
+          "u64"
+        ],
+        "return": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Playground"
+        ]
+      },
+      "get_playground": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID",
+          "u64"
+        ],
+        "return": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Playground"
+        ]
+      },
+      "mint_exp_token": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x37816d28c34cc0df82655ca97b3f066112a5f3c202cbb4aaa76c8af54e779750::tails_exp::TAILS_EXP>"
+        ]
+      },
+      "new_playground": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "vector<u8>",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "odds": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "bool",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "play": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "bool",
+          "u64",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "playground_whitelist_check": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "registry_whitelist_check": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_playground_whitelist": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "vector<address>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_registry_whitelist": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "vector<address>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "resume_playground": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "suspend_playground": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_game_config": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "upgrade_version": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "version_check": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry"
+        ],
+        "return": []
+      },
+      "withdraw_stakes": {
+        "visibility": "FRIEND",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc4808fe7296f41f30c3d226966d6303a84ad4c39ffa9301ca08fe5ab09a70a8d::tails_exp::Registry",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "utils": {
@@ -491,11 +972,13 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "get_u64_padding_value": {
         "visibility": "PUBLIC",
@@ -504,7 +987,9 @@
           "&vector<u64>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "multiplier": {
         "visibility": "PUBLIC",
@@ -512,7 +997,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "set_u64_padding_value": {
         "visibility": "PUBLIC",
@@ -522,7 +1009,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       }
     }
   }

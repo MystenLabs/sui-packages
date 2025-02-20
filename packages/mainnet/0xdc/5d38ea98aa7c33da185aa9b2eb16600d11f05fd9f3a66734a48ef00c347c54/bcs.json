@@ -173,7 +173,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk"
         ],
-        "return": null
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bag::Bag"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -182,7 +184,7 @@
           "0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::extension::EXTENSION",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "install": {
         "visibility": "PUBLIC",
@@ -192,17 +194,17 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "lock": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
-          "$0",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>"
+          "T0",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>"
         ],
-        "return": null
+        "return": []
       }
     },
     "marketplace": {
@@ -213,12 +215,16 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::extension::Marketplace>",
+          "0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<T0>"
+        ]
       },
       "accept_collection_bid": {
         "visibility": "PUBLIC",
@@ -228,20 +234,26 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::Collection",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::extension::Marketplace>",
+          "0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<T0>"
+        ]
       },
       "buyer": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<$0>"
+          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<T0>"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "cancel_bid": {
         "visibility": "PUBLIC",
@@ -252,7 +264,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_collection_bid": {
         "visibility": "PUBLIC",
@@ -263,15 +275,17 @@
           "&mut 0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::Collection",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "coin_type": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<$0>"
+          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<T0>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "create_collection": {
         "visibility": "PUBLIC",
@@ -281,7 +295,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delist": {
         "visibility": "PUBLIC",
@@ -291,7 +305,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -299,15 +313,108 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "item_id": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<$0>"
+          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<T0>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "list": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "place_bid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "place_collection_bid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::Collection",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "purchase": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "T0",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::extension::Marketplace>",
+          "0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<T0>"
+        ]
+      },
+      "salt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "seller": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<T0>"
+        ],
+        "return": [
+          "address"
+        ]
       }
     },
     "marketplace_rule": {
@@ -315,31 +422,31 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<T0>",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "prove": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<$1>",
+          "&0xdc5d38ea98aa7c33da185aa9b2eb16600d11f05fd9f3a66734a48ef00c347c54::marketplace::TradeInfo<T1>",
           "vector<u8>",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<$0>"
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>"
         ],
-        "return": null
+        "return": []
       },
       "remove": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<$0>"
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<T0>"
         ],
-        "return": null
+        "return": []
       }
     },
     "witness_rule_marketplace": {
@@ -347,29 +454,29 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<$0>"
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<T0>"
         ],
-        "return": null
+        "return": []
       },
       "confirm": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "$1",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<$0>"
+          "T1",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>"
         ],
-        "return": null
+        "return": []
       },
       "remove": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<$0>"
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<T0>"
         ],
-        "return": null
+        "return": []
       }
     }
   }

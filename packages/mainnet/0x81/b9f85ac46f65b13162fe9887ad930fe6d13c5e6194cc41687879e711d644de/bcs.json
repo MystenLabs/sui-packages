@@ -79,7 +79,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "add_swap_fee": {
         "visibility": "PUBLIC",
@@ -90,13 +90,13 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "buy_card_direct": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
@@ -107,13 +107,13 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_card_direct_returns": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
@@ -124,7 +124,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "calculate_date": {
         "visibility": "PRIVATE",
@@ -132,7 +134,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::Date"
+        ]
       },
       "create_purchase_profile": {
         "visibility": "PUBLIC",
@@ -141,7 +145,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_current_date": {
         "visibility": "PUBLIC",
@@ -149,7 +153,9 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::Date"
+        ]
       },
       "get_fee_from_tiers": {
         "visibility": "PUBLIC",
@@ -158,7 +164,9 @@
           "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::FeeTierList",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_swap_fee_from_list": {
         "visibility": "PUBLIC",
@@ -167,7 +175,9 @@
           "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::SwapFeeList",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -175,7 +185,183 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "is_leap_year": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "migrate": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::CardConfigs",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::FeeTierList",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::SwapFeeList",
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap"
+        ],
+        "return": []
+      },
+      "new_purchase_record": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::PurchaseRecord"
+        ]
+      },
+      "remove_fee_tier": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::FeeTierList",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "remove_swap_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::SwapFeeList",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ],
+        "return": []
+      },
+      "set_card_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::CardConfigs",
+          "address"
+        ],
+        "return": []
+      },
+      "set_daily_limit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::CardConfigs",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_max_card_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::CardConfigs",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_min_card_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::CardConfigs",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_native_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::CardConfigs",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_non_native_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::CardConfigs",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_revenue_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::CardConfigs",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_revenue_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::CardConfigs",
+          "address"
+        ],
+        "return": []
+      },
+      "set_usdc_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::CardConfigs",
+          "address"
+        ],
+        "return": []
+      },
+      "transfer_coin_object": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_fee_tier": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::FeeTierList",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_swap_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::AdminCap",
+          "&mut 0x065424ceb2c6eab8d68b6c26340faee7b081569471a3d20736d7e57bf1e253ac::sui_silver_card_contract::SwapFeeList",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "u64"
+        ],
+        "return": []
       }
     }
   }

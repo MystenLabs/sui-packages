@@ -343,7 +343,9 @@
         "params": [
           "u8"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "address_to_script_hex": {
         "visibility": "PRIVATE",
@@ -351,7 +353,9 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "bech32_decode": {
         "visibility": "PRIVATE",
@@ -359,7 +363,9 @@
         "params": [
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "construct_script": {
         "visibility": "PRIVATE",
@@ -368,7 +374,9 @@
           "u8",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "convert_bits": {
         "visibility": "PRIVATE",
@@ -379,7 +387,9 @@
           "u8",
           "bool"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "create_btc_action": {
         "visibility": "PUBLIC",
@@ -387,7 +397,9 @@
         "params": [
           "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::TxOutput>"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCAction"
+        ]
       },
       "create_btc_chain_state": {
         "visibility": "PUBLIC",
@@ -395,7 +407,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCChainState"
+        ]
       },
       "create_module_shared_data_bitcoin": {
         "visibility": "PUBLIC",
@@ -405,7 +419,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCChainState>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleSharedData<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCChainState>"
+        ]
       },
       "create_p2wpkh_tx_input": {
         "visibility": "PUBLIC",
@@ -415,7 +431,9 @@
           "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::TxOutpoint",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::P2WPKHTxInput"
+        ]
       },
       "create_tx_outpoint": {
         "visibility": "PUBLIC",
@@ -424,7 +442,199 @@
           "vector<u8>",
           "u32"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::TxOutpoint"
+        ]
+      },
+      "create_tx_output": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "u64"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::TxOutput"
+        ]
+      },
+      "decode_segwit_address": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ],
+        "return": [
+          "u8",
+          "vector<u8>"
+        ]
+      },
+      "init_btc_module": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "op_push": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u32"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "prepare_signing": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCAction>",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::P2WPKHTxInput>",
+          "u64",
+          "bool"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCPreparedSigning>"
+        ]
+      },
+      "prepare_signing_accelerate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCAction>",
+          "u64",
+          "bool"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCAccelerated>"
+        ]
+      },
+      "prepare_signing_drop": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCAction>",
+          "u64"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCDropped>"
+        ]
+      },
+      "push_script": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "sha256d": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "test_util_create_bitcoin_module": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::BTCModule"
+        ]
+      },
+      "to_signable_blobs_p2wpkh": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::P2WPKHTxInput>",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::TxOutput>"
+        ],
+        "return": [
+          "vector<vector<u8>>"
+        ]
+      },
+      "transaction_calc_bip143_shared_txdigest_fields": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::P2WPKHTxInput>",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::TxOutput>"
+        ],
+        "return": [
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>"
+        ]
+      },
+      "transaction_serialize_preimage": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::P2WPKHTxInput>",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::TxOutput>",
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "tx_outpoint_serialize_to_network": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::TxOutpoint"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "tx_output_serialize_to_network": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::TxOutput"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "var_int": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "view_tx_output": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::bitcoin_module::TxOutput"
+        ],
+        "return": [
+          "vector<u8>",
+          "u64"
+        ]
       }
     },
     "cosmos_module": {
@@ -439,7 +649,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosAction"
+        ]
       },
       "create_coin": {
         "visibility": "PUBLIC",
@@ -448,7 +660,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::Coin"
+        ]
       },
       "create_cosmos_action": {
         "visibility": "PUBLIC",
@@ -458,7 +672,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosAction"
+        ]
       },
       "create_cosmos_chain_state": {
         "visibility": "PUBLIC",
@@ -467,7 +683,9 @@
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u128>"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosChainState"
+        ]
       },
       "create_message_send": {
         "visibility": "PUBLIC",
@@ -477,7 +695,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::Coin>"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::MsgSend"
+        ]
       },
       "create_module_shared_data_cosmos": {
         "visibility": "PUBLIC",
@@ -487,7 +707,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosChainState>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleSharedData<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosChainState>"
+        ]
       },
       "create_proto_any": {
         "visibility": "PUBLIC",
@@ -496,7 +718,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::ProtoAny"
+        ]
       },
       "encode_Any": {
         "visibility": "PUBLIC",
@@ -505,7 +729,7 @@
           "&mut vector<u8>",
           "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::ProtoAny"
         ],
-        "return": null
+        "return": []
       },
       "encode_AuthInfo": {
         "visibility": "PUBLIC",
@@ -514,7 +738,7 @@
           "&mut vector<u8>",
           "&mut 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::AuthInfo"
         ],
-        "return": null
+        "return": []
       },
       "encode_Coin": {
         "visibility": "PUBLIC",
@@ -523,7 +747,252 @@
           "&mut vector<u8>",
           "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::Coin"
         ],
-        "return": null
+        "return": []
+      },
+      "encode_Fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "&mut 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::Fee"
+        ],
+        "return": []
+      },
+      "encode_MsgSend": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "&mut 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::MsgSend"
+        ],
+        "return": []
+      },
+      "encode_SignDoc": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::SignDoc"
+        ],
+        "return": []
+      },
+      "encode_SignerInfo": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "&mut 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::SignerInfo"
+        ],
+        "return": []
+      },
+      "encode_TxBody": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "&mut 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::TxBody"
+        ],
+        "return": []
+      },
+      "encode_bytes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "encode_u32": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "u32"
+        ],
+        "return": []
+      },
+      "encode_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "u64"
+        ],
+        "return": []
+      },
+      "encode_utf8": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "encode_varint64": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "u32",
+          "u32"
+        ],
+        "return": []
+      },
+      "encode_with_len": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<u8>",
+          "u32",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "init_cosmos_module": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "make_auth_info_bytes": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::Coin>",
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "make_sign_bytes": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "make_sign_info_bytes": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "make_tx_body_bytes": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<vector<u8>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "prepare_signing": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosAction>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u128",
+          "vector<u8>",
+          "vector<u8>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosPreparedSigning>"
+        ]
+      },
+      "prepare_signing_accelerate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosAction>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u128",
+          "vector<u8>",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosAccelerated>"
+        ]
+      },
+      "prepare_signing_drop": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosAction>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u128",
+          "vector<u8>",
+          "vector<u8>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosDropped>"
+        ]
+      },
+      "split_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u32",
+          "u32"
+        ]
+      },
+      "test_util_create_cosmos_module": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosModule"
+        ]
+      },
+      "test_util_create_cosmos_transaction": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::cosmos_module::CosmosTxData"
+        ]
       }
     },
     "eth_module": {
@@ -533,7 +1002,9 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "bytes4": {
         "visibility": "PUBLIC",
@@ -541,7 +1012,9 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "char_to_num": {
         "visibility": "PUBLIC",
@@ -549,7 +1022,9 @@
         "params": [
           "u8"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "create_evm_action": {
         "visibility": "PUBLIC",
@@ -560,7 +1035,9 @@
           "vector<u8>",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMAction"
+        ]
       },
       "create_evm_chain_state": {
         "visibility": "PUBLIC",
@@ -569,7 +1046,9 @@
           "u64",
           "u128"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMChainState"
+        ]
       },
       "create_module_shared_data_ethereum": {
         "visibility": "PUBLIC",
@@ -579,7 +1058,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMChainState>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleSharedData<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMChainState>"
+        ]
       },
       "encode_array_of_bytes": {
         "visibility": "PRIVATE",
@@ -587,7 +1068,9 @@
         "params": [
           "vector<vector<u8>>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "encode_bytes": {
         "visibility": "PRIVATE",
@@ -595,7 +1078,9 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "encode_length": {
         "visibility": "PRIVATE",
@@ -604,7 +1089,9 @@
           "u64",
           "u8"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "init_ethereum_module": {
         "visibility": "PUBLIC",
@@ -612,7 +1099,205 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "left_pad_address_to_32_bytes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "prepare_signing_accelerate_eip1559": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMAction>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMAccelerated>"
+        ]
+      },
+      "prepare_signing_accelerate_legacy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMAction>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMAccelerated>"
+        ]
+      },
+      "prepare_signing_drop_eip1559": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMAction>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMDropped>"
+        ]
+      },
+      "prepare_signing_drop_legacy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMAction>",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMDropped>"
+        ]
+      },
+      "prepare_signing_eip1559": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMAction>",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMPreparedSigning>"
+        ]
+      },
+      "prepare_signing_legacy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMAction>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMPreparedSigning>"
+        ]
+      },
+      "string_to_number": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "u32"
+        ]
+      },
+      "test_util_create_evm_module": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMModule"
+        ]
+      },
+      "test_util_create_evm_transaction": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "bool",
+          "bool"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMTxData"
+        ]
+      },
+      "to_minimal_be_bytes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&T0"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "to_signable_blob_eip1559": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "to_signable_blob_legacy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "u256_to_32_byte_vector": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "view_evm_action": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::eth_module::EVMAction"
+        ],
+        "return": [
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>"
+        ]
       }
     },
     "raw_signing_module": {
@@ -624,13 +1309,17 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::raw_signing_module::RawChainState>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleSharedData<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::raw_signing_module::RawChainState>"
+        ]
       },
       "create_raw_chain_state": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::raw_signing_module::RawChainState"
+        ]
       },
       "create_raw_signing_action": {
         "visibility": "PUBLIC",
@@ -640,7 +1329,9 @@
           "vector<u8>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::raw_signing_module::RawSigningAction"
+        ]
       },
       "init_raw_signing_module": {
         "visibility": "PUBLIC",
@@ -648,7 +1339,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "prepare_signing": {
         "visibility": "PUBLIC",
@@ -657,7 +1348,9 @@
           "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::raw_signing_module::RawSigningModule",
           "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::raw_signing_module::RawSigningAction>"
         ],
-        "return": null
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::raw_signing_module::RawPreparedSigning>"
+        ]
       }
     },
     "sui_module": {
@@ -668,7 +1361,9 @@
           "&mut vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CallArgX>",
           "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CallArgX"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX"
+        ]
       },
       "add_command": {
         "visibility": "PUBLIC",
@@ -678,7 +1373,9 @@
           "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX",
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u16>"
         ],
-        "return": null
+        "return": [
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX>"
+        ]
       },
       "bcs_encode_intent_message": {
         "visibility": "PUBLIC",
@@ -687,7 +1384,9 @@
           "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::IntentX",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "bcs_encode_transaction_data": {
         "visibility": "PUBLIC",
@@ -695,7 +1394,9 @@
         "params": [
           "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::TransactionDataX"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "create_argument_input": {
         "visibility": "PUBLIC",
@@ -703,7 +1404,9 @@
         "params": [
           "u16"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX"
+        ]
       },
       "create_argument_nested_result": {
         "visibility": "PUBLIC",
@@ -712,7 +1415,9 @@
           "u16",
           "u16"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX"
+        ]
       },
       "create_argument_result": {
         "visibility": "PUBLIC",
@@ -720,7 +1425,9 @@
         "params": [
           "u16"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX"
+        ]
       },
       "create_call_arg_object": {
         "visibility": "PUBLIC",
@@ -728,7 +1435,9 @@
         "params": [
           "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectArgX"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CallArgX"
+        ]
       },
       "create_call_arg_pure": {
         "visibility": "PUBLIC",
@@ -736,7 +1445,9 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CallArgX"
+        ]
       },
       "create_command_make_move_vec": {
         "visibility": "PUBLIC",
@@ -745,7 +1456,381 @@
           "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX>",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX"
+        ]
+      },
+      "create_command_merge_coins": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX>"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX"
+        ]
+      },
+      "create_command_move_call": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ProgrammableMoveCallX"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX"
+        ]
+      },
+      "create_command_publish": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<vector<u8>>",
+          "vector<address>"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX"
+        ]
+      },
+      "create_command_split_coins": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX>"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX"
+        ]
+      },
+      "create_command_transfer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX>",
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX"
+        ]
+      },
+      "create_command_upgrade": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<vector<u8>>",
+          "vector<address>",
+          "address",
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX"
+        ]
+      },
+      "create_module_shared_data_sui": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::SuiModule",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::SuiChainState>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleSharedData<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::SuiChainState>"
+        ]
+      },
+      "create_object_arg_immutable": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "vector<u8>"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectArgX"
+        ]
+      },
+      "create_object_arg_receiving": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "vector<u8>"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectArgX"
+        ]
+      },
+      "create_object_arg_shared": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "bool"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectArgX"
+        ]
+      },
+      "create_object_ref": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "vector<u8>"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectRefX"
+        ]
+      },
+      "create_programmable_move_call": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX>"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ProgrammableMoveCallX"
+        ]
+      },
+      "create_resolved_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectRefX"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ResolvedCoin"
+        ]
+      },
+      "create_resolved_gas_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ResolvedCoin"
+        ]
+      },
+      "create_sui_action": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::VirtualInput>",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX>"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::SuiAction"
+        ]
+      },
+      "create_sui_chain_state": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::SuiChainState"
+        ]
+      },
+      "create_virtual_input_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "bool"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::VirtualInput"
+        ]
+      },
+      "create_virtual_input_imm_or_owned_object": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::VirtualInput"
+        ]
+      },
+      "create_virtual_input_pure": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::VirtualInput"
+        ]
+      },
+      "create_virtual_input_receiving": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectRefX"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::VirtualInput"
+        ]
+      },
+      "create_virtual_input_shared_object": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "bool"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::VirtualInput"
+        ]
+      },
+      "encode_uleb128": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "init_sui_move_module": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "intent_scope_personal_message": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::IntentScopeX"
+        ]
+      },
+      "intent_scope_transaction_data": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::IntentScopeX"
+        ]
+      },
+      "intent_sui_app": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::IntentScopeX"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::IntentX"
+        ]
+      },
+      "new_txb": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::TransactionBuilder"
+        ]
+      },
+      "objectX": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::TransactionBuilder",
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectArgX"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX"
+        ]
+      },
+      "prepare_signing": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::VaultContainer",
+          "&0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::SuiModule",
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionRequest<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::SuiAction>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectRefX>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u64, bool>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u64, 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectRefX>",
+          "u64",
+          "u64",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectRefX>",
+          "address"
+        ],
+        "return": [
+          "0x8149631b2b88686a6ae1337c93939c0ed52f9b32dd0817612557dee54c8f1894::module_interface::ModuleActionResult<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::SuiPreparedSigning>"
+        ]
+      },
+      "pureX": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::TransactionBuilder",
+          "vector<u8>"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX"
+        ]
+      },
+      "resolve_virtual_inputs": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::VirtualInput>",
+          "vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u64, bool>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectRefX>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u64, 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ObjectRefX>",
+          "address"
+        ],
+        "return": [
+          "0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::TransactionBuilder"
+        ]
+      },
+      "shift_command_results": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::CommandX>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u16, 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX>"
+        ],
+        "return": []
+      },
+      "shift_or_replace_input": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u16, 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX>"
+        ],
+        "return": []
+      },
+      "shift_or_replace_inputs": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<u16, 0x5a4bd7f100e5ca68fdf6aef39aecf9561b8a52fc330b854cbee15aedc3822331::sui_module::ArgumentX>"
+        ],
+        "return": []
       }
     }
   }

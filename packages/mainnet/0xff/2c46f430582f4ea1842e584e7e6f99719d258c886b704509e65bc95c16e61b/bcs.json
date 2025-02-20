@@ -83,7 +83,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "assert_is_validator": {
         "visibility": "PRIVATE",
@@ -92,7 +92,7 @@
           "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
         ],
-        "return": null
+        "return": []
       },
       "assert_not_paused": {
         "visibility": "PRIVATE",
@@ -100,7 +100,7 @@
         "params": [
           "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule"
         ],
-        "return": null
+        "return": []
       },
       "deposit_is_reported": {
         "visibility": "PUBLIC",
@@ -109,7 +109,9 @@
           "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
           "u256"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "deposit_is_unreported": {
         "visibility": "PUBLIC",
@@ -118,7 +120,9 @@
           "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
           "u256"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "deposit_is_withdrawn": {
         "visibility": "PUBLIC",
@@ -127,7 +131,9 @@
           "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
           "u256"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "get_deposit_state": {
         "visibility": "PUBLIC",
@@ -136,7 +142,9 @@
           "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
           "u256"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::DepositState>"
+        ]
       },
       "get_validate_threshold": {
         "visibility": "PUBLIC",
@@ -144,7 +152,9 @@
         "params": [
           "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "grant_pauser": {
         "visibility": "PRIVATE",
@@ -154,7 +164,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "grant_reporter": {
         "visibility": "PRIVATE",
@@ -164,7 +174,136 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::BASCULE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_reported": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::DepositState"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_validator": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_withdrawn": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::DepositState"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::BasculePauserCap",
+          "&mut 0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_withdrawal_validator": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::BasculeOwnerCap",
+          "&mut 0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "report_deposit": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::BasculeReporterCap",
+          "&mut 0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
+          "u256",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "to_deposit_id": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "vector<u8>",
+          "u32"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "unpause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::BasculePauserCap",
+          "&mut 0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_validate_threshold": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::BasculeOwnerCap",
+          "&mut 0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_withdrawal": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "T0",
+          "&mut 0xff2c46f430582f4ea1842e584e7e6f99719d258c886b704509e65bc95c16e61b::bascule::Bascule",
+          "address",
+          "u64",
+          "vector<u8>",
+          "u32"
+        ],
+        "return": []
       }
     }
   }

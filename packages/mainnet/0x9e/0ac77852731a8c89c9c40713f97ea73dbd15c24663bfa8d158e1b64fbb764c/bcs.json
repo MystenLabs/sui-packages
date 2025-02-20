@@ -78,7 +78,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::STBL>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delete_burn_cap": {
         "visibility": "PUBLIC",
@@ -87,7 +87,7 @@
           "0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::BurnCap",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delete_general_cap": {
         "visibility": "PUBLIC",
@@ -96,7 +96,7 @@
           "0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::GeneralCap",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delete_metadata_cap": {
         "visibility": "PUBLIC",
@@ -105,7 +105,7 @@
           "0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::MetadataCap",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delete_mint_cap": {
         "visibility": "PUBLIC",
@@ -114,7 +114,7 @@
           "0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::MintCap",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -123,7 +123,7 @@
           "0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::STBL",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -134,7 +134,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::STBL>"
+        ]
       },
       "mint_and_transfer": {
         "visibility": "PUBLIC",
@@ -146,7 +148,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "supply_immut": {
         "visibility": "PUBLIC",
@@ -155,7 +157,9 @@
           "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::Capability",
           "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::GeneralCap"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Supply<0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::STBL>"
+        ]
       },
       "supply_mut": {
         "visibility": "PUBLIC",
@@ -164,7 +168,79 @@
           "&mut 0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::Capability",
           "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::GeneralCap"
         ],
-        "return": null
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Supply<0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::STBL>"
+        ]
+      },
+      "total_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::Capability",
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::GeneralCap"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "treasury_into_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::Capability",
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::GeneralCap"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Supply<0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::STBL>"
+        ]
+      },
+      "update_description": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::Capability",
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::MetadataCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::STBL>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_icon_url": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::Capability",
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::MetadataCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::STBL>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_name": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::Capability",
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::MetadataCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::STBL>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_symbol": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::Capability",
+          "&0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::MetadataCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x9e0ac77852731a8c89c9c40713f97ea73dbd15c24663bfa8d158e1b64fbb764c::stbl::STBL>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

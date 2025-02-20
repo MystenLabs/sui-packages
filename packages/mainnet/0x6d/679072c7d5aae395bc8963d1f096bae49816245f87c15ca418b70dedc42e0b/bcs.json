@@ -83,7 +83,7 @@
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "change_public_key": {
         "visibility": "PUBLIC",
@@ -93,7 +93,7 @@
           "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "change_total_count": {
         "visibility": "PUBLIC",
@@ -103,7 +103,7 @@
           "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "delete_event": {
         "visibility": "PUBLIC",
@@ -113,7 +113,7 @@
           "0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "get_current_count": {
         "visibility": "PUBLIC",
@@ -121,7 +121,9 @@
         "params": [
           "&0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_deadline": {
         "visibility": "PUBLIC",
@@ -129,7 +131,9 @@
         "params": [
           "&0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_public_key": {
         "visibility": "PUBLIC",
@@ -137,7 +141,9 @@
         "params": [
           "&0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "get_total_count": {
         "visibility": "PUBLIC",
@@ -145,7 +151,9 @@
         "params": [
           "&0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_user_nonce": {
         "visibility": "PUBLIC",
@@ -154,7 +162,9 @@
           "&0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -162,7 +172,142 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "make_coin_message": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "address",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "make_object_message": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "address",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "u64",
+          "&vector<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "vector<u8>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "register_event": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::AdminCap",
+          "vector<u8>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "u64",
+          "address",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_nfts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo",
+          "vector<0xc333c671dd102324ee32517420fc3faa7d147e424cb8db2d7b6a925108dbf98f::nonfungible::Nft<T0>>",
+          "u64",
+          "address",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_objects": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo",
+          "vector<T0>",
+          "u64",
+          "address",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_sbts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::event_paying_system::EventInfo",
+          "vector<0xc333c671dd102324ee32517420fc3faa7d147e424cb8db2d7b6a925108dbf98f::soulbound::Sbt<T0>>",
+          "u64",
+          "address",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "&mut 0xc333c671dd102324ee32517420fc3faa7d147e424cb8db2d7b6a925108dbf98f::soulbound::OperatorCap<T0>",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_message": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>"
+        ],
+        "return": [
+          "bool"
+        ]
       }
     },
     "paying_system": {
@@ -172,7 +317,9 @@
         "params": [
           "&0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::paying_system::PayingInfo"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "get_user_nonce": {
         "visibility": "PUBLIC",
@@ -181,7 +328,9 @@
           "&0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::paying_system::PayingInfo",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -189,7 +338,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "make_coin_message": {
         "visibility": "PRIVATE",
@@ -204,7 +353,9 @@
           "u8",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "make_object_message": {
         "visibility": "PRIVATE",
@@ -214,13 +365,16 @@
           "address",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
           "u64",
-          "&vector<$0>",
+          "&vector<T0>",
           "u64",
           "u64",
           "u8",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "vector<u8>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
       },
       "remove_verifying_public_key": {
         "visibility": "PUBLIC",
@@ -229,7 +383,7 @@
           "&0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::paying_system::AdminCap",
           "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::paying_system::PayingInfo"
         ],
-        "return": null
+        "return": []
       },
       "set_verifying_public_key": {
         "visibility": "PUBLIC",
@@ -239,14 +393,14 @@
           "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::paying_system::PayingInfo",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "transfer_coin": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::paying_system::PayingInfo",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "address",
           "u64",
@@ -256,14 +410,14 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "transfer_nfts": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::paying_system::PayingInfo",
-          "vector<0xc333c671dd102324ee32517420fc3faa7d147e424cb8db2d7b6a925108dbf98f::nonfungible::Nft<$0>>",
+          "vector<0xc333c671dd102324ee32517420fc3faa7d147e424cb8db2d7b6a925108dbf98f::nonfungible::Nft<T0>>",
           "address",
           "u64",
           "u8",
@@ -272,14 +426,14 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "transfer_objects": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::paying_system::PayingInfo",
-          "vector<$0>",
+          "vector<T0>",
           "address",
           "u64",
           "u8",
@@ -288,7 +442,37 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "transfer_sbts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6d679072c7d5aae395bc8963d1f096bae49816245f87c15ca418b70dedc42e0b::paying_system::PayingInfo",
+          "vector<0xc333c671dd102324ee32517420fc3faa7d147e424cb8db2d7b6a925108dbf98f::soulbound::Sbt<T0>>",
+          "address",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "&mut 0xc333c671dd102324ee32517420fc3faa7d147e424cb8db2d7b6a925108dbf98f::soulbound::OperatorCap<T0>",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_message": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>"
+        ],
+        "return": [
+          "bool"
+        ]
       }
     }
   }

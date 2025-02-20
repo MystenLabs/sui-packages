@@ -79,10 +79,12 @@
           "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
           "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig",
           "address",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "add_version": {
         "visibility": "PUBLIC",
@@ -92,7 +94,7 @@
           "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "assert_valid_version": {
         "visibility": "PRIVATE",
@@ -100,7 +102,7 @@
         "params": [
           "&0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig"
         ],
-        "return": null
+        "return": []
       },
       "borrow_table_mut": {
         "visibility": "PRIVATE",
@@ -109,7 +111,9 @@
           "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig",
           "address"
         ],
-        "return": null
+        "return": [
+          "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoTable<T0>"
+        ]
       },
       "create_plinko_table": {
         "visibility": "PUBLIC",
@@ -119,15 +123,20 @@
           "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "destroy_bet": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::Bet<$0>"
+          "0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::Bet<T0>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64"
+        ]
       },
       "emit_bet_added": {
         "visibility": "PUBLIC",
@@ -140,7 +149,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_bet_removed": {
         "visibility": "PUBLIC",
@@ -153,7 +162,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_table_created": {
         "visibility": "PUBLIC",
@@ -163,7 +172,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "generate_ball_path_and_roll": {
         "visibility": "PRIVATE",
@@ -173,7 +182,264 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "vector<u8>",
+          "u64"
+        ]
+      },
+      "get_plinko_config": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u8",
+          "bool"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "handle_add_bet": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::linked_table::LinkedTable<address, 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::Bet<T0>>",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mul": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "package_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "play_plinko": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "address",
+          "u64",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "play_plinko_with_partner": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "address",
+          "u64",
+          "u64",
+          "u8",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::partners::PartnerList",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "play_plinko_with_partner_personal_kiosk": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "address",
+          "u64",
+          "u64",
+          "u8",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::partners::PartnerList",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "play_singles_plinko": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "play_singles_plinko_with_partner": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::partners::PartnerList",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "play_singles_plinko_with_partner_personal_kiosk": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::partners::PartnerList",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_bet": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig",
+          "address",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "remove_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::AdminCap",
+          "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig",
+          "u64"
+        ],
+        "return": []
+      },
+      "risk": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u8"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "settle_and_payout": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoTable<T0>",
+          "address",
+          "u64",
+          "u64",
+          "u8",
+          "bool",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "singles_settle_and_payout": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "u8",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "bool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "table_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoConfig",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "table_has_bets": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x1fe09dde001fa92d5a60eb892615c7975556dbca2f4c29c137ff8fc003bce08f::multi_plinko::PlinkoTable<T0>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "u64_to_binary": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
       }
     }
   }

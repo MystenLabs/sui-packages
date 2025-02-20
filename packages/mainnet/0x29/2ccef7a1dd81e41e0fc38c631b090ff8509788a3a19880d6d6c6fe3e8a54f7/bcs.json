@@ -101,13 +101,13 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "$0",
+          "T0",
           "vector<u8>",
           "vector<u8>",
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_vault": {
         "visibility": "PUBLIC",
@@ -117,12 +117,12 @@
           "u64",
           "u64",
           "u64",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
           "&0x66c4cf6e3c354c3f94db0d0b5a4de306767928e24f13023fd7f374a3a0dc0719::admin::AdminCap",
           "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -130,7 +130,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "current_version": {
@@ -138,7 +138,9 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "events": {
@@ -149,7 +151,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "assets_updated": {
         "visibility": "FRIEND",
@@ -160,7 +162,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "FRIEND",
@@ -171,7 +173,7 @@
           "u64",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "fees_taken": {
         "visibility": "FRIEND",
@@ -182,13 +184,13 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "new_grow_coin_registered": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "soulbound_grow_created": {
         "visibility": "FRIEND",
@@ -198,7 +200,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": []
       },
       "soulbound_grow_deposit": {
         "visibility": "FRIEND",
@@ -207,7 +209,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "soulbound_grow_withdraw": {
         "visibility": "FRIEND",
@@ -216,7 +218,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "vault_created": {
         "visibility": "FRIEND",
@@ -226,7 +228,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": []
       },
       "withdraw": {
         "visibility": "FRIEND",
@@ -236,7 +238,7 @@
           "u64",
           "address"
         ],
-        "return": null
+        "return": []
       }
     },
     "grow_usd": {
@@ -247,7 +249,7 @@
           "0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_usd::GROW_USD",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "grow_vault": {
@@ -255,38 +257,46 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<$0, $1>"
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "burn": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>"
+          "&mut 0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
         ],
-        "return": null
+        "return": []
       },
       "compute_fees_internal": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<$0, $1>",
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "convert_to_assets": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "u64",
-          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<$0, $1>",
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "convert_to_assets_internal": {
         "visibility": "PRIVATE",
@@ -296,17 +306,21 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "convert_to_shares": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "u64",
-          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<$0, $1>",
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "convert_to_shares_internal": {
         "visibility": "PRIVATE",
@@ -316,37 +330,265 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "cooldown_time_ms": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<$0, $1>"
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create_vault": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T1>",
           "u64",
           "u64",
           "u64",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "current_fees": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<$0, $1>",
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "debt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "finalize_deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
+          "&mut 0xf260c8a53a573e65f289147a9072836e02e171290e94af391877cee2c913bc3a::session_flow::SessionFlow<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::version::Version",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "initiate_withdrawal": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::version::Version"
+        ],
+        "return": [
+          "0xf260c8a53a573e65f289147a9072836e02e171290e94af391877cee2c913bc3a::session_flow::SessionFlow<T0, T1>"
+        ]
+      },
+      "last_fee_checkpoint_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "last_fee_checkpoint_sp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "last_update_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "management_fee_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "mint": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "mut_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x66c4cf6e3c354c3f94db0d0b5a4de306767928e24f13023fd7f374a3a0dc0719::admin::AdminCap",
+          "&mut 0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
+        ],
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
+      },
+      "perf_fee_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "share_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "share_price_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "take_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x66c4cf6e3c354c3f94db0d0b5a4de306767928e24f13023fd7f374a3a0dc0719::admin::AdminCap",
+          "&mut 0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::version::Version",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "total_assets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "treasury_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T1>"
+        ]
+      },
+      "unrealized_gains": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_debt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x66c4cf6e3c354c3f94db0d0b5a4de306767928e24f13023fd7f374a3a0dc0719::admin::AdminCap",
+          "&mut 0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
+          "u64",
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "update_fee_checkpoint": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "vault_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
+      },
+      "withdrawal_fee_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::grow_vault::GrowVault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
       }
     },
     "version": {
@@ -356,7 +598,7 @@
         "params": [
           "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::version::Version"
         ],
-        "return": null
+        "return": []
       },
       "create_version": {
         "visibility": "FRIEND",
@@ -364,7 +606,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_current_version": {
         "visibility": "PUBLIC",
@@ -372,7 +614,9 @@
         "params": [
           "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::version::Version"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "upgrade": {
         "visibility": "PUBLIC",
@@ -381,7 +625,7 @@
           "&mut 0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::version::Version",
           "&0x66c4cf6e3c354c3f94db0d0b5a4de306767928e24f13023fd7f374a3a0dc0719::admin::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "value": {
         "visibility": "PUBLIC",
@@ -389,7 +633,9 @@
         "params": [
           "&0x292ccef7a1dd81e41e0fc38c631b090ff8509788a3a19880d6d6c6fe3e8a54f7::version::Version"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     }
   }

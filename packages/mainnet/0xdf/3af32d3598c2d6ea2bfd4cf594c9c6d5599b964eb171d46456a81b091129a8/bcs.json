@@ -47,18 +47,18 @@
           "&0xdf3af32d3598c2d6ea2bfd4cf594c9c6d5599b964eb171d46456a81b091129a8::exchange_rate::MetaVaultAfSuiIntegration",
           "&0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::admin::AdminCap",
           "&0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::version::Version",
-          "&mut 0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::vault::Vault<$0>",
+          "&mut 0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::vault::Vault<T0>",
           "address",
           "u64",
           "u64",
           "u64",
           "u64",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T1>",
           "&mut 0x546b4c792de9744e08cb89f8f52b25cf5384db0af44f613db6d383234f009bb9::registry::Registry",
-          "&0xb0575765166030556a6eafd3b1b970eba8183ff748860680245b9edd41c716e7::liquid_staking::LiquidStakingInfo<$1>",
+          "&0xb0575765166030556a6eafd3b1b970eba8183ff748860680245b9edd41c716e7::liquid_staking::LiquidStakingInfo<T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "authorize": {
         "visibility": "PUBLIC",
@@ -67,27 +67,31 @@
           "&0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::admin::AdminCap",
           "&mut 0xdf3af32d3598c2d6ea2bfd4cf594c9c6d5599b964eb171d46456a81b091129a8::exchange_rate::MetaVaultAfSuiIntegration"
         ],
-        "return": null
+        "return": []
       },
       "create_deposit_cap": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0xdf3af32d3598c2d6ea2bfd4cf594c9c6d5599b964eb171d46456a81b091129a8::exchange_rate::MetaVaultAfSuiIntegration",
-          "&0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::vault::Vault<$0>",
+          "&0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::vault::Vault<T0>",
           "&mut 0x546b4c792de9744e08cb89f8f52b25cf5384db0af44f613db6d383234f009bb9::registry::Registry"
         ],
-        "return": null
+        "return": [
+          "0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::vault::DepositCap<T0, T1>"
+        ]
       },
       "create_withdraw_cap": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0xdf3af32d3598c2d6ea2bfd4cf594c9c6d5599b964eb171d46456a81b091129a8::exchange_rate::MetaVaultAfSuiIntegration",
-          "&0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::vault::Vault<$0>",
+          "&0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::vault::Vault<T0>",
           "&mut 0x546b4c792de9744e08cb89f8f52b25cf5384db0af44f613db6d383234f009bb9::registry::Registry"
         ],
-        "return": null
+        "return": [
+          "0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::vault::WithdrawCap<T0, T1>"
+        ]
       },
       "deauthorize": {
         "visibility": "PUBLIC",
@@ -96,7 +100,7 @@
           "&0xca653d2fac70a49549c7ff8792027fa4fa418fd6619954ea0f45d6fd0d081b8e::admin::AdminCap",
           "&mut 0xdf3af32d3598c2d6ea2bfd4cf594c9c6d5599b964eb171d46456a81b091129a8::exchange_rate::MetaVaultAfSuiIntegration"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -104,15 +108,17 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "lsd_to_sui_exchange_rate": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0xb0575765166030556a6eafd3b1b970eba8183ff748860680245b9edd41c716e7::liquid_staking::LiquidStakingInfo<$0>"
+          "&0xb0575765166030556a6eafd3b1b970eba8183ff748860680245b9edd41c716e7::liquid_staking::LiquidStakingInfo<T0>"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "update_exchange_rate": {
         "visibility": "PUBLIC",
@@ -120,9 +126,9 @@
         "params": [
           "&0xdf3af32d3598c2d6ea2bfd4cf594c9c6d5599b964eb171d46456a81b091129a8::exchange_rate::MetaVaultAfSuiIntegration",
           "&mut 0x546b4c792de9744e08cb89f8f52b25cf5384db0af44f613db6d383234f009bb9::registry::Registry",
-          "&0xb0575765166030556a6eafd3b1b970eba8183ff748860680245b9edd41c716e7::liquid_staking::LiquidStakingInfo<$0>"
+          "&0xb0575765166030556a6eafd3b1b970eba8183ff748860680245b9edd41c716e7::liquid_staking::LiquidStakingInfo<T0>"
         ],
-        "return": null
+        "return": []
       }
     }
   }

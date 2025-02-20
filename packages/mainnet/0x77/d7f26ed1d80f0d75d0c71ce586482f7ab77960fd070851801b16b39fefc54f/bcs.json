@@ -77,7 +77,9 @@
           "&0x77d7f26ed1d80f0d75d0c71ce586482f7ab77960fd070851801b16b39fefc54f::eternal_position::Sheet",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "borrow_buck": {
         "visibility": "PRIVATE",
@@ -88,7 +90,9 @@
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>"
+        ]
       },
       "cap": {
         "visibility": "PUBLIC",
@@ -97,7 +101,9 @@
           "&0x77d7f26ed1d80f0d75d0c71ce586482f7ab77960fd070851801b16b39fefc54f::eternal_position::Sheet",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "debt": {
         "visibility": "PUBLIC",
@@ -106,19 +112,21 @@
           "&0x77d7f26ed1d80f0d75d0c71ce586482f7ab77960fd070851801b16b39fefc54f::eternal_position::Sheet",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_exceed_debt_cap": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "err_sender_is_not_whitelisted": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -126,7 +134,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "repay_buck": {
         "visibility": "PRIVATE",
@@ -137,7 +145,7 @@
           "address",
           "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>"
         ],
-        "return": null
+        "return": []
       },
       "repay_debt": {
         "visibility": "PUBLIC",
@@ -148,7 +156,7 @@
           "address",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK>"
         ],
-        "return": null
+        "return": []
       },
       "repay_position": {
         "visibility": "PUBLIC",
@@ -161,7 +169,61 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "repay_position_with_proof": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x77d7f26ed1d80f0d75d0c71ce586482f7ab77960fd070851801b16b39fefc54f::eternal_position::Sheet",
+          "&mut 0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BucketProtocol",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "&mut 0x5d019c033bb8051fe9631cf910d0f4d077364d64ed4bb1940e98e6dc419a8d59::fountain::Fountain<T0, T1>",
+          "0x5d019c033bb8051fe9631cf910d0f4d077364d64ed4bb1940e98e6dc419a8d59::fountain::StakeProof<T0, T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x5d019c033bb8051fe9631cf910d0f4d077364d64ed4bb1940e98e6dc419a8d59::fountain::StakeProof<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "repay_position_with_strap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x77d7f26ed1d80f0d75d0c71ce586482f7ab77960fd070851801b16b39fefc54f::eternal_position::Sheet",
+          "&mut 0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BucketProtocol",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "&0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::strap::BottleStrap<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x77d7f26ed1d80f0d75d0c71ce586482f7ab77960fd070851801b16b39fefc54f::eternal_position::AdminCap",
+          "&mut 0x77d7f26ed1d80f0d75d0c71ce586482f7ab77960fd070851801b16b39fefc54f::eternal_position::Sheet",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "whitelist": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x77d7f26ed1d80f0d75d0c71ce586482f7ab77960fd070851801b16b39fefc54f::eternal_position::AdminCap",
+          "&mut 0x77d7f26ed1d80f0d75d0c71ce586482f7ab77960fd070851801b16b39fefc54f::eternal_position::Sheet",
+          "address",
+          "u64"
+        ],
+        "return": []
       }
     }
   }

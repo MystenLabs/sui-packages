@@ -52,7 +52,7 @@
           "&0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::AdminCap",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_play_event": {
         "visibility": "PUBLIC",
@@ -67,7 +67,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_play_event_dynamic_field": {
         "visibility": "PUBLIC",
@@ -75,11 +75,11 @@
         "params": [
           "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
           "u64",
-          "$0",
-          "$1",
-          "$2"
+          "T0",
+          "T1",
+          "T2"
         ],
-        "return": null
+        "return": []
       },
       "borrow_mut_play_event": {
         "visibility": "PRIVATE",
@@ -88,7 +88,9 @@
           "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
           "u64"
         ],
-        "return": null
+        "return": [
+          "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayEvent"
+        ]
       },
       "borrow_mut_play_event_dynamic_field": {
         "visibility": "PUBLIC",
@@ -96,10 +98,12 @@
         "params": [
           "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
           "u64",
-          "$0",
-          "$2"
+          "T0",
+          "T2"
         ],
-        "return": null
+        "return": [
+          "&mut T1"
+        ]
       },
       "borrow_play_event": {
         "visibility": "PUBLIC",
@@ -108,7 +112,9 @@
           "&0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
           "u64"
         ],
-        "return": null
+        "return": [
+          "&0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayEvent"
+        ]
       },
       "cancel_play": {
         "visibility": "PUBLIC",
@@ -117,11 +123,11 @@
           "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
           "u64",
           "address",
-          "&$0",
+          "&T0",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_play_count": {
         "visibility": "PUBLIC",
@@ -130,19 +136,19 @@
           "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
           "u64",
           "address",
-          "&$0",
+          "&T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_approved_contract": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
           "&0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
-          "&$0"
+          "&T0"
         ],
-        "return": null
+        "return": []
       },
       "current_event_key": {
         "visibility": "PUBLIC",
@@ -150,7 +156,141 @@
         "params": [
           "&0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "decrement_point": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
+          "u64",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "&T0",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "emit_win_play_history": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
+          "address",
+          "u64",
+          "u64",
+          "&T0"
+        ],
+        "return": []
+      },
+      "get_user_rank": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayEvent",
+          "address"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "increment_point": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
+          "u64",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "&T0",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_ended": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayEvent",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "record_play": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
+          "u64",
+          "address",
+          "&T0",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "record_play_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
+          "u64",
+          "address",
+          "&T0",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_approved_contract": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
+          "&0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::AdminCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_play_event": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayManager",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::AdminCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_ranks": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x15f9a9074a801634490cd688f66b2235d0eca971556d1e43a7ffa48c3ded2df8::play_manager::PlayEventRank>",
+          "u64",
+          "address",
+          "u64"
+        ],
+        "return": []
       }
     }
   }
