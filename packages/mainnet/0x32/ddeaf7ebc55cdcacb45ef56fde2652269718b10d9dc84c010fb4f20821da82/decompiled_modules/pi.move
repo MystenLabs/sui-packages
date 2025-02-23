@@ -1,0 +1,14 @@
+module 0x32ddeaf7ebc55cdcacb45ef56fde2652269718b10d9dc84c010fb4f20821da82::pi {
+    struct PI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PI>(arg0, 6, b"Pi", b"Pi networks", x"54686520446563656d6265722032303231205768697465706170657220636861707465727320e2809c546f6b656e204d6f64656c20616e64204d696e696e67e2809d20616e6420e2809c526f61646d6170e2809d20776572652072656c656173656420617320616e20616464656e64756d20746f20746865206f726967696e616c203230313920576869746570617065722c2077697468206e657720696e666f726d6174696f6e206f6e204d61696e6e65742e20546865206f726967696e616c204d6172636820323031392057686974657061706572206d6179206e656564207570646174657320746f2069747320636f6e74656e742c20736f20706c65617365207265666572", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://akasui-statics.sgp1.cdn.digitaloceanspaces.com/images/bb498d38-b85d-4fe7-8db3-de88261e82da.jpeg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<PI>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PI>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
