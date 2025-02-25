@@ -1,0 +1,14 @@
+module 0x5951f5c464f48fc1961f08bf291324b652288a0adf4e77175936fc332fa17472::bai {
+    struct BAI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: BAI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<BAI>(arg0, 6, b"BAI", b"BILL AI", x"506c6174666f726d20616e642050726163746963616c204170706c69636174696f6e730a0a41492054726164696e67202620416e616c79746963733a2042696c6c6169206170706c69657320414920746f206d61726b657420616e616c797369732c2068656c70696e6720636f6e73756c74616e7473206d616b65206d6f7265206163637572617465206465636973696f6e732e0a0a446546692026205374616b653a2055736572732063616e207374616b652042696c6c616920746f6b656e7320746f2072656365697665206174747261637469766520726577617264732e0a0a53656375726974792026205472616e73706172656e63793a20426c6f636b", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://akasui-statics.sgp1.cdn.digitaloceanspaces.com/images/8c96a3b7-a568-4885-bc4c-acdb08f95420.webp")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<BAI>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<BAI>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
