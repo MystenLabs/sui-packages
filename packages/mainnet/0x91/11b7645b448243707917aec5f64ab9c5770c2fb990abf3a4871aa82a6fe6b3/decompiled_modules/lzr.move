@@ -1,0 +1,14 @@
+module 0x9111b7645b448243707917aec5f64ab9c5770c2fb990abf3a4871aa82a6fe6b3::lzr {
+    struct LZR has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: LZR, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<LZR>(arg0, 6, b"LZR", b"Lazarus Coin", x"4c617a6172757320436f696e2028244c5a522920e2809320546865204861636b6572e2809973204d656d6520436f696e0a496e207468652068696464656e20636f726e657273206f6620746865206469676974616c207265616c6d2c2074686520656c7573697665206861636b657220636f6c6c656374697665204c617a6172757320686173207368616b656e20676c6f62616c2066696e616e636520746f2069747320636f72652e204e6f626f6479206b6e6f77732074686569722074727565206964656e7469746965732c207965742074686579e28099726520626568696e6420736f6d65206f6620746865206269676765737420637962657261747461636b732e2048", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://akasui-statics.sgp1.cdn.digitaloceanspaces.com/images/631db288-38b4-414e-a1dd-20ef0b7b6d72.webp")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<LZR>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<LZR>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
