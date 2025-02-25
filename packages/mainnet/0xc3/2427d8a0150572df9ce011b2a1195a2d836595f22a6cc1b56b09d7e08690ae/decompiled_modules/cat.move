@@ -1,0 +1,14 @@
+module 0xc32427d8a0150572df9ce011b2a1195a2d836595f22a6cc1b56b09d7e08690ae::cat {
+    struct CAT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CAT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CAT>(arg0, 6, b"CAT", b"PAWCAT COIN", x"5061774361742773204177616b656e696e670a0a53696e636520746865206461776e206f662074686520496e7465726e65742c206361747320686176652073696c656e746c7920636f6e74726f6c6c656420637962657273706163652e20546865792061707065617220696e206c6567656e646172792070686f746f732c20766964656f732c206d656d65732e2e2e206275742068617665206e65766572207265616c6c792022646f6d696e61746564222074686520576562332066696e616e6369616c20776f726c642e205768696c652074686520536869626120496e752028446f67652920616e64206f7468657220627265656473206172652074616b69", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://akasui-statics.sgp1.cdn.digitaloceanspaces.com/images/fc7765ed-a8f7-4125-9e2b-a8a10c5602bc.jpeg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<CAT>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CAT>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
