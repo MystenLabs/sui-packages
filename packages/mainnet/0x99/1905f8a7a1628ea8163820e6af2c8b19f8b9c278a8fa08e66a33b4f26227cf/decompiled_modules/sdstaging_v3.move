@@ -1,0 +1,34 @@
+module 0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging_v3 {
+    public fun borrow<T0>(arg0: &0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::MyStruct, arg1: &mut 0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::Treasury<T0>, arg2: &0x2::clock::Clock, arg3: &0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f::oracle::PriceOracle, arg4: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage, arg5: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>, arg6: u8, arg7: u64, arg8: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive, arg9: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::Incentive, arg10: &0x2::tx_context::TxContext) {
+        0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::check_allowed(arg10);
+        0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::version::pre_check_version(0);
+        0x2::balance::join<T0>(0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::get_balance<T0>(arg1), 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::borrow_with_account_cap<T0>(arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, 0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::get_account_cap(arg0)));
+    }
+
+    public fun claimRewards<T0>(arg0: &0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::MyStruct, arg1: &0x2::clock::Clock, arg2: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::Incentive, arg3: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage, arg4: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::RewardFund<T0>, arg5: vector<0x1::ascii::String>, arg6: vector<address>, arg7: &0x2::tx_context::TxContext) : 0x2::balance::Balance<T0> {
+        0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::check_allowed(arg7);
+        0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::version::pre_check_version(0);
+        0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::claim_reward_with_account_cap<T0>(arg1, arg2, arg3, arg4, arg5, arg6, 0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::get_account_cap(arg0))
+    }
+
+    public fun depositNavi<T0>(arg0: &0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::MyStruct, arg1: &mut 0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::Treasury<T0>, arg2: &0x2::clock::Clock, arg3: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage, arg4: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>, arg5: u8, arg6: u64, arg7: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive, arg8: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::Incentive, arg9: &mut 0x2::tx_context::TxContext) {
+        0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::check_allowed(arg9);
+        0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::version::pre_check_version(0);
+        0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::deposit_with_account_cap<T0>(arg2, arg3, arg4, arg5, 0x2::coin::from_balance<T0>(0x2::balance::split<T0>(0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::get_balance<T0>(arg1), arg6), arg9), arg7, arg8, 0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::get_account_cap(arg0));
+    }
+
+    public fun repay<T0>(arg0: &0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::MyStruct, arg1: &mut 0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::Treasury<T0>, arg2: &0x2::clock::Clock, arg3: &0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f::oracle::PriceOracle, arg4: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage, arg5: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>, arg6: u8, arg7: u64, arg8: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive, arg9: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::Incentive, arg10: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<T0> {
+        0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::check_allowed(arg10);
+        0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::version::pre_check_version(0);
+        0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::repay_with_account_cap<T0>(arg2, arg3, arg4, arg5, arg6, 0x2::coin::from_balance<T0>(0x2::balance::split<T0>(0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::get_balance<T0>(arg1), arg7), arg10), arg8, arg9, 0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::get_account_cap(arg0))
+    }
+
+    public fun withdrawNavi<T0>(arg0: &0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::MyStruct, arg1: &mut 0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::Treasury<T0>, arg2: &0x2::clock::Clock, arg3: &0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f::oracle::PriceOracle, arg4: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage, arg5: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>, arg6: u8, arg7: u64, arg8: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive, arg9: &mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::Incentive, arg10: &0x2::tx_context::TxContext) {
+        0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::check_allowed(arg10);
+        0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::version::pre_check_version(0);
+        0x2::balance::join<T0>(0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::get_balance<T0>(arg1), 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::withdraw_with_account_cap<T0>(arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, 0x151904d6f9f59cf891318c233756301e109ac321e34fdc05722b864621450bec::sdstaging::get_account_cap(arg0)));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
