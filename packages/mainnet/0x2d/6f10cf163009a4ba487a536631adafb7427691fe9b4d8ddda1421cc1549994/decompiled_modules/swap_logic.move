@@ -1,0 +1,19 @@
+module 0x2d6f10cf163009a4ba487a536631adafb7427691fe9b4d8ddda1421cc1549994::swap_logic {
+    public fun calculate_amount_out(arg0: u64, arg1: u64, arg2: u64) : u64 {
+        assert!(arg0 > 0, 1);
+        assert!(arg1 > 0 && arg2 > 0, 2);
+        arg2 - (((arg1 as u256) * (arg2 as u256) / ((arg1 as u256) + (arg0 as u256))) as u64)
+    }
+
+    public fun calculate_fee(arg0: u64, arg1: u64, arg2: u64, arg3: u64) : u64 {
+        let v0 = (((arg0 as u256) * (arg1 as u256) / (arg2 as u256)) as u64);
+        if (v0 < arg3) {
+            arg3
+        } else {
+            v0
+        }
+    }
+
+    // decompiled from Move bytecode v6
+}
+
