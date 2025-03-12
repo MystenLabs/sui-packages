@@ -1,0 +1,20 @@
+module 0xb0e6be5d9ae27ef214a5bc0127f3f3124dc0af4472c29e16f114b98d34fcfabc::pumptoken {
+    struct PUMPTOKEN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PUMPTOKEN, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x1::option::none<0x2::url::Url>();
+        0x1::option::fill<0x2::url::Url>(&mut v0, 0x2::url::new_unsafe_from_bytes(b"https://yolo-hola-dev.s3.amazonaws.com/uploads/1741775783086.png"));
+        let (v1, v2) = 0x2::coin::create_currency<PUMPTOKEN>(arg0, 6, b"PT", b"PumpToken", b"", v0, arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PUMPTOKEN>>(v1, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<PUMPTOKEN>>(v2);
+    }
+
+    public entry fun renounce_ownership(arg0: 0x2::coin::TreasuryCap<PUMPTOKEN>, arg1: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_freeze_object<0x2::coin::TreasuryCap<PUMPTOKEN>>(arg0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
