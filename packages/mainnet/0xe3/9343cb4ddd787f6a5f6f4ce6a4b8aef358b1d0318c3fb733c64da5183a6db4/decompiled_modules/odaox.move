@@ -1,0 +1,16 @@
+module 0xe39343cb4ddd787f6a5f6f4ce6a4b8aef358b1d0318c3fb733c64da5183a6db4::odaox {
+    struct ODAOX has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ODAOX, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ODAOX>(arg0, 6, b"ODAOX", b"Orosa Capital DAO", x"4f44414f5820e280932054686520476f7665726e616e636520546f6b656e20666f72204f4341505820496e766573746f7273204f44414f5820697320746865206f6666696369616c2044414f20746f6b656e20666f72206561726c7920737570706f7274657273206f6620746865204f434150582065636f73797374656d2e204f44414f5820676976657320796f7520612073656375726520616e64207472616e73706172656e742077617920746f20706172746963697061746520696e2074686520667574757265206f66204f4341505820e28094207769746820757073696465206966207468652044414f20737563636565647320616e642070726f74656374696f6e20696620697420646f65736ee28099742e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://public-cdn.daossui.io/assets/tokens/3a61dda0-0855-11f0-b264-5f08cd100cd6")), arg1);
+        let v2 = v0;
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<ODAOX>>(v1);
+        0x2::coin::mint_and_transfer<ODAOX>(&mut v2, 1100000000000000, 0x2::tx_context::sender(arg1), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ODAOX>>(v2, @0x0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
