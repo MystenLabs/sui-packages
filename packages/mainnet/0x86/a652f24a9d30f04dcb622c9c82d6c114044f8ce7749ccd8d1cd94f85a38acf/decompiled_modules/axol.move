@@ -1,0 +1,16 @@
+module 0x86a652f24a9d30f04dcb622c9c82d6c114044f8ce7749ccd8d1cd94f85a38acf::axol {
+    struct AXOL has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: AXOL, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<AXOL>(arg0, 9, b"AXOL", b"AXOL", x"496e74726f647563696e672041786f6c207468652061786f6c6f746c2c20746865206d656d6520746861742077696c6c206c69746572616c6c79206d616b6520796f7520736d696c652065617220746f206561722e2041786f6c2069732074686520446567656ee280997320647265616d3a207061727420637574652c20706172742077656972642c20616e64203130302520706f74656e7469616c20746f206d6f6f6e2e2041786f6c6f746c7320726567656e65726174652c20616e6420736f2063616e20796f757220626167732077697468207468697320746f6b656e21204e6f2070726f6d697365732c206a7573742076696265732e20486f7020696e2c20686f646c2074696768742c20616e64206c6574207468652041786f6c20646f2074686520535549207377696d6d696e6720666f7220796f7521", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://dd.dexscreener.com/ds-data/tokens/sui/0xae00e078a46616bf6e1e6fb673d18dcd2aa31319a07c9bc92f6063363f597b4e::axol::axol.png?size=lg&key=a12c4b")), arg1);
+        let v2 = v0;
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<AXOL>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::Coin<AXOL>>(0x2::coin::mint<AXOL>(&mut v2, 1000000000000000000, arg1), 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_freeze_object<0x2::coin::TreasuryCap<AXOL>>(v2);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
