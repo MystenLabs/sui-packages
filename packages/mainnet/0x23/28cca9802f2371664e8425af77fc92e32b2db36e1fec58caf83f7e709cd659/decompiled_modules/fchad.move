@@ -1,0 +1,14 @@
+module 0x2328cca9802f2371664e8425af77fc92e32b2db36e1fec58caf83f7e709cd659::fchad {
+    struct FCHAD has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: FCHAD, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<FCHAD>(arg0, 6, b"FCHAD", b"FOMOCHAD", x"412070726f6a656374206275696c742061726f756e642074686520726973696e6720464f4d4f20696e207468652063727970746f206d61726b65747320e2809320657370656369616c6c79206f6e207468652053554920426c6f636b636861696e210a0a54686973206973207468652066697273742070726f6a6563742066726f6d206f7572207465616d2e0a4974e28099732066756c6c79206c656769742c206c6f6e672d7465726d2c20616e6420706f77657265642062792074686520737069726974206f6620464f4d4f204d454d452e0a0a427579206f757220746f6b656e20e2809320616e6420737469636b207769746820757320666f7220746865", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1744439736865.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<FCHAD>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<FCHAD>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
