@@ -1,0 +1,14 @@
+module 0xad309bf54b63f182c1f051dd849697d17316e3995ff6922ae67803a05eac423c::crmnsc {
+    struct CRMNSC has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CRMNSC, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<CRMNSC>(arg0, 6, b"CRMNSC", b"Crimesnc", x"696620796f752061726520612063726561746f722c206f72206172746973742c206f7220616e797468696e672c20616e6420796f7520636f696e20736f6d657468696e67206f6e204043524d4e534320746f206578707265737320796f7572206372656174697669747920616e6420796f75206172652061747461636b6564206f72206d616c69676e65642c20492077696c6c207374616e6420627920796f7520616e6420646566656e6420796f7520200a0a796f75206465736572766520746f206561726e2066726f6d20796f757220776f726b2020646f6e2774206c657420616e796f6e652074656c6c20796f75206f7468657277697365", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/1000059254_2050c041c7.png")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CRMNSC>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<CRMNSC>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
