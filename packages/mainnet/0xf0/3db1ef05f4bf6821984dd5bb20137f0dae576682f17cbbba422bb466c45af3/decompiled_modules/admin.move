@@ -21,7 +21,7 @@ module 0xf03db1ef05f4bf6821984dd5bb20137f0dae576682f17cbbba422bb466c45af3::admin
         0x2::transfer::transfer<AdminCap>(v0, v1);
     }
 
-    public entry fun transer_admin_cap(arg0: &ProtocolConfig, arg1: AdminCap, arg2: address, arg3: &0x2::tx_context::TxContext) {
+    public entry fun transfer_admin_cap(arg0: &ProtocolConfig, arg1: AdminCap, arg2: address, arg3: &0x2::tx_context::TxContext) {
         verify_version(arg0);
         0x2::transfer::transfer<AdminCap>(arg1, arg2);
         0xf03db1ef05f4bf6821984dd5bb20137f0dae576682f17cbbba422bb466c45af3::events::emit_admin_cap_transfer_event(0x2::tx_context::sender(arg3), arg2);
