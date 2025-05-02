@@ -1,0 +1,14 @@
+module 0xfec4f3b643c0f799009dc90fd5b53c29a9685d5a75af9136e4df570ccdb4651a::ancassette {
+    struct ANCASSETTE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ANCASSETTE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ANCASSETTE>(arg0, 6, b"ANCASSETTE", b"AGENT CASSETTE ON SUI", x"426f726e2066726f6d20616e616c6f6720726f6f74732c20776972656420666f722074686520626c6f636b636861696e2e0a496e206120776f726c6420666c6f6f6465642077697468206e6f6973652c2068652074756e657320696e746f20636c61726974790a204f6c6420736f756c2e204e657720636861696e2e0a4275696c74206f6e205355492e20506f7765726564206279207468652070656f706c652e0a546869732069736e74206e6f7374616c6769612e0a497473206120726573697374616e6365206672657175656e63792e0a0a204d656d65732e204d61726b6574732e204d697373696f6e732e0a57656c636f6d6520746f20746865206d697373696f6e2e2057656c636f6d6520746f204167656e742043617373657474652e0a0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/photo_2025_05_02_23_02_07_4ffe99136a.jpg")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ANCASSETTE>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<ANCASSETTE>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
