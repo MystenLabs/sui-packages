@@ -1,0 +1,14 @@
+module 0x62216c233d5c5503fc6e02978e113ea4623b9d3af8300b922fa99ae171a190dc::fren {
+    struct FREN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: FREN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<FREN>(arg0, 6, b"FREN", b"Fren the Spider", x"54686520667269656e646c6965737420737069646572206672656e206f6e205375692e0a0a446f6e2774206b696c6c204672656e20746865206e6578742074696d6520796f75207365652068696d2068616e67696e6720696e2074686520636f726e6572206f6620796f75722074726164696e6720726f6f6d2e204c6f6f6b2075702c20796f75206d69676874206a757374207365652068696d2e0a0a48652773206f6e6c7920746865726520746f2070726f74656374206869732068756d616e2e2042652070726f7564206f6620796f7572204672656e2e20486520656174732074686f7365206e6173747920627567676572732074686174206b65657020796f75206177616b65206174206e696768742e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/73_Mi72j_C5_K_Qjq_R695_Dgu_B_Enk_X2a_Vm_E1b_ZFYAM_839pump_b9f096b80b.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<FREN>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<FREN>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
