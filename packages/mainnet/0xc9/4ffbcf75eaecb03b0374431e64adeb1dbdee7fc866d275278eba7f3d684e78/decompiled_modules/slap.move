@@ -1,0 +1,14 @@
+module 0xc94ffbcf75eaecb03b0374431e64adeb1dbdee7fc866d275278eba7f3d684e78::slap {
+    struct SLAP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SLAP, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SLAP>(arg0, 6, b"SLAP", b"SuiSlap", x"5468697320636f696e20736c6170730a4275696c74206f6e205375692e20506f7765726564206279204d656d65732e204261636b68616e64696e67204655442073696e636520646179206f6e652e0a546f74616c20537570706c793a20312c3030302c3030302c30303020534c41500a0a54617865733a20302520496e202f203025204f757420284265636175736520736c6170732073686f756c646e74206265207461786564290a0a5574696c6974793a204e6f6e6520206a757374206d656d652d6675656c6564206d6f6f6e206d697373696f6e730a0a436f6d6d756e6974792044414f3a20536c617020666967687473206465636964652065766572797468696e67200a0a23536c61705468654469700a0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/slap_meme_fe448d3cc1.gif")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SLAP>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SLAP>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
