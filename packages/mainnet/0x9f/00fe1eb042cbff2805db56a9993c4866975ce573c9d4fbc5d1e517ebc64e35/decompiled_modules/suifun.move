@@ -1,0 +1,12 @@
+module 0x9f00fe1eb042cbff2805db56a9993c4866975ce573c9d4fbc5d1e517ebc64e35::suifun {
+    struct SUIFUN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUIFUN, arg1: &mut 0x2::tx_context::TxContext) {
+        0xc874b6eb08bcab05aea4b00dab8451b6f16b393023d39798366de4845e2917ec::connector_v3::new<SUIFUN>(arg0, 97332468, b"SUI FUN", b"suifun", x"5355492046554e20697320796f7572206761746577617920746f206c61756e6368696e6720616e6420646973636f766572696e6720696e6e6f76617469766520746f6b656e73206f6e2074686520537569206e6574776f726b2e2053696d706c652c20666173742c20616e64206275696c7420666f722063726561746f727320616e6420747261646572732e0a0a2453554946554e3a205475726e696e672065766572792066656520696e746f206669726520616e6420726577617264732e", b"https://ipfs.io/ipfs/bafybeihy67llnace7ohl3qxd4p5ahu4fdj34hp7d33kyixj7dfs5eb2mee", 0x1::string::utf8(b"https://x.com/SuiFun_io"), 0x1::string::utf8(b"https://suifun.io/"), 0x1::string::utf8(b"https://t.me/suifun_io"), arg1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
