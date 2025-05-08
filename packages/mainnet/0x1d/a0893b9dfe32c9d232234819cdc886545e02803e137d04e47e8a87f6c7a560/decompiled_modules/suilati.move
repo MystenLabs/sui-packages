@@ -1,0 +1,14 @@
+module 0x1da0893b9dfe32c9d232234819cdc886545e02803e137d04e47e8a87f6c7a560::suilati {
+    struct SUILATI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUILATI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SUILATI>(arg0, 6, b"SUILATI", b"Suilati Pokemon", x"54686520245355494c41544920746f6b656e20697320696e73706972656420627920746865206c6567656e646172792064756f206f66204c6174696f7320616e64204c61746961732066726f6d2074686520506f6bc3a96d6f6e20756e6976657273652c20617320646570696374656420696e20746869732076696272616e7420617274776f726b2e20466561747572696e67207468652069636f6e696320626c7565204c6174696f7320616e6420726564204c617469617320666f726d696e67206120686561727420616761696e737420612072616469616e74206261636b64726f702c20245355494c4154492073796d626f6c697a657320756e6974792c206861726d6f6e792c20616e642074686520706f776572206f6620636f6e6e656374696f6e2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://ipfs.io/ipfs/bafkreihmjc7gjbqmcuw7qa3hxs6q3e73fpy5refbbverg7badyfgvaqzay")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUILATI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<SUILATI>>(v1, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
