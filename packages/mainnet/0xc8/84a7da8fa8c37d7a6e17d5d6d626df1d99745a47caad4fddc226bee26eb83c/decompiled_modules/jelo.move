@@ -1,0 +1,14 @@
+module 0xc884a7da8fa8c37d7a6e17d5d6d626df1d99745a47caad4fddc226bee26eb83c::jelo {
+    struct JELO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: JELO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<JELO>(arg0, 6, b"JELO", b"JELO the CAT", x"496e74726f647563696e67204a656c6f20546865204361742e20426f726e2066726f6d2074686520646567656e6572617465206c616273206f662064656570205375692063616d65206120637572696f757320636174206675736564207769746820616e20656469626c65207375627374616e6365206c696b65206e6f206f746865722e20244a454c4f206973207469726564206f662041692c2043656c6562732c20616e64206c617270732074616b696e67206f766572206f75722062656c6f7665642053756920436861696e2e204a656c6f20696e766974657320796f7520746f207468652062726967687465722073696465206f6620746865205472656e636865732e200a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://api.movepump.com/uploads/jelo_logo_62a0971c6e.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<JELO>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<JELO>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
