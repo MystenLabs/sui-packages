@@ -1,0 +1,14 @@
+module 0x69fa9b3fe98ff3f1199ebc2587dfd5d576fe9cb768817f0b0fa8c8338f65c007::skf {
+    struct SKF has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SKF, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SKF>(arg0, 6, b"SKF", b"SUIKINGFISH", x"4120736d616c6c2062757420766572792070617373696f6e61746520616e6420636f6d6d6974746564207465616d20696e0a7768617420776520646f2c206f75722061727469737420686173206d6f7265207468616e2035207965617273206f660a657870657269656e636520696e20746865204e46542073706163652c20736f206f7572204e46542064657369676e732077696c6c0a6265206f66206772656174207175616c6974792c2061732077656c6c206173206f7572206d6f64657261746f72732c20616e640a74686520656e74697265207465616d20626568696e642c20736f6f6e2077652077696c6c20626520676976696e67206d6f72650a696e666f726d6174696f6e2061626f757420746865207465616d21", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://ipfs.io/ipfs/bafkreibaats7bviygbhiezwjaytagqmuwho5knivk3piq6t7clcwwc2m5q")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SKF>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<SKF>>(v1, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
