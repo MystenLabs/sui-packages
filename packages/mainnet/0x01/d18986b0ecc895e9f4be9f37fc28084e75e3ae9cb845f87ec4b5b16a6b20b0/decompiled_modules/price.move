@@ -1,0 +1,24 @@
+module 0x1d18986b0ecc895e9f4be9f37fc28084e75e3ae9cb845f87ec4b5b16a6b20b0::price {
+    struct Price has copy, drop, store {
+        value: 0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::Decimal,
+        timestamp_ms: u64,
+    }
+
+    public(friend) fun get_price(arg0: Price) : 0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::Decimal {
+        arg0.value
+    }
+
+    public(friend) fun get_timestamp_ms(arg0: Price) : u64 {
+        arg0.timestamp_ms
+    }
+
+    public(friend) fun new(arg0: 0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::Decimal, arg1: u64) : Price {
+        Price{
+            value        : arg0,
+            timestamp_ms : arg1,
+        }
+    }
+
+    // decompiled from Move bytecode v6
+}
+
