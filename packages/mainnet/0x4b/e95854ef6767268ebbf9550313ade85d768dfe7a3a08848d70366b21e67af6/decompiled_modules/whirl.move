@@ -1,0 +1,14 @@
+module 0x4be95854ef6767268ebbf9550313ade85d768dfe7a3a08848d70366b21e67af6::whirl {
+    struct WHIRL has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: WHIRL, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<WHIRL>(arg0, 6, b"WHIRL", b"POLIWHIRL", x"706f6c69776869726c20697320696e73706972656420627920706f6b656d6f6e206d6f6e7374657220636861726163746572732c2073696d706c79207075742c2077652077616e7420746f20636f6d62696e65207468652068797065206f662066726f6720746f6b656e73206f6e2074686520626c6f636b636861696e20737563682061732028706570652c20747572626f20616e642066776f6729207769746820706f6b656d6f6e20636861726163746572732e207468656e20706f6c69776869726c20697320746865206d6f737420726570726573656e746174697665206368617261637465722e0a74686520726573742077652073656520686f7720746865206d61726b6574207265616374732e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://ipfs.io/ipfs/bafybeiferbz3qcshqpwvjju23lc6kzrtw4xgaz2cmogoxe2kwsykuhyfgq")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<WHIRL>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<WHIRL>>(v1, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
