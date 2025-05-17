@@ -1,0 +1,14 @@
+module 0xa8dcf3e9b5cf6bc9cd9fe58b3621ddd3aaeae9e5a80de2fd5e41b98eeaddc29e::mega_sui {
+    struct MEGA_SUI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MEGA_SUI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MEGA_SUI>(arg0, 9, b"megaSUI", b"mega Staked SUI", b"", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,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")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MEGA_SUI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<MEGA_SUI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
