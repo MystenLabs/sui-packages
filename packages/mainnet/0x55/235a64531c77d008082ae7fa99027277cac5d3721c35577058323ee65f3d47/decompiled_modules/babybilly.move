@@ -1,0 +1,14 @@
+module 0x55235a64531c77d008082ae7fa99027277cac5d3721c35577058323ee65f3d47::babybilly {
+    struct BABYBILLY has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: BABYBILLY, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<BABYBILLY>(arg0, 6, b"BABYBILLY", b"Baby Billy coin", x"244241425942494c4c59206973206120686967682d6f6374616e65206d656d6520636f696e206275696c7420666f72207468652077696c6465737420646567656e7320696e2063727970746f2e20506f776572656420627920687970652c2068756d6f722c20616e6420686f6c792070756d7020656e657267792c206974e2809973207468652070726561636865722d6c65642070726f6a6563742074686174207475726e7320657665727920636861727420696e746f2061207365726d6f6e2e204a6f696e2074686520636f6e677265676174696f6e20e2809420776520646f6ee28099742070726f6d6973652073616c766174696f6e2c206a7573742076", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1747677320184.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<BABYBILLY>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<BABYBILLY>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
