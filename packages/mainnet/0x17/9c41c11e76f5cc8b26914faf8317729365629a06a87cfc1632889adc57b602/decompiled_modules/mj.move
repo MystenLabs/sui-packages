@@ -1,0 +1,14 @@
+module 0x179c41c11e76f5cc8b26914faf8317729365629a06a87cfc1632889adc57b602::mj {
+    struct MJ has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MJ, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MJ>(arg0, 6, b"MJ", b"Michael Jackson Coin", x"54686973206973206e6f74206a7573742061206d656d6520636f696e2e0a497427732061207472696275746520746f20746865204b696e67206f6620506f7020e28094204d69636861656c204a61636b736f6e2e0a0a244d4a206272696e677320686973207370697269742c2072687974686d2c20616e64206c656761637920696e746f2074686520776f726c64206f662063727970746f2e0a46726f6d20746865204d6f6f6e77616c6b20746f20746865204d6f6f6e6261672c206576657279207374657020697320612063656c6562726174696f6e206f6620746865206d757369632c20746865206d6f7665732c20616e6420746865206d6167", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1747677483662.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<MJ>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MJ>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
