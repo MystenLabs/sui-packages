@@ -1,0 +1,14 @@
+module 0x89b8f1c88e658171c409bfa428e344acd3028368eb19efbf7753434656b67be9::ash {
+    struct ASH has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: ASH, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ASH>(arg0, 6, b"ASH", b"Ash Ketchum", x"417368204b65746368756d20285361746f73686920696e204a6170616e657365206c616e67756167652920697320746865206d61696e20636861726163746572206f6620506f6b656d6f6e20746865205365726965732e20486520697320612031302d796561722d6f6c6420506f6b656d6f6e20547261696e65722066726f6d2050616c6c657420546f776e20696e20746865204b616e746f20726567696f6e2077686f2068617320616c7761797320647265616d6564206f66206265636f6d696e672074686520776f726c642773206265737420506f6b656d6f6e204d61737465722e0a0a4869732063757272656e7420676f616c3f20746f2043617463682027456d20416c6c206f6e207468652053554920636861696e21", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://ipfs.io/ipfs/bafkreiakploierdrj4amylh4cojvt2uouiqq3sravu77q5yjv3xfhjh4by")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ASH>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<ASH>>(v1, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
