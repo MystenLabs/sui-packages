@@ -1,0 +1,14 @@
+module 0x1002fc69d5acb65a34d523b8977f82fa6f3a53f9c3ad3dd604ac807e48203637::bvsb {
+    struct BVSB has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: BVSB, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<BVSB>(arg0, 6, b"BVSB", b"BULL vs BEAR", x"4d6f6e65792063616e2774206275792068617070696e6573732c206275742069742063616e206769766520796f752066726565646f6d2e20496620796f7520646f6ee28099742063686f6f736520796f7572206f776e20706174682c206f74686572732077696c6c2063686f6f736520697420666f7220796f752e477265617420616368696576656d656e747320636f6d652066726f6d20626f6c642063686f696365732e2045766572796f6e6520697320657175616c20616e6420576520617265207374726f6e67657220746f6765746865722e20497374616e42554c4c204469676974616c20496e7665737420536f63696574792e0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1747847039773.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<BVSB>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<BVSB>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
