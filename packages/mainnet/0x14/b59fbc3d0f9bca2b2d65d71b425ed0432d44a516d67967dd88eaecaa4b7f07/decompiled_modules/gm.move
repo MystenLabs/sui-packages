@@ -1,0 +1,14 @@
+module 0x14b59fbc3d0f9bca2b2d65d71b425ed0432d44a516d67967dd88eaecaa4b7f07::gm {
+    struct GM has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: GM, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<GM>(arg0, 6, b"GM", b"GIANT MOUSE", x"57686174206973204749414e54204d4f55534520436f696e3f0a4749414e54204d4f5553452069732061206e65772067656e65726174696f6e2063727970746f63757272656e63792070726f6a656374207468617420636f6d62696e657320646563656e7472616c697a65642066696e616e6365202844654669292c2067616d696669636174696f6e20616e6420636f6d6d756e69747920706f7765722e2057697468206974732066756e207468656d652c207374726f6e6720746563686e6f6c6f676963616c20696e66726173747275637475726520616e6420766973696f6e61727920726f61646d61702c2077652061696d20746f206265", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1748190596724.webp")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<GM>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<GM>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
