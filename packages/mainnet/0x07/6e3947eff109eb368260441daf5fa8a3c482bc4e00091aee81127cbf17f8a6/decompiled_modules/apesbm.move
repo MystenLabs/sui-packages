@@ -1,0 +1,14 @@
+module 0x76e3947eff109eb368260441daf5fa8a3c482bc4e00091aee81127cbf17f8a6::apesbm {
+    struct APESBM has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: APESBM, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<APESBM>(arg0, 6, b"ApesBM", b"Apes BM", x"4170657320424d204e4654530a486f6c646572204e46542061697264726f700a4170657320424d0a68747470733a2f2f7777772e7472616465706f72742e78797a2f7375692f636f6c6c656374696f6e2f3078376466353236643734616662376166663165646338636338366265326435633139353334646461333931613931643634363161386638666262346264613134653f7461623d6d696e7426626f74746f6d5461623d7472616465730a4170657320424d320a68747470733a2f2f7777772e7472616465706f72742e78797a2f7375692f636f6c6c656374696f6e2f3078396165323134626266393531336466306337343638623231", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1748354808156.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<APESBM>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<APESBM>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
