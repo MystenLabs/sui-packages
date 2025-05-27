@@ -1,0 +1,14 @@
+module 0x87754ad48581aab96fb13162cf9c4c3aacfb64de8b1955fba7edaed6ce9114a4::step_sui {
+    struct STEP_SUI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: STEP_SUI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<STEP_SUI>(arg0, 9, b"stepSUI", b"12 Steps Staked SUI", b"All fees go to helping fund people who cannot afford addiction recovery on the 12Steps.io platform.", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,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")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<STEP_SUI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<STEP_SUI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
