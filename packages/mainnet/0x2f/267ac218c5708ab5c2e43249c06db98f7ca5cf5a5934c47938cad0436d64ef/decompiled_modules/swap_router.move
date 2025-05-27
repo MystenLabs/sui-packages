@@ -1,0 +1,4 @@
+module 0x2f267ac218c5708ab5c2e43249c06db98f7ca5cf5a5934c47938cad0436d64ef::swap_router {
+    // decompiled from Move bytecode v6
+}
+
