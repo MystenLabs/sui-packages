@@ -1,0 +1,14 @@
+module 0xceaef33aae9e415938da76bafbf61612f6f767d18113df68844972eb5a2f2635::milk_sui {
+    struct MILK_SUI has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MILK_SUI, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MILK_SUI>(arg0, 9, b"milkSUI", b"Milk Staked SUI", b"The best staked SUI you should own with 2.32% APR", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,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")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MILK_SUI>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<MILK_SUI>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
