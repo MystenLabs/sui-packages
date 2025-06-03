@@ -1,0 +1,9 @@
+module 0xa2acc6992412439af93549eb5c65fd7d9ff4fab278b50c117777ab51e7527f20::concat {
+    public(friend) fun concat<T0: copy>(arg0: vector<T0>, arg1: vector<T0>) : vector<T0> {
+        0x1::vector::append<T0>(&mut arg0, arg1);
+        arg0
+    }
+
+    // decompiled from Move bytecode v6
+}
+
