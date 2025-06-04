@@ -1,0 +1,16 @@
+module 0x24d7c608b4a180731e3c354778c4e463b1d1e482e0cd50878f0668839323ea5b::tao {
+    struct TAO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TAO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TAO>(arg0, 8, b"TAO", b"Bittensor", b"Bittensor (TAO) is a cryptocurrency launched in 2021. Bittensor has a current supply of 8,561,026. The last known price of Bittensor is 172.8903377 USD and is down -19.93 over the last 24 hours. It is currently trading on 142 active market(s) with $166,871,996.39 traded over the last 24 hours. More information can be found at https://bittensor.com.", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABAAEADASIAAhEBAxEB/8QAGQABAQADAQAAAAAAAAAAAAAAAAcDBQYI/8QAKhAAAQMEAAQFBQEAAAAAAAAAAQACAwQFBhEHEiExCBQYN0FVhJS002H/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A9UoiICIiAiIgIiICIiDS5dlNlw+zuuuSXCOhoQ9sYe8OcXPd2a1rQXOPc6APQE9gSo76psJ+l5H+PB/ZWy9WW1X2lZTXu20VypmPEjYqyBszGvAIDgHAjeiRv/SpH4gMTxrHuEt6u1lxmwUdxpX0skM8dsg20+ZiHyzRBBIIOwQSCCCg1/qmwn6Xkf48H9lU+G+bUOf46b1aqG5UlGZnQx+ehbG6XlA29nK5wc3ZLd77tcPhcLwRx/Gsv4W2K93rEcXfcKhkjZXx2mBgeY5Xx8xAboEhgJ1obJ0AOir1JTQUdLDS0kMUFNCxscUUTQ1kbANBrQOgAAAACDKiIgIiIClnig9jMl+2/aiVTXNcSMThzjCbpjtRVSUjK1jQJ42hxjc17XtOj3HM1ux02NjY7gOS8MHsbjX3P7MqqSm/AfE8lwfDnY/k9RbamKnmc+ikopXO5Y3kucxwdGzs/mcHbcTzkdA0bpCAiIgIiICIiAiIgIiIP//Z")), arg1);
+        let v2 = v0;
+        0x2::coin::mint_and_transfer<TAO>(&mut v2, 2100000000000000, 0x2::tx_context::sender(arg1), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TAO>>(v2, @0x0);
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<TAO>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
