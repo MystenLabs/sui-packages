@@ -1,0 +1,14 @@
+module 0x4907f547b20a6e9a4f0d4f624437edb528f3c8c0dd8378a3946fef0b78719039::spc {
+    struct SPC has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SPC, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<SPC>(arg0, 6, b"SPC", b"Sui Platinum Card", x"4e6f20666565732e204e6f206c696d6974732e204e6f2063726564697420636865636b2e0a0a546869732069736ee28099742069737375656420627920612062616e6b2e0a4974e280997320697373756564206279207468652063756c747572652e0a0a4465636c696e65643f2057686f2063617265732e0a466c6578696e67206e6576657220676574732072656a65637465642e0a0a4e6f626f6479206b6e6f7773207768617420697420646f65732e0a45766572796f6e65206b6e6f777320796f75e28099766520676f74206f6e652e0a0ae2809c4e6f7420616363657074656420616e7977686572652e204275742072657370656374656420657665727977", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1749056116386.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<SPC>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SPC>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
