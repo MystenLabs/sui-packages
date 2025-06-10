@@ -1,0 +1,12 @@
+module 0xcf95bd38a8411891e74a23f127640f2de53c432854ecc34e8b4422b3cc638153::mohip {
+    struct MOHIP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MOHIP, arg1: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x9ade9d6efa73a07f19a0ea166dd6850dcd5cd8f1a25e868b302755e5386a0086::bonding_curve::BondingCurveStartCap<MOHIP>>(0x9ade9d6efa73a07f19a0ea166dd6850dcd5cd8f1a25e868b302755e5386a0086::bonding_curve::create_bonding_curve<MOHIP>(arg0, b"MOHIP", b"Mind Of Hippo", x"546865205468696e6b696e672046616365206f662074686520537569204e6574776f726b2e0a576527726520676f696e67206265796f6e642063757465206d656d65732e2057652776652063686f73656e20696e74656c6c6967656e63652c2073747261746567792c20616e64206d696e696d616c69737420706f7765722e20244d4f4849502069736e2774206a757374206120746f6b656e3b20697427732074686520636f6c6c656374697665206d696e64206f662074686520636f6d6d756e69747920616e642061206c6f6e672d7465726d20766973696f6e2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://ipfs.io/ipfs/QmPX3Du7bQSoP1wGuLrpEzoSW22S2ag1TqgdLTkBFDBUfC")), b"WEBSITE", b"TWITTER", b"DISCORD", b"TELEGRAM", 0x1::string::utf8(b"00e99dfe8f9b2c2b8f2dbaa5a181a3840e29b4ac3fee637c20f096d6ddb28699ab99dcae3860fbf6ad8fa77f24c7d517403e9ec372a0b029edeb4038be6bee3a06d598785fb33e7cb9fefbf2f413c86f72ed5a2ced9d71a6a840dd9d6eb9c2561c1749569887"), arg1), 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
