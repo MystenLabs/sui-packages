@@ -1,0 +1,193 @@
+module 0x936c72d2f2db0d8a4c043c2910830e840696b1efd090b58d28ddd338950d82d5::mm_vault {
+    struct BalanceEvent has copy, drop {
+        vault: 0x2::object::ID,
+        user: address,
+        base_asset_amount: u64,
+        quote_asset_amount: u64,
+        lp_amount: u64,
+        deposit: bool,
+    }
+
+    struct OrderCreatedEvent has copy, drop {
+        user: address,
+        spread_bps: u64,
+        mid_price: u64,
+        bid_price: u64,
+        ask_price: u64,
+        bid_quantity: u64,
+        ask_quantity: u64,
+        order_size: u64,
+        created_at: u64,
+        expires_at: u64,
+    }
+
+    struct Vault<phantom T0, phantom T1, phantom T2> has store, key {
+        id: 0x2::object::UID,
+        lp_treasury_cap: 0x2::coin::TreasuryCap<T2>,
+        balance_manager: 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager,
+        base_price_id: vector<u8>,
+        quote_price_id: vector<u8>,
+    }
+
+    struct TradingCap has store, key {
+        id: 0x2::object::UID,
+        vault_id: 0x2::object::ID,
+    }
+
+    public fun deposit<T0, T1, T2>(arg0: &mut Vault<T0, T1, T2>, arg1: 0x2::coin::Coin<T0>, arg2: 0x2::coin::Coin<T1>, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T2> {
+        let v0 = 0x2::coin::value<T0>(&arg1);
+        let v1 = 0x2::coin::value<T1>(&arg2);
+        let (v2, v3) = get_price(arg0.base_price_id, arg3, arg5);
+        let v4 = v3;
+        let v5 = v2;
+        let (v6, v7) = get_price(arg0.quote_price_id, arg4, arg5);
+        let v8 = v7;
+        let v9 = v6;
+        let v10 = 0x2::coin::total_supply<T2>(&arg0.lp_treasury_cap);
+        let v11 = if (v10 == 0) {
+            (v0 as u256) * normalize_price(&v5, &v4) + (v1 as u256) * normalize_price(&v9, &v8)
+        } else {
+            ((v0 as u256) * normalize_price(&v5, &v4) + (v1 as u256) * normalize_price(&v9, &v8)) * (v10 as u256) / get_total_value<T0, T1, T2>(arg0, arg3, arg4, arg5)
+        };
+        assert!(v11 <= 18446744073709551615, 2);
+        0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::deposit<T0>(&mut arg0.balance_manager, arg1, arg6);
+        0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::deposit<T1>(&mut arg0.balance_manager, arg2, arg6);
+        let v12 = BalanceEvent{
+            vault              : 0x2::object::id<Vault<T0, T1, T2>>(arg0),
+            user               : 0x2::tx_context::sender(arg6),
+            base_asset_amount  : v0,
+            quote_asset_amount : v1,
+            lp_amount          : (v11 as u64),
+            deposit            : true,
+        };
+        0x2::event::emit<BalanceEvent>(v12);
+        0x2::coin::mint<T2>(&mut arg0.lp_treasury_cap, (v11 as u64), arg6)
+    }
+
+    public fun withdraw<T0, T1, T2>(arg0: &mut Vault<T0, T1, T2>, arg1: 0x2::coin::Coin<T2>, arg2: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, 0x2::coin::Coin<T1>) {
+        let v0 = 0x2::coin::value<T2>(&arg1);
+        let v1 = 0x2::coin::total_supply<T2>(&arg0.lp_treasury_cap);
+        let (v2, v3) = get_vault_balance<T0, T1, T2>(arg0);
+        let v4 = (v2 as u256) * (v0 as u256) / (v1 as u256);
+        let v5 = (v3 as u256) * (v0 as u256) / (v1 as u256);
+        assert!(v4 <= 18446744073709551615, 1);
+        assert!(v5 <= 18446744073709551615, 1);
+        let v6 = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::withdraw<T0>(&mut arg0.balance_manager, (v4 as u64), arg2);
+        let v7 = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::withdraw<T1>(&mut arg0.balance_manager, (v5 as u64), arg2);
+        0x2::coin::burn<T2>(&mut arg0.lp_treasury_cap, arg1);
+        let v8 = BalanceEvent{
+            vault              : 0x2::object::id<Vault<T0, T1, T2>>(arg0),
+            user               : 0x2::tx_context::sender(arg2),
+            base_asset_amount  : 0x2::coin::value<T0>(&v6),
+            quote_asset_amount : 0x2::coin::value<T1>(&v7),
+            lp_amount          : v0,
+            deposit            : false,
+        };
+        0x2::event::emit<BalanceEvent>(v8);
+        (v6, v7)
+    }
+
+    public fun get_price(arg0: vector<u8>, arg1: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg2: &0x2::clock::Clock) : (0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::I64, 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::I64) {
+        let v0 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::pyth::get_price_no_older_than(arg1, arg2, 60);
+        let v1 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_info_from_price_info_object(arg1);
+        let v2 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_identifier(&v1);
+        assert!(0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::get_bytes(&v2) == arg0, 0);
+        (0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_price(&v0), 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_expo(&v0))
+    }
+
+    public fun create_spread_order<T0, T1, T2>(arg0: &mut Vault<T0, T1, T2>, arg1: &0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::TradeProof, arg2: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>, arg3: u64, arg4: u64, arg5: u8, arg6: u64, arg7: u8, arg8: u64, arg9: &0x2::clock::Clock, arg10: &mut 0x2::tx_context::TxContext) : (0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order_info::OrderInfo, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order_info::OrderInfo) {
+        assert!(arg3 > 0, 4);
+        assert!(arg8 > 0x2::clock::timestamp_ms(arg9), 5);
+        let (_, v1, v2) = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::pool_book_params<T0, T1>(arg2);
+        assert!(arg4 * v1 >= v2, 3);
+        let v3 = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::mid_price<T0, T1>(arg2, arg9);
+        let v4 = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::balance<T1>(&arg0.balance_manager);
+        let v5 = (0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::balance<T0>(&arg0.balance_manager) as u128) * (v3 as u128);
+        let v6 = v3 * arg3 / 100 / 100 / 2;
+        let v7 = v3 - v6;
+        let v8 = v3 + v6;
+        let (v9, v10) = if (v5 == (v4 as u128)) {
+            (arg4, arg4)
+        } else if (v5 > (v4 as u128)) {
+            let v11 = 0x1::u64::min(((100 * v5 / (v4 as u128) - 100) as u64), arg6);
+            (arg4 * (100 + v11) / 100, arg4 * (100 - v11) / 100)
+        } else {
+            let v12 = 0x1::u64::min(((100 * v5 / (v4 as u128) - 100) as u64), arg6);
+            (arg4 * (100 - v12) / 100, arg4 * (100 + v12) / 100)
+        };
+        let v13 = OrderCreatedEvent{
+            user         : 0x2::tx_context::sender(arg10),
+            spread_bps   : arg3,
+            mid_price    : v3,
+            bid_price    : v7,
+            ask_price    : v8,
+            bid_quantity : v10,
+            ask_quantity : v9,
+            order_size   : arg4,
+            created_at   : 0x2::clock::timestamp_ms(arg9),
+            expires_at   : arg8,
+        };
+        0x2::event::emit<OrderCreatedEvent>(v13);
+        (0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_limit_order<T0, T1>(arg2, &mut arg0.balance_manager, arg1, 0, arg5, arg7, v7, 100, true, false, arg8, arg9, arg10), 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_limit_order<T0, T1>(arg2, &mut arg0.balance_manager, arg1, 0, arg5, arg7, v8, 100, false, false, arg8, arg9, arg10))
+    }
+
+    public fun create_vault<T0, T1, T2>(arg0: 0x2::coin::TreasuryCap<T2>, arg1: vector<u8>, arg2: vector<u8>, arg3: &mut 0x2::tx_context::TxContext) : TradingCap {
+        let v0 = Vault<T0, T1, T2>{
+            id              : 0x2::object::new(arg3),
+            lp_treasury_cap : arg0,
+            balance_manager : 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::new(arg3),
+            base_price_id   : arg1,
+            quote_price_id  : arg2,
+        };
+        0x2::transfer::share_object<Vault<T0, T1, T2>>(v0);
+        TradingCap{
+            id       : 0x2::object::new(arg3),
+            vault_id : 0x2::object::id<Vault<T0, T1, T2>>(&v0),
+        }
+    }
+
+    public fun generate_trade_proof<T0, T1, T2>(arg0: &TradingCap, arg1: &mut Vault<T0, T1, T2>, arg2: &0x2::tx_context::TxContext) : 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::TradeProof {
+        assert!(arg0.vault_id == 0x2::object::id<Vault<T0, T1, T2>>(arg1), 8);
+        0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::generate_proof_as_owner(&mut arg1.balance_manager, arg2)
+    }
+
+    public fun get_total_value<T0, T1, T2>(arg0: &Vault<T0, T1, T2>, arg1: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg3: &0x2::clock::Clock) : u256 {
+        let (v0, v1) = get_price(arg0.base_price_id, arg1, arg3);
+        let v2 = v1;
+        let v3 = v0;
+        let (v4, v5) = get_price(arg0.quote_price_id, arg2, arg3);
+        let v6 = v5;
+        let v7 = v4;
+        0 + (0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::balance<T0>(&arg0.balance_manager) as u256) * normalize_price(&v3, &v2) + (0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::balance<T1>(&arg0.balance_manager) as u256) * normalize_price(&v7, &v6)
+    }
+
+    public fun get_vault_balance<T0, T1, T2>(arg0: &Vault<T0, T1, T2>) : (u64, u64) {
+        (0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::balance<T0>(&arg0.balance_manager), 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::balance<T1>(&arg0.balance_manager))
+    }
+
+    fun normalize_price(arg0: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::I64, arg1: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::I64) : u256 {
+        let v0 = if (0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_is_negative(arg0)) {
+            0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_negative(arg0)
+        } else {
+            0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_positive(arg0)
+        };
+        let v1 = if (0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_is_negative(arg1)) {
+            0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_negative(arg1)
+        } else {
+            0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_positive(arg1)
+        };
+        let v2 = 8;
+        if (0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_is_negative(arg1)) {
+            if (v1 >= v2) {
+                (v0 as u256) / (0x1::u64::pow(10, ((v1 - v2) as u8)) as u256)
+            } else {
+                (v0 as u256) * (0x1::u64::pow(10, ((v2 - v1) as u8)) as u256)
+            }
+        } else {
+            (v0 as u256) * (0x1::u64::pow(10, ((v1 + v2) as u8)) as u256)
+        }
+    }
+
+    // decompiled from Move bytecode v6
+}
+
