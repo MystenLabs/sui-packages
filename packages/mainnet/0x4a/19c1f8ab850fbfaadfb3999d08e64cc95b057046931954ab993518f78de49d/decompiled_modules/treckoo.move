@@ -1,0 +1,14 @@
+module 0x4a19c1f8ab850fbfaadfb3999d08e64cc95b057046931954ab993518f78de49d::treckoo {
+    struct TRECKOO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TRECKOO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TRECKOO>(arg0, 6, b"TRECKOO", b"Pokemon Treckoo", x"456d6261726b206f6e20612077696c6420616476656e74757265207769746820506f6b656d6f6e20547265636b6f6f2c2074686520756c74696d617465206d656d6520636f696e206f6e207468652053756920626c6f636b636861696e2120496e737069726564206279207468652069636f6e696320506f6bc3a96d6f6e20756e6976657273652c2024545245434b4f4f206272696e67732076696272616e7420636f6d6d756e697479207370697269742c20657069632076696265732c20616e64206d6f6f6e20626f756e6420656e6572677920746f204d6f6f6e626167732e696f2e204a6f696e206f7572207061636b2c20686f646c2074696768742c20616e64206c657420547265636b6f6f20737061726b20796f75722063727970746f206a6f75726e657920776974682066756e20616e6420666f7274756e6521", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://ipfs.io/ipfs/bafkreicue36ctzqchtkvorkbbvqyl6lzahi6a4zbfunk3kuvphe2wlajvu")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TRECKOO>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<TRECKOO>>(v1, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
