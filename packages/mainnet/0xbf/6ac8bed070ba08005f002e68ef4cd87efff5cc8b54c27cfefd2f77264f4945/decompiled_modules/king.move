@@ -1,0 +1,14 @@
+module 0xbf6ac8bed070ba08005f002e68ef4cd87efff5cc8b54c27cfefd2f77264f4945::king {
+    struct KING has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: KING, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<KING>(arg0, 6, b"KING", b"No Kings Day", x"4f6e204a756e6520313474682c20666f726d657220507265736964656e7420446f6e616c64204a2e205472756d7020776f6b652075702c206c6f6f6b6564206174207468652063616c656e6461722c20616e642073637265616d65642c20e2809c576169742061206d696e75746520e280932054484559e28099524520484156494e47204120484f4c4944415920574954484f5554204d453fe2809d202048652073746f726d656420696e746f20746865204772756d626c6576616e69616e205061726c69616d656e7420287768696368206973206a757374207468726565206c61776e2063686169727320616e64206120676f6174206e616d656420537573616e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1750115249980.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<KING>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<KING>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
