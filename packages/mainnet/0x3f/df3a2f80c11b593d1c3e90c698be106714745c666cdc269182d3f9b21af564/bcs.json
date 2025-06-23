@@ -139,7 +139,7 @@
           "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "add_badge_type_for_publisher_inner": {
         "visibility": "PRIVATE",
@@ -148,7 +148,7 @@
           "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "authorize_publisher": {
         "visibility": "PUBLIC",
@@ -159,7 +159,7 @@
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "authorize_publisher_for_type": {
         "visibility": "PUBLIC",
@@ -169,21 +169,25 @@
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "badge_id": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::BadgeNFT<$0>"
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::BadgeNFT<T0>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "bronze": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::Tier"
+        ]
       },
       "check_valid_version": {
         "visibility": "PUBLIC",
@@ -191,7 +195,7 @@
         "params": [
           "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher"
         ],
-        "return": null
+        "return": []
       },
       "get_publisher": {
         "visibility": "PUBLIC",
@@ -200,13 +204,18 @@
           "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::borrow::Borrow"
+        ]
       },
       "gold": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::Tier"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -215,7 +224,160 @@
           "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::BADGE",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "initialize_upgrade_badge": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
+          "address",
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::Tier",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "iron": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::Tier"
+        ]
+      },
+      "is_authorized_publisher": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_authorized_publisher_for_type": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_valid_upgrade": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::Tier",
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::Tier"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "mint_and_transfer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::Tier",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "platinum": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::Tier"
+        ]
+      },
+      "remove_publisher": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry",
+          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "return_publisher": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::borrow::Borrow"
+        ],
+        "return": []
+      },
+      "silver": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::Tier"
+        ]
+      },
+      "tier_level": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::BadgeNFT<T0>"
+        ],
+        "return": [
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::Tier"
+        ]
+      },
+      "update_authorized_publisher": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "upgrade": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher",
+          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::BadgeNFT<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::UpgradeBadge<T0>>"
+        ],
+        "return": []
+      },
+      "upgrade_badge_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::UpgradeBadge<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::badge::ControlledPublisher"
+        ],
+        "return": [
+          "u64"
+        ]
       }
     },
     "core": {
@@ -227,7 +389,7 @@
           "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "admin_addresses": {
         "visibility": "PUBLIC",
@@ -235,7 +397,9 @@
         "params": [
           "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<address>"
+        ]
       },
       "check_admin": {
         "visibility": "FRIEND",
@@ -244,7 +408,7 @@
           "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "check_valid_version": {
         "visibility": "FRIEND",
@@ -252,7 +416,7 @@
         "params": [
           "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -261,13 +425,15 @@
           "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::CORE",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "package_version": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "remove_admin": {
         "visibility": "PUBLIC",
@@ -277,7 +443,7 @@
           "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "version": {
         "visibility": "PUBLIC",
@@ -285,7 +451,9 @@
         "params": [
           "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "moviepass_points": {
@@ -296,7 +464,7 @@
           "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::moviepass_points::MOVIEPASS_POINTS",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "points_management": {
@@ -305,26 +473,32 @@
         "is_entry": false,
         "params": [
           "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry",
-          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<$0>",
+          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicyCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::borrow::Borrow"
+        ]
       },
       "borrow_treasury_cap": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry",
-          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<$0>",
+          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::borrow::Borrow"
+        ]
       },
       "create_currency": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "$0",
+          "T0",
           "u8",
           "vector<u8>",
           "vector<u8>",
@@ -332,30 +506,32 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>"
+        ]
       },
       "create_registry": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicyCap<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicyCap<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry",
-          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<$0>",
+          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<T0>",
           "u64",
           "address",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint_point_ticket_as_admin": {
         "visibility": "PUBLIC",
@@ -367,46 +543,48 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "redeem_point_ticket": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::PointTicket<$0>",
+          "0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::PointTicket<T0>",
           "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::core::MoviePassRegistry",
-          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<$0>",
+          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "return_token_policy_cap": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicyCap<$0>",
+          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::token::TokenPolicyCap<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::borrow::Borrow"
         ],
-        "return": null
+        "return": []
       },
       "return_treasury_cap": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>",
+          "&mut 0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::CapRegistry<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::borrow::Borrow"
         ],
-        "return": null
+        "return": []
       },
       "ticket_amount": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::PointTicket<$0>"
+          "&0x3fdf3a2f80c11b593d1c3e90c698be106714745c666cdc269182d3f9b21af564::points_management::PointTicket<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     }
   }

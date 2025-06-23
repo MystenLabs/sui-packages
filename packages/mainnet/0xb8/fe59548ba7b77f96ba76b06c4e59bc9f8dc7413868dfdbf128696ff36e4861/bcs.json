@@ -96,7 +96,7 @@
           "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::admin::AdminCap",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "authorize_caller": {
         "visibility": "PUBLIC",
@@ -106,7 +106,7 @@
           "&mut 0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::Pi",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deauthorize_caller": {
         "visibility": "PUBLIC",
@@ -116,7 +116,7 @@
           "&mut 0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::Pi",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -125,7 +125,7 @@
           "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::admin::ADMIN",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "initialize": {
         "visibility": "PUBLIC",
@@ -135,7 +135,7 @@
           "&mut 0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::Pi",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "api": {
@@ -143,19 +143,19 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&$0",
+          "&T0",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::Pi",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "new_post": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&$0",
+          "&T0",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::Pi",
           "vector<u8>",
@@ -163,20 +163,22 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::PostLink>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::Post"
+        ]
       },
       "post_message": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&$0",
+          "&T0",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::Pi",
           "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::Post>",
           "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::Post",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "caller": {
@@ -184,7 +186,9 @@
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::caller::PIX"
+        ]
       }
     },
     "constants": {
@@ -192,13 +196,17 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "MIN_POST_LENGTH": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "errors": {
@@ -206,49 +214,65 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "EFeedAlreadyExists": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "EFeedNotFound": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "ENotAdmin": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "EPostTooLong": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "EPostTooShort": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "EProfileNotExists": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "EUnauthorized": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "feed": {
@@ -258,7 +282,7 @@
         "params": [
           "&vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "create_feed": {
         "visibility": "PUBLIC",
@@ -269,7 +293,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "generate_feed_id": {
         "visibility": "PRIVATE",
@@ -278,7 +302,9 @@
           "address",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "has_user_feed": {
         "visibility": "PUBLIC",
@@ -288,7 +314,9 @@
           "address",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "initialize": {
         "visibility": "PUBLIC",
@@ -297,7 +325,7 @@
           "&mut 0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::Registry",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "insert_user_feed": {
         "visibility": "PUBLIC",
@@ -307,7 +335,7 @@
           "address",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": []
       },
       "new_post": {
         "visibility": "PUBLIC",
@@ -320,7 +348,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::PostLink>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::Post"
+        ]
       },
       "post_message": {
         "visibility": "PUBLIC",
@@ -328,11 +358,11 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::Registry",
-          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<$0>",
-          "$0",
+          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>",
+          "T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "stream": {
@@ -341,72 +371,82 @@
         "is_entry": false,
         "params": [
           "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::StreamRegistry",
-          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<$0>",
-          "$0",
+          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>",
+          "T0",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_contributor": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::StreamRegistry",
-          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<$0>",
+          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "add_tag": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::StreamRegistry",
-          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<$0>",
+          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": []
       },
       "can_write_in_stream": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<$0>",
+          "&0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "get_next_id": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<$0>"
+          "&0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_stream_id": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<$0>"
+          "&0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "get_stream_name": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<$0>"
+          "&0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_stream_owner": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<$0>"
+          "&0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "new_stream": {
         "visibility": "PUBLIC",
@@ -418,17 +458,29 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>"
+        ]
       },
       "remove_contributor": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::StreamRegistry",
-          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<$0>",
+          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>",
           "address"
         ],
-        "return": null
+        "return": []
+      },
+      "remove_tag": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::StreamRegistry",
+          "&mut 0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::Stream<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
       }
     }
   }

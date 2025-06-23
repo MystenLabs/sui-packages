@@ -121,12 +121,12 @@
         "params": [
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
           "u128",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_and_add_balance_manager_indexer": {
         "visibility": "PRIVATE",
@@ -136,7 +136,7 @@
           "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_and_delete_balance_manager_indexer": {
         "visibility": "PRIVATE",
@@ -146,16 +146,16 @@
           "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_threshold": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "collect_protocol_fee": {
         "visibility": "PRIVATE",
@@ -167,7 +167,10 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "collect_protocol_fee_without_manager": {
         "visibility": "PRIVATE",
@@ -175,11 +178,15 @@
         "params": [
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
           "address",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "u64"
+        ]
       },
       "create_deposit_then_place_limit_order": {
         "visibility": "PUBLIC",
@@ -187,10 +194,10 @@
         "params": [
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::deepbookv3_wrapped::TurbosBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
           "u64",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u8",
           "u8",
           "u64",
@@ -201,7 +208,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_deposit_then_place_market_order": {
         "visibility": "PUBLIC",
@@ -209,9 +216,9 @@
         "params": [
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::deepbookv3_wrapped::TurbosBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u8",
           "u64",
           "bool",
@@ -219,7 +226,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_deposit_then_place_market_order_with_return": {
         "visibility": "PUBLIC",
@@ -227,9 +234,9 @@
         "params": [
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::deepbookv3_wrapped::TurbosBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u8",
           "u64",
           "bool",
@@ -237,7 +244,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "create_turbos_balance_manager": {
         "visibility": "PUBLIC",
@@ -246,7 +256,150 @@
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::deepbookv3_wrapped::TurbosBalanceManagerIndexer",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager"
+        ]
+      },
+      "deposit_then_place_limit_order_by_owner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::deepbookv3_wrapped::TurbosBalanceManagerIndexer",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u8",
+          "u8",
+          "u64",
+          "u64",
+          "bool",
+          "bool",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deposit_then_place_market_order_by_owner": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::deepbookv3_wrapped::TurbosBalanceManagerIndexer",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u8",
+          "u64",
+          "bool",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "get_balance_managers_by_owner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::deepbookv3_wrapped::TurbosBalanceManagerIndexer",
+          "address"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::deepbookv3_wrapped::DEEPBOOKV3_WRAPPED",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "place_limit_order": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::deepbookv3_wrapped::TurbosBalanceManagerIndexer",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "u64",
+          "u8",
+          "u8",
+          "u64",
+          "u64",
+          "bool",
+          "bool",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "place_market_order_once": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "u8",
+          "u64",
+          "bool",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "send_or_destory_zero_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_exact_base_for_quote_sponsored": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_exact_quote_for_base_sponsored": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       }
     },
     "global_config": {
@@ -256,7 +409,9 @@
         "params": [
           "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "advance_deep_fee": {
         "visibility": "PUBLIC",
@@ -264,7 +419,9 @@
         "params": [
           "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "checked_package_version": {
         "visibility": "PUBLIC",
@@ -272,7 +429,7 @@
         "params": [
           "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig"
         ],
-        "return": null
+        "return": []
       },
       "deep_fee_amount": {
         "visibility": "PUBLIC",
@@ -280,7 +437,9 @@
         "params": [
           "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "deposit_deep_fee": {
         "visibility": "PUBLIC",
@@ -289,7 +448,7 @@
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>"
         ],
-        "return": null
+        "return": []
       },
       "deposit_protocol_fee": {
         "visibility": "FRIEND",
@@ -297,9 +456,9 @@
         "params": [
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
           "address",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "get_protocol_fee_rate": {
         "visibility": "PUBLIC",
@@ -308,7 +467,9 @@
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -316,7 +477,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "set_advance_deep_fee": {
         "visibility": "PUBLIC",
@@ -326,7 +487,7 @@
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
           "bool"
         ],
-        "return": null
+        "return": []
       },
       "set_protocol_fee_rate": {
         "visibility": "PUBLIC",
@@ -337,7 +498,77 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "update_advance_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::AdminCap",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_package_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::AdminCap",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig"
+        ],
+        "return": []
+      },
+      "withdraw_advance_deep": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>"
+        ]
+      },
+      "withdraw_deep": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>"
+        ]
+      },
+      "withdraw_deep_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::AdminCap",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>"
+        ]
+      },
+      "withdraw_protocol_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     },
     "math": {
@@ -348,7 +579,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "mul_div_ceil": {
         "visibility": "PUBLIC",
@@ -358,7 +591,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "turbos_balance_manager": {
@@ -367,18 +602,22 @@
         "is_entry": false,
         "params": [
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>"
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::account::Account"
+        ]
       },
       "account_open_orders": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
-          "&0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>"
+          "&0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<u128>"
+        ]
       },
       "add_refund_amount": {
         "visibility": "FRIEND",
@@ -387,7 +626,7 @@
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "balance": {
         "visibility": "FRIEND",
@@ -395,7 +634,9 @@
         "params": [
           "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "balance_manager_id": {
         "visibility": "FRIEND",
@@ -403,19 +644,21 @@
         "params": [
           "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "cancel_order": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
           "u128",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delete": {
         "visibility": "FRIEND",
@@ -423,17 +666,17 @@
         "params": [
           "0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_advance_deep": {
         "visibility": "FRIEND",
@@ -443,7 +686,7 @@
           "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::global_config::GlobalConfig",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_order_maker_fee": {
         "visibility": "FRIEND",
@@ -451,7 +694,152 @@
         "params": [
           "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::OrderMakerFees"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_order_maker_quantity": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::OrderMakerFees"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_order_paid_fees": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "u128"
+        ],
+        "return": [
+          "&0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::OrderMakerFees"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager"
+        ]
+      },
+      "place_limit_order": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "u64",
+          "u8",
+          "u8",
+          "u64",
+          "u64",
+          "bool",
+          "bool",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order_info::OrderInfo"
+        ]
+      },
+      "place_market_order": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "u64",
+          "u8",
+          "u64",
+          "bool",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order_info::OrderInfo"
+        ]
+      },
+      "share": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_all": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_all_refund_deep": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_refund_deep": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_settled_amounts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "&mut 0x4012c757777add200b2b74959a9f87e53fb908b4a56ff809e61fddb0b817483f::turbos_balance_manager::TurbosBalanceManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

@@ -68,7 +68,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_treasuries": {
         "visibility": "PUBLIC",
@@ -76,7 +76,12 @@
         "params": [
           "&0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::GameAdmin"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "calculate_pending_rewards": {
         "visibility": "PUBLIC",
@@ -85,7 +90,10 @@
           "&0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::Miner",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "claim_reward": {
         "visibility": "PUBLIC",
@@ -97,7 +105,7 @@
           "&mut 0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::GameAdmin",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_tokens": {
         "visibility": "PUBLIC",
@@ -107,7 +115,7 @@
           "0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::BIGToken",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "distribute_tokens": {
         "visibility": "PUBLIC",
@@ -118,7 +126,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "factory_details": {
         "visibility": "PUBLIC",
@@ -126,7 +134,12 @@
         "params": [
           "&0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::Factory"
         ],
-        "return": null
+        "return": [
+          "address",
+          "u8",
+          "u64",
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -134,7 +147,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_miner_from_factory": {
         "visibility": "PUBLIC",
@@ -143,7 +156,9 @@
           "&0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::Miner",
           "&0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::Factory"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "merge_tokens": {
         "visibility": "PUBLIC",
@@ -153,7 +168,109 @@
           "&mut 0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::BIGToken",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "miner_details": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::Miner"
+        ],
+        "return": [
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u8",
+          "u64",
+          "u64"
+        ]
+      },
+      "mint_tokens": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::GameAdmin",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "purchase_factory": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u8",
+          "&mut 0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::GameAdmin",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "purchase_miner": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "u8",
+          "&mut 0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::Factory",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::GameAdmin",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "split_token": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::BIGToken",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "token_owner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::BIGToken"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "token_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::BIGToken"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "upgrade_factory": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::Factory",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "upgrade_miner": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::Miner",
+          "&0x80abe8f75c51b8c9bf22f3bbae55afc146e0b201f8411eb3e326609a349ed8ac::big_mine::Factory",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

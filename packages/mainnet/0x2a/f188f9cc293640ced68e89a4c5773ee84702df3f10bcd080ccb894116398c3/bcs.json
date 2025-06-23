@@ -38,7 +38,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "assert_and_configure_validator_set": {
         "visibility": "PRIVATE",
@@ -51,7 +51,7 @@
           "u256",
           "u256"
         ],
-        "return": null
+        "return": []
       },
       "get_epoch": {
         "visibility": "PUBLIC",
@@ -59,7 +59,9 @@
         "params": [
           "&0x2af188f9cc293640ced68e89a4c5773ee84702df3f10bcd080ccb894116398c3::consortium::Consortium"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "get_validator_set": {
         "visibility": "PUBLIC",
@@ -68,7 +70,9 @@
           "&0x2af188f9cc293640ced68e89a4c5773ee84702df3f10bcd080ccb894116398c3::consortium::Consortium",
           "u256"
         ],
-        "return": null
+        "return": [
+          "&0x2af188f9cc293640ced68e89a4c5773ee84702df3f10bcd080ccb894116398c3::consortium::ValidatorSet"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -76,7 +80,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "remove_admin": {
         "visibility": "PUBLIC",
@@ -86,7 +90,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "set_initial_validator_set": {
         "visibility": "PUBLIC",
@@ -96,7 +100,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "set_next_validator_set": {
         "visibility": "PUBLIC",
@@ -106,7 +110,7 @@
           "vector<u8>",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "set_valset_action": {
         "visibility": "PUBLIC",
@@ -116,7 +120,7 @@
           "u32",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "validate_payload": {
         "visibility": "PUBLIC",
@@ -126,7 +130,22 @@
           "vector<u8>",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
+      },
+      "validate_signatures": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "vector<vector<u8>>",
+          "vector<vector<u8>>",
+          "vector<u256>",
+          "u256",
+          "vector<u8>",
+          "vector<u8>"
+        ],
+        "return": [
+          "bool"
+        ]
       }
     },
     "payload_decoder": {
@@ -136,7 +155,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bcs::BCS"
         ],
-        "return": null
+        "return": [
+          "u32"
+        ]
       },
       "decode_bytes_array": {
         "visibility": "PRIVATE",
@@ -144,7 +165,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bcs::BCS"
         ],
-        "return": null
+        "return": [
+          "vector<vector<u8>>"
+        ]
       },
       "decode_fee_payload": {
         "visibility": "PUBLIC",
@@ -152,7 +175,13 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "u32",
+          "u256",
+          "address",
+          "u256",
+          "u256"
+        ]
       },
       "decode_left_padded_u256": {
         "visibility": "PRIVATE",
@@ -160,7 +189,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bcs::BCS"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "decode_mint_payload": {
         "visibility": "PUBLIC",
@@ -168,7 +199,14 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "u32",
+          "u256",
+          "address",
+          "u256",
+          "u256",
+          "u256"
+        ]
       },
       "decode_signatures": {
         "visibility": "PUBLIC",
@@ -176,7 +214,9 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<vector<u8>>"
+        ]
       },
       "decode_u256_array": {
         "visibility": "PRIVATE",
@@ -184,7 +224,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bcs::BCS"
         ],
-        "return": null
+        "return": [
+          "vector<u256>"
+        ]
       },
       "decode_valset": {
         "visibility": "PUBLIC",
@@ -192,7 +234,13 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "u32",
+          "u256",
+          "vector<vector<u8>>",
+          "vector<u256>",
+          "u256"
+        ]
       },
       "decode_valset_array": {
         "visibility": "PRIVATE",
@@ -200,7 +248,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::bcs::BCS"
         ],
-        "return": null
+        "return": [
+          "vector<vector<u8>>"
+        ]
       }
     }
   }

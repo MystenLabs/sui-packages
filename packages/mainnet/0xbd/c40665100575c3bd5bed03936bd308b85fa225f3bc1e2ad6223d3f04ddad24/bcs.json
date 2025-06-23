@@ -88,7 +88,9 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "safe_selection": {
         "visibility": "PUBLIC",
@@ -97,7 +99,9 @@
           "u64",
           "&vector<u8>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "verify_drand_signature": {
         "visibility": "PUBLIC",
@@ -107,7 +111,7 @@
           "vector<u8>",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "verify_time_has_passed": {
         "visibility": "PUBLIC",
@@ -118,7 +122,7 @@
           "vector<u8>",
           "u64"
         ],
-        "return": null
+        "return": []
       }
     },
     "wave_lottery": {
@@ -131,7 +135,7 @@
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "app_deposit_sui": {
         "visibility": "PRIVATE",
@@ -141,7 +145,7 @@
           "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
         ],
-        "return": null
+        "return": []
       },
       "authorize_nft": {
         "visibility": "PRIVATE",
@@ -150,7 +154,7 @@
           "&0xbe9d578ed9e0b7dbd79555fe02b8058be262f4c534adbf816cd6c4606df9ead9::ocean_nft::NftOwnerCap",
           "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App"
         ],
-        "return": null
+        "return": []
       },
       "can_participate": {
         "visibility": "PRIVATE",
@@ -164,7 +168,7 @@
           "address",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "change_ocean_receiver": {
         "visibility": "PRIVATE",
@@ -174,7 +178,7 @@
           "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "change_sui_receiver": {
         "visibility": "PRIVATE",
@@ -184,7 +188,7 @@
           "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "complete": {
         "visibility": "PRIVATE",
@@ -197,7 +201,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create": {
         "visibility": "PRIVATE",
@@ -219,7 +223,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "finalize_redeem": {
         "visibility": "PRIVATE",
@@ -230,7 +234,7 @@
           "u16",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -238,7 +242,442 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "inner_claim_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "u16",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "migrate": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App"
+        ],
+        "return": []
+      },
+      "next_sequence": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "u8"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "not_claimed": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "address"
+        ],
+        "return": []
+      },
+      "operator_adjust_time": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "operator_cancel_game": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game"
+        ],
+        "return": []
+      },
+      "operator_redeem_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "vector<address>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "u16",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "operator_redeem_ocean": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "vector<address>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "operator_redeem_sui": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "vector<address>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "operator_update_game": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "u64",
+          "u16",
+          "u16",
+          "u16",
+          "u16",
+          "u32"
+        ],
+        "return": []
+      },
+      "operator_update_ocean_prize": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "owner_withdraw_sui": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "participate_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa8816d3a6e3136e86bc2873b1f94a15cadc8af2703c075f2d546c2ae367f4df9::ocean::OCEAN>",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "participate_nft_discount": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa8816d3a6e3136e86bc2873b1f94a15cadc8af2703c075f2d546c2ae367f4df9::ocean::OCEAN>",
+          "u64",
+          "&0xbe9d578ed9e0b7dbd79555fe02b8058be262f4c534adbf816cd6c4606df9ead9::ocean_nft::NFT",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "participate_ocean": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa8816d3a6e3136e86bc2873b1f94a15cadc8af2703c075f2d546c2ae367f4df9::ocean::OCEAN>",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "participate_ocean_discount": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa8816d3a6e3136e86bc2873b1f94a15cadc8af2703c075f2d546c2ae367f4df9::ocean::OCEAN>",
+          "u64",
+          "&0xbe9d578ed9e0b7dbd79555fe02b8058be262f4c534adbf816cd6c4606df9ead9::ocean_nft::NFT",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "participate_sui": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "participate_sui_discount": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "&0xbe9d578ed9e0b7dbd79555fe02b8058be262f4c534adbf816cd6c4606df9ead9::ocean_nft::NFT",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "participate_sui_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "participate_sui_nft_discount": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "&0xbe9d578ed9e0b7dbd79555fe02b8058be262f4c534adbf816cd6c4606df9ead9::ocean_nft::NFT",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "participate_wav_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x82616322719cb327186d5b83a6d7783ce5cef4c5dbd4c6d1b5f3d6e5d288e2be::wav::WAV>",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "participate_wav_nft_discount": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x82616322719cb327186d5b83a6d7783ce5cef4c5dbd4c6d1b5f3d6e5d288e2be::wav::WAV>",
+          "u64",
+          "&0xbe9d578ed9e0b7dbd79555fe02b8058be262f4c534adbf816cd6c4606df9ead9::ocean_nft::NFT",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "redeem_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "address",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "u16",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "redeem_ocean": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "redeem_sui": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "required_amount_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "self_redeem_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "u16",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "self_redeem_ocean": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "self_redeem_sui": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "seq_key": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u8"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "take_exact_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "update_operator": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "update_sequence": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::LotteryOwnerCap",
+          "&mut 0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::App",
+          "u8",
+          "u64"
+        ],
+        "return": []
+      },
+      "valid_round_timestamp": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "verify_winner": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xbdc40665100575c3bd5bed03936bd308b85fa225f3bc1e2ad6223d3f04ddad24::wave_lottery::Game",
+          "address"
+        ],
+        "return": [
+          "u16"
+        ]
       }
     }
   }

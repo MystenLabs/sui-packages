@@ -74,18 +74,20 @@
           "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::RewardState",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "enable_system": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::AdminCap",
-          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<$0, $1>",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<T0, T1>",
           "bool",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "getReward": {
         "visibility": "PUBLIC",
@@ -93,27 +95,31 @@
         "params": [
           "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::UserState",
           "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::RewardState",
-          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<$0, $1>",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "getTotalReward": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<$0, $1>"
+          "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "getTotalStaked": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<$0, $1>"
+          "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "getUserEarned": {
         "visibility": "PUBLIC",
@@ -122,10 +128,12 @@
           "address",
           "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::UserState",
           "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::RewardState",
-          "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<$0, $1>",
+          "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "getUserStaked": {
         "visibility": "PUBLIC",
@@ -134,7 +142,9 @@
           "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::UserState",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -142,7 +152,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "rewardPerToken": {
         "visibility": "PRIVATE",
@@ -153,20 +163,80 @@
           "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::RewardState",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "setRewardAmount": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::AdminCap",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::UserState",
           "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::RewardState",
-          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<$0, $1>",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
+      },
+      "setRewardDuration": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::AdminCap",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::RewardState",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "setup_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::UserState",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::RewardState",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "updateReward": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "address",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::UserState",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::RewardState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::UserState",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::RewardState",
+          "&mut 0xaff3c89a2aeffbaa453096c7dd74cb4d12cb94c2e569674a76cdada64e14cf85::vault::Treasury<T0, T1>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

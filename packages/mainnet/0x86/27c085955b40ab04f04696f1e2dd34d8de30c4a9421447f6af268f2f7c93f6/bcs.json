@@ -69,7 +69,7 @@
           "u8",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_tag": {
         "visibility": "PUBLIC",
@@ -79,7 +79,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "compose_streams": {
         "visibility": "PUBLIC",
@@ -89,7 +89,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_data_stream": {
         "visibility": "PUBLIC",
@@ -103,7 +103,9 @@
           "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream"
+        ]
       },
       "get_id": {
         "visibility": "PUBLIC",
@@ -111,7 +113,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
       },
       "get_last_snapshot_timestamp": {
         "visibility": "PUBLIC",
@@ -119,7 +123,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_last_snapshot_version": {
         "visibility": "PUBLIC",
@@ -127,7 +133,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_parent_streams": {
         "visibility": "PUBLIC",
@@ -135,7 +143,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream"
         ],
-        "return": null
+        "return": [
+          "&vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
       },
       "get_schema": {
         "visibility": "PUBLIC",
@@ -143,7 +153,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
       },
       "get_stream_data": {
         "visibility": "PUBLIC",
@@ -151,7 +163,131 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream"
         ],
-        "return": null
+        "return": [
+          "&vector<u8>"
+        ]
+      },
+      "get_tags": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream"
+        ],
+        "return": [
+          "&vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
+      },
+      "get_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "has_permission": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream",
+          "address",
+          "u8"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_subscribed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "remove_tag": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_walrus_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "subscribe_to_stream": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_ownership": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_stream": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream",
+          "address"
+        ],
+        "return": []
+      },
+      "update_data_stream": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_last_snapshot_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_schema": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "storage": {
@@ -163,7 +299,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::storage::StreamSnapshot"
+        ]
       },
       "get_snapshot_creator": {
         "visibility": "PUBLIC",
@@ -171,7 +309,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::storage::StreamSnapshot"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_snapshot_data": {
         "visibility": "PUBLIC",
@@ -179,7 +319,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::storage::StreamSnapshot"
         ],
-        "return": null
+        "return": [
+          "&vector<u8>"
+        ]
       },
       "get_snapshot_metadata": {
         "visibility": "PUBLIC",
@@ -187,7 +329,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::storage::StreamSnapshot"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_snapshot_stream_id": {
         "visibility": "PUBLIC",
@@ -195,7 +339,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::storage::StreamSnapshot"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "get_snapshot_timestamp": {
         "visibility": "PUBLIC",
@@ -203,7 +349,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::storage::StreamSnapshot"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_snapshot_version": {
         "visibility": "PUBLIC",
@@ -211,7 +359,9 @@
         "params": [
           "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::storage::StreamSnapshot"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "transfer_snapshot": {
         "visibility": "PUBLIC",
@@ -220,7 +370,7 @@
           "0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::storage::StreamSnapshot",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "update_snapshot": {
         "visibility": "PUBLIC",
@@ -230,7 +380,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "update_snapshot_metadata": {
         "visibility": "PUBLIC",
@@ -239,7 +389,18 @@
           "&mut 0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::storage::StreamSnapshot",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": []
+      },
+      "verify_snapshot_stream": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::storage::StreamSnapshot",
+          "&0x8627c085955b40ab04f04696f1e2dd34d8de30c4a9421447f6af268f2f7c93f6::data_stream::DataStream"
+        ],
+        "return": [
+          "bool"
+        ]
       }
     }
   }

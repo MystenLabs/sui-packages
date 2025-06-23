@@ -68,7 +68,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "burn_egg_fragment": {
         "visibility": "PUBLIC",
@@ -79,7 +79,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_fees": {
         "visibility": "PUBLIC",
@@ -88,7 +88,7 @@
           "&mut 0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::CouncilData",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "council_fees": {
         "visibility": "PUBLIC",
@@ -96,7 +96,9 @@
         "params": [
           "&0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::CouncilData"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "council_house": {
         "visibility": "PUBLIC",
@@ -104,7 +106,9 @@
         "params": [
           "&0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::CouncilData"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "create_display": {
         "visibility": "PUBLIC",
@@ -114,7 +118,7 @@
           "0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::DisplayCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "egg_fragment_fragment_id": {
         "visibility": "PUBLIC",
@@ -122,7 +126,9 @@
         "params": [
           "&0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::EggFragment"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "egg_fragment_id": {
         "visibility": "PUBLIC",
@@ -130,7 +136,9 @@
         "params": [
           "&0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::EggFragment"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "egg_fragments_collected": {
         "visibility": "PUBLIC",
@@ -138,7 +146,9 @@
         "params": [
           "&0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::Egg"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "egg_id": {
         "visibility": "PUBLIC",
@@ -146,7 +156,99 @@
         "params": [
           "&0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::Egg"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::SUIGOOSE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "initialize_council_data": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::CouncilCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_custom_egg_to_sender": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "u8",
+          "&mut 0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::CouncilData",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_egg": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::CouncilData",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::Egg"
+        ]
+      },
+      "mint_egg_fragment": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::EggFragment"
+        ]
+      },
+      "mint_egg_fragment_to_sender": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "u8",
+          "&mut 0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::CouncilData",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_egg_to_sender": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::CouncilData",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_egg_fragment_to_sender": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::EggFragment",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_egg_to_sender": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x4afdcd875fc28568fe9a8e2aa19833f78d1a6ea0d6c33d655ecfcb62e9dcc8d3::suigoose::Egg",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

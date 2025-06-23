@@ -64,7 +64,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "Cancel_Battle": {
         "visibility": "PUBLIC",
@@ -73,7 +73,7 @@
           "&mut 0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::GameObj",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "Create_Battle": {
         "visibility": "PUBLIC",
@@ -83,7 +83,7 @@
           "&mut 0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::GameObj",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "Start_Battle": {
         "visibility": "PRIVATE",
@@ -96,7 +96,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::ResultObj"
+        ]
       },
       "add": {
         "visibility": "PRIVATE",
@@ -106,7 +108,7 @@
           "address",
           "0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::BattleObj"
         ],
-        "return": null
+        "return": []
       },
       "contains": {
         "visibility": "PUBLIC",
@@ -115,7 +117,9 @@
           "&0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::GameObj",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "fee_amount": {
         "visibility": "PUBLIC",
@@ -124,7 +128,9 @@
           "u64",
           "u16"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_current_games": {
         "visibility": "PUBLIC",
@@ -132,7 +138,9 @@
         "params": [
           "&0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::GameObj"
         ],
-        "return": null
+        "return": [
+          "&vector<0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::BattleInfo>"
+        ]
       },
       "get_finished_games": {
         "visibility": "PUBLIC",
@@ -140,7 +148,9 @@
         "params": [
           "&0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::GameObj"
         ],
-        "return": null
+        "return": [
+          "&vector<0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::ResultObj>"
+        ]
       },
       "get_games": {
         "visibility": "PRIVATE",
@@ -148,7 +158,50 @@
         "params": [
           "&mut 0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::GameObj"
         ],
-        "return": null
+        "return": [
+          "&mut vector<0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::BattleInfo>"
+        ]
+      },
+      "get_results": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::GameObj"
+        ],
+        "return": [
+          "&mut vector<0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::ResultObj>"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::GameObj",
+          "address"
+        ],
+        "return": [
+          "0x7e34d466b6f4464fd20722cd955f4b34e730cff1c5d06cf5b64e47e7b601ddda::deathroll::BattleObj"
+        ]
+      },
+      "roll_dice": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext",
+          "u8"
+        ],
+        "return": [
+          "u8"
+        ]
       }
     }
   }

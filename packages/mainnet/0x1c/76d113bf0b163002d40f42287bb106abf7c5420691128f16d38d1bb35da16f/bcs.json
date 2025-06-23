@@ -72,10 +72,12 @@
         "is_entry": false,
         "params": [
           "&0x1c76d113bf0b163002d40f42287bb106abf7c5420691128f16d38d1bb35da16f::stake::YubiBao",
-          "&0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<$0>",
+          "&0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_redemption_amount": {
         "visibility": "PRIVATE",
@@ -83,21 +85,23 @@
         "params": [
           "&0x1c76d113bf0b163002d40f42287bb106abf7c5420691128f16d38d1bb35da16f::stake::StakingOrder"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "depositToken": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
           "&0x1c76d113bf0b163002d40f42287bb106abf7c5420691128f16d38d1bb35da16f::stake::Vault",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage",
-          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<$0>",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::Incentive",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "find_and_update_order": {
         "visibility": "PRIVATE",
@@ -107,7 +111,9 @@
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "&mut 0x1c76d113bf0b163002d40f42287bb106abf7c5420691128f16d38d1bb35da16f::stake::StakingOrder"
+        ]
       },
       "get_daily_interest_rate": {
         "visibility": "PRIVATE",
@@ -115,7 +121,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -123,7 +131,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "orderList": {
         "visibility": "PUBLIC",
@@ -133,7 +141,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "vector<0x1c76d113bf0b163002d40f42287bb106abf7c5420691128f16d38d1bb35da16f::stake::StakingOrder>"
+        ]
       },
       "redemptionSUI": {
         "visibility": "PUBLIC",
@@ -142,14 +152,14 @@
           "u64",
           "&mut 0x1c76d113bf0b163002d40f42287bb106abf7c5420691128f16d38d1bb35da16f::stake::YubiBao",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage",
-          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<$0>",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::Incentive",
           "&0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f::oracle::PriceOracle",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "setAdmin": {
         "visibility": "PUBLIC",
@@ -159,22 +169,57 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "stakeSUI": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0x1c76d113bf0b163002d40f42287bb106abf7c5420691128f16d38d1bb35da16f::stake::YubiBao",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage",
-          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<$0>",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive",
           "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::Incentive",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "withdrawSUI": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "u64",
+          "address",
+          "&0x1c76d113bf0b163002d40f42287bb106abf7c5420691128f16d38d1bb35da16f::stake::YubiBao",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::Incentive",
+          "&0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f::oracle::PriceOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdrawToken": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x1c76d113bf0b163002d40f42287bb106abf7c5420691128f16d38d1bb35da16f::stake::Vault",
+          "u64",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::pool::Pool<T0>",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v2::Incentive",
+          "&mut 0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive_v3::Incentive",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f::oracle::PriceOracle",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     }
   }

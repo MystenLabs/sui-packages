@@ -88,17 +88,17 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_tile_generic": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_sale": {
         "visibility": "PUBLIC",
@@ -107,7 +107,7 @@
           "&mut 0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_transfer_policy": {
         "visibility": "PUBLIC",
@@ -117,7 +117,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_admin": {
         "visibility": "PUBLIC",
@@ -125,13 +125,17 @@
         "params": [
           "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_coin_symbol": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_default_price": {
         "visibility": "PUBLIC",
@@ -139,7 +143,9 @@
         "params": [
           "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_default_token": {
         "visibility": "PUBLIC",
@@ -147,7 +153,9 @@
         "params": [
           "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_image_data": {
         "visibility": "PUBLIC",
@@ -155,7 +163,9 @@
         "params": [
           "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "get_position": {
         "visibility": "PUBLIC",
@@ -163,7 +173,193 @@
         "params": [
           "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile"
         ],
-        "return": null
+        "return": [
+          "0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TilePosition"
+        ]
+      },
+      "get_sale_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_tile_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile"
+        ],
+        "return": [
+          "0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileMetadata"
+        ]
+      },
+      "get_tile_owner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_token_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_token_prices": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::PIXSUI",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_for_sale": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_token_supported": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "list_for_sale": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_tile": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager",
+          "u64",
+          "u64",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_tile_generic": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager",
+          "u64",
+          "u64",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_default_token": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "tile_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "toggle_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::TileManager",
+          "vector<u8>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_tile": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "pixsui_kiosk": {
@@ -175,7 +371,10 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
         ],
-        "return": null
+        "return": [
+          "0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile>"
+        ]
       },
       "buy_tile_from_kiosk": {
         "visibility": "PUBLIC",
@@ -187,7 +386,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xaf1659401f3abe67cdcfed6131949a73cc76509656b8be6f25d002127c9f24a1::pixsui::Tile>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_kiosk": {
         "visibility": "PUBLIC",
@@ -195,7 +394,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delist_tile": {
         "visibility": "PUBLIC",
@@ -206,7 +405,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "list_tile_in_kiosk": {
         "visibility": "PUBLIC",
@@ -218,7 +417,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "place_tile_in_kiosk": {
         "visibility": "PUBLIC",
@@ -229,7 +428,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "take_tile": {
         "visibility": "PUBLIC",
@@ -240,7 +439,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "withdraw_profits": {
         "visibility": "PUBLIC",
@@ -250,7 +449,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }

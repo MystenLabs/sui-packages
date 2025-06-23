@@ -73,22 +73,24 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "check_and_execute_arbitrage": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot",
-          "&mut 0x000000000000000000000000000000000000000000000000000000000000dee9::clob_v2::Pool<$0, $1>",
+          "&mut 0x000000000000000000000000000000000000000000000000000000000000dee9::clob_v2::Pool<T0, T1>",
           "&0x000000000000000000000000000000000000000000000000000000000000dee9::custodian_v2::AccountCap",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_new_bot": {
         "visibility": "PUBLIC",
@@ -96,7 +98,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_usdc": {
         "visibility": "PUBLIC",
@@ -106,7 +108,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::usdc::USDC>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_wusdc": {
         "visibility": "PUBLIC",
@@ -116,7 +118,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::coin::COIN>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "determine_trade_size": {
         "visibility": "PRIVATE",
@@ -126,31 +128,39 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "execute_trade": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x000000000000000000000000000000000000000000000000000000000000dee9::clob_v2::Pool<$0, $1>",
+          "&mut 0x000000000000000000000000000000000000000000000000000000000000dee9::clob_v2::Pool<T0, T1>",
           "&0x000000000000000000000000000000000000000000000000000000000000dee9::custodian_v2::AccountCap",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "bool",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "get_current_prices": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x000000000000000000000000000000000000000000000000000000000000dee9::clob_v2::Pool<$0, $1>",
+          "&0x000000000000000000000000000000000000000000000000000000000000dee9::clob_v2::Pool<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "get_statistics": {
         "visibility": "PUBLIC",
@@ -158,7 +168,11 @@
         "params": [
           "&0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "get_total_profit_usdc": {
         "visibility": "PUBLIC",
@@ -166,7 +180,100 @@
         "params": [
           "&0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_profit_wusdc": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_trading_balance_usdc": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_trading_balance_wusdc": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_active": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "toggle_bot": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_config": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_price_history": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_profits": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::bot::ArbitrageBot",
+          "u64",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "coin": {
@@ -177,7 +284,7 @@
           "0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::coin::COIN",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -188,7 +295,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "coins": {},
@@ -200,7 +307,7 @@
           "0x9ebc53b68bf69c22de52dbb2b56f344996a9ea42398c1d3af1e4bd27374cc00e::usdc::USDC",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -211,7 +318,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }

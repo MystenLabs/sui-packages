@@ -67,31 +67,31 @@
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<$0, $1>",
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "backdoor_withdraw": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<$0, $1>",
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "burn": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<$0, $1>",
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
           "u128",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_pool": {
         "visibility": "PUBLIC",
@@ -108,7 +108,7 @@
           "u8",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_action_id": {
         "visibility": "PRIVATE",
@@ -120,7 +120,9 @@
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "get_or_create_user_data": {
         "visibility": "PRIVATE",
@@ -130,40 +132,44 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::UserData"
+        ]
       },
       "is_whitelisted": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<$0, $1>",
+          "&0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "mint": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<$0, $1>",
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
           "u64",
           "bool",
           "u64",
           "bool",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u64",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "modify_pool_data": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<$0, $1>",
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
           "address",
           "bool",
           "address",
@@ -180,7 +186,7 @@
           "bool",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "normalize_token_amount": {
         "visibility": "PRIVATE",
@@ -189,7 +195,90 @@
           "u64",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "remove_from_whitelist": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "settle_burn": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "settle_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
+          "address",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "settle_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
+          "vector<u8>",
+          "bool",
+          "u64",
+          "u128",
+          "u64",
+          "u64",
+          "u8",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_to_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x21101dbd484664b2b86a6408f2f09871c99d45c6535fd6b9bf55ab85d909f9d2::pool::PeripheryPool<T0, T1>",
+          "address",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

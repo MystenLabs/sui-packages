@@ -81,7 +81,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create_balance_manager": {
         "visibility": "PUBLIC",
@@ -91,16 +93,16 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": []
       },
       "get_balance_manager_id": {
         "visibility": "PUBLIC",
@@ -108,7 +110,9 @@
         "params": [
           "&0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceRecord"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "get_reserve_stats": {
         "visibility": "PRIVATE",
@@ -118,7 +122,12 @@
           "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -126,27 +135,30 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "loan": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<$0>",
+          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::FlashLoanRecipient<T0>"
+        ]
       },
       "repay": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::FlashLoanRecipient<$0>"
+          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::FlashLoanRecipient<T0>"
         ],
-        "return": null
+        "return": []
       },
       "sca_loan": {
         "visibility": "PUBLIC",
@@ -154,13 +166,16 @@
         "params": [
           "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
           "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market",
-          "&mut 0x80ca577876dec91ae6d22090e56c39bc60dce9086ab0729930c6900bc4162b4c::s_coin_converter::SCoinTreasury<$0, $1>",
-          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<$0>",
+          "&mut 0x80ca577876dec91ae6d22090e56c39bc60dce9086ab0729930c6900bc4162b4c::s_coin_converter::SCoinTreasury<T0, T1>",
+          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<T0>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::FlashLoanRecipient<T0>"
+        ]
       },
       "sca_repay": {
         "visibility": "PUBLIC",
@@ -168,14 +183,38 @@
         "params": [
           "&0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version",
           "&mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market",
-          "&mut 0x80ca577876dec91ae6d22090e56c39bc60dce9086ab0729930c6900bc4162b4c::s_coin_converter::SCoinTreasury<$0, $1>",
-          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
-          "0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::FlashLoanRecipient<$0>",
+          "&mut 0x80ca577876dec91ae6d22090e56c39bc60dce9086ab0729930c6900bc4162b4c::s_coin_converter::SCoinTreasury<T0, T1>",
+          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::FlashLoanRecipient<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "set_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<T0>",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xc6fe3e883e6deb9dff386ecb3e54bb3cf521a1e9dc9894c44c87587d4b5139b4::flashloan::BalanceManager<T0>",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

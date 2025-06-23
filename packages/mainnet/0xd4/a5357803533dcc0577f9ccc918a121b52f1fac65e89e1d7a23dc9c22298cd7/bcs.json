@@ -71,7 +71,7 @@
           "0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathNFT",
           "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection"
         ],
-        "return": null
+        "return": []
       },
       "create_discount_tickets": {
         "visibility": "PUBLIC",
@@ -84,7 +84,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_nft": {
         "visibility": "PRIVATE",
@@ -94,7 +94,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathNFT"
+        ]
       },
       "get_admin_address": {
         "visibility": "PUBLIC",
@@ -102,7 +104,9 @@
         "params": [
           "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_available_public_nfts": {
         "visibility": "PUBLIC",
@@ -111,7 +115,9 @@
           "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_discount_ticket_minted": {
         "visibility": "PUBLIC",
@@ -119,7 +125,9 @@
         "params": [
           "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_minted": {
         "visibility": "PUBLIC",
@@ -127,7 +135,9 @@
         "params": [
           "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_next_id": {
         "visibility": "PRIVATE",
@@ -135,7 +145,9 @@
         "params": [
           "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_nft_id": {
         "visibility": "PUBLIC",
@@ -143,7 +155,9 @@
         "params": [
           "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathNFT"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_public_mint_price": {
         "visibility": "PUBLIC",
@@ -151,7 +165,227 @@
         "params": [
           "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_public_minted": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_remaining_nfts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::PASS",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_minting_active": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_nft_minted": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_ticket_valid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathTicket",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "mint_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::AdminCap",
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathNFT>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_public": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathNFT>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_with_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathTicket",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathNFT>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pause_minting": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::AdminCap",
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection"
+        ],
+        "return": []
+      },
+      "remove_specific_id": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "resume_minting": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::AdminCap",
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_bulk_nft_urls": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::AdminCap",
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "vector<u64>",
+          "vector<vector<u8>>"
+        ],
+        "return": []
+      },
+      "set_nft_url": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::AdminCap",
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "u64",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "set_reserved_amounts": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::AdminCap",
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_ticket_image": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::AdminCap",
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "u8",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "u64_to_string": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "update_admin_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::AdminCap",
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_mint_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::AdminCap",
+          "&mut 0xd4a5357803533dcc0577f9ccc918a121b52f1fac65e89e1d7a23dc9c22298cd7::PASS::OathCollection",
+          "u64"
+        ],
+        "return": []
       }
     }
   }

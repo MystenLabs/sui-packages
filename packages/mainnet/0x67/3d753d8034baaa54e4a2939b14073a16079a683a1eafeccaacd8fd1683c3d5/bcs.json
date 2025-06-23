@@ -137,7 +137,7 @@
           "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "add_collection": {
         "visibility": "PUBLIC",
@@ -148,18 +148,18 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_funds": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_reward_token": {
         "visibility": "PUBLIC",
@@ -169,35 +169,35 @@
           "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
           "u64",
           "u64",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "batch_stake_nft": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
-          "vector<$0>",
+          "vector<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "batch_stake_nft_from_kiosk": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
-          "vector<$0>",
+          "vector<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "batch_unstake_nft": {
         "visibility": "PUBLIC",
@@ -209,7 +209,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "vector<T0>"
+        ]
       },
       "batch_unstake_nft_to_kiosk": {
         "visibility": "PUBLIC",
@@ -223,7 +225,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "borrow_mut_user_stake": {
         "visibility": "PRIVATE",
@@ -232,7 +234,9 @@
           "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake"
+        ]
       },
       "calculate_rewards": {
         "visibility": "PRIVATE",
@@ -242,7 +246,514 @@
           "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::NFTStake",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>"
+        ]
+      },
+      "check_create_pool_preconditions": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "check_kiosk_owner": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "address"
+        ],
+        "return": []
+      },
+      "check_unstake_to_kiosk": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_pending_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_staking_pool_display": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_user_stake_display": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deactivate_emergency_mode": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "distribute_reward_coin": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "distribute_rewards": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "emergency_unstake_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "T0"
+        ]
+      },
+      "emit_rewards_distributed_event": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "force_unstake_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "bool",
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "T0"
+        ]
+      },
+      "get_allowed_collections": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
+      },
+      "get_coin_info": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_nft_stake_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "bool"
+        ]
+      },
+      "get_pool_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "address",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::RewardToken>",
+          "u64",
+          "bool",
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
+      },
+      "get_stake_nft_ids": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "get_staking_statistics": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_tvl_stats": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "u64"
+        ]
+      },
+      "get_user_stakes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "u64",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::NFT_STAKING",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_nft_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "merge_rewards": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>"
+        ],
+        "return": []
+      },
+      "pause_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "remove_reward_token": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "stake_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "T0",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_nft_from_kiosk": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "T0",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unpause_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "unstake_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "T0"
+        ]
+      },
+      "unstake_nft_to_kiosk": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::UserStake",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_global_stats": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_global_stats_last_claim_time": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_global_stats_nft_staked": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_global_stats_nft_unstaked": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "bool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_global_stats_rewards_claimed": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, u64>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_min_staking_period": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_reward_rate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_total_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_tvl_stats": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_funds": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::StakingPool",
+          "&0x673d753d8034baaa54e4a2939b14073a16079a683a1eafeccaacd8fd1683c3d5::nft_staking::PoolOwnerCap",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     }
   }

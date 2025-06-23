@@ -68,7 +68,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "assert_is_collection_nft": {
         "visibility": "PRIVATE",
@@ -77,7 +77,7 @@
           "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration",
           "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT"
         ],
-        "return": null
+        "return": []
       },
       "assert_not_paused": {
         "visibility": "PRIVATE",
@@ -85,7 +85,7 @@
         "params": [
           "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration"
         ],
-        "return": null
+        "return": []
       },
       "burn": {
         "visibility": "PUBLIC",
@@ -96,7 +96,7 @@
           "0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "burn_internal": {
         "visibility": "PRIVATE",
@@ -105,7 +105,7 @@
           "0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT",
           "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration"
         ],
-        "return": null
+        "return": []
       },
       "create_configuration": {
         "visibility": "PRIVATE",
@@ -114,7 +114,7 @@
           "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::AdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "description": {
         "visibility": "PUBLIC",
@@ -122,7 +122,9 @@
         "params": [
           "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "ensure_latest_version": {
         "visibility": "PRIVATE",
@@ -131,7 +133,7 @@
           "&mut 0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT",
           "&mut 0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -140,7 +142,7 @@
           "0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CROSSMINTCOLLECTION",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "migrate_collection": {
         "visibility": "PRIVATE",
@@ -148,7 +150,133 @@
         "params": [
           "&mut 0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration"
         ],
-        "return": null
+        "return": []
+      },
+      "migrate_nft": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT"
+        ],
+        "return": []
+      },
+      "mint_to_recipient": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::MinterCap",
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_to_recipient_and_authorize": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::AdminCap",
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "address",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_to_recipient_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "pause_collection": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::AdminCap",
+          "&mut 0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unpause_collection": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::AdminCap",
+          "&mut 0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::AdminCap",
+          "&mut 0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration",
+          "&mut 0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_metadata_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT",
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::CollectionConfiguration",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>"
+        ],
+        "return": []
+      },
+      "url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x801eac96c26530e9ac885fd361b4a8a35637c77d93d55cfcd156c679239c87a9::CrossmintCollection::NFT"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
       }
     }
   }

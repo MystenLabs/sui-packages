@@ -89,7 +89,9 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "events": {
@@ -99,7 +101,7 @@
         "params": [
           "address"
         ],
-        "return": null
+        "return": []
       },
       "suilend_vault_deposit": {
         "visibility": "FRIEND",
@@ -108,7 +110,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "suilend_vault_rewards_claimed": {
         "visibility": "FRIEND",
@@ -117,7 +119,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "suilend_vault_withdraw": {
         "visibility": "FRIEND",
@@ -126,7 +128,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       }
     },
     "suilend_deposit_apr": {
@@ -134,9 +136,11 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::Reserve<$0>"
+          "&0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::Reserve<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "suilend_vault": {
@@ -145,66 +149,74 @@
         "is_entry": false,
         "params": [
           "&0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::admin::AdminCap",
-          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<$0, $1, $3>",
-          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<$0>",
+          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T3>",
+          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "u64",
           "bool",
           "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T2>"
+        ]
       },
       "admin_deposit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::admin::AdminCap",
-          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<$0, $1, $2>",
-          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
-          "&mut 0x2662bcdf06c7b58473eb9f6215b81b45f97a4e86bb566e988c60032fd21fca57::session_flow::SessionFlow<$1, $2>",
+          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T2>",
+          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&mut 0x2662bcdf06c7b58473eb9f6215b81b45f97a4e86bb566e988c60032fd21fca57::session_flow::SessionFlow<T1, T2>",
           "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::version::Version",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_vault": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::admin::AdminCap",
-          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<$0>",
+          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposits_open": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<$0, $1, $2>"
+          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T2>"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "estimate_ctokens_for_withdrawal": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<$0>",
+          "&0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "id": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<$0, $1, $2>"
+          "&mut 0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T2>"
         ],
-        "return": null
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object::UID"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -212,42 +224,93 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "obligation_owner_cap_id": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<$0, $1, $2>"
+          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T2>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "public_deposit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<$0, $1, $2>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
-          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<$0>",
+          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>",
           "bool",
           "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::version::Version",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x2662bcdf06c7b58473eb9f6215b81b45f97a4e86bb566e988c60032fd21fca57::session_flow::SessionFlow<T1, T2>"
+        ]
       },
       "public_withdraw": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<$0, $1, $2>",
-          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<$0>",
-          "&mut 0x2662bcdf06c7b58473eb9f6215b81b45f97a4e86bb566e988c60032fd21fca57::session_flow::SessionFlow<$1, $2>",
+          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T2>",
+          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>",
+          "&mut 0x2662bcdf06c7b58473eb9f6215b81b45f97a4e86bb566e988c60032fd21fca57::session_flow::SessionFlow<T1, T2>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "reserve_array_index": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T2>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "toggle_deposits": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::admin::AdminCap",
+          "&mut 0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T2>",
+          "bool"
+        ],
+        "return": []
+      },
+      "total_assets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T2>",
+          "&0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::suilend_vault::SuilendVault<T0, T1, T2>",
+          "&mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       }
     },
     "version": {
@@ -257,7 +320,7 @@
         "params": [
           "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::version::Version"
         ],
-        "return": null
+        "return": []
       },
       "create_version": {
         "visibility": "FRIEND",
@@ -265,7 +328,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_current_version": {
         "visibility": "PUBLIC",
@@ -273,7 +336,9 @@
         "params": [
           "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::version::Version"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "upgrade": {
         "visibility": "PUBLIC",
@@ -282,7 +347,7 @@
           "&mut 0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::version::Version",
           "&0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::admin::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "value": {
         "visibility": "PUBLIC",
@@ -290,7 +355,9 @@
         "params": [
           "&0xd3774660f102acdc5c1679e1789abd38572a2e37736428bf82a50185330b9885::version::Version"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     }
   }

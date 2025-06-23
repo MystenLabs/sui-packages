@@ -103,7 +103,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "approve_staking_contract": {
         "visibility": "PUBLIC",
@@ -114,7 +114,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_staking_approval": {
         "visibility": "PUBLIC",
@@ -123,7 +123,7 @@
           "&mut 0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFT",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_ipfs_url": {
         "visibility": "PRIVATE",
@@ -133,7 +133,9 @@
           "vector<u8>",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ]
       },
       "get_approved_staking_contract": {
         "visibility": "PUBLIC",
@@ -141,7 +143,9 @@
         "params": [
           "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFT"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_image_url": {
         "visibility": "PUBLIC",
@@ -149,7 +153,9 @@
         "params": [
           "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFT"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
       },
       "get_metadata_url": {
         "visibility": "PUBLIC",
@@ -157,7 +163,9 @@
         "params": [
           "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFT"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
       },
       "get_mint_price": {
         "visibility": "PUBLIC",
@@ -165,7 +173,9 @@
         "params": [
           "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFTCollection"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_minted_count": {
         "visibility": "PUBLIC",
@@ -173,7 +183,9 @@
         "params": [
           "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFTCollection"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_name": {
         "visibility": "PUBLIC",
@@ -181,7 +193,133 @@
         "params": [
           "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFTCollection"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_token_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFT"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FLUX_VIP_NFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_approved_for_staking": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFT"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_approved_staking_contract": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFTCollection",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "mint": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFTCollection",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "name_equals": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFTCollection",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "place_in_kiosk": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_staking_contract": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::StakingManagerCap",
+          "&mut 0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFTCollection",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "take_from_kiosk": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "token_id_to_bytes": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "transfer_to_staking": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_treasury": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::MintingCap",
+          "&mut 0x26c5fe4e0d89e61e5cac3fab552c3895dc9cd5e04682db3258428c5096197aee::flux_vip_nft::FluxVipNFTCollection",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

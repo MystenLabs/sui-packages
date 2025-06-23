@@ -67,7 +67,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "contribute": {
         "visibility": "PUBLIC",
@@ -79,7 +79,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "emergency_refund_all": {
         "visibility": "PUBLIC",
@@ -89,7 +89,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_campaign_info": {
         "visibility": "PUBLIC",
@@ -97,7 +97,17 @@
         "params": [
           "&0x0b91b08c864e925f76bb7b172b1712dc664e39bbe2d913fcca2d667cdc831e9a::fund::Campaign"
         ],
-        "return": null
+        "return": [
+          "address",
+          "u64",
+          "u64",
+          "bool",
+          "u64",
+          "bool",
+          "bool",
+          "bool",
+          "u64"
+        ]
       },
       "get_campaign_metadata": {
         "visibility": "PUBLIC",
@@ -105,7 +115,12 @@
         "params": [
           "&0x0b91b08c864e925f76bb7b172b1712dc664e39bbe2d913fcca2d667cdc831e9a::fund::Campaign"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64"
+        ]
       },
       "get_campaign_progress": {
         "visibility": "PUBLIC",
@@ -113,7 +128,9 @@
         "params": [
           "&0x0b91b08c864e925f76bb7b172b1712dc664e39bbe2d913fcca2d667cdc831e9a::fund::Campaign"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_user_contribution": {
         "visibility": "PUBLIC",
@@ -122,7 +139,9 @@
           "&0x0b91b08c864e925f76bb7b172b1712dc664e39bbe2d913fcca2d667cdc831e9a::fund::Campaign",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init_campaign": {
         "visibility": "PUBLIC",
@@ -136,7 +155,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_campaign_failed": {
         "visibility": "PUBLIC",
@@ -145,7 +164,9 @@
           "&0x0b91b08c864e925f76bb7b172b1712dc664e39bbe2d913fcca2d667cdc831e9a::fund::Campaign",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "is_campaign_successful": {
         "visibility": "PUBLIC",
@@ -154,7 +175,48 @@
           "&0x0b91b08c864e925f76bb7b172b1712dc664e39bbe2d913fcca2d667cdc831e9a::fund::Campaign",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "is_user_refunded": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0b91b08c864e925f76bb7b172b1712dc664e39bbe2d913fcca2d667cdc831e9a::fund::Campaign",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "pause_campaign": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0b91b08c864e925f76bb7b172b1712dc664e39bbe2d913fcca2d667cdc831e9a::fund::Campaign",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "resume_campaign": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0b91b08c864e925f76bb7b172b1712dc664e39bbe2d913fcca2d667cdc831e9a::fund::Campaign",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0b91b08c864e925f76bb7b172b1712dc664e39bbe2d913fcca2d667cdc831e9a::fund::Campaign",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

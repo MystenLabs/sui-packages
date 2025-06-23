@@ -118,7 +118,7 @@
           "vector<address>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_whitelist_manager": {
         "visibility": "PUBLIC",
@@ -128,7 +128,7 @@
           "&mut 0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::SaleConfig",
           "vector<address>"
         ],
-        "return": null
+        "return": []
       },
       "burn": {
         "visibility": "PUBLIC",
@@ -138,7 +138,7 @@
           "0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdNFT",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy": {
         "visibility": "PUBLIC",
@@ -152,7 +152,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdNFT"
+        ]
       },
       "change_fee_manager": {
         "visibility": "PUBLIC",
@@ -162,7 +164,7 @@
           "&mut 0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdConfig",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "config_sale_type": {
         "visibility": "PUBLIC",
@@ -176,7 +178,7 @@
           "u64",
           "u128"
         ],
-        "return": null
+        "return": []
       },
       "info": {
         "visibility": "PUBLIC",
@@ -184,7 +186,11 @@
         "params": [
           "&0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdNFT"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u8",
+          "u8"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -193,7 +199,7 @@
           "0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BIRDS_NFT",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "migrate": {
         "visibility": "PUBLIC",
@@ -202,7 +208,7 @@
           "&0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::AdminCap",
           "&mut 0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdConfig"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -216,7 +222,113 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdNFT"
+        ]
+      },
+      "pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::AdminCap",
+          "&mut 0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::SaleConfig",
+          "bool"
+        ],
+        "return": []
+      },
+      "remove_whitelist": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::SaleConfig",
+          "bool",
+          "vector<address>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_whitelist_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::AdminCap",
+          "&mut 0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::SaleConfig",
+          "vector<address>"
+        ],
+        "return": []
+      },
+      "set_validator": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::AdminCap",
+          "&mut 0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdConfig",
+          "vector<u8>"
+        ],
+        "return": []
+      },
+      "setup_nft_display": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::display::Display<0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdNFT>"
+        ]
+      },
+      "update_bird_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::AdminCap",
+          "&mut 0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdConfig",
+          "u8",
+          "u8"
+        ],
+        "return": []
+      },
+      "update_start_end_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::AdminCap",
+          "&mut 0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::SaleConfig",
+          "&0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdConfig",
+          "bool",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "user_register": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_signature": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>"
+        ],
+        "return": []
+      },
+      "withdraw_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6443c5fcf2e410e49511985f72078975d4f6e407aa85f935b4dc058da4c73620::birds_nft::BirdConfig",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

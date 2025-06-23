@@ -78,7 +78,7 @@
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "bulk_add_to_airdrop": {
         "visibility": "PUBLIC",
@@ -88,7 +88,7 @@
           "vector<address>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "bulk_remove_from_airdrop": {
         "visibility": "PUBLIC",
@@ -98,7 +98,7 @@
           "vector<address>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_config": {
         "visibility": "PRIVATE",
@@ -106,7 +106,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_nft_storage": {
         "visibility": "PRIVATE",
@@ -114,7 +114,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_profile_storage": {
         "visibility": "PRIVATE",
@@ -122,7 +122,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_minted_count": {
         "visibility": "PUBLIC",
@@ -130,7 +130,9 @@
         "params": [
           "&0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::NFTStorage"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_options": {
         "visibility": "PUBLIC",
@@ -138,7 +140,17 @@
         "params": [
           "&0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::OptionsStorage"
         ],
-        "return": null
+        "return": [
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "bool",
+          "bool",
+          "bool"
+        ]
       },
       "get_profile": {
         "visibility": "PUBLIC",
@@ -147,7 +159,12 @@
           "&0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::ProfileStorage",
           "address"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -156,7 +173,133 @@
           "0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::ZEN_NFT",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "is_revealed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::NFT"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "mint_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::NFTStorage",
+          "&0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::OptionsStorage",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "reveal": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::NFT",
+          "&mut 0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::OptionsStorage",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "toggle_mint_enabled": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::OptionsStorage",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "toggle_voting_enabled": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::OptionsStorage",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::NFT",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_nft_description": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::NFT",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_options": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::OptionsStorage",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "vector<u8>",
+          "u64",
+          "bool",
+          "bool",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_profile": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::ProfileStorage",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "vote": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::NFTTreasury<T0>",
+          "&0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::OptionsStorage",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_vote": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xcb8892a762e5b62c8cc1c80c428cac40c5bb67ea3f05da831fe72bfae5e2671f::zen_nft::NFTTreasury<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

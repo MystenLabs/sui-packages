@@ -153,19 +153,19 @@
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<$0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": []
       },
       "create_package_admin_cap_and_keep": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&$0",
+          "&T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_vault_admin_cap": {
         "visibility": "FRIEND",
@@ -174,7 +174,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>>"
+        ]
       },
       "destroy_vault_admin_cap": {
         "visibility": "FRIEND",
@@ -182,21 +184,25 @@
         "params": [
           "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>>"
         ],
-        "return": null
+        "return": []
       },
       "this_package": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "vault_id": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<$0>"
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<T0>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       }
     },
     "events": {
@@ -204,9 +210,9 @@
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "$0"
+          "T0"
         ],
-        "return": null
+        "return": []
       },
       "emit_added_reward_event": {
         "visibility": "FRIEND",
@@ -215,7 +221,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_created_vault_event": {
         "visibility": "FRIEND",
@@ -228,7 +234,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_deposited_principal_event": {
         "visibility": "FRIEND",
@@ -238,7 +244,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_destroyed_staked_position_event": {
         "visibility": "FRIEND",
@@ -246,7 +252,7 @@
         "params": [
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": []
       },
       "emit_harvested_rewards_event": {
         "visibility": "FRIEND",
@@ -256,7 +262,7 @@
           "vector<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>",
           "vector<u64>"
         ],
-        "return": null
+        "return": []
       },
       "emit_initialized_reward_event": {
         "visibility": "FRIEND",
@@ -267,7 +273,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_joined_event": {
         "visibility": "FRIEND",
@@ -276,7 +282,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": []
       },
       "emit_locked_event": {
         "visibility": "FRIEND",
@@ -289,7 +295,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_split_event": {
         "visibility": "FRIEND",
@@ -298,7 +304,52 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": []
+      },
+      "emit_staked_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "u8",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_unlocked_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_updated_emission_schedule_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_withdrew_principal_event": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64"
+        ],
+        "return": []
       }
     },
     "staked_position": {
@@ -306,99 +357,463 @@
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<$0>",
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "u128",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "base_rewards_accumulated": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<$0>"
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
       },
       "base_rewards_accumulated_for": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<$0>",
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>"
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "base_rewards_debt": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<$0>"
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
       },
       "base_rewards_debt_for": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<$0>",
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>"
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "begin_harvest_tx": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<$0>",
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version"
         ],
-        "return": null
+        "return": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::HarvestRewardsCap"
+        ]
       },
       "calc_total_rewards_from_time_t0": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<$0>",
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "u128",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "decrease_multiplier_staked_amount": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<$0>",
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "decrease_staked_amount": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<$0>",
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "deposit_principal": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<$0>",
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": []
+      },
+      "destroy": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version"
+        ],
+        "return": []
+      },
+      "end_harvest_tx": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::HarvestRewardsCap",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version"
+        ],
+        "return": []
+      },
+      "harvest_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::HarvestRewardsCap",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "increase_multiplier_staked_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "increase_staked_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ],
+        "return": []
+      },
+      "is_unlocked": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "join": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "last_reward_timestamp_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "lock": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64"
+        ],
+        "return": []
+      },
+      "lock_duration_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "lock_end_timestamp_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "lock_multiplier": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "lock_start_timestamp_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "multiplier_rewards_accumulated": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "multiplier_rewards_accumulated_for": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "multiplier_rewards_debt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "multiplier_rewards_debt_for": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "multiplier_staked_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "renew_lock": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "return_multiplier_rewards": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "split": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ]
+      },
+      "stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u8",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ]
+      },
+      "staked_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "staked_amount_with_multiplier": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "unlock": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "unlock_": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "update_lock_duration_ms": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_multiplier_staked_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": []
+      },
+      "update_position": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "update_with_harvested_rewards": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::HarvestRewardsCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "u64"
+        ],
+        "return": []
+      },
+      "vault_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "withdraw_principal": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::staked_position::StakedPosition<T0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     },
     "utils": {
@@ -411,7 +826,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calc_multiplier_staked_amount": {
         "visibility": "PUBLIC",
@@ -420,7 +837,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calc_number_of_emissions_from_time_tn_to_tm": {
         "visibility": "PUBLIC",
@@ -431,7 +850,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calc_remaining_number_of_emissions": {
         "visibility": "PUBLIC",
@@ -440,7 +861,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "divide": {
         "visibility": "FRIEND",
@@ -449,7 +872,9 @@
           "u128",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "divide_into_u128": {
         "visibility": "FRIEND",
@@ -458,7 +883,9 @@
           "u128",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "divide_u128": {
         "visibility": "FRIEND",
@@ -467,13 +894,17 @@
           "u128",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "lock_multiplier_lower_bound": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "max": {
         "visibility": "FRIEND",
@@ -481,7 +912,9 @@
         "params": [
           "&vector<u64>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "multiply": {
         "visibility": "FRIEND",
@@ -490,7 +923,38 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
+      },
+      "multiply_u128": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u64"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "sum": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "vector<u64>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_rewards_accumulated_per_share_scaling_factor": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
       }
     },
     "vault": {
@@ -499,94 +963,601 @@
         "is_entry": false,
         "params": [
           "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>>",
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
         ],
-        "return": null
+        "return": []
       },
       "add_reward_": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>"
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
         ],
-        "return": null
+        "return": []
       },
       "add_reward_and_consume_admin_cap": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::OneTime<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>, $1>",
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::OneTime<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>, T1>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
         ],
-        "return": null
+        "return": []
       },
       "adjust_emission_start_timestamps_ms": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "calc_emission_end_timestamp_ms": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calc_lock_multiplier": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calc_rewards_debt": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
       },
       "claim_rewards": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "contains": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>"
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "contains_type_name": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<$0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "decrease_total_multiplier_staked_amount": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "decrease_total_staked_amount": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "destroy_one_time_admin_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::OneTime<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>, T0>"
+        ],
+        "return": []
+      },
+      "emission_end_timestamp_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "emission_frequencies_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "emission_rates": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "emission_start_timestamps_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "emit_reward": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "emit_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "from_u8": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u8"
+        ],
+        "return": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::LockEnforcement"
+        ]
+      },
+      "grant_one_time_admin_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "increase_total_multiplier_staked_amount": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "increase_total_rewards_accumulated_per_share": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "increase_total_staked_amount": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::VAULT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "initialize_reward": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "initialize_reward_": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "initialize_reward_and_consume_admin_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::OneTime<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>, T1>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "is_relaxed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::LockEnforcement"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_strict": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::LockEnforcement"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "last_reward_timestamps_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "max_lock_duration_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "max_lock_multiplier": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "min_lock_duration_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "min_stake_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "minimal_claim": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "new": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "vector<u8>",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>>"
+        ]
+      },
+      "reemit_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "remove_reward": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_reward_": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "set_min_stake_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "u64"
+        ],
+        "return": []
+      },
+      "share": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": []
+      },
+      "size": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "supported_lock_enforcements": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "vector<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::LockEnforcement>"
+        ]
+      },
+      "supports": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::LockEnforcement"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "to_u8": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::LockEnforcement"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "total_multiplier_staked_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_rewards_accumulated_per_share": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "vector<u128>"
+        ]
+      },
+      "total_rewards_emitted": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "total_rewards_remaining": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "vector<u64>"
+        ]
+      },
+      "total_staked_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "type_name_to_index": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "type_names": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>"
+        ]
+      },
+      "type_to_index": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_emission_schedule": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_emission_schedule_": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_emission_schedule_and_consume_admin_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::OneTime<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::VAULT<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>, T1>",
+          "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::vault::Vault<T0>",
+          "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "u64"
+        ],
+        "return": []
       }
     },
     "version": {
@@ -596,22 +1567,24 @@
         "params": [
           "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version"
         ],
-        "return": null
+        "return": []
       },
       "create_version": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&$0",
+          "&T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "current_version": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "upgrade_version": {
         "visibility": "PUBLIC",
@@ -620,7 +1593,7 @@
           "&0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::AuthorityCap<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::PACKAGE<0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::authority::ADMIN>>",
           "&mut 0x79ee374b9e3c60c00a19fdbeaea25731bbea8f2cab9bb61bb712543e0ba55b7a::version::Version"
         ],
-        "return": null
+        "return": []
       }
     }
   }

@@ -68,24 +68,24 @@
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<$0, $1>",
+          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<T0, T1>",
           "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::AdminCap",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_deposit_coin_b": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<$0, $1>",
+          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<T0, T1>",
           "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::AdminCap",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_withdraw_all_fees": {
         "visibility": "PUBLIC",
@@ -95,29 +95,29 @@
           "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::AdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_withdraw_coin_a": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<$0, $1>",
+          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<T0, T1>",
           "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::AdminCap",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_withdraw_coin_b": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<$0, $1>",
+          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<T0, T1>",
           "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::AdminCap",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_withdraw_fees": {
         "visibility": "PUBLIC",
@@ -128,16 +128,18 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_fee": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<$0, $1>",
+          "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<T0, T1>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "chain_to_display_amount": {
         "visibility": "PUBLIC",
@@ -145,7 +147,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create_pool": {
         "visibility": "PUBLIC",
@@ -155,7 +159,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "display_to_chain_amount": {
         "visibility": "PUBLIC",
@@ -163,7 +167,96 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_balances": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<T0, T1>"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_collected_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::FeeCollector"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_large_swap_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_large_swap_threshold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_max_swap_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_swap_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SWAP",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<T0, T1>",
+          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::FeeCollector",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_swap_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::SwapPool<T0, T1>",
+          "&0xfa1a45b3133cac90fb575dfeae7509c464c821036ab04926d67cb5c88fff347d::swap::AdminCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

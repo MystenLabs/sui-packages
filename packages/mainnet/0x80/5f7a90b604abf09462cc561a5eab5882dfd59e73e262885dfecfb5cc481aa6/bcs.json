@@ -187,7 +187,7 @@
           "vector<address>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_coin": {
         "visibility": "PUBLIC",
@@ -195,11 +195,11 @@
         "params": [
           "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool",
           "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::AdminCap",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_nft": {
         "visibility": "PUBLIC",
@@ -207,11 +207,11 @@
         "params": [
           "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool",
           "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::AdminCap",
-          "$0",
+          "T0",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_sui_reward": {
         "visibility": "PUBLIC",
@@ -223,7 +223,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "announce_winner": {
         "visibility": "PUBLIC",
@@ -234,7 +234,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "ascii_to_string": {
         "visibility": "PRIVATE",
@@ -242,7 +242,9 @@
         "params": [
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "batch_burn_and_mint": {
         "visibility": "PUBLIC",
@@ -256,7 +258,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "batch_mint": {
         "visibility": "PUBLIC",
@@ -269,7 +271,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "burn_and_replace": {
         "visibility": "PUBLIC",
@@ -282,7 +284,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "burn_game_nfts": {
         "visibility": "PUBLIC",
@@ -291,7 +293,972 @@
           "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::BurnCap",
           "0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT"
         ],
-        "return": null
+        "return": []
+      },
+      "burn_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::BurnCap",
+          "0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT"
+        ],
+        "return": []
+      },
+      "calculate_eliminations": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_royalty": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "check_and_set_scheduled_start_time": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "check_and_update_wallet_mint_limit": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::WalletMintLimit",
+          "address",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "check_nft_registry_status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "claim_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool",
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_deployer_proceeds": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::RewardsPool",
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool",
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_sui_and_check_prizepool": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::RewardsPool",
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_sui_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::RewardsPool",
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "clear_all_whitelist": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "clear_all_whitelist_entries": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": []
+      },
+      "create_prize_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "current_day": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "days_until_completion": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "enable_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "estimate_next_elimination": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "finish_game": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::RewardsPool",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool",
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::AdminCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_alive_nfts": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "get_all_whitelisted_addresses": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "vector<address>"
+        ]
+      },
+      "get_available_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::RewardsPool",
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64"
+        ],
+        "return": [
+          "bool",
+          "u64"
+        ]
+      },
+      "get_burn_discount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_current_day": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_game_by_index": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameCounter",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64"
+        ]
+      },
+      "get_game_status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_games_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameCounter"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_image_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_max_mints_per_wallet": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::WalletMintLimit",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_max_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_mint_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_nft_registry_status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_pool_by_index": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PoolCounter",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_pool_by_round": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PoolCounter",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_pools_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PoolCounter"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_prize_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_prize_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool"
+        ],
+        "return": [
+          "vector<u64>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
+      },
+      "get_prize_pool_by_round": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_royalty_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "address",
+          "u64"
+        ]
+      },
+      "get_scheduled_start_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_time_until_start": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_trait": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_type_name_by_index": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_wallet_mint_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::WalletMintLimit",
+          "address",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_winners": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64"
+        ],
+        "return": [
+          "&vector<0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::WinnerRecord>"
+        ]
+      },
+      "get_winning_nft_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::LAST_ALIVE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_game_ready_to_start": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_mint_enabled": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_owner_of_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_round_ended": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_whitelisted": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "launch_new_game": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameCounter",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PoolCounter",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "list_alive_nfts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "list_alive_nfts_with_details": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": []
+      },
+      "list_games": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameCounter"
+        ],
+        "return": []
+      },
+      "list_pools": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PoolCounter"
+        ],
+        "return": []
+      },
+      "list_prizes": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mark_nft_as_dead": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": []
+      },
+      "mint_nfts": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "notify_nft_update_required": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "number_to_string": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "prize_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "process_royalty_payment": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_addresses_from_whitelist": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "vector<address>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "reset_game": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::RewardsPool",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PoolCounter",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_burn_discount": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_day_length": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_max_mints_per_wallet": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::WalletMintLimit",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_max_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_mint_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_scheduled_start_time": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_winner": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::PrizePool",
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "should_start_game": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "to_ascii_string": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ]
+      },
+      "toggle_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "toggle_whitelist": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "total_alive": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "transfer_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT",
+          "address"
+        ],
+        "return": []
+      },
+      "update_champion_image": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_champion_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_daily_images": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "vector<vector<u8>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_day_image": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_dead_image": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_game_images": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "vector<vector<u8>>",
+          "vector<u8>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_game_state": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_nft_status": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT"
+        ],
+        "return": []
+      },
+      "update_nfts_with_attributes": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "vector<0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_royalty_percentage": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_royalty_recipient": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_wallet_nfts": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "vector<0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_status_update": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::GameState",
+          "&mut 0x805f7a90b604abf09462cc561a5eab5882dfd59e73e262885dfecfb5cc481aa6::last_alive::NFT"
+        ],
+        "return": []
       }
     }
   }

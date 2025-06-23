@@ -68,18 +68,20 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<$1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Reward<T0>"
+        ]
       },
       "batch_create_locks": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "vector<address>",
           "vector<u64>",
           "vector<u64>",
@@ -88,32 +90,36 @@
           "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_reward": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Reward<$0>",
+          "0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Reward<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "claim_vesting": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<$0>",
+          "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "create_lock_entry": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "u64",
           "address",
@@ -122,13 +128,13 @@
           "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_lock_internal": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "u64",
           "address",
@@ -137,13 +143,16 @@
           "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "create_lock_with_vesting_entry": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "u64",
           "u64",
@@ -155,13 +164,13 @@
           "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_lock_with_vesting_internal": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "u64",
           "u64",
@@ -173,23 +182,260 @@
           "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "get_amount": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<$0>"
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_claimed_portions": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<$0>"
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_coin_type_name": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_description": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_fee_percentage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_fee_token_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_fee_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "get_owner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_recipient": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_total_locks_created": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_tokens_locked": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_unlock_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_vesting_period": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_vesting_portions": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_vesting_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_fee_paid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_unlockable": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "pay_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "pay_fee_and_transfer": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::AdminCap",
+          "address",
+          "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unlock": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::TokenLock<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "update_fee_settings": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::AdminCap",
+          "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
+          "u8",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_total_locked": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb1179101dc49281dec9cb071091b9af10eec8b9cbf060a5d4f3b1dd8329dbc53::token_lock::Config",
+          "u64",
+          "bool"
+        ],
+        "return": []
       }
     }
   }

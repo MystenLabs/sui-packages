@@ -108,7 +108,12 @@
         "params": [
           "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault"
         ],
-        "return": null
+        "return": [
+          "u128",
+          "u128",
+          "u128",
+          "u64"
+        ]
       },
       "claim_and_transfer_usdc": {
         "visibility": "PUBLIC",
@@ -118,7 +123,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_and_transfer_xusdc": {
         "visibility": "PUBLIC",
@@ -127,7 +132,7 @@
           "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_usdc": {
         "visibility": "PUBLIC",
@@ -137,7 +142,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC>"
+        ]
       },
       "claim_xusdc": {
         "visibility": "PUBLIC",
@@ -146,7 +153,9 @@
           "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::xusdc::XUSDC>"
+        ]
       },
       "decrease_reward": {
         "visibility": "PUBLIC",
@@ -156,7 +165,7 @@
           "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::OperatorCap",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "deposit_usdc": {
         "visibility": "PUBLIC",
@@ -166,7 +175,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "end_epoch": {
         "visibility": "PUBLIC",
@@ -176,7 +185,7 @@
           "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::OperatorCap",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "get_balance": {
         "visibility": "FRIEND",
@@ -184,7 +193,9 @@
         "params": [
           "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_deposit_request_size": {
         "visibility": "FRIEND",
@@ -192,7 +203,181 @@
         "params": [
           "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_epoch_history": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "vector<0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::EpochData>"
+        ]
+      },
+      "get_pending_fund": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_burned_xusdc": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_usdc": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_xusdc": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_withdraw_request_size": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "increase_reward": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::OperatorCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init_vault": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::xusdc::XUSDC>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault"
+        ]
+      },
+      "migrate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::OperatorCap"
+        ],
+        "return": []
+      },
+      "operator_deposit_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::OperatorCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC>"
+        ],
+        "return": []
+      },
+      "operator_init_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::xusdc::XUSDC>",
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::OperatorCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "operator_withdraw_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::OperatorCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pause_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::OperatorCap"
+        ],
+        "return": []
+      },
+      "request_withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::xusdc::XUSDC>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unpause_vault": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::OperatorCap"
+        ],
+        "return": []
+      },
+      "update_withdraw_lock_time": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::Vault",
+          "&0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::vault_stable::OperatorCap",
+          "u64"
+        ],
+        "return": []
       }
     },
     "xusdc": {
@@ -203,7 +388,9 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::xusdc::XUSDC>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::xusdc::XUSDC>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -212,7 +399,7 @@
           "0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::xusdc::XUSDC",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint_xusdc": {
         "visibility": "PUBLIC",
@@ -222,7 +409,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x19fa5d3bc461e86d8fe5062853aec27ffdcb530c94b6c314b3c9d6c91c94cad4::xusdc::XUSDC>"
+        ]
       }
     }
   }

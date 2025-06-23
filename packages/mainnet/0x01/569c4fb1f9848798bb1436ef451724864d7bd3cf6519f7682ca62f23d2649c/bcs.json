@@ -192,43 +192,43 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<$0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
           "u64",
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "add_total_rewards": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_total_staked_unsafe": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<$0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_whitelisted_token": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<$0>"
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
         ],
-        "return": null
+        "return": []
       },
       "apply_proportion": {
         "visibility": "PRIVATE",
@@ -237,7 +237,9 @@
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000001::uq64_64::UQ64_64"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "apply_time_factor": {
         "visibility": "PRIVATE",
@@ -246,39 +248,43 @@
           "u128",
           "0x0000000000000000000000000000000000000000000000000000000000000001::uq64_64::UQ64_64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "assert_version": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<$0>"
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
         ],
-        "return": null
+        "return": []
       },
       "burn_cb": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<$0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
           "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "burn_cb_non_entry": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<$0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
           "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "calculate_base_fee": {
         "visibility": "PRIVATE",
@@ -287,7 +293,737 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_individual_withdrawable": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_multiplier": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_proportion": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::uq64_64::UQ64_64"
+        ]
+      },
+      "calculate_reward_fee": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "calculate_time_factor": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::uq64_64::UQ64_64"
+        ]
+      },
+      "calculate_time_weight": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_total_withdrawable": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_unstake_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "change_base_reward_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "change_base_unstake_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "change_min_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "change_unstake_fee_threshold": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "check_unclaimed_reward": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "claim_rewards": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_rewards_non_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "collect_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "address",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "collect_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "address",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "compare_entries": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::LeaderboardEntry",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::LeaderboardEntry"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "convert_cb": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::Metadata<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>",
+          "u64",
+          "bool",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "convert_cb_non_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::Metadata<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>",
+          "u64",
+          "bool",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>"
+        ]
+      },
+      "create_pool": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ]
+      },
+      "from_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_base_multiplier": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_leaderboard": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "vector<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::LeaderboardEntry>"
+        ]
+      },
+      "get_min_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_pending": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_ratio": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "get_reward_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_shares": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_stake_from_shares": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_active_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_staked": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_unstake_fee_threshold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_whitelisted_tokens": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>"
+        ]
+      },
+      "is_threshold_used": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_token_whitelisted": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "migrate": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap"
+        ],
+        "return": []
+      },
+      "mint_cb": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "u64",
+          "vector<u8>",
+          "u64",
+          "vector<u8>",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_cb_non_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ]
+      },
+      "new_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "bool",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_stake_non_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "bool",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ]
+      },
+      "preview_cb_epoch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "publish_ratio": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": []
+      },
+      "remove_tier": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "remove_whitelisted_token": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": []
+      },
+      "set_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_rewards_unsafe": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "sort_leaderboard_descending": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut vector<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::LeaderboardEntry>"
+        ],
+        "return": []
+      },
+      "sub_rewards_unsafe": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "sub_total_staked_unsafe": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "to_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unstake_non_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_leaderboard": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OperatorCap"
+        ],
+        "return": []
+      },
+      "update_rewards_threshold": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_stake_non_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_tier_threshold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "validate_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": []
+      },
+      "when_not_paused": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": []
+      },
+      "whitelist_size": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::bond_pool::BondPool<T0>",
+          "u64",
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "math": {
@@ -298,7 +1034,9 @@
           "u256",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "mul_div": {
         "visibility": "PUBLIC",
@@ -308,7 +1046,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "mul_div_time": {
         "visibility": "PUBLIC",
@@ -319,7 +1059,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "ratio": {
         "visibility": "PUBLIC",
@@ -328,7 +1070,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "to_shares": {
         "visibility": "PUBLIC",
@@ -337,7 +1081,9 @@
           "u256",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "ownership": {
@@ -347,7 +1093,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "transfer_operator": {
         "visibility": "PUBLIC",
@@ -357,7 +1103,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "transfer_owner": {
         "visibility": "PUBLIC",
@@ -367,7 +1113,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "stake_cb": {
@@ -381,7 +1127,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_bond_to_epoch": {
         "visibility": "PRIVATE",
@@ -390,7 +1136,7 @@
           "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_share_to_epoch": {
         "visibility": "PRIVATE",
@@ -400,7 +1146,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_stake_convertible_bond": {
         "visibility": "FRIEND",
@@ -415,7 +1161,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_stake_to_epoch": {
         "visibility": "PRIVATE",
@@ -425,7 +1171,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_unstake_to_epoch": {
         "visibility": "PRIVATE",
@@ -435,7 +1181,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "convert_convertible_bond": {
         "visibility": "FRIEND",
@@ -452,7 +1198,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_metadata": {
         "visibility": "FRIEND",
@@ -460,7 +1206,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata"
+        ]
       },
       "get_base_multiplier": {
         "visibility": "PUBLIC",
@@ -468,7 +1216,9 @@
         "params": [
           "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_bond_epoch_snapshot_value": {
         "visibility": "PUBLIC",
@@ -476,7 +1226,362 @@
         "params": [
           "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::EpochSnapshot"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_cumulative_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_duration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_epoch_snapshots": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "vector<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::EpochSnapshot>"
+        ]
+      },
+      "get_image_url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
+      },
+      "get_last_claimed_epoch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_max_supply_for_stake_2epochs": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_max_supply_for_unstake_2epochs": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_start_epoch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_bond_tier": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_convertible_shares": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_stake_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_unstake_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_unclaimed_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_unlock_time": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "is_compensation": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_unlocked": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "remove_bond_tiers_to_epoch": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_bond_to_epoch": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_share_to_epoch": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "address"
+        ],
+        "return": []
+      },
+      "unwrap_convertible_bond": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata",
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "update_bond_epoch_snapshot_on_stake": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_bond_epoch_snapshot_on_unstake": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_bond_tiers_to_epoch": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata",
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_cumulative_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_last_claimed_epoch": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_unclaimed_rewards": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "u64"
+        ],
+        "return": []
+      },
+      "withdraw_stake_convertible_bond": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata",
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url",
+          "bool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "wrap_convertible_bond": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::Metadata",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::stake_cb::ConvertibleBond"
+        ]
       }
     },
     "utility": {
@@ -486,7 +1591,7 @@
         "params": [
           "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::Metadata<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>"
         ],
-        "return": null
+        "return": []
       },
       "burn_balance": {
         "visibility": "FRIEND",
@@ -495,7 +1600,9 @@
           "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::Metadata<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "burn_coin": {
         "visibility": "FRIEND",
@@ -504,7 +1611,9 @@
           "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::Metadata<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_total_supply": {
         "visibility": "PUBLIC",
@@ -512,7 +1621,9 @@
         "params": [
           "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::Metadata<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Supply<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>"
+        ]
       },
       "get_total_supply_value": {
         "visibility": "PUBLIC",
@@ -520,7 +1631,9 @@
         "params": [
           "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::Metadata<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -529,7 +1642,7 @@
           "0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "migrate": {
         "visibility": "PRIVATE",
@@ -538,7 +1651,7 @@
           "&mut 0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::Metadata<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>",
           "&0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::ownership::OwnerCap"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "FRIEND",
@@ -548,7 +1661,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x01569c4fb1f9848798bb1436ef451724864d7bd3cf6519f7682ca62f23d2649c::utility::UTILITY>"
+        ]
       }
     }
   }

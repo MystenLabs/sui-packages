@@ -111,7 +111,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::GirlsOfDarkChaos2NFT>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "burn": {
         "visibility": "PUBLIC",
@@ -123,7 +123,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::GirlsOfDarkChaos2NFT>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delist_nft": {
         "visibility": "PUBLIC",
@@ -134,7 +134,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "ensure_kiosk": {
         "visibility": "PUBLIC",
@@ -142,7 +142,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_collection_name": {
         "visibility": "PUBLIC",
@@ -150,7 +150,9 @@
         "params": [
           "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_metadata": {
         "visibility": "PUBLIC",
@@ -160,7 +162,13 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::url::Url",
+          "&u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
       },
       "get_mint_price": {
         "visibility": "PUBLIC",
@@ -168,7 +176,9 @@
         "params": [
           "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_minted_count": {
         "visibility": "PUBLIC",
@@ -176,7 +186,9 @@
         "params": [
           "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -185,7 +197,7 @@
           "0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::GIRLS_OF_DARK_CHAOS_2",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_minting_paused": {
         "visibility": "PUBLIC",
@@ -193,7 +205,161 @@
         "params": [
           "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "is_transfer_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "list_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "&mut 0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::GirlsOfDarkChaos2NFT>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pause_minting": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::AdminCap",
+          "&mut 0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection"
+        ],
+        "return": []
+      },
+      "pause_transfers": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::AdminCap",
+          "&mut 0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection"
+        ],
+        "return": []
+      },
+      "pseudo_random": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "purchase_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::GirlsOfDarkChaos2NFT>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "resume_minting": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::AdminCap",
+          "&mut 0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection"
+        ],
+        "return": []
+      },
+      "resume_transfers": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::AdminCap",
+          "&mut 0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection"
+        ],
+        "return": []
+      },
+      "total_supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_mint_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::AdminCap",
+          "&mut 0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection",
+          "u64"
+        ],
+        "return": []
+      },
+      "withdraw_royalties": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::GirlsOfDarkChaos2NFT>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::GirlsOfDarkChaos2NFT>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_treasury": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::AdminCap",
+          "&mut 0xf76921f782fb3075b483a2c6c97e65b2428091b055ecd1cb4d98208b7890856c::girls_of_dark_chaos_2::Collection",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

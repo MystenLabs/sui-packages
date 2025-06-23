@@ -63,7 +63,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::Authorization"
+        ]
       },
       "confirm_admin": {
         "visibility": "PUBLIC",
@@ -72,7 +74,7 @@
           "0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::Authorization",
           "&0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSSAdminCap"
         ],
-        "return": null
+        "return": []
       },
       "confirm_public": {
         "visibility": "PUBLIC",
@@ -80,7 +82,7 @@
         "params": [
           "0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::Authorization"
         ],
-        "return": null
+        "return": []
       },
       "confirm_publisher": {
         "visibility": "PUBLIC",
@@ -89,7 +91,7 @@
           "0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::Authorization",
           "&0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSSPublishCap"
         ],
-        "return": null
+        "return": []
       },
       "give_up_publisher": {
         "visibility": "PUBLIC",
@@ -98,7 +100,7 @@
           "&mut 0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSS",
           "0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSSPublishCap"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -106,7 +108,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "new_publisher": {
         "visibility": "PUBLIC",
@@ -116,7 +118,9 @@
           "&0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSSAdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSSPublishCap"
+        ]
       },
       "new_rss": {
         "visibility": "PUBLIC",
@@ -127,7 +131,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSS",
+          "0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSSAdminCap"
+        ]
       },
       "pad_zero": {
         "visibility": "PRIVATE",
@@ -135,7 +142,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "print_rss": {
         "visibility": "PRIVATE",
@@ -146,7 +155,76 @@
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "print_xml": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "revoke_publisher": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSS",
+          "&0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSSAdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSS",
+          "&0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSSAdminCap",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "share_rss": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSS"
+        ],
+        "return": []
+      },
+      "take_over": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSSRegistry",
+          "&mut 0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSS",
+          "&0xd22b24490e0bae52676651b4f56660a5ff8022a2576e0089f79b3c88d44e08f0::suins_registration::SuinsRegistration",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xabb57e8cb9476076a14fda88e008fc1b8502115a1547114f02d9addc7941ebf0::sui_rss::RSSAdminCap"
+        ]
+      },
+      "utc_date_time": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       }
     }
   }

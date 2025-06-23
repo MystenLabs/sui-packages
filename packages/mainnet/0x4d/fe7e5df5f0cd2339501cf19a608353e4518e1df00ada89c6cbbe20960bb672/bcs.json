@@ -139,18 +139,18 @@
         "is_entry": false,
         "params": [
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "add_balance_to_protocol_asset": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "add_liquidity_with_return": {
         "visibility": "FRIEND",
@@ -158,10 +158,10 @@
         "params": [
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
-          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
-          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>>",
           "u64",
           "u64",
           "u64",
@@ -170,7 +170,10 @@
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "borrow_mut_turbos_position_nft": {
         "visibility": "FRIEND",
@@ -178,59 +181,66 @@
         "params": [
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
         ],
-        "return": null
+        "return": [
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_nft::TurbosPositionNFT"
+        ]
       },
       "collect_fees_with_return": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "collect_reward_with_return": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::PoolRewardVault<$3>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::PoolRewardVault<T3>",
           "u64",
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T3>"
+        ]
       },
       "compound": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_farm": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
-          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
-          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>>",
           "u32",
           "bool",
           "u32",
@@ -241,7 +251,11 @@
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "destroy_farm": {
         "visibility": "FRIEND",
@@ -252,7 +266,7 @@
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "do_distribute_fee_and_reward": {
         "visibility": "FRIEND",
@@ -260,10 +274,257 @@
         "params": [
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "do_take_compounding_asset_balance": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "do_take_compounding_asset_balance_by_amount": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "do_take_protocol_asset_balance": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "do_take_protocol_asset_balance_by_amount": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "get_compounding_asset_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_compounding_asset_balances_2": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_compounding_asset_balances_3": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_compounding_asset_balances_4": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u128"
+        ]
+      },
+      "get_info_v2": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u128",
+          "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::i32::I32",
+          "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::i32::I32",
+          "u128",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_protocol_asset_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_protocol_asset_balances_2": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_protocol_asset_balances_3": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_protocol_asset_balances_4": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_turbos_position_nft_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "rebalance": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "u32",
+          "bool",
+          "u32",
+          "bool",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "rebalance_end_v2": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "u32",
+          "bool",
+          "u32",
+          "bool",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "rebalance_start_v2": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_liquidity_with_return": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition",
+          "u128",
+          "u64",
+          "u64",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       }
     },
     "farm_manager_admin": {
@@ -273,10 +534,10 @@
         "params": [
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_coin_to_protocol_asset": {
         "visibility": "PUBLIC",
@@ -284,10 +545,10 @@
         "params": [
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "collect_fees": {
         "visibility": "PUBLIC",
@@ -295,14 +556,14 @@
         "params": [
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "collect_reward": {
         "visibility": "PUBLIC",
@@ -310,16 +571,16 @@
         "params": [
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::PoolRewardVault<$3>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::PoolRewardVault<T3>",
           "u64",
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "compound": {
         "visibility": "PUBLIC",
@@ -327,13 +588,13 @@
         "params": [
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_farm": {
         "visibility": "PUBLIC",
@@ -341,10 +602,10 @@
         "params": [
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::permission::AdminCap",
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
-          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
-          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>>",
           "u32",
           "bool",
           "u32",
@@ -355,7 +616,7 @@
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "destroy_farm": {
         "visibility": "PUBLIC",
@@ -368,7 +629,7 @@
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "rebalance": {
         "visibility": "PUBLIC",
@@ -381,13 +642,13 @@
           "bool",
           "u32",
           "bool",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "rebalance_end": {
         "visibility": "PUBLIC",
@@ -400,15 +661,15 @@
           "bool",
           "u32",
           "bool",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "rebalance_end_v2": {
         "visibility": "PUBLIC",
@@ -421,13 +682,130 @@
           "bool",
           "u32",
           "bool",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "rebalance_start": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::permission::AdminCap",
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "rebalance_start_v2": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::permission::AdminCap",
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_package_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::permission::AdminCap",
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_protocol_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::permission::AdminCap",
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
+          "u64"
+        ],
+        "return": []
+      },
+      "take_compounding_asset_by_amount_with_return": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::permission::AdminCap",
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "take_compounding_asset_with_return": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::permission::AdminCap",
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "take_protocol_asset": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::permission::AdminCap",
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "take_protocol_asset_by_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::permission::AdminCap",
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
+          "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_admin_role": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
+          "0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::permission::AdminCap",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "farm_manager_user": {
@@ -438,17 +816,17 @@
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u64",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "close_position": {
         "visibility": "PUBLIC",
@@ -457,7 +835,7 @@
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
           "0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition"
         ],
-        "return": null
+        "return": []
       },
       "merge_positions": {
         "visibility": "PUBLIC",
@@ -467,7 +845,7 @@
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition",
           "0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition"
         ],
-        "return": null
+        "return": []
       },
       "open_position": {
         "visibility": "PUBLIC",
@@ -475,17 +853,17 @@
         "params": [
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::farm::Farm",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u64",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "remove_liquidity": {
         "visibility": "PUBLIC",
@@ -497,13 +875,13 @@
           "u128",
           "u64",
           "u64",
-          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<$0, $1, $2>",
+          "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>",
           "&mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::position_manager::Positions",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "global_config": {
@@ -513,7 +891,7 @@
         "params": [
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig"
         ],
-        "return": null
+        "return": []
       },
       "get_info": {
         "visibility": "PUBLIC",
@@ -521,13 +899,17 @@
         "params": [
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "max_percent": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "new": {
         "visibility": "FRIEND",
@@ -536,7 +918,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "set_package_version": {
         "visibility": "FRIEND",
@@ -546,7 +928,7 @@
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "set_protocol_fee": {
         "visibility": "FRIEND",
@@ -555,7 +937,7 @@
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::global_config::GlobalConfig",
           "u64"
         ],
-        "return": null
+        "return": []
       }
     },
     "permission": {
@@ -566,7 +948,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "transfer_admin_role": {
         "visibility": "FRIEND",
@@ -576,7 +958,7 @@
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "position": {
@@ -587,7 +969,7 @@
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition",
           "u128"
         ],
-        "return": null
+        "return": []
       },
       "destroy": {
         "visibility": "FRIEND",
@@ -595,7 +977,7 @@
         "params": [
           "0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition"
         ],
-        "return": null
+        "return": []
       },
       "get_info": {
         "visibility": "PUBLIC",
@@ -603,7 +985,10 @@
         "params": [
           "&0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u128"
+        ]
       },
       "increase_share": {
         "visibility": "FRIEND",
@@ -612,7 +997,7 @@
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition",
           "u128"
         ],
-        "return": null
+        "return": []
       },
       "merge": {
         "visibility": "FRIEND",
@@ -621,7 +1006,7 @@
           "&mut 0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition",
           "0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition"
         ],
-        "return": null
+        "return": []
       },
       "new": {
         "visibility": "FRIEND",
@@ -631,7 +1016,9 @@
           "u128",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xabe7ea8ec332236bcd36e717bd504cc933a3b5e37d5d274d7d017a01d1bea6d3::position::JewelTurbosPosition"
+        ]
       }
     },
     "utils": {
@@ -645,21 +1032,27 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "coin_to_vec": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>"
+        ]
       },
       "get_type_name_str": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       }
     }
   }

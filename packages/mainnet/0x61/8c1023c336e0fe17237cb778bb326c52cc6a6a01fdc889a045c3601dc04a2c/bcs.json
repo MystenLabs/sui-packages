@@ -74,12 +74,12 @@
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&mut 0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_liquidity_return": {
         "visibility": "PRIVATE",
@@ -93,7 +93,10 @@
           "u64",
           "u128"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "calculate_lp_mint_amount": {
         "visibility": "PRIVATE",
@@ -108,7 +111,9 @@
           "u64",
           "u128"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_output": {
         "visibility": "PRIVATE",
@@ -121,7 +126,9 @@
           "u64",
           "u128"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create_pool_with_lp_tokens": {
         "visibility": "PUBLIC",
@@ -130,7 +137,7 @@
           "&mut 0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Global",
           "&mut 0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::PoolRegistry",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "u64",
           "u8",
@@ -142,7 +149,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "get_pool_creation_tier": {
         "visibility": "PUBLIC",
@@ -150,32 +159,47 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::PoolCreationTier"
+        ]
       },
       "get_pool_info": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<$0, $1>"
+          "&0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u8",
+          "address"
+        ]
       },
       "get_reserves": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<$0, $1>"
+          "&0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "get_user_lp_balance": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<$0, $1>",
+          "&0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<T0, T1>",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -184,7 +208,61 @@
           "0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::AMM_V2",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "merge_lp_tokens": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<T0, T1>",
+          "0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::LPToken<T0, T1>",
+          "0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::LPToken<T0, T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<T0, T1>",
+          "0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::LPToken<T0, T1>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "split_lp_token": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<T0, T1>",
+          "0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::LPToken<T0, T1>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_x_for_y": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_y_for_x": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "pool_factory_v2": {
@@ -195,7 +273,7 @@
           "&mut 0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::Global",
           "&mut 0x618c1023c336e0fe17237cb778bb326c52cc6a6a01fdc889a045c3601dc04a2c::amm_v2::PoolRegistry",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "u64",
           "vector<u8>",
@@ -206,7 +284,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }

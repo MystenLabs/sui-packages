@@ -73,7 +73,7 @@
           "bool",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_operator": {
         "visibility": "PUBLIC",
@@ -84,7 +84,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_withdraw": {
         "visibility": "PUBLIC",
@@ -95,7 +95,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_pool": {
         "visibility": "PUBLIC",
@@ -104,7 +104,7 @@
           "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::AdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
@@ -114,7 +114,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_available_balance": {
         "visibility": "PUBLIC",
@@ -122,7 +122,9 @@
         "params": [
           "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_balance": {
         "visibility": "PUBLIC",
@@ -131,7 +133,9 @@
           "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_operators": {
         "visibility": "PUBLIC",
@@ -139,7 +143,9 @@
         "params": [
           "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool"
         ],
-        "return": null
+        "return": [
+          "vector<address>"
+        ]
       },
       "get_total_deposited": {
         "visibility": "PUBLIC",
@@ -147,7 +153,9 @@
         "params": [
           "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_total_rewards_collected": {
         "visibility": "PUBLIC",
@@ -155,7 +163,102 @@
         "params": [
           "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_staked": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::POOL",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_operator": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "move_funds_for_staking": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "record_unstaking": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_operator": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool",
+          "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::AdminCap",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool",
+          "&0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::AdminCap",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x8a5b5e989383393d2b09b0d0b755de77d78d8ee39d63fa22fc9fccdbe6464836::pool::StakingPool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

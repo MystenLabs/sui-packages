@@ -113,7 +113,9 @@
         "params": [
           "&0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "balance_manager_id": {
         "visibility": "FRIEND",
@@ -121,7 +123,9 @@
         "params": [
           "&0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "check_and_add_cetus_balance_manager_indexer": {
         "visibility": "PUBLIC",
@@ -131,7 +135,7 @@
           "&0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_and_add_deepbook_balance_manager_indexer": {
         "visibility": "PUBLIC",
@@ -141,7 +145,7 @@
           "&0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_cetus_balance_manager": {
         "visibility": "FRIEND",
@@ -150,7 +154,9 @@
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager"
+        ]
       },
       "delete": {
         "visibility": "FRIEND",
@@ -158,17 +164,17 @@
         "params": [
           "0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_proxy_deep": {
         "visibility": "FRIEND",
@@ -178,7 +184,7 @@
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_balance_managers_by_owner": {
         "visibility": "PUBLIC",
@@ -187,7 +193,7 @@
           "&0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -196,7 +202,89 @@
           "0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CETUS_BALANCE_MANAGER",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager"
+        ]
+      },
+      "place_market_order": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "u64",
+          "u8",
+          "u64",
+          "bool",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order_info::OrderInfo"
+        ]
+      },
+      "share": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_all": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_all_refund_deep": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_refund_deep": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     },
     "deepbookv3_utils": {
@@ -206,21 +294,21 @@
         "params": [
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
           "u128",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_coin_threshold": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "create_deposit_then_place_limit_order": {
         "visibility": "PUBLIC",
@@ -228,9 +316,9 @@
         "params": [
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>",
           "u8",
           "u8",
@@ -242,7 +330,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_deposit_then_place_market_order": {
         "visibility": "PUBLIC",
@@ -250,9 +338,9 @@
         "params": [
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>",
           "u8",
           "u64",
@@ -261,7 +349,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_deposit_then_place_market_order_return_coins": {
         "visibility": "PUBLIC",
@@ -269,9 +357,9 @@
         "params": [
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>",
           "u8",
           "u64",
@@ -280,7 +368,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "create_deposit_then_place_market_order_v2": {
         "visibility": "PUBLIC",
@@ -288,9 +379,9 @@
         "params": [
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>",
           "u8",
           "u8",
@@ -302,7 +393,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_then_place_limit_order_by_owner": {
         "visibility": "PUBLIC",
@@ -310,10 +401,10 @@
         "params": [
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
           "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>",
           "u8",
           "u8",
@@ -325,7 +416,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_then_place_market_order_by_owner": {
         "visibility": "FRIEND",
@@ -333,10 +424,10 @@
         "params": [
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>",
           "u8",
           "u64",
@@ -345,7 +436,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "deposit_then_place_market_order_by_owner_v2": {
         "visibility": "PUBLIC",
@@ -353,10 +447,10 @@
         "params": [
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
           "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>",
           "u8",
           "u8",
@@ -368,7 +462,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "place_limit_order": {
         "visibility": "PUBLIC",
@@ -376,7 +470,7 @@
         "params": [
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
           "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager",
           "u8",
           "u8",
@@ -388,7 +482,74 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "place_market_order": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
+          "&mut 0x18eb3999327614f2c5287df3b7af825e349a6b45978aad1e466b0230113887ce::global_config::GlobalConfig",
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>",
+          "u8",
+          "u64",
+          "bool",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>"
+        ]
+      },
+      "place_market_order_once": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManager",
+          "u8",
+          "u64",
+          "bool",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "place_market_order_v2": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::cetus_balance_manager::CetusBalanceManagerIndexer",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "u8",
+          "u64",
+          "bool",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "send_or_destory_zero_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "global_config": {
@@ -398,7 +559,9 @@
         "params": [
           "&0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "advance_deep_fee": {
         "visibility": "PUBLIC",
@@ -406,7 +569,9 @@
         "params": [
           "&0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "checked_package_version": {
         "visibility": "PUBLIC",
@@ -414,7 +579,7 @@
         "params": [
           "&0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig"
         ],
-        "return": null
+        "return": []
       },
       "deep_fee_amount": {
         "visibility": "PUBLIC",
@@ -422,7 +587,9 @@
         "params": [
           "&0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "deposit_deep_fee": {
         "visibility": "PUBLIC",
@@ -431,7 +598,7 @@
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -439,7 +606,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "set_advance_deep_fee": {
         "visibility": "PUBLIC",
@@ -449,7 +616,7 @@
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "bool"
         ],
-        "return": null
+        "return": []
       },
       "update_advance_amount": {
         "visibility": "PUBLIC",
@@ -459,7 +626,7 @@
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "update_package_version": {
         "visibility": "PUBLIC",
@@ -469,7 +636,7 @@
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "withdraw_advance_deep": {
         "visibility": "FRIEND",
@@ -478,7 +645,22 @@
           "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>"
+        ]
+      },
+      "withdraw_deep_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::AdminCap",
+          "&mut 0xe6a50d4bccda934630da34a1ca9f83144e4ac97ada437457a22e186411f4070c::global_config::GlobalConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>"
+        ]
       }
     }
   }

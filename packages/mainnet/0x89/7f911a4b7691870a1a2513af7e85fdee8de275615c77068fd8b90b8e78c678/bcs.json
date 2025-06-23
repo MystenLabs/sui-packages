@@ -67,7 +67,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "enforce_version": {
         "visibility": "FRIEND",
@@ -76,7 +76,7 @@
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::Config",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "get_recv_message_args": {
         "visibility": "PRIVATE",
@@ -85,7 +85,9 @@
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::Config",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::Params"
+        ]
       },
       "get_token_balance": {
         "visibility": "PUBLIC",
@@ -93,13 +95,17 @@
         "params": [
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::Config"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_type_string": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "hub_asset_manager": {
         "visibility": "PUBLIC",
@@ -107,7 +113,9 @@
         "params": [
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::Config"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "hub_network_id": {
         "visibility": "PUBLIC",
@@ -115,7 +123,9 @@
         "params": [
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::Config"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "id_to_hex_string": {
         "visibility": "PUBLIC",
@@ -123,7 +133,9 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -132,7 +144,7 @@
           "0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::ASSET_MANAGER",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "migrate": {
         "visibility": "PRIVATE",
@@ -142,7 +154,68 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::package::UpgradeCap"
         ],
-        "return": null
+        "return": []
+      },
+      "recv_message": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::Config",
+          "&mut 0xf3b1e696a66d02cb776dc15aae73c68bc8f03adcb6ba0ec7f6332d9d90a6a3d2::connectionv3::State",
+          "&mut 0xf796d36fada0fedbc2c1a3b31980fdc9028faea6f3750ec7819d15e991995a0e::rate_limits::RateLimitState",
+          "u256",
+          "vector<u8>",
+          "u256",
+          "vector<u8>",
+          "vector<vector<u8>>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_hub_details": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::Config",
+          "u256",
+          "vector<u8>",
+          "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::AdminCap"
+        ],
+        "return": []
+      },
+      "set_rate_limit_id": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::Config",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::AdminCap"
+        ],
+        "return": []
+      },
+      "to_hex_string": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "transfer": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::asset_manager::Config",
+          "&mut 0xf3b1e696a66d02cb776dc15aae73c68bc8f03adcb6ba0ec7f6332d9d90a6a3d2::connectionv3::State",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "vector<u8>",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "transfer_msg": {
@@ -152,7 +225,9 @@
         "params": [
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::transfer_msg::TransferMsg"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "data": {
         "visibility": "PUBLIC",
@@ -160,7 +235,9 @@
         "params": [
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::transfer_msg::TransferMsg"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "decode": {
         "visibility": "PUBLIC",
@@ -168,7 +245,9 @@
         "params": [
           "&vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::transfer_msg::TransferMsg"
+        ]
       },
       "encode": {
         "visibility": "PUBLIC",
@@ -176,7 +255,9 @@
         "params": [
           "0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::transfer_msg::TransferMsg"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "from": {
         "visibility": "PUBLIC",
@@ -184,7 +265,9 @@
         "params": [
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::transfer_msg::TransferMsg"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "new": {
         "visibility": "PUBLIC",
@@ -196,7 +279,9 @@
           "u64",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::transfer_msg::TransferMsg"
+        ]
       },
       "to": {
         "visibility": "PUBLIC",
@@ -204,7 +289,9 @@
         "params": [
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::transfer_msg::TransferMsg"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "token": {
         "visibility": "PUBLIC",
@@ -212,7 +299,9 @@
         "params": [
           "&0xa17a409164d1676db71b411ab50813ba2c7dd547d2df538c699049566f1ff922::transfer_msg::TransferMsg"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       }
     }
   }

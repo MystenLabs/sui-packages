@@ -117,12 +117,12 @@
         "is_entry": true,
         "params": [
           "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::roles::AdminCap",
-          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<$0>",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_batch_force_withdraw": {
         "visibility": "PRIVATE",
@@ -130,23 +130,23 @@
         "params": [
           "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::roles::AdminCap",
           "&0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::perpetual::PerpetualV2",
-          "&0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::margin_bank::BankV2<$0>",
-          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<$0>",
+          "&0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::margin_bank::BankV2<T0>",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
           "vector<address>",
           "vector<u64>"
         ],
-        "return": null
+        "return": []
       },
       "claim_withdrawn_funds": {
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
-          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<$0>",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
           "address",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_tx_hash": {
         "visibility": "PRIVATE",
@@ -154,7 +154,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "create_vault": {
         "visibility": "PRIVATE",
@@ -162,62 +164,171 @@
         "params": [
           "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::roles::AdminCap",
           "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::roles::SubAccountsV2",
-          "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::margin_bank::BankV2<$0>",
+          "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::margin_bank::BankV2<T0>",
           "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::vaults::VaultStore",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_to_vault": {
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
           "&0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::perpetual::PerpetualV2",
-          "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::margin_bank::BankV2<$0>",
+          "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::margin_bank::BankV2<T0>",
           "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::roles::Sequencer",
-          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<$0>",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_amount_to_be_withdrawn": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<$0>"
+          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_total_shares": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<$0>"
+          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_user_pending_withdrawals": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<$0>",
+          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_user_shares": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<$0>",
+          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_vault_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "move_vault_balance_from_bank": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::margin_bank::BankV2<T0>",
+          "&0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::vaults::VaultStore",
+          "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::roles::Sequencer",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pause_vault": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::roles::AdminCap",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
+          "bool",
+          "bool",
+          "bool"
+        ],
+        "return": []
+      },
+      "subtract_vault_funds_to_be_withdrawn": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::roles::AdminCap",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_vault_funds_to_be_withdrawn": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::roles::AdminCap",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_vault_operator": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::roles::AdminCap",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
+          "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::roles::SubAccountsV2",
+          "&mut 0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::vaults::VaultStore",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_version_for_vault": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::roles::AdminCap",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>"
+        ],
+        "return": []
+      },
+      "vault_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "address",
+          "u64",
+          "&0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::margin_bank::BankV2<T0>",
+          "&0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::perpetual::PerpetualV2"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "withdraw_from_vault": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::perpetual::PerpetualV2",
+          "&0xc9ba51116d85cfbb401043f5e0710ab582c4b9b04a139b7df223f8f06bb66fa5::margin_bank::BankV2<T0>",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::bluefin_vault::Vault<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "constants": {
@@ -225,43 +336,57 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "deposit_type": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "ed25519_scheme": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "get_version": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "min_shares": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "secp256k1_scheme": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "withdraw_type": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u8"
+        ]
       }
     },
     "distributor": {
@@ -269,12 +394,12 @@
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
-          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::distributor::RewardPool<$0>",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::distributor::RewardPool<T0>",
           "vector<u8>",
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_reward_pool": {
         "visibility": "PRIVATE",
@@ -284,36 +409,36 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "fund_rewards_pool": {
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
-          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::distributor::RewardPool<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::distributor::RewardPool<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "update_rewards_controller": {
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
           "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::roles::AdminCap",
-          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::distributor::RewardPool<$0>",
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::distributor::RewardPool<T0>",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "update_version_for_reward_pool": {
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
           "&0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::roles::AdminCap",
-          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::distributor::RewardPool<$0>"
+          "&mut 0xfadc2a695e4d92612a203f5bfc48e9f0a5be4d6bad9d08b1e8f06ce9be7a3f5a::distributor::RewardPool<T0>"
         ],
-        "return": null
+        "return": []
       }
     },
     "errors": {
@@ -321,61 +446,137 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "bluefin_bank_mismatch": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "can_not_be_zero": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "claim_paused": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "claiming_more_than_requested": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "deposit_paused": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "insufficient_funds": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "insufficient_shares": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "invalid_signature": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "invalid_size": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "not_pool_operator": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "perp_not_supported": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "pool_address_dont_match": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "unsupported_wallet_scheme": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "version_mismatch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "withdraw_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "zero_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
       }
     },
     "events": {
@@ -386,7 +587,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_created_vault_event": {
         "visibility": "FRIEND",
@@ -397,7 +598,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_funds_claimed_event": {
         "visibility": "FRIEND",
@@ -408,7 +609,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_funds_deposited_event": {
         "visibility": "FRIEND",
@@ -423,7 +624,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_funds_withdrawn_event": {
         "visibility": "FRIEND",
@@ -437,7 +638,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_reward_amount_deposited_event": {
         "visibility": "FRIEND",
@@ -448,7 +649,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_rewards_claimed_event": {
         "visibility": "FRIEND",
@@ -460,7 +661,7 @@
           "u64",
           "u128"
         ],
-        "return": null
+        "return": []
       },
       "emit_rewards_pool_controller_update_event": {
         "visibility": "FRIEND",
@@ -469,7 +670,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_vault_operator_update_event": {
         "visibility": "FRIEND",
@@ -478,7 +679,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "emit_vault_pause_update_event": {
         "visibility": "FRIEND",
@@ -489,7 +690,7 @@
           "bool",
           "bool"
         ],
-        "return": null
+        "return": []
       }
     },
     "maths": {
@@ -499,7 +700,9 @@
         "params": [
           "u128"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "roles": {
@@ -509,7 +712,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "transfer_admin_cap": {
         "visibility": "PRIVATE",
@@ -520,7 +723,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }

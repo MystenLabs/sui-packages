@@ -122,7 +122,7 @@
           "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
           "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AllowedDonationCoins"
         ],
-        "return": null
+        "return": []
       },
       "checkVersion": {
         "visibility": "PUBLIC",
@@ -131,7 +131,7 @@
           "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "disable_allowed_coin": {
         "visibility": "PUBLIC",
@@ -141,7 +141,7 @@
           "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
           "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AllowedDonationCoins"
         ],
-        "return": null
+        "return": []
       },
       "donate": {
         "visibility": "PUBLIC",
@@ -152,10 +152,12 @@
           "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AllowedDonationCoins",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::DonateComicData<T0>"
+        ]
       },
       "enable_allowed_coin": {
         "visibility": "PUBLIC",
@@ -165,7 +167,7 @@
           "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
           "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AllowedDonationCoins"
         ],
-        "return": null
+        "return": []
       },
       "get_page_read_count": {
         "visibility": "PUBLIC",
@@ -175,7 +177,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -184,7 +188,7 @@
           "0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::COMIC",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_coin_allowed": {
         "visibility": "PUBLIC",
@@ -192,7 +196,9 @@
         "params": [
           "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AllowedDonationCoins"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "migrate": {
         "visibility": "PUBLIC",
@@ -202,7 +208,7 @@
           "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "mint_child_comic": {
         "visibility": "PUBLIC",
@@ -218,7 +224,130 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "mint_parent_comic": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AdminCap",
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_registry_mint_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AdminCap",
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_user_comic_registry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::RegistryMintCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "read_comic": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
+          "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::UserComicRegistry",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::ReadComicData"
+        ]
+      },
+      "receive_donate_comic_data": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AdminCap",
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
+          "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AllowedDonationCoins",
+          "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::ParentComic",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::DonateComicData<T0>>"
+        ],
+        "return": []
+      },
+      "receive_read_comic_data": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AdminCap",
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
+          "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::ParentComic",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::ReadComicData>"
+        ],
+        "return": []
+      },
+      "update_comic_blob_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AdminCap",
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
+          "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::ParentComic",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_comic_charity_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AdminCap",
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
+          "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::ParentComic",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "update_user_read_page_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AdminCap",
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
+          "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::ParentComic",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "withdraw_donation": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AdminCap",
+          "&0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::Version",
+          "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::AllowedDonationCoins",
+          "&mut 0x7e9b497426dd18ce152a01dc10358c584c302b8a58d1090147c687ae3167ebfb::comic::ParentComic",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

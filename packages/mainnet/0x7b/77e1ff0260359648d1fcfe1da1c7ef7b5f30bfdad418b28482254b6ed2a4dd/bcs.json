@@ -79,7 +79,7 @@
         "params": [
           "0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket"
         ],
-        "return": null
+        "return": []
       },
       "claim_reward": {
         "visibility": "PUBLIC",
@@ -90,7 +90,7 @@
           "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_staking_pool": {
         "visibility": "PRIVATE",
@@ -101,7 +101,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_staking_pool_auth": {
         "visibility": "PUBLIC",
@@ -111,7 +111,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -120,7 +120,7 @@
           "0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::STAKING",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_pool_active": {
         "visibility": "PUBLIC",
@@ -128,7 +128,9 @@
         "params": [
           "&0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPool"
         ],
-        "return": null
+        "return": [
+          "&bool"
+        ]
       },
       "mint_staking_ticket": {
         "visibility": "PRIVATE",
@@ -140,7 +142,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket"
+        ]
       },
       "pool_total_count": {
         "visibility": "PUBLIC",
@@ -148,7 +152,9 @@
         "params": [
           "&0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPoolAuth"
         ],
-        "return": null
+        "return": [
+          "&u64"
+        ]
       },
       "pool_value": {
         "visibility": "PUBLIC",
@@ -156,7 +162,9 @@
         "params": [
           "&0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPool"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "send_koban_to_pool": {
         "visibility": "PRIVATE",
@@ -165,7 +173,126 @@
           "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPool",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x8400e7044d360c28dd338111d2aa54ca5bdc960a8d6b60bf3b28e1ca503df3e2::koban::KOBAN>"
         ],
-        "return": null
+        "return": []
+      },
+      "set_staking_pool_inactive": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPoolAuth",
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_staking_pool_minimum_stake": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPoolAuth",
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPool",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_koban_existing_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPool",
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x8400e7044d360c28dd338111d2aa54ca5bdc960a8d6b60bf3b28e1ca503df3e2::koban::KOBAN>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_koban_new_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPool",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x8400e7044d360c28dd338111d2aa54ca5bdc960a8d6b60bf3b28e1ca503df3e2::koban::KOBAN>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "ticket_add_stake_update": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket",
+          "u64"
+        ],
+        "return": []
+      },
+      "ticket_last_claim_timestamp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "ticket_last_stake_update": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket"
+        ],
+        "return": [
+          "&0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakeUpdate"
+        ]
+      },
+      "ticket_owner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "ticket_total_staked": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "unstake_all_koban": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPool",
+          "0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unstake_koban": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingPool",
+          "&mut 0x7b77e1ff0260359648d1fcfe1da1c7ef7b5f30bfdad418b28482254b6ed2a4dd::staking::StakingTicket",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

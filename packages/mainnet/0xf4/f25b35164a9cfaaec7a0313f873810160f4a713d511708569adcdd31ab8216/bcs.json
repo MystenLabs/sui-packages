@@ -81,7 +81,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "configure_royalty": {
         "visibility": "PUBLIC",
@@ -92,7 +92,7 @@
           "u16",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_collection": {
         "visibility": "PUBLIC",
@@ -104,7 +104,7 @@
           "u16",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_kiosk": {
         "visibility": "PUBLIC",
@@ -112,7 +112,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_collection_info": {
         "visibility": "PUBLIC",
@@ -120,7 +120,15 @@
         "params": [
           "&0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::Collection"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u16",
+          "u64",
+          "u64",
+          "bool"
+        ]
       },
       "get_comic_info": {
         "visibility": "PUBLIC",
@@ -129,7 +137,14 @@
           "&0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::Collection",
           "u64"
         ],
-        "return": null
+        "return": [
+          "bool",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "bool"
+        ]
       },
       "get_comic_nft_info": {
         "visibility": "PUBLIC",
@@ -137,7 +152,15 @@
         "params": [
           "&0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::ComicNFT"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -146,7 +169,7 @@
           "0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::COLLECTION",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint_comic": {
         "visibility": "PUBLIC",
@@ -157,7 +180,7 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint_comic_to_kiosk": {
         "visibility": "PUBLIC",
@@ -170,7 +193,48 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "set_comic_availability": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::AdminCap",
+          "&mut 0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::Collection",
+          "u64",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_mint_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::AdminCap",
+          "&mut 0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::Collection",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_minting_status": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::AdminCap",
+          "&mut 0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::Collection",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_royalty_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::AdminCap",
+          "&mut 0xf4f25b35164a9cfaaec7a0313f873810160f4a713d511708569adcdd31ab8216::collection::Collection",
+          "u16"
+        ],
+        "return": []
       }
     }
   }

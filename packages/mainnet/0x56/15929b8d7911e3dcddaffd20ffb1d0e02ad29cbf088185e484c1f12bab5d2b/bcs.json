@@ -84,31 +84,41 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "exceed_max_gas_amount": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "gas_object_not_whitelisted": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "gas_owner_mismatch": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "insufficient_balance": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "gas_station": {
@@ -122,7 +132,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_and_update_daily_refuel": {
         "visibility": "PRIVATE",
@@ -132,7 +142,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "deposit": {
         "visibility": "PUBLIC",
@@ -142,7 +154,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_balance": {
         "visibility": "PUBLIC",
@@ -150,7 +162,9 @@
         "params": [
           "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_daily_refuel_limit": {
         "visibility": "PUBLIC",
@@ -158,7 +172,9 @@
         "params": [
           "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_day_timestamp": {
         "visibility": "PRIVATE",
@@ -166,7 +182,9 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_gas_whitelist": {
         "visibility": "PUBLIC",
@@ -174,7 +192,9 @@
         "params": [
           "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID, address>"
+        ]
       },
       "get_max_gas_amount": {
         "visibility": "PUBLIC",
@@ -182,7 +202,9 @@
         "params": [
           "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_once_refuel_amount": {
         "visibility": "PUBLIC",
@@ -190,7 +212,9 @@
         "params": [
           "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -198,7 +222,86 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "is_gas_object_whitelisted": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "refuel": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_gas_object_from_whitelist": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::AdminCap",
+          "&mut 0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_daily_refuel_limit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::AdminCap",
+          "&mut 0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_max_gas_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::AdminCap",
+          "&mut 0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_once_refuel_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::AdminCap",
+          "&mut 0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::AdminCap",
+          "&mut 0x5615929b8d7911e3dcddaffd20ffb1d0e02ad29cbf088185e484c1f12bab5d2b::gas_station::GasStation",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       }
     }
   }

@@ -73,7 +73,7 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_unstake": {
         "visibility": "PUBLIC",
@@ -85,7 +85,7 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_unstake_all": {
         "visibility": "PUBLIC",
@@ -96,7 +96,7 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000003::sui_system::SuiSystemState",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_withdraw": {
         "visibility": "PUBLIC",
@@ -107,7 +107,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_staking_pool": {
         "visibility": "PUBLIC",
@@ -116,7 +116,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
@@ -126,7 +126,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_admin": {
         "visibility": "PUBLIC",
@@ -134,7 +134,9 @@
         "params": [
           "&0x5645e4198f8c926e96c16d0a11ebfdcb592f7d580537d477b43e2fb2b572b8a3::staking_pool::StakingPool"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_pool_stats": {
         "visibility": "PUBLIC",
@@ -142,7 +144,13 @@
         "params": [
           "&0x5645e4198f8c926e96c16d0a11ebfdcb592f7d580537d477b43e2fb2b572b8a3::staking_pool::StakingPool"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "get_user_balance": {
         "visibility": "PUBLIC",
@@ -151,7 +159,9 @@
           "&0x5645e4198f8c926e96c16d0a11ebfdcb592f7d580537d477b43e2fb2b572b8a3::staking_pool::StakingPool",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_user_total_deposits": {
         "visibility": "PUBLIC",
@@ -160,7 +170,51 @@
           "&0x5645e4198f8c926e96c16d0a11ebfdcb592f7d580537d477b43e2fb2b572b8a3::staking_pool::StakingPool",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_user_total_withdrawals": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5645e4198f8c926e96c16d0a11ebfdcb592f7d580537d477b43e2fb2b572b8a3::staking_pool::StakingPool",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_validator_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5645e4198f8c926e96c16d0a11ebfdcb592f7d580537d477b43e2fb2b572b8a3::staking_pool::StakingPool"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "update_validator_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x5645e4198f8c926e96c16d0a11ebfdcb592f7d580537d477b43e2fb2b572b8a3::staking_pool::StakingPool",
+          "&0x5645e4198f8c926e96c16d0a11ebfdcb592f7d580537d477b43e2fb2b572b8a3::staking_pool::AdminCap",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x5645e4198f8c926e96c16d0a11ebfdcb592f7d580537d477b43e2fb2b572b8a3::staking_pool::StakingPool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

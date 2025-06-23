@@ -43,67 +43,79 @@
         "is_entry": true,
         "params": [
           "&mut 0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::Vault",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": []
       },
       "destory_swap_cert": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::FlashSwapCert<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::FlashSwapCert<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::Vault",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "destory_swap_cert_v2": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::FlashSwapCert<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::FlashSwapCert<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "&mut 0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::Vault",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "err_expired": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_insufficient_balance": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_no_flash_permission": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_no_withdraw_permission": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_scheme_not_support": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_signature": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -111,7 +123,73 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "new_swap_cert": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::Vault",
+          "u64",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x8c527eb289ee26634e9e96b1361bec1102443dab1c6787fb9b0b7e5d10618177::confirmer::ConfirmCert<T1>",
+          "0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::FlashSwapCert<T0, T1>"
+        ]
+      },
+      "new_swap_cert_v2": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::Vault",
+          "u64",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x8c527eb289ee26634e9e96b1361bec1102443dab1c6787fb9b0b7e5d10618177::confirmer::ConfirmCert<T0>",
+          "0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::FlashSwapCert<T0, T1>"
+        ]
+      },
+      "parse_signature": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "address",
+          "vector<u8>",
+          "vector<u8>"
+        ]
+      },
+      "verify_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "bool",
+          "address"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x7a4d081c482750bb489a3225d606ea1426079add752367e7dac49d02897f2cae::mm_demo::Vault",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

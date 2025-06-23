@@ -375,7 +375,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_fee": {
         "visibility": "PUBLIC",
@@ -384,7 +384,7 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
         ],
-        "return": null
+        "return": []
       },
       "get_app_link": {
         "visibility": "PUBLIC",
@@ -392,7 +392,9 @@
         "params": [
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_description": {
         "visibility": "PUBLIC",
@@ -400,7 +402,9 @@
         "params": [
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_name": {
         "visibility": "PUBLIC",
@@ -408,7 +412,9 @@
         "params": [
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_owner": {
         "visibility": "PUBLIC",
@@ -416,7 +422,9 @@
         "params": [
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -425,7 +433,7 @@
           "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AUCTIONHOUSE",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_admin": {
         "visibility": "PUBLIC",
@@ -434,7 +442,9 @@
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "remove_admin": {
         "visibility": "PUBLIC",
@@ -444,7 +454,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "update_display": {
         "visibility": "PUBLIC",
@@ -454,7 +464,41 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "update_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_owner": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "hybrid_auctionhouse": {
@@ -468,12 +512,17 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "$1",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "T1",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "address",
+          "T1"
+        ]
       },
       "accept_kiosk_for_native_offer": {
         "visibility": "PUBLIC",
@@ -483,13 +532,13 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "$1",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "T1",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "accept_native_for_kiosk": {
         "visibility": "PUBLIC",
@@ -501,11 +550,14 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T1>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "T0",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       },
       "accept_native_for_kiosk_offer": {
         "visibility": "PUBLIC",
@@ -517,11 +569,11 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T1>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_kiosk_for_native_offer": {
         "visibility": "PUBLIC",
@@ -532,7 +584,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_native_for_kiosk_offer": {
         "visibility": "PUBLIC",
@@ -542,7 +594,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "T0"
+        ]
       },
       "claim_kiosk_nft": {
         "visibility": "PUBLIC",
@@ -553,10 +607,12 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>"
+        ]
       },
       "claim_kiosk_nft_offer": {
         "visibility": "PUBLIC",
@@ -565,11 +621,11 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "counter_offer_exists": {
         "visibility": "PUBLIC",
@@ -578,7 +634,9 @@
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "create_and_share_hybrid_auctionhouse_store": {
         "visibility": "PUBLIC",
@@ -587,7 +645,335 @@
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "create_counter_offer_key": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::CounterOfferKey"
+        ]
+      },
+      "create_direct_for_kiosk_key": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::DirectForKioskKey"
+        ]
+      },
+      "create_escrow_key": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::EscrowKey"
+        ]
+      },
+      "create_hybrid_auctionhouse": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store"
+        ]
+      },
+      "create_kiosk_for_direct_key": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::KioskForDirectKey"
+        ]
+      },
+      "create_kiosk_for_native_offer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_native_for_kiosk_offer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "T0",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_orphaned_cap_key": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u8"
+        ],
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::OrphanedCapKey"
+        ]
+      },
+      "direct_for_kiosk_offer_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "emergency_reset_counter_offer": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "emergency_reset_direct_for_kiosk_offer": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "emergency_reset_kiosk_for_direct_offer": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_counter_offer_expiration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_direct_for_kiosk_offer_expiration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_direct_for_kiosk_offer_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_kiosk_for_direct_offer_expiration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_kiosk_for_direct_offer_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_marketplace_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "kiosk_for_direct_offer_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "orphaned_cap_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u8"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "recover_orphaned_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "recover_orphaned_cap_from_storage": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "recover_orphaned_counter_offer_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "recover_orphaned_direct_for_kiosk_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "recover_orphaned_kiosk_for_direct_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "store_orphaned_counter_offer_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::PurchaseCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "store_orphaned_direct_for_kiosk_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::PurchaseCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "store_orphaned_kiosk_for_direct_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::hybrid_auctionhouse::Hybrid_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::PurchaseCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "kiosk_auctionhouse": {
@@ -602,12 +988,12 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "accept_kiosk_offer": {
         "visibility": "PUBLIC",
@@ -622,11 +1008,14 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       },
       "accept_offer_exists": {
         "visibility": "PUBLIC",
@@ -635,7 +1024,9 @@
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "cancel_kiosk_nft_offer": {
         "visibility": "PUBLIC",
@@ -646,7 +1037,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_kiosk_nft_offer": {
         "visibility": "PUBLIC",
@@ -655,11 +1046,11 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_offer": {
         "visibility": "PUBLIC",
@@ -670,10 +1061,12 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>"
+        ]
       },
       "create_accept_offer_key": {
         "visibility": "PRIVATE",
@@ -681,7 +1074,9 @@
         "params": [
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::AcceptOfferKey"
+        ]
       },
       "create_and_share_kiosk_auctionhouse_store": {
         "visibility": "PUBLIC",
@@ -690,7 +1085,7 @@
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_kiosk_auctionhouse": {
         "visibility": "PUBLIC",
@@ -699,7 +1094,9 @@
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store"
+        ]
       },
       "create_kiosk_nft_offer": {
         "visibility": "PUBLIC",
@@ -714,7 +1111,198 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "create_orphaned_cap_key": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u8"
+        ],
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::OrphanedCapKey"
+        ]
+      },
+      "create_personal_kiosk": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_personal_kiosk_ptb": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x434b5bd8f6a7b05fede0ff46c6e511d71ea326ed38056e3bcd681d2d7c2a7879::personal_kiosk::PersonalKioskCap"
+        ]
+      },
+      "create_swap_offer_key": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::SwapOfferKey"
+        ]
+      },
+      "emergency_reset_accept_offer": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "emergency_reset_offer": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_auction_house_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_offer_expiration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_offer_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "is_offer_expired": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "offer_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "orphaned_accept_cap_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "orphaned_swap_cap_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "recover_orphaned_accept_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "recover_orphaned_swap_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "store_orphaned_accept_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::PurchaseCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "store_orphaned_swap_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_auctionhouse::Kiosk_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::PurchaseCap<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "kiosk_bidding_house": {
@@ -726,10 +1314,10 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "accept_bid_entry": {
         "visibility": "PUBLIC",
@@ -739,10 +1327,10 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "accepted_bid_exists": {
         "visibility": "PUBLIC",
@@ -751,7 +1339,9 @@
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "buy_nft": {
         "visibility": "PUBLIC",
@@ -761,11 +1351,11 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_nft_to_existing_kiosk": {
         "visibility": "PUBLIC",
@@ -777,12 +1367,12 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_nft_to_new_kiosk": {
         "visibility": "PUBLIC",
@@ -792,12 +1382,12 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_nft_with_request": {
         "visibility": "PUBLIC",
@@ -807,11 +1397,14 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "T0",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>"
+        ]
       },
       "cancel_listing": {
         "visibility": "PUBLIC",
@@ -822,7 +1415,7 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_listing_entry": {
         "visibility": "PUBLIC",
@@ -833,7 +1426,7 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_accepted_bid": {
         "visibility": "PUBLIC",
@@ -843,7 +1436,308 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "T0"
+        ]
+      },
+      "claim_accepted_bid_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_accepted_bid_to_existing_kiosk": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_accepted_bid_to_new_kiosk": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_and_share_kiosk_bidding_house_store": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_kiosk_bidding_house": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store"
+        ]
+      },
+      "create_nft_listing": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u16",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "create_nft_listing_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u16",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_nft_listing_with_duration": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u16",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_personal_kiosk": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_personal_kiosk_ptb": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x434b5bd8f6a7b05fede0ff46c6e511d71ea326ed38056e3bcd681d2d7c2a7879::personal_kiosk::PersonalKioskCap"
+        ]
+      },
+      "emergency_reset_accepted_bid": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "emergency_reset_listing": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_accepted_bid_bidder": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_accepted_bid_timestamp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_buyout_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_highest_bid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_highest_bidder": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>"
+        ]
+      },
+      "get_listing_expiration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_listing_status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "get_nft_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_seller": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "is_listing_expired": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "listing_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "place_bid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "place_bid_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "recover_orphaned_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::kiosk_bidding_house::Kiosk_Bidding_Store",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "nft_auctionhouse": {
@@ -854,11 +1748,14 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store",
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "$1",
+          "T1",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "T0",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       },
       "accept_native_nft_offer_entry": {
         "visibility": "PUBLIC",
@@ -867,11 +1764,11 @@
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store",
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "$1",
+          "T1",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_native_nft_offer": {
         "visibility": "PUBLIC",
@@ -881,7 +1778,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "T0"
+        ]
       },
       "create_and_share_nft_auctionhouse_store": {
         "visibility": "PUBLIC",
@@ -890,7 +1789,7 @@
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_direct_offer_key": {
         "visibility": "PRIVATE",
@@ -898,7 +1797,9 @@
         "params": [
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::DirectOfferKey"
+        ]
       },
       "create_escrow_key": {
         "visibility": "PRIVATE",
@@ -906,20 +1807,22 @@
         "params": [
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::EscrowKey"
+        ]
       },
       "create_native_nft_offer": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store",
-          "$0",
+          "T0",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "u64",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_nft_auctionhouse": {
         "visibility": "PUBLIC",
@@ -928,7 +1831,9 @@
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::auctionhouse::AuctionHouse",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store"
+        ]
       },
       "direct_offer_exists": {
         "visibility": "PUBLIC",
@@ -937,7 +1842,9 @@
           "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "emergency_reset_direct_offer": {
         "visibility": "PUBLIC",
@@ -948,7 +1855,73 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "get_direct_offer_expiration": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_direct_offer_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_direct_offer_offerer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_direct_offer_requested_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_marketplace_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "is_direct_offer_expired": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xefee40882f221619dc0ea098094be9df177ff3ce1ac5be0cb97caec77357f73f::nft_auctionhouse::NFT_Auctionhouse_Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
       }
     }
   }

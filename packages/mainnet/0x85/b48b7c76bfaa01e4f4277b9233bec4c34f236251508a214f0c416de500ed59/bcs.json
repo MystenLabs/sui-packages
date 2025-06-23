@@ -56,30 +56,30 @@
           "&mut 0x85b48b7c76bfaa01e4f4277b9233bec4c34f236251508a214f0c416de500ed59::ninja_store::SwapListing",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
-          "$0",
+          "T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "AcceptSwap": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0x85b48b7c76bfaa01e4f4277b9233bec4c34f236251508a214f0c416de500ed59::ninja_store::SwapListing",
-          "$1",
+          "T1",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "AcceptSwapPrivate": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0x85b48b7c76bfaa01e4f4277b9233bec4c34f236251508a214f0c416de500ed59::ninja_store::SwapListing",
-          "$1",
+          "T1",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "CancelKioskSwap": {
         "visibility": "PUBLIC",
@@ -88,7 +88,7 @@
           "&mut 0x85b48b7c76bfaa01e4f4277b9233bec4c34f236251508a214f0c416de500ed59::ninja_store::SwapListing",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "CancelSwap": {
         "visibility": "PUBLIC",
@@ -97,7 +97,7 @@
           "&mut 0x85b48b7c76bfaa01e4f4277b9233bec4c34f236251508a214f0c416de500ed59::ninja_store::SwapListing",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "EmergencyCancelSwap": {
         "visibility": "PUBLIC",
@@ -106,7 +106,7 @@
           "&mut 0x85b48b7c76bfaa01e4f4277b9233bec4c34f236251508a214f0c416de500ed59::ninja_store::SwapListing",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "OfferKioskSwap": {
         "visibility": "PUBLIC",
@@ -118,7 +118,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "OfferKioskSwapDouble": {
         "visibility": "PUBLIC",
@@ -130,7 +130,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "OfferKioskSwapWithPersonalCap": {
         "visibility": "PUBLIC",
@@ -142,18 +142,103 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "OfferSwap": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "$0",
+          "T0",
           "vector<u8>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "OfferSwapPrivate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "T0",
+          "vector<u8>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "ValidateKioskPersonalCap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x85b48b7c76bfaa01e4f4277b9233bec4c34f236251508a214f0c416de500ed59::ninja_store::PersonalKioskCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_swap_listing_master": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&T0",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_type_name": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x85b48b7c76bfaa01e4f4277b9233bec4c34f236251508a214f0c416de500ed59::ninja_store::NINJA_STORE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "offer_kiosk_swap_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_kiosk_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_nft_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&T0",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "bool"
+        ]
       }
     }
   }

@@ -95,7 +95,7 @@
           "vector<address>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_to_whitelist": {
         "visibility": "PUBLIC",
@@ -105,7 +105,7 @@
           "vector<address>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_og_eligibility": {
         "visibility": "PUBLIC",
@@ -114,7 +114,10 @@
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool",
+          "u64"
+        ]
       },
       "check_public_eligibility": {
         "visibility": "PUBLIC",
@@ -123,7 +126,10 @@
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool",
+          "u64"
+        ]
       },
       "check_wl_eligibility": {
         "visibility": "PUBLIC",
@@ -132,7 +138,10 @@
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool",
+          "u64"
+        ]
       },
       "create_nft": {
         "visibility": "PRIVATE",
@@ -142,7 +151,10 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap"
+        ]
       },
       "get_minted_nft_ids": {
         "visibility": "PUBLIC",
@@ -150,7 +162,9 @@
         "params": [
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
       },
       "get_user_mint_status": {
         "visibility": "PUBLIC",
@@ -159,7 +173,9 @@
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
           "address"
         ],
-        "return": null
+        "return": [
+          "0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::UserMintStatus"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -168,7 +184,7 @@
           "0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CANDY_MACHINE",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init_candy": {
         "visibility": "PUBLIC",
@@ -189,7 +205,120 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_og": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
+          "address",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "mint_public": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
+          "address",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "mint_wl": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
+          "address",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "number_to_string": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "reveal_and_return_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "send_nft_and_cap_for_reveal": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_phase": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_proceeds": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::candy_machine::CandyMachine",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "kiosk": {
@@ -201,7 +330,10 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
         ],
-        "return": null
+        "return": [
+          "0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft>"
+        ]
       },
       "confirm_request": {
         "visibility": "PUBLIC",
@@ -210,7 +342,11 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -219,7 +355,7 @@
           "0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::kiosk::KIOSK",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "list": {
         "visibility": "FRIEND",
@@ -230,7 +366,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "new_kiosk": {
         "visibility": "FRIEND",
@@ -238,7 +374,10 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap"
+        ]
       },
       "new_policy": {
         "visibility": "PUBLIC",
@@ -247,7 +386,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft>"
+        ]
       },
       "place": {
         "visibility": "FRIEND",
@@ -257,7 +399,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft"
         ],
-        "return": null
+        "return": []
       },
       "withdraw": {
         "visibility": "FRIEND",
@@ -267,7 +409,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft"
+        ]
       },
       "withdraw_royalty_proceeds": {
         "visibility": "PUBLIC",
@@ -278,7 +422,7 @@
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::kiosk::PolicyInfo",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "nft": {
@@ -289,7 +433,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Attribute"
+        ]
       },
       "create_attributes": {
         "visibility": "PUBLIC",
@@ -297,7 +443,9 @@
         "params": [
           "vector<0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Attribute>"
         ],
-        "return": null
+        "return": [
+          "0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Attributes"
+        ]
       },
       "create_nft_with_ipfs": {
         "visibility": "PUBLIC",
@@ -314,7 +462,9 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft"
+        ]
       },
       "edition": {
         "visibility": "PUBLIC",
@@ -322,7 +472,9 @@
         "params": [
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_attribute_at": {
         "visibility": "PUBLIC",
@@ -331,7 +483,9 @@
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Attribute"
+        ]
       },
       "get_attribute_count": {
         "visibility": "PUBLIC",
@@ -339,7 +493,9 @@
         "params": [
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_attributes": {
         "visibility": "PUBLIC",
@@ -347,7 +503,9 @@
         "params": [
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft"
         ],
-        "return": null
+        "return": [
+          "vector<0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Attribute>"
+        ]
       },
       "image_url": {
         "visibility": "PUBLIC",
@@ -355,7 +513,9 @@
         "params": [
           "&0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
       },
       "update_attributes": {
         "visibility": "PRIVATE",
@@ -364,7 +524,7 @@
           "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft",
           "vector<0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Attribute>"
         ],
-        "return": null
+        "return": []
       },
       "update_image_url": {
         "visibility": "PRIVATE",
@@ -373,7 +533,18 @@
           "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": []
+      },
+      "update_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Nft",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<0x6a91359da170383bbfbb7cc750120f12fa9c199871cbe393e048f0962cf1e9c0::nft::Attribute>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "royalty_rule": {
@@ -381,41 +552,45 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<T0>",
           "u16"
         ],
-        "return": null
+        "return": []
       },
       "fee_amount": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "pay": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
         ],
-        "return": null
+        "return": []
       },
       "withdraw": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       }
     }
   }

@@ -98,7 +98,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "change_name": {
         "visibility": "PUBLIC",
@@ -108,7 +110,7 @@
           "&mut 0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::Color",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "change_name_max_length": {
         "visibility": "PUBLIC",
@@ -118,7 +120,7 @@
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "change_price": {
         "visibility": "PUBLIC",
@@ -128,7 +130,7 @@
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "change_treasury": {
         "visibility": "PUBLIC",
@@ -138,7 +140,7 @@
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "get_color": {
         "visibility": "PUBLIC",
@@ -146,7 +148,9 @@
         "params": [
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::Color"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_treasury": {
         "visibility": "PUBLIC",
@@ -154,7 +158,9 @@
         "params": [
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::ColorsControl"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "giveaway": {
         "visibility": "PUBLIC",
@@ -164,7 +170,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -173,7 +179,7 @@
           "0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::COLORS",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_valid_hex_char": {
         "visibility": "PRIVATE",
@@ -181,7 +187,83 @@
         "params": [
           "u8"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "is_valid_hex_color": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&vector<u8>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::ColorsControl",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "vector<vector<u8>>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_free": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::ColorsControl",
+          "0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::FreeColor",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::Color"
+        ]
+      },
+      "mint_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::ColorsControl",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::Color"
+        ]
+      },
+      "pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::ColorsControl",
+          "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap"
+        ],
+        "return": []
+      },
+      "to_base64": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "unpause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::ColorsControl",
+          "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap"
+        ],
+        "return": []
       }
     },
     "gallery": {
@@ -194,7 +276,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": []
       },
       "manual_init": {
         "visibility": "PUBLIC",
@@ -204,7 +286,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -215,7 +297,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::gallery::ColorArtefact"
+        ]
       },
       "pause": {
         "visibility": "PUBLIC",
@@ -224,7 +308,7 @@
           "&mut 0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::gallery::GalleryControl",
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "remove_gallery_item": {
         "visibility": "PUBLIC",
@@ -234,7 +318,7 @@
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": []
       },
       "unpause": {
         "visibility": "PUBLIC",
@@ -243,7 +327,7 @@
           "&mut 0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::gallery::GalleryControl",
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap"
         ],
-        "return": null
+        "return": []
       }
     },
     "partners": {
@@ -256,7 +340,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": []
       },
       "manual_init": {
         "visibility": "PUBLIC",
@@ -266,7 +350,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -276,7 +360,9 @@
           "0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::partners::PartnersColorArtefactMint",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::partners::PartnersColorArtefact"
+        ]
       },
       "mint_color": {
         "visibility": "PUBLIC",
@@ -287,7 +373,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::partners::PartnersColorArtefact"
+        ]
       },
       "pause": {
         "visibility": "PUBLIC",
@@ -296,7 +384,7 @@
           "&mut 0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::partners::PartnersGalleryControl",
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "remove_gallery_item": {
         "visibility": "PUBLIC",
@@ -306,7 +394,7 @@
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": []
       },
       "send_mint": {
         "visibility": "PUBLIC",
@@ -318,7 +406,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "unpause": {
         "visibility": "PUBLIC",
@@ -327,7 +415,7 @@
           "&mut 0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::partners::PartnersGalleryControl",
           "&0x7b3c21b45ea400b10253bf3678862aa94a927c37f069d312fdf7a4b804179b5e::colors::AdminCap"
         ],
-        "return": null
+        "return": []
       }
     }
   }

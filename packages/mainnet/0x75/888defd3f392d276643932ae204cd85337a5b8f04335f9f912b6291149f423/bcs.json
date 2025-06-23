@@ -76,7 +76,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "add_attributes": {
         "visibility": "PUBLIC",
@@ -89,7 +89,7 @@
           "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_url": {
         "visibility": "PUBLIC",
@@ -101,7 +101,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "addresses_minted": {
         "visibility": "PUBLIC",
@@ -109,7 +109,9 @@
         "params": [
           "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address, u64>"
+        ]
       },
       "admin_mint": {
         "visibility": "PRIVATE",
@@ -122,7 +124,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "attributes": {
         "visibility": "PUBLIC",
@@ -130,7 +132,9 @@
         "params": [
           "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
       },
       "balance": {
         "visibility": "PUBLIC",
@@ -138,7 +142,9 @@
         "params": [
           "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       },
       "bulk_add_attributes": {
         "visibility": "PUBLIC",
@@ -151,7 +157,7 @@
           "vector<vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "bulk_add_urls": {
         "visibility": "PUBLIC",
@@ -163,7 +169,7 @@
           "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "burn_early_ticket": {
         "visibility": "PUBLIC",
@@ -172,7 +178,366 @@
           "0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyEarlyTicket",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "burn_free_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyFreeTicket",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "can_public_mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
+        ],
+        "return": [
+          "&bool"
+        ]
+      },
+      "check_can_public_mint": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "u64",
+          "address",
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::EarlyAccess"
+        ],
+        "return": []
+      },
+      "check_max_nfts_per_address": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "collection_size": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "description": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "distribute_early_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "vector<address>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "distribute_free_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "vector<address>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "early_mints": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "early_mints_used": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "free_mints": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "free_mints_used": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "has_mint_left": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::NFT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "max_nfts_per_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "mint": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "u64",
+          "0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::EarlyAccess",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_tally": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_tally_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_tally_early": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyEarlyTicket",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mint_tally_free": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "u64",
+          "0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyFreeTicket",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "minted": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "number": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "public_mint_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry"
+        ],
+        "return": [
+          "&u64"
+        ]
+      },
+      "remove_attributes": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyAttributes",
+          "vector<u64>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_urls": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyAttributes",
+          "vector<u64>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "reveal_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyAttributes",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "start_minting": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "start_revealing": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyAttributes",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "start_trading": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stop_minting": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "url": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::url::Url"
+        ]
+      },
+      "withdraw_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::TallyRegistry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_royalties": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicyCap<0x75888defd3f392d276643932ae204cd85337a5b8f04335f9f912b6291149f423::nft::Tally>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

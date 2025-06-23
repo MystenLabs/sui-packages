@@ -65,7 +65,9 @@
           "&0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenizedCollection",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_redemption_cost": {
         "visibility": "PUBLIC",
@@ -74,7 +76,9 @@
           "&0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenizedCollection",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "freeze_minting": {
         "visibility": "PUBLIC",
@@ -85,7 +89,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_collection_info": {
         "visibility": "PUBLIC",
@@ -93,7 +97,15 @@
         "params": [
           "&0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenizedCollection"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "u64",
+          "address",
+          "bool",
+          "u64"
+        ]
       },
       "get_registry_stats": {
         "visibility": "PUBLIC",
@@ -101,7 +113,10 @@
         "params": [
           "&0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenRegistry"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "get_tokenized_collection_id": {
         "visibility": "PUBLIC",
@@ -110,7 +125,9 @@
           "&0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenRegistry",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "get_tokens_per_nft": {
         "visibility": "PUBLIC",
@@ -118,7 +135,9 @@
         "params": [
           "&0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenizedCollection"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -127,7 +146,7 @@
           "0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TOKENIZER",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_collection_active": {
         "visibility": "PUBLIC",
@@ -135,7 +154,9 @@
         "params": [
           "&0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenizedCollection"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "is_collection_registered": {
         "visibility": "PUBLIC",
@@ -144,7 +165,69 @@
           "&0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenRegistry",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "mint_additional": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenRegistry",
+          "&mut 0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenizedCollection",
+          "&mut 0xffec77bdbb001fb7d9770bfdee1d3d1e5f48598d77c6ba793d8452e166ccb0d4::ART20::CollectionCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TOKENIZER>",
+          "u64",
+          "&mut 0xffec77bdbb001fb7d9770bfdee1d3d1e5f48598d77c6ba793d8452e166ccb0d4::ART20::TokenIdCounter",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "safe_mul": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "tokenize_existing_collection": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xffec77bdbb001fb7d9770bfdee1d3d1e5f48598d77c6ba793d8452e166ccb0d4::ART20::CollectionCap",
+          "u64",
+          "&mut 0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenRegistry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TOKENIZER>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_treasury_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TOKENIZER>",
+          "address"
+        ],
+        "return": []
+      },
+      "update_token_ratio": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xf37849182b977a868592c08687267e63bd07917f942022895202808666e7980f::TOKENIZER::TokenizedCollection",
+          "&0xffec77bdbb001fb7d9770bfdee1d3d1e5f48598d77c6ba793d8452e166ccb0d4::ART20::CollectionCap",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

@@ -176,12 +176,12 @@
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
           "u64",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_signer": {
         "visibility": "FRIEND",
@@ -191,15 +191,17 @@
           "vector<u8>",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "balance_value": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>"
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create_owner_cap": {
         "visibility": "FRIEND",
@@ -207,7 +209,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap"
+        ]
       },
       "create_pause_cap": {
         "visibility": "FRIEND",
@@ -215,60 +219,323 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::PauseCap"
+        ]
       },
       "create_vault": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
           "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
           "u64",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>"
+        ]
       },
       "deposit": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>",
           "address",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "direct_deposit": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "direct_withdraw": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "find_security_period": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
           "address"
         ],
-        "return": null
+        "return": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::SecurityPeriod"
+        ]
+      },
+      "freeze_pause_cap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "address",
+          "bool"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "keccak_message": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u64",
+          "address",
+          "u64",
+          "address",
+          "vector<u8>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "remove_signer": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      },
+      "reset_signers": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "vector<vector<u8>>",
+          "u64"
+        ],
+        "return": []
+      },
+      "security_update": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_deposit_enable": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_enable_security_period": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "address",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_max_vault_balance": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_minimum_deposit": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_minimum_withdraw": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_pause": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_withdraw_enable": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "bool"
+        ],
+        "return": []
+      },
+      "signer_length": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "signers": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config"
+        ],
+        "return": [
+          "&vector<vector<u8>>"
+        ]
+      },
+      "threshold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_security_period": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "address",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "version_migrate": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config"
+        ],
+        "return": []
+      },
+      "version_verification": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config"
+        ],
+        "return": []
+      },
+      "when_deposit_not_disabled": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>"
+        ],
+        "return": []
+      },
+      "when_not_expired": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64"
+        ],
+        "return": []
+      },
+      "when_not_freezed_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::PauseCap"
+        ],
+        "return": []
+      },
+      "when_not_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config"
+        ],
+        "return": []
+      },
+      "when_withdraw_not_disabled": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "u256",
+          "u64",
+          "address",
+          "u64",
+          "address",
+          "vector<vector<u8>>",
+          "vector<u8>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       }
     },
     "dvault_manage": {
@@ -277,13 +544,13 @@
         "is_entry": false,
         "params": [
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
           "u64",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_signer": {
         "visibility": "PUBLIC",
@@ -294,7 +561,7 @@
           "vector<u8>",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "create_owner_cap": {
         "visibility": "PUBLIC",
@@ -305,7 +572,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_pause_cap": {
         "visibility": "PUBLIC",
@@ -316,7 +583,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_vault": {
         "visibility": "PUBLIC",
@@ -324,33 +591,33 @@
         "params": [
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
           "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
           "u64",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_secure_vault": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "direct_deposit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "direct_withdraw": {
         "visibility": "PUBLIC",
@@ -358,11 +625,13 @@
         "params": [
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "freeze_pause_cap": {
         "visibility": "PUBLIC",
@@ -373,7 +642,7 @@
           "address",
           "bool"
         ],
-        "return": null
+        "return": []
       },
       "operator_withdraw_secure_vault": {
         "visibility": "PUBLIC",
@@ -381,12 +650,143 @@
         "params": [
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureOperatorCap",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "remove_signer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "vector<u8>",
+          "u64"
+        ],
+        "return": []
+      },
+      "reset_signers": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "vector<vector<u8>>",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_deposit_enable": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_enable_security_period": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "address",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_max_vault_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_minimum_deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_minimum_withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_pause_by_pause_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::PauseCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_withdraw_enable": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "bool"
+        ],
+        "return": []
+      },
+      "update_security_period": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
+          "address",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "version_migrate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::OwnerCap",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config"
+        ],
+        "return": []
       }
     },
     "secure_vault": {
@@ -394,28 +794,32 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureOwnerCap",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "assert_operator_enabled": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>",
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureOperatorCap"
         ],
-        "return": null
+        "return": []
       },
       "balance_value": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>"
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create_operator_cap": {
         "visibility": "PUBLIC",
@@ -425,7 +829,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_vault": {
         "visibility": "FRIEND",
@@ -433,16 +837,16 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_secure_vault": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -450,36 +854,50 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "set_disable_operator": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureOwnerCap",
           "address",
           "bool"
         ],
-        "return": null
+        "return": []
       },
       "set_operator_epoch_max_amount": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureOwnerCap",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "to_address": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>"
+          "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
+      },
+      "withdraw_secure_vault": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       }
     },
     "user_entry": {
@@ -488,13 +906,13 @@
         "is_entry": false,
         "params": [
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::secure_vault::SecureVault<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "withdraw": {
         "visibility": "PUBLIC",
@@ -502,7 +920,7 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::Config",
-          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<$0>",
+          "&mut 0xa4316a89f85fbdf6c0df30bd0486de0d93b024a530e1bd35c15ade821bce822a::active_vault::ActiveVault<T0>",
           "u256",
           "u64",
           "u64",
@@ -511,7 +929,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }

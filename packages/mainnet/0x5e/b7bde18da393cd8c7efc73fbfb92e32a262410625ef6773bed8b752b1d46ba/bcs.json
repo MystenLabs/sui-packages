@@ -54,7 +54,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "wrapper": {
@@ -65,16 +65,20 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "charge_fee": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "create_fund_cap": {
         "visibility": "PUBLIC",
@@ -84,18 +88,24 @@
           "&0x5eb7bde18da393cd8c7efc73fbfb92e32a262410625ef6773bed8b752b1d46ba::wrapper::DeepBookV3RouterWrapper",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x5eb7bde18da393cd8c7efc73fbfb92e32a262410625ef6773bed8b752b1d46ba::wrapper::DeepBookV3FundCap"
+        ]
       },
       "get_quantity_out": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
+          "&0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
           "u64",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -103,7 +113,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "join": {
         "visibility": "PUBLIC",
@@ -112,51 +122,67 @@
           "&mut 0x5eb7bde18da393cd8c7efc73fbfb92e32a262410625ef6773bed8b752b1d46ba::wrapper::DeepBookV3RouterWrapper",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>"
         ],
-        "return": null
+        "return": []
       },
       "join_fee": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
           "&mut 0x5eb7bde18da393cd8c7efc73fbfb92e32a262410625ef6773bed8b752b1d46ba::wrapper::DeepBookV3RouterWrapper",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "swap_exact_base_for_quote": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x5eb7bde18da393cd8c7efc73fbfb92e32a262410625ef6773bed8b752b1d46ba::wrapper::DeepBookV3RouterWrapper",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "swap_exact_quote_for_base": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x5eb7bde18da393cd8c7efc73fbfb92e32a262410625ef6773bed8b752b1d46ba::wrapper::DeepBookV3RouterWrapper",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "transfer_if_nonzero": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "address"
         ],
-        "return": null
+        "return": []
+      },
+      "withdraw_charged_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5eb7bde18da393cd8c7efc73fbfb92e32a262410625ef6773bed8b752b1d46ba::wrapper::DeepBookV3FundCap",
+          "&mut 0x5eb7bde18da393cd8c7efc73fbfb92e32a262410625ef6773bed8b752b1d46ba::wrapper::DeepBookV3RouterWrapper",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     }
   }

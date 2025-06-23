@@ -93,7 +93,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "close_proposal": {
         "visibility": "PUBLIC",
@@ -104,7 +104,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_proposal": {
         "visibility": "PUBLIC",
@@ -117,7 +117,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "did_member_vote": {
         "visibility": "PUBLIC",
@@ -126,7 +126,9 @@
           "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::Proposal",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "execute_proposal": {
         "visibility": "PUBLIC",
@@ -137,7 +139,7 @@
           "&mut 0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::Proposal",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_dao_config": {
         "visibility": "PUBLIC",
@@ -145,7 +147,10 @@
         "params": [
           "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::DAOState"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "get_member_count": {
         "visibility": "PUBLIC",
@@ -153,7 +158,9 @@
         "params": [
           "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::DAOState"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_proposal_expiry": {
         "visibility": "PUBLIC",
@@ -161,7 +168,9 @@
         "params": [
           "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::Proposal"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_proposal_status": {
         "visibility": "PUBLIC",
@@ -169,7 +178,13 @@
         "params": [
           "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::Proposal"
         ],
-        "return": null
+        "return": [
+          "bool",
+          "bool",
+          "bool",
+          "u64",
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -178,7 +193,95 @@
           "0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::DAO",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "invite_member": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::AdminCap",
+          "&mut 0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::DAOState",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_member": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::DAOState",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "propose_add_member": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::MemberCap",
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::DAOState",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "propose_config_update": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::MemberCap",
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::DAOState",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "propose_remove_member": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::MemberCap",
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::DAOState",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_member_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::MemberCap",
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::DAOState",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "vote": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::MemberCap",
+          "&0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::DAOState",
+          "&mut 0xa5624847b0b4ed0ace977e773bd120987b617c5bbed83a095d818a8a3f363be4::dao::Proposal",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

@@ -74,21 +74,21 @@
         "is_entry": false,
         "params": [
           "&0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::OwnerCap",
-          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>"
+          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
         ],
-        "return": null
+        "return": []
       },
       "admin_withdraw_reward": {
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
           "&0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::OwnerCap",
-          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<$0, $1>",
+          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<T0, T1>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cal_acc_reward_per_share": {
         "visibility": "PRIVATE",
@@ -102,7 +102,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "cal_pending_reward": {
         "visibility": "PRIVATE",
@@ -113,7 +115,9 @@
           "u256",
           "u256"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_reward_debt": {
         "visibility": "PRIVATE",
@@ -123,7 +127,9 @@
           "u64",
           "u256"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "create_pool": {
         "visibility": "PUBLIC",
@@ -137,7 +143,7 @@
           "u8",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -145,37 +151,76 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "migrate": {
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
           "&0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::OwnerCap",
-          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<$0, $1>"
+          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<T0, T1>"
         ],
-        "return": null
+        "return": []
       },
       "pending_reward": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<$0, $1>",
+          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "stake": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "update_pool": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "update_pool_config": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::OwnerCap",
+          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<T0, T1>",
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x6e815f46579a2c86506480e344c757d2ab5beccb9bdc9a9b857118cfae3c2b00::wave_staking_v2::Pool<T0, T1>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       }
     }
   }

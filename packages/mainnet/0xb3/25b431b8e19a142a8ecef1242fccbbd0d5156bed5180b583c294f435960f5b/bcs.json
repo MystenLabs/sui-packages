@@ -88,7 +88,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_collection": {
         "visibility": "PUBLIC",
@@ -104,7 +104,7 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_fee_amount": {
         "visibility": "PUBLIC",
@@ -112,7 +112,9 @@
         "params": [
           "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::ModuleState"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_public_key": {
         "visibility": "PUBLIC",
@@ -120,7 +122,9 @@
         "params": [
           "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::ModuleState"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_sbt_info": {
         "visibility": "PUBLIC",
@@ -128,7 +132,12 @@
         "params": [
           "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::SBT"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "bool"
+        ]
       },
       "image_url": {
         "visibility": "PUBLIC",
@@ -136,7 +145,9 @@
         "params": [
           "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::SBT"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -145,7 +156,7 @@
           "0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::SBT_NFT",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "initialize_values": {
         "visibility": "PUBLIC",
@@ -158,7 +169,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_collection_admin": {
         "visibility": "PUBLIC",
@@ -167,7 +178,9 @@
           "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::Collection",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "is_paused": {
         "visibility": "PUBLIC",
@@ -175,7 +188,96 @@
         "params": [
           "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::ModuleState"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "is_transferable": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::SBT"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "mint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::ModuleState",
+          "&mut 0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::Collection",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_collection_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::CollectionAdminCap",
+          "&mut 0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::Collection",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::AdminCap",
+          "&mut 0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::ModuleState",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_ownership": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::AdminCap",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_fee_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::AdminCap",
+          "&mut 0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::ModuleState",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_public_key": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::AdminCap",
+          "&mut 0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::ModuleState",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_sbt_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb325b431b8e19a142a8ecef1242fccbbd0d5156bed5180b583c294f435960f5b::sbt_nft::Collection",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

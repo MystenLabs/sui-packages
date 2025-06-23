@@ -43,62 +43,76 @@
         "is_entry": true,
         "params": [
           "&mut 0x3c443893b04b09794812ae163aeab8a6702605fb02a48bd648e3d6d9b35b0481::mm_demo::Vault",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": []
       },
       "destory_swap_cert": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x3c443893b04b09794812ae163aeab8a6702605fb02a48bd648e3d6d9b35b0481::mm_demo::FlashSwapCert<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "0x3c443893b04b09794812ae163aeab8a6702605fb02a48bd648e3d6d9b35b0481::mm_demo::FlashSwapCert<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "&mut 0x3c443893b04b09794812ae163aeab8a6702605fb02a48bd648e3d6d9b35b0481::mm_demo::Vault",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "err_expired": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_incorrect_amount_in": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_insufficient_balance": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_no_flash_permission": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_no_withdraw_permission": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_scheme_not_support": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_signature": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -106,7 +120,58 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "parse_signature": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>"
+        ],
+        "return": [
+          "address",
+          "vector<u8>",
+          "vector<u8>"
+        ]
+      },
+      "swap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x3c443893b04b09794812ae163aeab8a6702605fb02a48bd648e3d6d9b35b0481::mm_demo::Vault",
+          "u64",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x272b20a77a33151e2c8686e2fa0abe97ac48a676316a8f4a71cab00ae391aadf::confirmer::SwapCert<T0, T1>",
+          "&mut 0x272b20a77a33151e2c8686e2fa0abe97ac48a676316a8f4a71cab00ae391aadf::fee_tier::FeeTier",
+          "&0x272b20a77a33151e2c8686e2fa0abe97ac48a676316a8f4a71cab00ae391aadf::versioned::Versioned",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "bool",
+          "address"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x3c443893b04b09794812ae163aeab8a6702605fb02a48bd648e3d6d9b35b0481::mm_demo::Vault",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

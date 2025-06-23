@@ -91,7 +91,7 @@
           "&0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::AdminCap",
           "&mut 0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::LootboxTreasury"
         ],
-        "return": null
+        "return": []
       },
       "admin_issue_lootbox": {
         "visibility": "PUBLIC",
@@ -105,7 +105,7 @@
           "&mut 0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::LootboxSettings",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "admin_update_lootbox_settings": {
         "visibility": "PUBLIC",
@@ -121,7 +121,7 @@
           "u64",
           "&mut 0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::LootboxSettings"
         ],
-        "return": null
+        "return": []
       },
       "create_lootbox_display": {
         "visibility": "PUBLIC",
@@ -131,7 +131,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_lootbox_treasury": {
         "visibility": "PUBLIC",
@@ -140,7 +140,7 @@
           "&0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::AdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
@@ -148,9 +148,9 @@
         "params": [
           "&0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::AdminCap",
           "&mut 0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::LootboxTreasury",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": []
       },
       "get_prize_amount": {
         "visibility": "PRIVATE",
@@ -163,7 +163,9 @@
           "u64",
           "&0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::LootboxSettings"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -172,29 +174,41 @@
           "0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::LOOTBOX",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "open_lootbox": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::LootboxTreasury",
-          "0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::Lootbox<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$0>",
+          "0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::Lootbox<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
           "&0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::LootboxSettings",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "pay_from_balance": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::AdminCap",
+          "&mut 0x6682aaed15da135e34449cce7f89bf9e79c0fce1087173391a041742d8081690::lootbox::LootboxTreasury",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

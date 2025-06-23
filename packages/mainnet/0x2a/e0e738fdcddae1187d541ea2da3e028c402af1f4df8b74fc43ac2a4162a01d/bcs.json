@@ -110,7 +110,7 @@
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasAdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_cost_in_paint": {
         "visibility": "PUBLIC",
@@ -119,7 +119,9 @@
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_pixels_paint_fee": {
         "visibility": "PUBLIC",
@@ -130,7 +132,9 @@
           "vector<u64>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "color": {
         "visibility": "PUBLIC",
@@ -138,7 +142,9 @@
         "params": [
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Pixel"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "cost": {
         "visibility": "PUBLIC",
@@ -146,7 +152,9 @@
         "params": [
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Pixel"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "fee_router_mut": {
         "visibility": "FRIEND",
@@ -154,7 +162,9 @@
         "params": [
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas"
         ],
-        "return": null
+        "return": [
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::fee_router::FeeRouter"
+        ]
       },
       "get_chunk_coordinate_from_pixel": {
         "visibility": "PUBLIC",
@@ -163,7 +173,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Coordinate"
+        ]
       },
       "get_cost": {
         "visibility": "PUBLIC",
@@ -173,7 +185,9 @@
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_next_chunk_location": {
         "visibility": "PUBLIC",
@@ -181,7 +195,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Coordinate"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -189,7 +205,196 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "is_multiplier_expired": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Pixel",
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "last_painted_at": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Pixel"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "last_painter": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Pixel"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "offset_pixel_coordinate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Coordinate"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "paint": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Pixel",
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "paint_pixels": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "paint_pixels_with_paint": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas",
+          "vector<u64>",
+          "vector<u64>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x8d572055ac7168a40878ca9f90dfec10c11f77da086f215277da52ab06a62952::paint_coin::PAINT_COIN>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pixel": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Pixel"
+        ]
+      },
+      "pixel_mut": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Pixel"
+        ]
+      },
+      "rules": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas"
+        ],
+        "return": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules"
+        ]
+      },
+      "update_base_paint_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasAdminCap",
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_canvas_treasury": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasAdminCap",
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas",
+          "address"
+        ],
+        "return": []
+      },
+      "update_pixel_price_multiplier_reset_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasAdminCap",
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_ticket_odds": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasAdminCap",
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas",
+          "u64"
+        ],
+        "return": []
+      },
+      "withdraw_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Canvas",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "x": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Coordinate"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "y": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas::Coordinate"
+        ],
+        "return": [
+          "u64"
+        ]
       }
     },
     "canvas_admin": {
@@ -199,7 +404,9 @@
         "params": [
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "canvas_treasury": {
         "visibility": "PUBLIC",
@@ -207,16 +414,20 @@
         "params": [
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "claim_fees": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasAdminCap",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "id": {
         "visibility": "PUBLIC",
@@ -224,7 +435,9 @@
         "params": [
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasAdminCap"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -232,7 +445,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "new_rules": {
         "visibility": "FRIEND",
@@ -243,7 +456,9 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules"
+        ]
       },
       "paint_coin_fee": {
         "visibility": "PUBLIC",
@@ -251,7 +466,9 @@
         "params": [
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "pixel_price_multiplier_reset_ms": {
         "visibility": "PUBLIC",
@@ -259,7 +476,9 @@
         "params": [
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "update_base_paint_fee": {
         "visibility": "FRIEND",
@@ -268,7 +487,7 @@
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "update_canvas_treasury": {
         "visibility": "FRIEND",
@@ -277,7 +496,16 @@
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules",
           "address"
         ],
-        "return": null
+        "return": []
+      },
+      "update_pixel_price_multiplier_reset_ms": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasRules",
+          "u64"
+        ],
+        "return": []
       }
     },
     "events": {
@@ -288,7 +516,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_pixels_painted_event": {
         "visibility": "FRIEND",
@@ -300,7 +528,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "emit_reward_event": {
         "visibility": "FRIEND",
@@ -309,7 +537,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "bool"
         ],
-        "return": null
+        "return": []
       },
       "emit_wheel_created_event": {
         "visibility": "FRIEND",
@@ -318,7 +546,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address"
         ],
-        "return": null
+        "return": []
       }
     },
     "fee_router": {
@@ -329,7 +557,7 @@
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::fee_router::FeeRouter",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
         ],
-        "return": null
+        "return": []
       },
       "get_accrued_fees": {
         "visibility": "PUBLIC",
@@ -338,7 +566,9 @@
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::fee_router::FeeRouter",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "new_fee_router": {
         "visibility": "FRIEND",
@@ -346,7 +576,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::fee_router::FeeRouter"
+        ]
       },
       "record_fee": {
         "visibility": "FRIEND",
@@ -356,7 +588,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "withdraw_fees": {
         "visibility": "FRIEND",
@@ -365,7 +597,9 @@
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::fee_router::FeeRouter",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       }
     },
     "rewards": {
@@ -375,19 +609,21 @@
         "params": [
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::rewards::RewardWheel",
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasAdminCap",
-          "vector<$0>",
+          "vector<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_reward": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::rewards::Reward",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<T0>"
         ],
-        "return": null
+        "return": [
+          "T0"
+        ]
       },
       "create_reward_wheel": {
         "visibility": "PUBLIC",
@@ -397,7 +633,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_ticket": {
         "visibility": "FRIEND",
@@ -408,7 +644,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::rewards::Ticket"
+        ]
       },
       "destroy_ticket": {
         "visibility": "PUBLIC",
@@ -416,7 +654,7 @@
         "params": [
           "0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::rewards::Ticket"
         ],
-        "return": null
+        "return": []
       },
       "is_valid": {
         "visibility": "PUBLIC",
@@ -424,7 +662,9 @@
         "params": [
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::rewards::Ticket"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "rewards_mut": {
         "visibility": "PUBLIC",
@@ -432,7 +672,9 @@
         "params": [
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::rewards::RewardWheel"
         ],
-        "return": null
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object_bag::ObjectBag"
+        ]
       },
       "set_reward_wheel_metadata": {
         "visibility": "PUBLIC",
@@ -442,7 +684,7 @@
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::rewards::RewardWheel",
           "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
         ],
-        "return": null
+        "return": []
       },
       "spin": {
         "visibility": "PRIVATE",
@@ -453,7 +695,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "toggle_reward_wheel": {
         "visibility": "PRIVATE",
@@ -462,7 +704,19 @@
           "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasAdminCap",
           "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::rewards::RewardWheel"
         ],
-        "return": null
+        "return": []
+      },
+      "withdraw_from_reward_wheel": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::canvas_admin::CanvasAdminCap",
+          "&mut 0x2ae0e738fdcddae1187d541ea2da3e028c402af1f4df8b74fc43ac2a4162a01d::rewards::RewardWheel",
+          "u32"
+        ],
+        "return": [
+          "T0"
+        ]
       }
     }
   }

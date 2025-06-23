@@ -64,7 +64,9 @@
           "&0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::pool_dispatcher::PoolDispatcher",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "default": {
         "visibility": "FRIEND",
@@ -72,7 +74,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::pool_dispatcher::PoolDispatcher"
+        ]
       },
       "set_address_pool": {
         "visibility": "FRIEND",
@@ -82,7 +86,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "transfer": {
         "visibility": "FRIEND",
@@ -90,9 +94,9 @@
         "params": [
           "&0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::pool_dispatcher::PoolDispatcher",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": []
       }
     },
     "schedule": {
@@ -100,7 +104,9 @@
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "vector<0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<T0>>"
+        ]
       }
     },
     "testcoin": {
@@ -112,7 +118,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_batch": {
         "visibility": "PUBLIC",
@@ -124,7 +130,7 @@
           "vector<u64>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "depository": {
         "visibility": "PRIVATE",
@@ -132,7 +138,9 @@
         "params": [
           "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::Vault"
         ],
-        "return": null
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::object_table::ObjectTable<address, 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::TESTCOIN>>"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -141,7 +149,7 @@
           "0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::TESTCOIN",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "insert_entry": {
         "visibility": "PUBLIC",
@@ -156,7 +164,7 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -166,7 +174,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "pool_dispatcher": {
         "visibility": "PRIVATE",
@@ -174,7 +182,9 @@
         "params": [
           "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::Vault"
         ],
-        "return": null
+        "return": [
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::pool_dispatcher::PoolDispatcher"
+        ]
       },
       "premint": {
         "visibility": "PRIVATE",
@@ -183,7 +193,7 @@
           "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::Vault",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "remove_entry": {
         "visibility": "PUBLIC",
@@ -193,7 +203,7 @@
           "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::Vault",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "set_address_pool": {
         "visibility": "PUBLIC",
@@ -204,7 +214,41 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "address"
         ],
-        "return": null
+        "return": []
+      },
+      "set_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::ScheduleAdminCap",
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::Vault",
+          "u64",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "vector<u64>",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "treasury": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::Vault"
+        ],
+        "return": [
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::TESTCOIN>"
+        ]
+      },
+      "unblock_minting": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::ScheduleAdminCap",
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::testcoin::Vault"
+        ],
+        "return": []
       }
     },
     "treasury": {
@@ -212,12 +256,14 @@
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
           "u64",
-          "vector<0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<$0>>",
+          "vector<0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<T0>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<T0>"
+        ]
       },
       "create_entry": {
         "visibility": "FRIEND",
@@ -229,84 +275,96 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<T0>"
+        ]
       },
       "get_entry_mint_time": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<$0>"
+          "&0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "insert_entry": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<$0>",
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<T0>",
           "u64",
-          "0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<$0>"
+          "0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<T0>"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<$0>",
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>"
+        ]
       },
       "mint_entry": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<$0>",
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<T0>",
           "u64",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>"
+        ]
       },
       "premint": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<$0>",
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "remove_entry": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<$0>",
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<T0>",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "set_entry": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<$0>",
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<T0>",
           "u64",
-          "0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<$0>"
+          "0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::ScheduleEntry<T0>"
         ],
-        "return": null
+        "return": []
       },
       "unblock_minting": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<$0>"
+          "&mut 0xa490a3c4cdbc713e9666d89de8fb715cc75251ae04552b0b7b585331b6782020::treasury::Treasury<T0>"
         ],
-        "return": null
+        "return": []
       }
     }
   }

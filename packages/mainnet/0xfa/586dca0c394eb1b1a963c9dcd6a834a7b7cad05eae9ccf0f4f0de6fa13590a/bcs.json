@@ -67,7 +67,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::PriceIdentifier>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_additional_admin_cap": {
         "visibility": "PUBLIC",
@@ -76,7 +76,9 @@
           "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::AdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::AdminCap"
+        ]
       },
       "create_oracle": {
         "visibility": "PRIVATE",
@@ -84,7 +86,10 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::Oracle",
+          "0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::AdminCap"
+        ]
       },
       "get_all_supported_price_identifiers": {
         "visibility": "PUBLIC",
@@ -92,7 +97,9 @@
         "params": [
           "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::Oracle"
         ],
-        "return": null
+        "return": [
+          "vector<0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::PriceIdentifier>"
+        ]
       },
       "get_ema_price": {
         "visibility": "PUBLIC",
@@ -100,7 +107,9 @@
         "params": [
           "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::PriceInfo"
         ],
-        "return": null
+        "return": [
+          "0x482801dd5944c6ba06810966647f6835240c750bc3e980917a3e9e4617f278bc::math::Number"
+        ]
       },
       "get_identifiers_for_coin": {
         "visibility": "PUBLIC",
@@ -109,7 +118,9 @@
           "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::Oracle",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": [
+          "vector<0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::PriceIdentifier>"
+        ]
       },
       "get_price": {
         "visibility": "PUBLIC",
@@ -117,7 +128,9 @@
         "params": [
           "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::PriceInfo"
         ],
-        "return": null
+        "return": [
+          "0x482801dd5944c6ba06810966647f6835240c750bc3e980917a3e9e4617f278bc::math::Number"
+        ]
       },
       "get_price_info": {
         "visibility": "PUBLIC",
@@ -126,7 +139,9 @@
           "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::Oracle",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": [
+          "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::PriceInfo"
+        ]
       },
       "get_updated_time": {
         "visibility": "PUBLIC",
@@ -134,7 +149,9 @@
         "params": [
           "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::PriceInfo"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -143,7 +160,59 @@
           "0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::ORACLE",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "parse_price_to_number": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::Price"
+        ],
+        "return": [
+          "0x482801dd5944c6ba06810966647f6835240c750bc3e980917a3e9e4617f278bc::math::Number"
+        ]
+      },
+      "remove_coin_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::Oracle",
+          "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "update_identifier_for_coin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::Oracle",
+          "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::PriceIdentifier>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::PriceIdentifier>"
+        ],
+        "return": []
+      },
+      "update_max_age": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::Oracle",
+          "&0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::AdminCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfa586dca0c394eb1b1a963c9dcd6a834a7b7cad05eae9ccf0f4f0de6fa13590a::oracle::Oracle",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
       }
     }
   }

@@ -81,7 +81,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "advance_phase": {
         "visibility": "PUBLIC",
@@ -91,7 +91,7 @@
           "&0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::AdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_apy_rate_for_elapsed": {
         "visibility": "PRIVATE",
@@ -100,7 +100,9 @@
           "&0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::StakeInfo",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_rewards": {
         "visibility": "PRIVATE",
@@ -109,7 +111,9 @@
           "&0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::StakeInfo",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "change_admin": {
         "visibility": "PUBLIC",
@@ -120,7 +124,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_burn_thresholds": {
         "visibility": "PRIVATE",
@@ -129,7 +133,7 @@
           "&mut 0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::PreSaleConfig",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_rewards": {
         "visibility": "PUBLIC",
@@ -139,7 +143,7 @@
           "&mut 0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::PreSaleConfig",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_estimated_rewards": {
         "visibility": "PUBLIC",
@@ -149,7 +153,9 @@
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_stakes": {
         "visibility": "PUBLIC",
@@ -159,7 +165,9 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -168,7 +176,107 @@
           "0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::PLHH",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "init_staking_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::PreSaleConfig",
+          "&0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pow10": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u8"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "purchase_tokens": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::PreSaleConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "purchase_tokens_fiat": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::PreSaleConfig",
+          "u64",
+          "u64",
+          "vector<u8>",
+          "address",
+          "&0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "reset_phase_time": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::PreSaleConfig",
+          "&0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "show_available_funds_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::PreSaleConfig",
+          "&0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::StakePool",
+          "u64",
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::PLHH>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unstake": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::StakePool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_funds": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::PreSaleConfig",
+          "&0xa787193d3c84a1349a9b68bdf43cecb194780cc05c58dd33431096f1f9ddb95c::plhh::AdminCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

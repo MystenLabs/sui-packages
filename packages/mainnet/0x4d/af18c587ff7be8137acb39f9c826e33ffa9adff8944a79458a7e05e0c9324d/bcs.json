@@ -109,10 +109,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "accept_trade_single_kiosks": {
         "visibility": "PUBLIC",
@@ -125,10 +125,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_trade": {
         "visibility": "PUBLIC",
@@ -141,7 +141,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_trade_entry": {
         "visibility": "PUBLIC",
@@ -153,7 +153,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_expired_trade": {
         "visibility": "PUBLIC",
@@ -165,7 +165,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "consolidate_kiosk": {
         "visibility": "PUBLIC",
@@ -177,10 +177,10 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_kiosk": {
         "visibility": "PUBLIC",
@@ -188,7 +188,10 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap"
+        ]
       },
       "create_trade": {
         "visibility": "PUBLIC",
@@ -205,7 +208,9 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "create_trade_entry": {
         "visibility": "PUBLIC",
@@ -224,7 +229,9 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "create_trade_item": {
         "visibility": "PUBLIC",
@@ -232,7 +239,264 @@
         "params": [
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": [
+          "0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::TradeItem"
+        ]
+      },
+      "execute_purchase_for_type": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "T0",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>"
+        ]
+      },
+      "get_active_trades": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_counterparty_items": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "vector<0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::TradeItem>"
+        ]
+      },
+      "get_creator_items": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "vector<0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::TradeItem>"
+        ]
+      },
+      "get_fee_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_fee_percentage": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_purchase_cap_bytes": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::PurchaseCap<T0>"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "get_sui_offered": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_sui_requested": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_volume": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_trade_creator": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "get_trade_types": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
+      },
+      "get_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store"
+        ],
+        "return": [
+          "0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Version"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::NFT_SWAP",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init_type_registry": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::TypeRegistry"
+        ]
+      },
+      "is_allowed_nft_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_compatible_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_trade_expired": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "register_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::TypeRegistry",
+          "0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::TypeWitness<T0>"
+        ],
+        "return": []
+      },
+      "trade_contains_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "trade_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "update_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::AdminCap",
+          "&mut 0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_fee_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::AdminCap",
+          "&mut 0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_version": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::AdminCap",
+          "&mut 0x4daf18c587ff7be8137acb39f9c826e33ffa9adff8944a79458a7e05e0c9324d::nft_swap::Store",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

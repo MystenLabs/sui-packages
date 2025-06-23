@@ -46,7 +46,7 @@
           "0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::app::APP",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init_interal": {
         "visibility": "PRIVATE",
@@ -55,7 +55,9 @@
           "0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::app::APP",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::app::VaultAdminCap"
+        ]
       }
     },
     "vault": {
@@ -63,78 +65,91 @@
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<$0, $1>",
+          "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "balance_without_fees": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<$0, $1>",
+          "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "current_fee_balance": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<$0, $1>",
+          "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "0x1ad46303d653a4cfe7ed9a939567f78a2fd1b96d8423a8ded9b2415fdd1ee31f::decimals::Decimal"
+        ]
       },
       "current_fee_percentage": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<$0, $1>",
+          "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "0x1ad46303d653a4cfe7ed9a939567f78a2fd1b96d8423a8ded9b2415fdd1ee31f::decimals::Decimal"
+        ]
       },
       "deposit_internal": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>",
+          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "deposit_with_fees": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>",
+          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
           "0x1ad46303d653a4cfe7ed9a939567f78a2fd1b96d8423a8ded9b2415fdd1ee31f::decimals::Decimal",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "0x1ad46303d653a4cfe7ed9a939567f78a2fd1b96d8423a8ded9b2415fdd1ee31f::decimals::Decimal"
+        ]
       },
       "deposit_with_no_fees": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>",
+          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "fees_balance": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<$0, $1>",
+          "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "0x1ad46303d653a4cfe7ed9a939567f78a2fd1b96d8423a8ded9b2415fdd1ee31f::decimals::Decimal"
+        ]
       },
       "new": {
         "visibility": "PUBLIC",
@@ -144,17 +159,58 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::app::VaultAdminCap"
         ],
-        "return": null
+        "return": [
+          "0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>"
+        ]
       },
       "withdraw_fees": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<$0, $1>",
+          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::app::VaultAdminCap"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "withdraw_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "withdraw_with_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
+          "u64",
+          "0x1ad46303d653a4cfe7ed9a939567f78a2fd1b96d8423a8ded9b2415fdd1ee31f::decimals::Decimal",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "withdraw_with_no_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x24b3f83f98dc4ba4fd90916827d331d985c0b6cb5bbff880083a7fd5de445bc9::vault::Vault<T0, T1>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       }
     }
   }

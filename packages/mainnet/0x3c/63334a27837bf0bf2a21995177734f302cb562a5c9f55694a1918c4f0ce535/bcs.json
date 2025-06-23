@@ -164,7 +164,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_valid_operator": {
         "visibility": "FRIEND",
@@ -174,7 +174,7 @@
           "address",
           "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::authority::OperatorCapsBag"
         ],
-        "return": null
+        "return": []
       },
       "issue_operator_cap": {
         "visibility": "PUBLIC",
@@ -186,7 +186,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "revoke_operator_cap": {
         "visibility": "PUBLIC",
@@ -198,7 +198,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": []
       }
     },
     "quest": {
@@ -214,7 +214,7 @@
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_current_quest_point": {
         "visibility": "FRIEND",
@@ -223,7 +223,7 @@
           "&mut 0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::QuestRegistry",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "add_ticket_count": {
         "visibility": "PUBLIC",
@@ -236,7 +236,7 @@
           "u8",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_new_ticket": {
         "visibility": "PUBLIC",
@@ -248,7 +248,7 @@
           "u8",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "change_airdrop_status": {
         "visibility": "PUBLIC",
@@ -262,7 +262,7 @@
           "bool",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "change_quest_status": {
         "visibility": "PUBLIC",
@@ -275,7 +275,7 @@
           "bool",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_quest_ticket_airdrop_existing": {
         "visibility": "PUBLIC",
@@ -289,7 +289,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_quest_ticket_airdrop_new": {
         "visibility": "PUBLIC",
@@ -302,7 +302,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_drop": {
         "visibility": "PUBLIC",
@@ -319,7 +319,7 @@
           "u8",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "decrease_ticket_count": {
         "visibility": "FRIEND",
@@ -327,7 +327,112 @@
         "params": [
           "&mut 0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::QuestTicket"
         ],
-        "return": null
+        "return": []
+      },
+      "get_earn_point": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::QuestRegistry"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_ticket_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::QuestTicket"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::QUEST",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "new_ticket": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u8",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::QuestTicket"
+        ]
+      },
+      "update_admin_treasury": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::authority::GovernorCap",
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::version::Version",
+          "&mut 0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::QuestRegistry",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_drop_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::authority::OperatorCap",
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::authority::OperatorCapsBag",
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::version::Version",
+          "&mut 0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::AirdropRegistry",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<address>",
+          "bool",
+          "u8",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_gambit_earn_point": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::authority::OperatorCap",
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::authority::OperatorCapsBag",
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::version::Version",
+          "&mut 0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::QuestRegistry",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_whitelist_address": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::authority::OperatorCap",
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::authority::OperatorCapsBag",
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::version::Version",
+          "&mut 0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::AirdropRegistry",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<address>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_quest_status": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::quest::QuestRegistry"
+        ],
+        "return": []
       }
     },
     "spin_wheel": {
@@ -341,7 +446,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "street_gambit": {
@@ -352,7 +457,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u8",
+          "u8"
+        ]
       },
       "generate_middle_card": {
         "visibility": "PRIVATE",
@@ -361,7 +469,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -369,7 +479,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "make_bet": {
         "visibility": "PRIVATE",
@@ -382,7 +492,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "start_game": {
         "visibility": "PRIVATE",
@@ -396,7 +506,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "version": {
@@ -407,7 +517,7 @@
           "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::authority::GovernorCap",
           "&mut 0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::version::Version"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -415,7 +525,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "migrate": {
         "visibility": "PUBLIC",
@@ -425,7 +535,7 @@
           "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::authority::GovernorCap",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "validate_version": {
         "visibility": "PUBLIC",
@@ -434,7 +544,7 @@
           "&0x3c63334a27837bf0bf2a21995177734f302cb562a5c9f55694a1918c4f0ce535::version::Version",
           "u64"
         ],
-        "return": null
+        "return": []
       }
     }
   }

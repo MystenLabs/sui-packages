@@ -90,7 +90,7 @@
           "&mut 0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::BlacklistedMinters",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "burn_golden_key": {
         "visibility": "PUBLIC",
@@ -100,7 +100,7 @@
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::Version",
           "&mut 0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::GkSupply"
         ],
-        "return": null
+        "return": []
       },
       "burn_minter_cap": {
         "visibility": "PUBLIC",
@@ -109,7 +109,7 @@
           "0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::MinterCap",
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::Version"
         ],
-        "return": null
+        "return": []
       },
       "checkVersion": {
         "visibility": "PUBLIC",
@@ -118,7 +118,7 @@
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::Version",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "get_blacklisted_minters": {
         "visibility": "PUBLIC",
@@ -126,7 +126,9 @@
         "params": [
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::BlacklistedMinters"
         ],
-        "return": null
+        "return": [
+          "vector<address>"
+        ]
       },
       "get_burn_count": {
         "visibility": "PUBLIC",
@@ -134,7 +136,9 @@
         "params": [
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::GkSupply"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_total_supply": {
         "visibility": "PUBLIC",
@@ -142,7 +146,9 @@
         "params": [
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::GkSupply"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -151,7 +157,7 @@
           "0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::GOLDEN_KEY",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "migrate": {
         "visibility": "PUBLIC",
@@ -161,7 +167,7 @@
           "&mut 0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::Version",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "mint_golden_key": {
         "visibility": "PUBLIC",
@@ -173,7 +179,20 @@
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::BlacklistedMinters",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::GoldenKey"
+        ]
+      },
+      "mint_minter_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::AdminCap",
+          "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::Version",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "proxy": {
@@ -184,7 +203,7 @@
           "0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::proxy::PROXY",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "new_display": {
         "visibility": "PUBLIC",
@@ -195,7 +214,9 @@
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::display::Display<0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::GoldenKey>"
+        ]
       },
       "publisher_mut": {
         "visibility": "PUBLIC",
@@ -204,7 +225,9 @@
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::AdminCap",
           "&mut 0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::proxy::Registry"
         ],
-        "return": null
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::package::Publisher"
+        ]
       },
       "setup_tp": {
         "visibility": "PUBLIC",
@@ -215,15 +238,17 @@
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "transfer_policy": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
-          "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::proxy::ProtectedTP<$0>"
+          "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::proxy::ProtectedTP<T0>"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>"
+        ]
       }
     },
     "unlock": {
@@ -237,7 +262,7 @@
           "&0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::Version",
           "&mut 0x78ddda067d8f156129542d332b5da29c2308c42e091390cbdb226767fad5584c::golden_key::GkSupply"
         ],
-        "return": null
+        "return": []
       }
     }
   }

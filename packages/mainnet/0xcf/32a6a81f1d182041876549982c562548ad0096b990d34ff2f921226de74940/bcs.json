@@ -90,7 +90,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -99,7 +99,7 @@
           "0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::bot_nft::BOT_NFT",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint_bot_nft": {
         "visibility": "FRIEND",
@@ -111,7 +111,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::bot_nft::BotNFT"
+        ]
       },
       "transfer_nft": {
         "visibility": "PUBLIC",
@@ -120,7 +122,7 @@
           "0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::bot_nft::BotNFT",
           "address"
         ],
-        "return": null
+        "return": []
       }
     },
     "role_manager": {
@@ -131,7 +133,7 @@
           "&mut 0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::role_manager::Role",
           "&0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::bot_nft::BotNFT"
         ],
-        "return": null
+        "return": []
       },
       "add_skill": {
         "visibility": "PUBLIC",
@@ -142,7 +144,7 @@
           "&0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::skill_manager::Skill",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_role": {
         "visibility": "PUBLIC",
@@ -157,7 +159,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deactivate_role": {
         "visibility": "PUBLIC",
@@ -166,7 +168,7 @@
           "&mut 0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::role_manager::Role",
           "&0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::bot_nft::BotNFT"
         ],
-        "return": null
+        "return": []
       },
       "deposit_sui": {
         "visibility": "PUBLIC",
@@ -176,7 +178,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "remove_skill": {
         "visibility": "PUBLIC",
@@ -186,7 +188,7 @@
           "&0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::bot_nft::BotNFT",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
         ],
-        "return": null
+        "return": []
       },
       "toggle_lock": {
         "visibility": "PUBLIC",
@@ -195,7 +197,7 @@
           "&mut 0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::role_manager::Role",
           "&0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::bot_nft::BotNFT"
         ],
-        "return": null
+        "return": []
       },
       "update_role_health": {
         "visibility": "PUBLIC",
@@ -204,7 +206,7 @@
           "&mut 0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::role_manager::Role",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "update_skills": {
         "visibility": "PUBLIC",
@@ -214,7 +216,7 @@
           "&0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::bot_nft::BotNFT",
           "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
         ],
-        "return": null
+        "return": []
       },
       "withdraw_sui_as_bot": {
         "visibility": "PUBLIC",
@@ -224,7 +226,18 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "withdraw_sui_with_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::role_manager::Role",
+          "&0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::bot_nft::BotNFT",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "skill_manager": {
@@ -241,7 +254,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_enabled": {
         "visibility": "PUBLIC",
@@ -249,7 +262,9 @@
         "params": [
           "&0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::skill_manager::Skill"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "toggle_skill": {
         "visibility": "PUBLIC",
@@ -258,7 +273,7 @@
           "&mut 0xcf32a6a81f1d182041876549982c562548ad0096b990d34ff2f921226de74940::skill_manager::Skill",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "update_skill": {
         "visibility": "PUBLIC",
@@ -270,7 +285,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }

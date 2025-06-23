@@ -88,7 +88,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "batch_add_to_deny_list": {
         "visibility": "PUBLIC",
@@ -99,7 +99,7 @@
           "vector<address>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "batch_remove_from_deny_list": {
         "visibility": "PUBLIC",
@@ -110,7 +110,7 @@
           "vector<address>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "burn": {
         "visibility": "PUBLIC",
@@ -120,7 +120,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xd9ea7b4e58c0df878c4b90e785f937d73e3c77fa9a8105f72a6fca3b86994f3a::xbtc::XBTC>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "disable_global_pause": {
         "visibility": "PUBLIC",
@@ -130,7 +130,7 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::DenyCapV2<0xd9ea7b4e58c0df878c4b90e785f937d73e3c77fa9a8105f72a6fca3b86994f3a::xbtc::XBTC>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "enable_global_pause": {
         "visibility": "PUBLIC",
@@ -140,7 +140,7 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::DenyCapV2<0xd9ea7b4e58c0df878c4b90e785f937d73e3c77fa9a8105f72a6fca3b86994f3a::xbtc::XBTC>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -149,7 +149,7 @@
           "0xd9ea7b4e58c0df878c4b90e785f937d73e3c77fa9a8105f72a6fca3b86994f3a::xbtc::XBTC",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_denied_current_epoch": {
         "visibility": "PUBLIC",
@@ -159,7 +159,9 @@
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "is_denied_next_epoch": {
         "visibility": "PUBLIC",
@@ -168,7 +170,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "is_global_pause_enabled_current_epoch": {
         "visibility": "PUBLIC",
@@ -177,7 +181,61 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "is_global_pause_enabled_next_epoch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "mint": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xd9ea7b4e58c0df878c4b90e785f937d73e3c77fa9a8105f72a6fca3b86994f3a::xbtc::XBTC>",
+          "&0xd9ea7b4e58c0df878c4b90e785f937d73e3c77fa9a8105f72a6fca3b86994f3a::xbtc::Receiver",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_from_deny_list": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::DenyCapV2<0xd9ea7b4e58c0df878c4b90e785f937d73e3c77fa9a8105f72a6fca3b86994f3a::xbtc::XBTC>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_receiver": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0xd9ea7b4e58c0df878c4b90e785f937d73e3c77fa9a8105f72a6fca3b86994f3a::xbtc::XBTC>",
+          "&mut 0xd9ea7b4e58c0df878c4b90e785f937d73e3c77fa9a8105f72a6fca3b86994f3a::xbtc::Receiver",
+          "address"
+        ],
+        "return": []
+      },
+      "transfer_admin_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0xd9ea7b4e58c0df878c4b90e785f937d73e3c77fa9a8105f72a6fca3b86994f3a::xbtc::AdminCap",
+          "address"
+        ],
+        "return": []
       }
     }
   }

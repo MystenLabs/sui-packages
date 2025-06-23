@@ -127,7 +127,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::vendetta::VENDETTA>",
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version"
         ],
-        "return": null
+        "return": []
       },
       "add_vesting_time_for_airdrop": {
         "visibility": "PUBLIC",
@@ -140,7 +140,7 @@
           "u64",
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version"
         ],
-        "return": null
+        "return": []
       },
       "airdrop_nft_for_collection": {
         "visibility": "PUBLIC",
@@ -155,7 +155,7 @@
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "airdrop_nft_for_quest": {
         "visibility": "PUBLIC",
@@ -171,7 +171,7 @@
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "allocate_amount": {
         "visibility": "PUBLIC",
@@ -185,7 +185,7 @@
           "bool",
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version"
         ],
-        "return": null
+        "return": []
       },
       "claim": {
         "visibility": "PUBLIC",
@@ -198,7 +198,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::vendetta::VENDETTA>"
+        ]
       },
       "claimable": {
         "visibility": "PUBLIC",
@@ -207,7 +209,9 @@
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::airdrop::VendettaAirdropNFT",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "enable_airdrop": {
         "visibility": "PUBLIC",
@@ -217,7 +221,7 @@
           "&mut 0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::airdrop::Airdrop",
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version"
         ],
-        "return": null
+        "return": []
       },
       "get_address_details": {
         "visibility": "PUBLIC",
@@ -226,7 +230,9 @@
           "address",
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::airdrop::Allocation"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>"
+        ]
       },
       "get_airdrop_balance": {
         "visibility": "PUBLIC",
@@ -234,7 +240,62 @@
         "params": [
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::airdrop::Airdrop"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_allocation_for_nft_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::airdrop::Allocation"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_total_airdropped": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::airdrop::Allocation"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_allocation": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::airdrop::Allocation"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_total_claimed_count": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::airdrop::Allocation"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::airdrop::AIRDROP",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "role": {
@@ -244,7 +305,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "staking": {
@@ -255,7 +316,7 @@
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::role::AdminCap",
           "&mut 0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::staking::Config"
         ],
-        "return": null
+        "return": []
       },
       "claim_unstaked_tokens": {
         "visibility": "PUBLIC",
@@ -267,7 +328,7 @@
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_staked_amount": {
         "visibility": "PUBLIC",
@@ -275,7 +336,9 @@
         "params": [
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::staking::StakedV"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_unstake_time": {
         "visibility": "PUBLIC",
@@ -283,7 +346,9 @@
         "params": [
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::staking::StakedV"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -291,7 +356,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_paused": {
         "visibility": "PUBLIC",
@@ -299,7 +364,9 @@
         "params": [
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::staking::Config"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "stake_tokens": {
         "visibility": "PUBLIC",
@@ -310,7 +377,7 @@
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "unstake_tokens": {
         "visibility": "PUBLIC",
@@ -322,7 +389,7 @@
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "update_unstaking_period": {
         "visibility": "PUBLIC",
@@ -332,7 +399,7 @@
           "&mut 0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::staking::Config",
           "u64"
         ],
-        "return": null
+        "return": []
       }
     },
     "vendetta": {
@@ -343,7 +410,7 @@
           "&mut 0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::vendetta::CoinRegistry",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::vendetta::VENDETTA>"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -352,7 +419,7 @@
           "0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::vendetta::VENDETTA",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint_token": {
         "visibility": "PUBLIC",
@@ -363,7 +430,7 @@
           "&mut 0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::vendetta::VBalance",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "total_supply": {
         "visibility": "PUBLIC",
@@ -371,7 +438,9 @@
         "params": [
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::vendetta::CoinRegistry"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "unlock_token": {
         "visibility": "PUBLIC",
@@ -382,7 +451,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::vendetta::VENDETTA>"
+        ]
       }
     },
     "version": {
@@ -392,7 +463,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "migrate": {
         "visibility": "PUBLIC",
@@ -402,7 +473,7 @@
           "&mut 0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "validate_version": {
         "visibility": "PUBLIC",
@@ -411,7 +482,7 @@
           "&0xd832145d0211d4e3332881c742fc255e037139575d1359f3dea67d8886075394::version::Version",
           "u64"
         ],
-        "return": null
+        "return": []
       }
     }
   }

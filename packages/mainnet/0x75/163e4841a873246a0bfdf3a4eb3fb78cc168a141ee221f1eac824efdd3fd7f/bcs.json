@@ -50,7 +50,9 @@
           "&0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Whitelist",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "buy_with_osiri": {
         "visibility": "PUBLIC",
@@ -61,7 +63,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x42e826aa6c71325e2aaaf031976e023d75eefe584116f9349de5b0e56e648e49::osiri::OSIRI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_with_sui": {
         "visibility": "PUBLIC",
@@ -71,7 +73,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim": {
         "visibility": "PUBLIC",
@@ -81,7 +83,7 @@
           "0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::AllocationNFT",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "enable_claim": {
         "visibility": "PUBLIC",
@@ -90,7 +92,7 @@
           "&mut 0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Config",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -99,7 +101,7 @@
           "0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::FUNDRAISE",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_claim_live": {
         "visibility": "PUBLIC",
@@ -107,7 +109,9 @@
         "params": [
           "&0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Config"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "is_whitelisted": {
         "visibility": "PUBLIC",
@@ -116,7 +120,9 @@
           "&0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Whitelist",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "mint_nft": {
         "visibility": "PRIVATE",
@@ -126,7 +132,9 @@
           "u8",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::AllocationNFT"
+        ]
       },
       "osiri_bought_by": {
         "visibility": "PUBLIC",
@@ -135,7 +143,72 @@
           "&0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Config",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "osiri_pool_sold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Config"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "set_allocations": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Config",
+          "&mut 0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Whitelist",
+          "vector<address>",
+          "vector<u64>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "sui_deposited_by": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Config",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "sui_pool_sold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Config"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "transfer_balance_to_owner": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Config",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_sui_to_owner": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x75163e4841a873246a0bfdf3a4eb3fb78cc168a141ee221f1eac824efdd3fd7f::fundraise::Config",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }
