@@ -1,0 +1,14 @@
+module 0x70393622b8906427b9e71804a8a3a930482e625645db9b73dc4cd459bdaa684b::expay {
+    struct EXPAY has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: EXPAY, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<EXPAY>(arg0, 6, b"Expay", b"expay", x"4561726e2077697468205265616c204d616368696e6573210a4578506179206973206120746f6b656e206261636b6564206279207265616c2d776f726c6420726576656e75652e2046756e6473207261697365642066726f6d2074686520746f6b656e2077696c6c206265207573656420746f2062757920616e64206f70657261746520657863617661746f72732e2050726f666974732066726f6d20746865206d616368696e65732061726520736861726564207769746820746f6b656e20686f6c646572732e0a0a5265616c20776f726b2c207265616c20696e636f6d6520e2809320666f722065766572796f6e6521", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1750949133870.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<EXPAY>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<EXPAY>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
