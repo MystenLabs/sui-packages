@@ -89,7 +89,9 @@
         "params": [
           "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::current_price::CurrentPrice"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ]
       },
       "decimals": {
         "visibility": "PUBLIC",
@@ -97,7 +99,9 @@
         "params": [
           "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::current_price::CurrentPrice"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "new_current_price": {
         "visibility": "FRIEND",
@@ -108,7 +112,9 @@
           "u8",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::current_price::CurrentPrice"
+        ]
       },
       "price": {
         "visibility": "PUBLIC",
@@ -116,7 +122,9 @@
         "params": [
           "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::current_price::CurrentPrice"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "timestamp_ms": {
         "visibility": "PUBLIC",
@@ -124,7 +132,9 @@
         "params": [
           "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::current_price::CurrentPrice"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "oracle_aggregator": {
@@ -134,7 +144,7 @@
         "params": [
           "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
         ],
-        "return": null
+        "return": []
       },
       "add_price_from_pyth": {
         "visibility": "PUBLIC",
@@ -147,7 +157,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::PriceIdentifier"
         ],
-        "return": null
+        "return": []
       },
       "add_price_from_supra": {
         "visibility": "PUBLIC",
@@ -159,7 +169,7 @@
           "&0x5d8fbbf6f908a4af8c6d072669a462d53e03eb3c1d863bd0359dc818c69ea706::SupraSValueFeed::OracleHolder",
           "u32"
         ],
-        "return": null
+        "return": []
       },
       "add_price_from_switchboard": {
         "visibility": "PUBLIC",
@@ -170,7 +180,7 @@
           "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator",
           "&0xc3c7e6eb7202e9fb0389a2f7542b91cc40e4f7a33c02554fec11c4c92f938ea3::aggregator::Aggregator"
         ],
-        "return": null
+        "return": []
       },
       "borrow_pyth": {
         "visibility": "PUBLIC",
@@ -178,7 +188,9 @@
         "params": [
           "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
       },
       "borrow_supra": {
         "visibility": "PUBLIC",
@@ -186,7 +198,9 @@
         "params": [
           "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u32>"
+        ]
       },
       "borrow_switchboard": {
         "visibility": "PUBLIC",
@@ -194,7 +208,9 @@
         "params": [
           "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
       },
       "deactivate_aggregator": {
         "visibility": "FRIEND",
@@ -202,19 +218,141 @@
         "params": [
           "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
         ],
-        "return": null
+        "return": []
       },
       "err_no_valid_price": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "err_significant_price_diff": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
+      },
+      "is_active": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "latest_update_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u32>",
+          "u8",
+          "u64"
+        ],
+        "return": [
+          "0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
+        ]
+      },
+      "new_price_sources": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::PriceSources"
+        ]
+      },
+      "oracle_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "price_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
+        ],
+        "return": [
+          "u64",
+          "u8"
+        ]
+      },
+      "set_pyth": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>"
+        ],
+        "return": []
+      },
+      "set_supra": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u32>"
+        ],
+        "return": []
+      },
+      "set_switchboard": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>"
+        ],
+        "return": []
+      },
+      "tolerance_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::PriceSources"
+        ],
+        "return": []
+      },
+      "update_tolerance_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator",
+          "u64"
+        ],
+        "return": []
       }
     },
     "pyth_price_fetcher": {
@@ -222,7 +360,7 @@
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "fetch_price": {
         "visibility": "PUBLIC",
@@ -235,7 +373,9 @@
           "u8",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::current_price::CurrentPrice>"
+        ]
       }
     },
     "stingray_oracle": {
@@ -246,7 +386,7 @@
           "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": []
       },
       "add_version": {
         "visibility": "PUBLIC",
@@ -256,7 +396,7 @@
           "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::AdminCap",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "borrow_oracle_aggregator": {
         "visibility": "PUBLIC",
@@ -265,7 +405,9 @@
           "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": [
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
+        ]
       },
       "borrow_oracle_aggregator_mut": {
         "visibility": "PUBLIC",
@@ -274,7 +416,9 @@
           "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::oracle_aggregator::OracleAggregator"
+        ]
       },
       "deactivate": {
         "visibility": "PUBLIC",
@@ -283,37 +427,198 @@
           "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
           "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
         ],
-        "return": null
+        "return": []
       },
       "err_asset_already_existed": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "err_oracle_aggregator_not_active": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "err_price_expired": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "err_version_already_existed": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
       },
       "err_version_not_allowed": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
+      },
+      "err_version_not_existed": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "get_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "u64",
+          "u8"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_price_supported": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_version_allowed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "new_oracle": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::AdminCap"
+        ]
+      },
+      "new_oracle_aggregator": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u32>",
+          "u8",
+          "u64"
+        ],
+        "return": []
+      },
+      "remove_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::AdminCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "update_price_from_pyth": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::PriceIdentifier",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "update_price_from_supra": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "&0x5d8fbbf6f908a4af8c6d072669a462d53e03eb3c1d863bd0359dc818c69ea706::SupraSValueFeed::OracleHolder",
+          "u32",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "update_price_from_switchboard": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "&0xc3c7e6eb7202e9fb0389a2f7542b91cc40e4f7a33c02554fec11c4c92f938ea3::aggregator::Aggregator",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "update_pyth": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "update_supra": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u32>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "update_switchboard": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "&0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "update_tolerance_ms": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::stingray_oracle::StingrayOracle",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
       }
     },
     "supra_price_fetcher": {
@@ -326,7 +631,9 @@
           "u32",
           "u8"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::current_price::CurrentPrice>"
+        ]
       }
     },
     "switchboard_price_fetcher": {
@@ -338,7 +645,9 @@
           "&0xc3c7e6eb7202e9fb0389a2f7542b91cc40e4f7a33c02554fec11c4c92f938ea3::aggregator::Aggregator",
           "u8"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x5cc8ad9b3d0432356b0e204f41a28dc85edbe9bf2488e48032a53b75f0ef1c1c::current_price::CurrentPrice>"
+        ]
       }
     }
   }
