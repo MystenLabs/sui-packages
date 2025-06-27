@@ -313,9 +313,11 @@ module 0xd631cd66138909636fc3f73ed75820d0c5b76332d1644608ed1c85ea2b8219b4::rewar
                 let v2 = 0x1::option::borrow_mut<Reward>(v1);
                 if (v2.start_time >= 0x2::clock::timestamp_ms(arg1)) {
                     /* goto 18 */
-                } else if (v2.end_time < arg0.last_updated) {
-                    /* goto 17 */
                 } else {
+                    if (v2.end_time < arg0.last_updated) {
+                        v0 = v0 + 1;
+                        continue
+                    };
                     let v3 = 0x1::u64::max(arg0.last_updated, v2.start_time);
                     let v4 = if (0x4b591bbc246c9fadd28e7ac895e0778fb0e102f1b0d9f441e78d35f0d1ea1fcc::math::gt(0x4b591bbc246c9fadd28e7ac895e0778fb0e102f1b0d9f441e78d35f0d1ea1fcc::math::from(v2.total_rewards), v2.distributed_rewards)) {
                         0x4b591bbc246c9fadd28e7ac895e0778fb0e102f1b0d9f441e78d35f0d1ea1fcc::math::div(0x4b591bbc246c9fadd28e7ac895e0778fb0e102f1b0d9f441e78d35f0d1ea1fcc::math::mul(0x4b591bbc246c9fadd28e7ac895e0778fb0e102f1b0d9f441e78d35f0d1ea1fcc::math::sub(0x4b591bbc246c9fadd28e7ac895e0778fb0e102f1b0d9f441e78d35f0d1ea1fcc::math::from(v2.total_rewards), v2.distributed_rewards), 0x4b591bbc246c9fadd28e7ac895e0778fb0e102f1b0d9f441e78d35f0d1ea1fcc::math::from(0x1::u64::min(0x2::clock::timestamp_ms(arg1), v2.end_time) - v3)), 0x4b591bbc246c9fadd28e7ac895e0778fb0e102f1b0d9f441e78d35f0d1ea1fcc::math::from(v2.end_time - v3))
@@ -327,9 +329,6 @@ module 0xd631cd66138909636fc3f73ed75820d0c5b76332d1644608ed1c85ea2b8219b4::rewar
                     emit_reward_update_event(v2, arg0.market_id);
                 };
             };
-            v0 = v0 + 1;
-            continue;
-            /* label 17 */
             v0 = v0 + 1;
             continue;
             /* label 18 */

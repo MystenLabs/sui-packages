@@ -39,7 +39,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "arb_bluefin_cetus": {
         "visibility": "PUBLIC",
@@ -50,7 +50,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "arb_cetus_deepbook": {
         "visibility": "PUBLIC",
@@ -61,7 +61,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_arbitrage_profit": {
         "visibility": "PUBLIC",
@@ -71,7 +71,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "cetus_swap_sui_to_usdc": {
         "visibility": "PUBLIC",
@@ -82,7 +84,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deepbook_swap_sui_to_usdc": {
         "visibility": "PUBLIC",
@@ -93,7 +95,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "execute_arbitrage": {
         "visibility": "PUBLIC",
@@ -104,25 +106,148 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_all_dex_packages": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address",
+          "address",
+          "address",
+          "address",
+          "address",
+          "address"
+        ]
       },
       "get_all_dex_pools": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address",
+          "address",
+          "address",
+          "address",
+          "address",
+          "address"
+        ]
       },
       "get_deployment_status": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "bool",
+          "bool",
+          "bool",
+          "bool",
+          "bool",
+          "bool"
+        ]
+      },
+      "get_dex_efficiency_ratings": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_optimal_arbitrage_route": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "swap_tokens_aftermath": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_tokens_bluefin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_tokens_cetus": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_tokens_deepbook": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_tokens_kriya": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "swap_tokens_turbos": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "test_contract_deployment": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "constants": {
@@ -130,61 +255,137 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "bluefin_global_config": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "bluefin_package": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "bluefin_sqrt_price_limit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "bluefin_sui_usdc_pool": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "cetus_sui_usdc_pool": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "deepbook_package": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "deepbook_registry": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "deepbook_sui_usdc_pool": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "deepbook_treasury": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
+      },
+      "default_slippage_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "kriya_package": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      },
+      "kriya_sui_usdc_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      },
+      "max_slippage_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "min_profit_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "turbos_sui_usdc_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      },
+      "usdc_package": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
       }
     }
   }

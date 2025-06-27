@@ -58,7 +58,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "add_version": {
         "visibility": "PUBLIC",
@@ -68,7 +68,7 @@
           "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "assert_valid_version": {
         "visibility": "PRIVATE",
@@ -76,7 +76,7 @@
         "params": [
           "&0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank"
         ],
-        "return": null
+        "return": []
       },
       "borrow_player_balance_mut": {
         "visibility": "PRIVATE",
@@ -85,7 +85,9 @@
           "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank",
           "address"
         ],
-        "return": null
+        "return": [
+          "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PlayerBalanceValue<T0>"
+        ]
       },
       "borrow_poker_pool_mut": {
         "visibility": "PRIVATE",
@@ -93,7 +95,9 @@
         "params": [
           "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank"
         ],
-        "return": null
+        "return": [
+          "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerPoolValue<T0>"
+        ]
       },
       "burn_admin_cap": {
         "visibility": "PUBLIC",
@@ -101,7 +105,7 @@
         "params": [
           "0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
@@ -109,20 +113,20 @@
         "params": [
           "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank",
           "address",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_into_pool": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -130,7 +134,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint_admin_cap": {
         "visibility": "PUBLIC",
@@ -139,7 +143,86 @@
           "&0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::AdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::AdminCap"
+        ]
+      },
+      "package_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "player_balance_exists": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "poker_pool_exists": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "remove_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::AdminCap",
+          "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank",
+          "u64"
+        ],
+        "return": []
+      },
+      "sub_player_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::AdminCap",
+          "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::AdminCap",
+          "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_from_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::AdminCap",
+          "&mut 0xce9e49518df443e7e2c8770968c5e321086a49d8f4ce9ba4f80546d8fc0baddd::poker_wallet::PokerBank",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     }
   }
