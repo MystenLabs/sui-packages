@@ -64,7 +64,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "confirmer": {
@@ -72,21 +72,23 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::confirmer::SwapCert<$0, $1>",
+          "0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::confirmer::SwapCert<T0, T1>",
           "&mut 0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::fee_tier::FeeTier",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>",
           "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::versioned::Versioned",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_quote_id": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::confirmer::SwapCert<$0, $1>"
+          "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::confirmer::SwapCert<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "new_swap_cert": {
         "visibility": "PUBLIC",
@@ -95,21 +97,25 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "u64",
           "u64",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::fee_tier::FeeTier",
           "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::versioned::Versioned",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::confirmer::SwapCert<T0, T1>"
+        ]
       },
       "take_input_coin": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::confirmer::SwapCert<$0, $1>",
+          "&mut 0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::confirmer::SwapCert<T0, T1>",
           "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::versioned::Versioned"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     },
     "errors": {
@@ -117,31 +123,41 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_incorrect_amount_out": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_invalid_version": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_max_fee_rate_limit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "err_version_deprecated": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       }
     },
     "fee_tier": {
@@ -152,13 +168,17 @@
           "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::fee_tier::FeeTier",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "fee_rate_key": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -166,16 +186,16 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "receive_fee": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::fee_tier::FeeTier",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "set_default_fee_rate": {
         "visibility": "PUBLIC",
@@ -185,7 +205,7 @@
           "u32",
           "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::admin_cap::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "set_fee_rate": {
         "visibility": "PUBLIC",
@@ -195,7 +215,7 @@
           "u32",
           "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::admin_cap::AdminCap"
         ],
-        "return": null
+        "return": []
       }
     },
     "versioned": {
@@ -205,7 +225,7 @@
         "params": [
           "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::versioned::Versioned"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -213,7 +233,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "upgrade": {
         "visibility": "PUBLIC",
@@ -222,7 +242,7 @@
           "&mut 0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::versioned::Versioned",
           "&0xda99bccc952ed900ddf73f89a4558ea21b8d254a0253be0152902f472ac6f802::admin_cap::AdminCap"
         ],
-        "return": null
+        "return": []
       }
     }
   }

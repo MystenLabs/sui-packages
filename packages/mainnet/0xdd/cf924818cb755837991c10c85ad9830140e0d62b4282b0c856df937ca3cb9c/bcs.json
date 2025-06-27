@@ -76,11 +76,11 @@
         "is_entry": false,
         "params": [
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
-          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<$0, $1>",
-          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>",
+          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "calculate_initial_shares": {
         "visibility": "PRIVATE",
@@ -88,18 +88,22 @@
         "params": [
           "u64",
           "u64",
-          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>"
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_leverage": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<$0, $1>",
-          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>"
+          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_liquidity_from_amounts": {
         "visibility": "PRIVATE",
@@ -111,7 +115,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "calculate_new_tick_range": {
         "visibility": "PRIVATE",
@@ -121,63 +127,212 @@
           "u32",
           "u32"
         ],
-        "return": null
+        "return": [
+          "0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32",
+          "0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32"
+        ]
       },
       "calculate_proportional_shares": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<$0, $1>",
+          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "collect_fees_internal": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
-          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<$0, $1>",
-          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>",
+          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "compound_rewards": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
-          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<$0, $1>",
-          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>",
+          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::rewarder::RewarderGlobalVault",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_initial_position": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
-          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<$0, $1>",
-          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>",
+          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_vault": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "deposit": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_position_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "u128",
+          "0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32",
+          "0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32"
+        ]
+      },
+      "get_share_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "u64"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_vault_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
+      },
+      "get_vault_stats": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u32",
+          "u32"
+        ]
+      },
+      "get_vault_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "is_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "needs_rebalance": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "rebalance": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "sqrt_u128": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&mut 0xddcf924818cb755837991c10c85ad9830140e0d62b4282b0c856df937ca3cb9c::vault::Vault<T0, T1>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

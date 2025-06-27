@@ -73,11 +73,11 @@ module 0xdbc73f566b02feef1f26c4c30f02ae33984ee27f31d095dcef75428460767c2b::draw 
                 if (!0xdbc73f566b02feef1f26c4c30f02ae33984ee27f31d095dcef75428460767c2b::range::contains(&arg0.normal_range, 0x1::vector::borrow<u8>(v0, v1))) {
                     v2 = false;
                     /* label 8 */
-                    if (v2) {
-                        let v3 = if (0x2::vec_set::size<u8>(0xdbc73f566b02feef1f26c4c30f02ae33984ee27f31d095dcef75428460767c2b::picks::special_numbers(arg1)) == (arg0.special_count as u64)) {
+                    let v3 = if (v2) {
+                        let v3;
+                        if (0x2::vec_set::size<u8>(0xdbc73f566b02feef1f26c4c30f02ae33984ee27f31d095dcef75428460767c2b::picks::special_numbers(arg1)) == (arg0.special_count as u64)) {
                             let v4 = 0x2::vec_set::keys<u8>(0xdbc73f566b02feef1f26c4c30f02ae33984ee27f31d095dcef75428460767c2b::picks::special_numbers(arg1));
                             let v5 = 0;
-                            let v3;
                             while (v5 < 0x1::vector::length<u8>(v4)) {
                                 if (!0xdbc73f566b02feef1f26c4c30f02ae33984ee27f31d095dcef75428460767c2b::range::contains(&arg0.special_range, 0x1::vector::borrow<u8>(v4, v5))) {
                                     /* label 19 */
@@ -87,20 +87,23 @@ module 0xdbc73f566b02feef1f26c4c30f02ae33984ee27f31d095dcef75428460767c2b::draw 
                                     /* goto 21 */
                                 };
                             };
-                            v3
                         } else {
-                            false
+                            /* goto 23 */
                         };
-                        return v3
-                        /* label 21 */
-                        /* goto 14 */
-                        continue;
-                        /* goto 19 */
+                        v3
+                    } else {
+                        false
                     };
-                    return false
-                } else {
-                    v1 = v1 + 1;
+                    return v3
+                    /* label 21 */
+                    /* goto 14 */
+                    continue;
+                    /* goto 19 */
+                    /* label 23 */
+                    v3 = false;
+                    return v3
                 };
+                v1 = v1 + 1;
             };
             v2 = true;
             /* goto 8 */

@@ -80,10 +80,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store",
           "0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::SingleBid",
-          "&$0",
+          "&T0",
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
         ],
-        "return": null
+        "return": []
       },
       "accept_bid_with_transfer_policy": {
         "visibility": "PUBLIC",
@@ -96,10 +96,12 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferRequest<T0>"
+        ]
       },
       "accept_bid_without_transfer_policy": {
         "visibility": "PUBLIC",
@@ -109,10 +111,10 @@
           "&mut 0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
-          "$0",
+          "T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_bid": {
         "visibility": "PUBLIC",
@@ -123,7 +125,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_multi_bid": {
         "visibility": "PUBLIC",
@@ -133,7 +135,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_bid": {
         "visibility": "PRIVATE",
@@ -151,7 +153,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_bid_with_transfer_policy": {
         "visibility": "PUBLIC",
@@ -164,11 +166,11 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
           "u64",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_bid_without_transfer_policy": {
         "visibility": "PUBLIC",
@@ -184,7 +186,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_multi_bid": {
         "visibility": "PUBLIC",
@@ -194,7 +196,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_bid": {
         "visibility": "PRIVATE",
@@ -205,7 +207,116 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
           "bool"
         ],
-        "return": null
+        "return": [
+          "0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::SingleBid"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::TRADEPORT_BIDDINGS",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "migrate_bid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store",
+          "u64",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<vector<u8>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "u64",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_transfer_policy": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_admin": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_fee_bps": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_version": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_multi_bid": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_admin": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_version": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store"
+        ],
+        "return": []
+      },
+      "withdraw_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xd0a911abe24398e2f674edae92e78c4003b13427c7599632e1945c96a0009ecc::tradeport_biddings::Store",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }
