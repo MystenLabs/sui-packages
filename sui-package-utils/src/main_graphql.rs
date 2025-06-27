@@ -33,7 +33,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let save_args = SaveArgs {
         bcs: true,
         bytecode: true,
-        call_graph: false,
+        call_graph: true,
         metadata: true,
         move_code: true,
         force: cli_args.force,

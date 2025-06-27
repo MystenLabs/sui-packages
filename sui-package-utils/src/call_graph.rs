@@ -1,6 +1,6 @@
 use move_binary_format::file_format::{Bytecode, CompiledModule, FunctionHandle};
 use serde::Serialize;
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use sui_types::move_package::MovePackage;
 
 pub enum CallGraphType {
@@ -11,8 +11,7 @@ pub enum CallGraphType {
 #[derive(Debug, Serialize)]
 pub struct ModuleCallGraph {
     module_name: String,
-    original_call_graph: BTreeMap<String, Vec<String>>,
-    linkage_call_graph: BTreeMap<String, Vec<String>>,
+    call_graph: BTreeMap<String, BTreeSet<String>>,
 }
 #[derive(Debug, Serialize)]
 pub struct PackageCallGraph {
@@ -30,8 +29,7 @@ impl From<&MovePackage> for PackageCallGraph {
         for (module_name, module_bytes) in pkg.serialized_module_map() {
             let mut module_call_graph = ModuleCallGraph {
                 module_name: module_name.clone(),
-                original_call_graph: BTreeMap::new(),
-                linkage_call_graph: BTreeMap::new(),
+                call_graph: BTreeMap::new(),
             };
 
             let module = CompiledModule::deserialize_with_defaults(module_bytes).unwrap();
@@ -40,17 +38,10 @@ impl From<&MovePackage> for PackageCallGraph {
                 let caller_handle = module.function_handle_at(function_def.function);
                 let caller_name = module.identifier_at(caller_handle.name).to_string();
                 module_call_graph
-                    .original_call_graph
-                    .insert(caller_name.clone(), Vec::new());
-                module_call_graph
-                    .linkage_call_graph
-                    .insert(caller_name.clone(), Vec::new());
-                let caller_graph_original: &mut Vec<String> = module_call_graph
-                    .original_call_graph
-                    .get_mut(&caller_name.to_string())
-                    .unwrap();
-                let _caller_graph_linkage: &mut Vec<String> = module_call_graph
-                    .linkage_call_graph
+                    .call_graph
+                    .insert(caller_name.clone(), BTreeSet::new());
+                let caller_graph_original: &mut BTreeSet<String> = module_call_graph
+                    .call_graph
                     .get_mut(&caller_name.to_string())
                     .unwrap();
 
@@ -60,7 +51,7 @@ impl From<&MovePackage> for PackageCallGraph {
                         match instruction {
                             Bytecode::Call(func_handle_index) => {
                                 let callee_handle = module.function_handle_at(*func_handle_index);
-                                caller_graph_original.push(get_full_function_name(
+                                caller_graph_original.insert(get_full_function_name(
                                     &pkg,
                                     &module,
                                     &callee_handle,
@@ -72,7 +63,7 @@ impl From<&MovePackage> for PackageCallGraph {
                                     module.function_instantiation_at(*func_instantiation_index);
                                 let callee_handle =
                                     module.function_handle_at(callee_instantiation.handle);
-                                caller_graph_original.push(get_full_function_name(
+                                caller_graph_original.insert(get_full_function_name(
                                     &pkg,
                                     &module,
                                     &callee_handle,
