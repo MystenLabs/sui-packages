@@ -138,7 +138,7 @@ module 0xacb06ea9ed4c473deae01621201059c7770f1abf7790188fcf9f80cf89c035f::user_i
                             let v27 = 0x2::table::contains<0x1::string::String, 0x2::table::Table<address, 0x1::ascii::String>>(v8, *v26) && !0x2::table::is_empty<address, 0x1::ascii::String>(0x2::table::borrow<0x1::string::String, 0x2::table::Table<address, 0x1::ascii::String>>(v8, *v26));
                             if (!v27) {
                                 v25 = false;
-                                /* label 31 */
+                                /* label 30 */
                                 assert!(v25, 102);
                                 assert!(!0x2::table::contains<address, bool>(&v1.claimed_sign_up_reward, v0), 101);
                                 0x2::table::add<address, bool>(&mut v1.claimed_sign_up_reward, v0, true);
@@ -148,7 +148,7 @@ module 0xacb06ea9ed4c473deae01621201059c7770f1abf7790188fcf9f80cf89c035f::user_i
                             v24 = v24 + 1;
                         };
                         v25 = true;
-                        /* goto 31 */
+                        /* goto 30 */
                     } else {
                         v18 = v18 + 1;
                     };

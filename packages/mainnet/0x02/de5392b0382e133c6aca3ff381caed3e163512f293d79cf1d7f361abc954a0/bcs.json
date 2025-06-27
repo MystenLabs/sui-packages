@@ -92,7 +92,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x02de5392b0382e133c6aca3ff381caed3e163512f293d79cf1d7f361abc954a0::token::TOKEN>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_staking_rewards": {
         "visibility": "PUBLIC",
@@ -103,7 +103,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "distribute_revenue": {
         "visibility": "PUBLIC",
@@ -116,7 +116,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_creator_profile": {
         "visibility": "PUBLIC",
@@ -125,7 +125,13 @@
           "&0x02de5392b0382e133c6aca3ff381caed3e163512f293d79cf1d7f361abc954a0::token::CreatorRegistry",
           "address"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "bool",
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "get_staking_stats": {
         "visibility": "PUBLIC",
@@ -133,7 +139,12 @@
         "params": [
           "&0x02de5392b0382e133c6aca3ff381caed3e163512f293d79cf1d7f361abc954a0::token::StakingSystem"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
       },
       "get_treasury_stats": {
         "visibility": "PUBLIC",
@@ -141,7 +152,12 @@
         "params": [
           "&0x02de5392b0382e133c6aca3ff381caed3e163512f293d79cf1d7f361abc954a0::token::TokenTreasury"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -150,7 +166,7 @@
           "0x02de5392b0382e133c6aca3ff381caed3e163512f293d79cf1d7f361abc954a0::token::TOKEN",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "register_creator": {
         "visibility": "PUBLIC",
@@ -160,7 +176,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "stake_tokens": {
         "visibility": "PUBLIC",
@@ -171,7 +187,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "update_rate_limiter": {
         "visibility": "PRIVATE",
@@ -181,7 +197,16 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
+      },
+      "update_stake_count": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x02de5392b0382e133c6aca3ff381caed3e163512f293d79cf1d7f361abc954a0::token::RateLimiter",
+          "address"
+        ],
+        "return": []
       }
     }
   }

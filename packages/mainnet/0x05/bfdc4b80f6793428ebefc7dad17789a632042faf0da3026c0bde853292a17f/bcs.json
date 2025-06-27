@@ -67,18 +67,18 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_game_config_dynamic_field": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
-          "$0",
-          "$1",
-          "$2"
+          "T0",
+          "T1",
+          "T2"
         ],
-        "return": null
+        "return": []
       },
       "borrow_game_config": {
         "visibility": "PUBLIC",
@@ -86,16 +86,20 @@
         "params": [
           "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager"
         ],
-        "return": null
+        "return": [
+          "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameConfig"
+        ]
       },
       "borrow_game_config_dynamic_field": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
-          "$0"
+          "T0"
         ],
-        "return": null
+        "return": [
+          "&T1"
+        ]
       },
       "borrow_mut_game_config": {
         "visibility": "PRIVATE",
@@ -103,19 +107,21 @@
         "params": [
           "&mut 0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager"
         ],
-        "return": null
+        "return": [
+          "&mut 0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameConfig"
+        ]
       },
       "check_bet_amount": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
-          "&0xdc51e55b52bb48bcd7a4c4f629b63398706e6b0dcec43a0e43e09426bdb40839::liquidity::LiquidityPool<$0, $1>",
+          "&0xdc51e55b52bb48bcd7a4c4f629b63398706e6b0dcec43a0e43e09426bdb40839::liquidity::LiquidityPool<T0, T1>",
           "u64",
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_game_manager": {
         "visibility": "PUBLIC",
@@ -125,7 +131,7 @@
           "0xdc51e55b52bb48bcd7a4c4f629b63398706e6b0dcec43a0e43e09426bdb40839::liquidity::ManagerCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_liquidity_fee": {
         "visibility": "PRIVATE",
@@ -134,7 +140,9 @@
           "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_protocol_fee": {
         "visibility": "PRIVATE",
@@ -143,22 +151,151 @@
           "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "handle_payout": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
-          "&mut 0xdc51e55b52bb48bcd7a4c4f629b63398706e6b0dcec43a0e43e09426bdb40839::liquidity::LiquidityPool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0xdc51e55b52bb48bcd7a4c4f629b63398706e6b0dcec43a0e43e09426bdb40839::liquidity::LiquidityPool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "u64",
           "address",
-          "$2",
+          "T2",
           "&0x7bf0bd74001fdfaaa2796af8dbc6f9bf129a8098fe298a1cd497ca726d7c52d0::version::VersionTable",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "handle_payout_with_referral": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
+          "&mut 0xdc51e55b52bb48bcd7a4c4f629b63398706e6b0dcec43a0e43e09426bdb40839::liquidity::LiquidityPool<T0, 0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "u64",
+          "address",
+          "T1",
+          "&mut 0xef199024460c12d9880f7b6bb9712de2a56b3761fd5a480f297dadb60f956c03::referral::ReferralRegistry",
+          "&0x7bf0bd74001fdfaaa2796af8dbc6f9bf129a8098fe298a1cd497ca726d7c52d0::version::VersionTable",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "kelly_fraction_bp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameConfig"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "liquidity_fee_bp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameConfig"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "min_bet_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameConfig"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "protocol_fee_bp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameConfig"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "remove_if_exists_game_config_dynamic_field": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
+          "T0",
+          "T2"
+        ],
+        "return": []
+      },
+      "transfer_payout": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>",
+          "&mut 0xdc51e55b52bb48bcd7a4c4f629b63398706e6b0dcec43a0e43e09426bdb40839::liquidity::LiquidityPool<T0, T1>",
+          "u64",
+          "address",
+          "u64",
+          "&0x7bf0bd74001fdfaaa2796af8dbc6f9bf129a8098fe298a1cd497ca726d7c52d0::version::VersionTable",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_game_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::AdminCap",
+          "&mut 0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_game_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::AdminCap",
+          "&mut 0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager",
+          "address",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_exists_game_config": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x05bfdc4b80f6793428ebefc7dad17789a632042faf0da3026c0bde853292a17f::game_manager::GameManager"
+        ],
+        "return": []
       }
     }
   }
