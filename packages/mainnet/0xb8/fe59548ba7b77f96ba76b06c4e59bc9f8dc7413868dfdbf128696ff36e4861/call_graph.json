@@ -1,0 +1,185 @@
+{
+  "package_id": "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "assert_admin_owner_is_sender": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::errors::ENotAdmin"
+        ],
+        "authorize_caller": [
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::authorize_friend_caller",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::admin::assert_admin_owner_is_sender",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::caller::get_caller"
+        ],
+        "deauthorize_caller": [
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::deauthorize_friend_caller",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::admin::assert_admin_owner_is_sender",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::caller::get_caller"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::package::claim",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "initialize": [
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::borrow_caller_registry_mut",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::admin::assert_admin_owner_is_sender",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::caller::get_caller",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::initialize"
+        ]
+      }
+    },
+    {
+      "module_name": "api",
+      "call_graph": {
+        "create_feed": [
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::assert_friend_caller_is_authorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::borrow_caller_registry_mut",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::caller::get_caller",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::create_feed"
+        ],
+        "new_post": [
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::assert_friend_caller_is_authorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::borrow_caller_registry_mut",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::caller::get_caller",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::new_post"
+        ],
+        "post_message": [
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::assert_friend_caller_is_authorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::borrow_caller_registry_mut",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::caller::get_caller",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::post_message"
+        ]
+      }
+    },
+    {
+      "module_name": "caller",
+      "call_graph": {
+        "get_caller": []
+      }
+    },
+    {
+      "module_name": "constants",
+      "call_graph": {
+        "MAX_POST_LENGTH": [],
+        "MIN_POST_LENGTH": []
+      }
+    },
+    {
+      "module_name": "errors",
+      "call_graph": {
+        "EEmptyPost": [],
+        "EFeedAlreadyExists": [],
+        "EFeedNotFound": [],
+        "ENotAdmin": [],
+        "EPostTooLong": [],
+        "EPostTooShort": [],
+        "EProfileNotExists": [],
+        "EUnauthorized": []
+      }
+    },
+    {
+      "module_name": "feed",
+      "call_graph": {
+        "assert_content_valid": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::is_empty",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::constants::MAX_POST_LENGTH",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::constants::MIN_POST_LENGTH",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::errors::EEmptyPost",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::errors::EPostTooLong",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::errors::EPostTooShort"
+        ],
+        "create_feed": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::borrow_mut",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::errors::EFeedAlreadyExists",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::has_user_feed",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::insert_user_feed",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::new_stream"
+        ],
+        "generate_feed_id": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::append",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bcs::to_bytes",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hash::blake2b256",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hex::encode"
+        ],
+        "has_user_feed": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::exists_with_type",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::generate_feed_id"
+        ],
+        "initialize": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::add"
+        ],
+        "insert_user_feed": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::generate_feed_id",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::has_user_feed"
+        ],
+        "new_post": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::assert_content_valid"
+        ],
+        "post_message": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::borrow",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::borrow_mut",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::errors::EFeedNotFound",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::errors::EUnauthorized",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::feed::has_user_feed",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::add",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::can_write_in_stream",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::get_next_id",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::get_stream_id",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::get_stream_name"
+        ]
+      }
+    },
+    {
+      "module_name": "stream",
+      "call_graph": {
+        "add": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::errors::EUnauthorized",
+          "0xb8fe59548ba7b77f96ba76b06c4e59bc9f8dc7413868dfdbf128696ff36e4861::stream::can_write_in_stream"
+        ],
+        "add_contributor": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::insert"
+        ],
+        "add_tag": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::insert"
+        ],
+        "can_write_in_stream": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::contains"
+        ],
+        "get_next_id": [],
+        "get_stream_id": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id"
+        ],
+        "get_stream_name": [],
+        "get_stream_owner": [],
+        "new_stream": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::empty"
+        ],
+        "remove_contributor": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::remove"
+        ],
+        "remove_tag": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::remove"
+        ]
+      }
+    }
+  ]
+}

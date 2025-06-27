@@ -1,0 +1,778 @@
+{
+  "package_id": "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65",
+  "module_call_graphs": [
+    {
+      "module_name": "errors",
+      "call_graph": {
+        "EAmountInOutOfRange": [],
+        "EBaseMaxReserveExceeded": [],
+        "EForbidden": [],
+        "EInsufficientAmountOut": [],
+        "EInsufficientLiquidity": [],
+        "EMaxPriceDiffRatioExceeded": [],
+        "EPoolInfoMismatch": [],
+        "EPoolPaused": [],
+        "EPositionPoolMismatch": [],
+        "EPriceAssetsMismatch": [],
+        "EPriceInvalid": [],
+        "EPriceObjectInvalid": [],
+        "EQuoteMaxReserveExceeded": [],
+        "ETradeIntervalTooShort": [],
+        "ETxExpired": [],
+        "EWithdrawTooEarly": []
+      }
+    },
+    {
+      "module_name": "pool",
+      "call_graph": {
+        "collect_protocol_fees": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::withdraw_base_protocol_fee_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::withdraw_quote_protocol_fee_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::get_acc_protocol_fees",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::get_collected_protocol_fees",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::sub"
+        ],
+        "deposit_base_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::increase_base_reserve",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "deposit_base_fee_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::add_base_acc_fee",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "deposit_base_protocol_fee_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::add_base_acc_protocol_fee",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "deposit_quote_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::increase_quote_reserve",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "deposit_quote_fee_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::add_quote_acc_fee",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "deposit_quote_protocol_fee_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::add_quote_acc_protocol_fee",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "get_config_addr": [],
+        "get_fee_manager_addr": [],
+        "get_state_addr": [],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::new",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::new",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::new"
+        ],
+        "withdraw_base_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::decrease_base_reserve",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "withdraw_base_fee_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::collect_base_fee",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "withdraw_base_protocol_fee_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::collect_base_protocol_fee",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "withdraw_quote_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::decrease_quote_reserve",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "withdraw_quote_fee_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::collect_quote_fee",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "withdraw_quote_protocol_fee_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::collect_quote_protocol_fee",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ]
+      }
+    },
+    {
+      "module_name": "pool_config",
+      "call_graph": {
+        "get_base_amount_in_range": [],
+        "get_base_asset": [],
+        "get_base_price_object_addr": [],
+        "get_base_ref_price_object_addr": [],
+        "get_max_price_diff_ratio": [],
+        "get_max_price_staleness_ms": [],
+        "get_max_reserves": [],
+        "get_min_deposit_time_ms": [],
+        "get_min_fee_rate": [],
+        "get_min_trade_interval_ms": [],
+        "get_pricing_asset": [],
+        "get_protocol_fee_share": [],
+        "get_quote_amount_in_range": [],
+        "get_quote_asset": [],
+        "get_quote_price_object_addr": [],
+        "get_quote_ref_price_object_addr": [],
+        "get_safe_price_diff_ratio": [],
+        "is_paused": [],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::validate_price_object",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::validate_ref_price_object",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::max_decimal"
+        ],
+        "pause_or_resume": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden"
+        ],
+        "set_base_amount_in_range": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "set_base_price_object_addr": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::validate_price_object"
+        ],
+        "set_base_ref_price_object_addr": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::validate_ref_price_object"
+        ],
+        "set_max_price_diff_ratio": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden"
+        ],
+        "set_max_price_staleness_ms": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden"
+        ],
+        "set_max_reserves": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "set_min_deposit_time_ms": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden"
+        ],
+        "set_min_fee_rate": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden"
+        ],
+        "set_min_trade_interval_ms": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden"
+        ],
+        "set_protocol_fee_share": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden"
+        ],
+        "set_quote_amount_in_range": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "set_quote_price_object_addr": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::validate_price_object"
+        ],
+        "set_quote_ref_price_object_addr": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::validate_ref_price_object"
+        ],
+        "set_safe_price_diff_ratio": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden"
+        ]
+      }
+    },
+    {
+      "module_name": "pool_fee_manager",
+      "call_graph": {
+        "add_base_acc_fee": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div"
+        ],
+        "add_base_acc_protocol_fee": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add"
+        ],
+        "add_quote_acc_fee": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div"
+        ],
+        "add_quote_acc_protocol_fee": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add"
+        ],
+        "collect_base_fee": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add"
+        ],
+        "collect_base_protocol_fee": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add"
+        ],
+        "collect_quote_fee": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add"
+        ],
+        "collect_quote_protocol_fee": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add"
+        ],
+        "get_acc_fees": [],
+        "get_acc_fees_per_point": [],
+        "get_acc_protocol_fees": [],
+        "get_collected_fees": [],
+        "get_collected_protocol_fees": [],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ]
+      }
+    },
+    {
+      "module_name": "pool_state",
+      "call_graph": {
+        "burn_liquidity_points": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::sub"
+        ],
+        "decrease_base_reserve": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::sub"
+        ],
+        "decrease_quote_reserve": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::sub"
+        ],
+        "get_last_trade_time_ms": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "get_reserves": [],
+        "get_total_liquidity_point": [],
+        "get_tvl": [
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_reserves",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul"
+        ],
+        "increase_base_reserve": [
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EBaseMaxReserveExceeded",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_max_reserves",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::le"
+        ],
+        "increase_quote_reserve": [
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EQuoteMaxReserveExceeded",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_max_reserves",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::le"
+        ],
+        "mint_liquidity_points": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add"
+        ],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "update_last_trade_time_ms": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::remove"
+        ]
+      }
+    },
+    {
+      "module_name": "position",
+      "call_graph": {
+        "borrow": [],
+        "collect_fees": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolInfoMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPositionPoolMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_fee_manager_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::withdraw_base_fee_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::withdraw_quote_fee_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::get_acc_fees_per_point",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::get_claimable_fees",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::sync_acc_fees",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::sync_fee_debts",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor"
+        ],
+        "decrease_liquidity": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EForbidden",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EInsufficientLiquidity",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolInfoMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPositionPoolMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETxExpired",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EWithdrawTooEarly",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_config_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_fee_manager_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_state_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::withdraw_base_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::withdraw_quote_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_min_deposit_time_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::get_acc_fees_per_point",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::burn_liquidity_points",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_reserves",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_total_liquidity_point",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::sync_acc_fees",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::sync_fee_debts",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::ge",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::sub"
+        ],
+        "get_acc_fees": [],
+        "get_claimable_fees": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolInfoMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPositionPoolMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_fee_manager_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::get_acc_fees_per_point",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::get_acc_fees",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::get_fee_debts",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::sub"
+        ],
+        "get_collected_fees": [],
+        "get_fee_debts": [],
+        "get_last_increase_time_ms": [],
+        "get_last_update_time_ms": [],
+        "get_liquidity_point": [],
+        "get_position_reserves": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolInfoMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPositionPoolMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_state_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_reserves",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_total_liquidity_point",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul"
+        ],
+        "increase_base_liquidity": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EMaxPriceDiffRatioExceeded",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolInfoMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolPaused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPositionPoolMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETxExpired",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::deposit_base_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_config_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_fee_manager_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_state_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_max_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::is_paused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::get_acc_fees_per_point",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_total_liquidity_point",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_tvl",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::mint_liquidity_points",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::sync_acc_fees",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::sync_fee_debts",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::get_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::utils::fetch_prices",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul"
+        ],
+        "increase_quote_liquidity": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EMaxPriceDiffRatioExceeded",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolInfoMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolPaused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPositionPoolMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETxExpired",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::deposit_quote_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_config_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_fee_manager_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_state_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_max_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::is_paused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_fee_manager::get_acc_fees_per_point",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_total_liquidity_point",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_tvl",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::mint_liquidity_points",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::sync_acc_fees",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::position::sync_fee_debts",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::get_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::utils::fetch_prices",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul"
+        ],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "sync_acc_fees": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::add",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::sub"
+        ],
+        "sync_fee_debts": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul"
+        ]
+      }
+    },
+    {
+      "module_name": "pricing",
+      "call_graph": {
+        "get_price": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPriceAssetsMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPriceObjectInvalid",
+          "0xa8cc5ead60c188d252e1ae0db000ced612963772f541ba8d85fe93820ea24a1c::price_object::get_base_asset",
+          "0xa8cc5ead60c188d252e1ae0db000ced612963772f541ba8d85fe93820ea24a1c::price_object::get_price",
+          "0xa8cc5ead60c188d252e1ae0db000ced612963772f541ba8d85fe93820ea24a1c::price_object::get_quote_asset",
+          "0xa8cc5ead60c188d252e1ae0db000ced612963772f541ba8d85fe93820ea24a1c::price_object::get_timestamp_ms",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from"
+        ],
+        "get_price_diff_ratio": [
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::gt",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::sub"
+        ],
+        "get_price_not_older_than": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::get_price"
+        ],
+        "get_ref_price": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPriceAssetsMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPriceObjectInvalid",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xda0b9a0ce68f4156f7b580f8a8fc8db2828ebcf0f04c223e5b009763d46edcc0::price_object::get_base_asset",
+          "0xda0b9a0ce68f4156f7b580f8a8fc8db2828ebcf0f04c223e5b009763d46edcc0::price_object::get_price",
+          "0xda0b9a0ce68f4156f7b580f8a8fc8db2828ebcf0f04c223e5b009763d46edcc0::price_object::get_quote_asset",
+          "0xda0b9a0ce68f4156f7b580f8a8fc8db2828ebcf0f04c223e5b009763d46edcc0::price_object::get_timestamp_ms"
+        ],
+        "get_ref_price_not_older_than": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::get_ref_price"
+        ],
+        "validate_price_object": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_none",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPriceObjectInvalid",
+          "0xa8cc5ead60c188d252e1ae0db000ced612963772f541ba8d85fe93820ea24a1c::price_object::get_base_asset",
+          "0xa8cc5ead60c188d252e1ae0db000ced612963772f541ba8d85fe93820ea24a1c::price_object::get_quote_asset"
+        ],
+        "validate_ref_price_object": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_none",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPriceObjectInvalid",
+          "0xda0b9a0ce68f4156f7b580f8a8fc8db2828ebcf0f04c223e5b009763d46edcc0::price_object::get_base_asset",
+          "0xda0b9a0ce68f4156f7b580f8a8fc8db2828ebcf0f04c223e5b009763d46edcc0::price_object::get_quote_asset"
+        ]
+      }
+    },
+    {
+      "module_name": "router",
+      "call_graph": {
+        "trade_exact_x_to_y": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EAmountInOutOfRange",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EInsufficientAmountOut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EMaxPriceDiffRatioExceeded",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolInfoMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolPaused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETradeIntervalTooShort",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETxExpired",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_config_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_fee_manager_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_state_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::withdraw_quote_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_base_amount_in_range",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_base_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_max_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_min_fee_rate",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_min_trade_interval_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_protocol_fee_share",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_quote_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_safe_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::is_paused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_last_trade_time_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::update_last_trade_time_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::get_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::router::trade_x_to_y",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::utils::fetch_prices",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::ge",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::le"
+        ],
+        "trade_exact_y_to_x": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EAmountInOutOfRange",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EInsufficientAmountOut",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EMaxPriceDiffRatioExceeded",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolInfoMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolPaused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETradeIntervalTooShort",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETxExpired",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_config_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_fee_manager_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_state_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::withdraw_base_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_base_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_max_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_min_fee_rate",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_min_trade_interval_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_protocol_fee_share",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_quote_amount_in_range",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_quote_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_safe_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::is_paused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_last_trade_time_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::update_last_trade_time_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::get_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::router::trade_y_to_x",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::utils::fetch_prices",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::ge",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::le"
+        ],
+        "trade_x_to_exact_y": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EAmountInOutOfRange",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EMaxPriceDiffRatioExceeded",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolInfoMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolPaused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETradeIntervalTooShort",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETxExpired",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_config_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_fee_manager_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_state_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::withdraw_quote_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_base_amount_in_range",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_base_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_max_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_min_fee_rate",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_min_trade_interval_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_protocol_fee_share",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_quote_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_safe_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::is_paused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_last_trade_time_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::update_last_trade_time_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::get_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::router::trade_x_to_y",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::utils::fetch_prices",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::ge",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::le",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul"
+        ],
+        "trade_x_to_y": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::deposit_base_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::deposit_base_fee_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::deposit_base_protocol_fee_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_total_liquidity_point",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::sub"
+        ],
+        "trade_y_to_exact_x": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EAmountInOutOfRange",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EMaxPriceDiffRatioExceeded",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolInfoMismatch",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPoolPaused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETradeIntervalTooShort",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::ETxExpired",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_config_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_fee_manager_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::get_state_addr",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::withdraw_base_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_base_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_max_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_min_fee_rate",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_min_trade_interval_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_protocol_fee_share",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_quote_amount_in_range",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_quote_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_safe_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::is_paused",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_last_trade_time_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::update_last_trade_time_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::get_price_diff_ratio",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::router::trade_y_to_x",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::utils::fetch_prices",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::ge",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::le",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul"
+        ],
+        "trade_y_to_x": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::deposit_quote_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::deposit_quote_fee_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool::deposit_quote_protocol_fee_coin",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_state::get_total_liquidity_point",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::div",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::floor",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::from",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::mul",
+          "0xc5f0aa630b9e6de12ecdc2bbcd4307d1db3a90e1efec271f32d984b4b971c301::decimal::sub"
+        ]
+      }
+    },
+    {
+      "module_name": "utils",
+      "call_graph": {
+        "fetch_prices": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::errors::EPriceInvalid",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_base_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_max_price_staleness_ms",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_pricing_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pool_config::get_quote_asset",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::get_price_not_older_than",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::get_ref_price_not_older_than",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::validate_price_object",
+          "0x50d70d8c1d1e69783b2212ffa91ef4fdba4dc02c986ea220632ff9ee98b74f65::pricing::validate_ref_price_object"
+        ]
+      }
+    }
+  ]
+}

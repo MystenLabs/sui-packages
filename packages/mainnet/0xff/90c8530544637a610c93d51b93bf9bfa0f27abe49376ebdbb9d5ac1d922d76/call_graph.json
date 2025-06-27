@@ -1,0 +1,191 @@
+{
+  "package_id": "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "add_delegate_witness": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::insert"
+        ],
+        "assert_is_delegate_witness": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::contains"
+        ],
+        "decrease_score_delegated": [
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::admin::assert_is_delegate_witness",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_score::decrease_score"
+        ],
+        "increase_score_delegated": [
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::admin::assert_is_delegate_witness",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_score::increase_score"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::empty"
+        ],
+        "remove_delegate_witness": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::remove"
+        ],
+        "set_score": [
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_score::set_score"
+        ],
+        "upgrade_contract": [
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::version::upgrade"
+        ]
+      }
+    },
+    {
+      "module_name": "drand_lib",
+      "call_graph": {
+        "derive_randomness": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hash::blake2b256"
+        ],
+        "is_current_round": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::drand_lib::verify_drand_signature"
+        ],
+        "safe_selection": [],
+        "verify_drand_signature": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::hash::sha2_256",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::append",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::bls12381_min_pk_verify"
+        ]
+      }
+    },
+    {
+      "module_name": "lucky_draw",
+      "call_graph": {
+        "calc_rarity_seed": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::append",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hash::blake2b256",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_bytes",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::drand_lib::safe_selection",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::drand_lib::verify_drand_signature",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_box::rarity_base"
+        ],
+        "draw_ticket": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::drand_lib::is_current_round"
+        ],
+        "redeem_ticket": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::delete",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::lucky_draw::calc_rarity_seed",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_box::mint_with_rarity_seed"
+        ]
+      }
+    },
+    {
+      "module_name": "scallop_box",
+      "call_graph": {
+        "box_issue_timestamp": [],
+        "box_rarity": [],
+        "bronze": [],
+        "calc_box_rarity": [],
+        "diamond": [],
+        "gold": [],
+        "legendary": [],
+        "mint": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "mint_with_rarity_seed": [
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_box::calc_box_rarity",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_box::mint"
+        ],
+        "platinum": [],
+        "rarity_base": [],
+        "silver": []
+      }
+    },
+    {
+      "module_name": "scallop_score",
+      "call_graph": {
+        "decrease_score": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "get_score": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "increase_score": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object"
+        ],
+        "set_score": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ]
+      }
+    },
+    {
+      "module_name": "user",
+      "call_graph": {
+        "chad_redeem_scallop_box": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_box::diamond",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_box::mint",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_score::decrease_score",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_score::get_score",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::version::assert_current_version"
+        ],
+        "draw_scallop_box_tickets": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::lucky_draw::draw_ticket",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_score::decrease_score",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_score::get_score",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::version::assert_current_version"
+        ],
+        "redeem_scallop_box": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::lucky_draw::redeem_ticket",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::version::assert_current_version"
+        ],
+        "whale_redeem_scallop_box": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_box::legendary",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_box::mint",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_score::decrease_score",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::scallop_score::get_score",
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::version::assert_current_version"
+        ]
+      }
+    },
+    {
+      "module_name": "version",
+      "call_graph": {
+        "assert_current_version": [
+          "0xff90c8530544637a610c93d51b93bf9bfa0f27abe49376ebdbb9d5ac1d922d76::version::is_current_version"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object"
+        ],
+        "is_current_version": [],
+        "upgrade": [],
+        "version": []
+      }
+    }
+  ]
+}

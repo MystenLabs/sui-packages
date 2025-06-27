@@ -1,0 +1,116 @@
+{
+  "package_id": "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "authorize_caller": [
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::auth::authorize_caller",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::auth::is_caller_authorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::create_caller_registry",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::has_caller_registry"
+        ],
+        "deauthorize_caller": [
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::auth::deauthorize_caller",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::auth::is_caller_authorized"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ]
+      }
+    },
+    {
+      "module_name": "auth",
+      "call_graph": {
+        "assert_caller_is_authorized": [
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::auth::is_caller_authorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::errors::ECallerNotAuthorized"
+        ],
+        "authorize_caller": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::get_id_mut"
+        ],
+        "deauthorize_caller": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::remove",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::get_id_mut"
+        ],
+        "is_caller_authorized": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::exists_with_type",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::get_id"
+        ]
+      }
+    },
+    {
+      "module_name": "errors",
+      "call_graph": {
+        "ECallerNotAuthorized": [],
+        "EFriendCallerNotAuthorized": []
+      }
+    },
+    {
+      "module_name": "registry",
+      "call_graph": {
+        "add": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add"
+        ],
+        "assert_friend_caller_is_authorized": [
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::errors::EFriendCallerNotAuthorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::registry::is_friend_caller_authorized"
+        ],
+        "authorize_friend_caller": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::auth::assert_caller_is_authorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::get_id_mut"
+        ],
+        "borrow": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow"
+        ],
+        "borrow_caller_registry": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::get_id"
+        ],
+        "borrow_caller_registry_mut": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::auth::assert_caller_is_authorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::get_id_mut"
+        ],
+        "borrow_mut": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut"
+        ],
+        "create_caller_registry": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::auth::assert_caller_is_authorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::get_id_mut"
+        ],
+        "deauthorize_friend_caller": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::remove",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::auth::assert_caller_is_authorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::get_id_mut"
+        ],
+        "has_caller_registry": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::exists_with_type",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::get_id"
+        ],
+        "is_friend_caller_authorized": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::exists_with_type",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::auth::assert_caller_is_authorized",
+          "0x6490ecc049e7fe9e09525de43562dc63e645810e86c9f437993596772db5ffef::shared::get_id"
+        ]
+      }
+    },
+    {
+      "module_name": "shared",
+      "call_graph": {
+        "get_id": [],
+        "get_id_mut": [],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "package_id": "0xddaa9182907d79f590b6326f085df79f829b2b8583f66a2d953438e2daecb9a2",
+  "module_call_graphs": [
+    {
+      "module_name": "build_slot_floor_price_rule",
+      "call_graph": {
+        "add": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::add_rule"
+        ],
+        "prove": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::add_receipt",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::get_rule",
+          "0xb199d43324ac809f6869dd0b6cac6e1641023c5895853ca13ff5e01d1cfa2d73::marketplace::floor_price"
+        ]
+      }
+    },
+    {
+      "module_name": "build_slot_royalties_rule",
+      "call_graph": {
+        "add": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::add_rule"
+        ],
+        "fee_amount": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::get_rule"
+        ],
+        "pay": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::add_receipt",
+          "0xb199d43324ac809f6869dd0b6cac6e1641023c5895853ca13ff5e01d1cfa2d73::marketplace::royalties_price",
+          "0xddaa9182907d79f590b6326f085df79f829b2b8583f66a2d953438e2daecb9a2::build_slot_royalties_rule::fee_amount",
+          "0xddaa9182907d79f590b6326f085df79f829b2b8583f66a2d953438e2daecb9a2::royalties::add_to_balance_usdc"
+        ]
+      }
+    },
+    {
+      "module_name": "royalties",
+      "call_graph": {
+        "add_to_balance_usdc": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::put"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new"
+        ],
+        "withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::take"
+        ]
+      }
+    }
+  ]
+}

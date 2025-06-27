@@ -1,0 +1,424 @@
+{
+  "package_id": "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2",
+  "module_call_graphs": [
+    {
+      "module_name": "custodian",
+      "call_graph": {
+        "deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance"
+        ],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero"
+        ],
+        "reserve": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "safe_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::reserve"
+        ],
+        "withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance"
+        ],
+        "withdraw_all": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::withdraw_all",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance"
+        ]
+      }
+    },
+    {
+      "module_name": "fee_collector",
+      "call_graph": {
+        "change_fee": [],
+        "deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::deposit"
+        ],
+        "fee_amount": [],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::new"
+        ],
+        "value": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::reserve"
+        ],
+        "withdraw": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::withdraw"
+        ]
+      }
+    },
+    {
+      "module_name": "fee_collector_registry",
+      "call_graph": {
+        "assert_registered": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::exists_"
+        ],
+        "borrow_fee_collector": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector_registry::assert_registered"
+        ],
+        "borrow_mut_fee_collector": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector_registry::assert_registered"
+        ],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new"
+        ],
+        "register": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id"
+        ]
+      }
+    },
+    {
+      "module_name": "fetcher",
+      "call_graph": {
+        "fetch_pending_reward": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::estimate_pending_rewards",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::borrow_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::pool_idx",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_pool_registry"
+        ]
+      }
+    },
+    {
+      "module_name": "operator",
+      "call_graph": {
+        "create_pool": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector::deposit",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector::fee_amount",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::create_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::register",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_active_fee_collector",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_active_fee_collector",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_pool_registry",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::transfer_or_destroy_zero",
+          "0xba153169476e8c3114962261d1edc70de5ad9781b83cc617ecc8c1923191cae0::swap_utils::is_ordered"
+        ],
+        "decrease_for": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::withdraw",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::borrow_mut_lp_custodian",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::decrease"
+        ],
+        "decrease_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::decrease_position_"
+        ],
+        "decrease_position_": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::decrease_for",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::distribute_pending_rewards",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::recalc_reward_debts",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::is_emergency",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::update_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::borrow_mut_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::pool_idx",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::value",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_pool_registry"
+        ],
+        "decrease_position_emergency": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::decrease_for",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::is_emergency",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::borrow_mut_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::pool_idx",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::value",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_pool_registry"
+        ],
+        "distribute_pending_rewards": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::safe_withdraw",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::borrow_mut_flx_custodian",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::borrow_mut_reward_token_custodian",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::calc_pending_rewards"
+        ],
+        "harvest": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::harvest_"
+        ],
+        "harvest_": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::safe_withdraw",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::recalc_reward_debts",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::borrow_mut_flx_custodian",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::borrow_mut_reward_token_custodian",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::calc_pending_rewards",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::is_emergency",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::update_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::borrow_mut_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::pool_idx",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::value",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_pool_registry"
+        ],
+        "increase_for": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::deposit",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::borrow_mut_lp_custodian",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::increase"
+        ],
+        "increase_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::distribute_pending_rewards",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::increase_for",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::recalc_reward_debts",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::is_emergency",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::update_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::borrow_mut_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::pool_idx",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::value",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_pool_registry"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "open_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::increase_for",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::operator::recalc_reward_debts",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::is_emergency",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::update_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::borrow_mut_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::new",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_pool_registry"
+        ],
+        "recalc_reward_debts": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::calc_rewards_for",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::change_flx_reward_debt",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::change_token_reward_debt"
+        ],
+        "register_fee_collector": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector::new",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::register_active_fee_collector"
+        ],
+        "set_fee_amount": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector::change_fee",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_active_fee_collector"
+        ],
+        "setup": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_share_object",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::new"
+        ],
+        "stop_reward": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::set_emergency",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::stop_reward",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::borrow_mut_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_pool_registry"
+        ],
+        "update_end_time": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::set_end_time",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::borrow_mut_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_pool_registry"
+        ],
+        "withdraw_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector::withdraw",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_active_fee_collector"
+        ],
+        "withdraw_rewards": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::withdraw_all",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::borrow_mut_flx_custodian",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::borrow_mut_reward_token_custodian",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::is_emergency",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::borrow_mut_pool",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::state::borrow_mut_pool_registry",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::transfer_or_destroy_zero"
+        ]
+      }
+    },
+    {
+      "module_name": "pool",
+      "call_graph": {
+        "acc_flx_per_share": [],
+        "acc_token_per_share": [],
+        "borrow_flx_custodian": [],
+        "borrow_lp_custodian": [],
+        "borrow_mut_flx_custodian": [],
+        "borrow_mut_lp_custodian": [],
+        "borrow_mut_reward_token_custodian": [],
+        "borrow_reward_token_custodian": [],
+        "calc_pending_rewards": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::calc_rewards_for",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::flx_reward_debt",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::token_reward_debt"
+        ],
+        "calc_rewards_for": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::value"
+        ],
+        "create_pool": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::into_string",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::deposit",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::new",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::calculate_reward_in_duration",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::calculate_reward_per_seconds",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::to_milliseconds",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::to_seconds",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::transfer_or_destroy_zero",
+          "0xba153169476e8c3114962261d1edc70de5ad9781b83cc617ecc8c1923191cae0::pair::get_lp_name"
+        ],
+        "creator": [],
+        "ended_at": [],
+        "estimate_pending_rewards": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::reserve",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::get_multiplier",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::flx_reward_debt",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::token_reward_debt",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::position::value",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::to_seconds"
+        ],
+        "flx_per_seconds": [],
+        "get_multiplier": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::to_seconds"
+        ],
+        "is_emergency": [],
+        "last_reward_at": [],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::new"
+        ],
+        "set_emergency": [],
+        "set_end_time": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "started_at": [],
+        "stop_reward": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms"
+        ],
+        "token_per_seconds": [],
+        "update_pool": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::custodian::reserve",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool::get_multiplier",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::to_milliseconds",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::to_seconds"
+        ]
+      }
+    },
+    {
+      "module_name": "pool_registry",
+      "call_graph": {
+        "assert_registered": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::num_pools"
+        ],
+        "borrow_mut_pool": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::assert_registered"
+        ],
+        "borrow_pool": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::assert_registered"
+        ],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new"
+        ],
+        "num_pools": [],
+        "register": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::num_pools"
+        ]
+      }
+    },
+    {
+      "module_name": "position",
+      "call_graph": {
+        "change_flx_reward_debt": [],
+        "change_token_reward_debt": [],
+        "decrease": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "flx_reward_debt": [],
+        "increase": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "pool_idx": [],
+        "token_reward_debt": [],
+        "value": []
+      }
+    },
+    {
+      "module_name": "state",
+      "call_graph": {
+        "borrow_active_fee_collector": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector_registry::borrow_fee_collector"
+        ],
+        "borrow_mut_active_fee_collector": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector_registry::borrow_mut_fee_collector"
+        ],
+        "borrow_mut_pool_registry": [],
+        "borrow_pool_registry": [],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector::new",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector_registry::new",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector_registry::register",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::pool_registry::new"
+        ],
+        "register_active_fee_collector": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::fee_collector_registry::register"
+        ]
+      }
+    },
+    {
+      "module_name": "utils",
+      "call_graph": {
+        "calculate_reward_in_duration": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::to_seconds"
+        ],
+        "calculate_reward_per_seconds": [
+          "0x943535499ac300765aa930072470e0b515cfd7eebcaa5c43762665eaad9cc6f2::utils::to_seconds"
+        ],
+        "to_milliseconds": [],
+        "to_seconds": [],
+        "transfer_or_destroy_zero": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "package_id": "0x248f5cb31c12eed6ab8fd4c6176466b982be42ce87e6bf8ff896fb8097a1660d",
+  "module_call_graphs": [
+    {
+      "module_name": "rule",
+      "call_graph": {
+        "assert_price_not_stale": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms"
+        ],
+        "get_switchboard_price": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::u64::pow",
+          "0x248f5cb31c12eed6ab8fd4c6176466b982be42ce87e6bf8ff896fb8097a1660d::rule::assert_price_not_stale",
+          "0x248f5cb31c12eed6ab8fd4c6176466b982be42ce87e6bf8ff896fb8097a1660d::switchboard_adaptor::get_switchboard_price",
+          "0x248f5cb31c12eed6ab8fd4c6176466b982be42ce87e6bf8ff896fb8097a1660d::switchboard_registry::assert_switchboard_aggregator",
+          "0xe7511600c924f1d0ac4b3fa5de3ae26b8845545902b015dc5fc7894307365d7b::price_feed::decimals",
+          "0xe7511600c924f1d0ac4b3fa5de3ae26b8845545902b015dc5fc7894307365d7b::price_feed::new"
+        ],
+        "set_as_primary_price": [
+          "0x248f5cb31c12eed6ab8fd4c6176466b982be42ce87e6bf8ff896fb8097a1660d::rule::get_switchboard_price",
+          "0xe7511600c924f1d0ac4b3fa5de3ae26b8845545902b015dc5fc7894307365d7b::x_oracle::set_primary_price"
+        ],
+        "set_as_secondary_price": [
+          "0x248f5cb31c12eed6ab8fd4c6176466b982be42ce87e6bf8ff896fb8097a1660d::rule::get_switchboard_price",
+          "0xe7511600c924f1d0ac4b3fa5de3ae26b8845545902b015dc5fc7894307365d7b::x_oracle::set_secondary_price"
+        ]
+      }
+    },
+    {
+      "module_name": "switchboard_adaptor",
+      "call_graph": {
+        "get_switchboard_price": [
+          "0xc3c7e6eb7202e9fb0389a2f7542b91cc40e4f7a33c02554fec11c4c92f938ea3::aggregator::current_result",
+          "0xc3c7e6eb7202e9fb0389a2f7542b91cc40e4f7a33c02554fec11c4c92f938ea3::aggregator::result",
+          "0xc3c7e6eb7202e9fb0389a2f7542b91cc40e4f7a33c02554fec11c4c92f938ea3::aggregator::timestamp_ms",
+          "0xc3c7e6eb7202e9fb0389a2f7542b91cc40e4f7a33c02554fec11c4c92f938ea3::decimal::neg",
+          "0xc3c7e6eb7202e9fb0389a2f7542b91cc40e4f7a33c02554fec11c4c92f938ea3::decimal::value"
+        ]
+      }
+    },
+    {
+      "module_name": "switchboard_registry",
+      "call_graph": {
+        "assert_switchboard_aggregator": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "register_switchboard_aggregator": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::remove"
+        ]
+      }
+    }
+  ]
+}

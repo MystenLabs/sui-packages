@@ -1,0 +1,65 @@
+{
+  "package_id": "0xfb291ca86dacabc86fb3f7f2bbe882a8aa5c5cb7b332346e791a9f3f51cb8ab2",
+  "module_call_graphs": [
+    {
+      "module_name": "testury",
+      "call_graph": {
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xfb291ca86dacabc86fb3f7f2bbe882a8aa5c5cb7b332346e791a9f3f51cb8ab2::testury::new"
+        ],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new"
+        ],
+        "receive_sui_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance"
+        ],
+        "take_from_sui_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::take"
+        ],
+        "withdraw_from_sui_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0xfb291ca86dacabc86fb3f7f2bbe882a8aa5c5cb7b332346e791a9f3f51cb8ab2::testury::take_from_sui_balance"
+        ]
+      }
+    },
+    {
+      "module_name": "yield",
+      "call_graph": {
+        "create_scallop_vault": [
+          "0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::user::new_spool_account",
+          "0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::user::stake",
+          "0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::mint::mint",
+          "0xfb291ca86dacabc86fb3f7f2bbe882a8aa5c5cb7b332346e791a9f3f51cb8ab2::yield::new_shared_vault"
+        ],
+        "deposit_from_treasury_into_scallop": [
+          "0xfb291ca86dacabc86fb3f7f2bbe882a8aa5c5cb7b332346e791a9f3f51cb8ab2::testury::take_from_sui_balance",
+          "0xfb291ca86dacabc86fb3f7f2bbe882a8aa5c5cb7b332346e791a9f3f51cb8ab2::yield::create_scallop_vault"
+        ],
+        "new_shared_vault": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object"
+        ],
+        "scrape_rewards": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::user::redeem_rewards"
+        ],
+        "unstake_from_scallop_into_treasury": [
+          "0xfb291ca86dacabc86fb3f7f2bbe882a8aa5c5cb7b332346e791a9f3f51cb8ab2::testury::receive_sui_balance",
+          "0xfb291ca86dacabc86fb3f7f2bbe882a8aa5c5cb7b332346e791a9f3f51cb8ab2::yield::unstake_from_vault"
+        ],
+        "unstake_from_vault": [
+          "0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::stake_amount",
+          "0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::user::unstake",
+          "0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::redeem::redeem"
+        ]
+      }
+    }
+  ]
+}

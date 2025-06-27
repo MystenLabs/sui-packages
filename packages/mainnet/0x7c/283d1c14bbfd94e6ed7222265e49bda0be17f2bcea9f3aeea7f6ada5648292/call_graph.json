@@ -1,0 +1,72 @@
+{
+  "package_id": "0x7c283d1c14bbfd94e6ed7222265e49bda0be17f2bcea9f3aeea7f6ada5648292",
+  "module_call_graphs": [
+    {
+      "module_name": "pyth_adaptor",
+      "call_graph": {
+        "assert_price_conf_within_range": [],
+        "assert_price_not_stale": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_timestamp"
+        ],
+        "get_pyth_price": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x7c283d1c14bbfd94e6ed7222265e49bda0be17f2bcea9f3aeea7f6ada5648292::pyth_adaptor::assert_price_conf_within_range",
+          "0x7c283d1c14bbfd94e6ed7222265e49bda0be17f2bcea9f3aeea7f6ada5648292::pyth_adaptor::assert_price_not_stale",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_negative",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_positive",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_conf",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_expo",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_price",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::pyth::get_price"
+        ]
+      }
+    },
+    {
+      "module_name": "pyth_registry",
+      "call_graph": {
+        "assert_pyth_price_info_object": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "register_pyth_price_info_object": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::remove"
+        ]
+      }
+    },
+    {
+      "module_name": "rule",
+      "call_graph": {
+        "set_price_as_primary": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::math::pow",
+          "0x7c283d1c14bbfd94e6ed7222265e49bda0be17f2bcea9f3aeea7f6ada5648292::pyth_adaptor::get_pyth_price",
+          "0x7c283d1c14bbfd94e6ed7222265e49bda0be17f2bcea9f3aeea7f6ada5648292::pyth_registry::assert_pyth_price_info_object",
+          "0xe11209515f632fbc9280b09dcc25869f1efa02a675a96b92497857562f9a8a8f::price_feed::decimals",
+          "0xe11209515f632fbc9280b09dcc25869f1efa02a675a96b92497857562f9a8a8f::price_feed::new",
+          "0xe11209515f632fbc9280b09dcc25869f1efa02a675a96b92497857562f9a8a8f::x_oracle::set_primary_price"
+        ],
+        "set_price_as_secondary": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::math::pow",
+          "0x7c283d1c14bbfd94e6ed7222265e49bda0be17f2bcea9f3aeea7f6ada5648292::pyth_adaptor::get_pyth_price",
+          "0x7c283d1c14bbfd94e6ed7222265e49bda0be17f2bcea9f3aeea7f6ada5648292::pyth_registry::assert_pyth_price_info_object",
+          "0xe11209515f632fbc9280b09dcc25869f1efa02a675a96b92497857562f9a8a8f::price_feed::decimals",
+          "0xe11209515f632fbc9280b09dcc25869f1efa02a675a96b92497857562f9a8a8f::price_feed::new",
+          "0xe11209515f632fbc9280b09dcc25869f1efa02a675a96b92497857562f9a8a8f::x_oracle::set_secondary_price"
+        ]
+      }
+    }
+  ]
+}

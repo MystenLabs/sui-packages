@@ -1,0 +1,288 @@
+{
+  "package_id": "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "add_delegate_witness": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::insert"
+        ],
+        "assert_is_delegate_witness": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::contains"
+        ],
+        "assert_redeem_enabled": [],
+        "decrease_score": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::decrease_score"
+        ],
+        "decrease_score_delegated": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::admin::assert_is_delegate_witness",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::decrease_score"
+        ],
+        "disable_redeem": [],
+        "enable_redeem": [],
+        "increase_score": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::increase_score"
+        ],
+        "increase_score_delegated": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::admin::assert_is_delegate_witness",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::increase_score"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::empty"
+        ],
+        "remove_delegate_witness": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::remove"
+        ],
+        "set_score": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::set_score"
+        ],
+        "upgrade_contract": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::version::upgrade"
+        ]
+      }
+    },
+    {
+      "module_name": "drand_lib",
+      "call_graph": {
+        "derive_randomness": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hash::blake2b256"
+        ],
+        "is_current_round": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::drand_lib::verify_drand_signature"
+        ],
+        "safe_selection": [],
+        "verify_drand_signature": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::hash::sha2_256",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::append",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::bls12381_min_pk_verify"
+        ]
+      }
+    },
+    {
+      "module_name": "lucky_draw",
+      "call_graph": {
+        "calc_rarity_seed": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::append",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hash::blake2b256",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_bytes",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::drand_lib::safe_selection",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::drand_lib::verify_drand_signature",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::rarity_base"
+        ],
+        "draw_ticket": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::drand_lib::is_current_round"
+        ],
+        "redeem_ticket": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::delete",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::lucky_draw::calc_rarity_seed",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::mint_with_rarity_seed"
+        ]
+      }
+    },
+    {
+      "module_name": "redeem",
+      "call_graph": {
+        "deposit_reward": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance"
+        ],
+        "get_redeem_amount": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::box_rarity",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::bronze",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::diamond",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::gold",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::legendary",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::platinum",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::silver"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "redeem": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::redeem::get_redeem_amount",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::user::burn_scallop_box"
+        ],
+        "set_redeem_amount": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::bronze",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::diamond",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::gold",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::legendary",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::platinum",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::silver"
+        ],
+        "set_redeem_status": [],
+        "withdraw_reward": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance"
+        ]
+      }
+    },
+    {
+      "module_name": "scallop_box",
+      "call_graph": {
+        "box_issue_timestamp": [],
+        "box_rarity": [],
+        "bronze": [],
+        "burn": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::delete",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_inner",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "calc_box_rarity": [],
+        "diamond": [],
+        "get_image_url": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8"
+        ],
+        "gold": [],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::display::new_with_fields",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::display::update_version",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::package::claim",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "legendary": [],
+        "mint": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::append",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::empty",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::insert",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::get_image_url",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::u64_to_string"
+        ],
+        "mint_with_rarity_seed": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::calc_box_rarity",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::mint"
+        ],
+        "platinum": [],
+        "rarity_base": [],
+        "silver": [],
+        "transfer": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer"
+        ],
+        "u64_to_string": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::string",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::reverse"
+        ]
+      }
+    },
+    {
+      "module_name": "scallop_score",
+      "call_graph": {
+        "decrease_score": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "get_score": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "increase_score": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object"
+        ],
+        "set_score": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ]
+      }
+    },
+    {
+      "module_name": "user",
+      "call_graph": {
+        "burn_scallop_box": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::burn",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::version::assert_current_version"
+        ],
+        "chad_redeem_scallop_box": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::admin::assert_redeem_enabled",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::diamond",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::mint",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::transfer",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::decrease_score",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::get_score",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::version::assert_current_version"
+        ],
+        "draw_scallop_box_tickets": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::admin::assert_redeem_enabled",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::lucky_draw::draw_ticket",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::decrease_score",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::get_score",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::version::assert_current_version"
+        ],
+        "redeem_scallop_box": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::admin::assert_redeem_enabled",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::lucky_draw::redeem_ticket",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::transfer",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::version::assert_current_version"
+        ],
+        "whale_redeem_scallop_box": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::admin::assert_redeem_enabled",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::legendary",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::mint",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_box::transfer",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::decrease_score",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::scallop_score::get_score",
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::version::assert_current_version"
+        ]
+      }
+    },
+    {
+      "module_name": "version",
+      "call_graph": {
+        "assert_current_version": [
+          "0xa8b4c43ff881a1d73d440b8bd6cfd87599bb4ad6e3633056a8add082c9cdcab8::version::is_current_version"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object"
+        ],
+        "is_current_version": [],
+        "upgrade": [],
+        "version": []
+      }
+    }
+  ]
+}

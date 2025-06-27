@@ -1,0 +1,35 @@
+{
+  "package_id": "0xe53343b7a64ec5fed2e126e7a521c1794db28d04ec07c1475f9e2b83bc41ed14",
+  "module_call_graphs": [
+    {
+      "module_name": "drand_lib",
+      "call_graph": {
+        "derive_randomness": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::hash::sha2_256"
+        ],
+        "safe_selection": [],
+        "verify_drand_signature": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::hash::sha2_256",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bls12381::bls12381_min_sig_verify"
+        ],
+        "verify_time_has_passed": [
+          "0xe53343b7a64ec5fed2e126e7a521c1794db28d04ec07c1475f9e2b83bc41ed14::drand_lib::verify_drand_signature"
+        ]
+      }
+    },
+    {
+      "module_name": "sui_winner",
+      "call_graph": {
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object"
+        ],
+        "random": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0xe53343b7a64ec5fed2e126e7a521c1794db28d04ec07c1475f9e2b83bc41ed14::drand_lib::derive_randomness",
+          "0xe53343b7a64ec5fed2e126e7a521c1794db28d04ec07c1475f9e2b83bc41ed14::drand_lib::safe_selection"
+        ]
+      }
+    }
+  ]
+}

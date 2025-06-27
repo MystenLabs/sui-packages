@@ -1,0 +1,362 @@
+{
+  "package_id": "0x5725054b10f2096febe2edb81983b80d2fef1e017e6e2f231d7fcfe586c996eb",
+  "module_call_graphs": [
+    {
+      "module_name": "calculator",
+      "call_graph": {
+        "caculate_utilization": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_index",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_total_supply",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_div",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_mul"
+        ],
+        "calculate_borrow_rate": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::caculate_utilization",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_borrow_rate_factors",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_mul"
+        ],
+        "calculate_compounded_interest": [
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_mul"
+        ],
+        "calculate_linear_interest": [
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray"
+        ],
+        "calculate_repay_amount": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::calculate_borrow_rate"
+        ],
+        "calculate_supply_rate": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::caculate_utilization",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_borrow_rate_factors",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray"
+        ],
+        "calculate_value": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::math::pow",
+          "0xa4951e331eab16415301bc6e4c297cd7e369c3a19871373fb9f8dc92275f77e7::oracle::get_token_price"
+        ],
+        "calculate_withdraw_amount": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::calculate_borrow_rate",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::calculate_supply_rate"
+        ]
+      }
+    },
+    {
+      "module_name": "lending",
+      "call_graph": {
+        "borrow": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x3221fa03e8eb2a35409e6b2582ff89fb4af4745d0729f97d37bc3ee9adf2a653::pool::withdraw",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::lending::when_not_paused",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::execute_borrow",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::validation::validate_borrow"
+        ],
+        "deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x3221fa03e8eb2a35409e6b2582ff89fb4af4745d0729f97d37bc3ee9adf2a653::pool::deposit",
+          "0x953dd3b31a76d4c17c1c0391b4a8cf99692340df58ec2695dd703ec90adc6097::utils::split_coin",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::lending::when_not_paused",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::execute_deposit",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::validation::validate_deposit"
+        ],
+        "repay": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x3221fa03e8eb2a35409e6b2582ff89fb4af4745d0729f97d37bc3ee9adf2a653::pool::deposit",
+          "0x953dd3b31a76d4c17c1c0391b4a8cf99692340df58ec2695dd703ec90adc6097::utils::split_coin",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::lending::when_not_paused",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::execute_repay",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::validation::validate_repay"
+        ],
+        "when_not_paused": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::pause"
+        ],
+        "withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x3221fa03e8eb2a35409e6b2582ff89fb4af4745d0729f97d37bc3ee9adf2a653::pool::withdraw",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::lending::when_not_paused",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::execute_withdraw"
+        ]
+      }
+    },
+    {
+      "module_name": "logic",
+      "call_graph": {
+        "decrease_borrow_balance": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::decrease_supply_balance",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_index",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_div"
+        ],
+        "decrease_supply_balance": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::decrease_supply_balance",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_index",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_div"
+        ],
+        "execute_borrow": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::increase_borrow_balance",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::is_health",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::is_loan",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::update_interest_rate",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::update_state",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::update_user_loans"
+        ],
+        "execute_deposit": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::increase_supply_balance",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::is_collateral",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::update_interest_rate",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::update_state",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::update_user_collaterals"
+        ],
+        "execute_repay": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::decrease_borrow_balance",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::update_interest_rate",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::update_state",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::user_loan_balance",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::remove_user_loans",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::safe_math::min"
+        ],
+        "execute_withdraw": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::decrease_supply_balance",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::is_collateral",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::is_health",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::update_interest_rate",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::update_state",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::user_collateral_balance",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::remove_user_collaterals",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::safe_math::min"
+        ],
+        "increase_borrow_balance": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_index",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::increase_borrow_balance",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_div"
+        ],
+        "increase_supply_balance": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_index",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::increase_supply_balance",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_div"
+        ],
+        "is_collateral": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::contains",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_user_assets"
+        ],
+        "is_health": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::user_health_factor",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray"
+        ],
+        "is_loan": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::contains",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_user_assets"
+        ],
+        "update_interest_rate": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::calculate_borrow_rate",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::calculate_supply_rate",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::update_interest_rate"
+        ],
+        "update_state": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::calculate_compounded_interest",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::calculate_linear_interest",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_borrow_rate_factors",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_current_rate",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_index",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_last_update_timestamp",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_total_supply",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::update_state",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_div",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_mul"
+        ],
+        "user_collateral_balance": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_index",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_user_balance",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_mul"
+        ],
+        "user_collateral_value": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::calculate_value",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::user_collateral_balance"
+        ],
+        "user_health_collateral_value": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::user_collateral_value",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_asset_ltv",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_user_assets",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_mul"
+        ],
+        "user_health_factor": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::user_health_collateral_value",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::user_health_loan_value",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_div"
+        ],
+        "user_health_loan_value": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::user_loan_value",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_user_assets"
+        ],
+        "user_loan_balance": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_index",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_user_balance",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_mul"
+        ],
+        "user_loan_value": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::calculator::calculate_value",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::logic::user_loan_balance"
+        ]
+      }
+    },
+    {
+      "module_name": "storage",
+      "call_graph": {
+        "borrow_reserve": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "borrow_reserve_mut": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut"
+        ],
+        "decrease_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::remove"
+        ],
+        "decrease_borrow_balance": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::decrease_balance"
+        ],
+        "decrease_supply_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::decrease_balance"
+        ],
+        "get_asset_ltv": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "get_borrow_cap_ceiling_ratio": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "get_borrow_rate_factors": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "get_coin_type": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "get_current_rate": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "get_index": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "get_last_update_timestamp": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "get_supply_cap_ceiling": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "get_total_supply": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "get_user_assets": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "get_user_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "increase_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::remove"
+        ],
+        "increase_borrow_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::increase_balance"
+        ],
+        "increase_supply_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::increase_balance"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "init_reserve": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::into_string",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::only_configurator",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::reserve_validation",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray"
+        ],
+        "only_configurator": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "only_owner": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "pause": [],
+        "remove_user_collaterals": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::index_of",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut"
+        ],
+        "remove_user_loans": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::index_of",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut"
+        ],
+        "reserve_validation": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::into_string",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "set_configurator": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::only_owner"
+        ],
+        "set_pause": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::only_configurator"
+        ],
+        "update_interest_rate": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut"
+        ],
+        "update_state": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut"
+        ],
+        "update_user_collaterals": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut"
+        ],
+        "update_user_loans": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut"
+        ]
+      }
+    },
+    {
+      "module_name": "validation",
+      "call_graph": {
+        "validate_borrow": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_borrow_cap_ceiling_ratio",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_total_supply",
+          "0xf62046a601d34fe8b0b567d91652a8620a4f8ccf0da4bd6b501553c50571f35c::ray_math::ray_div"
+        ],
+        "validate_deposit": [
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_supply_cap_ceiling",
+          "0xe438fa4e83a49bc067f4d678273cecf364bf997db5d9e745309dfa22ebcd9163::storage::get_total_supply"
+        ],
+        "validate_repay": []
+      }
+    }
+  ]
+}

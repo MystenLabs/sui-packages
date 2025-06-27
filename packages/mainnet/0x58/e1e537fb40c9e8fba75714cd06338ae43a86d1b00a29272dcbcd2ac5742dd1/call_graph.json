@@ -1,0 +1,55 @@
+{
+  "package_id": "0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "assert_app_is_authorized": [
+          "0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::admin::has_authorized"
+        ],
+        "assert_app_is_deauthorized": [
+          "0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::admin::has_authorized"
+        ],
+        "authorize": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::admin::assert_app_is_deauthorized",
+          "0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::events::emit_authorized_app_event"
+        ],
+        "create_admin_cap": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "deauthorize": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::remove",
+          "0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::admin::assert_app_is_authorized",
+          "0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::events::emit_deauthorized_app_event"
+        ],
+        "has_authorized": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::exists_"
+        ]
+      }
+    },
+    {
+      "module_name": "events",
+      "call_graph": {
+        "emit_authorized_app_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address"
+        ],
+        "emit_deauthorized_app_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address"
+        ]
+      }
+    },
+    {
+      "module_name": "init",
+      "call_graph": {
+        "init": [
+          "0x58e1e537fb40c9e8fba75714cd06338ae43a86d1b00a29272dcbcd2ac5742dd1::admin::create_admin_cap"
+        ]
+      }
+    }
+  ]
+}

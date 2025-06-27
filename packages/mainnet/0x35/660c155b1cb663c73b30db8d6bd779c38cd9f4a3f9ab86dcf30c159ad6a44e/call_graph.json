@@ -1,0 +1,544 @@
+{
+  "package_id": "0x35660c155b1cb663c73b30db8d6bd779c38cd9f4a3f9ab86dcf30c159ad6a44e",
+  "module_call_graphs": [
+    {
+      "module_name": "managed_vault_config",
+      "call_graph": {
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "new_config": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::register_for_uid",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "set_max_kill_bps": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::set_max_kill_bps",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "set_params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::set_params",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "set_whitelisted_liquidator": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::set_whitelisted_liquidator",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "set_worker_config": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::set_worker_config",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ]
+      }
+    },
+    {
+      "module_name": "vault",
+      "call_graph": {
+        "accrue": [
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::now_seconds",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::pending_interest_inner",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_reserve_pool_bps",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_reserve_pool_bps_scale",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared"
+        ],
+        "acquire_position_operator_cap": [],
+        "add_debt": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::debt_val_to_share"
+        ],
+        "after_add_collateral": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_kill_factor_scale",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_raw_kill_factor",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::emergency::assert_no_emergency",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_emergency_status",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "after_kill": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::is_whitelisted_liquidator",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_kill_bps",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_kill_bps_scale",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_kill_treasury_bps",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_kill_treasury_bps_scale",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_treasury_addr",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::emergency::assert_no_emergency",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_emergency_status",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::mole_math::mul_div"
+        ],
+        "after_work": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::math::min",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::add_debt",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::fair_launch_deposit",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::transfer_coin_from_vault",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_min_debt_size",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_work_factor",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_work_factor_scale",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::emergency::assert_no_emergency",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_emergency_status",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "after_worker_direct_external": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::math::min",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::add_debt",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::fair_launch_deposit",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::get_coin_from_vault",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_min_debt_size",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_work_factor",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_work_factor_scale",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::emergency::assert_no_emergency",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_emergency_status",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "before_add_collateral": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::accrue",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::debt_share_to_val",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::transfer_coin_to_vault",
+          "0xba0311e40e1a18d048a20a0cbd1f5ca50c7b8a3c9b06e9b08f4e76b2489b2830::fair_launch::exists_pool",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::emergency::assert_no_emergency",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_emergency_status",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "before_kill": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::accrue",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::fair_launch_withdraw",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::is_whitelisted_liquidator",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::remove_debt",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_kill_factor",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_kill_factor_scale",
+          "0xba0311e40e1a18d048a20a0cbd1f5ca50c7b8a3c9b06e9b08f4e76b2489b2830::fair_launch::exists_pool",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::emergency::assert_no_emergency",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_emergency_status",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "before_work": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::accrue",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::fair_launch_withdraw",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::remove_debt",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::transfer_coin_to_vault",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_accept_debt",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::is_worker",
+          "0xba0311e40e1a18d048a20a0cbd1f5ca50c7b8a3c9b06e9b08f4e76b2489b2830::fair_launch::exists_pool",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::emergency::assert_no_emergency",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_emergency_status",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "burn_debt_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::decrease_supply",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance"
+        ],
+        "burn_magic_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::decrease_supply",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "debt_share_to_val": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::mole_math::mul_div"
+        ],
+        "debt_val_to_share": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::mole_math::mul_div"
+        ],
+        "deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::pay::join_vec",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::deposit_single",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "deposit_single": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::supply_value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::math::pow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::accrue",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::mint_magic_coin",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::total_token_from_vault_info",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::transfer_coin_to_vault",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::emergency::assert_no_emergency",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_emergency_status",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "extract_add_collateral_context_coin_send": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value"
+        ],
+        "extract_work_context_coin_send": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value"
+        ],
+        "fair_launch_deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::mint_debt_coin",
+          "0xba0311e40e1a18d048a20a0cbd1f5ca50c7b8a3c9b06e9b08f4e76b2489b2830::fair_launch::deposit_with_cap"
+        ],
+        "fair_launch_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::burn_debt_coin",
+          "0xba0311e40e1a18d048a20a0cbd1f5ca50c7b8a3c9b06e9b08f4e76b2489b2830::fair_launch::withdraw_with_cap"
+        ],
+        "get_add_collateral_context_debt": [],
+        "get_coin_from_vault": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero"
+        ],
+        "get_next_position_id": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_position_signer": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "get_position_signer_address": [],
+        "get_position_signer_cap": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address"
+        ],
+        "get_position_signer_or_default": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::extract",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::get_position_signer"
+        ],
+        "get_position_signer_with_capability": [],
+        "get_reserve_pool": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_vault_base_coin_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_vault_debt_share": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_vault_debt_value": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_work_context_debt": [],
+        "get_work_context_id": [],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "initialize": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::create_supply",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::get_decimals",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::now_seconds",
+          "0xba0311e40e1a18d048a20a0cbd1f5ca50c7b8a3c9b06e9b08f4e76b2489b2830::fair_launch::add_pool",
+          "0xba0311e40e1a18d048a20a0cbd1f5ca50c7b8a3c9b06e9b08f4e76b2489b2830::fair_launch::approve_stake_debt_token",
+          "0xba0311e40e1a18d048a20a0cbd1f5ca50c7b8a3c9b06e9b08f4e76b2489b2830::fair_launch::extract_user_cap",
+          "0xba0311e40e1a18d048a20a0cbd1f5ca50c7b8a3c9b06e9b08f4e76b2489b2830::fair_launch::get_pid",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::coder::type_to_package_address",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::add_share",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "is_vault_initialized": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::contains_shared"
+        ],
+        "is_whitelisted_liquidator": [
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::is_whitelisted_liquidator"
+        ],
+        "magic_share_to_amount": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::supply_value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "merge_kill_context_coin_back": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join"
+        ],
+        "merge_work_context_coin_back": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join"
+        ],
+        "mint_debt_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::increase_supply",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance"
+        ],
+        "mint_magic_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::increase_supply",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer"
+        ],
+        "now_seconds": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms"
+        ],
+        "pending_interest": [
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::pending_interest_inner",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "pending_interest_inner": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::now_seconds",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_interest_rate",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::get_interest_rate_scale",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared"
+        ],
+        "position_debt_share": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "position_debt_val": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::debt_share_to_val",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "reduceReserve": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "remove_debt": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::debt_share_to_val"
+        ],
+        "sendback_to_users": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::supply_value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::transfer_coin_from_vault",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::mole_math::mul_div"
+        ],
+        "set_work_context_health": [],
+        "total_token": [
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::total_token_from_vault_info",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "total_token_from_vault_info": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "transfer_coin_from_vault": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer"
+        ],
+        "transfer_coin_to_vault": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "update_config": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::pay::join_vec",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::withdraw_single",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "withdraw_reserve": [
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::transfer_coin_from_vault",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "withdraw_single": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::supply_value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::math::pow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::accrue",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::burn_magic_coin",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::magic_share_to_amount",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault::transfer_coin_from_vault",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::emergency::assert_no_emergency",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_emergency_status",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut_shared",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ]
+      }
+    },
+    {
+      "module_name": "vault_config",
+      "call_graph": {
+        "get_accept_debt": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0xd5e4f92248fbd9689ea846adebbecde6b63807b3f28b178a81da11d0a723f55a::worker_config::get_accept_debt",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_interest_model_addr": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_interest_rate": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::interest_model::get_interest_rate"
+        ],
+        "get_interest_rate_scale": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::interest_model::get_interest_rate_scale"
+        ],
+        "get_kill_bps": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_kill_bps_scale": [],
+        "get_kill_factor": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0xd5e4f92248fbd9689ea846adebbecde6b63807b3f28b178a81da11d0a723f55a::worker_config::get_kill_factor",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_kill_factor_scale": [],
+        "get_kill_treasury_bps": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_kill_treasury_bps_scale": [],
+        "get_max_kill_bps": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_min_debt_size": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_raw_kill_factor": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0xd5e4f92248fbd9689ea846adebbecde6b63807b3f28b178a81da11d0a723f55a::worker_config::get_raw_kill_factor",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_reserve_pool_bps": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_reserve_pool_bps_scale": [],
+        "get_treasury_addr": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow"
+        ],
+        "get_work_factor": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0xd5e4f92248fbd9689ea846adebbecde6b63807b3f28b178a81da11d0a723f55a::worker_config::get_work_factor",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "get_work_factor_scale": [],
+        "is_whitelisted_liquidator": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "is_worker": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "register": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::register_unchecked",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::add",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "register_for_uid": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address",
+          "0x73d1303f840a45b97f72f8c9950383576f033423c12b1ff4882bc86acb971b74::vault_config::register_unchecked",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::add_to_uid",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "register_unchecked": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::contains"
+        ],
+        "set_max_kill_bps": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "set_params": [
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "set_whitelisted_liquidator": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ],
+        "set_worker_config": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::borrow_mut",
+          "0xece29ada1257c4653314d598db728580bff02755176a710efa5ee233e2fc5ea4::global_storage::checked_package_version"
+        ]
+      }
+    }
+  ]
+}
