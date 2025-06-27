@@ -256,8 +256,20 @@ impl PackageGraphQLFetcher {
             serde_json::from_reader(reader).map_err(GraphQLFetcherError::BadResponseError)?;
         let mut packages = Vec::new();
         for node in res.data.unwrap().packages.nodes {
-            let pkg_with_metadata: MovePackageWithMetadata = node.try_into()?;
-            packages.push(pkg_with_metadata);
+            let pkg_with_metadata: Result<MovePackageWithMetadata, GraphQLFetcherError> = node.try_into();
+            match pkg_with_metadata {
+                Ok(pkg_with_metadata) => {
+                  println!("Fetched package: {}", pkg_with_metadata.package.id().to_string());
+                  packages.push(pkg_with_metadata);
+                },
+                Err(e) => {
+                    if let GraphQLFetcherError::SenderNotAvailable(_address) = e {
+                        // skip framework packages
+                    } else {
+                        return Err(e);
+                    }
+                }
+            }
         }
         Ok(packages)
     }
