@@ -64,14 +64,14 @@
           "&0x314772fdee396150089b71282d37ea0adfa4c862ee2587a5a9580b9563eb9a43::cloud_wallet_config::CloudWalletConfig",
           "&mut 0x314772fdee396150089b71282d37ea0adfa4c862ee2587a5a9580b9563eb9a43::cloud_wallet_config::CloudWalletTokenHolder",
           "u256",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "address",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "u64",
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "deposit_agent_config": {
@@ -81,7 +81,9 @@
         "params": [
           "&0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "check_signer": {
         "visibility": "FRIEND",
@@ -90,7 +92,7 @@
           "&0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
           "vector<u8>"
         ],
-        "return": null
+        "return": []
       },
       "create_address": {
         "visibility": "PUBLIC",
@@ -100,7 +102,7 @@
           "u256",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "emergency_pause": {
         "visibility": "PUBLIC",
@@ -109,7 +111,7 @@
           "&mut 0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_address": {
         "visibility": "PUBLIC",
@@ -118,7 +120,9 @@
           "&0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
           "u256"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_collect_to_sign_msg": {
         "visibility": "FRIEND",
@@ -130,7 +134,9 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "grant_admin": {
         "visibility": "PUBLIC",
@@ -140,7 +146,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "grant_operator": {
         "visibility": "PUBLIC",
@@ -150,7 +156,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "grant_trusted_bot": {
         "visibility": "PUBLIC",
@@ -160,7 +166,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "grant_trusted_bots": {
         "visibility": "PUBLIC",
@@ -170,7 +176,142 @@
           "vector<address>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "only_admin": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "only_allow_version": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig"
+        ],
+        "return": []
+      },
+      "only_operator": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "only_trusted_bot": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "revoke": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
+          "u64",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_conf_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_signer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "token_holder_receive": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
+          "&0x314772fdee396150089b71282d37ea0adfa4c862ee2587a5a9580b9563eb9a43::cloud_wallet_config::CloudWalletConfig",
+          "&mut 0x314772fdee396150089b71282d37ea0adfa4c862ee2587a5a9580b9563eb9a43::cloud_wallet_config::CloudWalletTokenHolder",
+          "u256",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "u64",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unpause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "when_not_expired": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64"
+        ],
+        "return": []
+      },
+      "when_not_paused": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xb44f05bd81db499bd214d7e8698c3488d5d0f464ce211bca6d0b658b3193e18f::deposit_agent_config::DepositAgentConfig"
+        ],
+        "return": []
+      },
+      "when_to_address_match": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x314772fdee396150089b71282d37ea0adfa4c862ee2587a5a9580b9563eb9a43::cloud_wallet_config::CloudWalletTokenHolder",
+          "address"
+        ],
+        "return": []
       }
     },
     "utils": {
@@ -181,7 +322,9 @@
           "vector<u8>",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "keccak_message": {
         "visibility": "FRIEND",
@@ -189,7 +332,9 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       }
     }
   }

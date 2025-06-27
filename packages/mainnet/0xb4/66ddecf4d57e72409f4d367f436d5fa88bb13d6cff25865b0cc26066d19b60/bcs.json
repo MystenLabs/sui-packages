@@ -204,7 +204,9 @@
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::fee_manager::FeeManager",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_fee_settings": {
         "visibility": "PUBLIC",
@@ -212,7 +214,12 @@
         "params": [
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::fee_manager::FeeManager"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "address",
+          "bool"
+        ]
       },
       "get_total_fees": {
         "visibility": "PUBLIC",
@@ -220,7 +227,9 @@
         "params": [
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::fee_manager::FeeManager"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -229,7 +238,7 @@
           "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::fee_manager::FEE_MANAGER",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "process_creation_fee": {
         "visibility": "PUBLIC",
@@ -241,7 +250,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "process_percentage_fee": {
         "visibility": "PUBLIC",
@@ -254,7 +263,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "set_creation_fee": {
         "visibility": "PUBLIC",
@@ -265,7 +274,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "set_fee_percentage": {
         "visibility": "PUBLIC",
@@ -276,7 +285,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "set_fee_recipient": {
         "visibility": "PUBLIC",
@@ -287,7 +296,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "take_fixed_fee": {
         "visibility": "PUBLIC",
@@ -299,7 +308,34 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "take_percentage_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::fee_manager::FeeManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "toggle_tiered_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::fee_manager::FeeManager",
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::fee_manager::AdminCap",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "prize_vault": {
@@ -311,11 +347,11 @@
           "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::ClaimTicket",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_nft_prize": {
         "visibility": "PUBLIC",
@@ -326,7 +362,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_purchase_cap_kiosk_nft_prize": {
         "visibility": "PUBLIC",
@@ -337,11 +373,11 @@
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::KioskOwnerCap",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::transfer_policy::TransferPolicy<T0>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_token_prize": {
         "visibility": "PUBLIC",
@@ -352,7 +388,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_kiosk_nft_vault": {
         "visibility": "PUBLIC",
@@ -367,25 +403,31 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault",
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::DepositReceipt"
+        ]
       },
       "create_nft_vault": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "$0",
+          "T0",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault",
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::DepositReceipt"
+        ]
       },
       "create_purchase_cap_kiosk_nft_vault": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::PurchaseCap<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::PurchaseCap<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
@@ -394,7 +436,10 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault",
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::DepositReceipt"
+        ]
       },
       "create_token_vault": {
         "visibility": "PUBLIC",
@@ -406,19 +451,22 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault",
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::DepositReceipt"
+        ]
       },
       "deposit_nft_prize": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault",
-          "$0",
+          "T0",
           "vector<u8>",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_prize_type": {
         "visibility": "PUBLIC",
@@ -426,7 +474,80 @@
         "params": [
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_vault_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "address",
+          "bool",
+          "u64"
+        ]
+      },
+      "has_prize_of_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "has_token_prize": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault"
+        ],
+        "return": [
+          "bool",
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PRIZE_VAULT",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "issue_claim_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::ClaimTicket"
+        ]
+      },
+      "reclaim_prize": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault",
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::DepositReceipt",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "raffle_core": {
@@ -441,7 +562,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_tickets": {
         "visibility": "PUBLIC",
@@ -454,7 +575,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_raffle": {
         "visibility": "PUBLIC",
@@ -468,7 +589,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_kiosk_nft_raffle": {
         "visibility": "PUBLIC",
@@ -493,7 +614,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_nft_raffle": {
         "visibility": "PUBLIC",
@@ -501,7 +622,7 @@
         "params": [
           "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::RaffleRegistry",
           "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::fee_manager::FeeManager",
-          "$0",
+          "T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "vector<u8>",
           "vector<u8>",
@@ -515,7 +636,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_purchase_cap_kiosk_nft_raffle": {
         "visibility": "PUBLIC",
@@ -539,7 +660,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_token_raffle": {
         "visibility": "PUBLIC",
@@ -561,7 +682,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "determine_winner": {
         "visibility": "PRIVATE",
@@ -571,7 +692,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "address",
+          "u64"
+        ]
       },
       "get_active_raffles": {
         "visibility": "PUBLIC",
@@ -579,7 +703,9 @@
         "params": [
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::RaffleRegistry"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
       },
       "get_certificate_info": {
         "visibility": "PUBLIC",
@@ -587,7 +713,116 @@
         "params": [
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::WinnerCertificate"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "u64"
+        ]
+      },
+      "get_completed_raffles": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::RaffleRegistry"
+        ],
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "get_raffle_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::Raffle"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_registry_stats": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::RaffleRegistry"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
+      },
+      "has_met_min_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::Raffle",
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::RAFFLE_CORE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "process_refunds": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::RaffleRegistry",
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::Raffle",
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager",
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault",
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::DepositReceipt",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "select_winner": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::RaffleRegistry",
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::Raffle",
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager",
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::prize_vault::PrizeVault",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "toggle_system_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::RaffleRegistry",
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::raffle_core::AdminCap",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "ticket_manager": {
@@ -601,7 +836,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_tickets": {
         "visibility": "PUBLIC",
@@ -613,7 +848,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketBatch"
+        ]
       },
       "create_ticket_manager": {
         "visibility": "PUBLIC",
@@ -624,7 +861,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager"
+        ]
       },
       "deactivate": {
         "visibility": "PUBLIC",
@@ -633,7 +872,7 @@
           "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "extract_proceeds": {
         "visibility": "PUBLIC",
@@ -642,7 +881,9 @@
           "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       },
       "find_ticket_owner": {
         "visibility": "PUBLIC",
@@ -651,7 +892,9 @@
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager",
           "u64"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_all_participants": {
         "visibility": "PUBLIC",
@@ -659,7 +902,9 @@
         "params": [
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager"
         ],
-        "return": null
+        "return": [
+          "vector<address>"
+        ]
       },
       "get_batch_info": {
         "visibility": "PUBLIC",
@@ -667,7 +912,14 @@
         "params": [
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketBatch"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "get_manager_info": {
         "visibility": "PUBLIC",
@@ -675,7 +927,16 @@
         "params": [
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
       },
       "get_ticket_info": {
         "visibility": "PUBLIC",
@@ -683,7 +944,57 @@
         "params": [
           "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::Ticket"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "address",
+          "u64",
+          "u64"
+        ]
+      },
+      "has_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager",
+          "address"
+        ],
+        "return": [
+          "bool",
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TICKET_MANAGER",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "process_refunds": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "split_proceeds": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb466ddecf4d57e72409f4d367f436d5fa88bb13d6cff25865b0cc26066d19b60::ticket_manager::TicketManager",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       }
     }
   }

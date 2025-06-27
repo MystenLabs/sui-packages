@@ -48,11 +48,11 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>"
+          "&mut 0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -61,7 +61,7 @@
           "0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::POOL",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "new": {
         "visibility": "PUBLIC",
@@ -69,7 +69,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "newFoo": {
         "visibility": "PUBLIC",
@@ -78,7 +78,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Foo"
+        ]
       },
       "newKek": {
         "visibility": "PUBLIC",
@@ -87,7 +89,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Kek"
+        ]
       },
       "newLol": {
         "visibility": "PUBLIC",
@@ -96,49 +100,60 @@
           "u64",
           "vector<u64>"
         ],
-        "return": null
+        "return": [
+          "0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Lol"
+        ]
       },
       "remove_liquidity": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Pool<$0, $1>",
+          "&mut 0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Pool<T0, T1>",
           "u64",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "swap_a_to_b": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "swap_b_to_a": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Pool<$0, $1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$1>",
+          "&mut 0xad248eb3e370c6e969dd5cd71d5e9dd39cec207f32005aba7549cacf6231762f::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "swap_coin": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$1>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       }
     }
   }
