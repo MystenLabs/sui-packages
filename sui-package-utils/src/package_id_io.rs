@@ -14,6 +14,9 @@ impl PackagesDir {
     pub fn new(prefix: PathBuf) -> Self {
         Self { prefix }
     }
+    pub fn get_prefix(self: &PackagesDir) -> PathBuf {
+        self.prefix.clone()
+    }
     pub fn get_package_dir(self: &PackagesDir, id: &str) -> String {
         let first_4 = &id[0..4];
         let last_62 = &id[4..id.len()];

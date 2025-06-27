@@ -5,3 +5,4 @@ pub mod csv;
 pub mod graphql;
 pub mod metadata;
 pub mod package_id_io;
+pub mod package_saver;
