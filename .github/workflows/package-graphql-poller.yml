@@ -7,10 +7,10 @@ on:
 
 env:
   # APP_DIRS here
-  APP_DIR_PACKAGE_GRAPHQL_POLLER: src/python/package_graphql_poller
+  APP_DIR_PACKAGE_GRAPHQL_POLLER: sui-package_utils
   # app specific variables
-  PACKAGE_GRAPHQL_POLLER_IO_DIR: packages
-  MOVE_DECOMPILER_BIN: third-party/move-decompiler/move-decompiler-linux-x86_64
+  PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET: packages/mainnet
+  PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN: third-party/move-decompiler/move-decompiler-linux-x86_64
 
 jobs:
   package-graphql-poller:
@@ -20,30 +20,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set Up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install poetry and dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install poetry
-          OLDDIR=$(pwd)
-          cd "$APP_DIR_PACKAGE_GRAPHQL_POLLER"
-          poetry install --no-root
-          cd "$OLDDIR"
-
-      - name: Poetry run package-graphql-poller
+      - name: Run sui-packages-graphql-poller
         run: |
           echo "Running package graphql poller on mainnet" > /dev/stderr
           OLDDIR=$(pwd)
+          GIT_ROOT=$(git rev-parse --show-toplevel)
           cd "$APP_DIR_PACKAGE_GRAPHQL_POLLER"
-          poetry run \
-            python3 "$OLDDIR/$APP_DIR_PACKAGE_GRAPHQL_POLLER/main.py" \
-              --io-dir "$OLDDIR/$PACKAGE_GRAPHQL_POLLER_IO_DIR" \
-              --network mainnet \
-              --move-decompiler "$OLDDIR/$MOVE_DECOMPILER_BIN"
+          cargo run --release --bin sui-packages-graphql-poller -- \
+            --packages_dir "${GIT_ROOT}/${PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET}" \
+            --move-decompiler-path "${GIT_ROOT}/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}"
 
       - name: Commit and Push Changes
         id: commit-and-push
