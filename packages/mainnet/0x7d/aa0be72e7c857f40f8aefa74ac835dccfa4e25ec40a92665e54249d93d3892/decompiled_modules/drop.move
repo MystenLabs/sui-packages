@@ -122,7 +122,7 @@ module 0x4e76606185130cd30293f43f638d353d8b7bb5848d1f6ca5b47f45b5c71c0465::drop 
         while (v0 < 0x1::vector::length<vector<u8>>(arg0)) {
             if (!(0x1::vector::length<u8>(0x1::vector::borrow<vector<u8>>(arg0, v0)) == 32)) {
                 v1 = false;
-                /* label 8 */
+                /* label 10 */
                 assert!(v1, 13906834728394162175);
                 let v2 = 0x2::vec_set::from_keys<vector<u8>>(*arg0);
                 assert!(0x2::vec_set::size<vector<u8>>(&v2) == 0x1::vector::length<vector<u8>>(arg0), 13906834741279064063);
@@ -131,7 +131,7 @@ module 0x4e76606185130cd30293f43f638d353d8b7bb5848d1f6ca5b47f45b5c71c0465::drop 
             v0 = v0 + 1;
         };
         v1 = true;
-        /* goto 8 */
+        /* goto 10 */
     }
 
     public(friend) fun verify_sender_proof(arg0: vector<u8>, arg1: &vector<vector<u8>>, arg2: &address, arg3: u64, arg4: u64) : bool {

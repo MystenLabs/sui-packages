@@ -92,7 +92,7 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "check_no_balance": {
         "visibility": "PUBLIC",
@@ -101,7 +101,9 @@
           "&0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::conditional_market::Market",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "check_yes_balance": {
         "visibility": "PUBLIC",
@@ -110,7 +112,9 @@
           "&0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::conditional_market::Market",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "claim_reward": {
         "visibility": "PRIVATE",
@@ -121,7 +125,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "bool"
         ],
-        "return": null
+        "return": []
       },
       "create_market": {
         "visibility": "PRIVATE",
@@ -136,7 +140,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "execute_order": {
         "visibility": "PRIVATE",
@@ -153,7 +159,7 @@
           "bool",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "get_conditions": {
         "visibility": "PUBLIC",
@@ -161,7 +167,9 @@
         "params": [
           "&0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::conditional_market::Market"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_market_info": {
         "visibility": "PUBLIC",
@@ -169,7 +177,12 @@
         "params": [
           "&0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::conditional_market::Market"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64"
+        ]
       },
       "get_no_users": {
         "visibility": "PUBLIC",
@@ -177,7 +190,9 @@
         "params": [
           "&0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::conditional_market::Market"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<address, u64>"
+        ]
       },
       "get_yes_users": {
         "visibility": "PUBLIC",
@@ -185,19 +200,9 @@
         "params": [
           "&0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::conditional_market::Market"
         ],
-        "return": null
-      }
-    },
-    "sweepstake": {
-      "deposit": {
-        "visibility": "PRIVATE",
-        "is_entry": true,
-        "params": [
-          "&mut 0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::sweepstake::Treasury<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
-        ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<address, u64>"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -205,7 +210,55 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "mint": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::conditional_market::Market",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "u64"
+        ],
+        "return": []
+      },
+      "transfer": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::conditional_market::Market",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "u64",
+          "bool"
+        ],
+        "return": []
+      }
+    },
+    "sweepstake": {
+      "deposit": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::sweepstake::Treasury<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       },
       "new_treasury": {
         "visibility": "PRIVATE",
@@ -215,20 +268,20 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "withdraw": {
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
           "&0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::sweepstake::AdminCap",
-          "&mut 0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::sweepstake::Treasury<$0>",
+          "&mut 0x7fb445e4857c137bc0589b5741622c8b4aa9630c32d560a1b321015e67536950::sweepstake::Treasury<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
           "u64",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }
