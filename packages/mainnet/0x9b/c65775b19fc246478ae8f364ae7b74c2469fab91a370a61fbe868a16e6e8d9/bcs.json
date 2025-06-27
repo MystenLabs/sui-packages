@@ -47,7 +47,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_withdrawal_message": {
         "visibility": "PRIVATE",
@@ -56,7 +56,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "deactivate": {
         "visibility": "PUBLIC",
@@ -65,7 +67,7 @@
           "&mut 0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
@@ -75,7 +77,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_balance": {
         "visibility": "PUBLIC",
@@ -83,7 +85,9 @@
         "params": [
           "&0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_time_until_next_withdrawal": {
         "visibility": "PUBLIC",
@@ -93,7 +97,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_timeout_period": {
         "visibility": "PUBLIC",
@@ -101,7 +107,9 @@
         "params": [
           "&0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_withdrawal_amount": {
         "visibility": "PUBLIC",
@@ -109,7 +117,9 @@
         "params": [
           "&0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_withdrawal_amount_pro": {
         "visibility": "PUBLIC",
@@ -117,7 +127,9 @@
         "params": [
           "&0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -125,7 +137,82 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "is_deactivated": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "pause": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_pubkey": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unpause": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_config": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9bc65775b19fc246478ae8f364ae7b74c2469fab91a370a61fbe868a16e6e8d9::talentum_faucet::Faucet",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64",
+          "vector<u8>",
+          "u8",
+          "u64",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

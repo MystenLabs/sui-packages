@@ -103,7 +103,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_proposal_and_deposit": {
         "visibility": "PUBLIC",
@@ -122,7 +122,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_counterparty": {
         "visibility": "PUBLIC",
@@ -136,7 +136,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "execute_swap": {
         "visibility": "PUBLIC",
@@ -149,7 +149,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_fee_recipient": {
         "visibility": "PUBLIC",
@@ -157,7 +157,9 @@
         "params": [
           "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::ProtocolConfig"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_proposal_details": {
         "visibility": "PUBLIC",
@@ -165,7 +167,15 @@
         "params": [
           "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::SwapProposal"
         ],
-        "return": null
+        "return": [
+          "address",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>",
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "get_proposal_state": {
         "visibility": "PUBLIC",
@@ -173,7 +183,9 @@
         "params": [
           "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::SwapProposal"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "get_protocol_fee": {
         "visibility": "PUBLIC",
@@ -181,7 +193,9 @@
         "params": [
           "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::ProtocolConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_total_fees_collected": {
         "visibility": "PUBLIC",
@@ -189,7 +203,9 @@
         "params": [
           "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::ProtocolConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_treasury_balance": {
         "visibility": "PUBLIC",
@@ -197,7 +213,81 @@
         "params": [
           "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::ProtocolTreasury"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::KIOSK_SWAP",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_expired": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::SwapProposal",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_ready_for_execution": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::SwapProposal"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "update_fee_recipient": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::SwapAdminCap",
+          "&mut 0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::ProtocolConfig",
+          "address"
+        ],
+        "return": []
+      },
+      "update_protocol_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::SwapAdminCap",
+          "&mut 0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::ProtocolConfig",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_kiosk_contents": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::kiosk::Kiosk",
+          "&vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ],
+        "return": []
+      },
+      "withdraw_protocol_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::SwapAdminCap",
+          "&0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::ProtocolConfig",
+          "&mut 0x91fdf8c07189fd8f1c380a1719f7c4a0153f49b24d25d786f86955a0c065b6b1::kiosk_swap::ProtocolTreasury",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

@@ -190,10 +190,10 @@
         "params": [
           "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
           "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
@@ -201,13 +201,13 @@
         "params": [
           "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
           "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
           "u256",
           "u256",
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "emergency_withdraw": {
         "visibility": "PUBLIC",
@@ -219,7 +219,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_lpb_withdraw_sign_msg": {
         "visibility": "FRIEND",
@@ -231,7 +231,9 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "get_mm_withdraw_sign_msg": {
         "visibility": "FRIEND",
@@ -243,19 +245,21 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "lpb_after_swap": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "0xa6d5ea19d71288ab5eb1f70dad707915217b67fa9758276a36bb6a49debacedf::swap::Swaping",
           "0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet::CloudWalletSwapping",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "lpb_before_swap": {
         "visibility": "PUBLIC",
@@ -270,7 +274,11 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0xa6d5ea19d71288ab5eb1f70dad707915217b67fa9758276a36bb6a49debacedf::swap::Swaping",
+          "0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet::CloudWalletSwapping"
+        ]
       },
       "lpb_credit": {
         "visibility": "PUBLIC",
@@ -278,10 +286,10 @@
         "params": [
           "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
           "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "lpb_withdraw": {
         "visibility": "PUBLIC",
@@ -297,7 +305,7 @@
           "vector<u8>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mm_credit": {
         "visibility": "PUBLIC",
@@ -305,10 +313,42 @@
         "params": [
           "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
           "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "mm_withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u256",
+          "u64",
+          "address",
+          "u64",
+          "vector<u8>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "quick_withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::QuickWithdrawCap",
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u256",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       }
     },
     "cloud_wallet_config": {
@@ -321,7 +361,7 @@
           "u8",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "check_lpb_swap_id_used": {
         "visibility": "FRIEND",
@@ -330,7 +370,7 @@
           "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
           "u256"
         ],
-        "return": null
+        "return": []
       },
       "check_mm_withdraw_id_used": {
         "visibility": "FRIEND",
@@ -339,7 +379,7 @@
           "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
           "u256"
         ],
-        "return": null
+        "return": []
       },
       "check_quick_withdraw_id_used": {
         "visibility": "FRIEND",
@@ -348,7 +388,7 @@
           "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
           "u256"
         ],
-        "return": null
+        "return": []
       },
       "check_signer": {
         "visibility": "FRIEND",
@@ -358,7 +398,7 @@
           "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
           "u8"
         ],
-        "return": null
+        "return": []
       },
       "check_swapping_id_match": {
         "visibility": "FRIEND",
@@ -367,7 +407,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&0xa6d5ea19d71288ab5eb1f70dad707915217b67fa9758276a36bb6a49debacedf::swap::Swaping"
         ],
-        "return": null
+        "return": []
       },
       "check_withdraw_id_used": {
         "visibility": "FRIEND",
@@ -376,7 +416,7 @@
           "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
           "u256"
         ],
-        "return": null
+        "return": []
       },
       "check_withdraw_whitelist": {
         "visibility": "FRIEND",
@@ -385,7 +425,7 @@
           "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "create_vault_if_not_exist": {
         "visibility": "FRIEND",
@@ -394,17 +434,309 @@
           "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "credit_coin": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "delete_quick_withdraw_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::QuickWithdrawCap"
+        ],
+        "return": []
+      },
+      "deposit": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "emergency_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "grant_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "grant_lpb_trusted_bot": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "grant_lpb_trusted_bots": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "vector<address>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "grant_operator": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "mark_lpb_swap_id_used": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "u256"
+        ],
+        "return": []
+      },
+      "mark_mm_withdraw_id_used": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "u256"
+        ],
+        "return": []
+      },
+      "mark_quick_withdraw_id_used": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "u256"
+        ],
+        "return": []
+      },
+      "mark_withdraw_id_used": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "u256"
+        ],
+        "return": []
+      },
+      "only_admin": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "only_allow_version": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig"
+        ],
+        "return": []
+      },
+      "only_latest_withdraw_cap": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::QuickWithdrawCap"
+        ],
+        "return": []
+      },
+      "only_lpb_trusted_bot": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "only_operator": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_signer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "vector<u8>",
+          "u8",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "revoke": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "u64",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_conf_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_emergency_withdraw_to": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_quick_withdrawer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unpause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "vault_token_holder_address": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig"
+        ],
+        "return": [
+          "address"
+        ]
+      },
+      "when_emergency_withdraw_to_match": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig",
+          "address"
+        ],
+        "return": []
+      },
+      "when_emergency_withdraw_to_not_null": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig"
+        ],
+        "return": []
+      },
+      "when_not_expired": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64"
+        ],
+        "return": []
+      },
+      "when_not_paused": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletConfig"
+        ],
+        "return": []
+      },
+      "when_vault_created": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x10e0146cd3124bf035a30ff65966c011876bb261b2b05c654d108ca68ef130d8::cloud_wallet_config::CloudWalletTokenHolder",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       }
     },
     "utils": {
@@ -415,7 +747,9 @@
           "vector<u8>",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "keccak_message": {
         "visibility": "FRIEND",
@@ -423,7 +757,9 @@
         "params": [
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       }
     }
   }

@@ -96,9 +96,9 @@
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::factory::Pools",
           "&mut 0x12d73de9a6bc3cb658ec9dc0fe7de2662be1cea5c76c092fcc3606048cdbac27::lp_burn::BurnManager",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
           "address",
-          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<$0>",
+          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "bool",
           "u64",
@@ -106,7 +106,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "calculate_sqrt_price": {
         "visibility": "PRIVATE",
@@ -115,7 +118,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "create_": {
         "visibility": "PUBLIC",
@@ -123,8 +128,8 @@
         "params": [
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::factory::Pools",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
           "u64",
           "u64",
           "u64",
@@ -134,13 +139,15 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>"
+        ]
       },
       "first_buy_": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<$0>",
+          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "bool",
           "u64",
@@ -148,54 +155,73 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "get_bonding_curve": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<$0>"
+          "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
       },
       "max_tick": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
       },
       "migrate_to_dex": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<$0>",
+          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>",
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::factory::Pools",
           "&mut 0x12d73de9a6bc3cb658ec9dc0fe7de2662be1cea5c76c092fcc3606048cdbac27::lp_burn::BurnManager",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "min_tick": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
       },
       "quote_amount_in": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<$0>",
+          "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>",
           "u64",
           "u64",
           "bool"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "quote_amount_in_": {
         "visibility": "PUBLIC",
@@ -207,7 +233,56 @@
           "u64",
           "bool"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "quote_amount_out": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>",
+          "u64",
+          "u64",
+          "bool"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "quote_amount_out_": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "sell_": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "bool",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       }
     },
     "freeze": {
@@ -215,10 +290,10 @@
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "$0",
+          "T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "i32": {
@@ -228,7 +303,9 @@
         "params": [
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
         ],
-        "return": null
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
       },
       "abs_u32": {
         "visibility": "PUBLIC",
@@ -236,7 +313,9 @@
         "params": [
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
         ],
-        "return": null
+        "return": [
+          "u32"
+        ]
       },
       "add": {
         "visibility": "PUBLIC",
@@ -245,7 +324,9 @@
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
         ],
-        "return": null
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
       },
       "and": {
         "visibility": "PUBLIC",
@@ -254,7 +335,9 @@
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
         ],
-        "return": null
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
       },
       "as_u32": {
         "visibility": "PUBLIC",
@@ -262,7 +345,9 @@
         "params": [
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
         ],
-        "return": null
+        "return": [
+          "u32"
+        ]
       },
       "cmp": {
         "visibility": "PUBLIC",
@@ -271,7 +356,9 @@
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "div": {
         "visibility": "PUBLIC",
@@ -280,7 +367,9 @@
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
         ],
-        "return": null
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
       },
       "eq": {
         "visibility": "PUBLIC",
@@ -289,7 +378,9 @@
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
           "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "from": {
         "visibility": "PUBLIC",
@@ -297,7 +388,9 @@
         "params": [
           "u32"
         ],
-        "return": null
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
       },
       "from_u32": {
         "visibility": "PUBLIC",
@@ -305,7 +398,199 @@
         "params": [
           "u32"
         ],
-        "return": null
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
+      },
+      "gt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "gte": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_neg": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "lt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "lte": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "mod": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
+      },
+      "mul": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
+      },
+      "neg_from": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u32"
+        ],
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
+      },
+      "or": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
+      },
+      "shl": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "u8"
+        ],
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
+      },
+      "shr": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "u8"
+        ],
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
+      },
+      "sign": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "sub": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
+      },
+      "u32_neg": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u32"
+        ],
+        "return": [
+          "u32"
+        ]
+      },
+      "u8_neg": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u8"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "wrapping_add": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
+      },
+      "wrapping_sub": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32",
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ],
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
+      },
+      "zero": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::i32::I32"
+        ]
       }
     },
     "kappa_fun": {
@@ -315,7 +600,9 @@
         "params": [
           "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration"
         ],
-        "return": null
+        "return": [
+          "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>"
+        ]
       },
       "borrow_bonding_curve_mut": {
         "visibility": "PRIVATE",
@@ -323,7 +610,9 @@
         "params": [
           "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration"
         ],
-        "return": null
+        "return": [
+          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>"
+        ]
       },
       "buy": {
         "visibility": "PUBLIC",
@@ -333,7 +622,7 @@
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::factory::Pools",
           "&mut 0x12d73de9a6bc3cb658ec9dc0fe7de2662be1cea5c76c092fcc3606048cdbac27::lp_burn::BurnManager",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
           "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "bool",
@@ -341,7 +630,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_": {
         "visibility": "PUBLIC",
@@ -351,7 +640,7 @@
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::factory::Pools",
           "&mut 0x12d73de9a6bc3cb658ec9dc0fe7de2662be1cea5c76c092fcc3606048cdbac27::lp_burn::BurnManager",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
           "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "bool",
@@ -359,7 +648,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create": {
         "visibility": "PUBLIC",
@@ -368,13 +657,13 @@
           "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration",
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::factory::Pools",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
           "bool",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_": {
         "visibility": "PRIVATE",
@@ -383,13 +672,15 @@
           "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration",
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::factory::Pools",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>",
-          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<T0>",
           "bool",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::bonding_curve::BondingCurve<T0>"
+        ]
       },
       "first_buy": {
         "visibility": "PUBLIC",
@@ -402,7 +693,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "first_buy_": {
         "visibility": "PUBLIC",
@@ -415,7 +706,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_bonding_curve": {
         "visibility": "PUBLIC",
@@ -423,7 +714,15 @@
         "params": [
           "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
       },
       "get_configuration": {
         "visibility": "PUBLIC",
@@ -431,7 +730,64 @@
         "params": [
           "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "sell_": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "bool",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      },
+      "set_protocol_active_status": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration",
+          "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::AdminCap",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_config": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::Configuration",
+          "&0x9161fb228a0ede5ab8d596d28f5050816bcce5ecca327c541ab3113f20f6ff22::kappa_fun::AdminCap",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "address",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }
