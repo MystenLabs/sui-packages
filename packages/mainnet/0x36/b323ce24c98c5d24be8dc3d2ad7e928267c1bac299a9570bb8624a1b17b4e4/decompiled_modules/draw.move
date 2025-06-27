@@ -74,30 +74,26 @@ module 0xdcf96cb6435abead12decb0867a03feabfaf9264308a335feb94b83f5b573282::draw 
                     v2 = false;
                     /* label 8 */
                     if (v2) {
-                        let v3 = if (0x2::vec_set::size<u8>(0xdcf96cb6435abead12decb0867a03feabfaf9264308a335feb94b83f5b573282::picks::special_numbers(arg1)) == (arg0.special_count as u64)) {
-                            let v4 = 0x2::vec_set::keys<u8>(0xdcf96cb6435abead12decb0867a03feabfaf9264308a335feb94b83f5b573282::picks::special_numbers(arg1));
-                            let v5 = 0;
-                            let v3;
-                            while (v5 < 0x1::vector::length<u8>(v4)) {
-                                if (!0xdcf96cb6435abead12decb0867a03feabfaf9264308a335feb94b83f5b573282::range::contains(&arg0.special_range, 0x1::vector::borrow<u8>(v4, v5))) {
-                                    /* label 19 */
-                                    v3 = false;
-                                    return v3
-                                } else {
-                                    /* goto 21 */
+                        if (0x2::vec_set::size<u8>(0xdcf96cb6435abead12decb0867a03feabfaf9264308a335feb94b83f5b573282::picks::special_numbers(arg1)) == (arg0.special_count as u64)) {
+                            let v3 = 0x2::vec_set::keys<u8>(0xdcf96cb6435abead12decb0867a03feabfaf9264308a335feb94b83f5b573282::picks::special_numbers(arg1));
+                            let v4 = 0;
+                            let v5;
+                            while (v4 < 0x1::vector::length<u8>(v3)) {
+                                if (!0xdcf96cb6435abead12decb0867a03feabfaf9264308a335feb94b83f5b573282::range::contains(&arg0.special_range, 0x1::vector::borrow<u8>(v3, v4))) {
+                                    v5 = false;
+                                    /* label 18 */
+                                    return v5
                                 };
+                                v4 = v4 + 1;
                             };
-                            v3
+                            v5 = true;
+                            /* goto 18 */
                         } else {
-                            false
+                            return false
                         };
-                        return v3
-                        /* label 21 */
-                        /* goto 14 */
-                        continue;
-                        /* goto 19 */
+                    } else {
+                        return false
                     };
-                    return false
                 } else {
                     v1 = v1 + 1;
                 };

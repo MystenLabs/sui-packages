@@ -49,7 +49,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_metadata_batch": {
         "visibility": "PUBLIC",
@@ -61,7 +61,7 @@
           "vector<0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x0000000000000000000000000000000000000000000000000000000000000001::string::String>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_all_ids": {
         "visibility": "PUBLIC",
@@ -69,7 +69,9 @@
         "params": [
           "&0x340c17d8593066da374c8c06d4348fe8c65cd15373df577f9381eb1de5de8ade::metadata_storage::MetadataStorage"
         ],
-        "return": null
+        "return": [
+          "vector<u64>"
+        ]
       },
       "get_metadata": {
         "visibility": "PUBLIC",
@@ -78,7 +80,9 @@
           "&0x340c17d8593066da374c8c06d4348fe8c65cd15373df577f9381eb1de5de8ade::metadata_storage::MetadataStorage",
           "u64"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
       },
       "get_metadata_copy": {
         "visibility": "PUBLIC",
@@ -87,7 +91,9 @@
           "&0x340c17d8593066da374c8c06d4348fe8c65cd15373df577f9381eb1de5de8ade::metadata_storage::MetadataStorage",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
       },
       "get_total_stored": {
         "visibility": "PUBLIC",
@@ -95,7 +101,9 @@
         "params": [
           "&0x340c17d8593066da374c8c06d4348fe8c65cd15373df577f9381eb1de5de8ade::metadata_storage::MetadataStorage"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_trait": {
         "visibility": "PUBLIC",
@@ -105,7 +113,9 @@
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_trait_names": {
         "visibility": "PUBLIC",
@@ -114,7 +124,9 @@
           "&0x340c17d8593066da374c8c06d4348fe8c65cd15373df577f9381eb1de5de8ade::metadata_storage::MetadataStorage",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::string::String>"
+        ]
       },
       "has_trait": {
         "visibility": "PUBLIC",
@@ -124,7 +136,9 @@
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -132,7 +146,30 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "metadata_exists": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x340c17d8593066da374c8c06d4348fe8c65cd15373df577f9381eb1de5de8ade::metadata_storage::MetadataStorage",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "update_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x340c17d8593066da374c8c06d4348fe8c65cd15373df577f9381eb1de5de8ade::metadata_storage::MetadataStorage",
+          "&0x340c17d8593066da374c8c06d4348fe8c65cd15373df577f9381eb1de5de8ade::metadata_storage::AdminCap",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000001::string::String, 0x0000000000000000000000000000000000000000000000000000000000000001::string::String>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }
