@@ -108,12 +108,14 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::config::GlobalConfig",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<$0, $1>>",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<$1, $0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T0, T1>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T1, T0>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "buy_to_alpha": {
         "visibility": "PUBLIC",
@@ -125,7 +127,7 @@
           "&0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletConfig",
           "&mut 0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletTokenHolder",
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
-          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::partner::Partner",
           "u256",
           "u256",
@@ -134,7 +136,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_to_alpha_multi_hop": {
         "visibility": "PUBLIC",
@@ -147,10 +149,10 @@
           "&mut 0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletTokenHolder",
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::partner::Partner",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>>",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$1, $0>>",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$1, $2>>",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$2, $1>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T2>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, T1>>",
           "u256",
           "u256",
           "u64",
@@ -158,7 +160,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "buy_to_alpha_multi_hop_bluefin": {
         "visibility": "PUBLIC",
@@ -170,10 +174,10 @@
           "&0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletConfig",
           "&mut 0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletTokenHolder",
           "&mut 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::config::GlobalConfig",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<$0, $1>>",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<$1, $0>>",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<$1, $2>>",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<$2, $1>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T0, T1>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T1, T0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T1, T2>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T2, T1>>",
           "u256",
           "u256",
           "u64",
@@ -181,7 +185,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "cetus_swap_internal": {
         "visibility": "PRIVATE",
@@ -190,12 +196,14 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::partner::Partner",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>>",
-          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$1, $0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T0>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
       },
       "credit_coin": {
         "visibility": "PUBLIC",
@@ -203,10 +211,10 @@
         "params": [
           "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
           "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "emergency_withdraw": {
         "visibility": "PUBLIC",
@@ -218,7 +226,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_checksum": {
         "visibility": "FRIEND",
@@ -227,7 +235,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "rebalance_out": {
         "visibility": "PUBLIC",
@@ -239,7 +249,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "sell_to_self_from_alpha": {
         "visibility": "PUBLIC",
@@ -251,7 +261,7 @@
           "&mut 0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletConfig",
           "&mut 0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletTokenHolder",
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
-          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
           "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::partner::Partner",
           "u256",
           "u256",
@@ -261,7 +271,99 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "sell_to_self_from_alpha_multi_hop": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
+          "&mut 0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletConfig",
+          "&mut 0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletTokenHolder",
+          "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::partner::Partner",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T2>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T2, T1>>",
+          "u256",
+          "u256",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "sell_to_self_from_alpha_multi_hop_bluefin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
+          "&mut 0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletConfig",
+          "&mut 0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::CloudWalletTokenHolder",
+          "&mut 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::config::GlobalConfig",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T0, T1>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T1, T0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T1, T2>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T2, T1>>",
+          "u256",
+          "u256",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "swap_check": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "test_234": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "test_234_2": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "test_check_sum": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": []
       }
     },
     "vault_config": {
@@ -273,7 +375,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_extension_in_config": {
         "visibility": "PUBLIC",
@@ -282,7 +384,7 @@
           "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "borrow_withdraw_cap": {
         "visibility": "FRIEND",
@@ -290,7 +392,9 @@
         "params": [
           "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder"
         ],
-        "return": null
+        "return": [
+          "&0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::QuickWithdrawCap"
+        ]
       },
       "check_rebalance_to": {
         "visibility": "FRIEND",
@@ -299,7 +403,7 @@
           "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "check_trade_token": {
         "visibility": "FRIEND",
@@ -308,7 +412,7 @@
           "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "coin_a_is_whitelist": {
         "visibility": "PUBLIC",
@@ -316,7 +420,9 @@
         "params": [
           "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "create_vault": {
         "visibility": "FRIEND",
@@ -325,26 +431,26 @@
           "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "credit_coin": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_token_from_vault": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
         ],
-        "return": null
+        "return": []
       },
       "emergency_withdraw": {
         "visibility": "FRIEND",
@@ -353,7 +459,300 @@
           "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "emit_bag": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ],
+        "return": []
+      },
+      "emit_extension_ev": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig"
+        ],
+        "return": []
+      },
+      "get_role_status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "u64",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "get_token_to_vault": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "grant_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "grant_operator": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "grant_trusted_bot": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "grant_trusted_bots": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "vector<address>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "only_admin": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "only_allow_version": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig"
+        ],
+        "return": []
+      },
+      "only_operator": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "only_trusted_bot": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "rebalance_out": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
+      },
+      "remove_withdraw_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "revoke": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "u64",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_bag": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_cloud_wallet_withdraw_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::Receiving<0xc03ce5701b9a79bafc890a7d5e127b719627d29afd2c5508efa33f1c16977438::cloud_wallet_config::QuickWithdrawCap>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_conf_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_rebalance_to": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_trade_token": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unpause": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "vault_balance_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "vault_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "when_not_expired": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64"
+        ],
+        "return": []
+      },
+      "when_not_paused": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultConfig"
+        ],
+        "return": []
+      },
+      "when_vault_created": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x27590d1d4eb13c545258a8a767ac94bf88455c0319ef944dee236cd5e00870c1::vault_config::VaultTokenHolder",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       }
     }
   }

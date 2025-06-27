@@ -76,7 +76,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "arb_sui_usdc_deepbook": {
         "visibility": "PUBLIC",
@@ -88,7 +88,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "arb_sui_usdc_kriya": {
         "visibility": "PUBLIC",
@@ -100,7 +100,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "arb_sui_usdc_turbos": {
         "visibility": "PUBLIC",
@@ -112,7 +112,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "execute_cetus_swap_ptb": {
         "visibility": "PRIVATE",
@@ -123,7 +123,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "execute_deepbook_swap_ptb": {
         "visibility": "PRIVATE",
@@ -134,7 +134,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "execute_kriya_swap_ptb": {
         "visibility": "PRIVATE",
@@ -145,7 +145,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "execute_turbos_swap_ptb": {
         "visibility": "PRIVATE",
@@ -156,19 +156,47 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_ptb_batch_capacity": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_supported_routes": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "vector<vector<u8>>"
+        ]
+      },
+      "ptb_batch_arbitrage": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>>",
+          "vector<u64>",
+          "vector<address>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_ptb_batch": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&vector<u64>",
+          "&vector<address>"
+        ],
+        "return": [
+          "bool"
+        ]
       }
     },
     "constants": {
@@ -176,61 +204,129 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "bluefin_package": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "cetus_package": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "cetus_sui_usdc_pool": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "deepbook_deep_usdc_pool": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "deepbook_package": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "deepbook_registry": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "default_slippage_bps": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "kriya_amm_contract": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "kriya_package": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
+      },
+      "max_slippage_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "proven_sui_usdc_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      },
+      "proven_swap_package": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      },
+      "turbos_clmm_contract": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      },
+      "turbos_package": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      },
+      "usdc_package": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
       }
     },
     "dex_cetus": {
@@ -240,19 +336,25 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_cetus_package": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_cetus_sui_usdc_pool": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "prepare_sui_for_cetus_ptb": {
         "visibility": "PUBLIC",
@@ -262,7 +364,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "swap_sui_to_usdc": {
         "visibility": "PUBLIC",
@@ -274,7 +376,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "validate_cetus_ptb_params": {
         "visibility": "PUBLIC",
@@ -284,7 +386,9 @@
           "u64",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       }
     },
     "dex_cetus_no_clock": {
@@ -295,7 +399,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "swap_sui_to_usdc_minimal": {
         "visibility": "PUBLIC",
@@ -305,7 +409,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "swap_sui_to_usdc_no_clock": {
         "visibility": "PUBLIC",
@@ -316,7 +420,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "test_entry_point_accessibility": {
         "visibility": "PUBLIC",
@@ -324,7 +428,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "dex_deepbook": {
@@ -334,19 +438,25 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_deepbook_package": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_sui_usdc_pool": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "prepare_sui_for_deepbook_ptb": {
         "visibility": "PUBLIC",
@@ -356,7 +466,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "swap_sui_to_usdc": {
         "visibility": "PUBLIC",
@@ -368,7 +478,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "validate_deepbook_ptb_params": {
         "visibility": "PUBLIC",
@@ -378,7 +488,9 @@
           "u64",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       }
     },
     "dex_kriya": {
@@ -388,19 +500,25 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_kriya_package": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_sui_usdc_pool": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "prepare_sui_for_kriya_ptb": {
         "visibility": "PUBLIC",
@@ -410,7 +528,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "swap_sui_to_usdc": {
         "visibility": "PUBLIC",
@@ -422,7 +540,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "validate_kriya_ptb_params": {
         "visibility": "PUBLIC",
@@ -432,7 +550,9 @@
           "u64",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       }
     },
     "dex_turbos": {
@@ -442,7 +562,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_turbos_fee": {
         "visibility": "PUBLIC",
@@ -450,25 +572,33 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_turbos_package": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_turbos_sui_usdc_pool": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "is_turbos_operational": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "prepare_sui_for_turbos_ptb": {
         "visibility": "PUBLIC",
@@ -478,7 +608,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "swap_sui_to_usdc": {
         "visibility": "PUBLIC",
@@ -490,7 +620,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "validate_turbos_ptb_params": {
         "visibility": "PUBLIC",
@@ -500,7 +630,9 @@
           "u64",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       }
     },
     "timestamp_workaround_entry_points": {
@@ -513,7 +645,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deepbook_swap_no_clock": {
         "visibility": "PUBLIC",
@@ -524,7 +656,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "emergency_swap_any_dex": {
         "visibility": "PUBLIC",
@@ -533,7 +665,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_current_epoch": {
         "visibility": "PUBLIC",
@@ -541,7 +673,9 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "is_valid_dex_id": {
         "visibility": "PUBLIC",
@@ -549,7 +683,9 @@
         "params": [
           "u8"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "kriya_swap_no_clock": {
         "visibility": "PUBLIC",
@@ -560,7 +696,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "test_entry_point_connectivity": {
         "visibility": "PUBLIC",
@@ -568,7 +704,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "turbos_swap_no_clock": {
         "visibility": "PUBLIC",
@@ -579,7 +715,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "universal_swap_sui_to_usdc_no_clock": {
         "visibility": "PUBLIC",
@@ -591,7 +727,7 @@
           "u8",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }
