@@ -60,7 +60,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_members_batch": {
         "visibility": "PUBLIC",
@@ -73,7 +73,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create": {
         "visibility": "PUBLIC",
@@ -85,7 +85,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::AdminCap"
+        ]
       },
       "create_allowlist": {
         "visibility": "PRIVATE",
@@ -97,7 +99,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_access_fee": {
         "visibility": "PUBLIC",
@@ -105,7 +107,9 @@
         "params": [
           "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_balance": {
         "visibility": "PUBLIC",
@@ -113,7 +117,9 @@
         "params": [
           "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_description": {
         "visibility": "PUBLIC",
@@ -121,7 +127,9 @@
         "params": [
           "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_members": {
         "visibility": "PUBLIC",
@@ -129,7 +137,9 @@
         "params": [
           "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist"
         ],
-        "return": null
+        "return": [
+          "&vector<0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Member>"
+        ]
       },
       "get_name": {
         "visibility": "PUBLIC",
@@ -137,7 +147,9 @@
         "params": [
           "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist"
         ],
-        "return": null
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_total_members": {
         "visibility": "PUBLIC",
@@ -145,7 +157,113 @@
         "params": [
           "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "is_member": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_prefix": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "vector<u8>",
+          "vector<u8>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "join_with_payment": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "namespace": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "publish_content": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist",
+          "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": []
+      },
+      "remove_member": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist",
+          "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::AdminCap",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "seal_approve": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "vector<u8>",
+          "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_metadata": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist",
+          "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::AdminCap",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "withdraw_fees": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::Allowlist",
+          "&0xf4218e4bed10b50debd21b7f010b54643128052c5ccba3cc8af0e8c965426e93::allowlist::AdminCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
       }
     }
   }

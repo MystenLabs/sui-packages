@@ -63,7 +63,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_escrow_payment": {
         "visibility": "PUBLIC",
@@ -76,7 +76,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "generate_escrow_id": {
         "visibility": "PRIVATE",
@@ -85,7 +85,9 @@
           "&mut 0xf9d58122a5e6643ef0519701d7ff754492c40295a34460dfd0dae9da07d07f71::drop_escrow::EscrowRegistry",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "get_escrow_details": {
         "visibility": "PUBLIC",
@@ -94,7 +96,15 @@
           "&0xf9d58122a5e6643ef0519701d7ff754492c40295a34460dfd0dae9da07d07f71::drop_escrow::EscrowRegistry",
           "vector<u8>"
         ],
-        "return": null
+        "return": [
+          "address",
+          "address",
+          "vector<u8>",
+          "u64",
+          "u8",
+          "u64",
+          "u64"
+        ]
       },
       "get_total_escrow_balance": {
         "visibility": "PUBLIC",
@@ -102,7 +112,9 @@
         "params": [
           "&0xf9d58122a5e6643ef0519701d7ff754492c40295a34460dfd0dae9da07d07f71::drop_escrow::EscrowRegistry"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_treasury_address": {
         "visibility": "PUBLIC",
@@ -110,7 +122,9 @@
         "params": [
           "&0xf9d58122a5e6643ef0519701d7ff754492c40295a34460dfd0dae9da07d07f71::drop_escrow::EscrowRegistry"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -118,7 +132,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "process_escrow_approval": {
         "visibility": "PUBLIC",
@@ -130,7 +144,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "process_escrow_refund": {
         "visibility": "PUBLIC",
@@ -143,7 +157,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "u64_to_string": {
         "visibility": "PRIVATE",
@@ -151,7 +165,20 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "update_treasury_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xf9d58122a5e6643ef0519701d7ff754492c40295a34460dfd0dae9da07d07f71::drop_escrow::AdminCap",
+          "&mut 0xf9d58122a5e6643ef0519701d7ff754492c40295a34460dfd0dae9da07d07f71::drop_escrow::EscrowRegistry",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

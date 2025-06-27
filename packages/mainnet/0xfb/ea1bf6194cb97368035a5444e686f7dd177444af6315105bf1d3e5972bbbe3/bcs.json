@@ -83,7 +83,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_multiple_tickets": {
         "visibility": "PUBLIC",
@@ -96,7 +96,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_ticket": {
         "visibility": "PUBLIC",
@@ -108,7 +108,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "can_buy_tickets": {
         "visibility": "PUBLIC",
@@ -117,7 +117,9 @@
           "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "can_claim_prize": {
         "visibility": "PUBLIC",
@@ -126,7 +128,9 @@
           "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "can_draw_winner": {
         "visibility": "PUBLIC",
@@ -135,7 +139,9 @@
           "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "claim_prize": {
         "visibility": "PUBLIC",
@@ -144,13 +150,13 @@
           "&mut 0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_raffle": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "$0",
+          "T0",
           "vector<u8>",
           "vector<u8>",
           "u64",
@@ -159,7 +165,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "draw_winner": {
         "visibility": "PUBLIC",
@@ -171,7 +177,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "generate_random_winner": {
         "visibility": "PRIVATE",
@@ -181,7 +187,160 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
+      },
+      "get_raffle_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "bool",
+          "bool"
+        ]
+      },
+      "get_raffle_status": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_admin": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::GlobalConfig",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "remove_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::GlobalConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_primary_fee_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::GlobalConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_primary_fee_percentage": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::GlobalConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_secondary_fee_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::GlobalConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_secondary_fee_percentage": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::GlobalConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_prize_claim_status": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
+          "address"
+        ],
+        "return": []
+      },
+      "validate_ticket_purchase_status": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
+          "u64"
+        ],
+        "return": []
+      },
+      "validate_winner_selection_status": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
+          "u64"
+        ],
+        "return": []
+      },
+      "withdraw_nft": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::GlobalConfig",
+          "&mut 0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::flow_raffle::Raffle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "nft_raffle": {
@@ -194,13 +353,13 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_raffle": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "$0",
+          "T0",
           "vector<u8>",
           "vector<u8>",
           "u64",
@@ -210,7 +369,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "draw_winner": {
         "visibility": "PUBLIC",
@@ -221,7 +380,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "end_raffle": {
         "visibility": "PUBLIC",
@@ -231,7 +390,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "generate_random_number": {
         "visibility": "PRIVATE",
@@ -240,7 +399,9 @@
           "vector<u8>",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -248,7 +409,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "transfer_admin_cap": {
         "visibility": "PUBLIC",
@@ -257,7 +418,7 @@
           "0xfbea1bf6194cb97368035a5444e686f7dd177444af6315105bf1d3e5972bbbe3::nft_raffle::AdminCap",
           "address"
         ],
-        "return": null
+        "return": []
       }
     }
   }

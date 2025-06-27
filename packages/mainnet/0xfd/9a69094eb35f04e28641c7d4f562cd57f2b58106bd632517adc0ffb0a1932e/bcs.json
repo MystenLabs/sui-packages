@@ -95,10 +95,10 @@
         "params": [
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "bridge_info": {
         "visibility": "PUBLIC",
@@ -106,7 +106,9 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge"
         ],
-        "return": null
+        "return": [
+          "0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeInfo"
+        ]
       },
       "bridge_info_entry": {
         "visibility": "PUBLIC",
@@ -114,7 +116,7 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge"
         ],
-        "return": null
+        "return": []
       },
       "bridge_pair_info_entry": {
         "visibility": "PRIVATE",
@@ -123,20 +125,20 @@
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "bridge_token": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "bridge_token_balance": {
         "visibility": "PUBLIC",
@@ -144,7 +146,9 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge"
         ],
-        "return": null
+        "return": [
+          "0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeTokenBalance"
+        ]
       },
       "bridge_token_info": {
         "visibility": "PUBLIC",
@@ -153,7 +157,9 @@
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeTokenInfo"
+        ]
       },
       "bridge_token_info_entry": {
         "visibility": "PRIVATE",
@@ -162,7 +168,7 @@
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "check_version": {
         "visibility": "PRIVATE",
@@ -170,7 +176,7 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge"
         ],
-        "return": null
+        "return": []
       },
       "claim_bridge_fee": {
         "visibility": "PUBLIC",
@@ -182,7 +188,164 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "claim_token": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "address",
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "u64",
+          "vector<vector<u8>>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_token_batch": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "vector<address>",
+          "vector<u64>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "vector<u64>",
+          "vector<vector<vector<u8>>>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "claim_treasury_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_bridge_pair": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_special_bridge_pair": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "delete_bridge_pair": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "u64"
+        ],
+        "return": []
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_treasury_exist": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "migrate": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge"
+        ],
+        "return": []
+      },
+      "modify_pair_enable": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "u64",
+          "bool"
+        ],
+        "return": []
+      },
+      "modify_pair_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "u64",
+          "u64",
+          "u8"
+        ],
+        "return": []
+      },
+      "modify_pair_limit": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "op_bridge_signers": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "address",
+          "bool"
+        ],
+        "return": []
+      },
+      "op_bridge_white_black": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::BridgeCap",
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::bridge::Bridge",
+          "vector<address>",
+          "u8"
+        ],
+        "return": []
       }
     },
     "config": {
@@ -195,7 +358,9 @@
           "u64",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "can_bridge": {
         "visibility": "PUBLIC",
@@ -206,7 +371,9 @@
           "address",
           "u64"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "create": {
         "visibility": "FRIEND",
@@ -214,7 +381,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig"
+        ]
       },
       "create_bridge_pair": {
         "visibility": "FRIEND",
@@ -224,7 +393,7 @@
           "vector<0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_special_bridge_pair": {
         "visibility": "FRIEND",
@@ -235,7 +404,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delete_bridge_pair": {
         "visibility": "FRIEND",
@@ -244,7 +413,7 @@
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "find_pair": {
         "visibility": "PRIVATE",
@@ -253,7 +422,9 @@
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
         ],
-        "return": null
+        "return": [
+          "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgePair"
+        ]
       },
       "find_pair_by_id": {
         "visibility": "FRIEND",
@@ -262,7 +433,9 @@
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
           "u64"
         ],
-        "return": null
+        "return": [
+          "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgePair"
+        ]
       },
       "find_pair_mut_by_id": {
         "visibility": "FRIEND",
@@ -271,7 +444,9 @@
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
           "u64"
         ],
-        "return": null
+        "return": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgePair"
+        ]
       },
       "is_black_user": {
         "visibility": "PRIVATE",
@@ -280,7 +455,131 @@
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "is_pair_exist": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_pair_id_exist": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
+          "u64"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "modify_pair_enable": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
+          "u64",
+          "bool"
+        ],
+        "return": []
+      },
+      "modify_pair_fee": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
+          "u64",
+          "u64",
+          "u8"
+        ],
+        "return": []
+      },
+      "modify_pair_limit": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "new_bridge_pair": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "op_white_black": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
+          "vector<address>",
+          "u8"
+        ],
+        "return": []
+      },
+      "pair_fee_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgePair"
+        ],
+        "return": [
+          "u64",
+          "u8",
+          "u64",
+          "u64"
+        ]
+      },
+      "pair_list": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig"
+        ],
+        "return": [
+          "vector<0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgePair>"
+        ]
+      },
+      "pair_token_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgePair"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ]
+      },
+      "user_role": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::config::BridgeConfig",
+          "address"
+        ],
+        "return": [
+          "u8"
+        ]
       }
     },
     "deposit": {
@@ -290,7 +589,9 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>"
+        ]
       },
       "claim": {
         "visibility": "FRIEND",
@@ -299,7 +600,9 @@
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "claim_fee": {
         "visibility": "FRIEND",
@@ -308,7 +611,9 @@
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit",
           "u64"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "create": {
         "visibility": "FRIEND",
@@ -316,7 +621,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit"
+        ]
       },
       "create_balance_if_not_exist": {
         "visibility": "PRIVATE",
@@ -325,16 +632,18 @@
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit",
           "bool"
         ],
-        "return": null
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
+        ]
       },
       "deposit": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "deposit_balance": {
         "visibility": "FRIEND",
@@ -342,16 +651,18 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "deposit_fee": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::Balance<T0>"
         ],
-        "return": null
+        "return": []
       },
       "deposit_fee_balance": {
         "visibility": "FRIEND",
@@ -359,7 +670,9 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "is_balance_exist": {
         "visibility": "PRIVATE",
@@ -367,7 +680,19 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "is_fee_exist": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::deposit::BridgeDeposit"
+        ],
+        "return": [
+          "bool"
+        ]
       }
     },
     "sign": {
@@ -375,7 +700,9 @@
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::sign::BridgeSign"
+        ]
       },
       "encode_message_bytes": {
         "visibility": "PRIVATE",
@@ -387,7 +714,9 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "info": {
         "visibility": "FRIEND",
@@ -395,7 +724,9 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::sign::BridgeSign"
         ],
-        "return": null
+        "return": [
+          "vector<address>"
+        ]
       },
       "min_signer_count": {
         "visibility": "PRIVATE",
@@ -403,7 +734,9 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::sign::BridgeSign"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "op_signers": {
         "visibility": "FRIEND",
@@ -413,7 +746,7 @@
           "address",
           "bool"
         ],
-        "return": null
+        "return": []
       },
       "recover_eth_address": {
         "visibility": "PRIVATE",
@@ -422,7 +755,9 @@
           "&vector<u8>",
           "&vector<u8>"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "slice_range": {
         "visibility": "PRIVATE",
@@ -432,7 +767,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       },
       "verify_signatures": {
         "visibility": "FRIEND",
@@ -445,7 +782,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String",
           "u64"
         ],
-        "return": null
+        "return": []
       }
     },
     "string_utils": {
@@ -455,7 +792,9 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ]
       },
       "index_of": {
         "visibility": "FRIEND",
@@ -464,7 +803,10 @@
           "&vector<u8>",
           "&vector<u8>"
         ],
-        "return": null
+        "return": [
+          "bool",
+          "u64"
+        ]
       },
       "last_index_of": {
         "visibility": "FRIEND",
@@ -473,7 +815,10 @@
           "&vector<u8>",
           "&vector<u8>"
         ],
-        "return": null
+        "return": [
+          "bool",
+          "u64"
+        ]
       },
       "substring": {
         "visibility": "FRIEND",
@@ -483,7 +828,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "vector<u8>"
+        ]
       }
     },
     "treasury": {
@@ -492,9 +839,9 @@
         "is_entry": false,
         "params": [
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::treasury::BridgeTreasury",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>"
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>"
         ],
-        "return": null
+        "return": []
       },
       "all_treasury_cap": {
         "visibility": "FRIEND",
@@ -502,17 +849,19 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::treasury::BridgeTreasury"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName>"
+        ]
       },
       "burn": {
         "visibility": "FRIEND",
         "is_entry": false,
         "params": [
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::treasury::BridgeTreasury",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "claim_treasury_cap": {
         "visibility": "FRIEND",
@@ -520,7 +869,9 @@
         "params": [
           "&mut 0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::treasury::BridgeTreasury"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>"
+        ]
       },
       "create": {
         "visibility": "FRIEND",
@@ -528,7 +879,9 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::treasury::BridgeTreasury"
+        ]
       },
       "is_treasury_exist": {
         "visibility": "FRIEND",
@@ -536,7 +889,9 @@
         "params": [
           "&0xfd9a69094eb35f04e28641c7d4f562cd57f2b58106bd632517adc0ffb0a1932e::treasury::BridgeTreasury"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "mint": {
         "visibility": "FRIEND",
@@ -546,7 +901,9 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     }
   }

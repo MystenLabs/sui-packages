@@ -67,7 +67,7 @@
         "params": [
           "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleConfig"
         ],
-        "return": null
+        "return": []
       },
       "div": {
         "visibility": "PUBLIC",
@@ -76,7 +76,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "div_u128": {
         "visibility": "PUBLIC",
@@ -85,7 +87,9 @@
           "u128",
           "u128"
         ],
-        "return": null
+        "return": [
+          "u128"
+        ]
       },
       "ema_price": {
         "visibility": "PUBLIC",
@@ -93,13 +97,17 @@
         "params": [
           "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::PriceFeed"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
       },
       "float_scaling": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -107,13 +115,15 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "max_bps": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "max_confidence_interval_bps": {
         "visibility": "PUBLIC",
@@ -121,7 +131,9 @@
         "params": [
           "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "max_staleness_threshold_s": {
         "visibility": "PUBLIC",
@@ -129,7 +141,9 @@
         "params": [
           "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "new_config": {
         "visibility": "FRIEND",
@@ -141,7 +155,127 @@
           "u8",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleConfig"
+        ]
+      },
+      "new_holder": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleHolder"
+        ]
+      },
+      "new_price_feed": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>",
+          "u64"
+        ],
+        "return": [
+          "0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::PriceFeed"
+        ]
+      },
+      "oracle_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleConfig"
+        ],
+        "return": [
+          "vector<u8>"
+        ]
+      },
+      "oracle_type": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleConfig"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "oracle_type_pyth": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u8"
+        ]
+      },
+      "oracle_type_supra": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u8"
+        ]
+      },
+      "price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::PriceFeed"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "price_feed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleHolder",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::PriceFeed"
+        ]
+      },
+      "price_feeds_mut": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleHolder"
+        ],
+        "return": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::VecMap<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID, 0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::PriceFeed>"
+        ]
+      },
+      "timestamp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::PriceFeed"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_oracle_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleConfig",
+          "u64",
+          "u64",
+          "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::AdminCap"
+        ],
+        "return": []
+      },
+      "update_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::OracleConfig",
+          "u64",
+          "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::AdminCap"
+        ],
+        "return": []
       }
     },
     "pyth": {
@@ -151,7 +285,9 @@
         "params": [
           "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::Price"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_price": {
         "visibility": "PUBLIC",
@@ -162,7 +298,7 @@
           "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "new_oracle": {
         "visibility": "PUBLIC",
@@ -174,7 +310,7 @@
           "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::AdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     },
     "supra": {
@@ -187,7 +323,7 @@
           "&0x5d8fbbf6f908a4af8c6d072669a462d53e03eb3c1d863bd0359dc818c69ea706::SupraSValueFeed::OracleHolder",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "new_oracle": {
         "visibility": "PUBLIC",
@@ -199,7 +335,7 @@
           "&0xffc18f74e4e8d115a5953c4b2f4b3527b80b271c171b6c4aba51276a8b0b2e52::oracle::AdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "validate_supra_id": {
         "visibility": "PRIVATE",
@@ -207,7 +343,7 @@
         "params": [
           "vector<u32>"
         ],
-        "return": null
+        "return": []
       }
     }
   }

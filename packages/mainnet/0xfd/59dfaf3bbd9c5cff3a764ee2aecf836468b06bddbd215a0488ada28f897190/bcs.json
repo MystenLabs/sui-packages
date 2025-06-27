@@ -79,7 +79,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "new": {
         "visibility": "PUBLIC",
@@ -90,7 +90,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "send_ping": {
         "visibility": "PUBLIC",
@@ -99,7 +99,7 @@
           "&0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::capability::Account",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": []
       },
       "update": {
         "visibility": "PUBLIC",
@@ -108,7 +108,7 @@
           "&mut 0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::capability::Account",
           "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
         ],
-        "return": null
+        "return": []
       }
     },
     "escrow": {
@@ -117,30 +117,30 @@
         "is_entry": false,
         "params": [
           "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::lock::Key",
-          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::lock::Locked<$0>",
+          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::lock::Locked<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "address",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "return_to_sender": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::escrow::Escrow<$0>"
+          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::escrow::Escrow<T0>"
         ],
-        "return": null
+        "return": []
       },
       "swap": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::escrow::Escrow<$0>",
-          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::escrow::Escrow<$1>"
+          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::escrow::Escrow<T0>",
+          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::escrow::Escrow<T1>"
         ],
-        "return": null
+        "return": []
       }
     },
     "lock": {
@@ -148,19 +148,24 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "$0",
+          "T0",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::lock::Locked<T0>",
+          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::lock::Key"
+        ]
       },
       "unlock": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::lock::Locked<$0>",
+          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::lock::Locked<T0>",
           "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::lock::Key"
         ],
-        "return": null
+        "return": [
+          "T0"
+        ]
       }
     },
     "vault": {
@@ -169,10 +174,10 @@
         "is_entry": false,
         "params": [
           "&mut 0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::vault::Vault",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_and_add_dynamic_field_to_vault_object": {
         "visibility": "PUBLIC",
@@ -182,7 +187,7 @@
           "u32",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -190,17 +195,19 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "stake": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
           "&mut 0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::vault::Vault",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::vault::StakeProof<T0>"
+        ]
       },
       "withdraw_coin": {
         "visibility": "PUBLIC",
@@ -209,7 +216,7 @@
           "&mut 0xfd59dfaf3bbd9c5cff3a764ee2aecf836468b06bddbd215a0488ada28f897190::vault::Vault",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }
