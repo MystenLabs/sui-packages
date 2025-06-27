@@ -98,20 +98,20 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "buy_tokens_from_amm": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
-          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::AMMPool<$0>",
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::AMMPool<T0>",
           "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>>",
           "u64",
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_token_out": {
         "visibility": "PRIVATE",
@@ -121,7 +121,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_holder_amount": {
         "visibility": "PUBLIC",
@@ -130,7 +132,9 @@
           "&0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_investor_quota": {
         "visibility": "PUBLIC",
@@ -139,7 +143,9 @@
           "&0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -147,18 +153,18 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "initialize_amm_pool": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
           "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "initialize_platform": {
         "visibility": "PRIVATE",
@@ -169,7 +175,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "invest": {
         "visibility": "PUBLIC",
@@ -180,7 +186,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "remove_from_fund_holders": {
         "visibility": "PUBLIC",
@@ -190,7 +196,157 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "sell_tokens_to_amm": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::AMMPool<T0>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "spl_payment": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::AMMPool<T0>",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_core_wallet": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "address",
+          "address",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_investor_info": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "address",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_platform_buy_flag": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_platform_status": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_spl_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "address",
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::spl::SPL>>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_spl_payment_receiver": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_withdraw_whitelist": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_all_funds": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_amm_funds": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::AMMPool<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_fund": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_spl_token": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw_suis": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::invest_platform::InvestmentPlatform",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "spl": {
@@ -202,7 +358,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::spl::SPL>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -211,7 +367,7 @@
           "0x4e30239614b86da3951744bc6c2783880321353580cf3de0f0f6964b2ae0c690::spl::SPL",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -222,7 +378,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       }
     }
   }
