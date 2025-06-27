@@ -66,7 +66,7 @@
           "&0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::AdminCap",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "add_player_balance": {
         "visibility": "PUBLIC",
@@ -77,7 +77,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "add_version": {
         "visibility": "PUBLIC",
@@ -87,7 +87,7 @@
           "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
           "u64"
         ],
-        "return": null
+        "return": []
       },
       "assert_gas_fee": {
         "visibility": "PRIVATE",
@@ -95,7 +95,7 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
         ],
-        "return": null
+        "return": []
       },
       "assert_sender_is_manager": {
         "visibility": "PRIVATE",
@@ -104,7 +104,7 @@
           "&0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "assert_valid_package_version": {
         "visibility": "PRIVATE",
@@ -112,7 +112,7 @@
         "params": [
           "&0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank"
         ],
-        "return": null
+        "return": []
       },
       "borrow_house_pool_mut": {
         "visibility": "PRIVATE",
@@ -120,7 +120,9 @@
         "params": [
           "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank"
         ],
-        "return": null
+        "return": [
+          "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::HousePoolValue<T0>"
+        ]
       },
       "borrow_player_balance_mut": {
         "visibility": "PRIVATE",
@@ -129,7 +131,9 @@
           "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
           "address"
         ],
-        "return": null
+        "return": [
+          "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::PlayerBalanceValue<T0>"
+        ]
       },
       "deposit": {
         "visibility": "PUBLIC",
@@ -137,17 +141,167 @@
         "params": [
           "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
           "address",
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "err_insufficient_gas_fee": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [],
-        "return": null
+        "return": []
+      },
+      "err_invalid_package_version": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_loss_amount_exceeds_balance": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_sender_is_not_manager": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "err_user_balance_does_not_exist": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [],
+        "return": []
+      },
+      "house_pool_exists": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "managers": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<address>"
+        ]
+      },
+      "package_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u64"
+        ]
+      },
+      "player_balance_exists": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "remove_manager": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
+          "&0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::AdminCap",
+          "address"
+        ],
+        "return": []
+      },
+      "remove_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::AdminCap",
+          "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
+          "u64"
+        ],
+        "return": []
+      },
+      "sub_player_balance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_player_loss_to_unihouse": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "versions": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::VecSet<u64>"
+        ]
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
+          "&mut 0x2f2226a22ebeb7a0e63ea39551829b238589d981d1c6dd454f01fcc513035593::unihouse::Unihouse",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "withdraw_from_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x657aeedcd2bbd551202e9e1fb7bf5534a527f933035eb85bb8f8226a766095a7::st8::St8Bank",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       }
     }
   }

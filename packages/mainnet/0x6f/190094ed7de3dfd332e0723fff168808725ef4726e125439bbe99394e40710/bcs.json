@@ -43,7 +43,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_decimals": {
         "visibility": "PUBLIC",
@@ -51,7 +51,9 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "get_description": {
         "visibility": "PUBLIC",
@@ -59,7 +61,9 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_icon_url": {
         "visibility": "PUBLIC",
@@ -67,7 +71,9 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::url::Url>"
+        ]
       },
       "get_name": {
         "visibility": "PUBLIC",
@@ -75,7 +81,9 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
       },
       "get_symbol": {
         "visibility": "PUBLIC",
@@ -83,7 +91,9 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::String"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -92,7 +102,7 @@
           "0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_denylisted": {
         "visibility": "PUBLIC",
@@ -102,7 +112,9 @@
           "address",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "is_paused_current_epoch": {
         "visibility": "PUBLIC",
@@ -111,7 +123,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "is_paused_next_epoch": {
         "visibility": "PUBLIC",
@@ -119,7 +133,104 @@
         "params": [
           "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "mint_tokens": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pause_all_activity": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::DenyCapV2<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "supply": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::balance::Supply<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>"
+        ]
+      },
+      "transfer_amount": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
+          "address",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_denycap_ownership": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::DenyCapV2<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_metadata_ownership": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::CoinMetadata<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_treasury_ownership": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "undeny_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::DenyCapV2<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "unpause_all_activity": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::deny_list::DenyList",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::DenyCapV2<0x6f190094ed7de3dfd332e0723fff168808725ef4726e125439bbe99394e40710::regulated_coin::REGULATED_COIN>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }
