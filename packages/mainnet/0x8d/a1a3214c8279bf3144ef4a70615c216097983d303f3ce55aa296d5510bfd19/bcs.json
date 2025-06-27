@@ -87,20 +87,20 @@
           "u32",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_and_open_position": {
         "visibility": "PRIVATE",
         "is_entry": true,
         "params": [
           "&0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig",
-          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<$0, $1>",
+          "&mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>",
           "u32",
           "u32",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_position_manager": {
         "visibility": "PUBLIC",
@@ -108,7 +108,10 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x8da1a3214c8279bf3144ef4a70615c216097983d303f3ce55aa296d5510bfd19::position_manager::PositionManager",
+          "0x8da1a3214c8279bf3144ef4a70615c216097983d303f3ce55aa296d5510bfd19::position_manager::OwnerCap"
+        ]
       },
       "get_manager_owner": {
         "visibility": "PUBLIC",
@@ -116,7 +119,9 @@
         "params": [
           "&0x8da1a3214c8279bf3144ef4a70615c216097983d303f3ce55aa296d5510bfd19::position_manager::PositionManager"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
       },
       "get_position_info": {
         "visibility": "PUBLIC",
@@ -127,7 +132,11 @@
           "u32",
           "u32"
         ],
-        "return": null
+        "return": [
+          "u128",
+          "u64",
+          "u64"
+        ]
       },
       "harvest_rewards": {
         "visibility": "PUBLIC",
@@ -140,7 +149,10 @@
           "u32",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "mint_and_send_manager_cap": {
         "visibility": "PRIVATE",
@@ -151,7 +163,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint_manager_cap": {
         "visibility": "PUBLIC",
@@ -162,7 +174,9 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x8da1a3214c8279bf3144ef4a70615c216097983d303f3ce55aa296d5510bfd19::position_manager::ManagerCap"
+        ]
       },
       "open_position": {
         "visibility": "PUBLIC",
@@ -175,7 +189,7 @@
           "u32",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "position_exists": {
         "visibility": "PUBLIC",
@@ -186,7 +200,54 @@
           "u32",
           "u32"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "send_manager_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0x8da1a3214c8279bf3144ef4a70615c216097983d303f3ce55aa296d5510bfd19::position_manager::ManagerCap",
+          "address"
+        ],
+        "return": []
+      },
+      "update_position_rewards": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8da1a3214c8279bf3144ef4a70615c216097983d303f3ce55aa296d5510bfd19::position_manager::PositionManager",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u32",
+          "u32",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_manager_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8da1a3214c8279bf3144ef4a70615c216097983d303f3ce55aa296d5510bfd19::position_manager::PositionManager",
+          "&0x8da1a3214c8279bf3144ef4a70615c216097983d303f3ce55aa296d5510bfd19::position_manager::ManagerCap"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "verify_owner_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8da1a3214c8279bf3144ef4a70615c216097983d303f3ce55aa296d5510bfd19::position_manager::PositionManager",
+          "&0x8da1a3214c8279bf3144ef4a70615c216097983d303f3ce55aa296d5510bfd19::position_manager::OwnerCap"
+        ],
+        "return": [
+          "bool"
+        ]
       }
     }
   }

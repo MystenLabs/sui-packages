@@ -112,7 +112,7 @@
           "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "assert_not_paused": {
         "visibility": "FRIEND",
@@ -120,7 +120,7 @@
         "params": [
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig"
         ],
-        "return": null
+        "return": []
       },
       "assert_pause_admin": {
         "visibility": "PUBLIC",
@@ -129,7 +129,7 @@
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
           "address"
         ],
-        "return": null
+        "return": []
       },
       "burner_cap_revoked": {
         "visibility": "FRIEND",
@@ -138,7 +138,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
           "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig"
         ],
-        "return": null
+        "return": []
       },
       "destroy_burner_cap": {
         "visibility": "PUBLIC",
@@ -147,7 +147,7 @@
           "0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::BurnerCap",
           "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig"
         ],
-        "return": null
+        "return": []
       },
       "destroy_minter_cap": {
         "visibility": "PUBLIC",
@@ -156,7 +156,7 @@
           "0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::MinterCap",
           "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig"
         ],
-        "return": null
+        "return": []
       },
       "execute_admin_change_proposal": {
         "visibility": "PUBLIC",
@@ -166,7 +166,7 @@
           "0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AdminCap",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_burner_cap_id": {
         "visibility": "FRIEND",
@@ -174,7 +174,9 @@
         "params": [
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::BurnerCap"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "get_minter_cap_id": {
         "visibility": "FRIEND",
@@ -182,7 +184,9 @@
         "params": [
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::MinterCap"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
       },
       "get_pause_admin": {
         "visibility": "PUBLIC",
@@ -190,7 +194,108 @@
         "params": [
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig"
         ],
-        "return": null
+        "return": [
+          "vector<address>"
+        ]
+      },
+      "has_pause_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_paused": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "issue_burner_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "address",
+          "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
+          "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "issue_minter_cap": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "address",
+          "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
+          "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "minter_cap_revoked": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig"
+        ],
+        "return": []
+      },
+      "propose_admin_change": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
+          "address",
+          "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AdminCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "retract_admin_change_proposal": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
+          "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AdminCap"
+        ],
+        "return": []
+      },
+      "set_pause": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
+          "bool"
+        ],
+        "return": []
+      },
+      "set_pause_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
+          "address",
+          "bool",
+          "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AdminCap"
+        ],
+        "return": []
       }
     },
     "fbtc": {
@@ -203,7 +308,9 @@
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::BurnerCap",
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "check_version": {
         "visibility": "PRIVATE",
@@ -211,7 +318,7 @@
         "params": [
           "u8"
         ],
-        "return": null
+        "return": []
       },
       "init": {
         "visibility": "PRIVATE",
@@ -220,7 +327,7 @@
           "0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::fbtc::FBTC",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "is_paused": {
         "visibility": "PUBLIC",
@@ -228,7 +335,9 @@
         "params": [
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "migrate": {
         "visibility": "PRIVATE",
@@ -237,7 +346,7 @@
           "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::fbtc::TreasuryCapManager",
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "mint": {
         "visibility": "PUBLIC",
@@ -249,7 +358,9 @@
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::fbtc::FBTC>"
+        ]
       },
       "revoke_burner_cap": {
         "visibility": "PUBLIC",
@@ -260,7 +371,7 @@
           "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "revoke_minter_cap": {
         "visibility": "PUBLIC",
@@ -271,7 +382,7 @@
           "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AdminCap"
         ],
-        "return": null
+        "return": []
       },
       "revoked_burners": {
         "visibility": "PUBLIC",
@@ -279,7 +390,9 @@
         "params": [
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::fbtc::TreasuryCapManager"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
       },
       "revoked_minters": {
         "visibility": "PUBLIC",
@@ -287,7 +400,19 @@
         "params": [
           "&0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::fbtc::TreasuryCapManager"
         ],
-        "return": null
+        "return": [
+          "vector<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
+      },
+      "set_pause": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "bool",
+          "&mut 0x8bb49770175de6bd20ba98b58f3e34efe2a9424b3b80d2cb6dff2edd1e23dbc7::access_control::AccessConfig",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }
