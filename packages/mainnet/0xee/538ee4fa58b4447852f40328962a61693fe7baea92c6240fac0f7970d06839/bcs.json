@@ -488,7 +488,9 @@
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::amm::BatchAuction",
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::amm::AdvancedPool"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_price_impact": {
         "visibility": "PRIVATE",
@@ -498,7 +500,9 @@
           "u64",
           "bool"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create_advanced_pool": {
         "visibility": "PUBLIC",
@@ -512,7 +516,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "detect_frontrun": {
         "visibility": "PRIVATE",
@@ -523,7 +527,9 @@
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "detect_mev": {
         "visibility": "PRIVATE",
@@ -534,7 +540,9 @@
           "bool",
           "u64"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "execute_batch_auction": {
         "visibility": "PUBLIC",
@@ -546,7 +554,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "execute_matching_orders": {
         "visibility": "PRIVATE",
@@ -555,7 +563,10 @@
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::amm::BatchAuction",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "get_batch_info": {
         "visibility": "PUBLIC",
@@ -563,7 +574,13 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::amm::BatchAuction"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u8"
+        ]
       },
       "get_mev_stats": {
         "visibility": "PUBLIC",
@@ -571,7 +588,10 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::amm::AMMRegistry"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "get_or_create_batch_auction": {
         "visibility": "PRIVATE",
@@ -582,7 +602,69 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::amm::BatchAuction"
+        ]
+      },
+      "get_pool_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::amm::AdvancedPool"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "sqrt_u64": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "submit_order": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::amm::AMMRegistry",
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::amm::AdvancedPool",
+          "u8",
+          "bool",
+          "u64",
+          "u64",
+          "u64",
+          "vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_pool_after_batch": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::amm::AdvancedPool",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
       }
     },
     "enhanced_risk": {
@@ -597,7 +679,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_expected_shortfall": {
         "visibility": "PRIVATE",
@@ -605,7 +687,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_health_factor": {
         "visibility": "PRIVATE",
@@ -615,7 +699,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_risk_score": {
         "visibility": "PRIVATE",
@@ -624,7 +710,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_system_risk_level": {
         "visibility": "PRIVATE",
@@ -632,7 +720,9 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::RiskMetrics"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "calculate_var_95": {
         "visibility": "PRIVATE",
@@ -641,7 +731,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "check_circuit_breakers": {
         "visibility": "PUBLIC",
@@ -656,7 +748,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_risk_position": {
         "visibility": "PUBLIC",
@@ -669,7 +761,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "file_insurance_claim": {
         "visibility": "PUBLIC",
@@ -682,7 +774,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_circuit_breaker_status": {
         "visibility": "PUBLIC",
@@ -690,7 +782,108 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::CircuitBreaker"
         ],
-        "return": null
+        "return": [
+          "bool",
+          "bool",
+          "bool",
+          "u64"
+        ]
+      },
+      "get_emergency_status": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::EmergencySystem"
+        ],
+        "return": [
+          "bool",
+          "bool",
+          "bool",
+          "u64"
+        ]
+      },
+      "get_position_health": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::RiskPosition"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
+      },
+      "get_risk_metrics": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::RiskMetrics"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "run_stress_test": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::RiskMetrics",
+          "u8",
+          "vector<u64>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "trigger_circuit_breaker": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::EmergencySystem",
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::CircuitBreaker",
+          "u8",
+          "u64",
+          "u64"
+        ],
+        "return": []
+      },
+      "trigger_liquidation": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::EmergencySystem",
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::RiskPosition",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_risk_metrics": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enhanced_risk::RiskMetrics",
+          "u64",
+          "u64",
+          "u64",
+          "u64"
+        ],
+        "return": []
       }
     },
     "enterprise": {
@@ -702,7 +895,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "assign_validator_pool": {
         "visibility": "PUBLIC",
@@ -713,7 +906,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "bulk_purchase_gas": {
         "visibility": "PUBLIC",
@@ -724,7 +917,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_volume_discount": {
         "visibility": "PRIVATE",
@@ -732,7 +925,10 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u8",
+          "u64"
+        ]
       },
       "create_corporate_account": {
         "visibility": "PUBLIC",
@@ -745,7 +941,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_enterprise_gas_pool": {
         "visibility": "PUBLIC",
@@ -756,7 +952,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_validator_pool": {
         "visibility": "PUBLIC",
@@ -768,7 +964,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "enterprise_gas_purchase": {
         "visibility": "PUBLIC",
@@ -781,7 +977,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_corporate_account_info": {
         "visibility": "PUBLIC",
@@ -789,7 +985,15 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enterprise::CorporateAccount"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "u8",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>"
+        ]
       },
       "get_discount_info": {
         "visibility": "PUBLIC",
@@ -797,7 +1001,61 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u8",
+          "u64"
+        ]
+      },
+      "get_enterprise_stats": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enterprise::EnterpriseRegistry"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_validator_pool_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enterprise::EnterpriseRegistry",
+          "address"
+        ],
+        "return": [
+          "vector<address>",
+          "u64",
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "reset_monthly_budget": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enterprise::CorporateAccount",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_discount_tier": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::enterprise::CorporateAccount",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "gas_futures": {
@@ -809,7 +1067,9 @@
           "u64",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_premium": {
         "visibility": "PRIVATE",
@@ -818,7 +1078,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_contract_info": {
         "visibility": "PUBLIC",
@@ -826,7 +1088,17 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gas_futures::GasFuturesContract"
         ],
-        "return": null
+        "return": [
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u8",
+          "u64",
+          "bool",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<0x0000000000000000000000000000000000000000000000000000000000000002::object::ID>"
+        ]
       },
       "get_oracle_info": {
         "visibility": "PUBLIC",
@@ -834,7 +1106,11 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gas_futures::SuiGasOracle"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u8",
+          "u64"
+        ]
       },
       "get_registry_stats": {
         "visibility": "PUBLIC",
@@ -842,7 +1118,13 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gas_futures::GasFuturesRegistry"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "bool",
+          "bool"
+        ]
       },
       "get_voucher_info": {
         "visibility": "PUBLIC",
@@ -850,7 +1132,14 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gas_futures::GasVoucher"
         ],
-        "return": null
+        "return": [
+          "address",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -858,7 +1147,7 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "purchase_gas_futures": {
         "visibility": "PUBLIC",
@@ -873,7 +1162,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "redeem_gas_credits": {
         "visibility": "PUBLIC",
@@ -884,7 +1173,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "toggle_emergency_mode": {
         "visibility": "PUBLIC",
@@ -893,7 +1182,40 @@
           "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gas_futures::GasFuturesRegistry",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "toggle_physical_delivery": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gas_futures::GasFuturesRegistry",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_gas_oracle": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gas_futures::SuiGasOracle",
+          "u64",
+          "u8",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "use_gas_voucher": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gas_futures::GasFuturesRegistry",
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gas_futures::GasVoucher",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "gfs_governance": {
@@ -908,7 +1230,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "delegate_votes": {
         "visibility": "PUBLIC",
@@ -918,7 +1240,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "execute_proposal": {
         "visibility": "PUBLIC",
@@ -929,7 +1251,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "execute_proposal_action": {
         "visibility": "PRIVATE",
@@ -939,7 +1261,9 @@
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gfs_governance::Proposal",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
       },
       "get_governance_stats": {
         "visibility": "PUBLIC",
@@ -947,7 +1271,12 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gfs_governance::GovernanceRegistry"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
       },
       "get_proposal_status": {
         "visibility": "PUBLIC",
@@ -955,7 +1284,12 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gfs_governance::Proposal"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u8"
+        ]
       },
       "get_voter_info": {
         "visibility": "PUBLIC",
@@ -964,7 +1298,11 @@
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gfs_governance::GovernanceRegistry",
           "address"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -973,7 +1311,7 @@
           "0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gfs_governance::GFS_GOVERNANCE",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "mint_tokens": {
         "visibility": "PUBLIC",
@@ -984,7 +1322,7 @@
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "stake_tokens": {
         "visibility": "PUBLIC",
@@ -996,7 +1334,30 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "unstake_tokens": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gfs_governance::GovernanceRegistry",
+          "0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gfs_governance::StakingPosition",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "vote": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gfs_governance::GovernanceRegistry",
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::gfs_governance::Proposal",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "oracle": {
@@ -1009,7 +1370,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_average_price": {
         "visibility": "PRIVATE",
@@ -1017,7 +1378,9 @@
         "params": [
           "&vector<u64>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_median_price": {
         "visibility": "PRIVATE",
@@ -1025,7 +1388,9 @@
         "params": [
           "&vector<u64>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_price_deviation": {
         "visibility": "PRIVATE",
@@ -1034,7 +1399,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_price_volatility": {
         "visibility": "PRIVATE",
@@ -1042,7 +1409,9 @@
         "params": [
           "&vector<u64>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_twap": {
         "visibility": "PUBLIC",
@@ -1052,7 +1421,9 @@
           "u64",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_weighted_average_price": {
         "visibility": "PRIVATE",
@@ -1061,7 +1432,9 @@
           "&vector<u64>",
           "&vector<u64>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create_aggregated_price": {
         "visibility": "PUBLIC",
@@ -1074,7 +1447,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_oracle": {
         "visibility": "PUBLIC",
@@ -1088,7 +1461,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_ema_price": {
         "visibility": "PUBLIC",
@@ -1096,7 +1469,90 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::oracle::PriceOracle"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_oracle_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::oracle::PriceOracle"
+        ],
+        "return": [
+          "vector<u8>",
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
+      },
+      "get_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::oracle::PriceOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_price_fresh": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::oracle::PriceOracle",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "min_u64": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "sqrt_u64": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "update_price": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::oracle::OracleRegistry",
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::oracle::PriceOracle",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     },
     "risk_management": {
@@ -1109,7 +1565,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "assess_risk_level": {
         "visibility": "PRIVATE",
@@ -1117,7 +1573,9 @@
         "params": [
           "u64"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "calculate_health_factor": {
         "visibility": "PRIVATE",
@@ -1126,7 +1584,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_liquidation_price": {
         "visibility": "PRIVATE",
@@ -1135,7 +1595,9 @@
           "u64",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "create_risk_position": {
         "visibility": "PUBLIC",
@@ -1147,7 +1609,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit_insurance": {
         "visibility": "PUBLIC",
@@ -1157,7 +1619,7 @@
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_insurance_fund_balance": {
         "visibility": "PUBLIC",
@@ -1165,7 +1627,9 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::risk_management::InsuranceFund"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_position_info": {
         "visibility": "PUBLIC",
@@ -1173,7 +1637,14 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::risk_management::RiskPosition"
         ],
-        "return": null
+        "return": [
+          "address",
+          "u64",
+          "u64",
+          "u8",
+          "u64",
+          "u64"
+        ]
       },
       "get_system_health": {
         "visibility": "PUBLIC",
@@ -1181,7 +1652,10 @@
         "params": [
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::risk_management::RiskRegistry"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "bool"
+        ]
       },
       "init": {
         "visibility": "PRIVATE",
@@ -1189,7 +1663,40 @@
         "params": [
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "liquidate_position": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::risk_management::RiskRegistry",
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::risk_management::InsuranceFund",
+          "0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::risk_management::RiskPosition",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_risk_assessment": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::risk_management::RiskRegistry",
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::risk_management::RiskPosition",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_system_health": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::risk_management::RiskRegistry"
+        ],
+        "return": []
       }
     },
     "yield_farming": {
@@ -1203,7 +1710,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "calculate_accumulated_rewards": {
         "visibility": "PRIVATE",
@@ -1213,7 +1720,9 @@
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::GasYieldPool",
           "u64"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_current_apy": {
         "visibility": "PUBLIC",
@@ -1222,7 +1731,9 @@
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::GasYieldPool",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_expected_rewards": {
         "visibility": "PRIVATE",
@@ -1233,7 +1744,9 @@
           "u64",
           "u8"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "calculate_volume_tier": {
         "visibility": "PRIVATE",
@@ -1242,7 +1755,9 @@
           "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::YieldFarmingRegistry",
           "address"
         ],
-        "return": null
+        "return": [
+          "u8"
+        ]
       },
       "claim_rewards": {
         "visibility": "PUBLIC",
@@ -1253,7 +1768,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_compound_strategy": {
         "visibility": "PUBLIC",
@@ -1266,7 +1781,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_cross_chain_yield": {
         "visibility": "PUBLIC",
@@ -1280,7 +1795,7 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_liquidity_reward": {
         "visibility": "PUBLIC",
@@ -1293,7 +1808,7 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_yield_pool": {
         "visibility": "PUBLIC",
@@ -1308,7 +1823,111 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
+      },
+      "emergency_withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::GasYieldPool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_cross_chain_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::CrossChainYield"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u8",
+          "u64",
+          "bool"
+        ]
+      },
+      "get_farming_stats": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::YieldFarmingRegistry"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64"
+        ]
+      },
+      "get_pool_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::GasYieldPool"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "bool"
+        ]
+      },
+      "get_stake_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::GasYieldPool",
+          "address"
+        ],
+        "return": [
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u8",
+          "bool"
+        ]
+      },
+      "get_strategy_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::CompoundStrategy"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u64>",
+          "vector<u64>",
+          "u64",
+          "address"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "stake_gas_credits": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::YieldFarmingRegistry",
+          "&mut 0xee538ee4fa58b4447852f40328962a61693fe7baea92c6240fac0f7970d06839::yield_farming::GasYieldPool",
+          "u64",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
       }
     }
   }

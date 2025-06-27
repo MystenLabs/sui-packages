@@ -77,16 +77,16 @@
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::TreasuryCap<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "deposit": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<$0>",
+          "&mut 0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<T0>",
           "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>",
           "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
           "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
@@ -94,7 +94,9 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
       },
       "get_deep_price": {
         "visibility": "PRIVATE",
@@ -103,7 +105,9 @@
           "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "get_sui_price": {
         "visibility": "PRIVATE",
@@ -112,19 +116,27 @@
           "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "get_total_value": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<$0>",
+          "&0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<T0>",
           "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
           "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
           "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u256",
+          "u256",
+          "u256",
+          "u256",
+          "u64"
+        ]
       },
       "get_usdc_price": {
         "visibility": "PRIVATE",
@@ -133,42 +145,92 @@
           "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
         ],
-        "return": null
+        "return": [
+          "u256"
+        ]
       },
       "get_user_balance_manager": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<$0>",
+          "&mut 0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<T0>",
           "address"
         ],
-        "return": null
+        "return": [
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager"
+        ]
       },
       "get_user_trade_cap": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&mut 0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<$0>",
+          "&mut 0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<T0>",
           "address"
         ],
-        "return": null
+        "return": [
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::TradeCap"
+        ]
       },
       "get_vault_balance": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<$0>"
+          "&0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<T0>"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "is_user_registered": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<$0>",
+          "&0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<T0>",
           "address"
         ],
-        "return": null
+        "return": [
+          "bool"
+        ]
+      },
+      "normalize_price": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::I64",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::I64"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "take_bm": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<T0>",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::TradeCap",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::DepositCap",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::WithdrawCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "withdraw": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xe6e6eef1bb9d6e4c1e5ca3fb45f47baed8405cb0c5986d573cc229dd0fa6eae7::mm_vault::Vault<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>"
+        ]
       }
     },
     "strategy": {
@@ -178,7 +240,7 @@
         "params": [
           "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager",
           "&0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::TradeProof",
-          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<$0, $1>",
+          "&mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>",
           "u64",
           "u64",
           "u8",
@@ -188,7 +250,10 @@
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order_info::OrderInfo",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order_info::OrderInfo"
+        ]
       }
     }
   }

@@ -79,41 +79,41 @@
           "u64",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "cancel_game": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::Game<$0>",
+          "0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::Game<T0>",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "create_game": {
         "visibility": "PUBLIC",
         "is_entry": true,
         "params": [
-          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "bool",
           "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig",
           "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "execute_secure_game": {
         "visibility": "PRIVATE",
         "is_entry": false,
         "params": [
-          "0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::Game<$0>",
-          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<$0>",
+          "0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::Game<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
           "address",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::random::RandomGenerator",
           "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig",
           "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
         ],
-        "return": null
+        "return": []
       },
       "get_fee_percentage": {
         "visibility": "PUBLIC",
@@ -121,15 +121,22 @@
         "params": [
           "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_game_info": {
         "visibility": "PUBLIC",
         "is_entry": false,
         "params": [
-          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::Game<$0>"
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::Game<T0>"
         ],
-        "return": null
+        "return": [
+          "address",
+          "u64",
+          "bool",
+          "u64"
+        ]
       },
       "get_max_games_per_transaction": {
         "visibility": "PUBLIC",
@@ -137,7 +144,9 @@
         "params": [
           "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig"
         ],
-        "return": null
+        "return": [
+          "u64"
+        ]
       },
       "get_token_bet_limits": {
         "visibility": "PUBLIC",
@@ -145,7 +154,10 @@
         "params": [
           "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig"
         ],
-        "return": null
+        "return": [
+          "u64",
+          "u64"
+        ]
       },
       "get_token_config": {
         "visibility": "PUBLIC",
@@ -153,7 +165,11 @@
         "params": [
           "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig"
         ],
-        "return": null
+        "return": [
+          "bool",
+          "u64",
+          "u64"
+        ]
       },
       "get_treasury_address": {
         "visibility": "PUBLIC",
@@ -161,7 +177,146 @@
         "params": [
           "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig"
         ],
-        "return": null
+        "return": [
+          "address"
+        ]
+      },
+      "get_whitelisted_tokens": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig"
+        ],
+        "return": [
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<0x0000000000000000000000000000000000000000000000000000000000000001::type_name::TypeName, 0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::TokenConfig>"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::COIN_FLIP",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_contract_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_token_whitelisted": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "join_games": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "vector<0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::Game<T0>>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "remove_whitelisted_token": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::AdminCap",
+          "&mut 0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_pause_state": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::AdminCap",
+          "&mut 0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_token_enabled": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::AdminCap",
+          "&mut 0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig",
+          "bool",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_fee_percentage": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::AdminCap",
+          "&mut 0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_max_games_per_transaction": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::AdminCap",
+          "&mut 0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_token_limits": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::AdminCap",
+          "&mut 0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_treasury_address": {
+        "visibility": "PUBLIC",
+        "is_entry": true,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::AdminCap",
+          "&mut 0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_admin_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::AdminCap",
+          "&0xe6b037ee4c4bdd67639ec090eb2fe47fd0a363106e66caf612e89f493d9001dc::coin_flip::GameConfig"
+        ],
+        "return": []
       }
     }
   }
