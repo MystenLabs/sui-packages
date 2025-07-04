@@ -1,0 +1,558 @@
+{
+  "package_id": "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ]
+      }
+    },
+    {
+      "module_name": "fee",
+      "call_graph": {
+        "calculate_deep_reserves_coverage_order_fee": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::mul"
+        ],
+        "calculate_fee_by_rate": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::mul"
+        ],
+        "calculate_full_order_fee": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_deep_reserves_coverage_order_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_protocol_fee"
+        ],
+        "calculate_input_coin_deepbook_fee": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_fee_by_rate",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::mul",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::fee_penalty_multiplier"
+        ],
+        "calculate_input_coin_protocol_fee": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_fee_by_rate",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::mul"
+        ],
+        "calculate_protocol_fee": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::mul"
+        ],
+        "charge_swap_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::balance_mut",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_fee_by_rate"
+        ],
+        "estimate_full_fee_limit": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::estimate_full_order_fee_core",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::calculate_deep_required",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_sui_per_deep",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::whitelisted"
+        ],
+        "estimate_full_fee_market": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::estimate_full_order_fee_core",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::calculate_market_order_params",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_sui_per_deep",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::whitelisted"
+        ],
+        "estimate_full_order_fee_core": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_full_order_fee"
+        ]
+      }
+    },
+    {
+      "module_name": "helper",
+      "call_graph": {
+        "apply_slippage": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::mul"
+        ],
+        "calculate_deep_required": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_order_deep_required",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::whitelisted"
+        ],
+        "calculate_market_order_params": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_quantity_out",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::pool_book_params"
+        ],
+        "calculate_order_amount": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::mul"
+        ],
+        "current_version": [],
+        "get_fee_bps": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::pool_trade_params"
+        ],
+        "get_order_deep_price_params": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::deep_price::asset_is_base",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::deep_price::deep_per_asset",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_order_deep_price"
+        ],
+        "get_pool_first_ask_price": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::is_empty",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_level2_ticks_from_mid"
+        ],
+        "get_sui_per_deep": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_sui_per_deep_from_oracle",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_sui_per_deep_from_reference_pool"
+        ],
+        "get_sui_per_deep_from_oracle": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::u64::pow",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::div",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::oracle::deep_price_feed_id",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::oracle::get_pyth_price",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::oracle::sui_price_feed_id",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_is_negative",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_negative",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_positive",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_expo",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_price",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::get_bytes"
+        ],
+        "get_sui_per_deep_from_reference_pool": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_pool_first_ask_price",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::div",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::registered_pool",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::whitelisted"
+        ],
+        "transfer_if_nonzero": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer"
+        ],
+        "validate_slippage": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::float_scaling"
+        ]
+      }
+    },
+    {
+      "module_name": "math",
+      "call_graph": {
+        "div": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::div_internal"
+        ],
+        "div_internal": [],
+        "mul": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::math::mul_internal"
+        ],
+        "mul_internal": []
+      }
+    },
+    {
+      "module_name": "multisig",
+      "call_graph": {
+        "address_from_bytes": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::address::from_bytes",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hash::blake2b256"
+        ],
+        "check_if_sender_is_multisig_address": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::check_multisig_address_eq"
+        ],
+        "check_multisig_address_eq": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::derive_multisig_address_quiet"
+        ],
+        "derive_multisig_address": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::derive_multisig_address_quiet"
+        ],
+        "derive_multisig_address_quiet": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::append",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::address::from_bytes",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bcs::to_bytes",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hash::blake2b256"
+        ],
+        "ed25519_key_to_address": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::address_from_bytes"
+        ],
+        "secp256k1_key_to_address": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::address_from_bytes"
+        ],
+        "secp256r1_key_to_address": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::address_from_bytes"
+        ]
+      }
+    },
+    {
+      "module_name": "oracle",
+      "call_graph": {
+        "deep_price_feed_id": [],
+        "get_pyth_price": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_positive",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_conf",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_price",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_timestamp",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_feed::get_price",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_feed::get_price_identifier",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_feed",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_info_from_price_info_object"
+        ],
+        "sui_price_feed_id": []
+      }
+    },
+    {
+      "module_name": "order",
+      "call_graph": {
+        "create_empty_fee_plan": [],
+        "create_empty_input_coin_fee_plan": [],
+        "create_input_fee_order_core": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_input_coin_deepbook_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::get_input_coin_deposit_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::get_input_coin_fee_plan"
+        ],
+        "create_limit_order": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::calculate_deep_required",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::calculate_order_amount",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::prepare_order_execution",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_limit_order"
+        ],
+        "create_limit_order_input_fee": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::calculate_order_amount",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::prepare_input_fee_order_execution",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_limit_order",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::pool_trade_params"
+        ],
+        "create_limit_order_whitelisted": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::calculate_order_amount",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::prepare_whitelisted_order_execution",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_limit_order"
+        ],
+        "create_market_order": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::calculate_market_order_params",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::prepare_order_execution",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_market_order"
+        ],
+        "create_market_order_input_fee": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::calculate_market_order_params",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::prepare_input_fee_order_execution",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_market_order",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::pool_trade_params"
+        ],
+        "create_market_order_whitelisted": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::calculate_market_order_params",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::prepare_whitelisted_order_execution",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_market_order"
+        ],
+        "create_order_core": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::get_deep_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::get_fee_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::get_input_coin_deposit_plan"
+        ],
+        "execute_deep_plan": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::split_deep_reserves",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::deposit"
+        ],
+        "execute_fee_plan": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::balance_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join_deep_reserves_coverage_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join_protocol_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::withdraw"
+        ],
+        "execute_input_coin_deposit_plan": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::deposit"
+        ],
+        "execute_input_coin_fee_plan": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::balance_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join_protocol_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::withdraw"
+        ],
+        "get_deep_plan": [],
+        "get_fee_plan": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_full_order_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::insufficient_fee_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::plan_fee_collection",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::zero_fee_plan"
+        ],
+        "get_input_coin_deposit_plan": [],
+        "get_input_coin_fee_plan": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_input_coin_protocol_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::insufficient_input_coin_fee_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::plan_fee_collection",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::zero_input_coin_fee_plan"
+        ],
+        "insufficient_fee_plan": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::create_empty_fee_plan"
+        ],
+        "insufficient_input_coin_fee_plan": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::create_empty_input_coin_fee_plan"
+        ],
+        "plan_fee_collection": [],
+        "prepare_input_fee_order_execution": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::transfer_if_nonzero",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::create_input_fee_order_core",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::execute_input_coin_deposit_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::execute_input_coin_fee_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::balance",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::generate_proof_as_owner",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::owner",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::whitelisted"
+        ],
+        "prepare_order_execution": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_sui_per_deep",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::transfer_if_nonzero",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::validate_slippage",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::create_order_core",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::execute_deep_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::execute_fee_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::execute_input_coin_deposit_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::validate_fees_against_max",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::deep_reserves",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::balance",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::generate_proof_as_owner",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::owner",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::whitelisted"
+        ],
+        "prepare_whitelisted_order_execution": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::transfer_if_nonzero",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::execute_input_coin_deposit_plan",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::get_input_coin_deposit_plan",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::balance",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::generate_proof_as_owner",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::owner"
+        ],
+        "validate_fees_against_max": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_full_order_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::apply_slippage"
+        ],
+        "zero_fee_plan": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::create_empty_fee_plan"
+        ],
+        "zero_input_coin_fee_plan": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::order::create_empty_input_coin_fee_plan"
+        ]
+      }
+    },
+    {
+      "module_name": "pool",
+      "call_graph": {
+        "create_permissionless_pool": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::transfer_if_nonzero",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join_protocol_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::pool_creation_fee",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::create_permissionless_pool"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object"
+        ],
+        "pool_creation_protocol_fee": [],
+        "update_pool_creation_protocol_fee": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::check_if_sender_is_multisig_address",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::destroy_ticket",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::update_pool_creation_protocol_fee_ticket_type",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::validate_ticket"
+        ]
+      }
+    },
+    {
+      "module_name": "swap",
+      "call_graph": {
+        "apply_wrapper_fees": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::calculate_fee_by_rate",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_fee_bps"
+        ],
+        "get_quantity_out": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::swap::apply_wrapper_fees",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_quantity_out"
+        ],
+        "get_quantity_out_input_fee": [
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::swap::apply_wrapper_fees",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_quantity_out_input_fee"
+        ],
+        "swap_exact_base_for_quote": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::charge_swap_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_fee_bps",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::swap::validate_minimum_output",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join_deep_reserves_coverage_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::split_deep_reserves",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_quote_quantity_out",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::swap_exact_quantity",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::whitelisted"
+        ],
+        "swap_exact_base_for_quote_input_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::charge_swap_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_fee_bps",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::swap::validate_minimum_output",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join_protocol_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::swap_exact_quantity"
+        ],
+        "swap_exact_quote_for_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::charge_swap_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_fee_bps",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::swap::validate_minimum_output",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join_deep_reserves_coverage_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::split_deep_reserves",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_base_quantity_out",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::swap_exact_quantity",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::whitelisted"
+        ],
+        "swap_exact_quote_for_base_input_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::fee::charge_swap_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::get_fee_bps",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::swap::validate_minimum_output",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::join_protocol_fee",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version",
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::swap_exact_quantity"
+        ],
+        "validate_minimum_output": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value"
+        ]
+      }
+    },
+    {
+      "module_name": "wrapper",
+      "call_graph": {
+        "create_ticket": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_inner",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::check_if_sender_is_multisig_address"
+        ],
+        "deep_reserves": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "destroy_ticket": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::delete"
+        ],
+        "disable_version": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::remove",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::current_version",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::check_if_sender_is_multisig_address"
+        ],
+        "enable_version": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::insert",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::check_if_sender_is_multisig_address"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::singleton",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::current_version"
+        ],
+        "is_ticket_expired": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms"
+        ],
+        "is_ticket_ready": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms"
+        ],
+        "join": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version"
+        ],
+        "join_deep_reserves_coverage_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version"
+        ],
+        "join_protocol_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version"
+        ],
+        "split_deep_reserves": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version"
+        ],
+        "update_pool_creation_protocol_fee_ticket_type": [],
+        "validate_ticket": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::is_ticket_expired",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::is_ticket_ready"
+        ],
+        "verify_version": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_set::contains",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::helper::current_version"
+        ],
+        "withdraw_coverage_fee_ticket_type": [],
+        "withdraw_deep_reserves": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::check_if_sender_is_multisig_address",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::destroy_ticket",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::validate_ticket",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version"
+        ],
+        "withdraw_deep_reserves_coverage_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::withdraw_all",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::check_if_sender_is_multisig_address",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::destroy_ticket",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::validate_ticket",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version"
+        ],
+        "withdraw_deep_reserves_ticket_type": [],
+        "withdraw_protocol_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::withdraw_all",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::multisig::check_if_sender_is_multisig_address",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::destroy_ticket",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::validate_ticket",
+          "0x09f09f3a9fb7411ca3836f146bbc6012c8823059f020307f99cf1ff057f55fb2::wrapper::verify_version"
+        ],
+        "withdraw_protocol_fee_ticket_type": []
+      }
+    }
+  ]
+}
