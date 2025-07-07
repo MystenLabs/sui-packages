@@ -7,5 +7,5 @@ pub struct MovePackageWithMetadata {
     pub epoch: u64,
     pub checkpoint: u64,
     pub transaction_digest: String,
-    pub sender: String,
+    pub sender: Option<String>,
 }

@@ -45,7 +45,7 @@ pub struct PackageBcsWithCreationInfo {
     #[serde(rename = "TRANSACTION_DIGEST")]
     pub transaction_digest: String,
     #[serde(rename = "SENDER")]
-    pub sender: String,
+    pub sender: Option<String>,
 }
 
 impl Into<MovePackageWithMetadata> for PackageBcsWithCreationInfo {
@@ -57,7 +57,7 @@ impl Into<MovePackageWithMetadata> for PackageBcsWithCreationInfo {
             epoch: self.epoch,
             checkpoint: self.checkpoint,
             transaction_digest: self.transaction_digest,
-            sender: self.sender,
+            sender: self.sender.clone(),
         }
     }
 }

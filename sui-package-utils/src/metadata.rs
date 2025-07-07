@@ -10,7 +10,7 @@ pub struct PackageMetadata {
     pub id: String,
     pub original_package_id: String,
     pub version: u64,
-    pub sender: String,
+    pub sender: Option<String>,
     pub transaction_digest: String,
     pub checkpoint: u64,
 }
@@ -24,7 +24,7 @@ impl From<&MovePackageWithMetadata> for PackageMetadata {
                 .original_package_id()
                 .to_canonical_string(true),
             version: pkg_with_metadata.package.version().value(),
-            sender: pkg_with_metadata.sender.to_string(),
+            sender: pkg_with_metadata.sender.clone(),
             transaction_digest: pkg_with_metadata.transaction_digest.to_string(),
             checkpoint: pkg_with_metadata.checkpoint,
         }
@@ -39,7 +39,7 @@ pub fn move_package_to_metadata_json(
         id: pkg.id().to_canonical_string(true),
         original_package_id: pkg.original_package_id().to_canonical_string(true),
         version: pkg.version().value(),
-        sender: record.sender.to_string(),
+        sender: record.sender.clone(),
         transaction_digest: record.transaction_digest.to_string(),
         checkpoint: record.checkpoint,
     };

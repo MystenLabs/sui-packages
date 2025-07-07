@@ -115,9 +115,6 @@ impl TryInto<MovePackageWithMetadata> for PackageGraphQLResponseNode {
         let previous_transaction_block = self.previous_transaction_block.unwrap();
 
         let sender = previous_transaction_block.sender.map(|s| s.address.clone());
-        if sender.is_none() {
-            return Err(GraphQLFetcherError::SenderNotAvailable(address));
-        }
         let transaction_digest = previous_transaction_block.digest.clone();
         let checkpoint = previous_transaction_block
             .effects
@@ -136,7 +133,7 @@ impl TryInto<MovePackageWithMetadata> for PackageGraphQLResponseNode {
             epoch,
             checkpoint,
             transaction_digest,
-            sender: sender.unwrap(), // safe (checked above)
+            sender: sender.clone(),
         })
     }
 }
@@ -216,20 +213,9 @@ impl PackageGraphQLFetcher {
                 self.has_next_page = data.packages.page_info.has_next_page;
                 self.cursor = data.packages.page_info.end_cursor;
                 for node in data.packages.nodes {
-                    let pkg_with_metadata: Result<MovePackageWithMetadata, GraphQLFetcherError> = node.try_into();
-                    match pkg_with_metadata {
-                        Ok(pkg_with_metadata) => {
-                          println!("Fetched package: {}", pkg_with_metadata.package.id().to_string());
-                          packages.push(pkg_with_metadata);
-                        },
-                        Err(e) => {
-                            if let GraphQLFetcherError::SenderNotAvailable(_address) = e {
-                                // skip framework packages
-                            } else {
-                                return Err(e);
-                            }
-                        }
-                    }
+                    let pkg_with_metadata: MovePackageWithMetadata = node.try_into()?;
+                    println!("Fetched package: {}", pkg_with_metadata.package.id().to_string());
+                    packages.push(pkg_with_metadata);
                 }
             } else {
                 if let Some(errors) = res.errors {
@@ -256,20 +242,9 @@ impl PackageGraphQLFetcher {
             serde_json::from_reader(reader).map_err(GraphQLFetcherError::BadResponseError)?;
         let mut packages = Vec::new();
         for node in res.data.unwrap().packages.nodes {
-            let pkg_with_metadata: Result<MovePackageWithMetadata, GraphQLFetcherError> = node.try_into();
-            match pkg_with_metadata {
-                Ok(pkg_with_metadata) => {
-                  println!("Fetched package: {}", pkg_with_metadata.package.id().to_string());
-                  packages.push(pkg_with_metadata);
-                },
-                Err(e) => {
-                    if let GraphQLFetcherError::SenderNotAvailable(_address) = e {
-                        // skip framework packages
-                    } else {
-                        return Err(e);
-                    }
-                }
-            }
+            let pkg_with_metadata: MovePackageWithMetadata = node.try_into()?;
+            println!("Fetched package: {}", pkg_with_metadata.package.id().to_string());
+            packages.push(pkg_with_metadata);
         }
         Ok(packages)
     }
@@ -289,6 +264,4 @@ pub enum GraphQLFetcherError {
     PreviousTransactionBlockNotAvailable(String),
     #[error("Failed to deserialize package for package id {0}")]
     PackageBcsDeserializeError(String),
-    #[error("Sender not available. Likely framework package; {0}")]
-    SenderNotAvailable(String),
 }
