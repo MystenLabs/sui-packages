@@ -10,7 +10,6 @@ select
   pkg.package_id,
   pkg.package_version,
   pkg.checkpoint,
-  pkg.epoch,
   pkg.bcs,
   pkg.transaction_digest,
   tp.sender
@@ -38,8 +37,6 @@ pub struct PackageBcsWithCreationInfo {
     pub package_version: u64,
     #[serde(rename = "CHECKPOINT")]
     pub checkpoint: u64,
-    #[serde(rename = "EPOCH")]
-    pub epoch: u64,
     #[serde(rename = "BCS")]
     pub bcs: String,
     #[serde(rename = "TRANSACTION_DIGEST")]
@@ -54,7 +51,6 @@ impl Into<MovePackageWithMetadata> for PackageBcsWithCreationInfo {
         let pkg: MovePackage = bcs::from_bytes(&bytes).unwrap();
         MovePackageWithMetadata {
             package: pkg,
-            epoch: self.epoch,
             checkpoint: self.checkpoint,
             transaction_digest: self.transaction_digest,
             sender: self.sender.clone(),

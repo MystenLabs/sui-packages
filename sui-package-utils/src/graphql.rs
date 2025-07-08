@@ -7,6 +7,9 @@ use thiserror::Error;
 use sui_types::move_package::MovePackage;
 
 use crate::common_types::MovePackageWithMetadata;
+use crate::json_rpc::{
+    get_package_creation_transaction, get_transaction_metadata, TransactionMetadata,
+};
 
 const GRAPHQL_QUERY: &str = r#"
 query($cursor: String, $afterCheckpoint: UInt53) {
@@ -69,6 +72,19 @@ struct PackageGraphQLResponse {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+struct SinglePackageGraphQLResponse {
+    data: Option<SinglePackageGraphQLResponseData>,
+    errors: Option<Vec<PackageGraphQLResponseError>>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct SinglePackageGraphQLResponseData {
+    package: PackageGraphQLResponseNode,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 struct PackageGraphQLResponseError {
     message: String,
 }
@@ -105,23 +121,29 @@ impl TryInto<MovePackageWithMetadata> for PackageGraphQLResponseNode {
     type Error = GraphQLFetcherError;
     fn try_into(self) -> Result<MovePackageWithMetadata, Self::Error> {
         let address = self.address.clone();
-        if self.previous_transaction_block.is_none() {
-            return Err(GraphQLFetcherError::PreviousTransactionBlockNotAvailable(
-                address,
-            ));
-        }
+        let (sender, transaction_digest, checkpoint) =
+            if let Some(previous_transaction_block) = self.previous_transaction_block {
+                (
+                    previous_transaction_block.sender.map(|s| s.address.clone()),
+                    previous_transaction_block.digest.clone(),
+                    previous_transaction_block
+                        .effects
+                        .checkpoint
+                        .sequence_number,
+                )
+            } else {
+                let transaction_digest = get_package_creation_transaction(&address)
+                    .map_err(|_| GraphQLFetcherError::PreviousTransactionBlockNotAvailable(address.clone()))?;
+                let transaction_metadata: TransactionMetadata =
+                    get_transaction_metadata(&transaction_digest)
+                        .map_err(|_| GraphQLFetcherError::PreviousTransactionBlockNotAvailable(address.clone()))?;
+                (
+                    Some(transaction_metadata.sender),
+                    transaction_digest,
+                    transaction_metadata.checkpoint,
+                )
+            };
 
-        // safe: just checked that it's not none
-        let previous_transaction_block = self.previous_transaction_block.unwrap();
-
-        let sender = previous_transaction_block.sender.map(|s| s.address.clone());
-        let transaction_digest = previous_transaction_block.digest.clone();
-        let checkpoint = previous_transaction_block
-            .effects
-            .checkpoint
-            .sequence_number;
-
-        let epoch = previous_transaction_block.effects.checkpoint.epoch.epoch_id;
 
         let package_bcs = BASE64_STANDARD
             .decode(&self.package_bcs)
@@ -130,7 +152,6 @@ impl TryInto<MovePackageWithMetadata> for PackageGraphQLResponseNode {
             .map_err(|_e| GraphQLFetcherError::PackageBcsDeserializeError(self.address.clone()))?;
         Ok(MovePackageWithMetadata {
             package,
-            epoch,
             checkpoint,
             transaction_digest,
             sender: sender.clone(),
@@ -214,7 +235,10 @@ impl PackageGraphQLFetcher {
                 self.cursor = data.packages.page_info.end_cursor;
                 for node in data.packages.nodes {
                     let pkg_with_metadata: MovePackageWithMetadata = node.try_into()?;
-                    println!("Fetched package: {}", pkg_with_metadata.package.id().to_string());
+                    println!(
+                        "Fetched package: {}",
+                        pkg_with_metadata.package.id().to_string()
+                    );
                     packages.push(pkg_with_metadata);
                 }
             } else {
@@ -232,6 +256,86 @@ impl PackageGraphQLFetcher {
         Ok(packages)
     }
 
+    pub fn fetch_single_package(
+        address: &str,
+    ) -> Result<MovePackageWithMetadata, GraphQLFetcherError> {
+        const SINGLE_PACKAGE_QUERY: &str = r#"query($address: SuiAddress!) {
+            package(address: $address) {
+              address
+              version
+              packageBcs
+              previousTransactionBlock {
+                digest
+                sender {
+                  address
+                }
+                effects {
+                  checkpoint {
+                    sequenceNumber
+                    epoch {
+                      epochId
+                    }
+                  }
+                }
+              }
+            }
+          }"#;
+
+        let client = reqwest::blocking::Client::new();
+        #[derive(Debug, Deserialize, Serialize)]
+        #[serde(rename_all = "camelCase")]
+        struct SinglePackageGraphQLVariables {
+            address: String,
+        }
+        #[derive(Debug, Deserialize, Serialize)]
+        #[serde(rename_all = "camelCase")]
+        struct SinglePackageGraphQLRequest {
+            query: String,
+            variables: SinglePackageGraphQLVariables,
+        }
+        let body = SinglePackageGraphQLRequest {
+            query: SINGLE_PACKAGE_QUERY.to_string(),
+            variables: SinglePackageGraphQLVariables {
+                address: address.to_string(),
+            },
+        };
+        let http_res = client
+            .post("https://sui-mainnet.mystenlabs.com/graphql")
+            .header("Content-Type", "application/json")
+            .header(
+                "User-Agent",
+                "sui-packages: https://github.com/MystenLabs/sui-packages",
+            )
+            .json(&body)
+            .send()
+            .map_err(GraphQLFetcherError::ReqwestError)?;
+        let res_text = http_res.text().map_err(GraphQLFetcherError::ReqwestError)?;
+        let res: SinglePackageGraphQLResponse =
+            serde_json::from_str(&res_text).map_err(GraphQLFetcherError::BadResponseError)?;
+        if let Some(errors) = res.errors {
+            return Err(GraphQLFetcherError::GraphQLError(
+                errors
+                    .iter()
+                    .map(|e| e.message.clone())
+                    .collect::<Vec<String>>()
+                    .join(", "),
+            ));
+        }
+        if res.data.is_none() {
+            return Err(GraphQLFetcherError::GraphQLError(
+                "No data returned".to_string(),
+            ));
+        }
+        let data = res.data.unwrap();
+        let package = data.package;
+        let pkg_with_metadata: MovePackageWithMetadata = package.try_into()?;
+        println!(
+            "Fetched package: {}",
+            pkg_with_metadata.package.id().to_string()
+        );
+        Ok(pkg_with_metadata)
+    }
+
     pub fn parse_from_file(
         file_path: &str,
     ) -> Result<Vec<MovePackageWithMetadata>, GraphQLFetcherError> {
@@ -243,7 +347,10 @@ impl PackageGraphQLFetcher {
         let mut packages = Vec::new();
         for node in res.data.unwrap().packages.nodes {
             let pkg_with_metadata: MovePackageWithMetadata = node.try_into()?;
-            println!("Fetched package: {}", pkg_with_metadata.package.id().to_string());
+            println!(
+                "Fetched package: {}",
+                pkg_with_metadata.package.id().to_string()
+            );
             packages.push(pkg_with_metadata);
         }
         Ok(packages)
