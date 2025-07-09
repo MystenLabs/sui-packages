@@ -1,0 +1,122 @@
+{
+  "package_id": "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "get_address": []
+      }
+    },
+    {
+      "module_name": "asserts",
+      "call_graph": {
+        "address_is_whitelisted": [],
+        "loan_amount": [
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::get_coin_amount"
+        ],
+        "payout_amount": [
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::get_coin_amount"
+        ],
+        "profit_amount": [
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::get_coin_amount"
+        ],
+        "sender_is_admin": [
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::admin::get_address",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::get_sender"
+        ],
+        "sender_is_whitelisted": [],
+        "total_amount": [
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::get_coin_amount"
+        ]
+      }
+    },
+    {
+      "module_name": "datastore",
+      "call_graph": {
+        "add_to_whitelist": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::asserts::sender_is_admin",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::datastore::is_whitelisted"
+        ],
+        "create_config": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::asserts::sender_is_admin"
+        ],
+        "is_whitelisted": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "remove_from_whitelist": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::remove",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::asserts::address_is_whitelisted",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::asserts::sender_is_admin",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::datastore::is_whitelisted"
+        ]
+      }
+    },
+    {
+      "module_name": "tools",
+      "call_graph": {
+        "destroy_zero": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero"
+        ],
+        "get_coin_amount": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value"
+        ],
+        "get_coin_vec": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::singleton"
+        ],
+        "get_deadline": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms"
+        ],
+        "get_sender": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "join_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join"
+        ],
+        "send_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer"
+        ],
+        "split_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split"
+        ],
+        "zero": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero"
+        ]
+      }
+    },
+    {
+      "module_name": "version",
+      "call_graph": {
+        "emit_version": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ]
+      }
+    },
+    {
+      "module_name": "wallet",
+      "call_graph": {
+        "create_vault": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::asserts::sender_is_admin",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::zero"
+        ],
+        "deposit_or_destroy": [
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::destroy_zero",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::get_coin_amount",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::join_coin"
+        ],
+        "withdraw_all": [
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::admin::get_address",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::asserts::payout_amount",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::asserts::sender_is_admin",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::send_coin",
+          "0x50a1de188351ebcd5264ba1439d2f8ed5286aeebb70096d1276ce1eaabf80425::tools::split_coin"
+        ]
+      }
+    }
+  ]
+}
