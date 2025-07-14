@@ -1,0 +1,385 @@
+module 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::battle {
+    public fun borrow_current_attack_count(arg0: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::PlayerBattleStats, arg1: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::SystemConfig, arg2: &0x2::clock::Clock) : (u64, u64, u64) {
+        let v0 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_player_battle_stats(arg0);
+        let v1 = *0x1::vector::borrow<u64>(&v0, 0);
+        let (_, _, v4, _, _, _, _, _, _, _, _) = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::borrow_system_config(arg1);
+        let v13 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_player_battle_stats(arg0);
+        let v14 = *0x1::vector::borrow<u64>(&v13, 1);
+        let v15 = (0x2::clock::timestamp_ms(arg2) - v14) / v4;
+        let v16 = if (v15 > v1) {
+            0
+        } else {
+            v1 - v15
+        };
+        (v16, v15 * v4, v14 + v15 * v4 + v4)
+    }
+
+    fun calculate_damage(arg0: u128, arg1: u128, arg2: &0x2::random::Random, arg3: &mut 0x2::tx_context::TxContext) : 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::Damage {
+        let v0 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::roll_dice(6, arg2, arg3);
+        let v1 = if (v0 >= 5) {
+            arg1 * 2
+        } else if (v0 == 2) {
+            arg1 / 2
+        } else if (v0 == 1) {
+            0
+        } else {
+            arg1
+        };
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::new_damage(v1 * arg0 / 1 * 0x1::u128::pow(2, 64), v0)
+    }
+
+    public(friend) fun generate_bot_defenses(arg0: &0x2::random::Random, arg1: u128, arg2: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::PlayerBattleStats, arg3: &mut 0x2::tx_context::TxContext) : vector<0x1::string::String> {
+        let v0 = 0x2::random::new_generator(arg0, arg3);
+        let v1 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_player_battle_stats(arg2);
+        let v2 = *0x1::vector::borrow<u64>(&v1, 4);
+        let v3 = if (v2 >= 5) {
+            50
+        } else if (v2 >= 3) {
+            60
+        } else if (v2 >= 2) {
+            70
+        } else {
+            100
+        };
+        let v4 = if (arg1 < 3) {
+            let v5 = 0x1::vector::empty<0x1::string::String>();
+            0x1::vector::push_back<0x1::string::String>(&mut v5, 0x1::string::utf8(b"henchman"));
+            get_gangster_vector(v5, vector[1])
+        } else if (arg1 < 8) {
+            let v6 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage(((3 + 0x2::random::generate_u8_in_range(&mut v0, 0, 1)) as u128), v3);
+            let v7 = if (v6 == 0) {
+                1
+            } else {
+                v6
+            };
+            let v8 = 0x1::vector::empty<0x1::string::String>();
+            0x1::vector::push_back<0x1::string::String>(&mut v8, 0x1::string::utf8(b"henchman"));
+            let v9 = 0x1::vector::empty<u128>();
+            0x1::vector::push_back<u128>(&mut v9, v7);
+            get_gangster_vector(v8, v9)
+        } else if (arg1 < 17) {
+            let v10 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage((0x2::random::generate_u8_in_range(&mut v0, 2, 3) as u128), v3);
+            let v11 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage(2, v3);
+            let v12 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage((0x2::random::generate_u8_in_range(&mut v0, 0, 1) as u128), v3);
+            let v13 = 0x1::vector::empty<0x1::string::String>();
+            let v14 = 0x1::vector::empty<u128>();
+            if (v10 > 0) {
+                0x1::vector::push_back<0x1::string::String>(&mut v13, 0x1::string::utf8(b"henchman"));
+                0x1::vector::push_back<u128>(&mut v14, v10);
+            };
+            if (v11 > 0) {
+                0x1::vector::push_back<0x1::string::String>(&mut v13, 0x1::string::utf8(b"bouncer"));
+                0x1::vector::push_back<u128>(&mut v14, v11);
+            };
+            if (v12 > 0) {
+                0x1::vector::push_back<0x1::string::String>(&mut v13, 0x1::string::utf8(b"enforcer"));
+                0x1::vector::push_back<u128>(&mut v14, v12);
+            };
+            if (v10 + v11 + v12 == 0) {
+                let v15 = 0x1::vector::empty<0x1::string::String>();
+                0x1::vector::push_back<0x1::string::String>(&mut v15, 0x1::string::utf8(b"henchman"));
+                get_gangster_vector(v15, vector[1])
+            } else {
+                get_gangster_vector(v13, v14)
+            }
+        } else if (arg1 < 32) {
+            let v16 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage((0x2::random::generate_u8_in_range(&mut v0, 2, 3) as u128), v3);
+            let v17 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage((0x2::random::generate_u8_in_range(&mut v0, 4, 5) as u128), v3);
+            let v18 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage((0x2::random::generate_u8_in_range(&mut v0, 4, 5) as u128), v3);
+            let v19 = 0x1::vector::empty<0x1::string::String>();
+            let v20 = 0x1::vector::empty<u128>();
+            if (v16 > 0) {
+                0x1::vector::push_back<0x1::string::String>(&mut v19, 0x1::string::utf8(b"henchman"));
+                0x1::vector::push_back<u128>(&mut v20, v16);
+            };
+            if (v17 > 0) {
+                0x1::vector::push_back<0x1::string::String>(&mut v19, 0x1::string::utf8(b"bouncer"));
+                0x1::vector::push_back<u128>(&mut v20, v17);
+            };
+            if (v18 > 0) {
+                0x1::vector::push_back<0x1::string::String>(&mut v19, 0x1::string::utf8(b"enforcer"));
+                0x1::vector::push_back<u128>(&mut v20, v18);
+            };
+            if (v16 + v17 + v18 == 0) {
+                let v21 = 0x1::vector::empty<0x1::string::String>();
+                0x1::vector::push_back<0x1::string::String>(&mut v21, 0x1::string::utf8(b"enforcer"));
+                get_gangster_vector(v21, vector[1])
+            } else {
+                get_gangster_vector(v19, v20)
+            }
+        } else {
+            let v22 = 0x1::vector::empty<0x1::string::String>();
+            let v23 = &mut v22;
+            0x1::vector::push_back<0x1::string::String>(v23, 0x1::string::utf8(b"bouncer"));
+            0x1::vector::push_back<0x1::string::String>(v23, 0x1::string::utf8(b"enforcer"));
+            let v24 = 0x1::vector::empty<u128>();
+            let v25 = &mut v24;
+            0x1::vector::push_back<u128>(v25, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage(4 + (arg1 - 30) / 10, v3));
+            0x1::vector::push_back<u128>(v25, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage(3 + (arg1 - 30) / 5, v3));
+            get_gangster_vector(v22, v24)
+        };
+        let v26 = v4;
+        0x2::random::shuffle<0x1::string::String>(&mut v0, &mut v26);
+        let v27 = 0;
+        let v28 = 0x1::vector::empty<0x1::string::String>();
+        while (v27 < 0x1::vector::length<0x1::string::String>(&v26)) {
+            if (v27 >= 10) {
+                break
+            };
+            0x1::vector::push_back<0x1::string::String>(&mut v28, *0x1::vector::borrow<0x1::string::String>(&v26, v27));
+            v27 = v27 + 1;
+        };
+        v28
+    }
+
+    public(friend) fun generate_defender_gangsters(arg0: &0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::TurfInformation, arg1: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::igangsters::GangsterBaseStats, arg2: vector<0x1::string::String>, arg3: &0x2::clock::Clock) : (vector<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>, u128, vector<0x1::string::String>) {
+        let v0 = 10;
+        let v1 = 0;
+        let v2 = 0x1::vector::empty<0x1::string::String>();
+        while (0x1::vector::length<0x1::string::String>(&arg2) > v1) {
+            if (0x1::vector::length<0x1::string::String>(&v2) == v0) {
+                break
+            };
+            let v3 = 0x1::vector::borrow<0x1::string::String>(&arg2, v1);
+            let v4 = 0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::borrow_unit_value(arg0, v3);
+            v1 = v1 + 1;
+            while (v4 > 0) {
+                if (0x1::vector::length<0x1::string::String>(&v2) == v0) {
+                    break
+                };
+                0x1::vector::push_back<0x1::string::String>(&mut v2, *v3);
+                v4 = v4 - 1;
+            };
+        };
+        let (v5, v6) = generate_gangster_units(v2, arg1, 44444, arg3);
+        (v5, v6, v2)
+    }
+
+    public(friend) fun generate_gangster_units(arg0: vector<0x1::string::String>, arg1: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::igangsters::GangsterBaseStats, arg2: u64, arg3: &0x2::clock::Clock) : (vector<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>, u128) {
+        let v0 = 0x1::vector::empty<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>();
+        let v1 = 0x1::vector::length<0x1::string::String>(&arg0);
+        let v2 = 0;
+        while (v1 > 0) {
+            let v3 = *0x1::vector::borrow<0x1::string::String>(&arg0, v1 - 1);
+            let (v4, v5) = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::igangsters::borrow_gangster_battle_stats(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::igangsters::borrow_gangster_df<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::igangsters::GangsterStats>(arg1, v3));
+            v2 = v2 + v5;
+            0x1::vector::push_back<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&mut v0, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::new_gangster_unit_battle_stats(v3, v5, v5, v4, v1 + arg2, arg3));
+            v1 = v1 - 1;
+        };
+        (v0, v2)
+    }
+
+    fun get_gangster_vector(arg0: vector<0x1::string::String>, arg1: vector<u128>) : vector<0x1::string::String> {
+        let v0 = 0;
+        let v1 = 0x1::vector::empty<0x1::string::String>();
+        while (v0 < 0x1::vector::length<0x1::string::String>(&arg0)) {
+            let v2 = 0;
+            let v3 = 0x1::vector::borrow<0x1::string::String>(&arg0, v0);
+            while (v2 < *0x1::vector::borrow<u128>(&arg1, v0)) {
+                0x1::vector::push_back<0x1::string::String>(&mut v1, *v3);
+                v2 = v2 + 1;
+            };
+            v0 = v0 + 1;
+        };
+        v1
+    }
+
+    public(friend) fun process_battle_result(arg0: &mut 0xdf7d39243184df01f2fcaac0b127c4f7434b0d1b6759d0c39f80218666053524::airdrop::VendettaAirdropNFT, arg1: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::CapWrapper, arg2: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player, arg3: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player, arg4: &0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::map_version::Version, arg5: &mut 0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::TurfInformation, arg6: &mut 0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::TurfInformation, arg7: &0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::TurfSystem, arg8: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::SystemConfig, arg9: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::PlayerBattleStats, arg10: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::PlayerBattleStats, arg11: vector<0x1::string::String>, arg12: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::igangsters::GangsterBaseStats, arg13: u8, arg14: u8, arg15: vector<0x1::string::String>, arg16: vector<0x1::string::String>, arg17: vector<0x1::string::String>, arg18: vector<0x1::string::String>, arg19: u128, arg20: u128, arg21: &0x2::random::Random, arg22: &0x2::clock::Clock, arg23: &mut 0x2::tx_context::TxContext) : (u128, u128, u128) {
+        let v0 = 0;
+        let v1 = 0;
+        0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::turf::remove_warrior_gangster(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_map_cap(arg1), arg4, arg6, arg16);
+        0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::turf::remove_warrior_gangster(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_map_cap(arg1), arg4, arg5, arg11);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::players::remove_warrior_gangsters(arg2, arg15);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::players::remove_warrior_gangsters(arg3, arg16);
+        let v2 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_headquarter(arg3) == 0x2::object::id<0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::TurfInformation>(arg6);
+        if (arg13 == 1) {
+            if (arg14 == 1) {
+                let (v3, v4) = process_raid(arg1, arg2, arg3, arg8, arg21, arg22, v2, arg23);
+                0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::add_alive_units(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_map_cap(arg1), arg4, arg5, arg17, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::igangsters::borrow_unit_types(arg12));
+                v0 = v3;
+                v1 = v4;
+            } else if (arg14 == 2) {
+                process_capture(arg1, arg2, arg3, arg4, arg6, arg7, arg8, arg9, arg10, arg12, arg17, arg22);
+                0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::increase_turf_cooldown(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_map_cap(arg1), arg4, arg6, arg7, arg22);
+                0xdf7d39243184df01f2fcaac0b127c4f7434b0d1b6759d0c39f80218666053524::airdrop::update_user_game_stats(arg0, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_game_cap(arg1), 0x1::string::utf8(b"turf"));
+            } else if (arg14 == 3) {
+                let (v5, v6) = process_raid(arg1, arg2, arg3, arg8, arg21, arg22, v2, arg23);
+                v0 = v5;
+                v1 = v6;
+                process_capture(arg1, arg2, arg3, arg4, arg6, arg7, arg8, arg9, arg10, arg12, arg17, arg22);
+                0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::increase_turf_cooldown(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_map_cap(arg1), arg4, arg6, arg7, arg22);
+                0xdf7d39243184df01f2fcaac0b127c4f7434b0d1b6759d0c39f80218666053524::airdrop::update_user_game_stats(arg0, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_game_cap(arg1), 0x1::string::utf8(b"turf"));
+            };
+        };
+        (v0, v1, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::players::calculate_loot_xp(arg13, arg2, arg19, arg3, arg20))
+    }
+
+    fun process_capture(arg0: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::CapWrapper, arg1: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player, arg2: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player, arg3: &0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::map_version::Version, arg4: &mut 0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::TurfInformation, arg5: &0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::TurfSystem, arg6: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::SystemConfig, arg7: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::PlayerBattleStats, arg8: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::PlayerBattleStats, arg9: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::igangsters::GangsterBaseStats, arg10: vector<0x1::string::String>, arg11: &0x2::clock::Clock) {
+        let v0 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_owned_location(arg1);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::buildings::has_enough_dirty_cop(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_mut_player_df<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::Resources>(arg1, 0x1::string::utf8(b"scouts")), 0x1::vector::length<0x2::object::ID>(&v0));
+        0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::set_turf_owner(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_map_cap(arg0), arg3, arg4, 0x2::object::id<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player>(arg1));
+        0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::set_turf_cooldown(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_map_cap(arg0), arg3, arg4, 0x2::clock::timestamp_ms(arg11) + 0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::borrow_turf_cooldown(arg5));
+        if (0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_headquarter(arg2) == 0x2::object::id<0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::TurfInformation>(arg4)) {
+            let v1 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_owned_location(arg2);
+            if (0x1::vector::length<0x2::object::ID>(&v1) >= 2) {
+                let v2 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_owned_location(arg2);
+                0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::set_headquarter(arg2, *0x1::vector::borrow<0x2::object::ID>(&v2, 1));
+            } else {
+                0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::set_headquarter(arg2, 0x2::object::id_from_address(@0x1));
+                0xe660c11d5cddf961e2f153e2e9c89517bdbb2dfa64b9d3aae711672aeb7f240d::game_events::emit_headquarter_destroyed_event(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_event_cap(arg0), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_dvd_id(arg1), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_dvd_id(arg2), 0x2::object::id<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player>(arg1), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_name(arg1), 0x2::object::id<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player>(arg2), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_name(arg2), 0x2::clock::timestamp_ms(arg11), 0, 0, 0);
+            };
+        };
+        let v3 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_owned_location(arg2);
+        let v4 = 0x2::object::id<0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::TurfInformation>(arg4);
+        let (_, v6) = 0x1::vector::index_of<0x2::object::ID>(&v3, &v4);
+        0x1::vector::push_back<0x2::object::ID>(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_mut_player_owned_location(arg1), 0x1::vector::remove<0x2::object::ID>(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_mut_player_owned_location(arg2), v6));
+        let (_, _, _, _, v11, _, _, _, _, _, _) = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::borrow_system_config(arg6);
+        0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::add_alive_units(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_map_cap(arg0), arg3, arg4, arg10, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::igangsters::borrow_unit_types(arg9));
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::increase_gangster_capacity(arg1, v11);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::decrease_gangster_capacity(arg2, v11);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::increase_recent_occupied_turf_count(arg7);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::decrease_recent_occupied_turf_count(arg8);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::update_player_stats(arg1, 0x1::string::utf8(b"territory_boss"), 1);
+        0xe660c11d5cddf961e2f153e2e9c89517bdbb2dfa64b9d3aae711672aeb7f240d::game_events::emit_capture_event(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_event_cap(arg0), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_dvd_id(arg1), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_dvd_id(arg2), 0x2::object::id<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player>(arg1), 0x2::object::id<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player>(arg2), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_name(arg1), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_name(arg2), 0x2::object::id<0xa0c4bb412c1d6121c1b6a40954ef76c3b1f75248211209e94726496f46a59ce0::iturf::TurfInformation>(arg4), 0x2::clock::timestamp_ms(arg11));
+    }
+
+    fun process_raid(arg0: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::CapWrapper, arg1: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player, arg2: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player, arg3: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::SystemConfig, arg4: &0x2::random::Random, arg5: &0x2::clock::Clock, arg6: bool, arg7: &mut 0x2::tx_context::TxContext) : (u128, u128) {
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::players::validate_player_raid_cooldown(arg2, arg5);
+        let (v0, v1) = if (arg6) {
+            let (_, _, _, _, _, _, _, _, _, v11, _) = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::borrow_system_config(arg3);
+            let (_, _, _, _, _, _, _, _, _, _, v23) = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::borrow_system_config(arg3);
+            let (_, _, _, _, _, v29, _, _, _, _, _) = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::borrow_system_config(arg3);
+            let v35 = 0x2::random::new_generator(arg4, arg7);
+            (0x2::random::generate_u128_in_range(&mut v35, (v11 as u128), (v23 as u128)), v29)
+        } else {
+            let (_, _, _, _, _, _, _, v43, _, _, _) = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::borrow_system_config(arg3);
+            let (_, _, _, _, _, _, _, _, v55, _, _) = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::borrow_system_config(arg3);
+            let (_, _, _, _, _, _, v64, _, _, _, _) = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::borrow_system_config(arg3);
+            let v69 = 0x2::random::new_generator(arg4, arg7);
+            (0x2::random::generate_u128_in_range(&mut v69, (v43 as u128), (v55 as u128)), v64)
+        };
+        let v70 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_mut_player_df<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::Resources>(arg2, 0x1::string::utf8(b"cash"));
+        let v71 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::borrow_resource_amount(v70), v0);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::subtract_resource_amount(v70, v71);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::add_resource_amount(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_mut_player_df<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::Resources>(arg1, 0x1::string::utf8(b"cash")), v71);
+        let v72 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_mut_player_df<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::Resources>(arg2, 0x1::string::utf8(b"weapon"));
+        let v73 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::utils::percentage(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::borrow_resource_amount(v72), v0);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::subtract_resource_amount(v72, v73);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::add_resource_amount(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_mut_player_df<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::Resources>(arg1, 0x1::string::utf8(b"weapon")), v73);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::players::validate_and_update_raid_cooldown(arg2, v1, arg5);
+        0xe660c11d5cddf961e2f153e2e9c89517bdbb2dfa64b9d3aae711672aeb7f240d::game_events::emit_raid_event(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::authority::borrow_event_cap(arg0), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_dvd_id(arg1), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_dvd_id(arg2), 0x2::object::id<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player>(arg1), 0x2::object::id<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player>(arg2), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_name(arg1), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_name(arg2), v71, v73, 0x2::clock::timestamp_ms(arg5));
+        (v71, v73)
+    }
+
+    public(friend) fun reverse_attack_count(arg0: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player, arg1: &mut 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::PlayerBattleStats, arg2: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::SystemConfig, arg3: &0x2::clock::Clock) {
+        validate_if_owned_battle_stats(arg0, arg1);
+        let (v0, v1, _) = borrow_current_attack_count(arg1, arg2, arg3);
+        let (v3, _, _, _, _, _, _, _, _, _, _) = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::isystem::borrow_system_config(arg2);
+        assert!(v0 != (v3 as u64), 0);
+        let v14 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_player_battle_stats(arg1);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::set_player_battle_ts(arg1, *0x1::vector::borrow<u64>(&v14, 1) + v1);
+        0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::set_player_battle_counts(arg1, v0 + 1);
+    }
+
+    public(friend) fun start_simulation(arg0: &mut vector<0x1::string::String>, arg1: &mut vector<0x1::string::String>, arg2: vector<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>, arg3: vector<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>, arg4: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::DamageMultiplier, arg5: &0x2::random::Random, arg6: &mut 0x2::tx_context::TxContext) : (vector<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GameStateLogger>, u8, vector<0x1::string::String>, vector<0x1::string::String>, vector<0x1::string::String>, vector<0x1::string::String>) {
+        let v0 = 0;
+        let v1 = 0;
+        let v2 = 0;
+        let v3 = 0x1::vector::empty<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GameStateLogger>();
+        let v4 = 0x1::vector::empty<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>();
+        let v5 = 0x1::vector::empty<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>();
+        let v6 = 0x1::vector::empty<0x1::string::String>();
+        let v7 = 0x1::vector::empty<0x1::string::String>();
+        let v8;
+        loop {
+            v2 = v2 + 1;
+            if (0x1::vector::length<0x1::string::String>(arg1) == 0) {
+                v8 = 1;
+            } else {
+                let v9 = 0x1::vector::borrow_mut<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&mut arg2, v0);
+                let v10 = 0x1::vector::borrow_mut<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&mut arg3, v1);
+                let v11 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_name(v9);
+                0x1::string::append(&mut v11, 0x1::string::utf8(b"_"));
+                0x1::string::append(&mut v11, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_name(v10));
+                assert!(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::has_gangsters_damage_multiplier(arg4, v11), 3);
+                let v12 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangsters_damage_multiplier(arg4, v11);
+                let v13 = calculate_damage(v12, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_attack_power(v9), arg5, arg6);
+                let v14 = calculate_damage(v12, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_attack_power(v10), arg5, arg6);
+                let v15 = if (0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_current_health(v9) > 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_damage_value(&v14)) {
+                    0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_current_health(v9) - 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_damage_value(&v14)
+                } else {
+                    0
+                };
+                0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::set_gangster_current_health(v9, v15);
+                0x1::vector::push_back<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&mut v4, *v9);
+                let v16 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::new_gangster_battle_stats_logger(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_id(v9), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_name(v9), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_dice_roll_value(&v13), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_current_health(v9), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_read_health(v9), 0x1::vector::empty<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::StatMultiplier>(), 0x1::vector::empty<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::StatMultiplier>(), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_damage_value(&v13), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_damage_value(&v14));
+                let v17 = if (0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_current_health(v10) > 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_damage_value(&v13)) {
+                    0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_current_health(v10) - 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_damage_value(&v13)
+                } else {
+                    0
+                };
+                0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::set_gangster_current_health(v10, v17);
+                0x1::vector::push_back<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&mut v5, *v10);
+                let v18 = 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::new_gangster_battle_stats_logger(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_id(v10), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_name(v10), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_dice_roll_value(&v14), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_current_health(v10), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_read_health(v10), 0x1::vector::empty<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::StatMultiplier>(), 0x1::vector::empty<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::StatMultiplier>(), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_damage_value(&v14), 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_damage_value(&v13));
+                0x1::vector::push_back<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GameStateLogger>(&mut v3, 0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::new_game_state_logger(v2, v16, v18));
+                if (0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_life_status(&v18)) {
+                    if (v1 < 0x1::vector::length<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&arg3)) {
+                        0x1::vector::push_back<0x1::string::String>(&mut v6, 0x1::vector::remove<0x1::string::String>(arg1, 0));
+                    };
+                    v1 = v1 + 1;
+                };
+                if (0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::borrow_gangster_life_status(&v16)) {
+                    if (v0 < 0x1::vector::length<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&arg2)) {
+                        0x1::vector::push_back<0x1::string::String>(&mut v7, 0x1::vector::remove<0x1::string::String>(arg0, 0));
+                    };
+                    v0 = v0 + 1;
+                };
+                if (v0 >= 0x1::vector::length<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&arg2) && v1 >= 0x1::vector::length<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&arg3)) {
+                    v8 = 3;
+                } else if (v0 >= 0x1::vector::length<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&arg2)) {
+                    v8 = 2;
+                } else {
+                    /* goto 31 */
+                };
+            };
+            /* label 30 */
+            return (v3, v8, v7, v6, *arg0, *arg1)
+            /* label 31 */
+            if (v1 >= 0x1::vector::length<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::GangsterUnitBattleStats>(&arg3)) {
+                break
+            };
+        };
+        v8 = 1;
+        /* goto 30 */
+    }
+
+    public(friend) fun validate_attack_type(arg0: u8) {
+        let v0 = if (arg0 == 1) {
+            true
+        } else if (arg0 == 2) {
+            true
+        } else {
+            arg0 == 3
+        };
+        assert!(v0, 6);
+    }
+
+    public(friend) fun validate_attacker_count(arg0: u64) {
+        assert!(arg0 <= 10 && arg0 > 0, 2);
+    }
+
+    public(friend) fun validate_if_owned_battle_stats(arg0: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::Player, arg1: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::PlayerBattleStats) {
+        assert!(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::iplayer::borrow_player_battle_stats_id(arg0) == 0x2::object::id<0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::PlayerBattleStats>(arg1), 5);
+    }
+
+    public(friend) fun validate_multiplier_key(arg0: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::DamageMultiplier, arg1: 0x1::string::String) {
+        assert!(!0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibattle::has_multiplier_key(arg0, arg1), 4);
+    }
+
+    public(friend) fun validate_scouts_count(arg0: &0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::Resources, arg1: u64) {
+        assert!(0x63081c5dd824a49289b6557d9f9bcf8613fe801e89dbad728616348a58b4b40a::ibuildings::borrow_resource_amount(arg0) / 2 > (arg1 as u128) * 0x1::u128::pow(2, 64), 1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
