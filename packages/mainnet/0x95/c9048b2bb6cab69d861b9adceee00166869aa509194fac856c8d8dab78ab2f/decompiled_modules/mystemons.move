@@ -1,0 +1,141 @@
+module 0x95c9048b2bb6cab69d861b9adceee00166869aa509194fac856c8d8dab78ab2f::mystemons {
+    struct Stats has store {
+        atk: u64,
+        def: u64,
+        spd: u64,
+        intelligence: u64,
+        stm: u64,
+        chr: u64,
+    }
+
+    struct Trait has store {
+        trait_type: 0x1::string::String,
+        value: 0x1::string::String,
+    }
+
+    struct Mystemon has store, key {
+        id: 0x2::object::UID,
+        name: 0x1::string::String,
+        lore: 0x1::string::String,
+        image_url: 0x2::url::Url,
+        generation: u64,
+        rarity: 0x1::string::String,
+        elements: vector<0x1::string::String>,
+        species: 0x1::string::String,
+        stats: Stats,
+    }
+
+    struct MYSTEMONS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MYSTEMONS, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::package::claim<MYSTEMONS>(arg0, arg1);
+        let v1 = 0x2::display::new<Mystemon>(&v0, arg1);
+        0x2::display::add<Mystemon>(&mut v1, 0x1::string::utf8(b"name"), 0x1::string::utf8(b"{name}"));
+        0x2::display::add<Mystemon>(&mut v1, 0x1::string::utf8(b"lore"), 0x1::string::utf8(b"{lore}"));
+        0x2::display::add<Mystemon>(&mut v1, 0x1::string::utf8(b"image_url"), 0x1::string::utf8(b"{image_url}"));
+        0x2::display::add<Mystemon>(&mut v1, 0x1::string::utf8(b"description"), 0x1::string::utf8(b"{lore}"));
+        0x2::display::add<Mystemon>(&mut v1, 0x1::string::utf8(b"project_url"), 0x1::string::utf8(b"https://mystendex.com"));
+        0x2::display::add<Mystemon>(&mut v1, 0x1::string::utf8(b"creator"), 0x1::string::utf8(b"MystenDex Team"));
+        0x2::display::update_version<Mystemon>(&mut v1);
+        0x2::transfer::public_transfer<0x2::package::Publisher>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::display::Display<Mystemon>>(v1, 0x2::tx_context::sender(arg1));
+    }
+
+    public entry fun mint(arg0: 0x1::string::String, arg1: 0x1::string::String, arg2: vector<u8>, arg3: u64, arg4: 0x1::string::String, arg5: vector<0x1::string::String>, arg6: 0x1::string::String, arg7: u64, arg8: u64, arg9: u64, arg10: u64, arg11: u64, arg12: u64, arg13: &mut 0x2::tx_context::TxContext) {
+        let v0 = Stats{
+            atk          : arg7,
+            def          : arg8,
+            spd          : arg9,
+            intelligence : arg10,
+            stm          : arg11,
+            chr          : arg12,
+        };
+        let v1 = Mystemon{
+            id         : 0x2::object::new(arg13),
+            name       : arg0,
+            lore       : arg1,
+            image_url  : 0x2::url::new_unsafe_from_bytes(arg2),
+            generation : arg3,
+            rarity     : arg4,
+            elements   : arg5,
+            species    : arg6,
+            stats      : v0,
+        };
+        let v2 = 0x1::vector::empty<Trait>();
+        let v3 = Trait{
+            trait_type : 0x1::string::utf8(b"Rarity"),
+            value      : arg4,
+        };
+        0x1::vector::push_back<Trait>(&mut v2, v3);
+        let v4 = Trait{
+            trait_type : 0x1::string::utf8(b"Species"),
+            value      : arg6,
+        };
+        0x1::vector::push_back<Trait>(&mut v2, v4);
+        let v5 = Trait{
+            trait_type : 0x1::string::utf8(b"Generation"),
+            value      : u64_to_string(arg3),
+        };
+        0x1::vector::push_back<Trait>(&mut v2, v5);
+        let v6 = 0;
+        while (v6 < 0x1::vector::length<0x1::string::String>(&arg5)) {
+            let v7 = Trait{
+                trait_type : 0x1::string::utf8(b"Element"),
+                value      : *0x1::vector::borrow<0x1::string::String>(&arg5, v6),
+            };
+            0x1::vector::push_back<Trait>(&mut v2, v7);
+            v6 = v6 + 1;
+        };
+        let v8 = Trait{
+            trait_type : 0x1::string::utf8(b"Attack"),
+            value      : u64_to_string(arg7),
+        };
+        0x1::vector::push_back<Trait>(&mut v2, v8);
+        let v9 = Trait{
+            trait_type : 0x1::string::utf8(b"Defense"),
+            value      : u64_to_string(arg8),
+        };
+        0x1::vector::push_back<Trait>(&mut v2, v9);
+        let v10 = Trait{
+            trait_type : 0x1::string::utf8(b"Speed"),
+            value      : u64_to_string(arg9),
+        };
+        0x1::vector::push_back<Trait>(&mut v2, v10);
+        let v11 = Trait{
+            trait_type : 0x1::string::utf8(b"Intelligence"),
+            value      : u64_to_string(arg10),
+        };
+        0x1::vector::push_back<Trait>(&mut v2, v11);
+        let v12 = Trait{
+            trait_type : 0x1::string::utf8(b"Stamina"),
+            value      : u64_to_string(arg11),
+        };
+        0x1::vector::push_back<Trait>(&mut v2, v12);
+        let v13 = Trait{
+            trait_type : 0x1::string::utf8(b"Charisma"),
+            value      : u64_to_string(arg12),
+        };
+        0x1::vector::push_back<Trait>(&mut v2, v13);
+        0x2::dynamic_field::add<0x1::string::String, vector<Trait>>(&mut v1.id, 0x1::string::utf8(b"attributes"), v2);
+        0x2::transfer::public_transfer<Mystemon>(v1, 0x2::tx_context::sender(arg13));
+    }
+
+    fun u64_to_string(arg0: u64) : 0x1::string::String {
+        let v0 = b"";
+        if (arg0 == 0) {
+            0x1::vector::push_back<u8>(&mut v0, 48);
+        } else {
+            while (arg0 > 0) {
+                0x1::vector::push_back<u8>(&mut v0, ((arg0 % 10 + 48) as u8));
+                arg0 = arg0 / 10;
+            };
+            0x1::vector::reverse<u8>(&mut v0);
+        };
+        0x1::string::utf8(v0)
+    }
+
+    // decompiled from Move bytecode v6
+}
+
