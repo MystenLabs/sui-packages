@@ -1,0 +1,14 @@
+module 0x37c20fdf49d42c21565ffbca4c6c009b9f1a18add24f94b41c4e19958e922956::pooh {
+    struct POOH has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: POOH, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<POOH>(arg0, 6, b"POOH", b"Pooh Token", x"e2809c546865206d6f73742077686f6c65736f6d652064756d7020796f75276c6c2065766572206275792ee2809d0a506f6f6820436f696e2069732074686520686f6e65792d6472656e636865642c20676967676c652d706f7765726564206d656d6520746f6b656e206e6f626f64792061736b656420666f72206275742065766572796f6e65207365637265746c792077616e7465642e20496e73706972656420627920746865206265617220776974682074686520736d616c6c65737420627261696e20616e642074686520626967676573742062656c6c792c20504f4f48206973206865726520746f20737469636b2061726f756e642e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1752975116387.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<POOH>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<POOH>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
