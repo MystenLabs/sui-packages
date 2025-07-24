@@ -1,0 +1,14 @@
+module 0xb3fb775431da9e222a98c757244d93d99d18b55a046ad235ebbadddc31f70b87::cellfie {
+    struct CELLFIE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CELLFIE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0xf4054b4c967ea64173453f593a0ec98cb6aa351635cbc412f4fdf5f804bb98db::token_emitter::create_currency<CELLFIE>(arg0, 6, b"CELLFIE", b"CELLFIE COIN", b"Humor so broke that I laughed at this.", 0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,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"), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<CELLFIE>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<CELLFIE>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
