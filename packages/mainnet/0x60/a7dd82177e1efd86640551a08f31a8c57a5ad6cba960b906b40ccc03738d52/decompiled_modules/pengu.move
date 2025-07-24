@@ -1,0 +1,14 @@
+module 0x60a7dd82177e1efd86640551a08f31a8c57a5ad6cba960b906b40ccc03738d52::pengu {
+    struct PENGU has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PENGU, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PENGU>(arg0, 6, b"PENGU", b"PUDGY PENGUINS", x"50454e475520697320746865206f6666696369616c20636f696e206f662050756467792050656e6775696e732e0a0a50756467792050656e6775696e7320686173206265636f6d65207468652066616365206f662063727970746f2077697468206f6e65206f6620746865206d6f737420696e666c75656e7469616c20636f6d6d756e697469657320696e2074686520696e6475737472792e2046726f6d206c6172676520636f6d70616e6965732077656172696e67207468652050656e6775696e2c20746f206265696e6720666561747572656420696e2045544620636f6d6d65726369616c732c20746f206761726e6572696e67206d696c", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1753385832811.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<PENGU>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PENGU>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
