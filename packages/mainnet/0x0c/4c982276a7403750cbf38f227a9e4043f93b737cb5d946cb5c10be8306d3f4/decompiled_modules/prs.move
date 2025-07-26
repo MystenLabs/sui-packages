@@ -1,0 +1,14 @@
+module 0xc4c982276a7403750cbf38f227a9e4043f93b737cb5d946cb5c10be8306d3f4::prs {
+    struct PRS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PRS, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PRS>(arg0, 6, b"PRS", b"PolyRewards", x"506f6c7952657761726473206973206120746f6b656e2077686572652075736572732063616e20626574206f6e20676c6f62616c20706f6c69746963616c206576656e747320616e64206561726e206461696c7920726577617264732e2046726f6d20656c656374696f6e7320746f206d616a6f7220706f6c696379207368696674732c2075736572732070726564696374206f7574636f6d657320616e642067657420726577617264656420666f7220616363757261746520696e736967687473e280946d616b696e6720706f6c697469637320626f746820656e676167696e6720616e6420726577617264696e672e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1753569228682.jpeg")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<PRS>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PRS>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
