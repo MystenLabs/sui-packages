@@ -1,0 +1,14 @@
+module 0xeab6bcf3f2f7b93bdf5801a52535969e1866db99379727207096e1e5dd898335::vasco {
+    struct VASCO has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: VASCO, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<VASCO>(arg0, 6, b"VASCO", b"Gama Protocol", x"546865206372657720697320746865206361707461696e2e0a47616d612050726f746f636f6c20282447414d4129206973206120666169722d6c61756e63682044414f206275696c64696e672074686520746f6f6c7320616e64206368617274696e6720746865206d61707320666f72205375692e204e6f205643732e204e6f207465616d20746f6b656e732e204a757374206120636f6d6d756e6974792d676f7665726e656420747265617375727920616e642061206d697373696f6e20746f206275696c642e2057652061726520746865206e6176696761746f727320666f7220746865206e657720776f726c642e204a6f696e2075732e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1753720348265.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<VASCO>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<VASCO>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
