@@ -1,0 +1,14 @@
+module 0xd2570d5fcf6c6bc7b1faf73c338ab55d7e604b9accd61118554a21e1f5854532::ikamdrop {
+    struct IKAMDROP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: IKAMDROP, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0xf4054b4c967ea64173453f593a0ec98cb6aa351635cbc412f4fdf5f804bb98db::token_emitter::create_currency<IKAMDROP>(arg0, 6, b"IKAMDROP", b"ika mybaddrop", b"my charts after ika is reversed so we make memes until its unlocked", 0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,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"), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<IKAMDROP>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<IKAMDROP>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
