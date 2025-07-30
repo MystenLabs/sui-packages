@@ -1,0 +1,14 @@
+module 0x58d9271c12685fc4102e6d85617b095afb772b291aaf2ba1e6804a3ac724dcc1::tedog {
+    struct TEDOG has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TEDOG, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TEDOG>(arg0, 6, b"TEDOG", b"Termi Ai Dog", x"5445444f4720746865206d6f737420706f77657266756c20616e64206c6567656e64617279206d656d6520636f696e2063697263756c6174696e67206f6e20746865204261736520636861696e2057652061726520636f6d62696e696e6720726f626f74732c206d656d65732c20616e6420446f6720706f776572656420656e6572677920696e746f206f6e65207472756c790a706f77657266756c20746f6b656e2e2046726f6d205445524d49414920446f6720612076617374206f6365616e206f6620626f617473202069747320616c6c20636f76657265642e0a0a0a57652061726520616c6c206a6f696e696e6720666f7263657320696e20746869732e20476f20666f72746820676f20666f72746820616e64206c6574732063656c656272617465216c", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://ipfs.io/ipfs/bafybeihd74butgblt3m4kfrv4fkp2oi2ca5ybgcjvfpf7lbafzmxrjllte")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TEDOG>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<TEDOG>>(v1, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
