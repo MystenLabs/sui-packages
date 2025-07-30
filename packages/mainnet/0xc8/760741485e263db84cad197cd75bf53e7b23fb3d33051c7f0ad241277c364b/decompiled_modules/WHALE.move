@@ -1,0 +1,14 @@
+module 0xc8760741485e263db84cad197cd75bf53e7b23fb3d33051c7f0ad241277c364b::WHALE {
+    struct WHALE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: WHALE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<WHALE>(arg0, 6, b"WhaleWave", b"WHALE", x"4469766520696e746f207468652063727970746f206f6365616e2077697468205768616c6557617665212054686520756c74696d617465206d656d6520636f696e20666f722074686f73652077686f2077616e7420746f206d616b6520612073706c6173682e205768657468657220796f7527726520612063727970746f207768616c65206f72206a757374207374617274696e6720796f7572206a6f75726e65792c205768616c6557617665206272696e6773207468652066756e20616e6420636f6d6d756e6974792076696265732e205269646520746865207761766520746f20746865206d6f6f6e2120f09f9a80f09f908b", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://replicate.delivery/xezq/CcDin6si9m49C1g9CfzosmTsyQjfyifek8EyePHDoAEAm8voC/out-0.webp")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<WHALE>>(v0, @0xdfbc0bca5f7ab287e65359124a2abf5cad98f8b6b7624819a650050338195689);
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<WHALE>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
