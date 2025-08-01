@@ -1,0 +1,14 @@
+module 0x643da8c4a38f1f9b940a824f00092a9677c77cebf3d46209b1837a7f6f231ce7::PROMISE {
+    struct PROMISE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: PROMISE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PROMISE>(arg0, 6, b"WARA PROMISE", b"PROMISE", x"41206d656d6520636f696e2063656c6562726174696e672057415241277320696e746567726974792061667465722064656c6574696e672074686569722054776974746572206163636f756e7420746f20686f6e6f7220612070726f6d6973652e20486f6c64657273206f662050524f4d495345206172652070617274206f66206120636f6d6d756e69747920746861742076616c7565732074727573742c20636f6d6d69746d656e742c20616e642074686520706f776572206f66206b656570696e6720796f757220776f7264e280946e6f206d61747465722074686520636f73742e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"blob:https://mfc.club/bb4f180c-15cb-46c5-b18b-bbe1462f090f")), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PROMISE>>(v0, @0x5e72ea12028e47600b9aec39b6c143f9472d3ad7178d84e1fe6069dbbe2cf631);
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<PROMISE>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
