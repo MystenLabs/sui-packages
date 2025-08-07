@@ -1,0 +1,28 @@
+module 0x70dcf63182f0755c02ac3c8e448777320998c8fd2400fa3b6d1847296b0d5f81::swap_magma {
+    public fun swap_a2b<T0, T1, T2, T3>(arg0: &0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::config::GlobalConfig, arg1: &mut 0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::pool::Pool<T0, T1>, arg2: 0x2::coin::Coin<T0>, arg3: &0x2::clock::Clock, arg4: &0x1a830340e1caed73881c51f13fd3c1409153879493b56688118012c25b658512::swap_transaction::SwapTransaction<T2, T3>, arg5: &0x1a830340e1caed73881c51f13fd3c1409153879493b56688118012c25b658512::state::State, arg6: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T1> {
+        let v0 = 0x2::coin::value<T0>(&arg2);
+        let (v1, v2, v3) = 0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::pool::flash_swap<T0, T1>(arg0, arg1, true, true, v0, 0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::tick_math::min_sqrt_price(), arg3);
+        let v4 = v1;
+        0x2::balance::join<T0>(&mut v4, 0x2::coin::into_balance<T0>(arg2));
+        0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::pool::repay_flash_swap<T0, T1>(arg0, arg1, v4, 0x2::balance::zero<T1>(), v3);
+        let v5 = 0x2::coin::from_balance<T1>(v2, arg6);
+        let v6 = 0x2::object::id<0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::config::GlobalConfig>(arg0);
+        0x70dcf63182f0755c02ac3c8e448777320998c8fd2400fa3b6d1847296b0d5f81::swap_event::emit_common_swap<T0, T1>(0x1a830340e1caed73881c51f13fd3c1409153879493b56688118012c25b658512::consts::DEX_MAGMA(), 0x2::object::id_to_address(&v6), true, v0, 0x2::coin::value<T1>(&v5), true);
+        v5
+    }
+
+    public fun swap_b2a<T0, T1, T2, T3>(arg0: &0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::config::GlobalConfig, arg1: &mut 0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::pool::Pool<T0, T1>, arg2: 0x2::coin::Coin<T1>, arg3: &0x2::clock::Clock, arg4: &0x1a830340e1caed73881c51f13fd3c1409153879493b56688118012c25b658512::swap_transaction::SwapTransaction<T2, T3>, arg5: &0x1a830340e1caed73881c51f13fd3c1409153879493b56688118012c25b658512::state::State, arg6: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T0> {
+        let v0 = 0x2::coin::value<T1>(&arg2);
+        let (v1, v2, v3) = 0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::pool::flash_swap<T0, T1>(arg0, arg1, false, true, v0, 0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::tick_math::max_sqrt_price(), arg3);
+        let v4 = v2;
+        0x2::balance::join<T1>(&mut v4, 0x2::coin::into_balance<T1>(arg2));
+        0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::pool::repay_flash_swap<T0, T1>(arg0, arg1, 0x2::balance::zero<T0>(), v4, v3);
+        let v5 = 0x2::coin::from_balance<T0>(v1, arg6);
+        let v6 = 0x2::object::id<0x4a35d3dfef55ed3631b7158544c6322a23bc434fe4fca1234cb680ce0505f82d::config::GlobalConfig>(arg0);
+        0x70dcf63182f0755c02ac3c8e448777320998c8fd2400fa3b6d1847296b0d5f81::swap_event::emit_common_swap<T0, T1>(0x1a830340e1caed73881c51f13fd3c1409153879493b56688118012c25b658512::consts::DEX_MAGMA(), 0x2::object::id_to_address(&v6), false, v0, 0x2::coin::value<T0>(&v5), true);
+        v5
+    }
+
+    // decompiled from Move bytecode v6
+}
+

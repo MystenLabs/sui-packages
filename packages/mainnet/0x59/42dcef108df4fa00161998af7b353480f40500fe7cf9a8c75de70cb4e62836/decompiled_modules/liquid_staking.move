@@ -1,0 +1,326 @@
+module 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::liquid_staking {
+    struct LIQUID_STAKING has drop {
+        dummy_field: bool,
+    }
+
+    struct LiquidStakingInfo<phantom T0> has store, key {
+        id: 0x2::object::UID,
+        lst_treasury_cap: 0x2::coin::TreasuryCap<T0>,
+        fee_config: 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::cell::Cell<0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig>,
+        fees: 0x2::balance::Balance<0x2::sui::SUI>,
+        accrued_spread_fees: u64,
+        storage: 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::Storage,
+        version: 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::version::Version,
+        extra_fields: 0x2::bag::Bag,
+    }
+
+    struct AdminCap<phantom T0> has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct CustomRedeemRequest<phantom T0> {
+        lst: 0x2::coin::Coin<T0>,
+        request_processed: bool,
+    }
+
+    struct CreateEvent has copy, drop {
+        typename: 0x1::type_name::TypeName,
+        liquid_staking_info_id: 0x2::object::ID,
+    }
+
+    struct MintEvent has copy, drop {
+        typename: 0x1::type_name::TypeName,
+        sui_amount_in: u64,
+        lst_amount_out: u64,
+        fee_amount: u64,
+    }
+
+    struct RedeemEvent has copy, drop {
+        typename: 0x1::type_name::TypeName,
+        lst_amount_in: u64,
+        sui_amount_out: u64,
+        fee_amount: u64,
+    }
+
+    struct DecreaseValidatorStakeEvent has copy, drop {
+        typename: 0x1::type_name::TypeName,
+        staking_pool_id: 0x2::object::ID,
+        amount: u64,
+    }
+
+    struct IncreaseValidatorStakeEvent has copy, drop {
+        typename: 0x1::type_name::TypeName,
+        staking_pool_id: 0x2::object::ID,
+        amount: u64,
+    }
+
+    struct CollectFeesEvent has copy, drop {
+        typename: 0x1::type_name::TypeName,
+        amount: u64,
+    }
+
+    struct EpochChangedEvent has copy, drop {
+        typename: 0x1::type_name::TypeName,
+        old_sui_supply: u64,
+        new_sui_supply: u64,
+        lst_supply: u64,
+        spread_fee: u64,
+    }
+
+    public fun mint<T0: drop>(arg0: &mut LiquidStakingInfo<T0>, arg1: &mut 0x3::sui_system::SuiSystemState, arg2: 0x2::coin::Coin<0x2::sui::SUI>, arg3: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T0> {
+        refresh<T0>(arg0, arg1, arg3);
+        let v0 = (total_sui_supply<T0>(arg0) as u128);
+        let v1 = (total_lst_supply<T0>(arg0) as u128);
+        let v2 = 0x2::coin::into_balance<0x2::sui::SUI>(arg2);
+        let v3 = 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::calculate_mint_fee(0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::cell::get<0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig>(&arg0.fee_config), 0x2::balance::value<0x2::sui::SUI>(&v2));
+        0x2::balance::join<0x2::sui::SUI>(&mut arg0.fees, 0x2::balance::split<0x2::sui::SUI>(&mut v2, v3));
+        let v4 = sui_amount_to_lst_amount<T0>(arg0, 0x2::balance::value<0x2::sui::SUI>(&v2));
+        assert!(v4 > 0, 5);
+        let v5 = MintEvent{
+            typename       : 0x1::type_name::get<T0>(),
+            sui_amount_in  : 0x2::balance::value<0x2::sui::SUI>(&v2),
+            lst_amount_out : v4,
+            fee_amount     : v3,
+        };
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::events::emit_event<MintEvent>(v5);
+        let v6 = 0x2::coin::mint<T0>(&mut arg0.lst_treasury_cap, v4, arg3);
+        assert!((0x2::coin::value<T0>(&v6) as u128) * v0 <= (0x2::balance::value<0x2::sui::SUI>(&v2) as u128) * v1 || v0 > 0 && v1 == 0, 1);
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::join_to_sui_pool(&mut arg0.storage, v2);
+        v6
+    }
+
+    public fun fees<T0>(arg0: &LiquidStakingInfo<T0>) : u64 {
+        0x2::balance::value<0x2::sui::SUI>(&arg0.fees) + arg0.accrued_spread_fees
+    }
+
+    public fun change_validator_priority<T0>(arg0: &mut LiquidStakingInfo<T0>, arg1: &AdminCap<T0>, arg2: u64, arg3: u64) {
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::change_validator_priority(&mut arg0.storage, arg2, arg3);
+    }
+
+    public fun collect_fees<T0>(arg0: &mut LiquidStakingInfo<T0>, arg1: &mut 0x3::sui_system::SuiSystemState, arg2: &AdminCap<T0>, arg3: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<0x2::sui::SUI> {
+        refresh<T0>(arg0, arg1, arg3);
+        let v0 = 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::split_n_sui(&mut arg0.storage, arg1, arg0.accrued_spread_fees, arg3);
+        arg0.accrued_spread_fees = arg0.accrued_spread_fees - 0x2::balance::value<0x2::sui::SUI>(&v0);
+        let v1 = 0x2::balance::withdraw_all<0x2::sui::SUI>(&mut arg0.fees);
+        0x2::balance::join<0x2::sui::SUI>(&mut v1, v0);
+        let v2 = CollectFeesEvent{
+            typename : 0x1::type_name::get<T0>(),
+            amount   : 0x2::balance::value<0x2::sui::SUI>(&v1),
+        };
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::events::emit_event<CollectFeesEvent>(v2);
+        0x2::coin::from_balance<0x2::sui::SUI>(v1, arg3)
+    }
+
+    public fun create_lst<T0: drop>(arg0: 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig, arg1: 0x2::coin::TreasuryCap<T0>, arg2: &mut 0x2::tx_context::TxContext) : (AdminCap<T0>, LiquidStakingInfo<T0>) {
+        assert!(0x2::coin::total_supply<T0>(&arg1) == 0, 0);
+        let v0 = 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::new(arg2);
+        create_lst_with_storage<T0>(arg0, arg1, v0, arg2)
+    }
+
+    public fun create_lst_with_stake<T0: drop>(arg0: &mut 0x3::sui_system::SuiSystemState, arg1: 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig, arg2: 0x2::coin::TreasuryCap<T0>, arg3: vector<0x3::staking_pool::FungibleStakedSui>, arg4: 0x2::coin::Coin<0x2::sui::SUI>, arg5: &mut 0x2::tx_context::TxContext) : (AdminCap<T0>, LiquidStakingInfo<T0>) {
+        let v0 = 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::new(arg5);
+        while (!0x1::vector::is_empty<0x3::staking_pool::FungibleStakedSui>(&arg3)) {
+            0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::join_fungible_stake(&mut v0, arg0, 0x1::vector::pop_back<0x3::staking_pool::FungibleStakedSui>(&mut arg3), arg5);
+        };
+        0x1::vector::destroy_empty<0x3::staking_pool::FungibleStakedSui>(arg3);
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::join_to_sui_pool(&mut v0, 0x2::coin::into_balance<0x2::sui::SUI>(arg4));
+        assert!(0x2::coin::total_supply<T0>(&arg2) > 0 && 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::total_sui_supply(&v0) > 0, 0);
+        let v1 = (0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::total_sui_supply(&v0) as u128);
+        let v2 = (0x2::coin::total_supply<T0>(&arg2) as u128);
+        assert!(v1 >= v2 && v1 <= 2 * v2, 0);
+        create_lst_with_storage<T0>(arg1, arg2, v0, arg5)
+    }
+
+    fun create_lst_with_storage<T0: drop>(arg0: 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig, arg1: 0x2::coin::TreasuryCap<T0>, arg2: 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::Storage, arg3: &mut 0x2::tx_context::TxContext) : (AdminCap<T0>, LiquidStakingInfo<T0>) {
+        let v0 = 0x2::object::new(arg3);
+        let v1 = CreateEvent{
+            typename               : 0x1::type_name::get<T0>(),
+            liquid_staking_info_id : 0x2::object::uid_to_inner(&v0),
+        };
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::events::emit_event<CreateEvent>(v1);
+        let v2 = AdminCap<T0>{id: 0x2::object::new(arg3)};
+        let v3 = LiquidStakingInfo<T0>{
+            id                  : v0,
+            lst_treasury_cap    : arg1,
+            fee_config          : 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::cell::new<0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig>(arg0),
+            fees                : 0x2::balance::zero<0x2::sui::SUI>(),
+            accrued_spread_fees : 0,
+            storage             : arg2,
+            version             : 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::version::new(1),
+            extra_fields        : 0x2::bag::new(arg3),
+        };
+        (v2, v3)
+    }
+
+    public fun storage<T0>(arg0: &LiquidStakingInfo<T0>) : &0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::Storage {
+        &arg0.storage
+    }
+
+    public fun custom_redeem<T0: drop>(arg0: &mut LiquidStakingInfo<T0>, arg1: CustomRedeemRequest<T0>, arg2: &mut 0x3::sui_system::SuiSystemState, arg3: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<0x2::sui::SUI> {
+        let CustomRedeemRequest {
+            lst               : v0,
+            request_processed : v1,
+        } = arg1;
+        assert!(v1, 6);
+        redeem_internal<T0>(arg0, v0, arg2, true, arg3)
+    }
+
+    public fun custom_redeem_request<T0: drop>(arg0: &mut LiquidStakingInfo<T0>, arg1: 0x2::coin::Coin<T0>, arg2: &mut 0x3::sui_system::SuiSystemState, arg3: &mut 0x2::tx_context::TxContext) : CustomRedeemRequest<T0> {
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::version::assert_version_and_upgrade(&mut arg0.version, 1);
+        refresh<T0>(arg0, arg2, arg3);
+        CustomRedeemRequest<T0>{
+            lst               : arg1,
+            request_processed : false,
+        }
+    }
+
+    public fun decrease_validator_stake<T0>(arg0: &mut LiquidStakingInfo<T0>, arg1: &AdminCap<T0>, arg2: &mut 0x3::sui_system::SuiSystemState, arg3: address, arg4: u64, arg5: &mut 0x2::tx_context::TxContext) : u64 {
+        refresh<T0>(arg0, arg2, arg5);
+        let v0 = 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::find_validator_index_by_address(&arg0.storage, arg3);
+        assert!(v0 < 0x1::vector::length<0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::ValidatorInfo>(0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::validators(&arg0.storage)), 3);
+        let v1 = 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::unstake_approx_n_sui_from_validator(&mut arg0.storage, arg2, v0, arg4, arg5);
+        let v2 = DecreaseValidatorStakeEvent{
+            typename        : 0x1::type_name::get<T0>(),
+            staking_pool_id : 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::staking_pool_id(0x1::vector::borrow<0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::ValidatorInfo>(0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::validators(&arg0.storage), v0)),
+            amount          : v1,
+        };
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::events::emit_event<DecreaseValidatorStakeEvent>(v2);
+        v1
+    }
+
+    public fun fee_config<T0>(arg0: &LiquidStakingInfo<T0>) : &0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig {
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::cell::get<0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig>(&arg0.fee_config)
+    }
+
+    public fun increase_validator_stake<T0>(arg0: &mut LiquidStakingInfo<T0>, arg1: &AdminCap<T0>, arg2: &mut 0x3::sui_system::SuiSystemState, arg3: address, arg4: u64, arg5: &mut 0x2::tx_context::TxContext) : u64 {
+        refresh<T0>(arg0, arg2, arg5);
+        let v0 = 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::split_up_to_n_sui_from_sui_pool(&mut arg0.storage, arg4);
+        if (0x2::balance::value<0x2::sui::SUI>(&v0) < 1000000000) {
+            0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::join_to_sui_pool(&mut arg0.storage, v0);
+            return 0
+        };
+        let v1 = 0x3::sui_system::request_add_stake_non_entry(arg2, 0x2::coin::from_balance<0x2::sui::SUI>(v0, arg5), arg3, arg5);
+        let v2 = 0x3::staking_pool::staked_sui_amount(&v1);
+        let v3 = IncreaseValidatorStakeEvent{
+            typename        : 0x1::type_name::get<T0>(),
+            staking_pool_id : 0x3::staking_pool::pool_id(&v1),
+            amount          : v2,
+        };
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::events::emit_event<IncreaseValidatorStakeEvent>(v3);
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::join_stake(&mut arg0.storage, arg2, v1, arg5);
+        v2
+    }
+
+    fun init(arg0: LIQUID_STAKING, arg1: &mut 0x2::tx_context::TxContext) {
+        0x2::package::claim_and_keep<LIQUID_STAKING>(arg0, arg1);
+    }
+
+    public fun lst<T0>(arg0: &CustomRedeemRequest<T0>) : &0x2::coin::Coin<T0> {
+        &arg0.lst
+    }
+
+    public(friend) fun lst_amount_to_sui_amount<T0>(arg0: &LiquidStakingInfo<T0>, arg1: u64) : u64 {
+        let v0 = total_lst_supply<T0>(arg0);
+        assert!(v0 > 0, 4);
+        (((total_sui_supply<T0>(arg0) as u128) * (arg1 as u128) / (v0 as u128)) as u64)
+    }
+
+    public(friend) fun mark_redeem_request_as_processed<T0>(arg0: &AdminCap<T0>, arg1: &mut CustomRedeemRequest<T0>) {
+        arg1.request_processed = true;
+    }
+
+    public fun redeem<T0: drop>(arg0: &mut LiquidStakingInfo<T0>, arg1: 0x2::coin::Coin<T0>, arg2: &mut 0x3::sui_system::SuiSystemState, arg3: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<0x2::sui::SUI> {
+        redeem_internal<T0>(arg0, arg1, arg2, false, arg3)
+    }
+
+    fun redeem_internal<T0: drop>(arg0: &mut LiquidStakingInfo<T0>, arg1: 0x2::coin::Coin<T0>, arg2: &mut 0x3::sui_system::SuiSystemState, arg3: bool, arg4: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<0x2::sui::SUI> {
+        refresh<T0>(arg0, arg2, arg4);
+        let v0 = if (arg3) {
+            0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::split_from_sui_pool(&mut arg0.storage, lst_amount_to_sui_amount<T0>(arg0, 0x2::coin::value<T0>(&arg1)))
+        } else {
+            0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::split_n_sui(&mut arg0.storage, arg2, lst_amount_to_sui_amount<T0>(arg0, 0x2::coin::value<T0>(&arg1)), arg4)
+        };
+        let v1 = v0;
+        let v2 = if (arg3) {
+            0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::calculate_custom_redeem_fee(0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::cell::get<0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig>(&arg0.fee_config), 0x2::balance::value<0x2::sui::SUI>(&v1))
+        } else {
+            0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::calculate_redeem_fee(0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::cell::get<0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig>(&arg0.fee_config), 0x2::balance::value<0x2::sui::SUI>(&v1))
+        };
+        0x2::balance::join<0x2::sui::SUI>(&mut arg0.fees, 0x2::balance::split<0x2::sui::SUI>(&mut v1, (v2 as u64)));
+        let v3 = RedeemEvent{
+            typename       : 0x1::type_name::get<T0>(),
+            lst_amount_in  : 0x2::coin::value<T0>(&arg1),
+            sui_amount_out : 0x2::balance::value<0x2::sui::SUI>(&v1),
+            fee_amount     : v2,
+        };
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::events::emit_event<RedeemEvent>(v3);
+        assert!(((0x2::balance::value<0x2::sui::SUI>(&v1) as u128) + (v2 as u128)) * (total_lst_supply<T0>(arg0) as u128) <= (0x2::coin::value<T0>(&arg1) as u128) * (total_sui_supply<T0>(arg0) as u128), 2);
+        0x2::coin::burn<T0>(&mut arg0.lst_treasury_cap, arg1);
+        0x2::coin::from_balance<0x2::sui::SUI>(v1, arg4)
+    }
+
+    public fun refresh<T0>(arg0: &mut LiquidStakingInfo<T0>, arg1: &mut 0x3::sui_system::SuiSystemState, arg2: &mut 0x2::tx_context::TxContext) : bool {
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::version::assert_version_and_upgrade(&mut arg0.version, 1);
+        let v0 = total_sui_supply<T0>(arg0);
+        if (0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::refresh(&mut arg0.storage, arg1, arg2)) {
+            let v1 = total_sui_supply<T0>(arg0);
+            let v2 = if (v1 > v0) {
+                ((((v1 - v0) as u128) * (0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::spread_fee_bps(0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::cell::get<0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig>(&arg0.fee_config)) as u128) / 10000) as u64)
+            } else {
+                0
+            };
+            arg0.accrued_spread_fees = arg0.accrued_spread_fees + v2;
+            let v3 = EpochChangedEvent{
+                typename       : 0x1::type_name::get<T0>(),
+                old_sui_supply : v0,
+                new_sui_supply : v1,
+                lst_supply     : total_lst_supply<T0>(arg0),
+                spread_fee     : v2,
+            };
+            0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::events::emit_event<EpochChangedEvent>(v3);
+            return true
+        };
+        false
+    }
+
+    fun sui_amount_to_lst_amount<T0>(arg0: &LiquidStakingInfo<T0>, arg1: u64) : u64 {
+        let v0 = total_sui_supply<T0>(arg0);
+        let v1 = total_lst_supply<T0>(arg0);
+        if (v0 == 0 || v1 == 0) {
+            return arg1
+        };
+        (((v1 as u128) * (arg1 as u128) / (v0 as u128)) as u64)
+    }
+
+    public fun total_lst_supply<T0>(arg0: &LiquidStakingInfo<T0>) : u64 {
+        0x2::coin::total_supply<T0>(&arg0.lst_treasury_cap)
+    }
+
+    public fun total_sui_supply<T0>(arg0: &LiquidStakingInfo<T0>) : u64 {
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::storage::total_sui_supply(&arg0.storage) - arg0.accrued_spread_fees
+    }
+
+    public fun update_fees<T0>(arg0: &mut LiquidStakingInfo<T0>, arg1: &AdminCap<T0>, arg2: 0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig) {
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::version::assert_version_and_upgrade(&mut arg0.version, 1);
+        0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::destroy(0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::cell::set<0x5942dcef108df4fa00161998af7b353480f40500fe7cf9a8c75de70cb4e62836::fees::FeeConfig>(&mut arg0.fee_config, arg2));
+    }
+
+    public fun update_metadata<T0>(arg0: &mut LiquidStakingInfo<T0>, arg1: &AdminCap<T0>, arg2: &mut 0x2::coin::CoinMetadata<T0>, arg3: 0x1::option::Option<0x1::string::String>, arg4: 0x1::option::Option<0x1::ascii::String>, arg5: 0x1::option::Option<0x1::string::String>, arg6: 0x1::option::Option<0x1::ascii::String>) {
+        let v0 = &arg0.lst_treasury_cap;
+        if (0x1::option::is_some<0x1::string::String>(&arg3)) {
+            0x2::coin::update_name<T0>(v0, arg2, 0x1::option::destroy_some<0x1::string::String>(arg3));
+        };
+        if (0x1::option::is_some<0x1::ascii::String>(&arg4)) {
+            0x2::coin::update_symbol<T0>(v0, arg2, 0x1::option::destroy_some<0x1::ascii::String>(arg4));
+        };
+        if (0x1::option::is_some<0x1::string::String>(&arg5)) {
+            0x2::coin::update_description<T0>(v0, arg2, 0x1::option::destroy_some<0x1::string::String>(arg5));
+        };
+        if (0x1::option::is_some<0x1::ascii::String>(&arg6)) {
+            0x2::coin::update_icon_url<T0>(v0, arg2, 0x1::option::destroy_some<0x1::ascii::String>(arg6));
+        };
+    }
+
+    // decompiled from Move bytecode v6
+}
+
