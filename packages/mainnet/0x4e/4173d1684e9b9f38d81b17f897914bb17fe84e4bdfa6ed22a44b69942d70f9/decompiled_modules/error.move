@@ -1,0 +1,196 @@
+module 0x4e4173d1684e9b9f38d81b17f897914bb17fe84e4bdfa6ed22a44b69942d70f9::error {
+    public fun add_check_failed() : u64 {
+        17
+    }
+
+    public fun deprecated_reward_claim() : u64 {
+        83
+    }
+
+    public fun exceed_max_liquidity_per_tick() : u64 {
+        74
+    }
+
+    public fun fee_rate_already_configured() : u64 {
+        2
+    }
+
+    public fun grow_obs_check_failed() : u64 {
+        22
+    }
+
+    public fun high_slippage() : u64 {
+        7
+    }
+
+    public fun index_out_of_bounds() : u64 {
+        14
+    }
+
+    public fun insufficient_funds() : u64 {
+        11
+    }
+
+    public fun insufficient_liquidity() : u64 {
+        10
+    }
+
+    public fun invalid_amounts() : u64 {
+        5
+    }
+
+    public fun invalid_create_pool_configs() : u64 {
+        29
+    }
+
+    public fun invalid_current_price() : u64 {
+        27
+    }
+
+    public fun invalid_fee_growth() : u64 {
+        16
+    }
+
+    public fun invalid_fee_rate() : u64 {
+        1
+    }
+
+    public fun invalid_initialization() : u64 {
+        13
+    }
+
+    public fun invalid_last_update_time() : u64 {
+        15
+    }
+
+    public fun invalid_liquidity_scalled() : u64 {
+        25
+    }
+
+    public fun invalid_major_version() : u64 {
+        79
+    }
+
+    public fun invalid_min_tick_range_factor() : u64 {
+        73
+    }
+
+    public fun invalid_minor_version() : u64 {
+        78
+    }
+
+    public fun invalid_next_price() : u64 {
+        26
+    }
+
+    public fun invalid_observation_timestamp() : u64 {
+        21
+    }
+
+    public fun invalid_pool_coin_types() : u64 {
+        71
+    }
+
+    public fun invalid_pool_coin_types_sorted() : u64 {
+        81
+    }
+
+    public fun invalid_pool_match() : u64 {
+        12
+    }
+
+    public fun invalid_price_bounds() : u64 {
+        24
+    }
+
+    public fun invalid_price_limit() : u64 {
+        8
+    }
+
+    public fun invalid_price_or_liquidity() : u64 {
+        76
+    }
+
+    public fun invalid_protocol_fee() : u64 {
+        4
+    }
+
+    public fun invalid_reserves_state() : u64 {
+        9
+    }
+
+    public fun invalid_sqrt_prices() : u64 {
+        80
+    }
+
+    public fun invalid_tick() : u64 {
+        19
+    }
+
+    public fun invalid_tick_range() : u64 {
+        72
+    }
+
+    public fun invalid_tick_spacing() : u64 {
+        6
+    }
+
+    public fun invalid_timestamp() : u64 {
+        3
+    }
+
+    public fun not_authorised() : u64 {
+        32
+    }
+
+    public fun observe_checks() : u64 {
+        23
+    }
+
+    public fun overflow() : u64 {
+        20
+    }
+
+    public fun pool_is_pause() : u64 {
+        70
+    }
+
+    public fun pool_not_initialised() : u64 {
+        31
+    }
+
+    public fun position_not_empty() : u64 {
+        30
+    }
+
+    public fun reward_cap_already_issued() : u64 {
+        82
+    }
+
+    public fun reward_index_not_found() : u64 {
+        28
+    }
+
+    public fun trading_disabled() : u64 {
+        75
+    }
+
+    public fun update_rewards_info_check_failed() : u64 {
+        18
+    }
+
+    public fun value_out_of_range() : u64 {
+        77
+    }
+
+    public fun version_not_supported() : u64 {
+        69
+    }
+
+    public fun zero() : u64 {
+        0
+    }
+
+    // decompiled from Move bytecode v6
+}
+
