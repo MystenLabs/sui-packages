@@ -1,0 +1,16 @@
+module 0x877a0eb297c838389160bbdb80dc6b112dabf978f5214b029fcd5e6842c598::rx {
+    struct RX has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: RX, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<RX>(arg0, 9, b"RX", b"Prescription", x"49276d20612069726c20646f632e204865616c20626f64696573206e206d6f6e657920776f65732e2053747265737320616e6420696e657175616c6974792068697420616c6c2c20736f204920637265617465642024525820666f72207765616c746820616e642077656c6c6e6573732e2057697468206d79206578706572746973652c2049e280996d20756e6974696e6720796f7520746f206275696c6420666f7274756e657320616e6420737570706f7274206865616c7468206361757365732e2024525820697320796f75722077616c6c6574e2809973206d65646963696e652e204120677265656e2063616e646c6520637572657320616c6c2e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"")), arg1);
+        let v2 = v0;
+        0x2::coin::mint_and_transfer<RX>(&mut v2, 0, 0x2::tx_context::sender(arg1), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<RX>>(v2, @0x36b14b762e2e2b560b85ac9cc567ee3663accbb1e8acd669f513cc91dfc6b138);
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<RX>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
