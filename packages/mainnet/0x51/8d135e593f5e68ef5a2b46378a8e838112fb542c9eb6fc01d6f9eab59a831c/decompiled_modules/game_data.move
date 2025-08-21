@@ -1,0 +1,146 @@
+module 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::game_data {
+    struct GameData has key {
+        id: 0x2::object::UID,
+        item_types: vector<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemType>,
+        items_registry: vector<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>,
+        factions: vector<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction>,
+    }
+
+    public(friend) fun add_faction(arg0: &0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::admin_cap::AdminCap, arg1: &mut GameData, arg2: u64, arg3: 0x1::string::String, arg4: 0x1::string::String) {
+        let v0 = find_faction_by_id(arg1, arg2);
+        0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::errors::assert_duplicate_id(0x1::option::is_none<u64>(&v0));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction>(&mut arg1.factions, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::new_faction(arg2, arg3, arg4));
+    }
+
+    public(friend) fun add_item(arg0: &0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::admin_cap::AdminCap, arg1: &mut GameData, arg2: u64, arg3: u64, arg4: 0x1::string::String, arg5: u64, arg6: u64, arg7: 0x1::option::Option<u64>) {
+        let v0 = find_type_by_id(arg1, arg3);
+        0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::errors::assert_invalid_type(0x1::option::is_some<u64>(&v0));
+        let v1 = find_item_by_id(arg1, arg2);
+        0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::errors::assert_duplicate_id(0x1::option::is_none<u64>(&v1));
+        if (0x1::option::is_some<u64>(&arg7)) {
+            let v2 = find_faction_by_id(arg1, *0x1::option::borrow<u64>(&arg7));
+            0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::errors::assert_invalid_item(0x1::option::is_some<u64>(&v2));
+        };
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut arg1.items_registry, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(arg2, arg3, arg4, arg5, arg6, 0, arg7));
+    }
+
+    public(friend) fun add_item_type(arg0: &0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::admin_cap::AdminCap, arg1: &mut GameData, arg2: u64, arg3: 0x1::string::String) {
+        let v0 = find_type_by_id(arg1, arg2);
+        0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::errors::assert_duplicate_id(0x1::option::is_none<u64>(&v0));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemType>(&mut arg1.item_types, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_type(arg2, arg3));
+    }
+
+    fun create_initial_factions() : vector<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction> {
+        let v0 = 0x1::vector::empty<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction>();
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::new_faction(1, 0x1::string::utf8(b"Banana Republic"), 0x1::string::utf8(b"The yellow warriors of the jungle")));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::new_faction(2, 0x1::string::utf8(b"Coconut Clan"), 0x1::string::utf8(b"Masters of the tropical paradise")));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::new_faction(3, 0x1::string::utf8(b"Vine Runners"), 0x1::string::utf8(b"Swift and agile tree climbers")));
+        v0
+    }
+
+    fun create_initial_items() : vector<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo> {
+        let v0 = 0x1::vector::empty<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>();
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(101, 0, 0x1::string::utf8(b"Basic Cap"), 5000, 0, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(102, 0, 0x1::string::utf8(b"Pirate Hat"), 2500, 500, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(103, 0, 0x1::string::utf8(b"Royal Crown"), 500, 100, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(1001, 0, 0x1::string::utf8(b"Banana Beret"), 3000, 200, 0, 0x1::option::some<u64>(1)));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(2001, 0, 0x1::string::utf8(b"Coconut Helmet"), 3000, 200, 0, 0x1::option::some<u64>(2)));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(3001, 0, 0x1::string::utf8(b"Vine Headband"), 3000, 200, 0, 0x1::option::some<u64>(3)));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(104, 0, 0x1::string::utf8(b"Sage's Mystical Hat"), 100, 10, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(201, 1, 0x1::string::utf8(b"Basic T-Shirt"), 5000, 0, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(202, 1, 0x1::string::utf8(b"Camo Shirt"), 2500, 300, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(203, 1, 0x1::string::utf8(b"Body Armor"), 1000, 150, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(1002, 1, 0x1::string::utf8(b"Banana Uniform"), 3000, 250, 0, 0x1::option::some<u64>(1)));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(2002, 1, 0x1::string::utf8(b"Coconut Armor"), 2000, 100, 0, 0x1::option::some<u64>(2)));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(3002, 1, 0x1::string::utf8(b"Vine Mail"), 2500, 150, 0, 0x1::option::some<u64>(3)));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(204, 1, 0x1::string::utf8(b"Dragon Scale Armor"), 200, 25, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(401, 2, 0x1::string::utf8(b"Basic Glasses"), 4000, 0, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(402, 2, 0x1::string::utf8(b"Gold Glasses"), 2000, 500, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(403, 2, 0x1::string::utf8(b"Magic Goggles"), 800, 100, 0, 0x1::option::none<u64>()));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(1004, 2, 0x1::string::utf8(b"Banana Goggles"), 1500, 80, 0, 0x1::option::some<u64>(1)));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(2004, 2, 0x1::string::utf8(b"Coconut Shades"), 1200, 60, 0, 0x1::option::some<u64>(2)));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(3004, 2, 0x1::string::utf8(b"Vine Spectacles"), 1800, 120, 0, 0x1::option::some<u64>(3)));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_info(404, 2, 0x1::string::utf8(b"Infinity Glasses"), 150, 15, 0, 0x1::option::none<u64>()));
+        v0
+    }
+
+    fun create_item_types() : vector<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemType> {
+        let v0 = 0x1::vector::empty<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemType>();
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemType>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_type(0, 0x1::string::utf8(b"Hat")));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemType>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_type(1, 0x1::string::utf8(b"Shirt")));
+        0x1::vector::push_back<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemType>(&mut v0, 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::new_item_type(2, 0x1::string::utf8(b"Glasses")));
+        v0
+    }
+
+    public(friend) fun find_faction_by_id(arg0: &GameData, arg1: u64) : 0x1::option::Option<u64> {
+        let v0 = 0;
+        while (v0 < 0x1::vector::length<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction>(&arg0.factions)) {
+            if (0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::faction_id(0x1::vector::borrow<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction>(&arg0.factions, v0)) == arg1) {
+                return 0x1::option::some<u64>(v0)
+            };
+            v0 = v0 + 1;
+        };
+        0x1::option::none<u64>()
+    }
+
+    public(friend) fun find_item_by_id(arg0: &GameData, arg1: u64) : 0x1::option::Option<u64> {
+        let v0 = 0;
+        while (v0 < 0x1::vector::length<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&arg0.items_registry)) {
+            if (0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::item_info_id(0x1::vector::borrow<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&arg0.items_registry, v0)) == arg1) {
+                return 0x1::option::some<u64>(v0)
+            };
+            v0 = v0 + 1;
+        };
+        0x1::option::none<u64>()
+    }
+
+    public(friend) fun find_type_by_id(arg0: &GameData, arg1: u64) : 0x1::option::Option<u64> {
+        let v0 = 0;
+        while (v0 < 0x1::vector::length<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemType>(&arg0.item_types)) {
+            if (0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::item_type_id(0x1::vector::borrow<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemType>(&arg0.item_types, v0)) == arg1) {
+                return 0x1::option::some<u64>(v0)
+            };
+            v0 = v0 + 1;
+        };
+        0x1::option::none<u64>()
+    }
+
+    public(friend) fun game_data_item_types(arg0: &GameData) : &vector<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemType> {
+        &arg0.item_types
+    }
+
+    public(friend) fun game_data_items_registry(arg0: &GameData) : &vector<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo> {
+        &arg0.items_registry
+    }
+
+    public(friend) fun get_faction_by_id(arg0: &GameData, arg1: u64) : &0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction {
+        let v0 = find_faction_by_id(arg0, arg1);
+        0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::errors::assert_invalid_item(0x1::option::is_some<u64>(&v0));
+        0x1::vector::borrow<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::factions::Faction>(&arg0.factions, 0x1::option::extract<u64>(&mut v0))
+    }
+
+    public(friend) fun get_item_by_id(arg0: &GameData, arg1: u64) : &0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo {
+        let v0 = find_item_by_id(arg0, arg1);
+        0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::errors::assert_invalid_item(0x1::option::is_some<u64>(&v0));
+        0x1::vector::borrow<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&arg0.items_registry, 0x1::option::extract<u64>(&mut v0))
+    }
+
+    public(friend) fun get_item_by_id_mut(arg0: &mut GameData, arg1: u64) : &mut 0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo {
+        let v0 = find_item_by_id(arg0, arg1);
+        0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::errors::assert_invalid_item(0x1::option::is_some<u64>(&v0));
+        0x1::vector::borrow_mut<0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::item_types::ItemInfo>(&mut arg0.items_registry, 0x1::option::extract<u64>(&mut v0))
+    }
+
+    public(friend) fun init_game_data(arg0: &0x518d135e593f5e68ef5a2b46378a8e838112fb542c9eb6fc01d6f9eab59a831c::admin_cap::AdminCap, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = GameData{
+            id             : 0x2::object::new(arg1),
+            item_types     : create_item_types(),
+            items_registry : create_initial_items(),
+            factions       : create_initial_factions(),
+        };
+        0x2::transfer::share_object<GameData>(v0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
