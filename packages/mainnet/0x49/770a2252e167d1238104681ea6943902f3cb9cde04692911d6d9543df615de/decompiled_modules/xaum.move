@@ -1,0 +1,14 @@
+module 0x49770a2252e167d1238104681ea6943902f3cb9cde04692911d6d9543df615de::xaum {
+    struct XAUM has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: XAUM, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0xf4054b4c967ea64173453f593a0ec98cb6aa351635cbc412f4fdf5f804bb98db::token_emitter::create_currency<XAUM>(arg0, 9, b"XAUM", b"Matrixdock Gold", b"Matrixdock Gold (XAUm) is a standardized token deployed on multiple chains, with a 1:1 peg to 1 troy oz. fine weight of high grade LBMA gold. The total supply of XAUm will always be equal to the amount of underlying assets stored in highly secured ", 0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,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"), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<XAUM>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<XAUM>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
