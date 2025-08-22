@@ -1,0 +1,116 @@
+module 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::auto_exit {
+    struct NewAutoExitStrategyEvent has copy, drop {
+        strategy_id: 0x2::object::ID,
+        owner: address,
+        position_registry_id: u64,
+        description: 0x1::string::String,
+        exit_trigger_value: u64,
+        to_coin: 0x1::type_name::TypeName,
+    }
+
+    struct AutoExitTriggerEvent has copy, drop {
+        strategy_id: 0x2::object::ID,
+        exit_value: u64,
+        timestamp_ms: u64,
+    }
+
+    struct AutoExitStrategy has store, key {
+        id: 0x2::object::UID,
+        owner: address,
+        position_registry_id: u64,
+        description: 0x1::string::String,
+        exit_trigger_value: u64,
+        exit_trigger_direction: bool,
+        to_coin: 0x1::type_name::TypeName,
+    }
+
+    struct AutoExitRequest has copy, drop {
+        strategy_id: 0x2::object::ID,
+        exit_value: u64,
+    }
+
+    struct AUTO_EXIT has drop {
+        dummy_field: bool,
+    }
+
+    public fun decode_auto_exit_strategy_data<T0>(arg0: vector<u8>) : (0x1::string::String, u64, bool, 0x1::type_name::TypeName) {
+        let v0 = 0x2::bcs::new(arg0);
+        (0x1::string::utf8(0x2::bcs::peel_vec_u8(&mut v0)), 0x2::bcs::peel_u64(&mut v0), 0x2::bcs::peel_bool(&mut v0), 0x1::type_name::get<T0>())
+    }
+
+    public fun new_auto_exit_request(arg0: 0x2::object::ID, arg1: u64) : AutoExitRequest {
+        AutoExitRequest{
+            strategy_id : arg0,
+            exit_value  : arg1,
+        }
+    }
+
+    public fun new_auto_exit_strategy<T0: store, T1>(arg0: &0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::config::GlobalConfig, arg1: &mut 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::registry::PositionRegistry, arg2: u64, arg3: vector<u8>, arg4: &mut 0x2::tx_context::TxContext) : AutoExitStrategy {
+        0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::config::check_version(arg0);
+        let (v0, v1, v2, v3) = decode_auto_exit_strategy_data<T1>(arg3);
+        assert!(0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::registry::is_some_position<T0>(arg1, arg2), 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::errors::error_position_registry_not_exists());
+        assert!(0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::registry::owner<T0>(arg1, arg2) == 0x2::tx_context::sender(arg4), 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::errors::error_invalid_owner());
+        let v4 = AutoExitStrategy{
+            id                     : 0x2::object::new(arg4),
+            owner                  : 0x2::tx_context::sender(arg4),
+            position_registry_id   : arg2,
+            description            : v0,
+            exit_trigger_value     : v1,
+            exit_trigger_direction : v2,
+            to_coin                : v3,
+        };
+        let v5 = NewAutoExitStrategyEvent{
+            strategy_id          : *0x2::object::uid_as_inner(&v4.id),
+            owner                : v4.owner,
+            position_registry_id : arg2,
+            description          : v0,
+            exit_trigger_value   : v1,
+            to_coin              : v3,
+        };
+        0x2::event::emit<NewAutoExitStrategyEvent>(v5);
+        v4
+    }
+
+    public fun prepare_exit_bot<T0: store>(arg0: &AutoExitStrategy, arg1: &0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::config::GlobalConfig, arg2: &mut 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::registry::PositionRegistry, arg3: &0x4376812594277ddf4c5cf03c9e3d6ee78019defab822916e4bdb7b874f621951::enclave::Enclave<AUTO_EXIT>, arg4: u64, arg5: AutoExitRequest, arg6: &vector<u8>, arg7: &0x2::clock::Clock) : T0 {
+        0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::config::check_version(arg1);
+        0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::config::check_is_paused(arg1);
+        assert!(0x4376812594277ddf4c5cf03c9e3d6ee78019defab822916e4bdb7b874f621951::enclave::verify_signature<AUTO_EXIT, AutoExitRequest>(arg3, 0, arg4, arg5, arg6), 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::errors::error_invalid_signature());
+        let AutoExitRequest {
+            strategy_id : v0,
+            exit_value  : v1,
+        } = arg5;
+        assert!(v0 == *0x2::object::uid_as_inner(&arg0.id), 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::errors::error_invalid_strategy_id());
+        prepare_exit_internal<T0>(arg2, arg0, v1, arg7)
+    }
+
+    fun prepare_exit_internal<T0: store>(arg0: &mut 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::registry::PositionRegistry, arg1: &AutoExitStrategy, arg2: u64, arg3: &0x2::clock::Clock) : T0 {
+        if (arg1.exit_trigger_direction && arg2 < arg1.exit_trigger_value) {
+            abort 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::errors::error_total_position_value_below_trigger_threshold()
+        };
+        if (!arg1.exit_trigger_direction && arg2 > arg1.exit_trigger_value) {
+            abort 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::errors::error_total_position_value_above_trigger_threshold()
+        };
+        let v0 = AutoExitTriggerEvent{
+            strategy_id  : *0x2::object::uid_as_inner(&arg1.id),
+            exit_value   : arg2,
+            timestamp_ms : 0x2::clock::timestamp_ms(arg3),
+        };
+        0x2::event::emit<AutoExitTriggerEvent>(v0);
+        0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::registry::get_position_by_id<T0>(arg0, arg1.position_registry_id)
+    }
+
+    public fun prepare_exit_owner<T0: store>(arg0: &0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::config::GlobalConfig, arg1: &mut 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::registry::PositionRegistry, arg2: &AutoExitStrategy, arg3: AutoExitRequest, arg4: &0x2::clock::Clock, arg5: &mut 0x2::tx_context::TxContext) : T0 {
+        0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::config::check_version(arg0);
+        0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::config::check_is_paused(arg0);
+        let AutoExitRequest {
+            strategy_id : v0,
+            exit_value  : v1,
+        } = arg3;
+        assert!(v0 == *0x2::object::uid_as_inner(&arg2.id), 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::errors::error_invalid_strategy_id());
+        assert!(arg2.owner == 0x2::tx_context::sender(arg5), 0x837bb9907b7388a8b306ab24b659055d1b71aa00d3862ebb8dab9ab365d2505e::errors::error_invalid_owner());
+        prepare_exit_internal<T0>(arg1, arg2, v1, arg4)
+    }
+
+    // decompiled from Move bytecode v6
+}
+
