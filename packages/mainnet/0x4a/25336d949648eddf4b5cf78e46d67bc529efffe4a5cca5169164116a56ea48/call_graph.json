@@ -1,0 +1,192 @@
+{
+  "package_id": "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48",
+  "module_call_graphs": [
+    {
+      "module_name": "actions",
+      "call_graph": {
+        "decode": [
+          "0x5a6ab91581604273c78ef5bf421f0f57868ac40e519d39e2b80f39e9ddaef12e::decoder::decode_list",
+          "0x5a6ab91581604273c78ef5bf421f0f57868ac40e519d39e2b80f39e9ddaef12e::decoder::decode_u128"
+        ],
+        "get_hub_admin": [],
+        "get_hub_signers": [],
+        "get_rate_limit": [],
+        "get_reset_token": [],
+        "is_pause": [],
+        "is_reset_rate_limit": [],
+        "is_set_hub_admin": [],
+        "is_set_hub_signers": [],
+        "is_set_rate_limit": []
+      }
+    },
+    {
+      "module_name": "message",
+      "call_graph": {
+        "decode": [
+          "0x5a6ab91581604273c78ef5bf421f0f57868ac40e519d39e2b80f39e9ddaef12e::decoder::decode_list",
+          "0x5a6ab91581604273c78ef5bf421f0f57868ac40e519d39e2b80f39e9ddaef12e::decoder::decode_u64",
+          "0x5a6ab91581604273c78ef5bf421f0f57868ac40e519d39e2b80f39e9ddaef12e::decoder::decode_u8"
+        ],
+        "get_actions": [
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::decode"
+        ],
+        "get_deadline": [],
+        "has_expired": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms"
+        ]
+      }
+    },
+    {
+      "module_name": "payload",
+      "call_graph": {
+        "decode": [
+          "0x5a6ab91581604273c78ef5bf421f0f57868ac40e519d39e2b80f39e9ddaef12e::decoder::decode_list"
+        ],
+        "extract_pubkey": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::ecdsa_k1::decompress_pubkey",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::ecdsa_k1::secp256k1_ecrecover",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::payload::full_pubkey_to_eth_address"
+        ],
+        "full_pubkey_to_eth_address": [
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::payload::pubkey_to_eth_address"
+        ],
+        "get_message": [
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::message::decode"
+        ],
+        "new": [],
+        "pubkey_to_eth_address": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hash::keccak256"
+        ],
+        "recover_signer": [
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::payload::extract_pubkey"
+        ]
+      }
+    },
+    {
+      "module_name": "rate_limits",
+      "call_graph": {
+        "compute_available": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::u128::min"
+        ],
+        "configure": [],
+        "decode_and_verify_payload": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::message::get_actions",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::message::get_deadline",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::message::has_expired",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::payload::decode",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::payload::get_message",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::payload::recover_signer"
+        ],
+        "enforce_version": [],
+        "get_asset_manager": [],
+        "get_available": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::compute_available",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::get_type_string",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::timestamp_s"
+        ],
+        "get_hub_admin": [],
+        "get_hub_manager": [],
+        "get_hub_signers": [],
+        "get_rate_limit_configs": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::get_type_string"
+        ],
+        "get_recv_message_args": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_as_inner",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::enforce_version",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::id_to_hex_string"
+        ],
+        "get_type_string": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::into_string",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::to_hex_string"
+        ],
+        "id_to_hex_string": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hex::encode",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_to_bytes",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::to_hex_string"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::package::claim",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::package::published_package",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "is_authorized": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::contains"
+        ],
+        "migrate": [],
+        "pause": [],
+        "pause_s": [
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::is_pause",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::decode_and_verify_payload",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::is_authorized"
+        ],
+        "process_message": [
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::get_hub_admin",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::get_hub_signers",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::get_rate_limit",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::get_reset_token",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::is_pause",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::is_reset_rate_limit",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::is_set_hub_admin",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::is_set_hub_signers",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::actions::is_set_rate_limit",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::decode_and_verify_payload",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::is_authorized",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::reset_rate_limit",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::set_rate_limit_inner",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::timestamp_s"
+        ],
+        "recv_message": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::hash::keccak256",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::process_message",
+          "0xf3b1e696a66d02cb776dc15aae73c68bc8f03adcb6ba0ec7f6332d9d90a6a3d2::connectionv3::verify_message"
+        ],
+        "reset_rate_limit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut"
+        ],
+        "set_asset_manager": [],
+        "set_rate_limit_inner": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::compute_available"
+        ],
+        "timestamp_s": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms"
+        ],
+        "to_hex_string": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::append",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8"
+        ],
+        "unpause": [],
+        "verify_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::package::published_package",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::compute_available",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::get_type_string",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::timestamp_s",
+          "0x4a25336d949648eddf4b5cf78e46d67bc529efffe4a5cca5169164116a56ea48::rate_limits::to_hex_string"
+        ]
+      }
+    }
+  ]
+}
