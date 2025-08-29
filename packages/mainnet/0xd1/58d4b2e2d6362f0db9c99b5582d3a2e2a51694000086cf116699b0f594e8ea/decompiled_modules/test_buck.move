@@ -1,0 +1,4 @@
+module 0xd158d4b2e2d6362f0db9c99b5582d3a2e2a51694000086cf116699b0f594e8ea::test_buck {
+    // decompiled from Move bytecode v6
+}
+
