@@ -1,0 +1,14 @@
+module 0xe2bdf82acbd2b804b2f653edbdd6e59ba8e64e77684b3d15f5f1661bd4f64205::sea {
+    struct SEA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SEA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0xf4054b4c967ea64173453f593a0ec98cb6aa351635cbc412f4fdf5f804bb98db::token_emitter::create_currency<SEA>(arg0, 6, b"SEA", b"SEAL", b"", 0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,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"), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SEA>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SEA>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
