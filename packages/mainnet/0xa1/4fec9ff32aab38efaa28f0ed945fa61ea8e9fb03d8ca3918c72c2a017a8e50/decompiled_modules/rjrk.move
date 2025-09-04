@@ -1,0 +1,14 @@
+module 0xa14fec9ff32aab38efaa28f0ed945fa61ea8e9fb03d8ca3918c72c2a017a8e50::rjrk {
+    struct RJRK has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: RJRK, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0xf4054b4c967ea64173453f593a0ec98cb6aa351635cbc412f4fdf5f804bb98db::token_emitter::create_currency<RJRK>(arg0, 6, b"RJRK", b"R.J. Knox", b"", 0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,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"), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<RJRK>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<RJRK>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
