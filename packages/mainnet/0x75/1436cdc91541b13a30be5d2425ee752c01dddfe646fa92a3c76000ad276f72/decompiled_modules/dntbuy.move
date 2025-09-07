@@ -1,0 +1,27 @@
+module 0x751436cdc91541b13a30be5d2425ee752c01dddfe646fa92a3c76000ad276f72::dntbuy {
+    struct DNTBUY has drop {
+        dummy_field: bool,
+    }
+
+    public entry fun mint(arg0: &mut 0x2::coin::TreasuryCap<DNTBUY>, arg1: u64, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::coin::mint_and_transfer<DNTBUY>(arg0, arg1, arg2, arg3);
+    }
+
+    fun init(arg0: DNTBUY, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = b"https://gateway.pinata.cloud/ipfs/bafkreibhy7qzrqztjxxug3hdciqlpelfja2tlrihjxdu56i7bssvi7iubi";
+        let v1 = if (0x1::vector::length<u8>(&v0) == 0) {
+            0x1::option::none<0x2::url::Url>()
+        } else {
+            0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://gateway.pinata.cloud/ipfs/bafkreibhy7qzrqztjxxug3hdciqlpelfja2tlrihjxdu56i7bssvi7iubi"))
+        };
+        let (v2, v3, v4) = 0x2::coin::create_regulated_currency_v2<DNTBUY>(arg0, 9, b"DNTBUY", b"Dont Buy", b"Don't buy. These are test tokens and the Actual sui value will be pulled out to 0 at any time. Website: https://suitokenlauncher.app X: https://x.com/mobdaboss Telegram: https://t.me/mobdaboss", v1, true, arg1);
+        let v5 = v2;
+        0x2::transfer::public_transfer<0x2::coin::Coin<DNTBUY>>(0x2::coin::mint<DNTBUY>(&mut v5, 1000000000000000, arg1), 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<DNTBUY>>(v5, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::DenyCapV2<DNTBUY>>(v3, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<DNTBUY>>(v4, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
