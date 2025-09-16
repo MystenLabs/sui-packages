@@ -1,0 +1,64 @@
+module 0x4b0f4ee1a40ce37ec81c987cc4e76a665419e74b863319492fc7d26f708b835a::tgld {
+    struct TGLD has drop {
+        dummy_field: bool,
+    }
+
+    struct TgldRegistry has key {
+        id: 0x2::object::UID,
+        treasury_cap: 0x2::coin::TreasuryCap<TGLD>,
+        token_policy_cap: 0x2::token::TokenPolicyCap<TGLD>,
+    }
+
+    struct MintEvent has copy, drop {
+        recipient: address,
+        log: vector<u64>,
+        bcs_padding: vector<vector<u8>>,
+    }
+
+    struct BurnEvent has copy, drop {
+        log: vector<u64>,
+        bcs_padding: vector<vector<u8>>,
+    }
+
+    public fun burn(arg0: &0x4b0f4ee1a40ce37ec81c987cc4e76a665419e74b863319492fc7d26f708b835a::ecosystem::ManagerCap, arg1: &0x4b0f4ee1a40ce37ec81c987cc4e76a665419e74b863319492fc7d26f708b835a::ecosystem::Version, arg2: &mut TgldRegistry, arg3: 0x2::token::Token<TGLD>) {
+        0x4b0f4ee1a40ce37ec81c987cc4e76a665419e74b863319492fc7d26f708b835a::ecosystem::version_check(arg1);
+        let v0 = 0x1::vector::empty<u64>();
+        0x1::vector::push_back<u64>(&mut v0, 0x2::token::value<TGLD>(&arg3));
+        let v1 = BurnEvent{
+            log         : v0,
+            bcs_padding : vector[],
+        };
+        0x2::event::emit<BurnEvent>(v1);
+        0x2::token::burn<TGLD>(&mut arg2.treasury_cap, arg3);
+    }
+
+    public fun mint(arg0: &0x4b0f4ee1a40ce37ec81c987cc4e76a665419e74b863319492fc7d26f708b835a::ecosystem::ManagerCap, arg1: &0x4b0f4ee1a40ce37ec81c987cc4e76a665419e74b863319492fc7d26f708b835a::ecosystem::Version, arg2: &mut TgldRegistry, arg3: address, arg4: u64, arg5: &mut 0x2::tx_context::TxContext) {
+        0x4b0f4ee1a40ce37ec81c987cc4e76a665419e74b863319492fc7d26f708b835a::ecosystem::version_check(arg1);
+        let (_, _, _, _) = 0x2::token::confirm_with_policy_cap<TGLD>(&arg2.token_policy_cap, 0x2::token::transfer<TGLD>(0x2::token::mint<TGLD>(&mut arg2.treasury_cap, arg4, arg5), arg3, arg5), arg5);
+        let v4 = 0x1::vector::empty<u64>();
+        0x1::vector::push_back<u64>(&mut v4, arg4);
+        let v5 = MintEvent{
+            recipient   : arg3,
+            log         : v4,
+            bcs_padding : vector[],
+        };
+        0x2::event::emit<MintEvent>(v5);
+    }
+
+    fun init(arg0: TGLD, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TGLD>(arg0, 0, b"TGLD", b"Typus Gold", b"TGLD on Sui maintained by Typus Lab", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe(0x1::ascii::string(b"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTIiIGhlaWdodD0iNTIiIHZpZXdCb3g9IjAgMCA1MiA1MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjYiIGN5PSIyNiIgcj0iMjYiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcl8xNDU5MV80NjczMTApIi8+CjxwYXRoIGQ9Ik0yNy41ODA4IDguOTkyOTlDMjguNzUxNSA5Ljc3ODc5IDI5LjgyNTUgMTAuOTU3NSAzMC40OTgxIDExLjc1MzZDMzEuNzQwMiAxMy4yMTU2IDMzLjEyMzIgMTQuODIwMyAzMy44MTA1IDE2LjYyMTRDMzQuMzA0NCAxNy45MiAzNC4zNjEyIDE5LjQ0ODIgMzMuNjE5MiAyMC42Mjg5QzMyLjk3ODIgMjEuNjUwNCAzMS44NDk1IDIyLjI2NDYgMzAuNzcxMyAyMi44MzUzQzI5LjA2ODggMjMuNzM2OSAyNy4zNjY0IDI0LjYzODUgMjUuNjU5NyAyNS41NDAxQzI1LjU5MjUgMjUuNTc1MyAyNS41MjEgMjUuNjE2NiAyNS40OTU4IDI1LjY4NDlDMjUuNDY2NCAyNS43NTcyIDI1LjUgMjUuODM1OCAyNS41MjczIDI1LjkwODJDMjUuNzM3NSAyNi40MjUyIDI1Ljk2ODcgMjYuODc1OSAyNi4wOTA2IDI3LjM1MTZDMjYuMjQxOSAyNy45Mzg4IDI2LjE4NTIgMjcuNDY3NCAyNi4yNTg3IDI4LjQ2MkMyNi4yOTAzIDI4Ljg4OCAyNi4xOTk5IDI5LjM3NiAyNS45ODc2IDI5Ljc3NzJDMjUuOTA5OCAyOS45MjE5IDI1LjgzIDMwLjE0OTQgMjUuNjc0NCAzMC4xOTlDMjUuMzczOSAzMC4yOTQxIDI0LjE1MjcgMjguODI4IDIzLjcwNTEgMjguNTQ2OEMyMi43MDQ2IDI3LjkyMDIgMjIuMTA5OCAyNy42MDM4IDIxLjY2NDIgMjcuNzE1NUMyMS42MDk2IDI3LjcyNzkgMjAuNTkwMiAyOC4yOTQ1IDIwLjE1NTEgMjguODU3QzE5Ljg4MTkgMjkuMjEyNiAxOS42MDY2IDI5LjYxMTcgMTkuMzg4IDI5Ljk0NjdDMTguNTc0NiAzMS4xODc1IDE4Ljg3OTMgMzIuNDQ2OCAxOC45ODQ0IDMyLjg3NjlDMTkuMzEwMiAzNC4yMjMxIDIwLjY5OTUgMzQuMjM5NiAyMS44ODQ5IDM0LjIwMDRDMjQuMTU5IDM0LjEyMzggMjYuNTM4MyAzNC4yNTgzIDI4LjUyMjQgMzUuMzU2M0MyOC44ODM5IDM1LjU1NjkgMjkuMjc2OSAzNS45MjA4IDI5LjEzMTkgMzYuMzAxM0MyOS4wNDk5IDM2LjUxMjIgMjguODI5MiAzNi42MzQyIDI4LjYyMTIgMzYuNzI5NEMyNy42ODU5IDM3LjE2MzYgMjYuNjkxNyAzNy40Nzc5IDI1LjY3NDQgMzcuNjU3OEMyNC44ODQyIDM3Ljc5ODUgMjQuMDU4MiAzNy44NjY3IDIzLjM1NDEgMzguMjQ1MUMyMi41ODI3IDM4LjY1ODcgMjIuMDQyNSAzOS40MDczIDIxLjY5NzggNDAuMjAzNEMyMS40MjA0IDQwLjg0NjUgMjAuOTg5NSA0NC4xMzg1IDE5Ljc3NjggNDMuNTUxM0MxOS41NjQ1IDQzLjQ0OTkgMTkuNDE1MyA0My4yNTU2IDE5LjI5MzQgNDMuMDU3MUMxOC43ODI2IDQyLjIyMTYgMTguNjc3NiA0MS4yMzMyIDE4LjI4NjYgNDAuMzUwMkMxNy44NDc0IDM5LjM1NTYgMTcuMDQyNCAzOC44NTcyIDE2LjE3NDMgMzguMjQ3MkMxNC4zOTQxIDM2Ljk5ODIgMTIuODU3NyAzNS4xMTIzIDEyLjMwOTEgMzMuMDA3MkMxMS41NzE0IDMwLjE4MjUgMTEuNzQ3OSAyNi42MzQgMTMuMjUyOCAyNC4wNTc0QzEyLjk1MjMgMjMuNzUxNCAxMi44MDA5IDIzLjcyNjYgMTEuMDk2NCAyMy44NTQ4QzEwLjg0ODQgMjMuODczNCA5LjQ2NTM5IDI0LjIxNDYgOS4zMzkyOCAyMy45OTk1QzkuMjM4NCAyMy44MjU4IDkuMzMyOTggMjMuNDU3OCA5LjQ2MTE5IDIzLjE1NzlDOS41MDMyMyAyMy4wNjI4IDkuNTUzNjYgMjIuOTUzMiA5LjU4NzI5IDIyLjg3NDZDOS43ODY5NiAyMi4zNzAxIDEwLjE4IDIyLjAyMjcgMTAuNjAyNSAyMS42ODM1QzExLjc3NTMgMjAuNzQwNiAxMy4wNDkgMTkuOTUyNyAxNC40ODI0IDE5LjQzOTlDMTQuOTA5IDE5LjI4ODkgMTUuMDk0IDE5LjAyNDIgMTUuMjc0OCAxOC41OTQxQzE2Ljg3NDIgMTQuNzk1NCAyMC40ODkzIDguMzgwOSAyNS4yNjY3IDguMTc4MjVDMjYuMDIzMyA4LjE0MzEgMjYuODI0MSA4LjQ4NjM3IDI3LjU4MDggOC45OTI5OVoiIGZpbGw9IiMxRDI1MkQiLz4KPHBhdGggZD0iTTQyLjcwNyAzMC40Mzk0QzM5LjU0NTggMzIuNTA1MyAzNy43MTMzIDM0LjQ3ODggMzcuNzk4MyAzNS42OTkyQzM3Ljc5NTEgMzUuNjk2IDM3Ljc5NTEgMzUuNjkyNyAzNy43OTUxIDM1LjY4OTVDMzcuNjMxNCAzMi44ODY3IDM2LjAxODEgMzAuNjg3NyAzNC4wNTE0IDMwLjY4NzdDMzMuNTc2OSAzMC42ODc3IDMzLjEyMiAzMC44MTU5IDMyLjcwMzEgMzEuMDQ5NkMzNS43NzI3IDI5LjAzODggMzcuNTc5MSAyNy4xMjA1IDM3LjU4NTYgMjUuODk4NEMzNy43Nzg3IDI4LjY2MjMgMzkuMzgyMiAzMC44MTkxIDQxLjMyOTMgMzAuODE5MUM0MS44MTY5IDMwLjgxOTEgNDIuMjgxNiAzMC42ODQ0IDQyLjcwNyAzMC40Mzk0WiIgZmlsbD0iIzFEMjUyRCIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDBfbGluZWFyXzE0NTkxXzQ2NzMxMCIgeDE9IjIuNzE0MjkiIHkxPSI1MC4wNzE0IiB4Mj0iNDAuMTQyOSIgeTI9IjcuNzE0MjgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0ZGQkUxNyIvPgo8c3RvcCBvZmZzZXQ9IjAuNjQwNjI1IiBzdG9wLWNvbG9yPSIjRkZFMjk3Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+Cg=="))), arg1);
+        let v2 = v0;
+        let (v3, v4) = 0x2::token::new_policy<TGLD>(&v2, arg1);
+        let v5 = TgldRegistry{
+            id               : 0x2::object::new(arg1),
+            treasury_cap     : v2,
+            token_policy_cap : v4,
+        };
+        0x2::token::share_policy<TGLD>(v3);
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<TGLD>>(v1);
+        0x2::transfer::share_object<TgldRegistry>(v5);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
