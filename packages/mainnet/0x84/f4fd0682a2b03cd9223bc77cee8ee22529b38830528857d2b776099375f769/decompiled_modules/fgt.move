@@ -1,0 +1,14 @@
+module 0x84f4fd0682a2b03cd9223bc77cee8ee22529b38830528857d2b776099375f769::fgt {
+    struct FGT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: FGT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<FGT>(arg0, 6, b"FGT", b"FiGth CLUB", x"3173742072756c652e2e2e20596f7520646f2074616c6b2061626f757420466947746820434c5542200a0a416e20496e7374616772616d206172656e6120776865726520657665727920666f6c6c6f776572206265636f6d6573206120666967687465722e2045616368206461792c2074686f7573616e647320656e74657220616e64206f6e6c79206f6e652077616c6b73206f757420766963746f72696f75732e204a6f696e20746865206172656e612c2073686172652069646561732c20616e64206b6565702074686520666967687420616c6976652e20200a496e7374616772616d204066696768742e6f722e756e666f6c6c6f770a0a", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1758630710341.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<FGT>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<FGT>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
