@@ -1,0 +1,57 @@
+module 0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::redstone_sdk_crypto {
+    fun check_s(arg0: &vector<u8>) : bool {
+        let v0 = b"";
+        let v1 = 0;
+        while (v1 < 32) {
+            0x1::vector::push_back<u8>(&mut v0, *0x1::vector::borrow<u8>(arg0, 32 + v1));
+            v1 = v1 + 1;
+        };
+        0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::redstone_sdk_conv::from_bytes_to_u256(&v0) <= 57896044618658097711785492504343953926418782139537452191302581570759080747168
+    }
+
+    fun last_n_bytes(arg0: &vector<u8>, arg1: u64) : 0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::result::Result<vector<u8>> {
+        let v0 = 0x1::vector::length<u8>(arg0);
+        if (arg1 > v0) {
+            return 0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::result::error<vector<u8>>(b"Invalid length of vector")
+        };
+        let v1 = b"";
+        let v2 = 0;
+        while (v2 < arg1) {
+            0x1::vector::push_back<u8>(&mut v1, *0x1::vector::borrow<u8>(arg0, v0 - arg1 + v2));
+            v2 = v2 + 1;
+        };
+        0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::result::ok<vector<u8>>(v1)
+    }
+
+    public fun recover_address(arg0: &vector<u8>, arg1: &vector<u8>) : vector<u8> {
+        abort 0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::constants::deprecated_code()
+    }
+
+    public(friend) fun try_recover_address(arg0: &vector<u8>, arg1: &vector<u8>) : 0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::result::Result<vector<u8>> {
+        if (0x1::vector::length<u8>(arg1) != 65) {
+            return 0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::result::error<vector<u8>>(b"Invalid signature len")
+        };
+        let v0 = *arg1;
+        let v1 = *0x1::vector::borrow<u8>(&v0, 64);
+        let v2 = if (v1 >= 27) {
+            v1 - 27
+        } else {
+            v1
+        };
+        if (v2 >= 2) {
+            return 0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::result::error<vector<u8>>(b"Invalid recovery id")
+        };
+        if (!check_s(&v0)) {
+            return 0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::result::error<vector<u8>>(b"Invalid `s` part in signature")
+        };
+        *0x1::vector::borrow_mut<u8>(&mut v0, 64) = v2;
+        let v3 = 0x2::ecdsa_k1::secp256k1_ecrecover(&v0, arg0, 0);
+        let v4 = 0x2::ecdsa_k1::decompress_pubkey(&v3);
+        let v5 = 0x89e17825a895ddba532a5aebbf5f790f22401dd014494a9a47c8a1600d1f4ec0::result::unwrap<vector<u8>>(last_n_bytes(&v4, 0x1::vector::length<u8>(&v4) - 1));
+        let v6 = 0x2::hash::keccak256(&v5);
+        last_n_bytes(&v6, 20)
+    }
+
+    // decompiled from Move bytecode v6
+}
+
