@@ -1,0 +1,294 @@
+module 0xc2fd8e0c3f5247ecee930ba97b0bf4b71cbd866e28e4d0c5a3190238cdec020d::bid_ask {
+    public fun add_liquidity<T0, T1>(arg0: &mut 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::Pool<T0, T1>, arg1: &mut 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::position::Position, arg2: &mut 0x2::coin::Coin<T0>, arg3: &mut 0x2::coin::Coin<T1>, arg4: u64, arg5: u64, arg6: u32, arg7: u32, arg8: u32, arg9: u32, arg10: &0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::config::GlobalConfig, arg11: &0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::versioned::Versioned, arg12: &0x2::clock::Clock, arg13: &mut 0x2::tx_context::TxContext) {
+        if (arg4 == 0 && arg5 == 0) {
+            abort 13906835239495532549
+        };
+        0xc2fd8e0c3f5247ecee930ba97b0bf4b71cbd866e28e4d0c5a3190238cdec020d::utils::validate_active_id_slippage<T0, T1>(arg0, arg8, arg9);
+        let v0 = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::active_id<T0, T1>(arg0);
+        let v1 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from_u32(arg6);
+        let v2 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from_u32(arg7);
+        assert!(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lte(v1, v2), 13906835265265205251);
+        let v3 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v0, v1) || 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v0, v2);
+        let v4 = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::price_math::get_price_from_id(v0, 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::bin_step<T0, T1>(arg0));
+        let (v5, v6) = if (!v3) {
+            let (v7, v8) = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::amounts_in_active_bin<T0, T1>(arg0);
+            calculate_active_weights(v7, v8, (v4 as u256))
+        } else {
+            (0, 0)
+        };
+        let v9 = v6;
+        let v10 = v5;
+        if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::eq(v0, v1) && arg5 == 0) {
+            v10 = ((200 as u256) << 128) / (v4 as u256);
+            v9 = 0;
+        };
+        if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::eq(v0, v2) && arg4 == 0) {
+            v9 = (200 as u256) << 64;
+            v10 = 0;
+        };
+        if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v0, v1) && 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v0, v2)) {
+            if (arg4 == 0) {
+                v9 = (200 as u256) << 64;
+                v10 = 0;
+            };
+            if (arg5 == 0) {
+                v10 = ((200 as u256) << 128) / (v4 as u256);
+                v9 = 0;
+            };
+        };
+        let (v11, v12) = if (v3) {
+            (0, 0)
+        } else {
+            (v10, v9)
+        };
+        let v13 = v12;
+        let v14 = v11;
+        let v15 = 2000 - 200;
+        let v16 = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v0, v2)) {
+            v2
+        } else {
+            v0
+        };
+        let v17 = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v0, v1)) {
+            v1
+        } else {
+            v0
+        };
+        let v18 = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v0, v1)) {
+            if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::eq(v16, v1)) {
+                0
+            } else {
+                v15 / (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::as_u32(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(v16, v1)) as u16)
+            }
+        } else {
+            0
+        };
+        let v19 = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v2, v0)) {
+            if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::eq(v2, v17)) {
+                0
+            } else {
+                v15 / (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::as_u32(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(v2, v17)) as u16)
+            }
+        } else {
+            0
+        };
+        let v20 = 0x1::vector::empty<u16>();
+        let v21 = 0x1::vector::empty<u256>();
+        while (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lte(v1, v2)) {
+            let v22 = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v1, v0)) {
+                200 + (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::as_u32(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(v16, v1)) as u16) * v18
+            } else if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v1, v0)) {
+                200 + (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::as_u32(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(v1, v17)) as u16) * v19
+            } else {
+                200
+            };
+            0x1::vector::push_back<u16>(&mut v20, v22);
+            if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v1, v0)) {
+                v13 = v13 + ((v22 as u256) << 64);
+                0x1::vector::push_back<u256>(&mut v21, 0);
+            } else if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v1, v0)) {
+                let v23 = ((v22 as u256) << 128) / (0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::price_math::get_price_from_id(v1, 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::bin_step<T0, T1>(arg0)) as u256);
+                0x1::vector::push_back<u256>(&mut v21, v23);
+                v14 = v14 + v23;
+            } else {
+                0x1::vector::push_back<u256>(&mut v21, 0);
+            };
+            v1 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::add(v1, 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from(1));
+        };
+        let v24 = if (v13 == 0) {
+            0
+        } else {
+            ((arg5 as u256) << 128) / v13
+        };
+        let v25 = if (v14 == 0) {
+            0
+        } else {
+            ((arg4 as u256) << 128) / v14
+        };
+        let v26 = v25 * v10 >> 128;
+        let v27 = v24 * v9 >> 128;
+        let v28 = v26 > 0 || v27 > 0;
+        let v29 = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::new_add_liquidity_cert<T0, T1>(arg0, arg1, v28, arg10, arg11, arg12, arg13);
+        let (v30, _) = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::bin::resolve_bin_position(0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::bin::bin_score(v1));
+        let v32 = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::add_group_if_absent<T0, T1>(arg0, v30, arg11);
+        let v33 = 0;
+        while (v33 < (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::as_u32(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::add(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(v2, v1), 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from(1))) as u64)) {
+            let (v34, v35) = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::bin::resolve_bin_position(0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::bin::bin_score(v1));
+            if (v34 != v30) {
+                v32 = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::add_group_if_absent<T0, T1>(arg0, v34, arg11);
+            };
+            let (v36, v37) = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v1, v0)) {
+                (0, ((v24 * (*0x1::vector::borrow<u16>(&v20, v33) as u256) >> 64) as u64))
+            } else if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v1, v0)) {
+                (((v25 * *0x1::vector::borrow<u256>(&v21, v33) >> 128) as u64), 0)
+            } else {
+                ((v26 as u64), (v27 as u64))
+            };
+            0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::add_liquidity_on_bin<T0, T1>(arg1, &mut v29, v32, v35, v36, v37, arg11);
+            v1 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::add(v1, 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from(1));
+            v33 = v33 + 1;
+        };
+        let (v38, v39) = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::amounts<T0, T1>(&v29);
+        assert!(0x2::coin::value<T0>(arg2) >= v38, 13906835961049776129);
+        assert!(0x2::coin::value<T1>(arg3) >= v39, 13906835965344743425);
+        0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::repay_add_liquidity<T0, T1>(arg0, arg1, v29, 0x2::coin::into_balance<T0>(0x2::coin::split<T0>(arg2, v38, arg13)), 0x2::coin::into_balance<T1>(0x2::coin::split<T1>(arg3, v39, arg13)), arg11);
+    }
+
+    fun calculate_active_weights(arg0: u64, arg1: u64, arg2: u256) : (u256, u256) {
+        if (arg0 == 0 && arg1 == 0) {
+            (((200 as u256) << 128) / arg2 * 2, ((200 as u256) << 64) / 2)
+        } else {
+            let v2 = if (arg0 == 0) {
+                0
+            } else {
+                ((200 as u256) << 128) / (arg2 + ((arg1 as u256) << 64) / (arg0 as u256))
+            };
+            let v3 = if (arg1 == 0) {
+                0
+            } else {
+                ((200 as u256) << 128) / (18446744073709551616 + arg2 * (arg0 as u256) / (arg1 as u256))
+            };
+            (v2, v3)
+        }
+    }
+
+    public fun open_position<T0, T1>(arg0: &mut 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::Pool<T0, T1>, arg1: &mut 0x2::coin::Coin<T0>, arg2: &mut 0x2::coin::Coin<T1>, arg3: u64, arg4: u64, arg5: u32, arg6: u16, arg7: u32, arg8: u32, arg9: &0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::config::GlobalConfig, arg10: &0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::versioned::Versioned, arg11: &0x2::clock::Clock, arg12: &mut 0x2::tx_context::TxContext) : 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::position::Position {
+        if (arg3 == 0 && arg4 == 0) {
+            abort 13906834359027236869
+        };
+        0xc2fd8e0c3f5247ecee930ba97b0bf4b71cbd866e28e4d0c5a3190238cdec020d::utils::validate_active_id_slippage<T0, T1>(arg0, arg7, arg8);
+        let v0 = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::active_id<T0, T1>(arg0);
+        let v1 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from_u32(arg5);
+        let v2 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::add(v1, 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from((arg6 as u32))), 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from(1));
+        let v3 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v0, v1) || 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v0, v2);
+        let v4 = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::price_math::get_price_from_id(v0, 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::bin_step<T0, T1>(arg0));
+        let (v5, v6) = if (!v3) {
+            let (v7, v8) = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::amounts_in_active_bin<T0, T1>(arg0);
+            calculate_active_weights(v7, v8, (v4 as u256))
+        } else {
+            (0, 0)
+        };
+        let v9 = v6;
+        let v10 = v5;
+        if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::eq(v0, v1) && arg4 == 0) {
+            v10 = ((200 as u256) << 128) / (v4 as u256);
+            v9 = 0;
+        };
+        if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::eq(v0, v2) && arg3 == 0) {
+            v9 = (200 as u256) << 64;
+            v10 = 0;
+        };
+        if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v0, v1) && 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v0, v2)) {
+            if (arg3 == 0) {
+                v9 = (200 as u256) << 64;
+                v10 = 0;
+            };
+            if (arg4 == 0) {
+                v10 = ((200 as u256) << 128) / (v4 as u256);
+                v9 = 0;
+            };
+        };
+        let (v11, v12) = if (v3) {
+            (0, 0)
+        } else {
+            (v10, v9)
+        };
+        let v13 = v12;
+        let v14 = v11;
+        let v15 = 2000 - 200;
+        let v16 = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v0, v2)) {
+            v2
+        } else {
+            v0
+        };
+        let v17 = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v0, v1)) {
+            v1
+        } else {
+            v0
+        };
+        let v18 = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v0, v1)) {
+            if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::eq(v16, v1)) {
+                0
+            } else {
+                v15 / (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::as_u32(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(v16, v1)) as u16)
+            }
+        } else {
+            0
+        };
+        let v19 = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v2, v0)) {
+            if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::eq(v2, v17)) {
+                0
+            } else {
+                v15 / (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::as_u32(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(v2, v17)) as u16)
+            }
+        } else {
+            0
+        };
+        let v20 = 0x1::vector::empty<u16>();
+        let v21 = 0x1::vector::empty<u256>();
+        while (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lte(v1, v2)) {
+            let v22 = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v1, v0)) {
+                200 + (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::as_u32(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(v16, v1)) as u16) * v18
+            } else if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v1, v0)) {
+                200 + (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::as_u32(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(v1, v17)) as u16) * v19
+            } else {
+                200
+            };
+            0x1::vector::push_back<u16>(&mut v20, v22);
+            if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v1, v0)) {
+                v13 = v13 + ((v22 as u256) << 64);
+                0x1::vector::push_back<u256>(&mut v21, 0);
+            } else if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v1, v0)) {
+                let v23 = ((v22 as u256) << 128) / (0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::price_math::get_price_from_id(v1, 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::bin_step<T0, T1>(arg0)) as u256);
+                0x1::vector::push_back<u256>(&mut v21, v23);
+                v14 = v14 + v23;
+            } else {
+                0x1::vector::push_back<u256>(&mut v21, 0);
+            };
+            v1 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::add(v1, 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from(1));
+        };
+        let v24 = if (v13 == 0) {
+            0
+        } else {
+            ((arg4 as u256) << 128) / v13
+        };
+        let v25 = if (v14 == 0) {
+            0
+        } else {
+            ((arg3 as u256) << 128) / v14
+        };
+        let v26 = v25 * v10 >> 128;
+        let v27 = v24 * v9 >> 128;
+        let v28 = v26 > 0 || v27 > 0;
+        let (v29, v30) = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::new_open_position_cert<T0, T1>(arg0, arg5, arg6, v28, arg9, arg10, arg11, arg12);
+        let v31 = v30;
+        let v32 = v29;
+        let (v33, _) = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::bin::resolve_bin_position(0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::bin::bin_score(v1));
+        let v35 = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::add_group_if_absent<T0, T1>(arg0, v33, arg10);
+        let v36 = 0;
+        while (v36 < (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::as_u32(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::add(0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::sub(v2, v1), 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from(1))) as u64)) {
+            let (v37, v38) = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::bin::resolve_bin_position(0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::bin::bin_score(v1));
+            if (v37 != v33) {
+                v35 = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::add_group_if_absent<T0, T1>(arg0, v37, arg10);
+            };
+            let (v39, v40) = if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::lt(v1, v0)) {
+                (0, ((v24 * (*0x1::vector::borrow<u16>(&v20, v36) as u256) >> 64) as u64))
+            } else if (0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::gt(v1, v0)) {
+                (((v25 * *0x1::vector::borrow<u256>(&v21, v36) >> 128) as u64), 0)
+            } else {
+                ((v26 as u64), (v27 as u64))
+            };
+            0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::open_position_on_bin<T0, T1>(&mut v32, &mut v31, v35, v38, v39, v40, arg10);
+            v1 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::add(v1, 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::from(1));
+            v36 = v36 + 1;
+        };
+        let (v41, v42) = 0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::open_cert_amounts<T0, T1>(&v31);
+        assert!(0x2::coin::value<T0>(arg1) >= v41, 13906835097761349633);
+        assert!(0x2::coin::value<T1>(arg2) >= v42, 13906835102056316929);
+        0x5664f9d3fd82c84023870cfbda8ea84e14c8dd56ce557ad2116e0668581a682b::pool::repay_open_position<T0, T1>(arg0, &mut v32, v31, 0x2::coin::into_balance<T0>(0x2::coin::split<T0>(arg1, v41, arg12)), 0x2::coin::into_balance<T1>(0x2::coin::split<T1>(arg2, v42, arg12)), arg10);
+        v32
+    }
+
+    // decompiled from Move bytecode v6
+}
+
