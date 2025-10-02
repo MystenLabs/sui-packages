@@ -1,0 +1,12 @@
+module 0xe674ba65d3dec63ee7cfba3ccea81480492aa9f28fb490fdb24b93c814bf3658::ommv2 {
+    public fun swap_oracle<T0, T1, T2, T3, T4, T5: drop>(arg0: &mut 0xe674ba65d3dec63ee7cfba3ccea81480492aa9f28fb490fdb24b93c814bf3658::swap_context::SwapContext, arg1: &0xe84b649199654d18c38e727212f5d8dacfc3cf78d60d0a7fc85fd589f280eb2b::oracles::OracleRegistry, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: u64, arg5: u64, arg6: &mut 0x4fb1cf45dffd6230305f1d269dd1816678cc8e3ba0b747a813a556921219f261::pool::Pool<T3, T4, 0x4fb1cf45dffd6230305f1d269dd1816678cc8e3ba0b747a813a556921219f261::omm_v2::OracleQuoterV2, T5>, arg7: &mut 0x4fb1cf45dffd6230305f1d269dd1816678cc8e3ba0b747a813a556921219f261::bank::Bank<T0, T1, T3>, arg8: &mut 0x4fb1cf45dffd6230305f1d269dd1816678cc8e3ba0b747a813a556921219f261::bank::Bank<T0, T2, T4>, arg9: &0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg10: bool, arg11: u64, arg12: &0x2::clock::Clock, arg13: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::coin::from_balance<T1>(0xe674ba65d3dec63ee7cfba3ccea81480492aa9f28fb490fdb24b93c814bf3658::swap_context::take_balance<T1>(arg0), arg13);
+        let v1 = 0x2::coin::from_balance<T2>(0xe674ba65d3dec63ee7cfba3ccea81480492aa9f28fb490fdb24b93c814bf3658::swap_context::take_balance<T2>(arg0), arg13);
+        0x13bfc09cfc1bd922d3aa53fcf7b2cd510727ee65068ce136e2ebd5f3b213fdd2::pool_script_v2::omm_v2_swap<T0, T1, T2, T3, T4, T5>(arg6, arg7, arg8, arg9, 0xe84b649199654d18c38e727212f5d8dacfc3cf78d60d0a7fc85fd589f280eb2b::oracles::get_pyth_price(arg1, arg2, arg4, arg12), 0xe84b649199654d18c38e727212f5d8dacfc3cf78d60d0a7fc85fd589f280eb2b::oracles::get_pyth_price(arg1, arg3, arg5, arg12), &mut v0, &mut v1, arg10, arg11, 0, arg12, arg13);
+        0xe674ba65d3dec63ee7cfba3ccea81480492aa9f28fb490fdb24b93c814bf3658::swap_context::merge_coin_balance<T1>(arg0, v0);
+        0xe674ba65d3dec63ee7cfba3ccea81480492aa9f28fb490fdb24b93c814bf3658::swap_context::merge_coin_balance<T2>(arg0, v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
