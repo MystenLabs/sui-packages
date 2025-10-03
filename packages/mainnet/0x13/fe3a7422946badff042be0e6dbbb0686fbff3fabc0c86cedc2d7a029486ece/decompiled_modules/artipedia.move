@@ -1,0 +1,242 @@
+module 0xb7c36a747d6fdd6b59ab0354cea52a31df078c242242465a867481b6f4509498::artipedia {
+    struct ARTIPEDIA has drop {
+        dummy_field: bool,
+    }
+
+    struct AdminRegistry has key {
+        id: 0x2::object::UID,
+        admins: 0x2::vec_set::VecSet<address>,
+        treasury_cap: 0x2::coin::TreasuryCap<ARTIPEDIA>,
+    }
+
+    struct Approval has store, key {
+        id: 0x2::object::UID,
+        recipient: address,
+        amount: u64,
+    }
+
+    struct UserNumber has store, key {
+        id: 0x2::object::UID,
+        value: u64,
+        owner: address,
+    }
+
+    struct NumberCreated has copy, drop {
+        user: address,
+        value: u64,
+        object_id: 0x2::object::ID,
+    }
+
+    struct NumberUpdated has copy, drop {
+        user: address,
+        old_value: u64,
+        new_value: u64,
+        object_id: 0x2::object::ID,
+    }
+
+    struct NumberDeleted has copy, drop {
+        user: address,
+        value: u64,
+        object_id: 0x2::object::ID,
+    }
+
+    struct InitEvent has copy, drop {
+        admin: address,
+    }
+
+    struct AdminAddedEvent has copy, drop {
+        admin: address,
+    }
+
+    struct AdminRemovedEvent has copy, drop {
+        admin: address,
+    }
+
+    struct ExchangeApproved has copy, drop {
+        admin: address,
+        recipient: address,
+        amount: u64,
+    }
+
+    struct TierRegistration has store, key {
+        id: 0x2::object::UID,
+        tier: u8,
+    }
+
+    struct TierRegistry has key {
+        id: 0x2::object::UID,
+        registrations: 0x2::table::Table<address, TierRegistration>,
+    }
+
+    struct UserRegisteredForTier has copy, drop {
+        user: address,
+        initial_tier: u8,
+    }
+
+    public fun total_supply(arg0: &AdminRegistry) : u64 {
+        0x2::coin::total_supply<ARTIPEDIA>(&arg0.treasury_cap)
+    }
+
+    public entry fun add_admin(arg0: &mut AdminRegistry, arg1: address, arg2: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg2);
+        assert!(0x2::vec_set::contains<address>(&arg0.admins, &v0), 1);
+        0x2::vec_set::insert<address>(&mut arg0.admins, arg1);
+        let v1 = AdminAddedEvent{admin: arg1};
+        0x2::event::emit<AdminAddedEvent>(v1);
+    }
+
+    public entry fun approve_exchange(arg0: &AdminRegistry, arg1: address, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg3);
+        assert!(is_admin(arg0, v0), 1);
+        let v1 = Approval{
+            id        : 0x2::object::new(arg3),
+            recipient : arg1,
+            amount    : arg2,
+        };
+        let v2 = ExchangeApproved{
+            admin     : v0,
+            recipient : arg1,
+            amount    : arg2,
+        };
+        0x2::event::emit<ExchangeApproved>(v2);
+        0x2::transfer::public_transfer<Approval>(v1, arg1);
+    }
+
+    public fun create_tier_registry(arg0: &AdminRegistry, arg1: &mut 0x2::tx_context::TxContext) {
+        assert!(is_admin(arg0, 0x2::tx_context::sender(arg1)), 1);
+        let v0 = TierRegistry{
+            id            : 0x2::object::new(arg1),
+            registrations : 0x2::table::new<address, TierRegistration>(arg1),
+        };
+        0x2::transfer::share_object<TierRegistry>(v0);
+    }
+
+    public entry fun delete_points(arg0: UserNumber, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        assert!(v0 == arg0.owner, 2);
+        let UserNumber {
+            id    : v1,
+            value : v2,
+            owner : _,
+        } = arg0;
+        let v4 = v1;
+        let v5 = NumberDeleted{
+            user      : v0,
+            value     : v2,
+            object_id : 0x2::object::uid_to_inner(&v4),
+        };
+        0x2::event::emit<NumberDeleted>(v5);
+        0x2::object::delete(v4);
+    }
+
+    public entry fun exchange_points(arg0: &mut AdminRegistry, arg1: Approval, arg2: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg2);
+        assert!(v0 == arg1.recipient, 2);
+        0x2::transfer::public_transfer<0x2::coin::Coin<ARTIPEDIA>>(0x2::coin::mint<ARTIPEDIA>(&mut arg0.treasury_cap, arg1.amount, arg2), v0);
+        let Approval {
+            id        : v1,
+            recipient : _,
+            amount    : _,
+        } = arg1;
+        0x2::object::delete(v1);
+    }
+
+    public fun get_points_owner(arg0: &UserNumber) : address {
+        arg0.owner
+    }
+
+    public fun get_points_value(arg0: &UserNumber) : u64 {
+        arg0.value
+    }
+
+    public entry fun incinerate(arg0: &mut AdminRegistry, arg1: 0x2::coin::Coin<ARTIPEDIA>, arg2: &mut 0x2::tx_context::TxContext) {
+        0x2::tx_context::sender(arg2);
+        0x2::coin::burn<ARTIPEDIA>(&mut arg0.treasury_cap, arg1);
+    }
+
+    fun init(arg0: ARTIPEDIA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ARTIPEDIA>(arg0, 9, b"ARTPIA", b"ARTIPEDIA", b"ARTIPEDIA token for exchanging points", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://bl5t74gddm6pwignkw4qvn4qbiq6cwpe47stk2yzrcm2egpd7egq.arweave.net/Cvs_8MMbPPsgzVW5CreQCiHhWeTn5TVrGYiZohnj-Q0")), arg1);
+        let v2 = 0x2::tx_context::sender(arg1);
+        let v3 = 0x2::vec_set::empty<address>();
+        0x2::vec_set::insert<address>(&mut v3, v2);
+        let v4 = AdminRegistry{
+            id           : 0x2::object::new(arg1),
+            admins       : v3,
+            treasury_cap : v0,
+        };
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<ARTIPEDIA>>(v1);
+        0x2::transfer::share_object<AdminRegistry>(v4);
+        let v5 = InitEvent{admin: v2};
+        0x2::event::emit<InitEvent>(v5);
+    }
+
+    public fun is_admin(arg0: &AdminRegistry, arg1: address) : bool {
+        0x2::vec_set::contains<address>(&arg0.admins, &arg1)
+    }
+
+    public fun register_for_tier(arg0: &mut TierRegistry, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        assert!(!0x2::table::contains<address, TierRegistration>(&arg0.registrations, v0), 4);
+        let v1 = TierRegistration{
+            id   : 0x2::object::new(arg1),
+            tier : 0,
+        };
+        0x2::table::add<address, TierRegistration>(&mut arg0.registrations, v0, v1);
+        let v2 = UserRegisteredForTier{
+            user         : v0,
+            initial_tier : 0,
+        };
+        0x2::event::emit<UserRegisteredForTier>(v2);
+    }
+
+    public entry fun register_points(arg0: u64, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let v1 = UserNumber{
+            id    : 0x2::object::new(arg1),
+            value : arg0,
+            owner : v0,
+        };
+        let v2 = NumberCreated{
+            user      : v0,
+            value     : arg0,
+            object_id : 0x2::object::uid_to_inner(&v1.id),
+        };
+        0x2::event::emit<NumberCreated>(v2);
+        0x2::transfer::public_transfer<UserNumber>(v1, v0);
+    }
+
+    public entry fun remove_admin(arg0: &mut AdminRegistry, arg1: address, arg2: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg2);
+        assert!(0x2::vec_set::contains<address>(&arg0.admins, &v0), 1);
+        0x2::vec_set::remove<address>(&mut arg0.admins, &arg1);
+        let v1 = AdminRemovedEvent{admin: arg1};
+        0x2::event::emit<AdminRemovedEvent>(v1);
+    }
+
+    public entry fun stack_incinerate(arg0: &mut AdminRegistry, arg1: vector<0x2::coin::Coin<ARTIPEDIA>>, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x1::vector::pop_back<0x2::coin::Coin<ARTIPEDIA>>(&mut arg1);
+        while (!0x1::vector::is_empty<0x2::coin::Coin<ARTIPEDIA>>(&arg1)) {
+            0x2::coin::join<ARTIPEDIA>(&mut v0, 0x1::vector::pop_back<0x2::coin::Coin<ARTIPEDIA>>(&mut arg1));
+        };
+        0x1::vector::destroy_empty<0x2::coin::Coin<ARTIPEDIA>>(arg1);
+        assert!(0x2::coin::value<ARTIPEDIA>(&v0) >= arg2, 3);
+        0x2::coin::burn<ARTIPEDIA>(&mut arg0.treasury_cap, 0x2::coin::split<ARTIPEDIA>(&mut v0, arg2, arg3));
+        0x2::transfer::public_transfer<0x2::coin::Coin<ARTIPEDIA>>(v0, 0x2::tx_context::sender(arg3));
+    }
+
+    public entry fun update_points(arg0: &mut UserNumber, arg1: u64, arg2: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg2);
+        assert!(v0 == arg0.owner, 2);
+        arg0.value = arg1;
+        let v1 = NumberUpdated{
+            user      : v0,
+            old_value : arg0.value,
+            new_value : arg1,
+            object_id : 0x2::object::uid_to_inner(&arg0.id),
+        };
+        0x2::event::emit<NumberUpdated>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
