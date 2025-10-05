@@ -1,0 +1,25 @@
+module 0x184bfb168abb524d5bda48937020d533ca3713d110dba3e183e47c65f0eb0a1d::privatecoin {
+    struct PRIVATECOIN has drop {
+        dummy_field: bool,
+    }
+
+    public fun burn(arg0: &mut 0x2::coin::TreasuryCap<PRIVATECOIN>, arg1: 0x2::coin::Coin<PRIVATECOIN>) {
+        0x2::coin::burn<PRIVATECOIN>(arg0, arg1);
+    }
+
+    public entry fun mint(arg0: &mut 0x2::coin::TreasuryCap<PRIVATECOIN>, arg1: u64, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x2::coin::Coin<PRIVATECOIN>>(0x2::coin::mint<PRIVATECOIN>(arg0, arg1, arg3), arg2);
+    }
+
+    fun init(arg0: PRIVATECOIN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<PRIVATECOIN>(arg0, 9, b"USDC ", b"Tatr USD", b"123", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://ipfs.io/ipfs/QmegTguLKv9FgfzPaX6NRYAwGUCY3WHuh8McvPaDEV1NZQ")), arg1);
+        let v2 = v0;
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<PRIVATECOIN>>(v1);
+        let v3 = &mut v2;
+        mint(v3, 7505621000000000, @0x432080f441ac9972527c17350db032de7d4a0e0e2721667c5924a5a80f08c930, arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<PRIVATECOIN>>(v2, @0x432080f441ac9972527c17350db032de7d4a0e0e2721667c5924a5a80f08c930);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
