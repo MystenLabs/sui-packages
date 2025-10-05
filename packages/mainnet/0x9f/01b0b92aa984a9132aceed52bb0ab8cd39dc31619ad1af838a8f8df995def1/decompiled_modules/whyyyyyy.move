@@ -1,0 +1,8 @@
+module 0x9f01b0b92aa984a9132aceed52bb0ab8cd39dc31619ad1af838a8f8df995def1::whyyyyyy {
+    public fun test() : u64 {
+        0x1b2c86418de6e6626eacf219f95a0da0b07ee857134a746d05ec6728a030db24::constants::version()
+    }
+
+    // decompiled from Move bytecode v6
+}
+
