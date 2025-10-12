@@ -1,0 +1,1294 @@
+module 0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::pool_rewards {
+    struct PoolAdminCap has key {
+        id: 0x2::object::UID,
+    }
+
+    struct PoolSystem has key {
+        id: 0x2::object::UID,
+        pools: 0x2::object_table::ObjectTable<0x2::object::ID, Pool>,
+        pool_counter: u64,
+        global_config: GlobalConfig,
+    }
+
+    struct GlobalConfig has store {
+        claim_time_interval: u64,
+    }
+
+    struct Pool has store, key {
+        id: 0x2::object::UID,
+        pool_id: 0x2::object::ID,
+        name: 0x1::string::String,
+        description: 0x1::string::String,
+        creator: address,
+        image_url: 0x1::string::String,
+        required_elements: vector<u64>,
+        start_time: u64,
+        end_time: u64,
+        is_active: bool,
+        sui_reward_pool: 0x2::balance::Balance<0x2::sui::SUI>,
+        total_sui_deposited: u64,
+        last_reward_update: u64,
+        staked_nfts: 0x2::object_table::ObjectTable<0x2::object::ID, StakedNFT>,
+        user_stakes: 0x2::table::Table<address, UserStakeInfo>,
+        total_staked_count: u64,
+        total_weight: u64,
+        staked_nft_ids: vector<0x2::object::ID>,
+        unique_participants: 0x2::table::Table<address, bool>,
+        participant_count: u64,
+    }
+
+    struct UserStakeInfo has drop, store {
+        nft_count: u64,
+        total_weight: u64,
+        stake_start_time: u64,
+        last_reward_claim: u64,
+    }
+
+    struct StakedNFT has store, key {
+        id: 0x2::object::UID,
+        nft: 0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT,
+        owner: address,
+        pool_id: 0x2::object::ID,
+        stake_time: u64,
+        weight: u64,
+    }
+
+    struct CustomTokenPool<phantom T0> has key {
+        id: 0x2::object::UID,
+        pool_id: 0x2::object::ID,
+        name: 0x1::string::String,
+        description: 0x1::string::String,
+        creator: address,
+        image_url: 0x1::string::String,
+        token_type: 0x1::string::String,
+        required_elements: vector<u64>,
+        start_time: u64,
+        end_time: u64,
+        is_active: bool,
+        last_reward_update: u64,
+        token_reward_pool: 0x2::balance::Balance<T0>,
+        total_rewards_added: u64,
+        staked_nfts: 0x2::object_table::ObjectTable<0x2::object::ID, StakedNFT>,
+        user_stakes: 0x2::table::Table<address, UserStakeInfo>,
+        total_staked_count: u64,
+        total_weight: u64,
+        staked_nft_ids: vector<0x2::object::ID>,
+        unique_participants: 0x2::table::Table<address, bool>,
+        participant_count: u64,
+    }
+
+    struct PoolCreated has copy, drop {
+        pool_id: 0x2::object::ID,
+        name: 0x1::string::String,
+        creator: address,
+        start_time: u64,
+        end_time: u64,
+        required_elements: vector<u64>,
+    }
+
+    struct PoolStarted has copy, drop {
+        pool_id: 0x2::object::ID,
+        start_time: u64,
+    }
+
+    struct PoolEnded has copy, drop {
+        pool_id: 0x2::object::ID,
+        end_time: u64,
+        total_participants: u64,
+        total_nfts: u64,
+    }
+
+    struct NFTStaked has copy, drop {
+        pool_id: 0x2::object::ID,
+        nft_id: 0x2::object::ID,
+        owner: address,
+        stake_time: u64,
+    }
+
+    struct NFTUnstaked has copy, drop {
+        pool_id: 0x2::object::ID,
+        nft_id: 0x2::object::ID,
+        owner: address,
+        stake_duration: u64,
+    }
+
+    struct RewardsClaimed has copy, drop {
+        pool_id: 0x2::object::ID,
+        user: address,
+        sui_amount: u64,
+    }
+
+    struct SuiRewardsAdded has copy, drop {
+        pool_id: 0x2::object::ID,
+        sui_amount: u64,
+    }
+
+    struct PoolImageUpdated has copy, drop {
+        pool_id: 0x2::object::ID,
+        old_image_url: 0x1::string::String,
+        new_image_url: 0x1::string::String,
+        updated_by: address,
+    }
+
+    struct PoolTimeExtended has copy, drop {
+        pool_id: 0x2::object::ID,
+        new_end_time: u64,
+    }
+
+    struct PoolDeleted has copy, drop {
+        pool_id: 0x2::object::ID,
+        deleted_by: address,
+        funds_withdrawn: u64,
+    }
+
+    struct CustomTokenPoolCreated has copy, drop {
+        pool_id: 0x2::object::ID,
+        name: 0x1::string::String,
+        creator: address,
+        token_type: 0x1::string::String,
+        start_time: u64,
+        end_time: u64,
+        required_elements: vector<u64>,
+    }
+
+    struct CustomTokenPoolStarted has copy, drop {
+        pool_id: 0x2::object::ID,
+        start_time: u64,
+    }
+
+    struct CustomTokenPoolEnded has copy, drop {
+        pool_id: 0x2::object::ID,
+        end_time: u64,
+        total_participants: u64,
+        total_nfts: u64,
+    }
+
+    struct CustomTokenRewardsAdded has copy, drop {
+        pool_id: 0x2::object::ID,
+        token_type: 0x1::string::String,
+        amount: u64,
+    }
+
+    struct NFTStakedInCustomPool has copy, drop {
+        pool_id: 0x2::object::ID,
+        nft_id: 0x2::object::ID,
+        owner: address,
+        stake_time: u64,
+    }
+
+    struct NFTUnstakedFromCustomPool has copy, drop {
+        pool_id: 0x2::object::ID,
+        nft_id: 0x2::object::ID,
+        owner: address,
+        stake_duration: u64,
+    }
+
+    struct CustomTokenRewardsClaimed has copy, drop {
+        pool_id: 0x2::object::ID,
+        user: address,
+        token_type: 0x1::string::String,
+        amount: u64,
+    }
+
+    struct CustomPoolTimeExtended has copy, drop {
+        pool_id: 0x2::object::ID,
+        new_end_time: u64,
+    }
+
+    struct CustomPoolDeleted has copy, drop {
+        pool_id: 0x2::object::ID,
+        deleted_by: address,
+        funds_withdrawn: u64,
+    }
+
+    struct CustomPoolImageUpdated has copy, drop {
+        pool_id: 0x2::object::ID,
+        old_image_url: 0x1::string::String,
+        new_image_url: 0x1::string::String,
+        updated_by: address,
+    }
+
+    struct POOL_REWARDS has drop {
+        dummy_field: bool,
+    }
+
+    public fun add_custom_token_rewards<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: &mut 0x2::coin::Coin<T0>, arg3: u64, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::coin::value<T0>(arg2) >= arg3, 5);
+        0x2::balance::join<T0>(&mut arg1.token_reward_pool, 0x2::coin::into_balance<T0>(0x2::coin::split<T0>(arg2, arg3, arg4)));
+        arg1.total_rewards_added = arg1.total_rewards_added + arg3;
+        let v0 = CustomTokenRewardsAdded{
+            pool_id    : arg1.pool_id,
+            token_type : 0x1::string::utf8(0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>()))),
+            amount     : arg3,
+        };
+        0x2::event::emit<CustomTokenRewardsAdded>(v0);
+    }
+
+    public fun add_custom_token_rewards_from_balance<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: 0x2::coin::Coin<T0>) {
+        let v0 = 0x2::coin::value<T0>(&arg2);
+        0x2::balance::join<T0>(&mut arg1.token_reward_pool, 0x2::coin::into_balance<T0>(arg2));
+        arg1.total_rewards_added = arg1.total_rewards_added + v0;
+        let v1 = CustomTokenRewardsAdded{
+            pool_id    : arg1.pool_id,
+            token_type : 0x1::string::utf8(0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>()))),
+            amount     : v0,
+        };
+        0x2::event::emit<CustomTokenRewardsAdded>(v1);
+    }
+
+    public fun add_sui_rewards(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: &mut 0x2::coin::Coin<0x2::sui::SUI>, arg4: u64, arg5: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2);
+        assert!(0x2::coin::value<0x2::sui::SUI>(arg3) >= arg4, 5);
+        0x2::balance::join<0x2::sui::SUI>(&mut v0.sui_reward_pool, 0x2::coin::into_balance<0x2::sui::SUI>(0x2::coin::split<0x2::sui::SUI>(arg3, arg4, arg5)));
+        v0.total_sui_deposited = v0.total_sui_deposited + arg4;
+        let v1 = SuiRewardsAdded{
+            pool_id    : arg2,
+            sui_amount : arg4,
+        };
+        0x2::event::emit<SuiRewardsAdded>(v1);
+    }
+
+    public fun add_sui_rewards_from_balance(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: 0x2::coin::Coin<0x2::sui::SUI>) {
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2);
+        let v1 = 0x2::coin::value<0x2::sui::SUI>(&arg3);
+        0x2::balance::join<0x2::sui::SUI>(&mut v0.sui_reward_pool, 0x2::coin::into_balance<0x2::sui::SUI>(arg3));
+        v0.total_sui_deposited = v0.total_sui_deposited + v1;
+        let v2 = SuiRewardsAdded{
+            pool_id    : arg2,
+            sui_amount : v1,
+        };
+        0x2::event::emit<SuiRewardsAdded>(v2);
+    }
+
+    fun calculate_total_current_weight(arg0: &Pool, arg1: u64) : u64 {
+        let v0 = if (arg1 > arg0.end_time) {
+            arg0.end_time
+        } else {
+            arg1
+        };
+        let v1 = 0;
+        let v2 = 0;
+        while (v2 < 0x1::vector::length<0x2::object::ID>(&arg0.staked_nft_ids)) {
+            let v3 = *0x1::vector::borrow<0x2::object::ID>(&arg0.staked_nft_ids, v2);
+            if (0x2::object_table::contains<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v3)) {
+                let v4 = 0x2::object_table::borrow<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v3);
+                let v5 = v4.owner;
+                if (0x2::table::contains<address, UserStakeInfo>(&arg0.user_stakes, v5)) {
+                    let v6 = 0x2::table::borrow<address, UserStakeInfo>(&arg0.user_stakes, v5);
+                    let v7 = if (v6.last_reward_claim > v4.stake_time) {
+                        v6.last_reward_claim
+                    } else {
+                        v4.stake_time
+                    };
+                    let v8 = if (v0 > v7) {
+                        v0 - v7
+                    } else {
+                        0
+                    };
+                    v1 = v1 + v8;
+                };
+            };
+            v2 = v2 + 1;
+        };
+        if (v1 == 0) {
+            1
+        } else {
+            v1
+        }
+    }
+
+    fun calculate_total_current_weight_custom<T0>(arg0: &CustomTokenPool<T0>, arg1: u64) : u64 {
+        let v0 = if (arg1 > arg0.end_time) {
+            arg0.end_time
+        } else {
+            arg1
+        };
+        let v1 = 0;
+        let v2 = 0;
+        while (v2 < 0x1::vector::length<0x2::object::ID>(&arg0.staked_nft_ids)) {
+            let v3 = *0x1::vector::borrow<0x2::object::ID>(&arg0.staked_nft_ids, v2);
+            if (0x2::object_table::contains<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v3)) {
+                let v4 = 0x2::object_table::borrow<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v3);
+                let v5 = v4.owner;
+                if (0x2::table::contains<address, UserStakeInfo>(&arg0.user_stakes, v5)) {
+                    let v6 = 0x2::table::borrow<address, UserStakeInfo>(&arg0.user_stakes, v5);
+                    let v7 = if (v6.last_reward_claim > v4.stake_time) {
+                        v6.last_reward_claim
+                    } else {
+                        v4.stake_time
+                    };
+                    let v8 = if (v0 > v7) {
+                        v0 - v7
+                    } else {
+                        0
+                    };
+                    v1 = v1 + v8;
+                };
+            };
+            v2 = v2 + 1;
+        };
+        if (v1 == 0) {
+            1
+        } else {
+            v1
+        }
+    }
+
+    fun calculate_user_current_weight(arg0: &Pool, arg1: address, arg2: u64) : u64 {
+        if (!0x2::table::contains<address, UserStakeInfo>(&arg0.user_stakes, arg1)) {
+            return 0
+        };
+        let v0 = if (arg2 > arg0.end_time) {
+            arg0.end_time
+        } else {
+            arg2
+        };
+        let v1 = 0x2::table::borrow<address, UserStakeInfo>(&arg0.user_stakes, arg1);
+        let v2 = 0;
+        let v3 = 0;
+        while (v3 < 0x1::vector::length<0x2::object::ID>(&arg0.staked_nft_ids)) {
+            let v4 = *0x1::vector::borrow<0x2::object::ID>(&arg0.staked_nft_ids, v3);
+            if (0x2::object_table::contains<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v4)) {
+                let v5 = 0x2::object_table::borrow<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v4);
+                if (v5.owner == arg1) {
+                    let v6 = if (v1.last_reward_claim > v5.stake_time) {
+                        v1.last_reward_claim
+                    } else {
+                        v5.stake_time
+                    };
+                    let v7 = if (v0 > v6) {
+                        v0 - v6
+                    } else {
+                        0
+                    };
+                    v2 = v2 + v7;
+                };
+            };
+            v3 = v3 + 1;
+        };
+        v2
+    }
+
+    fun calculate_user_current_weight_custom<T0>(arg0: &CustomTokenPool<T0>, arg1: address, arg2: u64) : u64 {
+        if (!0x2::table::contains<address, UserStakeInfo>(&arg0.user_stakes, arg1)) {
+            return 0
+        };
+        let v0 = if (arg2 > arg0.end_time) {
+            arg0.end_time
+        } else {
+            arg2
+        };
+        let v1 = 0x2::table::borrow<address, UserStakeInfo>(&arg0.user_stakes, arg1);
+        let v2 = 0;
+        let v3 = 0;
+        while (v3 < 0x1::vector::length<0x2::object::ID>(&arg0.staked_nft_ids)) {
+            let v4 = *0x1::vector::borrow<0x2::object::ID>(&arg0.staked_nft_ids, v3);
+            if (0x2::object_table::contains<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v4)) {
+                let v5 = 0x2::object_table::borrow<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v4);
+                if (v5.owner == arg1) {
+                    let v6 = if (v1.last_reward_claim > v5.stake_time) {
+                        v1.last_reward_claim
+                    } else {
+                        v5.stake_time
+                    };
+                    let v7 = if (v0 > v6) {
+                        v0 - v6
+                    } else {
+                        0
+                    };
+                    v2 = v2 + v7;
+                };
+            };
+            v3 = v3 + 1;
+        };
+        v2
+    }
+
+    fun calculate_user_reward_amount(arg0: &Pool, arg1: address, arg2: u64) : u64 {
+        let v0 = calculate_user_current_weight(arg0, arg1, arg2);
+        let v1 = calculate_total_current_weight(arg0, arg2);
+        let v2 = arg0.end_time - arg0.start_time;
+        let v3 = if (arg2 > arg0.end_time) {
+            arg0.end_time - arg0.start_time
+        } else {
+            arg2 - arg0.start_time
+        };
+        let v4 = if (v1 == 0) {
+            true
+        } else if (v0 == 0) {
+            true
+        } else {
+            v2 == 0
+        };
+        if (v4) {
+            0
+        } else {
+            let v6 = (v0 as u128) * (v3 as u128) * (0x2::balance::value<0x2::sui::SUI>(&arg0.sui_reward_pool) as u128) / (v1 as u128) * (v2 as u128);
+            if (v6 > 18446744073709551615) {
+                18446744073709551615
+            } else {
+                (v6 as u64)
+            }
+        }
+    }
+
+    public fun calculate_user_sui_rewards(arg0: &Pool, arg1: u64) : u64 {
+        if (arg0.total_weight == 0 || arg1 == 0) {
+            return 0
+        };
+        0x2::balance::value<0x2::sui::SUI>(&arg0.sui_reward_pool) * arg1 / arg0.total_weight
+    }
+
+    public fun can_claim_custom_rewards<T0>(arg0: &PoolSystem, arg1: &CustomTokenPool<T0>, arg2: address, arg3: &0x2::clock::Clock) : bool {
+        if (!0x2::table::contains<address, UserStakeInfo>(&arg1.user_stakes, arg2)) {
+            return false
+        };
+        0x2::clock::timestamp_ms(arg3) - 0x2::table::borrow<address, UserStakeInfo>(&arg1.user_stakes, arg2).last_reward_claim >= arg0.global_config.claim_time_interval
+    }
+
+    public fun can_claim_rewards(arg0: &PoolSystem, arg1: 0x2::object::ID, arg2: address, arg3: &0x2::clock::Clock) : bool {
+        let v0 = 0x2::object_table::borrow<0x2::object::ID, Pool>(&arg0.pools, arg1);
+        if (!0x2::table::contains<address, UserStakeInfo>(&v0.user_stakes, arg2)) {
+            return false
+        };
+        0x2::clock::timestamp_ms(arg3) - 0x2::table::borrow<address, UserStakeInfo>(&v0.user_stakes, arg2).last_reward_claim >= arg0.global_config.claim_time_interval
+    }
+
+    fun check_nft_has_all_required_elements(arg0: &0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT, arg1: &vector<u64>) : bool {
+        let v0 = extract_nft_element_ids(arg0);
+        let v1 = 0;
+        while (v1 < 0x1::vector::length<u64>(arg1)) {
+            let v2 = *0x1::vector::borrow<u64>(arg1, v1);
+            if (!0x1::vector::contains<u64>(&v0, &v2)) {
+                return false
+            };
+            v1 = v1 + 1;
+        };
+        true
+    }
+
+    public fun claim_custom_token_rewards<T0>(arg0: &PoolSystem, arg1: &mut CustomTokenPool<T0>, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg3);
+        assert!(0x2::table::contains<address, UserStakeInfo>(&arg1.user_stakes, v0), 8);
+        let v1 = 0x2::clock::timestamp_ms(arg2);
+        let v2 = 0x2::table::borrow<address, UserStakeInfo>(&arg1.user_stakes, v0);
+        if (v2.nft_count == 0) {
+            return
+        };
+        assert!(v1 - v2.last_reward_claim >= arg0.global_config.claim_time_interval || v2.last_reward_claim == 0, 12);
+        let v3 = calculate_user_current_weight_custom<T0>(arg1, v0, v1);
+        let v4 = calculate_total_current_weight_custom<T0>(arg1, v1);
+        let v5 = if (v4 == 0 || v3 == 0) {
+            0
+        } else {
+            let v6 = (0x2::balance::value<T0>(&arg1.token_reward_pool) as u128) * (v3 as u128) / (v4 as u128);
+            if (v6 > 18446744073709551615) {
+                18446744073709551615
+            } else {
+                (v6 as u64)
+            }
+        };
+        if (v5 > 0 && 0x2::balance::value<T0>(&arg1.token_reward_pool) >= v5) {
+            0x2::table::borrow_mut<address, UserStakeInfo>(&mut arg1.user_stakes, v0).last_reward_claim = v1;
+            0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(0x2::balance::split<T0>(&mut arg1.token_reward_pool, v5), arg3), v0);
+            let v7 = CustomTokenRewardsClaimed{
+                pool_id    : arg1.pool_id,
+                user       : v0,
+                token_type : 0x1::string::utf8(0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>()))),
+                amount     : v5,
+            };
+            0x2::event::emit<CustomTokenRewardsClaimed>(v7);
+        };
+    }
+
+    public fun claim_rewards_dynamic(arg0: &mut PoolSystem, arg1: 0x2::object::ID, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg0.pools, arg1);
+        let v1 = 0x2::tx_context::sender(arg3);
+        assert!(0x2::table::contains<address, UserStakeInfo>(&v0.user_stakes, v1), 8);
+        let v2 = 0x2::clock::timestamp_ms(arg2);
+        let v3 = 0x2::table::borrow<address, UserStakeInfo>(&v0.user_stakes, v1);
+        if (v3.nft_count == 0) {
+            return
+        };
+        assert!(v2 - v3.last_reward_claim >= arg0.global_config.claim_time_interval || v3.last_reward_claim == 0, 12);
+        let v4 = calculate_user_reward_amount(v0, v1, v2);
+        if (v4 > 0 && 0x2::balance::value<0x2::sui::SUI>(&v0.sui_reward_pool) >= v4) {
+            0x2::table::borrow_mut<address, UserStakeInfo>(&mut v0.user_stakes, v1).last_reward_claim = v2;
+            0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x2::balance::split<0x2::sui::SUI>(&mut v0.sui_reward_pool, v4), arg3), v1);
+            let v5 = RewardsClaimed{
+                pool_id    : arg1,
+                user       : v1,
+                sui_amount : v4,
+            };
+            0x2::event::emit<RewardsClaimed>(v5);
+        };
+    }
+
+    public fun create_custom_token_pool<T0>(arg0: &PoolAdminCap, arg1: 0x1::string::String, arg2: 0x1::string::String, arg3: vector<u64>, arg4: u64, arg5: 0x1::string::String, arg6: u64, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) {
+        assert!(arg6 > arg4, 7);
+        let v0 = 0x2::object::new(arg8);
+        let v1 = 0x2::object::uid_to_inner(&v0);
+        let v2 = CustomTokenPool<T0>{
+            id                  : v0,
+            pool_id             : v1,
+            name                : arg1,
+            description         : arg2,
+            creator             : 0x2::tx_context::sender(arg8),
+            image_url           : arg5,
+            token_type          : 0x1::string::utf8(0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>()))),
+            required_elements   : arg3,
+            start_time          : arg4,
+            end_time            : arg6,
+            is_active           : false,
+            last_reward_update  : 0x2::clock::timestamp_ms(arg7),
+            token_reward_pool   : 0x2::balance::zero<T0>(),
+            total_rewards_added : 0,
+            staked_nfts         : 0x2::object_table::new<0x2::object::ID, StakedNFT>(arg8),
+            user_stakes         : 0x2::table::new<address, UserStakeInfo>(arg8),
+            total_staked_count  : 0,
+            total_weight        : 0,
+            staked_nft_ids      : 0x1::vector::empty<0x2::object::ID>(),
+            unique_participants : 0x2::table::new<address, bool>(arg8),
+            participant_count   : 0,
+        };
+        let v3 = CustomTokenPoolCreated{
+            pool_id           : v1,
+            name              : v2.name,
+            creator           : v2.creator,
+            token_type        : v2.token_type,
+            start_time        : arg4,
+            end_time          : arg6,
+            required_elements : arg3,
+        };
+        0x2::event::emit<CustomTokenPoolCreated>(v3);
+        0x2::transfer::share_object<CustomTokenPool<T0>>(v2);
+    }
+
+    public fun create_pool(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x1::string::String, arg3: 0x1::string::String, arg4: vector<u64>, arg5: u64, arg6: 0x1::string::String, arg7: u64, arg8: &0x2::clock::Clock, arg9: &mut 0x2::tx_context::TxContext) {
+        assert!(arg7 > arg5, 7);
+        arg1.pool_counter = arg1.pool_counter + 1;
+        let v0 = 0x2::object::new(arg9);
+        let v1 = 0x2::object::uid_to_inner(&v0);
+        let v2 = Pool{
+            id                  : v0,
+            pool_id             : v1,
+            name                : arg2,
+            description         : arg3,
+            creator             : 0x2::tx_context::sender(arg9),
+            image_url           : arg6,
+            required_elements   : arg4,
+            start_time          : arg5,
+            end_time            : arg7,
+            is_active           : false,
+            sui_reward_pool     : 0x2::balance::zero<0x2::sui::SUI>(),
+            total_sui_deposited : 0,
+            last_reward_update  : 0x2::clock::timestamp_ms(arg8),
+            staked_nfts         : 0x2::object_table::new<0x2::object::ID, StakedNFT>(arg9),
+            user_stakes         : 0x2::table::new<address, UserStakeInfo>(arg9),
+            total_staked_count  : 0,
+            total_weight        : 0,
+            staked_nft_ids      : 0x1::vector::empty<0x2::object::ID>(),
+            unique_participants : 0x2::table::new<address, bool>(arg9),
+            participant_count   : 0,
+        };
+        let v3 = PoolCreated{
+            pool_id           : v1,
+            name              : v2.name,
+            creator           : v2.creator,
+            start_time        : arg5,
+            end_time          : arg7,
+            required_elements : arg4,
+        };
+        0x2::event::emit<PoolCreated>(v3);
+        0x2::object_table::add<0x2::object::ID, Pool>(&mut arg1.pools, v1, v2);
+    }
+
+    public fun delete_custom_pool<T0>(arg0: &PoolAdminCap, arg1: CustomTokenPool<T0>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        arg1.is_active = false;
+        let v0 = 0x2::balance::value<T0>(&arg1.token_reward_pool);
+        if (v0 > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(0x2::balance::withdraw_all<T0>(&mut arg1.token_reward_pool), arg3), arg2);
+        };
+        let v1 = 0;
+        while (v1 < 0x1::vector::length<0x2::object::ID>(&arg1.staked_nft_ids)) {
+            let v2 = *0x1::vector::borrow<0x2::object::ID>(&arg1.staked_nft_ids, v1);
+            if (0x2::object_table::contains<0x2::object::ID, StakedNFT>(&arg1.staked_nfts, v2)) {
+                let v3 = 0x2::object_table::remove<0x2::object::ID, StakedNFT>(&mut arg1.staked_nfts, v2);
+                let StakedNFT {
+                    id         : v4,
+                    nft        : v5,
+                    owner      : _,
+                    pool_id    : _,
+                    stake_time : _,
+                    weight     : _,
+                } = v3;
+                0x2::object::delete(v4);
+                0x2::transfer::public_transfer<0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT>(v5, v3.owner);
+            };
+            v1 = v1 + 1;
+        };
+        let CustomTokenPool {
+            id                  : v10,
+            pool_id             : _,
+            name                : _,
+            description         : _,
+            creator             : _,
+            image_url           : _,
+            token_type          : _,
+            required_elements   : _,
+            start_time          : _,
+            end_time            : _,
+            is_active           : _,
+            last_reward_update  : _,
+            token_reward_pool   : v22,
+            total_rewards_added : _,
+            staked_nfts         : v24,
+            user_stakes         : v25,
+            total_staked_count  : _,
+            total_weight        : _,
+            staked_nft_ids      : _,
+            unique_participants : v29,
+            participant_count   : _,
+        } = arg1;
+        0x2::balance::destroy_zero<T0>(v22);
+        0x2::object_table::destroy_empty<0x2::object::ID, StakedNFT>(v24);
+        0x2::table::drop<address, UserStakeInfo>(v25);
+        0x2::table::drop<address, bool>(v29);
+        0x2::object::delete(v10);
+        let v31 = CustomPoolDeleted{
+            pool_id         : arg1.pool_id,
+            deleted_by      : 0x2::tx_context::sender(arg3),
+            funds_withdrawn : v0,
+        };
+        0x2::event::emit<CustomPoolDeleted>(v31);
+    }
+
+    public fun delete_pool(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: address, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg1.pools, arg2), 1);
+        let v0 = 0x2::object_table::remove<0x2::object::ID, Pool>(&mut arg1.pools, arg2);
+        v0.is_active = false;
+        let v1 = 0x2::balance::value<0x2::sui::SUI>(&v0.sui_reward_pool);
+        if (v1 > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x2::balance::withdraw_all<0x2::sui::SUI>(&mut v0.sui_reward_pool), arg4), arg3);
+        };
+        let v2 = 0;
+        while (v2 < 0x1::vector::length<0x2::object::ID>(&v0.staked_nft_ids)) {
+            let v3 = *0x1::vector::borrow<0x2::object::ID>(&v0.staked_nft_ids, v2);
+            if (0x2::object_table::contains<0x2::object::ID, StakedNFT>(&v0.staked_nfts, v3)) {
+                let v4 = 0x2::object_table::remove<0x2::object::ID, StakedNFT>(&mut v0.staked_nfts, v3);
+                let StakedNFT {
+                    id         : v5,
+                    nft        : v6,
+                    owner      : _,
+                    pool_id    : _,
+                    stake_time : _,
+                    weight     : _,
+                } = v4;
+                0x2::object::delete(v5);
+                0x2::transfer::public_transfer<0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT>(v6, v4.owner);
+            };
+            v2 = v2 + 1;
+        };
+        let Pool {
+            id                  : v11,
+            pool_id             : _,
+            name                : _,
+            description         : _,
+            creator             : _,
+            image_url           : _,
+            required_elements   : _,
+            start_time          : _,
+            end_time            : _,
+            is_active           : _,
+            sui_reward_pool     : v21,
+            total_sui_deposited : _,
+            last_reward_update  : _,
+            staked_nfts         : v24,
+            user_stakes         : v25,
+            total_staked_count  : _,
+            total_weight        : _,
+            staked_nft_ids      : _,
+            unique_participants : v29,
+            participant_count   : _,
+        } = v0;
+        0x2::balance::destroy_zero<0x2::sui::SUI>(v21);
+        0x2::object_table::destroy_empty<0x2::object::ID, StakedNFT>(v24);
+        0x2::table::drop<address, UserStakeInfo>(v25);
+        0x2::table::drop<address, bool>(v29);
+        0x2::object::delete(v11);
+        let v31 = PoolDeleted{
+            pool_id         : arg2,
+            deleted_by      : 0x2::tx_context::sender(arg4),
+            funds_withdrawn : v1,
+        };
+        0x2::event::emit<PoolDeleted>(v31);
+    }
+
+    public fun emergency_withdraw_all(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: address, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg1.pools, arg2), 1);
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2);
+        assert!(0x2::balance::value<0x2::sui::SUI>(&v0.sui_reward_pool) > 0, 5);
+        v0.total_sui_deposited = 0;
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x2::balance::withdraw_all<0x2::sui::SUI>(&mut v0.sui_reward_pool), arg4), arg3);
+    }
+
+    public fun emergency_withdraw_all_custom<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::balance::value<T0>(&arg1.token_reward_pool) > 0, 5);
+        0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(0x2::balance::withdraw_all<T0>(&mut arg1.token_reward_pool), arg3), arg2);
+    }
+
+    public fun end_custom_pool<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(arg1.is_active, 2);
+        let v0 = 0x2::clock::timestamp_ms(arg2);
+        arg1.is_active = false;
+        arg1.end_time = v0;
+        let v1 = CustomTokenPoolEnded{
+            pool_id            : arg1.pool_id,
+            end_time           : v0,
+            total_participants : arg1.participant_count,
+            total_nfts         : arg1.total_staked_count,
+        };
+        0x2::event::emit<CustomTokenPoolEnded>(v1);
+    }
+
+    public fun end_pool(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: &0x2::clock::Clock, arg4: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2);
+        assert!(v0.is_active, 2);
+        let v1 = 0x2::clock::timestamp_ms(arg3);
+        v0.is_active = false;
+        v0.end_time = v1;
+        let v2 = PoolEnded{
+            pool_id            : arg2,
+            end_time           : v1,
+            total_participants : v0.participant_count,
+            total_nfts         : v0.total_staked_count,
+        };
+        0x2::event::emit<PoolEnded>(v2);
+    }
+
+    public fun extend_custom_pool_time<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(arg1.is_active, 2);
+        arg1.end_time = arg2;
+        let v0 = CustomPoolTimeExtended{
+            pool_id      : arg1.pool_id,
+            new_end_time : arg2,
+        };
+        0x2::event::emit<CustomPoolTimeExtended>(v0);
+    }
+
+    public fun extend_pool_time(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: u64, arg4: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2);
+        assert!(v0.is_active, 2);
+        v0.end_time = arg3;
+        let v1 = PoolTimeExtended{
+            pool_id      : arg2,
+            new_end_time : arg3,
+        };
+        0x2::event::emit<PoolTimeExtended>(v1);
+    }
+
+    fun extract_nft_element_ids(arg0: &0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT) : vector<u64> {
+        0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::get_all_item_ids(arg0)
+    }
+
+    public fun get_claim_time_interval(arg0: &PoolSystem) : u64 {
+        arg0.global_config.claim_time_interval
+    }
+
+    public fun get_custom_pool_info<T0>(arg0: &CustomTokenPool<T0>) : (0x1::string::String, 0x1::string::String, 0x1::string::String, bool, u64, u64, u64, u64, vector<u64>) {
+        (arg0.name, arg0.description, arg0.token_type, arg0.is_active, arg0.start_time, arg0.end_time, arg0.participant_count, arg0.total_staked_count, arg0.required_elements)
+    }
+
+    public fun get_custom_pool_overview<T0>(arg0: &CustomTokenPool<T0>, arg1: &0x2::clock::Clock) : (u64, u64, u64, bool) {
+        let v0 = 0x2::clock::timestamp_ms(arg1);
+        let v1 = if (v0 < arg0.end_time) {
+            arg0.end_time - v0
+        } else {
+            0
+        };
+        (v1 / 3600000 * 24, v1 % 3600000 * 24 / 3600000, arg0.participant_count, arg0.is_active)
+    }
+
+    public fun get_custom_pool_rewards_info<T0>(arg0: &CustomTokenPool<T0>) : (u64, u64, u64) {
+        (0x2::balance::value<T0>(&arg0.token_reward_pool), arg0.total_rewards_added, arg0.last_reward_update)
+    }
+
+    public fun get_custom_user_staked_nft_ids<T0>(arg0: &CustomTokenPool<T0>, arg1: address) : vector<0x2::object::ID> {
+        let v0 = 0x1::vector::empty<0x2::object::ID>();
+        let v1 = 0;
+        while (v1 < 0x1::vector::length<0x2::object::ID>(&arg0.staked_nft_ids)) {
+            let v2 = *0x1::vector::borrow<0x2::object::ID>(&arg0.staked_nft_ids, v1);
+            if (0x2::object_table::contains<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v2)) {
+                if (0x2::object_table::borrow<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v2).owner == arg1) {
+                    0x1::vector::push_back<0x2::object::ID>(&mut v0, v2);
+                };
+            };
+            v1 = v1 + 1;
+        };
+        v0
+    }
+
+    public fun get_pool_info(arg0: &PoolSystem, arg1: 0x2::object::ID) : (0x1::string::String, 0x1::string::String, bool, u64, u64, u64, u64, vector<u64>) {
+        let v0 = 0x2::object_table::borrow<0x2::object::ID, Pool>(&arg0.pools, arg1);
+        (v0.name, v0.description, v0.is_active, v0.start_time, v0.end_time, v0.participant_count, v0.total_staked_count, v0.required_elements)
+    }
+
+    public fun get_pool_overview(arg0: &PoolSystem, arg1: 0x2::object::ID, arg2: &0x2::clock::Clock) : (u64, u64, u64, u64, u64, bool) {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg0.pools, arg1), 1);
+        let v0 = 0x2::object_table::borrow<0x2::object::ID, Pool>(&arg0.pools, arg1);
+        let v1 = 0x2::clock::timestamp_ms(arg2);
+        let v2 = if (v1 < v0.end_time) {
+            v0.end_time - v1
+        } else {
+            0
+        };
+        (0x2::balance::value<0x2::sui::SUI>(&v0.sui_reward_pool), v2 / 3600000 * 24, v2 % 3600000 * 24 / 3600000, v0.participant_count, v0.total_staked_count, v0.is_active)
+    }
+
+    public fun get_pool_rewards_info(arg0: &PoolSystem, arg1: 0x2::object::ID) : (u64, u64) {
+        let v0 = 0x2::object_table::borrow<0x2::object::ID, Pool>(&arg0.pools, arg1);
+        (0x2::balance::value<0x2::sui::SUI>(&v0.sui_reward_pool), v0.last_reward_update)
+    }
+
+    public fun get_total_sui_deposited(arg0: &PoolSystem, arg1: 0x2::object::ID) : u64 {
+        0x2::object_table::borrow<0x2::object::ID, Pool>(&arg0.pools, arg1).total_sui_deposited
+    }
+
+    public fun get_user_nft_weights(arg0: &PoolSystem, arg1: 0x2::object::ID, arg2: address, arg3: &0x2::clock::Clock) : vector<u64> {
+        let v0 = 0x2::object_table::borrow<0x2::object::ID, Pool>(&arg0.pools, arg1);
+        let v1 = 0x2::clock::timestamp_ms(arg3);
+        let v2 = if (v1 > v0.end_time) {
+            v0.end_time
+        } else {
+            v1
+        };
+        let v3 = 0x1::vector::empty<u64>();
+        let v4 = 0;
+        while (v4 < 0x1::vector::length<0x2::object::ID>(&v0.staked_nft_ids)) {
+            let v5 = *0x1::vector::borrow<0x2::object::ID>(&v0.staked_nft_ids, v4);
+            if (0x2::object_table::contains<0x2::object::ID, StakedNFT>(&v0.staked_nfts, v5)) {
+                let v6 = 0x2::object_table::borrow<0x2::object::ID, StakedNFT>(&v0.staked_nfts, v5);
+                if (v6.owner == arg2) {
+                    let v7 = (v2 - v6.stake_time) / 3600000;
+                    let v8 = if (v7 == 0) {
+                        1
+                    } else {
+                        v7
+                    };
+                    0x1::vector::push_back<u64>(&mut v3, v8);
+                };
+            };
+            v4 = v4 + 1;
+        };
+        v3
+    }
+
+    public fun get_user_nft_weights_custom<T0>(arg0: &CustomTokenPool<T0>, arg1: address, arg2: &0x2::clock::Clock) : vector<u64> {
+        let v0 = 0x2::clock::timestamp_ms(arg2);
+        let v1 = if (v0 > arg0.end_time) {
+            arg0.end_time
+        } else {
+            v0
+        };
+        let v2 = 0x1::vector::empty<u64>();
+        let v3 = 0;
+        while (v3 < 0x1::vector::length<0x2::object::ID>(&arg0.staked_nft_ids)) {
+            let v4 = *0x1::vector::borrow<0x2::object::ID>(&arg0.staked_nft_ids, v3);
+            if (0x2::object_table::contains<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v4)) {
+                let v5 = 0x2::object_table::borrow<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, v4);
+                if (v5.owner == arg1) {
+                    let v6 = (v1 - v5.stake_time) / 3600000;
+                    let v7 = if (v6 == 0) {
+                        1
+                    } else {
+                        v6
+                    };
+                    0x1::vector::push_back<u64>(&mut v2, v7);
+                };
+            };
+            v3 = v3 + 1;
+        };
+        v2
+    }
+
+    public fun get_user_reward_details(arg0: &PoolSystem, arg1: 0x2::object::ID, arg2: address, arg3: &0x2::clock::Clock) : (u64, u64, u64, bool, u64, u64) {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg0.pools, arg1), 1);
+        let v0 = 0x2::object_table::borrow<0x2::object::ID, Pool>(&arg0.pools, arg1);
+        let v1 = 0x2::clock::timestamp_ms(arg3);
+        if (!0x2::table::contains<address, UserStakeInfo>(&v0.user_stakes, arg2)) {
+            return (0, 0, 0, false, 0, 0)
+        };
+        let v2 = 0x2::table::borrow<address, UserStakeInfo>(&v0.user_stakes, arg2);
+        let v3 = v1 - v2.stake_start_time;
+        let v4 = v3 / 3600000;
+        let v5 = if (v4 == 0) {
+            v2.nft_count
+        } else {
+            v2.nft_count * v4
+        };
+        let v6 = if (v0.total_weight > 0) {
+            0x2::balance::value<0x2::sui::SUI>(&v0.sui_reward_pool) * v5 / v0.total_weight
+        } else {
+            0
+        };
+        let v7 = v1 - v2.last_reward_claim;
+        (v2.nft_count, v5, v6, v7 >= arg0.global_config.claim_time_interval, v3, v7)
+    }
+
+    public fun get_user_reward_details_custom<T0>(arg0: &CustomTokenPool<T0>, arg1: address, arg2: &0x2::clock::Clock) : (u64, u64, u64, u64, u64, u64) {
+        let v0 = 0x2::clock::timestamp_ms(arg2);
+        if (!0x2::table::contains<address, UserStakeInfo>(&arg0.user_stakes, arg1)) {
+            return (0, 0, 0, 0, 0, 0)
+        };
+        let v1 = 0x2::table::borrow<address, UserStakeInfo>(&arg0.user_stakes, arg1);
+        let v2 = calculate_user_current_weight_custom<T0>(arg0, arg1, v0);
+        let v3 = calculate_total_current_weight_custom<T0>(arg0, v0);
+        let v4 = arg0.end_time - arg0.start_time;
+        let v5 = if (v0 > arg0.end_time) {
+            arg0.end_time - arg0.start_time
+        } else {
+            v0 - arg0.start_time
+        };
+        let v6 = if (v3 == 0) {
+            true
+        } else if (v2 == 0) {
+            true
+        } else {
+            v4 == 0
+        };
+        let v7 = if (v6) {
+            0
+        } else {
+            let v8 = (v2 as u128) * (v5 as u128) * (0x2::balance::value<T0>(&arg0.token_reward_pool) as u128) / (v3 as u128) * (v4 as u128);
+            if (v8 > 18446744073709551615) {
+                18446744073709551615
+            } else {
+                (v8 as u64)
+            }
+        };
+        (v1.nft_count, v2, v3, v7, v0 - v1.stake_start_time, v1.last_reward_claim)
+    }
+
+    public fun get_user_reward_details_dynamic(arg0: &PoolSystem, arg1: 0x2::object::ID, arg2: address, arg3: &0x2::clock::Clock) : (u64, u64, u64, u64, u64, u64) {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg0.pools, arg1), 1);
+        let v0 = 0x2::object_table::borrow<0x2::object::ID, Pool>(&arg0.pools, arg1);
+        let v1 = 0x2::clock::timestamp_ms(arg3);
+        if (!0x2::table::contains<address, UserStakeInfo>(&v0.user_stakes, arg2)) {
+            return (0, 0, 0, 0, 0, 0)
+        };
+        let v2 = 0x2::table::borrow<address, UserStakeInfo>(&v0.user_stakes, arg2);
+        (v2.nft_count, calculate_user_current_weight(v0, arg2, v1), calculate_total_current_weight(v0, v1), calculate_user_reward_amount(v0, arg2, v1), v1 - v2.stake_start_time, v2.last_reward_claim)
+    }
+
+    public fun get_user_stake_info(arg0: &PoolSystem, arg1: 0x2::object::ID, arg2: address) : (u64, u64, u64) {
+        let v0 = 0x2::object_table::borrow<0x2::object::ID, Pool>(&arg0.pools, arg1);
+        if (!0x2::table::contains<address, UserStakeInfo>(&v0.user_stakes, arg2)) {
+            return (0, 0, 0)
+        };
+        let v1 = 0x2::table::borrow<address, UserStakeInfo>(&v0.user_stakes, arg2);
+        (v1.nft_count, v1.total_weight, v1.last_reward_claim)
+    }
+
+    public fun get_user_stake_info_custom<T0>(arg0: &CustomTokenPool<T0>, arg1: address) : (u64, u64, u64, u64) {
+        if (!0x2::table::contains<address, UserStakeInfo>(&arg0.user_stakes, arg1)) {
+            return (0, 0, 0, 0)
+        };
+        let v0 = 0x2::table::borrow<address, UserStakeInfo>(&arg0.user_stakes, arg1);
+        (v0.nft_count, v0.total_weight, v0.stake_start_time, v0.last_reward_claim)
+    }
+
+    public fun get_user_staked_nft_ids(arg0: &PoolSystem, arg1: 0x2::object::ID, arg2: address) : vector<0x2::object::ID> {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg0.pools, arg1), 1);
+        let v0 = 0x2::object_table::borrow<0x2::object::ID, Pool>(&arg0.pools, arg1);
+        let v1 = 0x1::vector::empty<0x2::object::ID>();
+        let v2 = 0;
+        while (v2 < 0x1::vector::length<0x2::object::ID>(&v0.staked_nft_ids)) {
+            let v3 = *0x1::vector::borrow<0x2::object::ID>(&v0.staked_nft_ids, v2);
+            if (0x2::object_table::contains<0x2::object::ID, StakedNFT>(&v0.staked_nfts, v3)) {
+                if (0x2::object_table::borrow<0x2::object::ID, StakedNFT>(&v0.staked_nfts, v3).owner == arg2) {
+                    0x1::vector::push_back<0x2::object::ID>(&mut v1, v3);
+                };
+            };
+            v2 = v2 + 1;
+        };
+        v1
+    }
+
+    fun init(arg0: POOL_REWARDS, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = PoolAdminCap{id: 0x2::object::new(arg1)};
+        let v1 = GlobalConfig{claim_time_interval: 500000};
+        let v2 = PoolSystem{
+            id            : 0x2::object::new(arg1),
+            pools         : 0x2::object_table::new<0x2::object::ID, Pool>(arg1),
+            pool_counter  : 0,
+            global_config : v1,
+        };
+        0x2::transfer::transfer<PoolAdminCap>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::share_object<PoolSystem>(v2);
+    }
+
+    public fun stake_nft(arg0: &mut PoolSystem, arg1: 0x2::object::ID, arg2: 0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT, arg3: &0x2::clock::Clock, arg4: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg0.pools, arg1);
+        assert!(v0.is_active, 2);
+        let v1 = 0x2::clock::timestamp_ms(arg3);
+        assert!(v1 < v0.end_time, 6);
+        validate_nft_requirements(v0, &arg2);
+        let v2 = 0x2::tx_context::sender(arg4);
+        let v3 = 0x2::object::id<0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT>(&arg2);
+        let v4 = 1;
+        let v5 = StakedNFT{
+            id         : 0x2::object::new(arg4),
+            nft        : arg2,
+            owner      : v2,
+            pool_id    : arg1,
+            stake_time : v1,
+            weight     : v4,
+        };
+        v0.total_staked_count = v0.total_staked_count + 1;
+        v0.total_weight = v0.total_weight + v4;
+        if (!0x2::table::contains<address, UserStakeInfo>(&v0.user_stakes, v2)) {
+            0x2::table::add<address, bool>(&mut v0.unique_participants, v2, true);
+            v0.participant_count = v0.participant_count + 1;
+            let v6 = UserStakeInfo{
+                nft_count         : 1,
+                total_weight      : v4,
+                stake_start_time  : v1,
+                last_reward_claim : v1,
+            };
+            0x2::table::add<address, UserStakeInfo>(&mut v0.user_stakes, v2, v6);
+        } else {
+            let v7 = 0x2::table::borrow_mut<address, UserStakeInfo>(&mut v0.user_stakes, v2);
+            v7.nft_count = v7.nft_count + 1;
+            v7.total_weight = v7.total_weight + v4;
+        };
+        0x2::object_table::add<0x2::object::ID, StakedNFT>(&mut v0.staked_nfts, v3, v5);
+        0x1::vector::push_back<0x2::object::ID>(&mut v0.staked_nft_ids, v3);
+        let v8 = NFTStaked{
+            pool_id    : arg1,
+            nft_id     : v3,
+            owner      : v2,
+            stake_time : v1,
+        };
+        0x2::event::emit<NFTStaked>(v8);
+    }
+
+    public fun stake_nft_in_custom_pool<T0>(arg0: &mut CustomTokenPool<T0>, arg1: 0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0.is_active, 2);
+        let v0 = 0x2::clock::timestamp_ms(arg2);
+        assert!(v0 < arg0.end_time, 6);
+        validate_nft_requirements_custom<T0>(arg0, &arg1);
+        let v1 = 0x2::tx_context::sender(arg3);
+        let v2 = 0x2::object::id<0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT>(&arg1);
+        let v3 = 1;
+        let v4 = StakedNFT{
+            id         : 0x2::object::new(arg3),
+            nft        : arg1,
+            owner      : v1,
+            pool_id    : arg0.pool_id,
+            stake_time : v0,
+            weight     : v3,
+        };
+        arg0.total_staked_count = arg0.total_staked_count + 1;
+        arg0.total_weight = arg0.total_weight + v3;
+        if (!0x2::table::contains<address, UserStakeInfo>(&arg0.user_stakes, v1)) {
+            0x2::table::add<address, bool>(&mut arg0.unique_participants, v1, true);
+            arg0.participant_count = arg0.participant_count + 1;
+            let v5 = UserStakeInfo{
+                nft_count         : 1,
+                total_weight      : v3,
+                stake_start_time  : v0,
+                last_reward_claim : v0,
+            };
+            0x2::table::add<address, UserStakeInfo>(&mut arg0.user_stakes, v1, v5);
+        } else {
+            let v6 = 0x2::table::borrow_mut<address, UserStakeInfo>(&mut arg0.user_stakes, v1);
+            v6.nft_count = v6.nft_count + 1;
+            v6.total_weight = v6.total_weight + v3;
+        };
+        0x2::object_table::add<0x2::object::ID, StakedNFT>(&mut arg0.staked_nfts, v2, v4);
+        0x1::vector::push_back<0x2::object::ID>(&mut arg0.staked_nft_ids, v2);
+        let v7 = NFTStakedInCustomPool{
+            pool_id    : arg0.pool_id,
+            nft_id     : v2,
+            owner      : v1,
+            stake_time : v0,
+        };
+        0x2::event::emit<NFTStakedInCustomPool>(v7);
+    }
+
+    public fun start_custom_pool<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(!arg1.is_active, 3);
+        arg1.is_active = true;
+        let v0 = CustomTokenPoolStarted{
+            pool_id    : arg1.pool_id,
+            start_time : 0x2::clock::timestamp_ms(arg2),
+        };
+        0x2::event::emit<CustomTokenPoolStarted>(v0);
+    }
+
+    public fun start_pool(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: &0x2::clock::Clock, arg4: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2);
+        assert!(!v0.is_active, 3);
+        v0.is_active = true;
+        let v1 = PoolStarted{
+            pool_id    : arg2,
+            start_time : 0x2::clock::timestamp_ms(arg3),
+        };
+        0x2::event::emit<PoolStarted>(v1);
+    }
+
+    public fun transfer_pool_admin_cap(arg0: PoolAdminCap, arg1: address) {
+        0x2::transfer::transfer<PoolAdminCap>(arg0, arg1);
+    }
+
+    public fun unstake_nft(arg0: &mut PoolSystem, arg1: 0x2::object::ID, arg2: 0x2::object::ID, arg3: &0x2::clock::Clock, arg4: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg0.pools, arg1);
+        let v1 = 0x2::tx_context::sender(arg4);
+        assert!(0x2::object_table::contains<0x2::object::ID, StakedNFT>(&v0.staked_nfts, arg2), 8);
+        let v2 = 0x2::object_table::remove<0x2::object::ID, StakedNFT>(&mut v0.staked_nfts, arg2);
+        assert!(v2.owner == v1, 4);
+        v0.total_staked_count = v0.total_staked_count - 1;
+        v0.total_weight = v0.total_weight - v2.weight;
+        let v3 = 0x2::table::borrow_mut<address, UserStakeInfo>(&mut v0.user_stakes, v1);
+        v3.nft_count = v3.nft_count - 1;
+        v3.total_weight = v3.total_weight - v2.weight;
+        let StakedNFT {
+            id         : v4,
+            nft        : v5,
+            owner      : _,
+            pool_id    : _,
+            stake_time : _,
+            weight     : _,
+        } = v2;
+        0x2::object::delete(v4);
+        let (v10, v11) = 0x1::vector::index_of<0x2::object::ID>(&v0.staked_nft_ids, &arg2);
+        if (v10) {
+            0x1::vector::remove<0x2::object::ID>(&mut v0.staked_nft_ids, v11);
+        };
+        0x2::transfer::public_transfer<0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT>(v5, v1);
+        let v12 = NFTUnstaked{
+            pool_id        : arg1,
+            nft_id         : arg2,
+            owner          : v1,
+            stake_duration : 0x2::clock::timestamp_ms(arg3) - v2.stake_time,
+        };
+        0x2::event::emit<NFTUnstaked>(v12);
+    }
+
+    public fun unstake_nft_from_custom_pool<T0>(arg0: &mut CustomTokenPool<T0>, arg1: 0x2::object::ID, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg3);
+        assert!(0x2::object_table::contains<0x2::object::ID, StakedNFT>(&arg0.staked_nfts, arg1), 8);
+        let v1 = 0x2::object_table::remove<0x2::object::ID, StakedNFT>(&mut arg0.staked_nfts, arg1);
+        assert!(v1.owner == v0, 4);
+        arg0.total_staked_count = arg0.total_staked_count - 1;
+        arg0.total_weight = arg0.total_weight - v1.weight;
+        let v2 = 0x2::table::borrow_mut<address, UserStakeInfo>(&mut arg0.user_stakes, v0);
+        v2.nft_count = v2.nft_count - 1;
+        v2.total_weight = v2.total_weight - v1.weight;
+        let StakedNFT {
+            id         : v3,
+            nft        : v4,
+            owner      : _,
+            pool_id    : _,
+            stake_time : _,
+            weight     : _,
+        } = v1;
+        0x2::object::delete(v3);
+        let (v9, v10) = 0x1::vector::index_of<0x2::object::ID>(&arg0.staked_nft_ids, &arg1);
+        if (v9) {
+            0x1::vector::remove<0x2::object::ID>(&mut arg0.staked_nft_ids, v10);
+        };
+        0x2::transfer::public_transfer<0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT>(v4, v0);
+        let v11 = NFTUnstakedFromCustomPool{
+            pool_id        : arg0.pool_id,
+            nft_id         : arg1,
+            owner          : v0,
+            stake_duration : 0x2::clock::timestamp_ms(arg2) - v1.stake_time,
+        };
+        0x2::event::emit<NFTUnstakedFromCustomPool>(v11);
+    }
+
+    public fun update_claim_time_interval(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        arg1.global_config.claim_time_interval = arg2;
+    }
+
+    public fun update_custom_pool_description<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: 0x1::string::String, arg3: &mut 0x2::tx_context::TxContext) {
+        arg1.description = arg2;
+    }
+
+    public fun update_custom_pool_image_url<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: 0x1::string::String, arg3: &mut 0x2::tx_context::TxContext) {
+        arg1.image_url = arg2;
+        let v0 = CustomPoolImageUpdated{
+            pool_id       : arg1.pool_id,
+            old_image_url : arg1.image_url,
+            new_image_url : arg1.image_url,
+            updated_by    : 0x2::tx_context::sender(arg3),
+        };
+        0x2::event::emit<CustomPoolImageUpdated>(v0);
+    }
+
+    public fun update_custom_pool_name<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: 0x1::string::String, arg3: &mut 0x2::tx_context::TxContext) {
+        arg1.name = arg2;
+    }
+
+    public fun update_custom_pool_required_elements<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: vector<u64>, arg3: &mut 0x2::tx_context::TxContext) {
+        arg1.required_elements = arg2;
+    }
+
+    public fun update_pool_description(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: 0x1::string::String, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg1.pools, arg2), 1);
+        0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2).description = arg3;
+    }
+
+    public fun update_pool_image_url(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: 0x1::string::String, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg1.pools, arg2), 1);
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2);
+        v0.image_url = arg3;
+        let v1 = PoolImageUpdated{
+            pool_id       : arg2,
+            old_image_url : v0.image_url,
+            new_image_url : v0.image_url,
+            updated_by    : 0x2::tx_context::sender(arg4),
+        };
+        0x2::event::emit<PoolImageUpdated>(v1);
+    }
+
+    public fun update_pool_name(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: 0x1::string::String, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg1.pools, arg2), 1);
+        0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2).name = arg3;
+    }
+
+    public fun update_pool_required_elements(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: vector<u64>, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg1.pools, arg2), 1);
+        0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2).required_elements = arg3;
+    }
+
+    fun validate_nft_requirements(arg0: &Pool, arg1: &0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT) {
+        if (0x1::vector::length<u64>(&arg0.required_elements) > 0) {
+            assert!(check_nft_has_all_required_elements(arg1, &arg0.required_elements), 11);
+        };
+    }
+
+    fun validate_nft_requirements_custom<T0>(arg0: &CustomTokenPool<T0>, arg1: &0x2a1aacd72da22e0472780fb4ef3fd000620169faf66541f7745802316ee23075::creature_nft::CreatureNFT) {
+        if (0x1::vector::length<u64>(&arg0.required_elements) > 0) {
+            assert!(check_nft_has_all_required_elements(arg1, &arg0.required_elements), 11);
+        };
+    }
+
+    public fun withdraw_custom_pool_funds<T0>(arg0: &PoolAdminCap, arg1: &mut CustomTokenPool<T0>, arg2: u64, arg3: address, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::balance::value<T0>(&arg1.token_reward_pool) >= arg2, 5);
+        arg1.total_rewards_added = arg1.total_rewards_added - arg2;
+        0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(0x2::balance::split<T0>(&mut arg1.token_reward_pool, arg2), arg4), arg3);
+    }
+
+    public fun withdraw_pool_funds(arg0: &PoolAdminCap, arg1: &mut PoolSystem, arg2: 0x2::object::ID, arg3: u64, arg4: address, arg5: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::object_table::contains<0x2::object::ID, Pool>(&arg1.pools, arg2), 1);
+        let v0 = 0x2::object_table::borrow_mut<0x2::object::ID, Pool>(&mut arg1.pools, arg2);
+        assert!(0x2::balance::value<0x2::sui::SUI>(&v0.sui_reward_pool) >= arg3, 5);
+        v0.total_sui_deposited = v0.total_sui_deposited - arg3;
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x2::balance::split<0x2::sui::SUI>(&mut v0.sui_reward_pool, arg3), arg5), arg4);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
