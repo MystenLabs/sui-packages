@@ -1,0 +1,422 @@
+{
+  "package_id": "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "get_address": []
+      }
+    },
+    {
+      "module_name": "asserts",
+      "call_graph": {
+        "must_is_admin": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::admin::get_address"
+        ],
+        "must_is_whitelisted": [],
+        "must_loan_amount": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value"
+        ],
+        "must_payout_amount": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "must_profit_amount": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value"
+        ],
+        "must_total_amount": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value"
+        ]
+      }
+    },
+    {
+      "module_name": "datastore",
+      "call_graph": {
+        "add_to_whitelist": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_is_admin",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::is_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::get_sender"
+        ],
+        "create_config": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_is_admin",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::get_sender"
+        ],
+        "get_sender_if_whitelisted": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_is_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::is_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::get_sender"
+        ],
+        "is_whitelisted": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "remove_from_whitelist": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::remove",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_is_admin",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_is_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::is_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::get_sender"
+        ]
+      }
+    },
+    {
+      "module_name": "flashloans",
+      "call_graph": {
+        "base_fl_b": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_profit_amount",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_total_amount",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_return_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::wallet::deposit_or_destroy"
+        ],
+        "base_fl_q": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_profit_amount",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_total_amount",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_return_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::wallet::deposit_or_destroy"
+        ],
+        "fl_b": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::borrow_flashloan_base"
+        ],
+        "fl_b_checked": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_loan_amount",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b"
+        ],
+        "fl_q": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::borrow_flashloan_quote"
+        ],
+        "fl_q_checked": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_loan_amount",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q"
+        ],
+        "fl_return_b": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::return_flashloan_base"
+        ],
+        "fl_return_q": [
+          "0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::return_flashloan_quote"
+        ],
+        "test_fl_b": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_return_b"
+        ],
+        "test_fl_q": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_return_q"
+        ]
+      }
+    },
+    {
+      "module_name": "momentum",
+      "call_graph": {
+        "log_flash": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "ma": [
+          "0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::flash_swap"
+        ],
+        "mb": [
+          "0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::flash_swap"
+        ],
+        "repay_f_s": [
+          "0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::repay_flash_swap"
+        ],
+        "test_ma": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::flash_swap",
+          "0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::swap_receipt_debts",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::admin::get_address",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::momentum::log_flash",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::momentum::repay_f_s",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::coin_from_balance",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::coin_to_balance",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::join",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::send_coin",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::zero_balance"
+        ],
+        "test_mb": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::flash_swap",
+          "0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::swap_receipt_debts",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::admin::get_address",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::momentum::log_flash",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::momentum::repay_f_s",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::coin_from_balance",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::coin_to_balance",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::join",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::send_coin",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::zero_balance"
+        ]
+      }
+    },
+    {
+      "module_name": "swap_fl_t",
+      "call_graph": {
+        "fl_b_th_ta_ta_ta": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta_",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta__"
+        ],
+        "fl_b_th_ta_ta_tb": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta_",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb__"
+        ],
+        "fl_b_th_ta_tb_ta": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta__",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb_"
+        ],
+        "fl_b_th_tb_ta_tb": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta_",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb__"
+        ],
+        "fl_b_th_tb_tb_ta": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta__",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb_"
+        ],
+        "fl_b_th_tb_tb_tb": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb_",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb__"
+        ],
+        "fl_b_tw_ta_ta": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta__"
+        ],
+        "fl_b_tw_ta_tb": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb__"
+        ],
+        "fl_b_tw_tb_ta": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta__",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb"
+        ],
+        "fl_b_tw_tb_tb": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_b",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_b_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb__"
+        ],
+        "fl_q_th_ta_ta_ta": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta_",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta__"
+        ],
+        "fl_q_th_ta_ta_tb": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta_",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb__"
+        ],
+        "fl_q_th_ta_tb_ta": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta__",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb_"
+        ],
+        "fl_q_th_tb_ta_tb": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta_",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb__"
+        ],
+        "fl_q_th_tb_tb_ta": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta__",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb_"
+        ],
+        "fl_q_th_tb_tb_tb": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb_",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb__"
+        ],
+        "fl_q_tw_ta_ta": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta__"
+        ],
+        "fl_q_tw_ta_tb": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb__"
+        ],
+        "fl_q_tw_tb_ta": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta__",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb"
+        ],
+        "fl_q_tw_tb_tb": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::datastore::get_sender_if_whitelisted",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::base_fl_q",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::flashloans::fl_q_checked",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb__"
+        ]
+      }
+    },
+    {
+      "module_name": "tools",
+      "call_graph": {
+        "coin_from_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance"
+        ],
+        "coin_to_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance"
+        ],
+        "destroy_zero": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero"
+        ],
+        "get_coin_vec": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::singleton"
+        ],
+        "get_deadline": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms"
+        ],
+        "get_sender": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "join": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join"
+        ],
+        "send_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer"
+        ],
+        "zero_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero"
+        ]
+      }
+    },
+    {
+      "module_name": "turbos",
+      "call_graph": {
+        "ta": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::swap_router::swap_a_b_with_return_",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::get_coin_vec",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::get_deadline"
+        ],
+        "ta_": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::wallet::deposit_or_destroy"
+        ],
+        "ta__": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::join",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta_"
+        ],
+        "tb": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::swap_router::swap_b_a_with_return_",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::get_coin_vec",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::get_deadline"
+        ],
+        "tb_": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::wallet::deposit_or_destroy"
+        ],
+        "tb__": [
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::join",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb_"
+        ],
+        "test_ta": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::admin::get_address",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::destroy_zero",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::send_coin",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::ta"
+        ],
+        "test_tb": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::admin::get_address",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::destroy_zero",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::send_coin",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::turbos::tb"
+        ]
+      }
+    },
+    {
+      "module_name": "wallet",
+      "call_graph": {
+        "create_vault": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_is_admin",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::get_sender",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::zero_balance"
+        ],
+        "deposit_or_destroy": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::coin_to_balance",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::destroy_zero"
+        ],
+        "withdraw_to_admin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::admin::get_address",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_is_admin",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::asserts::must_payout_amount",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::coin_from_balance",
+          "0xef432faf1624617ac313e5c64c21ce8eb964126bf05fac3e68e8ac4ce0f9325b::tools::get_sender"
+        ]
+      }
+    }
+  ]
+}
