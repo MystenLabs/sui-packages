@@ -115,7 +115,7 @@ struct PackageGraphQLResponsePageInfo {
 struct PackageGraphQLResponseNode {
     address: String,
     package_bcs: String,
-    previous_transaction_block: Option<PackageGraphQLResponsePreviousTransactionBlock>,
+    previous_transaction: Option<PackageGraphQLResponsePreviousTransaction>,
 }
 
 impl TryInto<MovePackageWithMetadata> for PackageGraphQLResponseNode {
@@ -123,21 +123,21 @@ impl TryInto<MovePackageWithMetadata> for PackageGraphQLResponseNode {
     fn try_into(self) -> Result<MovePackageWithMetadata, Self::Error> {
         let address = self.address.clone();
         let (sender, transaction_digest, checkpoint) =
-            if let Some(previous_transaction_block) = self.previous_transaction_block {
+            if let Some(previous_transaction) = self.previous_transaction {
                 (
-                    previous_transaction_block.sender.map(|s| s.address.clone()),
-                    previous_transaction_block.digest.clone(),
-                    previous_transaction_block
+                    previous_transaction.sender.map(|s| s.address.clone()),
+                    previous_transaction.digest.clone(),
+                    previous_transaction
                         .effects
                         .checkpoint
                         .sequence_number,
                 )
             } else {
                 let transaction_digest = get_package_creation_transaction(&address)
-                    .map_err(|_| GraphQLFetcherError::PreviousTransactionBlockNotAvailable(address.clone()))?;
+                    .map_err(|_| GraphQLFetcherError::PreviousTransactionNotAvailable(address.clone()))?;
                 let transaction_metadata: TransactionMetadata =
                     get_transaction_metadata(&transaction_digest)
-                        .map_err(|_| GraphQLFetcherError::PreviousTransactionBlockNotAvailable(address.clone()))?;
+                        .map_err(|_| GraphQLFetcherError::PreviousTransactionNotAvailable(address.clone()))?;
                 (
                     Some(transaction_metadata.sender),
                     transaction_digest,
@@ -162,7 +162,7 @@ impl TryInto<MovePackageWithMetadata> for PackageGraphQLResponseNode {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-struct PackageGraphQLResponsePreviousTransactionBlock {
+struct PackageGraphQLResponsePreviousTransaction {
     digest: String,
     effects: PackageGraphQLResponseEffects,
     sender: Option<PackageGraphQLResponseSender>,
@@ -265,7 +265,7 @@ impl PackageGraphQLFetcher {
               address
               version
               packageBcs
-              previousTransactionBlock {
+              previousTransaction {
                 digest
                 sender {
                   address
@@ -368,8 +368,8 @@ pub enum GraphQLFetcherError {
     GraphQLError(String),
     #[error("Failed to decode package bcs")]
     PackageBcsBase64DecodeError(#[from] base64::DecodeError),
-    #[error("Previous transaction block not available because of pruned node. Address: {0}")]
-    PreviousTransactionBlockNotAvailable(String),
+    #[error("Previous transaction not available because of pruned node. Address: {0}")]
+    PreviousTransactionNotAvailable(String),
     #[error("Failed to deserialize package for package id {0}")]
     PackageBcsDeserializeError(String),
 }
