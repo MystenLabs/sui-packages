@@ -11,6 +11,7 @@ use crate::json_rpc::{
     get_package_creation_transaction, get_transaction_metadata, TransactionMetadata,
 };
 
+const GRAPHQL_ENDPOINT: &str = "https://graphql.mainnet.sui.io/graphql";
 const GRAPHQL_QUERY: &str = r#"
 query($cursor: String, $afterCheckpoint: UInt53) {
   packages(first: 50, after: $cursor, filter: {
@@ -23,7 +24,7 @@ query($cursor: String, $afterCheckpoint: UInt53) {
     nodes {
       address
       packageBcs
-      previousTransactionBlock {
+      previousTransaction {
         digest
         sender {
           address
@@ -211,7 +212,7 @@ impl PackageGraphQLFetcher {
             },
         };
         let res = client
-            .post("https://sui-mainnet.mystenlabs.com/graphql")
+            .post(GRAPHQL_ENDPOINT)
             .header("Content-Type", "application/json")
             .header(
                 "User-Agent",
@@ -300,7 +301,7 @@ impl PackageGraphQLFetcher {
             },
         };
         let http_res = client
-            .post("https://sui-mainnet.mystenlabs.com/graphql")
+            .post(GRAPHQL_ENDPOINT)
             .header("Content-Type", "application/json")
             .header(
                 "User-Agent",
