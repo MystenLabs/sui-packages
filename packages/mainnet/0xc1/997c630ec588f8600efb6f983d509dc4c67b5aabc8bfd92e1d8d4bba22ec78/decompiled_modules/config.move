@@ -1,0 +1,87 @@
+module 0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::config {
+    struct GlobalConfig has key {
+        id: 0x2::object::UID,
+        acl: 0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::acl::ACL,
+        package_version: u64,
+    }
+
+    struct PackageVersionUpgraded has copy, drop {
+        new_version: u64,
+        old_version: u64,
+    }
+
+    struct RoleAdded has copy, drop {
+        member: address,
+        role: u8,
+    }
+
+    struct RoleRemoved has copy, drop {
+        member: address,
+        role: u8,
+    }
+
+    public fun add_role(arg0: &0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::admin_cap::AdminCap, arg1: &mut GlobalConfig, arg2: address, arg3: u8) {
+        check_package_version(arg1);
+        add_role_internal(arg1, arg2, arg3);
+    }
+
+    public fun has_role(arg0: &GlobalConfig, arg1: address, arg2: u8) : bool {
+        0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::acl::has_role(&arg0.acl, arg1, arg2)
+    }
+
+    public fun remove_member(arg0: &0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::admin_cap::AdminCap, arg1: &mut GlobalConfig, arg2: address) {
+        check_package_version(arg1);
+        0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::acl::remove_member(&mut arg1.acl, arg2);
+    }
+
+    public fun remove_role(arg0: &0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::admin_cap::AdminCap, arg1: &mut GlobalConfig, arg2: address, arg3: u8) {
+        check_package_version(arg1);
+        remove_role_internal(arg1, arg2, arg3);
+    }
+
+    public(friend) fun add_role_internal(arg0: &mut GlobalConfig, arg1: address, arg2: u8) {
+        0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::acl::add_role(&mut arg0.acl, arg1, arg2);
+        let v0 = RoleAdded{
+            member : arg1,
+            role   : arg2,
+        };
+        0x2::event::emit<RoleAdded>(v0);
+    }
+
+    public fun check_package_version(arg0: &GlobalConfig) {
+        assert!(arg0.package_version == 2, 2);
+    }
+
+    fun init(arg0: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::acl::new(arg0);
+        0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::acl::add_role(&mut v0, @0x337f3bad574e6338551b71932c449e20c81abb371364811de3ee93b58343eb3c, 0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::roles::role_rewarder());
+        let v1 = GlobalConfig{
+            id              : 0x2::object::new(arg0),
+            acl             : v0,
+            package_version : 2,
+        };
+        0x2::transfer::share_object<GlobalConfig>(v1);
+    }
+
+    public(friend) fun remove_role_internal(arg0: &mut GlobalConfig, arg1: address, arg2: u8) {
+        0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::acl::remove_role(&mut arg0.acl, arg1, arg2);
+        let v0 = RoleRemoved{
+            member : arg1,
+            role   : arg2,
+        };
+        0x2::event::emit<RoleRemoved>(v0);
+    }
+
+    public fun upgrade_package_version(arg0: &0xc1997c630ec588f8600efb6f983d509dc4c67b5aabc8bfd92e1d8d4bba22ec78::admin_cap::AdminCap, arg1: &mut GlobalConfig) {
+        assert!(arg1.package_version < 2, 1);
+        arg1.package_version = 2;
+        let v0 = PackageVersionUpgraded{
+            new_version : arg1.package_version,
+            old_version : arg1.package_version,
+        };
+        0x2::event::emit<PackageVersionUpgraded>(v0);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
