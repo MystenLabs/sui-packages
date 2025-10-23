@@ -1,0 +1,14 @@
+module 0xcd3d0187b7d73c79e2ee0e27dd421209bfc7806a60d6aa42fb10d8a2e4411dca::nickel {
+    struct NICKEL has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: NICKEL, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0xf4054b4c967ea64173453f593a0ec98cb6aa351635cbc412f4fdf5f804bb98db::token_emitter::create_currency<NICKEL>(arg0, 9, b"NICKEL", b"$nickel", b"https://x.com/EmanAbio/status/1981179645237305808?t=nUG5N3FKknO2IQw3khUDKQ&s=19", 0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,UklGRuAFAABXRUJQVlA4WAoAAAAQAAAAfwAAfwAAQUxQSBYAAAABDzD/ERFCSED4f9oHSkT/k3zcj3wAVlA4IKQFAACQHQCdASqAAIAAPm02lUekIyIhJBgLsIANiWcA1l/5U0xYq4HqA2wHPRehPeAPQA6VzAO/6b2lf57wlsKqsO8H4q/0nkl3UUAH5f/VO+y1Gu+nQt/kvAG8Z9gD+V/2b1V/739nfN99aewL5bHsS/cD2ay9a3zxlMplMpgL1AKaSu84mH9s7HH/Ko7Kp+FzNsW18zJLBDUAyFgajrkIsfjIOB/KxXSliQ4lc8nYnzXbUOXU/xtpUL9crvRu8vIJYPXL2sn2z/YDCzyt+Divc+8lU+joFBPEorgXlthJpxw77WICgpRv53pOgPaH/0MYvQLh3Ya7gAD+/PhAAAifNxzPEbF0clNBg+ssg7lXIaMnVKe0Iw49tosrcbyg0h7UKV33W+IgOFOuC8v8hPN2v2PLYycSvtrS76h7o1AKX3GWO3XbYWJdIJlF4AjIddVO441Sj7NpBXPO58c9LWDOC/teHDutIrm1VRwYdOAHA3scq2Ckas4xrRII6TEchAQ5PcNQiKlgC1TxsBKwJPzGLBrDZCpnm0WQyGyUrxKt/fS2/TOyermomDcv4iwMUlv1zjUZQM16u3+no8xJue28h+bOeB6tXal7d0tSyvMVu2WkqBQrnQnfBVRG2S72qGTLNyZgr8mPZYodgReNdknRPl6giYxYYdt2NbaK873x7XVluBI4ab2dgJT0/HhJzy1k+g3BPgFCN36ihvMYIF4dU/YFV5tz+RNlkhDWWYPDCn9dwskkR055D1Y8kz3RttWJLfiZgQJ+Pdd49fdNcptBYUvZ1+sj/gCQMH4MVO5diAbIahtt8CdAVe9bG5f/Hh0++KHxiyaVV6XT7wjglLy/FfCPwAoA6lBFP6qDpdja4KcOmtmj9f2dyw6onpmNqHcvnHYulOlRYqhVDLNiqrwuWWy0ppQJ8omXas6DzPTvTh+E+YJwoDGc8+g10JF+JKs+PI3xNe5oamPk3DfXWx4d4+9qOY6a+Abh/8IKvGsyRKqJtYEm49ehFDKwXfrzJe3eGHmYgV/CEkr1QJ5yqXAUoVxwx67tN3eCsjKaYAzIAl3aewRXKGAwf1MUYc+3/GOR3WryDA9hN6YkU/YiU5pm9rsUXQFK2xtFR1Ep77TJv1aSwHY11uP3h5PPdMh5zcsxjMYjG9l68WlMn1XtOsdlhR0sRHRcu6s2eT+iR5lWAp5hz4MeU9EHepe1mLo2NpHGfehSIVWKs3VSycvicxB+IIfNWU8N+UfCuvtrzZzWpCJ0iuuB0jr1/WIoYpwPdx3sK0MOvIq3m20G0LpMW5ClLCfV4mDo1tHULrJLRwcfG6Lp6BPRV8mqdQhcFZxJhHtbrKoe6biLp9Zh4GQcyqg6sHQAMrOeegoBUZZICToUcLMdcR+Nmf9N6GQuAjklhMe97wdNLpmsaAJRA2gq5qW6K7GsqySaQKv8eYEe62xRcSfrCYxpjGFMJAm0q+10V/ICeE8h1Ji8e2+idog6sEoz/hl7UYvf5ZgfymkmhOwFsICLRT7Kv6Zfi2zQwqW8zOysnguC0mtmHTfHdZezoefJTQh1XpBx1VJdXC6rzBzWLQN0giPRPuLR4NXPx+4vJncOlFfHDGnwc0XwRhSoCPfopRRagJSG+KJaGOSyUtmpN2Z+7EK2JCtJd3/lVNma/cRckUhC2rINSmb1u5XwbavnzKab+86mICqovdYamhltzAtm88TgJeXMGeyNOvpWLxQCqRPOf6pTAUTddABvBnQTbk4xS1lYUSPzWySSzi3GibIUZh6yHqrIU4ehIbZIWiRxXEQXI0F2k6kx6GrWLqXepXGH2d44cyF11dX8VRS6KjEP/UBEQDCG83H2BUmwSXnkYkz1O9AJy9V4+qjwukOlitFL9qyoA3KuaAGCWafqw+V0YvbcXfiXEVE/xZ3nRVuQAAAAAAAA"), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<NICKEL>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<NICKEL>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
