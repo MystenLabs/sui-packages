@@ -1,0 +1,15 @@
+module 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::session {
+    public fun deposit_into_extension<T0, T1>(arg0: &mut 0x85891c96d7802ac09421dc2064002234b2dfcd238adaa9b20b781be1953cd50::session::SessionCap<T0>, arg1: &0x85891c96d7802ac09421dc2064002234b2dfcd238adaa9b20b781be1953cd50::config::Config, arg2: &mut 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::protected::ProtectedMarket, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: 0x2::coin::Coin<T1>, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) : 0x9c688ea952547e8d3ebfe13e97668659dd3aebd6c5a854048655ba8f253e7a26::locked::Locked<0x2::coin::Coin<T0>> {
+        let v0 = 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::state::create_extension_key();
+        0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::state::deposit_into_extension<T1>(0x85891c96d7802ac09421dc2064002234b2dfcd238adaa9b20b781be1953cd50::session::borrow_mut_extension<T0, 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::state::ExtensionKey, 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::state::ExtensionStateV1>(arg0, v0), 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::protected::borrow_mut(arg2), arg3, arg4, arg5, arg6);
+        0x85891c96d7802ac09421dc2064002234b2dfcd238adaa9b20b781be1953cd50::session::deposit_into_extension<T0, T1, 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::state::ExtensionKey>(arg0, arg1, &v0, &arg4, arg5, arg6)
+    }
+
+    public fun withdraw_from_extension<T0, T1>(arg0: &mut 0x85891c96d7802ac09421dc2064002234b2dfcd238adaa9b20b781be1953cd50::session::SessionCap<T0>, arg1: &mut 0x85891c96d7802ac09421dc2064002234b2dfcd238adaa9b20b781be1953cd50::session::ForceWithdrawCap<T0, T1>, arg2: &0x85891c96d7802ac09421dc2064002234b2dfcd238adaa9b20b781be1953cd50::config::Config, arg3: &mut 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::protected::ProtectedMarket, arg4: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg5: u64, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::state::create_extension_key();
+        0x85891c96d7802ac09421dc2064002234b2dfcd238adaa9b20b781be1953cd50::session::force_withdraw<T0, T1, 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::state::ExtensionKey>(arg0, arg1, arg2, v0, 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::state::withdraw_from_extension<T1>(0x85891c96d7802ac09421dc2064002234b2dfcd238adaa9b20b781be1953cd50::session::borrow_mut_extension<T0, 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::state::ExtensionKey, 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::state::ExtensionStateV1>(arg0, v0), 0xd8bbab10d5e675e99e6619c66289dc244d5408431941350b3c0d586191883b2::protected::borrow_mut(arg3), arg4, arg5, arg6, arg7));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
