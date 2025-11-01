@@ -1,0 +1,14 @@
+module 0x42a5592126bc34f20a51d5a5873286f19d7e6feb28d32f24073a2e945d3d3c2b::babymmt {
+    struct BABYMMT has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: BABYMMT, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<BABYMMT>(arg0, 6, b"BabyMMT", b"Baby MMT", x"f09f90a3204d6565742042616279204d4d5420e2809420746865204865617274206f66204d6f6d656e74756d2120f09f92990a426f726e206f6e207468652073616d652064617920617320426974636f696e202874616c6b2061626f75742064657374696e7920f09f9180292c2042616279204d4d5420726570726573656e74732074686520737061726b206f6620696e6e6f766174696f6e2c20636f6d6d756e6974792c20616e6420656e646c65737320656e6572677920746861742064726976657320757320666f72776172642e0a54696e7920627574206d696768747920e280942074686973206c6974746c65206f6e6520636172726965732074686520667574", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://r.turbos.finance/icon/1762016031143.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<BABYMMT>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<BABYMMT>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
