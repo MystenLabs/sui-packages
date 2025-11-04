@@ -1,0 +1,33 @@
+module 0x24a1f38ea03f6042d5bd16b4026575c7d6e07b754afef8ed430c3ba5d238f5ff::beez {
+    struct BEEZ has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: BEEZ, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = trim_right(b"111111111   ");
+        let v1 = trim_right(b"66d8949867545e9b07b3cf3163ff6c838aae3c2d4eda521c34745792e8b0879f                                                                                                                                                                                                                                                                ");
+        let v2 = if (0x1::vector::length<u8>(&v1) == 0) {
+            0x1::option::none<0x2::url::Url>()
+        } else {
+            0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(v1))
+        };
+        let (v3, v4) = 0x2::coin::create_currency<BEEZ>(arg0, (0x1::vector::length<u8>(&v0) as u8), 0x1::ascii::into_bytes(0x1::string::to_ascii(0x1::string::utf8(trim_right(b"BEEZ        ")))), trim_right(b"Beez in the Trap                "), trim_right(b"Everyone from Sabrina Carpenter to the Jonas Brothers are lip-syncing to a mashup of 4 Non Blondes' \"What's Up?\" and Nicki Minaj's \"Beez in the Trap\"                                                                                                                                                                           "), v2, arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<BEEZ>>(v3, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<BEEZ>>(v4);
+    }
+
+    fun trim_right(arg0: vector<u8>) : vector<u8> {
+        let v0 = 32;
+        let v1 = &v0;
+        while (0x1::vector::length<u8>(&arg0) > 0) {
+            if (0x1::vector::borrow<u8>(&arg0, 0x1::vector::length<u8>(&arg0) - 1) != v1) {
+                break
+            };
+            0x1::vector::pop_back<u8>(&mut arg0);
+        };
+        arg0
+    }
+
+    // decompiled from Move bytecode v6
+}
+
