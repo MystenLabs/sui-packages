@@ -30,6 +30,11 @@ pub struct BcsFunctionEntry {
     #[serde(rename = "return")]
     return_: Vec<String>,
 }
+impl BcsJsonSchema {
+    pub fn get_module_map(&self) -> &BTreeMap<String, String> {
+        &self.module_map
+    }
+}
 
 impl From<&MovePackage> for BcsJsonSchema {
     fn from(pkg: &MovePackage) -> Self {
