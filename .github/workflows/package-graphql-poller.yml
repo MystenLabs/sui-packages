@@ -18,24 +18,32 @@ jobs:
     runs-on: ubuntu-ghcloud
     timeout-minutes: 10 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout sui-packages
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # pin to v5
+        path: sui-packages
+
+      - name: Checkout sui-packages-code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # pin to v5
+        repository: MystenLabs/sui-packages-code
+        path: sui-packages-code
 
       - name: Run sui-packages-graphql-poller
         run: |
           echo "Running package graphql poller on mainnet" > /dev/stderr
           OLDDIR=$(pwd)
-          GIT_ROOT=$(git rev-parse --show-toplevel)
-          cd "$APP_DIR_PACKAGE_GRAPHQL_POLLER"
+          SUI_PACKAGES_ROOT=$(pwd)/sui-packages
+          SUI_PACKAGES_CODE_ROOT=$(pwd)/sui-packages-code
+          cd "$SUI_PACKAGES_CODE_ROOT/$APP_DIR_PACKAGE_GRAPHQL_POLLER"
           cargo run --release --bin sui-packages-graphql-poller -- \
-            --packages-dir "${GIT_ROOT}/${PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET}" \
-            --move-decompiler-path "${GIT_ROOT}/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}"
+            --packages-dir "${SUI_PACKAGES_ROOT}/${PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET}" \
+            --move-decompiler-path "${SUI_PACKAGES_ROOT}/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}"
           cd "$OLDDIR"
 
       - name: Commit and Push Changes
         id: commit-and-push
         continue-on-error: true
         run: |
+          cd sui-packages
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
           git add "$PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET"
