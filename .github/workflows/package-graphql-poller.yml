@@ -12,12 +12,23 @@ env:
   # app specific variables
   PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET: packages/mainnet
   PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN: third-party/move-decompiler/move-decompiler-linux-x86_64
+  ACTION_HELPER_JSON = action_helper.json
 
 jobs:
   package-graphql-poller:
     runs-on: ubuntu-ghcloud
     timeout-minutes: 10 
     steps:
+      - name: Download dependencies
+        run: |
+          ROOT=$(pwd)
+          echo "Github Workspace: ${GITHUB_WORKSPACE} / ROOT: ${ROOT}"
+          set -x
+          mkdir -p ${ROOT}/inputs/$(dirname $PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN)
+          curl "https://raw.githubusercontent.com/MystenLabs/sui-packages/refs/heads/main/action_helper.json" -o "${ROOT}/inputs/action_helper.json"
+          curl "https://raw.githubusercontent.com/MystenLabs/sui-packages/refs/heads/main/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}" -o "${ROOT}/inputs/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}"
+          chmod +x "${ROOT}/inputs/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}"
+
       - name: Checkout sui-packages
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # pin to v5
         with:
@@ -38,7 +49,9 @@ jobs:
           cd "$SUI_PACKAGES_CODE_ROOT/$APP_DIR_PACKAGE_GRAPHQL_POLLER"
           cargo run --release --bin sui-packages-graphql-poller -- \
             --packages-dir "${SUI_PACKAGES_ROOT}/${PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET}" \
-            --move-decompiler-path "${SUI_PACKAGES_ROOT}/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}"
+            --move-decompiler-path "${OLDDIR}/inputs/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}" \
+            --initial-checkpoint "$(jq -r .max_checkpoint_seen ${OLDDIR}/inputs/action_helper.json)" \
+            --max-checkpoint-seen-file "${SUI_PACKAGES_ROOT}/${ACTION_HELPER_JSON}"
           cd "$OLDDIR"
 
       - name: Commit and Push Changes
@@ -48,6 +61,7 @@ jobs:
           cd sui-packages
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
+          git add "$ACTION_HELPER_JSON"
           git add "$PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET"
           git commit -m "package-graphql-poller: update package data"
           git pull --rebase --depth=5
