@@ -69,12 +69,12 @@ jobs:
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
           # here be dragons / tricky code
-          # the system progresses without errors as long as action_helper.json has a checkpoint 
+          # the system progresses without errors as long as action_helper.json has a max_seen_checkpoint
           # that is <= the max checkpoint in packages/mainnet/
           for D in $(ls -1 ${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}); do
             git sparse-checkout add "packages/mainnet/$D"
           done
-          git pull origin main
+          git pull origin main --depth=5
           cp ${ROOT}/outputs/${ACTION_HELPER_JSON} ${ACTION_HELPER_JSON}
           cp -a ${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}/* "${PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET}/"
           git add "$ACTION_HELPER_JSON"
