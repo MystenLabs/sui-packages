@@ -13,6 +13,7 @@ env:
   PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET: packages/mainnet
   PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN: third-party/move-decompiler/move-decompiler-linux-x86_64
   ACTION_HELPER_JSON: action_helper.json
+  NEW_SUI_PACKAGES_DIR: sui-packages-new/packages/mainnet
 
 jobs:
   package-graphql-poller:
@@ -21,24 +22,29 @@ jobs:
     steps:
       - name: Download dependencies
         run: |
+          set -e
           ROOT=$(pwd)
           echo "Github Workspace: ${GITHUB_WORKSPACE} / ROOT: ${ROOT}"
-          set -x
           mkdir -p ${ROOT}/inputs/$(dirname $PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN)
           curl "https://raw.githubusercontent.com/MystenLabs/sui-packages/refs/heads/main/action_helper.json" -o "${ROOT}/inputs/action_helper.json"
           curl "https://raw.githubusercontent.com/MystenLabs/sui-packages/refs/heads/main/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}" -o "${ROOT}/inputs/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}"
           chmod +x "${ROOT}/inputs/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}"
-
-      - name: Checkout sui-packages
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # pin to v5
-        with:
-          path: sui-packages
+          mkdir -p " ${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}"
 
       - name: Checkout sui-packages-code
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # pin to v5
         with:
           repository: MystenLabs/sui-packages-code
           path: sui-packages-code
+
+      - name: Checkout sui-packages
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # pin to v5
+        with:
+          path: sui-packages
+          sparse-checkout-cone-mode: true
+          sparse-checkout: |
+            ${ACTION_HELPER_JSON}
+
 
       - name: Run sui-packages-graphql-poller
         run: |
@@ -48,23 +54,32 @@ jobs:
           SUI_PACKAGES_CODE_ROOT=$(pwd)/sui-packages-code
           cd "$SUI_PACKAGES_CODE_ROOT/$APP_DIR_PACKAGE_GRAPHQL_POLLER"
           cargo run --release --bin sui-packages-graphql-poller -- \
-            --packages-dir "${SUI_PACKAGES_ROOT}/${PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET}" \
+            --packages-dir "${OLDDIR}/outputs/${NEW_SUI_PACKAGES_DIR}" \
             --move-decompiler-path "${OLDDIR}/inputs/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}" \
             --initial-checkpoint "$(jq -r .max_checkpoint_seen ${OLDDIR}/inputs/action_helper.json)" \
-            --max-checkpoint-seen-file "${SUI_PACKAGES_ROOT}/${ACTION_HELPER_JSON}"
+            --max-checkpoint-seen-file "${OLDDIR}/outputs/${ACTION_HELPER_JSON}"
           cd "$OLDDIR"
 
       - name: Commit and Push Changes
         id: commit-and-push
         continue-on-error: true
         run: |
+          ROOT=$(pwd)
           cd sui-packages
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
+          # here be dragons / tricky code
+          # the system progresses without errors as long as action_helper.json has a checkpoint 
+          # that is <= the max checkpoint in packages/mainnet/
+          for D in $(ls -1 ${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}); do
+            git sparse-checkout add "packages/mainnet/$D"
+          done
+          git pull origin main
+          cp ${ROOT}/outputs/${ACTION_HELPER_JSON} ${ACTION_HELPER_JSON}
+          cp -a ${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}/* "${PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET}/"
           git add "$ACTION_HELPER_JSON"
           git add "$PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET"
           git commit -m "package-graphql-poller: update package data"
-          git pull --rebase --depth=5
           git push origin HEAD
 
       - name: Process Packages
