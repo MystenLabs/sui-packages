@@ -56,7 +56,7 @@ jobs:
             --max-checkpoint-seen-file "${OLDDIR}/outputs/${ACTION_HELPER_JSON}"
           cd "$OLDDIR"
           MAX_CHECKPOINT_AFTER="$(jq -r .max_checkpoint_seen ${OLDDIR}/outputs/${ACTION_HELPER_JSON})"
-          if [[ "$MAX_CHECKPOINT_BEFORE" == "$MAX_CHEKCPOINT_AFTER"]]; then
+          if [[ "$MAX_CHECKPOINT_BEFORE" == "$MAX_CHECKPOINT_AFTER" ]]; then
             echo "sui_packages_checkout_needed=false" >> $GITHUB_OUTPUT
           else
             echo "sui_packages_checkout_needed=true" >> $GITHUB_OUTPUT
