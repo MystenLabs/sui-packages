@@ -5,7 +5,6 @@ on:
   schedule:
     - cron: "*/10 * * * *"
 
-
 env:
   # APP_DIRS here
   APP_DIR_PACKAGE_GRAPHQL_POLLER: sui-package-utils
@@ -16,7 +15,6 @@ env:
   NEW_SUI_PACKAGES_DIR: sui-packages-new/packages/mainnet
   RUST_BACKTRACE: 1
   RUST_LIB_BACKTRACE: 1
-
 
 jobs:
   package-graphql-poller:
@@ -49,7 +47,7 @@ jobs:
           SUI_PACKAGES_CODE_ROOT="$(pwd)/sui-packages-code"
           MAX_CHECKPOINT_BEFORE="$(jq -r .max_checkpoint_seen ${OLDDIR}/inputs/${ACTION_HELPER_JSON})" 
           cd "$SUI_PACKAGES_CODE_ROOT/$APP_DIR_PACKAGE_GRAPHQL_POLLER"
-          cargo run --release --bin sui-packages-graphql-poller -- \
+          cargo run --bin sui-packages-graphql-poller -- \
             --move-decompiler-path "${OLDDIR}/inputs/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}" \
             --initial-checkpoint "${MAX_CHECKPOINT_BEFORE}" \
             --packages-dir "${OLDDIR}/outputs/${NEW_SUI_PACKAGES_DIR}" \
