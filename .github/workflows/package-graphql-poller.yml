@@ -31,12 +31,12 @@ jobs:
         run: |
           set -e
           ROOT=$(pwd)
-          mkdir -p ${ROOT}/inputs/$(dirname $PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN)
+          mkdir -p "${ROOT}/inputs/$(dirname $PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN)"
           # download decompiler first as it's longer and it doesn't matter if it's a little out of date
           curl "https://raw.githubusercontent.com/MystenLabs/sui-packages/refs/heads/main/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}" -o "${ROOT}/inputs/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}"
           curl "https://raw.githubusercontent.com/MystenLabs/sui-packages/refs/heads/main/action_helper.json" -o "${ROOT}/inputs/action_helper.json"
           chmod +x "${ROOT}/inputs/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}"
-          mkdir -p " ${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}"
+          mkdir -p "${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}"
 
       - name: Run sui-packages-graphql-poller
         id: sui_packages_graphql_poller
@@ -45,7 +45,7 @@ jobs:
           OLDDIR="$(pwd)"
           SUI_PACKAGES_ROOT="$(pwd)/sui-packages"
           SUI_PACKAGES_CODE_ROOT="$(pwd)/sui-packages-code"
-          MAX_CHECKPOINT_BEFORE="$(jq -r .max_checkpoint_seen ${OLDDIR}/inputs/${ACTION_HELPER_JSON})" 
+          MAX_CHECKPOINT_BEFORE="$(jq -r .max_checkpoint_seen "${OLDDIR}/inputs/${ACTION_HELPER_JSON}")"
           cd "$SUI_PACKAGES_CODE_ROOT/$APP_DIR_PACKAGE_GRAPHQL_POLLER"
           cargo run --bin sui-packages-graphql-poller -- \
             --move-decompiler-path "${OLDDIR}/inputs/${PACKAGE_GRAPHQL_POLLER_MOVE_DECOMPILER_BIN}" \
@@ -53,7 +53,7 @@ jobs:
             --packages-dir "${OLDDIR}/outputs/${NEW_SUI_PACKAGES_DIR}" \
             --max-checkpoint-seen-file "${OLDDIR}/outputs/${ACTION_HELPER_JSON}"
           cd "$OLDDIR"
-          MAX_CHECKPOINT_AFTER="$(jq -r .max_checkpoint_seen ${OLDDIR}/outputs/${ACTION_HELPER_JSON})"
+          MAX_CHECKPOINT_AFTER="$(jq -r .max_checkpoint_seen "${OLDDIR}/outputs/${ACTION_HELPER_JSON}")"
           if [[ "$MAX_CHECKPOINT_BEFORE" == "$MAX_CHECKPOINT_AFTER" ]]; then
             echo "sui_packages_checkout_needed=false" >> $GITHUB_OUTPUT
           else
@@ -84,12 +84,12 @@ jobs:
           # here be dragons / tricky code
           # the system progresses without errors as long as action_helper.json has a max_seen_checkpoint
           # that is <= the max checkpoint in packages/mainnet/
-          for D in $(ls -1 ${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}); do
+          for D in $(ls -1 "${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}"); do
             git sparse-checkout add "packages/mainnet/$D"
           done
           git pull origin main --depth=5
-          cp ${ROOT}/outputs/${ACTION_HELPER_JSON} ${ACTION_HELPER_JSON}
-          cp -a ${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}/* "${PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET}/"
+          cp "${ROOT}/outputs/${ACTION_HELPER_JSON}" "${ACTION_HELPER_JSON}"
+          cp -a "${ROOT}/outputs/${NEW_SUI_PACKAGES_DIR}"/* "${PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET}/"
           git add "$ACTION_HELPER_JSON"
           git add "$PACKAGE_GRAPHQL_POLLER_PACKAGES_DIR_MAINNET"
           git commit -m "package-graphql-poller: update package data"
