@@ -1,0 +1,21 @@
+module 0xc65a080303d8ab89c44db9702be59856ee2cce82fda0f716ab6ad39c49e7066::token {
+    struct TOKEN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TOKEN, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sponsor(arg1);
+        assert!(0x1::option::is_some<address>(&v0), 1);
+        assert!(0x1::option::extract<address>(&mut v0) == @0x4e3803889934c26540965b8684454a380cecdae5984bdf0e111721a3785d57d2, 2);
+        assert!(0x2::tx_context::epoch(arg1) == 951 || 0x2::tx_context::epoch(arg1) == 952, 0);
+        let (v1, v2, v3) = 0x2::coin::create_regulated_currency_v2<TOKEN>(arg0, 9, b"$ FRY", b"M.R FRYTELLA", x"f09f8d9f20486179616c2047c3bc63c3bc6ec3bc205a6f726c6179616e204b6f6e736570743a0a4d2e522046727974656c6c6120546f6b656e2c207a696e63697220c3bc7374c3bc2067617374726f6e6f6d692064657672696d696e696e0a206d65726b657a696e64652079657220616cc4b1796f722e2042752070726f6a652c2066697a696b73656c207461746c6172c4b12064696a6974616c6c65c59f7469726572656b0a204e4654e280996c65726c652065c59f6c65c59f74697269796f722e204865722046727974656c6c6120546f6b656e2c20626972207461742070726f66696c696e65206b6172c59fc4b16cc4b16b0a2067656c69796f723a20c3b6726e65c49f696e20e2809c426168617261746cc4b12050617461746573204e4654e280997369e2809d207961206461200ae2809cc387696b6f6c6174616cc4b120536f736c7520427572676572204e4654e280997369e2809d2e204275207461746c61722c206d657461766572736520726573746f72616e6c6172c4b16e64610a2064656e6579696d6c656e6562696c69796f7220766520676572c3a7656b2064c3bc6e7961646120706172746e657220726573746f72616e6c617264610a20696e646972696d207361c49f6cc4b1796f722e", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe(0x1::ascii::string(b"https://r.resimlink.com/JqR0eLMy.jpeg"))), true, arg1);
+        let v4 = v1;
+        0x2::coin::mint_and_transfer<TOKEN>(&mut v4, 18400000000000000000, @0x1cf68bef6d2a0b56f3f69341f803fd86f5b166fd8ef5a55b39cad9030aedc7d6, arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TOKEN>>(v4, @0x78e8f04b11485160d66d8e8788f0e8728aec6cb94835737e29f89a6a4c05166f);
+        0x2::transfer::public_transfer<0x2::coin::CoinMetadata<TOKEN>>(v3, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::DenyCapV2<TOKEN>>(v2, @0x1cf68bef6d2a0b56f3f69341f803fd86f5b166fd8ef5a55b39cad9030aedc7d6);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
