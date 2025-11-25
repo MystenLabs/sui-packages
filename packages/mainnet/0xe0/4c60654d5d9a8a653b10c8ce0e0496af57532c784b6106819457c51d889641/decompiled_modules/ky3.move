@@ -1,0 +1,38 @@
+module 0xe04c60654d5d9a8a653b10c8ce0e0496af57532c784b6106819457c51d889641::ky3 {
+    public fun atob<T0, T1>(arg0: &mut 0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::pool::Pool<T0, T1>, arg1: vector<0x2::coin::Coin<T0>>, arg2: u64, arg3: &0x2::clock::Clock, arg4: &0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::version::Version, arg5: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T1>, u64) {
+        let (v0, v1, v2) = 0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::trade::flash_swap<T0, T1>(arg0, true, true, arg2, 4295048016, arg3, arg4, arg5);
+        let v3 = v1;
+        0x2::balance::destroy_zero<T0>(v0);
+        let v4 = 0xe04c60654d5d9a8a653b10c8ce0e0496af57532c784b6106819457c51d889641::help::merge_all<T0>(arg1, arg5);
+        0xe04c60654d5d9a8a653b10c8ce0e0496af57532c784b6106819457c51d889641::help::transfer<T0>(v4, 0x2::tx_context::sender(arg5));
+        0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::trade::repay_flash_swap<T0, T1>(arg0, v2, 0x2::coin::into_balance<T0>(0x2::coin::split<T0>(&mut v4, arg2, arg5)), 0x2::balance::zero<T1>(), arg4, arg5);
+        (0x2::coin::from_balance<T1>(v3, arg5), 0x2::balance::value<T1>(&v3))
+    }
+
+    public fun atob1<T0, T1>(arg0: &mut 0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::pool::Pool<T0, T1>, arg1: vector<0x2::coin::Coin<T0>>, arg2: u64, arg3: &0x2::clock::Clock, arg4: &0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::version::Version, arg5: &mut 0x2::tx_context::TxContext) : (vector<0x2::coin::Coin<T1>>, u64) {
+        let (v0, v1) = atob<T0, T1>(arg0, arg1, arg2, arg3, arg4, arg5);
+        let v2 = 0x1::vector::empty<0x2::coin::Coin<T1>>();
+        0x1::vector::push_back<0x2::coin::Coin<T1>>(&mut v2, v0);
+        (v2, v1)
+    }
+
+    public fun btoa<T0, T1>(arg0: &mut 0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::pool::Pool<T0, T1>, arg1: vector<0x2::coin::Coin<T1>>, arg2: u64, arg3: &0x2::clock::Clock, arg4: &0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::version::Version, arg5: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, u64) {
+        let (v0, v1, v2) = 0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::trade::flash_swap<T0, T1>(arg0, false, true, arg2, 79226673515401279992447579055, arg3, arg4, arg5);
+        let v3 = v0;
+        0x2::balance::destroy_zero<T1>(v1);
+        let v4 = 0xe04c60654d5d9a8a653b10c8ce0e0496af57532c784b6106819457c51d889641::help::merge_all<T1>(arg1, arg5);
+        0xe04c60654d5d9a8a653b10c8ce0e0496af57532c784b6106819457c51d889641::help::transfer<T1>(v4, 0x2::tx_context::sender(arg5));
+        0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::trade::repay_flash_swap<T0, T1>(arg0, v2, 0x2::balance::zero<T0>(), 0x2::coin::into_balance<T1>(0x2::coin::split<T1>(&mut v4, arg2, arg5)), arg4, arg5);
+        (0x2::coin::from_balance<T0>(v3, arg5), 0x2::balance::value<T0>(&v3))
+    }
+
+    public fun btoa1<T0, T1>(arg0: &mut 0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::pool::Pool<T0, T1>, arg1: vector<0x2::coin::Coin<T1>>, arg2: u64, arg3: &0x2::clock::Clock, arg4: &0xf6c05e2d9301e6e91dc6ab6c3ca918f7d55896e1f1edd64adc0e615cde27ebf1::version::Version, arg5: &mut 0x2::tx_context::TxContext) : (vector<0x2::coin::Coin<T0>>, u64) {
+        let (v0, v1) = btoa<T0, T1>(arg0, arg1, arg2, arg3, arg4, arg5);
+        let v2 = 0x1::vector::empty<0x2::coin::Coin<T0>>();
+        0x1::vector::push_back<0x2::coin::Coin<T0>>(&mut v2, v0);
+        (v2, v1)
+    }
+
+    // decompiled from Move bytecode v6
+}
+
