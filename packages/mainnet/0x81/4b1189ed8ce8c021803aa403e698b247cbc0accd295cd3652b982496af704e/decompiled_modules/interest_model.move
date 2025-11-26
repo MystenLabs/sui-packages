@@ -1,0 +1,86 @@
+module 0x814b1189ed8ce8c021803aa403e698b247cbc0accd295cd3652b982496af704e::interest_model {
+    struct InterestModel has copy, drop, store {
+        asset_type: 0x1::type_name::TypeName,
+        base_borrow_rate_per_sec: 0x1::fixed_point32::FixedPoint32,
+        interest_rate_scale: u64,
+        revenue_factor: 0x1::fixed_point32::FixedPoint32,
+        min_borrow_amount: u64,
+    }
+
+    struct InterestModelChangeCreated has copy, drop {
+        interest_model: InterestModel,
+        current_epoch: u64,
+        delay_epoches: u64,
+        effective_epoches: u64,
+    }
+
+    struct InterestModelAdded has copy, drop {
+        interest_model: InterestModel,
+        current_epoch: u64,
+    }
+
+    struct InterestModels has drop {
+        dummy_field: bool,
+    }
+
+    public(friend) fun add_interest_model<T0>(arg0: &mut 0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::ac_table::AcTable<InterestModels, 0x1::type_name::TypeName, InterestModel>, arg1: &0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::ac_table::AcTableCap<InterestModels>, arg2: 0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::one_time_lock_value::OneTimeLockValue<InterestModel>, arg3: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::one_time_lock_value::get_value<InterestModel>(arg2, arg3);
+        let v1 = 0x1::type_name::get<T0>();
+        assert!(v0.asset_type == v1, 0x814b1189ed8ce8c021803aa403e698b247cbc0accd295cd3652b982496af704e::error::interest_model_type_not_match_error());
+        if (0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::ac_table::contains<InterestModels, 0x1::type_name::TypeName, InterestModel>(arg0, v1)) {
+            0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::ac_table::remove<InterestModels, 0x1::type_name::TypeName, InterestModel>(arg0, arg1, v1);
+        };
+        0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::ac_table::add<InterestModels, 0x1::type_name::TypeName, InterestModel>(arg0, arg1, v1, v0);
+        let v2 = InterestModelAdded{
+            interest_model : v0,
+            current_epoch  : 0x2::tx_context::epoch(arg3),
+        };
+        0x2::event::emit<InterestModelAdded>(v2);
+    }
+
+    public fun asset_type(arg0: &InterestModel) : 0x1::type_name::TypeName {
+        arg0.asset_type
+    }
+
+    public fun base_borrow_rate(arg0: &InterestModel) : 0x1::fixed_point32::FixedPoint32 {
+        arg0.base_borrow_rate_per_sec
+    }
+
+    public(friend) fun create_interest_model_change<T0>(arg0: &0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::ac_table::AcTableCap<InterestModels>, arg1: u64, arg2: u64, arg3: u64, arg4: u64, arg5: u64, arg6: u64, arg7: &mut 0x2::tx_context::TxContext) : 0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::one_time_lock_value::OneTimeLockValue<InterestModel> {
+        let v0 = InterestModel{
+            asset_type               : 0x1::type_name::get<T0>(),
+            base_borrow_rate_per_sec : 0x1::fixed_point32::create_from_rational(arg1, arg4),
+            interest_rate_scale      : arg2,
+            revenue_factor           : 0x1::fixed_point32::create_from_rational(arg3, arg4),
+            min_borrow_amount        : arg5,
+        };
+        let v1 = InterestModelChangeCreated{
+            interest_model    : v0,
+            current_epoch     : 0x2::tx_context::epoch(arg7),
+            delay_epoches     : arg6,
+            effective_epoches : 0x2::tx_context::epoch(arg7) + arg6,
+        };
+        0x2::event::emit<InterestModelChangeCreated>(v1);
+        0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::one_time_lock_value::new<InterestModel>(v0, arg6, 7, arg7)
+    }
+
+    public fun interest_rate_scale(arg0: &InterestModel) : u64 {
+        arg0.interest_rate_scale
+    }
+
+    public fun min_borrow_amount(arg0: &InterestModel) : u64 {
+        arg0.min_borrow_amount
+    }
+
+    public(friend) fun new(arg0: &mut 0x2::tx_context::TxContext) : (0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::ac_table::AcTable<InterestModels, 0x1::type_name::TypeName, InterestModel>, 0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::ac_table::AcTableCap<InterestModels>) {
+        let v0 = InterestModels{dummy_field: false};
+        0xd24c9ef07bc5b61caae54b8a6e9f2b2cdeaf23e585262e79f92084de7d5021aa::ac_table::new<InterestModels, 0x1::type_name::TypeName, InterestModel>(v0, true, arg0)
+    }
+
+    public fun revenue_factor(arg0: &InterestModel) : 0x1::fixed_point32::FixedPoint32 {
+        arg0.revenue_factor
+    }
+
+    // decompiled from Move bytecode v6
+}
+
