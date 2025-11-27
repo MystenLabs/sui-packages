@@ -96,7 +96,7 @@ jobs:
           git push origin HEAD
 
       - name: Process Packages
-        if: ${{ false && steps.sui_packages_graphql_poller.outputs.sui_packages_checkout_needed == 'true' }}
+        if: ${{ steps.sui_packages_graphql_poller.outputs.sui_packages_checkout_needed == 'true' }}
         run: |
           curl -L \
           -X POST \
