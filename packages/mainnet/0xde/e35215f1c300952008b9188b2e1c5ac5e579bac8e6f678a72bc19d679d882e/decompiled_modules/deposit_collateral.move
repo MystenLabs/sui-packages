@@ -1,0 +1,30 @@
+module 0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::deposit_collateral {
+    struct CollateralDepositEvent has copy, drop {
+        provider: address,
+        obligation: 0x2::object::ID,
+        deposit_asset: 0x1::type_name::TypeName,
+        deposit_amount: u64,
+    }
+
+    public fun deposit_collateral<T0>(arg0: &0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::version::Version, arg1: &mut 0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::obligation::Obligation, arg2: &mut 0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::market::Market, arg3: 0x2::coin::Coin<T0>, arg4: &mut 0x2::tx_context::TxContext) {
+        0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::version::assert_current_version(arg0);
+        assert!(!0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::market::is_paused(arg2), 0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::error::market_paused_error());
+        assert!(0x2::coin::value<T0>(&arg3) > 0, 0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::error::zero_amount_error());
+        assert!(0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::obligation::deposit_collateral_locked(arg1) == false, 0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::error::obligation_locked());
+        let v0 = 0x1::type_name::get<T0>();
+        assert!(0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::market::is_collateral_active(arg2, v0), 0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::error::collateral_not_active_error());
+        assert!(0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::market::has_risk_model(arg2, v0) == true, 0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::error::invalid_collateral_type_error());
+        let v1 = CollateralDepositEvent{
+            provider       : 0x2::tx_context::sender(arg4),
+            obligation     : 0x2::object::id<0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::obligation::Obligation>(arg1),
+            deposit_asset  : v0,
+            deposit_amount : 0x2::coin::value<T0>(&arg3),
+        };
+        0x2::event::emit<CollateralDepositEvent>(v1);
+        0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::market::handle_add_collateral<T0>(arg2, 0x2::coin::value<T0>(&arg3));
+        0xdee35215f1c300952008b9188b2e1c5ac5e579bac8e6f678a72bc19d679d882e::obligation::deposit_collateral<T0>(arg1, 0x2::coin::into_balance<T0>(arg3));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
