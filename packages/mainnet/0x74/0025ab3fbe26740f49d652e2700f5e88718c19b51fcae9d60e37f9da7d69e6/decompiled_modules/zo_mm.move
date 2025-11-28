@@ -1,0 +1,103 @@
+module 0x740025ab3fbe26740f49d652e2700f5e88718c19b51fcae9d60e37f9da7d69e6::zo_mm {
+    struct Config has store, key {
+        id: 0x2::object::UID,
+        owner: address,
+        order_size: u64,
+        profit_threshold_bps: u64,
+        enabled: bool,
+    }
+
+    struct DeepBookQuote has copy, drop, store {
+        bid_price: u64,
+        bid_quantity: u64,
+        ask_price: u64,
+        ask_quantity: u64,
+        timestamp: u64,
+    }
+
+    struct ZOQuote has copy, drop, store {
+        price: 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::I64,
+        confidence: u64,
+        timestamp: u64,
+        expo: 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::I64,
+    }
+
+    struct ArbitrageOpportunity has copy, drop {
+        direction: u8,
+        profit_bps: u64,
+        db_price: u64,
+        zo_price: u64,
+        quantity: u64,
+        timestamp: u64,
+    }
+
+    struct TradeExecuted has copy, drop {
+        direction: u8,
+        quantity: u64,
+        db_price: u64,
+        zo_price: u64,
+        profit: u64,
+        timestamp: u64,
+    }
+
+    public fun create_config(arg0: u64, arg1: u64, arg2: &mut 0x2::tx_context::TxContext) : Config {
+        Config{
+            id                   : 0x2::object::new(arg2),
+            owner                : 0x2::tx_context::sender(arg2),
+            order_size           : arg0,
+            profit_threshold_bps : arg1,
+            enabled              : true,
+        }
+    }
+
+    public fun create_db_balance_manager(arg0: &mut 0x2::tx_context::TxContext) : 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager {
+        0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::new(arg0)
+    }
+
+    public fun deposit_to_db_bm<T0>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager, arg1: 0x2::coin::Coin<T0>, arg2: &mut 0x2::tx_context::TxContext) {
+        0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::deposit<T0>(arg0, arg1, arg2);
+    }
+
+    public fun get_quotes_from_db<T0, T1>(arg0: &0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>, arg1: &0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager, arg2: u64, arg3: &0x2::clock::Clock) : DeepBookQuote {
+        let (v0, v1) = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_level2_range<T0, T1>(arg0, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::min_price(), 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::max_price(), true, arg3);
+        let v2 = v1;
+        let v3 = v0;
+        let (v4, v5) = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_level2_range<T0, T1>(arg0, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::min_price(), 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::max_price(), false, arg3);
+        let v6 = v5;
+        let v7 = v4;
+        let (v8, v9) = if (0x1::vector::length<u64>(&v3) > 0) {
+            let v10 = 0x1::vector::length<u64>(&v3) - 1;
+            (*0x1::vector::borrow<u64>(&v3, v10), *0x1::vector::borrow<u64>(&v2, v10))
+        } else {
+            (0, 0)
+        };
+        let (v11, v12) = if (0x1::vector::length<u64>(&v7) > 0) {
+            (*0x1::vector::borrow<u64>(&v7, 0), *0x1::vector::borrow<u64>(&v6, 0))
+        } else {
+            (0, 0)
+        };
+        DeepBookQuote{
+            bid_price    : v8,
+            bid_quantity : v9,
+            ask_price    : v11,
+            ask_quantity : v12,
+            timestamp    : 0x2::clock::timestamp_ms(arg3),
+        }
+    }
+
+    public fun get_quotes_from_zo(arg0: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg1: &0x2::clock::Clock) : ZOQuote {
+        let v0 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_info_from_price_info_object(arg0);
+        let v1 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_feed::get_price(0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_feed(&v0));
+        let v2 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_timestamp(&v1);
+        assert!(0x2::clock::timestamp_ms(arg1) - v2 * 1000 <= 10000, 4);
+        ZOQuote{
+            price      : 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_price(&v1),
+            confidence : 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_conf(&v1),
+            timestamp  : v2,
+            expo       : 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_expo(&v1),
+        }
+    }
+
+    // decompiled from Move bytecode v6
+}
+
