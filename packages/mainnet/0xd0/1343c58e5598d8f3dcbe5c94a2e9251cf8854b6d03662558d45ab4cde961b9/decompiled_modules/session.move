@@ -1,0 +1,15 @@
+module 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::session {
+    public fun deposit_into_extension<T0, T1, T2>(arg0: &mut 0x77032ea15c0f29ae6c6f6d8f76de0071841af4a92ed42f5e91a13ef6d9cdb906::session::SessionCap<T0>, arg1: &0x77032ea15c0f29ae6c6f6d8f76de0071841af4a92ed42f5e91a13ef6d9cdb906::config::Config, arg2: &mut 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::protected::ProtectedLendingMarket<T1>, arg3: 0x2::coin::Coin<T2>, arg4: &0x2::clock::Clock, arg5: &mut 0x2::tx_context::TxContext) : 0x9c688ea952547e8d3ebfe13e97668659dd3aebd6c5a854048655ba8f253e7a26::locked::Locked<0x2::coin::Coin<T0>> {
+        let v0 = 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::state::create_extension_key();
+        0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::state::deposit_into_extension<T1, T2>(0x77032ea15c0f29ae6c6f6d8f76de0071841af4a92ed42f5e91a13ef6d9cdb906::session::borrow_mut_extension<T0, 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::state::ExtensionKey, 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::state::ExtensionStateV1<T1>>(arg0, v0), 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::protected::borrow_mut<T1>(arg2), arg3, arg4, arg5);
+        0x77032ea15c0f29ae6c6f6d8f76de0071841af4a92ed42f5e91a13ef6d9cdb906::session::deposit_into_extension<T0, T2, 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::state::ExtensionKey>(arg0, arg1, &v0, &arg3, arg4, arg5)
+    }
+
+    public fun withdraw_from_extension<T0, T1, T2>(arg0: &mut 0x77032ea15c0f29ae6c6f6d8f76de0071841af4a92ed42f5e91a13ef6d9cdb906::session::SessionCap<T0>, arg1: &mut 0x77032ea15c0f29ae6c6f6d8f76de0071841af4a92ed42f5e91a13ef6d9cdb906::session::ForceWithdrawCap<T0, T2>, arg2: &0x77032ea15c0f29ae6c6f6d8f76de0071841af4a92ed42f5e91a13ef6d9cdb906::config::Config, arg3: &mut 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::protected::ProtectedLendingMarket<T1>, arg4: u64, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::state::create_extension_key();
+        0x77032ea15c0f29ae6c6f6d8f76de0071841af4a92ed42f5e91a13ef6d9cdb906::session::force_withdraw_from_extension<T0, T2, 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::state::ExtensionKey>(arg0, arg1, arg2, v0, 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::state::withdraw_from_extension<T1, T2>(0x77032ea15c0f29ae6c6f6d8f76de0071841af4a92ed42f5e91a13ef6d9cdb906::session::borrow_mut_extension<T0, 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::state::ExtensionKey, 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::state::ExtensionStateV1<T1>>(arg0, v0), 0xd01343c58e5598d8f3dcbe5c94a2e9251cf8854b6d03662558d45ab4cde961b9::protected::borrow_mut<T1>(arg3), arg4, arg5, arg6));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
