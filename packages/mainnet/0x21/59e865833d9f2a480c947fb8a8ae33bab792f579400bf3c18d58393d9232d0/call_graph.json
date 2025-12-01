@@ -1,0 +1,419 @@
+{
+  "package_id": "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0",
+  "module_call_graphs": [
+    {
+      "module_name": "leverage_admin",
+      "call_graph": {
+        "inject_protocol_caller_cap": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_app::accept_protocol_caller_cap"
+        ],
+        "onboard_market": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_share_object",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::new_market",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::market::assert_emode_group_exists"
+        ],
+        "remove_protocol_caller_cap": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_app::revoke_protocol_caller_cap"
+        ]
+      }
+    },
+    {
+      "module_name": "leverage_app",
+      "call_graph": {
+        "accept_protocol_caller_cap": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::already_assigned_caller_cap"
+        ],
+        "add_market_id": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::market_already_exists"
+        ],
+        "borrow_protocol_caller_cap": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::no_caller_cap"
+        ],
+        "create": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_app::current_version"
+        ],
+        "current_version": [],
+        "ensure_version_matches": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_app::current_version",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::version_mismatch"
+        ],
+        "get_version": [],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::package::claim_and_keep",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_share_object",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_app::create"
+        ],
+        "is_market": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "revoke_protocol_caller_cap": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::no_caller_cap",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::whitelist_admin::burn_whitelist"
+        ],
+        "validate_market": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::market_not_found"
+        ]
+      }
+    },
+    {
+      "module_name": "leverage_borrow_swap",
+      "call_graph": {
+        "request_leverage": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_app::borrow_protocol_caller_cap",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::emode_group",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::is_leverate_on_going",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::mark_leverage_ongoing",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::borrow_swap",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_collateral_price",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_usd_value",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::increase_collateral",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::market_obligation",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::set_or_check_position",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::borrow::borrow",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::deposit::deposit",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::flash_loan::borrow_flash_loan"
+        ]
+      }
+    },
+    {
+      "module_name": "leverage_delegate",
+      "call_graph": {
+        "claim_liquidity_minging_rewards": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::market_obligation",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::liquidity_mining::claim_reward",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::zero"
+        ],
+        "deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_coins_match",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_principle_intact",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_collateral_price",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_usd_value",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::increase_collateral",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::market_obligation",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::deposit::deposit"
+        ],
+        "repay": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_usd_value",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::market_obligation",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::repay::repay_coin_refund"
+        ]
+      }
+    },
+    {
+      "module_name": "leverage_error",
+      "call_graph": {
+        "already_assigned_caller_cap": [],
+        "borrow_coin_type_mismatch": [],
+        "cannot_repay_flash_loan": [],
+        "deposit_coin_type_mismatch": [],
+        "invalid_market": [],
+        "market_already_exists": [],
+        "market_not_found": [],
+        "market_not_supported": [],
+        "no_caller_cap": [],
+        "obligation_already_has_position": [],
+        "obligation_inconsistent_operation": [],
+        "obligation_no_position": [],
+        "principle_not_intact": [],
+        "version_mismatch": [],
+        "withdrawn_more_than_principle": [],
+        "withdrawn_too_much_collateral": []
+      }
+    },
+    {
+      "module_name": "leverage_market",
+      "call_graph": {
+        "emode_group": [],
+        "ensure_supporting_market": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::market_not_supported"
+        ],
+        "is_leverate_on_going": [],
+        "mark_leverage_finished": [],
+        "mark_leverage_ongoing": [],
+        "new_market": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ]
+      }
+    },
+    {
+      "module_name": "leverage_obligation",
+      "call_graph": {
+        "average_price": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow"
+        ],
+        "borrow_swap": [],
+        "collateral_amount": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::market_obligation",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::market::borrow_obligation",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::market::exchange_rate",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::obligation::ctoken_amount_by_coin",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::obligation::id",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::floor",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::mul_u64"
+        ],
+        "ensure_coins_match": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::borrow_coin_type_mismatch",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::deposit_coin_type_mismatch",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_has_position"
+        ],
+        "ensure_collateral_match": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::deposit_coin_type_mismatch",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_has_position"
+        ],
+        "ensure_has_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::obligation_no_position"
+        ],
+        "ensure_principle_intact": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::principle_not_intact",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::collateral_amount"
+        ],
+        "get_collateral_price": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_price_usd",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::div"
+        ],
+        "get_price_usd": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0xfe91675bc6d4cef3cf3b6045567189b5a7fc98bca6199190cf0ebed3a793343a::user_oracle::get_spot_price",
+          "0xfe91675bc6d4cef3cf3b6045567189b5a7fc98bca6199190cf0ebed3a793343a::x_oracle::usd"
+        ],
+        "get_usd_value": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_price_usd",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::coin_decimals_registry::decimals",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::value::coin_value",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::from"
+        ],
+        "has_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some"
+        ],
+        "id": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id"
+        ],
+        "increase_collateral": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow_mut",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_has_position",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::add",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::div_u64",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::mul_u64"
+        ],
+        "market_obligation": [],
+        "open_obligation": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_app::borrow_protocol_caller_cap",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::emode_group",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::ensure_supporting_market",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::enter_market::enter_market_with_emode",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::obligation::id"
+        ],
+        "principle": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow"
+        ],
+        "reduce_collateral_by_percentage": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow_mut",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_has_position",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::principle",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::ceil",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::mul_u64",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::zero"
+        ],
+        "reset_collateral": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow_mut",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::zero"
+        ],
+        "set_or_check_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_coins_match",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_principle_intact",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::zero"
+        ],
+        "swap_borrow": []
+      }
+    },
+    {
+      "module_name": "leverage_reduce_to_borrow_coin",
+      "call_graph": {
+        "complete_reduce": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_repay::complete_leverage"
+        ],
+        "emit_reduce_leverage_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_reduce_size_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "enforce_collateral_deduciton_by_percentage": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::collateral_amount",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::reduce_collateral_by_percentage",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::reset_collateral",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::floor",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::from_percent",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::mul_u64"
+        ],
+        "enforce_ctoken_deduciton": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::withdrawn_more_than_principle",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::withdrawn_too_much_collateral",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::collateral_amount",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::principle",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::ceil",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::div",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::from"
+        ],
+        "request_reduce": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_app::borrow_protocol_caller_cap",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::emode_group",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::is_leverate_on_going",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::mark_leverage_ongoing",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_coins_match",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::market_obligation",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::flash_loan::borrow_flash_loan",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::repay::repay_coin_refund",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::withdraw::withdraw_as_coin"
+        ],
+        "request_reduce_leverage": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_collateral_price",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_reduce_to_borrow_coin::emit_reduce_leverage_event",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_reduce_to_borrow_coin::enforce_ctoken_deduciton",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_reduce_to_borrow_coin::request_reduce"
+        ],
+        "request_reduce_size": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_collateral_price",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_reduce_to_borrow_coin::emit_reduce_size_event",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_reduce_to_borrow_coin::enforce_collateral_deduciton_by_percentage",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_reduce_to_borrow_coin::request_reduce"
+        ]
+      }
+    },
+    {
+      "module_name": "leverage_reduce_to_collateral_coin",
+      "call_graph": {
+        "withdraw_leverage": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_coins_match",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_collateral_price",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::market_obligation",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_reduce_to_borrow_coin::emit_reduce_leverage_event",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_reduce_to_borrow_coin::enforce_ctoken_deduciton",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::withdraw::withdraw_as_coin"
+        ],
+        "withdraw_size": [
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::ensure_coins_match",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_collateral_price",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::market_obligation",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_reduce_to_borrow_coin::emit_reduce_size_event",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_reduce_to_borrow_coin::enforce_collateral_deduciton_by_percentage",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::withdraw::withdraw_as_coin"
+        ]
+      }
+    },
+    {
+      "module_name": "leverage_repay",
+      "call_graph": {
+        "complete_leverage": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_error::cannot_repay_flash_loan",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::is_leverate_on_going",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::mark_leverage_finished",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_repay::new_refunded_event",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::flash_loan::repay_flash_loan",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::market::fee",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::market::loan_amount"
+        ],
+        "emit_new_refunded_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_repay::new_refunded_event"
+        ],
+        "new_refunded_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_usd_value"
+        ]
+      }
+    },
+    {
+      "module_name": "leverage_swap_borrow",
+      "call_graph": {
+        "complete_leverage": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::get",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_collateral_price",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::get_usd_value",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::id",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::increase_collateral",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::market_obligation",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::swap_borrow",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_repay::complete_leverage",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::borrow::borrow",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::deposit::deposit",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::market::fee",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::market::loan_amount",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::div",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::floor",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::from"
+        ],
+        "request_leverage": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_app::borrow_protocol_caller_cap",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::emode_group",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::is_leverate_on_going",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_market::mark_leverage_ongoing",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::set_or_check_position",
+          "0x2159e865833d9f2a480c947fb8a8ae33bab792f579400bf3c18d58393d9232d0::leverage_obligation::swap_borrow",
+          "0x3587b2b71baeabbfbb2f81a446197748b2b35235d59ba098eddfa8f6471cbe4c::flash_loan::borrow_flash_loan",
+          "0x3a2341506a50725e93850c5584ab6441bda2c70e82626e15691701e8681bdf5d::float::from_quotient"
+        ]
+      }
+    }
+  ]
+}
