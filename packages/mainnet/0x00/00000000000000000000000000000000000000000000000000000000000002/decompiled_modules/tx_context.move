@@ -25,8 +25,8 @@ module 0x2::tx_context {
         fresh_id()
     }
 
-    fun ids_created(arg0: &TxContext) : u64 {
-        native_ids_created()
+    public fun gas_price(arg0: &TxContext) : u64 {
+        native_gas_price()
     }
 
     native fun native_epoch() : u64;
@@ -34,6 +34,7 @@ module 0x2::tx_context {
     native fun native_gas_budget() : u64;
     native fun native_gas_price() : u64;
     native fun native_ids_created() : u64;
+    native fun native_rgp() : u64;
     native fun native_sender() : address;
     native fun native_sponsor() : vector<address>;
     fun option_sponsor() : 0x1::option::Option<address> {
@@ -43,6 +44,10 @@ module 0x2::tx_context {
         } else {
             0x1::option::some<address>(*0x1::vector::borrow<address>(&v0, 0))
         }
+    }
+
+    public fun reference_gas_price(arg0: &TxContext) : u64 {
+        native_rgp()
     }
 
     public fun sender(arg0: &TxContext) : address {

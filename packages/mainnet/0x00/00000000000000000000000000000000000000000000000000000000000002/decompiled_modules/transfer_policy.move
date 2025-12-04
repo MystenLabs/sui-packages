@@ -48,7 +48,7 @@ module 0x2::transfer_policy {
     }
 
     public fun add_receipt<T0, T1: drop>(arg0: T1, arg1: &mut TransferRequest<T0>) {
-        0x2::vec_set::insert<0x1::type_name::TypeName>(&mut arg1.receipts, 0x1::type_name::get<T1>());
+        0x2::vec_set::insert<0x1::type_name::TypeName>(&mut arg1.receipts, 0x1::type_name::with_defining_ids<T1>());
     }
 
     public fun add_rule<T0, T1: drop, T2: drop + store>(arg0: T1, arg1: &mut TransferPolicy<T0>, arg2: &TransferPolicyCap<T0>, arg3: T2) {
@@ -56,7 +56,7 @@ module 0x2::transfer_policy {
         assert!(!has_rule<T0, T1>(arg1), 3);
         let v0 = RuleKey<T1>{dummy_field: false};
         0x2::dynamic_field::add<RuleKey<T1>, T2>(&mut arg1.id, v0, arg3);
-        0x2::vec_set::insert<0x1::type_name::TypeName>(&mut arg1.rules, 0x1::type_name::get<T1>());
+        0x2::vec_set::insert<0x1::type_name::TypeName>(&mut arg1.rules, 0x1::type_name::with_defining_ids<T1>());
     }
 
     public fun add_to_balance<T0, T1: drop>(arg0: T1, arg1: &mut TransferPolicy<T0>, arg2: 0x2::coin::Coin<0x2::sui::SUI>) {
@@ -73,7 +73,7 @@ module 0x2::transfer_policy {
         } = arg1;
         let v4 = 0x2::vec_set::into_keys<0x1::type_name::TypeName>(v3);
         let v5 = 0x1::vector::length<0x1::type_name::TypeName>(&v4);
-        assert!(v5 == 0x2::vec_set::size<0x1::type_name::TypeName>(&arg0.rules), 0);
+        assert!(v5 == 0x2::vec_set::length<0x1::type_name::TypeName>(&arg0.rules), 0);
         while (v5 > 0) {
             let v6 = 0x1::vector::pop_back<0x1::type_name::TypeName>(&mut v4);
             assert!(0x2::vec_set::contains<0x1::type_name::TypeName>(&arg0.rules, &v6), 1);
@@ -141,7 +141,7 @@ module 0x2::transfer_policy {
         assert!(0x2::object::id<TransferPolicy<T0>>(arg0) == arg1.policy_id, 4);
         let v0 = RuleKey<T1>{dummy_field: false};
         0x2::dynamic_field::remove<RuleKey<T1>, T2>(&mut arg0.id, v0);
-        let v1 = 0x1::type_name::get<T1>();
+        let v1 = 0x1::type_name::with_defining_ids<T1>();
         0x2::vec_set::remove<0x1::type_name::TypeName>(&mut arg0.rules, &v1);
     }
 

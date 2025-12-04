@@ -252,7 +252,7 @@ module 0x3::validator_set {
             let v5 = if (0x2::vec_map::contains<u64, u64>(&arg8, &v3)) {
                 *0x1::vector::borrow<u64>(&arg4, v3) - *0x2::vec_map::get<u64, u64>(&arg8, &v3)
             } else {
-                *0x1::vector::borrow<u64>(&arg4, v3) + arg7 / (v2 - 0x2::vec_map::size<u64, u64>(&arg6))
+                *0x1::vector::borrow<u64>(&arg4, v3) + arg7 / (v2 - 0x2::vec_map::length<u64, u64>(&arg6))
             };
             0x1::vector::push_back<u64>(&mut v1, v5);
             v3 = v3 + 1;
@@ -785,6 +785,15 @@ module 0x3::validator_set {
             *0x2::table::borrow<0x2::object::ID, address>(&arg0.staking_pool_mappings, *arg1)
         } else {
             0x3::validator::sui_address(0x3::validator_wrapper::load_validator_maybe_upgrade(0x2::table::borrow_mut<0x2::object::ID, 0x3::validator_wrapper::ValidatorWrapper>(&mut arg0.inactive_validators, *arg1)))
+        }
+    }
+
+    public(friend) fun validator_by_pool_id(arg0: &mut ValidatorSet, arg1: &0x2::object::ID) : &0x3::validator::Validator {
+        if (0x2::table::contains<0x2::object::ID, address>(&arg0.staking_pool_mappings, *arg1)) {
+            let v1 = *0x2::table::borrow<0x2::object::ID, address>(&arg0.staking_pool_mappings, *arg1);
+            get_active_or_pending_or_candidate_validator_ref(arg0, v1, 3)
+        } else {
+            0x3::validator_wrapper::load_validator_maybe_upgrade(0x2::table::borrow_mut<0x2::object::ID, 0x3::validator_wrapper::ValidatorWrapper>(&mut arg0.inactive_validators, *arg1))
         }
     }
 

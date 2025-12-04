@@ -20,13 +20,13 @@ module 0x2::bcs {
 
     public fun peel_address(arg0: &mut BCS) : address {
         assert!(0x1::vector::length<u8>(&arg0.bytes) >= 0x2::address::length(), 0);
-        let v0 = 0;
-        let v1 = b"";
-        while (v0 < 0x2::address::length()) {
-            0x1::vector::push_back<u8>(&mut v1, 0x1::vector::pop_back<u8>(&mut arg0.bytes));
-            v0 = v0 + 1;
+        let v0 = b"";
+        let v1 = 0;
+        while (v1 < 0x2::address::length()) {
+            0x1::vector::push_back<u8>(&mut v0, 0x1::vector::pop_back<u8>(&mut arg0.bytes));
+            v1 = v1 + 1;
         };
-        0x2::address::from_bytes(v1)
+        0x2::address::from_bytes(v0)
     }
 
     public fun peel_bool(arg0: &mut BCS) : bool {
@@ -170,25 +170,25 @@ module 0x2::bcs {
     }
 
     public fun peel_vec_address(arg0: &mut BCS) : vector<address> {
-        let v0 = peel_vec_length(arg0);
-        let v1 = 0;
-        let v2 = vector[];
-        while (v1 < v0) {
-            0x1::vector::push_back<address>(&mut v2, peel_address(arg0));
-            v1 = v1 + 1;
+        let v0 = vector[];
+        let v1 = peel_vec_length(arg0);
+        let v2 = 0;
+        while (v2 < v1) {
+            0x1::vector::push_back<address>(&mut v0, peel_address(arg0));
+            v2 = v2 + 1;
         };
-        v2
+        v0
     }
 
     public fun peel_vec_bool(arg0: &mut BCS) : vector<bool> {
-        let v0 = peel_vec_length(arg0);
-        let v1 = 0;
-        let v2 = vector[];
-        while (v1 < v0) {
-            0x1::vector::push_back<bool>(&mut v2, peel_bool(arg0));
-            v1 = v1 + 1;
+        let v0 = vector[];
+        let v1 = peel_vec_length(arg0);
+        let v2 = 0;
+        while (v2 < v1) {
+            0x1::vector::push_back<bool>(&mut v0, peel_bool(arg0));
+            v2 = v2 + 1;
         };
-        v2
+        v0
     }
 
     public fun peel_vec_length(arg0: &mut BCS) : u64 {
@@ -209,80 +209,80 @@ module 0x2::bcs {
     }
 
     public fun peel_vec_u128(arg0: &mut BCS) : vector<u128> {
-        let v0 = peel_vec_length(arg0);
-        let v1 = 0;
-        let v2 = vector[];
-        while (v1 < v0) {
-            0x1::vector::push_back<u128>(&mut v2, peel_u128(arg0));
-            v1 = v1 + 1;
+        let v0 = vector[];
+        let v1 = peel_vec_length(arg0);
+        let v2 = 0;
+        while (v2 < v1) {
+            0x1::vector::push_back<u128>(&mut v0, peel_u128(arg0));
+            v2 = v2 + 1;
         };
-        v2
+        v0
     }
 
     public fun peel_vec_u16(arg0: &mut BCS) : vector<u16> {
-        let v0 = peel_vec_length(arg0);
-        let v1 = 0;
-        let v2 = vector[];
-        while (v1 < v0) {
-            0x1::vector::push_back<u16>(&mut v2, peel_u16(arg0));
-            v1 = v1 + 1;
+        let v0 = vector[];
+        let v1 = peel_vec_length(arg0);
+        let v2 = 0;
+        while (v2 < v1) {
+            0x1::vector::push_back<u16>(&mut v0, peel_u16(arg0));
+            v2 = v2 + 1;
         };
-        v2
+        v0
     }
 
     public fun peel_vec_u256(arg0: &mut BCS) : vector<u256> {
-        let v0 = peel_vec_length(arg0);
-        let v1 = 0;
-        let v2 = vector[];
-        while (v1 < v0) {
-            0x1::vector::push_back<u256>(&mut v2, peel_u256(arg0));
-            v1 = v1 + 1;
+        let v0 = vector[];
+        let v1 = peel_vec_length(arg0);
+        let v2 = 0;
+        while (v2 < v1) {
+            0x1::vector::push_back<u256>(&mut v0, peel_u256(arg0));
+            v2 = v2 + 1;
         };
-        v2
+        v0
     }
 
     public fun peel_vec_u32(arg0: &mut BCS) : vector<u32> {
-        let v0 = peel_vec_length(arg0);
-        let v1 = 0;
-        let v2 = vector[];
-        while (v1 < v0) {
-            0x1::vector::push_back<u32>(&mut v2, peel_u32(arg0));
-            v1 = v1 + 1;
+        let v0 = vector[];
+        let v1 = peel_vec_length(arg0);
+        let v2 = 0;
+        while (v2 < v1) {
+            0x1::vector::push_back<u32>(&mut v0, peel_u32(arg0));
+            v2 = v2 + 1;
         };
-        v2
+        v0
     }
 
     public fun peel_vec_u64(arg0: &mut BCS) : vector<u64> {
-        let v0 = peel_vec_length(arg0);
-        let v1 = 0;
-        let v2 = vector[];
-        while (v1 < v0) {
-            0x1::vector::push_back<u64>(&mut v2, peel_u64(arg0));
-            v1 = v1 + 1;
+        let v0 = vector[];
+        let v1 = peel_vec_length(arg0);
+        let v2 = 0;
+        while (v2 < v1) {
+            0x1::vector::push_back<u64>(&mut v0, peel_u64(arg0));
+            v2 = v2 + 1;
         };
-        v2
+        v0
     }
 
     public fun peel_vec_u8(arg0: &mut BCS) : vector<u8> {
-        let v0 = peel_vec_length(arg0);
-        let v1 = 0;
-        let v2 = b"";
-        while (v1 < v0) {
-            0x1::vector::push_back<u8>(&mut v2, peel_u8(arg0));
-            v1 = v1 + 1;
+        let v0 = b"";
+        let v1 = peel_vec_length(arg0);
+        let v2 = 0;
+        while (v2 < v1) {
+            0x1::vector::push_back<u8>(&mut v0, peel_u8(arg0));
+            v2 = v2 + 1;
         };
-        v2
+        v0
     }
 
     public fun peel_vec_vec_u8(arg0: &mut BCS) : vector<vector<u8>> {
-        let v0 = peel_vec_length(arg0);
-        let v1 = 0;
-        let v2 = vector[];
-        while (v1 < v0) {
-            0x1::vector::push_back<vector<u8>>(&mut v2, peel_vec_u8(arg0));
-            v1 = v1 + 1;
+        let v0 = vector[];
+        let v1 = peel_vec_length(arg0);
+        let v2 = 0;
+        while (v2 < v1) {
+            0x1::vector::push_back<vector<u8>>(&mut v0, peel_vec_u8(arg0));
+            v2 = v2 + 1;
         };
-        v2
+        v0
     }
 
     // decompiled from Move bytecode v6

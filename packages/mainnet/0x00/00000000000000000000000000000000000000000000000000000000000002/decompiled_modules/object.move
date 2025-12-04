@@ -79,6 +79,24 @@ module 0x2::object {
     }
 
     native fun record_new_uid(arg0: address);
+    public(friend) fun sui_accumulator_root_address() : address {
+        @0xacc
+    }
+
+    public(friend) fun sui_accumulator_root_object_id() : UID {
+        let v0 = ID{bytes: @0xacc};
+        UID{id: v0}
+    }
+
+    public(friend) fun sui_coin_registry_address() : address {
+        @0xc
+    }
+
+    public(friend) fun sui_coin_registry_object_id() : UID {
+        let v0 = ID{bytes: @0xc};
+        UID{id: v0}
+    }
+
     public(friend) fun sui_deny_list_object_id() : UID {
         let v0 = ID{bytes: @0x403};
         UID{id: v0}

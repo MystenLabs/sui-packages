@@ -41,6 +41,10 @@ module 0x3::staking_pool {
         dummy_field: bool,
     }
 
+    struct UnderflowSuiBalance has copy, drop, store {
+        dummy_field: bool,
+    }
+
     public(friend) fun new(arg0: &mut 0x2::tx_context::TxContext) : StakingPool {
         StakingPool{
             id                          : 0x2::object::new(arg0),
@@ -88,6 +92,19 @@ module 0x3::staking_pool {
         let v3 = (((arg1 as u128) * ((v0 - v1) as u128) / (arg3 as u128)) as u64);
         assert!(v2 + v3 <= get_sui_amount(&arg0, arg1), 20);
         (v2, v3)
+    }
+
+    public(friend) fun calculate_rewards(arg0: &StakingPool, arg1: &StakedSui, arg2: u64) : u64 {
+        let v0 = staked_sui_amount(arg1);
+        let v1 = pool_token_exchange_rate_at_epoch(arg0, arg1.stake_activation_epoch);
+        let v2 = pool_token_exchange_rate_at_epoch(arg0, arg2);
+        let v3 = get_sui_amount(&v2, get_token_amount(&v1, v0));
+        let v4 = if (v3 >= v0) {
+            v3 - v0
+        } else {
+            0
+        };
+        0x1::u64::min(v4, 0x2::balance::value<0x2::sui::SUI>(&arg0.rewards_pool))
     }
 
     fun check_balance_invariants(arg0: &StakingPool, arg1: u64) {
@@ -246,14 +263,32 @@ module 0x3::staking_pool {
             sui_amount        : arg0.sui_balance,
             pool_token_amount : arg0.pool_token_balance,
         };
-        arg0.sui_balance = arg0.sui_balance + arg0.pending_stake;
+        let v1 = UnderflowSuiBalance{dummy_field: false};
+        let v2 = if (0x2::bag::contains<UnderflowSuiBalance>(&arg0.extra_fields, v1)) {
+            0x2::bag::remove<UnderflowSuiBalance, u64>(&mut arg0.extra_fields, v1)
+        } else {
+            0
+        };
+        arg0.sui_balance = arg0.sui_balance + arg0.pending_stake - v2;
         arg0.pool_token_balance = get_token_amount(&v0, arg0.sui_balance);
         arg0.pending_stake = 0;
     }
 
     fun process_pending_stake_withdraw(arg0: &mut StakingPool) {
-        arg0.sui_balance = arg0.sui_balance - arg0.pending_total_sui_withdraw;
-        arg0.pool_token_balance = arg0.pool_token_balance - arg0.pending_pool_token_withdraw;
+        let v0 = if (arg0.sui_balance >= arg0.pending_total_sui_withdraw) {
+            arg0.sui_balance - arg0.pending_total_sui_withdraw
+        } else {
+            let v1 = UnderflowSuiBalance{dummy_field: false};
+            0x2::bag::add<UnderflowSuiBalance, u64>(&mut arg0.extra_fields, v1, arg0.pending_total_sui_withdraw - arg0.sui_balance);
+            0
+        };
+        arg0.sui_balance = v0;
+        let v2 = if (arg0.pool_token_balance >= arg0.pending_pool_token_withdraw) {
+            arg0.pool_token_balance - arg0.pending_pool_token_withdraw
+        } else {
+            0
+        };
+        arg0.pool_token_balance = v2;
         arg0.pending_total_sui_withdraw = 0;
         arg0.pending_pool_token_withdraw = 0;
     }

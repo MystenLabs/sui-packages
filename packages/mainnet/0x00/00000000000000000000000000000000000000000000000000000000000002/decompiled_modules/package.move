@@ -52,11 +52,11 @@ module 0x2::package {
 
     public fun claim<T0: drop>(arg0: T0, arg1: &mut 0x2::tx_context::TxContext) : Publisher {
         assert!(0x2::types::is_one_time_witness<T0>(&arg0), 0);
-        let v0 = 0x1::type_name::get_with_original_ids<T0>();
+        let v0 = 0x1::type_name::with_original_ids<T0>();
         Publisher{
             id          : 0x2::object::new(arg1),
-            package     : 0x1::type_name::get_address(&v0),
-            module_name : 0x1::type_name::get_module(&v0),
+            package     : 0x1::type_name::address_string(&v0),
+            module_name : 0x1::type_name::module_string(&v0),
         }
     }
 
@@ -85,13 +85,13 @@ module 0x2::package {
     }
 
     public fun from_module<T0>(arg0: &Publisher) : bool {
-        let v0 = 0x1::type_name::get_with_original_ids<T0>();
-        0x1::type_name::get_address(&v0) == arg0.package && 0x1::type_name::get_module(&v0) == arg0.module_name
+        let v0 = 0x1::type_name::with_original_ids<T0>();
+        0x1::type_name::address_string(&v0) == arg0.package && 0x1::type_name::module_string(&v0) == arg0.module_name
     }
 
     public fun from_package<T0>(arg0: &Publisher) : bool {
-        let v0 = 0x1::type_name::get_with_original_ids<T0>();
-        0x1::type_name::get_address(&v0) == arg0.package
+        let v0 = 0x1::type_name::with_original_ids<T0>();
+        0x1::type_name::address_string(&v0) == arg0.package
     }
 
     public entry fun make_immutable(arg0: UpgradeCap) {

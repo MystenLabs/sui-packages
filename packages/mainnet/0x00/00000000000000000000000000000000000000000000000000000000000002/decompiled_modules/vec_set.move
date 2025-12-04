@@ -7,40 +7,58 @@ module 0x2::vec_set {
         VecSet<T0>{contents: 0x1::vector::empty<T0>()}
     }
 
+    public fun length<T0: copy + drop>(arg0: &VecSet<T0>) : u64 {
+        0x1::vector::length<T0>(&arg0.contents)
+    }
+
     public fun remove<T0: copy + drop>(arg0: &mut VecSet<T0>, arg1: &T0) {
-        0x1::vector::remove<T0>(&mut arg0.contents, get_idx<T0>(arg0, arg1));
+        let v0 = &arg0.contents;
+        let v1 = 0;
+        let v2;
+        while (v1 < 0x1::vector::length<T0>(v0)) {
+            if (0x1::vector::borrow<T0>(v0, v1) == arg1) {
+                v2 = 0x1::option::some<u64>(v1);
+                /* label 6 */
+                if (0x1::option::is_some<u64>(&v2)) {
+                    0x1::vector::remove<T0>(&mut arg0.contents, 0x1::option::destroy_some<u64>(v2));
+                    return
+                } else {
+                    0x1::option::destroy_none<u64>(v2);
+                    abort 1
+                };
+            };
+            v1 = v1 + 1;
+        };
+        v2 = 0x1::option::none<u64>();
+        /* goto 6 */
     }
 
     public fun contains<T0: copy + drop>(arg0: &VecSet<T0>, arg1: &T0) : bool {
-        let v0 = get_idx_opt<T0>(arg0, arg1);
-        0x1::option::is_some<u64>(&v0)
+        let v0 = &arg0.contents;
+        let v1 = 0;
+        let v2;
+        while (v1 < 0x1::vector::length<T0>(v0)) {
+            if (0x1::vector::borrow<T0>(v0, v1) == arg1) {
+                v2 = true;
+                return v2
+            };
+            v1 = v1 + 1;
+        };
+        v2 = false;
+        v2
     }
 
     public fun from_keys<T0: copy + drop>(arg0: vector<T0>) : VecSet<T0> {
-        0x1::vector::reverse<T0>(&mut arg0);
         let v0 = empty<T0>();
-        while (0x1::vector::length<T0>(&arg0) != 0) {
-            let v1 = &mut v0;
-            insert<T0>(v1, 0x1::vector::pop_back<T0>(&mut arg0));
+        0x1::vector::reverse<T0>(&mut arg0);
+        let v1 = 0;
+        while (v1 < 0x1::vector::length<T0>(&arg0)) {
+            let v2 = &mut v0;
+            insert<T0>(v2, 0x1::vector::pop_back<T0>(&mut arg0));
+            v1 = v1 + 1;
         };
+        0x1::vector::destroy_empty<T0>(arg0);
         v0
-    }
-
-    fun get_idx<T0: copy + drop>(arg0: &VecSet<T0>, arg1: &T0) : u64 {
-        let v0 = get_idx_opt<T0>(arg0, arg1);
-        assert!(0x1::option::is_some<u64>(&v0), 1);
-        0x1::option::destroy_some<u64>(v0)
-    }
-
-    fun get_idx_opt<T0: copy + drop>(arg0: &VecSet<T0>, arg1: &T0) : 0x1::option::Option<u64> {
-        let v0 = 0;
-        while (v0 < size<T0>(arg0)) {
-            if (0x1::vector::borrow<T0>(&arg0.contents, v0) == arg1) {
-                return 0x1::option::some<u64>(v0)
-            };
-            v0 = v0 + 1;
-        };
-        0x1::option::none<u64>()
     }
 
     public fun insert<T0: copy + drop>(arg0: &mut VecSet<T0>, arg1: T0) {
@@ -54,7 +72,7 @@ module 0x2::vec_set {
     }
 
     public fun is_empty<T0: copy + drop>(arg0: &VecSet<T0>) : bool {
-        size<T0>(arg0) == 0
+        length<T0>(arg0) == 0
     }
 
     public fun keys<T0: copy + drop>(arg0: &VecSet<T0>) : &vector<T0> {

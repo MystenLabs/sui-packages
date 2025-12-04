@@ -77,7 +77,7 @@ module 0x2::token {
     }
 
     public fun add_approval<T0, T1: drop>(arg0: T1, arg1: &mut ActionRequest<T0>, arg2: &mut 0x2::tx_context::TxContext) {
-        0x2::vec_set::insert<0x1::type_name::TypeName>(&mut arg1.approvals, 0x1::type_name::get<T1>());
+        0x2::vec_set::insert<0x1::type_name::TypeName>(&mut arg1.approvals, 0x1::type_name::with_defining_ids<T1>());
     }
 
     public fun add_rule_config<T0, T1: drop, T2: store>(arg0: T1, arg1: &mut TokenPolicy<T0>, arg2: &TokenPolicyCap<T0>, arg3: T2, arg4: &mut 0x2::tx_context::TxContext) {
@@ -90,7 +90,7 @@ module 0x2::token {
         if (!0x2::vec_map::contains<0x1::string::String, 0x2::vec_set::VecSet<0x1::type_name::TypeName>>(&arg0.rules, &arg2)) {
             allow<T0>(arg0, arg1, arg2, arg3);
         };
-        0x2::vec_set::insert<0x1::type_name::TypeName>(0x2::vec_map::get_mut<0x1::string::String, 0x2::vec_set::VecSet<0x1::type_name::TypeName>>(&mut arg0.rules, &arg2), 0x1::type_name::get<T1>());
+        0x2::vec_set::insert<0x1::type_name::TypeName>(0x2::vec_map::get_mut<0x1::string::String, 0x2::vec_set::VecSet<0x1::type_name::TypeName>>(&mut arg0.rules, &arg2), 0x1::type_name::with_defining_ids<T1>());
     }
 
     public fun allow<T0>(arg0: &mut TokenPolicy<T0>, arg1: &TokenPolicyCap<T0>, arg2: 0x1::string::String, arg3: &mut 0x2::tx_context::TxContext) {
@@ -262,7 +262,7 @@ module 0x2::token {
 
     public fun remove_rule_for_action<T0, T1: drop>(arg0: &mut TokenPolicy<T0>, arg1: &TokenPolicyCap<T0>, arg2: 0x1::string::String, arg3: &mut 0x2::tx_context::TxContext) {
         assert!(0x2::object::id<TokenPolicy<T0>>(arg0) == arg1.for, 2);
-        let v0 = 0x1::type_name::get<T1>();
+        let v0 = 0x1::type_name::with_defining_ids<T1>();
         0x2::vec_set::remove<0x1::type_name::TypeName>(0x2::vec_map::get_mut<0x1::string::String, 0x2::vec_set::VecSet<0x1::type_name::TypeName>>(&mut arg0.rules, &arg2), &v0);
     }
 

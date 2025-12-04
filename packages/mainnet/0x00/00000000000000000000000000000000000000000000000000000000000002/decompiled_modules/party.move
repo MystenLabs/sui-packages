@@ -38,7 +38,7 @@ module 0x2::party {
 
     public(friend) fun is_single_owner(arg0: &Party) : bool {
         if (arg0.default.pos0 == 0) {
-            if (0x2::vec_map::size<address, Permissions>(&arg0.members) == 1) {
+            if (0x2::vec_map::length<address, Permissions>(&arg0.members) == 1) {
                 let (_, v2) = 0x2::vec_map::get_entry_by_idx<address, Permissions>(&arg0.members, 0);
                 v2.pos0 == 15
             } else {

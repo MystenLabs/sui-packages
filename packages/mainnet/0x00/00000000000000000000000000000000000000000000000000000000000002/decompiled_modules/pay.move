@@ -43,11 +43,13 @@ module 0x2::pay {
     }
 
     public entry fun split_vec<T0>(arg0: &mut 0x2::coin::Coin<T0>, arg1: vector<u64>, arg2: &mut 0x2::tx_context::TxContext) {
+        0x1::vector::reverse<u64>(&mut arg1);
         let v0 = 0;
         while (v0 < 0x1::vector::length<u64>(&arg1)) {
-            split<T0>(arg0, *0x1::vector::borrow<u64>(&arg1, v0), arg2);
+            split<T0>(arg0, 0x1::vector::pop_back<u64>(&mut arg1), arg2);
             v0 = v0 + 1;
         };
+        0x1::vector::destroy_empty<u64>(arg1);
     }
 
     // decompiled from Move bytecode v6

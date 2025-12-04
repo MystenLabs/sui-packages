@@ -23,9 +23,9 @@ module 0x2::group_ops {
         &arg0.bytes == &arg1.bytes
     }
 
-    public(friend) fun from_bytes<T0>(arg0: u8, arg1: &vector<u8>, arg2: bool) : Element<T0> {
-        assert!(arg2 || internal_validate(arg0, arg1), 1);
-        Element<T0>{bytes: *arg1}
+    public(friend) fun from_bytes<T0>(arg0: u8, arg1: vector<u8>, arg2: bool) : Element<T0> {
+        assert!(arg2 || internal_validate(arg0, &arg1), 1);
+        Element<T0>{bytes: arg1}
     }
 
     public(friend) fun hash_to<T0>(arg0: u8, arg1: &vector<u8>) : Element<T0> {

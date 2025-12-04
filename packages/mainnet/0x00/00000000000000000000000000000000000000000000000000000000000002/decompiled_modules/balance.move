@@ -9,11 +9,15 @@ module 0x2::balance {
 
     fun create_staking_rewards<T0>(arg0: u64, arg1: &0x2::tx_context::TxContext) : Balance<T0> {
         assert!(0x2::tx_context::sender(arg1) == @0x0, 3);
-        assert!(0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get<T0>())) == b"0000000000000000000000000000000000000000000000000000000000000002::sui::SUI", 4);
+        assert!(0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())) == b"0000000000000000000000000000000000000000000000000000000000000002::sui::SUI", 4);
         Balance<T0>{value: arg0}
     }
 
     public fun create_supply<T0: drop>(arg0: T0) : Supply<T0> {
+        Supply<T0>{value: 0}
+    }
+
+    public(friend) fun create_supply_internal<T0>() : Supply<T0> {
         Supply<T0>{value: 0}
     }
 
@@ -26,7 +30,7 @@ module 0x2::balance {
 
     fun destroy_storage_rebates<T0>(arg0: Balance<T0>, arg1: &0x2::tx_context::TxContext) {
         assert!(0x2::tx_context::sender(arg1) == @0x0, 3);
-        assert!(0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get<T0>())) == b"0000000000000000000000000000000000000000000000000000000000000002::sui::SUI", 4);
+        assert!(0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())) == b"0000000000000000000000000000000000000000000000000000000000000002::sui::SUI", 4);
         let Balance {  } = arg0;
     }
 
@@ -52,6 +56,14 @@ module 0x2::balance {
         arg0.value
     }
 
+    public fun redeem_funds<T0>(arg0: 0x2::funds_accumulator::Withdrawal<Balance<T0>>) : Balance<T0> {
+        0x2::funds_accumulator::redeem<Balance<T0>>(arg0)
+    }
+
+    public fun send_funds<T0>(arg0: Balance<T0>, arg1: address) {
+        0x2::funds_accumulator::add_impl<Balance<T0>>(arg0, arg1);
+    }
+
     public fun split<T0>(arg0: &mut Balance<T0>, arg1: u64) : Balance<T0> {
         assert!(arg0.value >= arg1, 2);
         arg0.value = arg0.value - arg1;
@@ -69,6 +81,10 @@ module 0x2::balance {
     public fun withdraw_all<T0>(arg0: &mut Balance<T0>) : Balance<T0> {
         let v0 = arg0.value;
         split<T0>(arg0, v0)
+    }
+
+    public(friend) fun withdraw_funds_from_object<T0>(arg0: &mut 0x2::object::UID, arg1: u64) : 0x2::funds_accumulator::Withdrawal<Balance<T0>> {
+        0x2::funds_accumulator::withdraw_from_object<Balance<T0>>(arg0, (arg1 as u256))
     }
 
     public fun zero<T0>() : Balance<T0> {

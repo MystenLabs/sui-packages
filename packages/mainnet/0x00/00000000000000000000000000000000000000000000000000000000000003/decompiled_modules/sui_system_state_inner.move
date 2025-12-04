@@ -1,4 +1,8 @@
 module 0x3::sui_system_state_inner {
+    struct ExecutionTimeObservationChunkKey has copy, drop, store {
+        chunk_index: u64,
+    }
+
     struct SystemParameters has store {
         epoch_duration_ms: u64,
         stake_subsidy_start_epoch: u64,
@@ -335,11 +339,36 @@ module 0x3::sui_system_state_inner {
     }
 
     public(friend) fun store_execution_time_estimates(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>) {
-        let v0 = 0;
-        if (0x2::bag::contains<u64>(&arg0.extra_fields, v0)) {
-            0x2::bag::remove<u64, vector<u8>>(&mut arg0.extra_fields, v0);
+        if (0x2::bag::contains<u64>(&arg0.extra_fields, 0)) {
+            0x2::bag::remove<u64, vector<u8>>(&mut arg0.extra_fields, 0);
         };
-        0x2::bag::add<u64, vector<u8>>(&mut arg0.extra_fields, v0, arg1);
+        0x2::bag::add<u64, vector<u8>>(&mut arg0.extra_fields, 0, arg1);
+    }
+
+    public(friend) fun store_execution_time_estimates_v2(arg0: &mut SuiSystemStateInnerV2, arg1: vector<vector<u8>>) {
+        if (0x2::bag::contains<u64>(&arg0.extra_fields, 0)) {
+            0x2::bag::remove<u64, vector<u8>>(&mut arg0.extra_fields, 0);
+        };
+        if (0x2::bag::contains<u64>(&arg0.extra_fields, 1)) {
+            let v0 = 0;
+            while (v0 < 0x2::bag::remove<u64, u64>(&mut arg0.extra_fields, 1)) {
+                let v1 = ExecutionTimeObservationChunkKey{chunk_index: v0};
+                if (0x2::bag::contains<ExecutionTimeObservationChunkKey>(&arg0.extra_fields, v1)) {
+                    0x2::bag::remove<ExecutionTimeObservationChunkKey, vector<u8>>(&mut arg0.extra_fields, v1);
+                };
+                v0 = v0 + 1;
+            };
+        };
+        let v2 = 0x1::vector::length<vector<u8>>(&arg1);
+        if (v2 > 0) {
+            0x2::bag::add<u64, u64>(&mut arg0.extra_fields, 1, v2);
+            let v3 = 0;
+            while (v3 < v2) {
+                let v4 = ExecutionTimeObservationChunkKey{chunk_index: v3};
+                0x2::bag::add<ExecutionTimeObservationChunkKey, vector<u8>>(&mut arg0.extra_fields, v4, *0x1::vector::borrow<vector<u8>>(&arg1, v3));
+                v3 = v3 + 1;
+            };
+        };
     }
 
     public(friend) fun system_state_version(arg0: &SuiSystemStateInnerV2) : u64 {
@@ -518,6 +547,14 @@ module 0x3::sui_system_state_inner {
 
     public(friend) fun validator_staking_pool_mappings(arg0: &SuiSystemStateInnerV2) : &0x2::table::Table<0x2::object::ID, address> {
         0x3::validator_set::staking_pool_mappings(&arg0.validators)
+    }
+
+    public(friend) fun validators(arg0: &SuiSystemStateInnerV2) : &0x3::validator_set::ValidatorSet {
+        &arg0.validators
+    }
+
+    public(friend) fun validators_mut(arg0: &mut SuiSystemStateInnerV2) : &mut 0x3::validator_set::ValidatorSet {
+        &mut arg0.validators
     }
 
     // decompiled from Move bytecode v6

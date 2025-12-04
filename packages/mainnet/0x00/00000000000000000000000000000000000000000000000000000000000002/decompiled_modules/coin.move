@@ -59,6 +59,14 @@ module 0x2::coin {
         0x2::balance::join<T0>(&mut arg0.balance, v1);
     }
 
+    public fun redeem_funds<T0>(arg0: 0x2::funds_accumulator::Withdrawal<0x2::balance::Balance<T0>>, arg1: &mut 0x2::tx_context::TxContext) : Coin<T0> {
+        from_balance<T0>(0x2::balance::redeem_funds<T0>(arg0), arg1)
+    }
+
+    public fun send_funds<T0>(arg0: Coin<T0>, arg1: address) {
+        0x2::balance::send_funds<T0>(into_balance<T0>(arg0), arg1);
+    }
+
     public fun split<T0>(arg0: &mut Coin<T0>, arg1: u64, arg2: &mut 0x2::tx_context::TxContext) : Coin<T0> {
         let v0 = &mut arg0.balance;
         take<T0>(v0, arg1, arg2)
@@ -73,6 +81,10 @@ module 0x2::coin {
             id      : 0x2::object::new(arg0),
             balance : 0x2::balance::zero<T0>(),
         }
+    }
+
+    public(friend) fun allow_global_pause<T0>(arg0: &DenyCapV2<T0>) : bool {
+        arg0.allow_global_pause
     }
 
     public fun balance_mut<T0>(arg0: &mut Coin<T0>) : &mut 0x2::balance::Balance<T0> {
@@ -134,6 +146,10 @@ module 0x2::coin {
         (v0, v3, v2)
     }
 
+    public(friend) fun deny_cap_id<T0>(arg0: &RegulatedCoinMetadata<T0>) : 0x2::object::ID {
+        arg0.deny_cap_object
+    }
+
     public fun deny_list_add<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCap<T0>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
         0x2::deny_list::v1_add(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg2);
     }
@@ -151,50 +167,62 @@ module 0x2::coin {
     }
 
     public fun deny_list_v2_add<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCapV2<T0>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
-        0x2::deny_list::v2_add(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg2, arg3);
+        0x2::deny_list::v2_add(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg2, arg3);
     }
 
     public fun deny_list_v2_contains_current_epoch<T0>(arg0: &0x2::deny_list::DenyList, arg1: address, arg2: &0x2::tx_context::TxContext) : bool {
-        0x2::deny_list::v2_contains_current_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg1, arg2)
+        0x2::deny_list::v2_contains_current_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg1, arg2)
     }
 
     public fun deny_list_v2_contains_next_epoch<T0>(arg0: &0x2::deny_list::DenyList, arg1: address) : bool {
-        0x2::deny_list::v2_contains_next_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg1)
+        0x2::deny_list::v2_contains_next_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg1)
     }
 
     public fun deny_list_v2_disable_global_pause<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCapV2<T0>, arg2: &mut 0x2::tx_context::TxContext) {
         assert!(arg1.allow_global_pause, 3);
-        0x2::deny_list::v2_disable_global_pause(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg2);
+        0x2::deny_list::v2_disable_global_pause(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg2);
     }
 
     public fun deny_list_v2_enable_global_pause<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCapV2<T0>, arg2: &mut 0x2::tx_context::TxContext) {
         assert!(arg1.allow_global_pause, 3);
-        0x2::deny_list::v2_enable_global_pause(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg2);
+        0x2::deny_list::v2_enable_global_pause(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg2);
     }
 
     public fun deny_list_v2_is_global_pause_enabled_current_epoch<T0>(arg0: &0x2::deny_list::DenyList, arg1: &0x2::tx_context::TxContext) : bool {
-        0x2::deny_list::v2_is_global_pause_enabled_current_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg1)
+        0x2::deny_list::v2_is_global_pause_enabled_current_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg1)
     }
 
     public fun deny_list_v2_is_global_pause_enabled_next_epoch<T0>(arg0: &0x2::deny_list::DenyList) : bool {
-        0x2::deny_list::v2_is_global_pause_enabled_next_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())))
+        0x2::deny_list::v2_is_global_pause_enabled_next_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())))
     }
 
     public fun deny_list_v2_remove<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCapV2<T0>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
-        0x2::deny_list::v2_remove(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg2, arg3);
+        0x2::deny_list::v2_remove(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg2, arg3);
+    }
+
+    public(friend) fun destroy_metadata<T0>(arg0: CoinMetadata<T0>) {
+        let CoinMetadata {
+            id          : v0,
+            decimals    : _,
+            name        : _,
+            symbol      : _,
+            description : _,
+            icon_url    : _,
+        } = arg0;
+        0x2::object::delete(v0);
     }
 
     public fun divide_into_n<T0>(arg0: &mut Coin<T0>, arg1: u64, arg2: &mut 0x2::tx_context::TxContext) : vector<Coin<T0>> {
         assert!(arg1 > 0, 1);
         assert!(arg1 <= value<T0>(arg0), 2);
-        let v0 = 0x1::vector::empty<Coin<T0>>();
-        let v1 = 0;
-        let v2 = value<T0>(arg0) / arg1;
-        while (v1 < arg1 - 1) {
-            0x1::vector::push_back<Coin<T0>>(&mut v0, split<T0>(arg0, v2, arg2));
-            v1 = v1 + 1;
+        let v0 = value<T0>(arg0) / arg1;
+        let v1 = 0x1::vector::empty<Coin<T0>>();
+        let v2 = 0;
+        while (v2 < arg1 - 1) {
+            0x1::vector::push_back<Coin<T0>>(&mut v1, split<T0>(arg0, v0, arg2));
+            v2 = v2 + 1;
         };
-        v0
+        v1
     }
 
     public fun from_balance<T0>(arg0: 0x2::balance::Balance<T0>, arg1: &mut 0x2::tx_context::TxContext) : Coin<T0> {
@@ -236,7 +264,7 @@ module 0x2::coin {
     public fun migrate_regulated_currency_to_v2<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: DenyCap<T0>, arg2: bool, arg3: &mut 0x2::tx_context::TxContext) : DenyCapV2<T0> {
         let DenyCap { id: v0 } = arg1;
         0x2::object::delete(v0);
-        0x2::deny_list::migrate_v1_to_v2(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg3);
+        0x2::deny_list::migrate_v1_to_v2(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg3);
         DenyCapV2<T0>{
             id                 : 0x2::object::new(arg3),
             allow_global_pause : arg2,
@@ -256,6 +284,31 @@ module 0x2::coin {
 
     public fun mint_balance<T0>(arg0: &mut TreasuryCap<T0>, arg1: u64) : 0x2::balance::Balance<T0> {
         0x2::balance::increase_supply<T0>(&mut arg0.total_supply, arg1)
+    }
+
+    public(friend) fun new_coin_metadata<T0>(arg0: u8, arg1: 0x1::string::String, arg2: 0x1::ascii::String, arg3: 0x1::string::String, arg4: 0x1::ascii::String, arg5: &mut 0x2::tx_context::TxContext) : CoinMetadata<T0> {
+        CoinMetadata<T0>{
+            id          : 0x2::object::new(arg5),
+            decimals    : arg0,
+            name        : arg1,
+            symbol      : arg2,
+            description : arg3,
+            icon_url    : 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe(arg4)),
+        }
+    }
+
+    public(friend) fun new_deny_cap_v2<T0>(arg0: bool, arg1: &mut 0x2::tx_context::TxContext) : DenyCapV2<T0> {
+        DenyCapV2<T0>{
+            id                 : 0x2::object::new(arg1),
+            allow_global_pause : arg0,
+        }
+    }
+
+    public(friend) fun new_treasury_cap<T0>(arg0: &mut 0x2::tx_context::TxContext) : TreasuryCap<T0> {
+        TreasuryCap<T0>{
+            id           : 0x2::object::new(arg0),
+            total_supply : 0x2::balance::create_supply_internal<T0>(),
+        }
     }
 
     public fun put<T0>(arg0: &mut 0x2::balance::Balance<T0>, arg1: Coin<T0>) {
@@ -292,6 +345,13 @@ module 0x2::coin {
         } = arg0;
         0x2::object::delete(v0);
         v1
+    }
+
+    public(friend) fun update_coin_metadata<T0>(arg0: &mut CoinMetadata<T0>, arg1: 0x1::string::String, arg2: 0x1::ascii::String, arg3: 0x1::string::String, arg4: 0x1::ascii::String) {
+        arg0.name = arg1;
+        arg0.symbol = arg2;
+        arg0.description = arg3;
+        arg0.icon_url = 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe(arg4));
     }
 
     public entry fun update_description<T0>(arg0: &TreasuryCap<T0>, arg1: &mut CoinMetadata<T0>, arg2: 0x1::string::String) {

@@ -4,8 +4,21 @@ module 0x3::sui_system {
         version: u64,
     }
 
+    public(friend) fun calculate_rewards(arg0: &mut SuiSystemState, arg1: &0x3::staking_pool::StakedSui, arg2: &0x2::tx_context::TxContext) : u64 {
+        let v0 = 0x3::staking_pool::pool_id(arg1);
+        0x3::staking_pool::calculate_rewards(0x3::validator::get_staking_pool_ref(0x3::validator_set::validator_by_pool_id(0x3::sui_system_state_inner::validators_mut(load_system_state_mut(arg0)), &v0)), arg1, 0x2::tx_context::epoch(arg2))
+    }
+
     public fun active_validator_addresses(arg0: &mut SuiSystemState) : vector<address> {
         0x3::sui_system_state_inner::active_validator_addresses(load_system_state_mut(arg0))
+    }
+
+    public fun active_validator_addresses_ref(arg0: &SuiSystemState) : vector<address> {
+        0x3::sui_system_state_inner::active_validator_addresses(load_system_state_ref(arg0))
+    }
+
+    public fun active_validator_voting_powers(arg0: &SuiSystemState) : 0x2::vec_map::VecMap<address, u64> {
+        0x3::sui_system_state_inner::active_validator_voting_powers(load_system_state_ref(arg0))
     }
 
     fun advance_epoch(arg0: 0x2::balance::Balance<0x2::sui::SUI>, arg1: 0x2::balance::Balance<0x2::sui::SUI>, arg2: &mut SuiSystemState, arg3: u64, arg4: u64, arg5: u64, arg6: u64, arg7: u64, arg8: u64, arg9: u64, arg10: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<0x2::sui::SUI> {
@@ -43,6 +56,12 @@ module 0x3::sui_system {
 
     fun load_system_state_mut(arg0: &mut SuiSystemState) : &mut 0x3::sui_system_state_inner::SuiSystemStateInnerV2 {
         load_inner_maybe_upgrade(arg0)
+    }
+
+    fun load_system_state_ref(arg0: &SuiSystemState) : &0x3::sui_system_state_inner::SuiSystemStateInnerV2 {
+        let v0 = 0x2::dynamic_field::borrow<u64, 0x3::sui_system_state_inner::SuiSystemStateInnerV2>(&arg0.id, arg0.version);
+        assert!(0x3::sui_system_state_inner::system_state_version(v0) == arg0.version, 1);
+        v0
     }
 
     public fun pool_exchange_rates(arg0: &mut SuiSystemState, arg1: &0x2::object::ID) : &0x2::table::Table<u64, 0x3::staking_pool::PoolTokenExchangeRate> {
@@ -117,6 +136,10 @@ module 0x3::sui_system {
 
     fun store_execution_time_estimates(arg0: &mut SuiSystemState, arg1: vector<u8>) {
         0x3::sui_system_state_inner::store_execution_time_estimates(load_system_state_mut(arg0), arg1);
+    }
+
+    fun store_execution_time_estimates_v2(arg0: &mut SuiSystemState, arg1: vector<vector<u8>>) {
+        0x3::sui_system_state_inner::store_execution_time_estimates_v2(load_system_state_mut(arg0), arg1);
     }
 
     public entry fun undo_report_validator(arg0: &mut SuiSystemState, arg1: &0x3::validator_cap::UnverifiedValidatorOperationCap, arg2: address) {
