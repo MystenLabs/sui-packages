@@ -1,0 +1,14 @@
+module 0xd675d7beca1943fbe9d1a86a79066f5df0f5700a84a12619bc808c991a3f8685::token_template {
+    struct TOKEN_TEMPLATE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: TOKEN_TEMPLATE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<TOKEN_TEMPLATE>(arg0, 9, b"MX2715488", b"MixedTest2 715488", b"Token for mixed operations test 2", 0x1::option::none<0x2::url::Url>(), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<TOKEN_TEMPLATE>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<TOKEN_TEMPLATE>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
