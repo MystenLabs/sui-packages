@@ -39,11 +39,11 @@ module 0xb::treasury {
     }
 
     public(friend) fun burn<T0>(arg0: &mut BridgeTreasury, arg1: 0x2::coin::Coin<T0>) {
-        0x2::coin::burn<T0>(0x2::object_bag::borrow_mut<0x1::type_name::TypeName, 0x2::coin::TreasuryCap<T0>>(&mut arg0.treasuries, 0x1::type_name::get<T0>()), arg1);
+        0x2::coin::burn<T0>(0x2::object_bag::borrow_mut<0x1::type_name::TypeName, 0x2::coin::TreasuryCap<T0>>(&mut arg0.treasuries, 0x1::type_name::with_defining_ids<T0>()), arg1);
     }
 
     public(friend) fun mint<T0>(arg0: &mut BridgeTreasury, arg1: u64, arg2: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T0> {
-        0x2::coin::mint<T0>(0x2::object_bag::borrow_mut<0x1::type_name::TypeName, 0x2::coin::TreasuryCap<T0>>(&mut arg0.treasuries, 0x1::type_name::get<T0>()), arg1, arg2)
+        0x2::coin::mint<T0>(0x2::object_bag::borrow_mut<0x1::type_name::TypeName, 0x2::coin::TreasuryCap<T0>>(&mut arg0.treasuries, 0x1::type_name::with_defining_ids<T0>()), arg1, arg2)
     }
 
     public(friend) fun add_new_token(arg0: &mut BridgeTreasury, arg1: 0x1::ascii::String, arg2: u8, arg3: bool, arg4: u64) {
@@ -90,7 +90,7 @@ module 0xb::treasury {
     }
 
     fun get_token_metadata<T0>(arg0: &BridgeTreasury) : BridgeTokenMetadata {
-        let v0 = 0x1::type_name::get<T0>();
+        let v0 = 0x1::type_name::with_defining_ids<T0>();
         let v1 = 0x2::vec_map::try_get<0x1::type_name::TypeName, BridgeTokenMetadata>(&arg0.supported_tokens, &v0);
         assert!(0x1::option::is_some<BridgeTokenMetadata>(&v1), 1);
         0x1::option::destroy_some<BridgeTokenMetadata>(v1)
@@ -103,9 +103,9 @@ module 0xb::treasury {
 
     public(friend) fun register_foreign_token<T0>(arg0: &mut BridgeTreasury, arg1: 0x2::coin::TreasuryCap<T0>, arg2: 0x2::package::UpgradeCap, arg3: &0x2::coin::CoinMetadata<T0>) {
         assert!(0x2::coin::total_supply<T0>(&arg1) == 0, 3);
-        let v0 = 0x1::type_name::get<T0>();
+        let v0 = 0x1::type_name::with_defining_ids<T0>();
         let v1 = 0x2::package::upgrade_package(&arg2);
-        assert!(0x2::object::id_to_address(&v1) == 0x2::address::from_bytes(0x2::hex::decode(0x1::ascii::into_bytes(0x1::type_name::get_address(&v0)))), 2);
+        assert!(0x2::object::id_to_address(&v1) == 0x2::address::from_bytes(0x2::hex::decode(0x1::ascii::into_bytes(0x1::type_name::address_string(&v0)))), 2);
         let v2 = ForeignTokenRegistration{
             type_name : v0,
             uc        : arg2,

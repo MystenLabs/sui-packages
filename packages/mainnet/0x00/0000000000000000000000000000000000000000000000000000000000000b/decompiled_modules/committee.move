@@ -35,7 +35,7 @@ module 0xb::committee {
     }
 
     fun check_uniqueness_bridge_keys(arg0: &BridgeCommittee, arg1: vector<u8>) {
-        let v0 = 0x2::vec_map::size<address, CommitteeMemberRegistration>(&arg0.member_registrations);
+        let v0 = 0x2::vec_map::length<address, CommitteeMemberRegistration>(&arg0.member_registrations);
         let v1 = false;
         while (v0 > 0) {
             v0 = v0 - 1;
@@ -69,7 +69,7 @@ module 0xb::committee {
         while (v2 < 0x1::vector::length<vector<u8>>(v1)) {
             let v5 = 0x1::vector::borrow<vector<u8>>(v1, v2);
             let v6 = false;
-            while (v3 < 0x2::vec_map::size<vector<u8>, CommitteeMember>(&arg0.members)) {
+            while (v3 < 0x2::vec_map::length<vector<u8>, CommitteeMember>(&arg0.members)) {
                 let (v7, v8) = 0x2::vec_map::get_entry_by_idx_mut<vector<u8>, CommitteeMember>(&mut arg0.members, v3);
                 if (*v5 == 0xb::crypto::ecdsa_pub_key_to_eth_address(v7)) {
                     v8.blocklisted = v0;
@@ -118,7 +118,7 @@ module 0xb::committee {
         let v0 = 0;
         let v1 = 0x2::vec_map::empty<vector<u8>, CommitteeMember>();
         let v2 = 0;
-        while (v0 < 0x2::vec_map::size<address, CommitteeMemberRegistration>(&arg0.member_registrations)) {
+        while (v0 < 0x2::vec_map::length<address, CommitteeMemberRegistration>(&arg0.member_registrations)) {
             let (_, v4) = 0x2::vec_map::get_entry_by_idx<address, CommitteeMemberRegistration>(&arg0.member_registrations, v0);
             let v5 = 0x2::vec_map::try_get<address, u64>(&arg1, &v4.sui_address);
             if (0x1::option::is_some<u64>(&v5)) {
@@ -149,7 +149,7 @@ module 0xb::committee {
 
     public(friend) fun update_node_url(arg0: &mut BridgeCommittee, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
         let v0 = 0;
-        while (v0 < 0x2::vec_map::size<vector<u8>, CommitteeMember>(&arg0.members)) {
+        while (v0 < 0x2::vec_map::length<vector<u8>, CommitteeMember>(&arg0.members)) {
             let (_, v2) = 0x2::vec_map::get_entry_by_idx_mut<vector<u8>, CommitteeMember>(&mut arg0.members, v0);
             if (v2.sui_address == 0x2::tx_context::sender(arg2)) {
                 v2.http_rest_url = arg1;

@@ -106,11 +106,47 @@ module 0x1::vector {
         v0
     }
 
+    public fun skip<T0: drop>(arg0: vector<T0>, arg1: u64) : vector<T0> {
+        let v0 = length<T0>(&arg0);
+        if (arg1 >= v0) {
+            return empty<T0>()
+        };
+        let v1 = empty<T0>();
+        let v2 = 0;
+        while (v2 < v0 - arg1) {
+            let v3 = &mut v1;
+            let v4 = &mut arg0;
+            push_back<T0>(v3, pop_back<T0>(v4));
+            v2 = v2 + 1;
+        };
+        let v5 = &mut v1;
+        reverse<T0>(v5);
+        v1
+    }
+
     public fun swap_remove<T0>(arg0: &mut vector<T0>, arg1: u64) : T0 {
         assert!(length<T0>(arg0) != 0, 131072);
         let v0 = length<T0>(arg0) - 1;
         swap<T0>(arg0, arg1, v0);
         pop_back<T0>(arg0)
+    }
+
+    public fun take<T0: drop>(arg0: vector<T0>, arg1: u64) : vector<T0> {
+        assert!(arg1 <= length<T0>(&arg0), 13906834930257625087);
+        if (arg1 == length<T0>(&arg0)) {
+            return arg0
+        };
+        let v0 = &mut arg0;
+        reverse<T0>(v0);
+        let v1 = empty<T0>();
+        let v2 = 0;
+        while (v2 < arg1) {
+            let v3 = &mut v1;
+            let v4 = &mut arg0;
+            push_back<T0>(v3, pop_back<T0>(v4));
+            v2 = v2 + 1;
+        };
+        v1
     }
 
     // decompiled from Move bytecode v6

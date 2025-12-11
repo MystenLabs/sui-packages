@@ -3,12 +3,7 @@ module 0x1::type_name {
         name: 0x1::ascii::String,
     }
 
-    public fun borrow_string(arg0: &TypeName) : &0x1::ascii::String {
-        &arg0.name
-    }
-
-    native public fun get<T0>() : TypeName;
-    public fun get_address(arg0: &TypeName) : 0x1::ascii::String {
+    public fun address_string(arg0: &TypeName) : 0x1::ascii::String {
         assert!(!is_primitive(arg0), 0);
         let v0 = 0x1::ascii::as_bytes(&arg0.name);
         let v1 = b"";
@@ -20,25 +15,31 @@ module 0x1::type_name {
         0x1::ascii::string(v1)
     }
 
-    public fun get_module(arg0: &TypeName) : 0x1::ascii::String {
-        assert!(!is_primitive(arg0), 0);
-        let v0 = 0x1::address::length() * 2 + 2;
-        let v1 = 0x1::ascii::as_bytes(&arg0.name);
-        let v2 = b"";
-        let v3 = 58;
-        loop {
-            let v4 = 0x1::vector::borrow<u8>(v1, v0);
-            if (v4 != &v3) {
-                0x1::vector::push_back<u8>(&mut v2, *v4);
-                v0 = v0 + 1;
-            } else {
-                break
-            };
-        };
-        0x1::ascii::string(v2)
+    public fun as_string(arg0: &TypeName) : &0x1::ascii::String {
+        &arg0.name
     }
 
-    native public fun get_with_original_ids<T0>() : TypeName;
+    public fun borrow_string(arg0: &TypeName) : &0x1::ascii::String {
+        as_string(arg0)
+    }
+
+    native public fun defining_id<T0>() : address;
+    public fun get<T0>() : TypeName {
+        with_defining_ids<T0>()
+    }
+
+    public fun get_address(arg0: &TypeName) : 0x1::ascii::String {
+        address_string(arg0)
+    }
+
+    public fun get_module(arg0: &TypeName) : 0x1::ascii::String {
+        module_string(arg0)
+    }
+
+    public fun get_with_original_ids<T0>() : TypeName {
+        with_original_ids<T0>()
+    }
+
     public fun into_string(arg0: TypeName) : 0x1::ascii::String {
         arg0.name
     }
@@ -110,6 +111,27 @@ module 0x1::type_name {
         }
     }
 
+    public fun module_string(arg0: &TypeName) : 0x1::ascii::String {
+        assert!(!is_primitive(arg0), 0);
+        let v0 = 0x1::address::length() * 2 + 2;
+        let v1 = 0x1::ascii::as_bytes(&arg0.name);
+        let v2 = b"";
+        let v3 = 58;
+        loop {
+            let v4 = 0x1::vector::borrow<u8>(v1, v0);
+            if (v4 != &v3) {
+                0x1::vector::push_back<u8>(&mut v2, *v4);
+                v0 = v0 + 1;
+            } else {
+                break
+            };
+        };
+        0x1::ascii::string(v2)
+    }
+
+    native public fun original_id<T0>() : address;
+    native public fun with_defining_ids<T0>() : TypeName;
+    native public fun with_original_ids<T0>() : TypeName;
     // decompiled from Move bytecode v6
 }
 
