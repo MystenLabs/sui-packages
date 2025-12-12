@@ -1,0 +1,96 @@
+module 0xbaef45a92b727fe5d860f7d3bdb770936e457700687c77d5e2fbe9fe2529b959::market_query {
+    struct PoolData has copy, drop, store {
+        interestRate: 0x1::fixed_point32::FixedPoint32,
+        borrowIndex: u64,
+        lastUpdated: u64,
+        type: 0x1::type_name::TypeName,
+        baseBorrowRatePerSec: 0x1::fixed_point32::FixedPoint32,
+        interestRateScale: u64,
+        borrowFeeRate: 0x1::fixed_point32::FixedPoint32,
+        minBorrowAmount: u64,
+        debt: u64,
+        reserve: u64,
+    }
+
+    struct CollateralData has copy, drop, store {
+        type: 0x1::type_name::TypeName,
+        collateralFactor: 0x1::fixed_point32::FixedPoint32,
+        liquidationFactor: 0x1::fixed_point32::FixedPoint32,
+        liquidationPanelty: 0x1::fixed_point32::FixedPoint32,
+        liquidationDiscount: 0x1::fixed_point32::FixedPoint32,
+        liquidationReserveFactor: 0x1::fixed_point32::FixedPoint32,
+        maxCollateralAmount: u64,
+        totalCollateralAmount: u64,
+    }
+
+    struct MarketData has copy, drop, store {
+        pools: vector<PoolData>,
+        collaterals: vector<CollateralData>,
+    }
+
+    public fun collateral_data(arg0: &0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market::Market) : vector<CollateralData> {
+        let v0 = 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market::risk_models(arg0);
+        let v1 = 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market::collateral_stats(arg0);
+        let v2 = 0x4b2d9b6fa9390014453773991e6d0ca1aecdc5aed4efc367de5000ea13190ff1::ac_table::keys<0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::risk_model::RiskModels, 0x1::type_name::TypeName, 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::risk_model::RiskModel>(v0);
+        let v3 = 0;
+        let v4 = 0x1::vector::empty<CollateralData>();
+        while (v3 < 0x1::vector::length<0x1::type_name::TypeName>(&v2)) {
+            let v5 = *0x1::vector::borrow<0x1::type_name::TypeName>(&v2, v3);
+            let v6 = 0x4b2d9b6fa9390014453773991e6d0ca1aecdc5aed4efc367de5000ea13190ff1::ac_table::borrow<0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::risk_model::RiskModels, 0x1::type_name::TypeName, 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::risk_model::RiskModel>(v0, v5);
+            let v7 = CollateralData{
+                type                     : v5,
+                collateralFactor         : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::risk_model::collateral_factor(v6),
+                liquidationFactor        : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::risk_model::liq_factor(v6),
+                liquidationPanelty       : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::risk_model::liq_penalty(v6),
+                liquidationDiscount      : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::risk_model::liq_discount(v6),
+                liquidationReserveFactor : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::risk_model::liq_revenue_factor(v6),
+                maxCollateralAmount      : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::risk_model::max_collateral_amount(v6),
+                totalCollateralAmount    : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::collateral_stats::collateral_amount(v1, v5),
+            };
+            0x1::vector::push_back<CollateralData>(&mut v4, v7);
+            v3 = v3 + 1;
+        };
+        v4
+    }
+
+    public fun market_data(arg0: &0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market::Market) {
+        let v0 = MarketData{
+            pools       : pool_data(arg0),
+            collaterals : collateral_data(arg0),
+        };
+        0x2::event::emit<MarketData>(v0);
+    }
+
+    public fun pool_data(arg0: &0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market::Market) : vector<PoolData> {
+        let v0 = 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market::borrow_dynamics(arg0);
+        let v1 = 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market::interest_models(arg0);
+        let v2 = 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::reserve::balance_sheets(0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market::vault(arg0));
+        let v3 = 0x4b2d9b6fa9390014453773991e6d0ca1aecdc5aed4efc367de5000ea13190ff1::ac_table::keys<0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::interest_model::InterestModels, 0x1::type_name::TypeName, 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::interest_model::InterestModel>(v1);
+        let v4 = 0;
+        let v5 = 0x1::vector::empty<PoolData>();
+        while (v4 < 0x1::vector::length<0x1::type_name::TypeName>(&v3)) {
+            let v6 = *0x1::vector::borrow<0x1::type_name::TypeName>(&v3, v4);
+            let v7 = 0x4b2d9b6fa9390014453773991e6d0ca1aecdc5aed4efc367de5000ea13190ff1::wit_table::borrow<0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::borrow_dynamics::BorrowDynamics, 0x1::type_name::TypeName, 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::borrow_dynamics::BorrowDynamic>(v0, v6);
+            let v8 = 0x4b2d9b6fa9390014453773991e6d0ca1aecdc5aed4efc367de5000ea13190ff1::ac_table::borrow<0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::interest_model::InterestModels, 0x1::type_name::TypeName, 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::interest_model::InterestModel>(v1, v6);
+            let (v9, v10) = 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::reserve::balance_sheet(0x4b2d9b6fa9390014453773991e6d0ca1aecdc5aed4efc367de5000ea13190ff1::wit_table::borrow<0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::reserve::BalanceSheets, 0x1::type_name::TypeName, 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::reserve::BalanceSheet>(v2, v6));
+            let v11 = PoolData{
+                interestRate         : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::borrow_dynamics::interest_rate(v7),
+                borrowIndex          : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::borrow_dynamics::borrow_index(v7),
+                lastUpdated          : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::borrow_dynamics::last_updated(v7),
+                type                 : v6,
+                baseBorrowRatePerSec : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::interest_model::base_borrow_rate(v8),
+                interestRateScale    : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::interest_model::interest_rate_scale(v8),
+                borrowFeeRate        : *0x2::dynamic_field::borrow<0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market_dynamic_keys::BorrowFeeKey, 0x1::fixed_point32::FixedPoint32>(0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market::uid(arg0), 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::market_dynamic_keys::borrow_fee_key(v6)),
+                minBorrowAmount      : 0x36e0fceb2d14ee3926315a26508a4c1dd8518e7eb9f35d9cdc7109116624f581::interest_model::min_borrow_amount(v8),
+                debt                 : v9,
+                reserve              : v10,
+            };
+            0x1::vector::push_back<PoolData>(&mut v5, v11);
+            v4 = v4 + 1;
+        };
+        v5
+    }
+
+    // decompiled from Move bytecode v6
+}
+
