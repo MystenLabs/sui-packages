@@ -1,0 +1,4 @@
+module 0xdac97d55917cc624644b3443e839af30d805467d65cf1adb75bc2579210b7a39::minimal_module {
+    // decompiled from Move bytecode v6
+}
+
