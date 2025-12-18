@@ -1,0 +1,33 @@
+module 0x309e3008b4ee28beceaab36ebc10573eee73d715e2a70388247cf2bb0e371435::strwrs {
+    struct STRWRS has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: STRWRS, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = trim_right(b"111111111   ");
+        let v1 = trim_right(b"a403a4dd35c80ae1d1628c296cd8478abd5c0944a884fcba8af13d3f8883baa4                                                                                                                                                                                                                                                                ");
+        let v2 = if (0x1::vector::length<u8>(&v1) == 0) {
+            0x1::option::none<0x2::url::Url>()
+        } else {
+            0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(v1))
+        };
+        let (v3, v4) = 0x2::coin::create_currency<STRWRS>(arg0, (0x1::vector::length<u8>(&v0) as u8), 0x1::ascii::into_bytes(0x1::string::to_ascii(0x1::string::utf8(trim_right(b"STRWRS      ")))), trim_right(b"STER WERS                       "), trim_right(b"$STRWRS | STER-WERS is the official true force in the Solana Galaxy coming to laser the jeets  may the force be with you!                                                                                                                                                                                                       "), v2, arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<STRWRS>>(v3, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<STRWRS>>(v4);
+    }
+
+    fun trim_right(arg0: vector<u8>) : vector<u8> {
+        let v0 = 32;
+        let v1 = &v0;
+        while (0x1::vector::length<u8>(&arg0) > 0) {
+            if (0x1::vector::borrow<u8>(&arg0, 0x1::vector::length<u8>(&arg0) - 1) != v1) {
+                break
+            };
+            0x1::vector::pop_back<u8>(&mut arg0);
+        };
+        arg0
+    }
+
+    // decompiled from Move bytecode v6
+}
+
