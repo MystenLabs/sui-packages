@@ -1,0 +1,28 @@
+module 0x7ac024d8f2810036de956b17b1662558191a00f27213ceec5e3d83fbdfe224ed::momentum {
+    struct PoolInfo has copy, drop, store {
+        pool_id: 0x2::object::ID,
+        coin_a: u64,
+        coin_b: u64,
+        liquidity: u128,
+        current_tick_index: 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::i32::I32,
+        current_sqrt_price: u128,
+        fee_rate: u64,
+    }
+
+    public fun get_pool_info<T0, T1>(arg0: &mut 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::Pool<T0, T1>) {
+        let (v0, v1) = 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::reserves<T0, T1>(arg0);
+        let v2 = PoolInfo{
+            pool_id            : 0x2::object::id<0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::Pool<T0, T1>>(arg0),
+            coin_a             : v0,
+            coin_b             : v1,
+            liquidity          : 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::liquidity<T0, T1>(arg0),
+            current_tick_index : 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::tick_index_current<T0, T1>(arg0),
+            current_sqrt_price : 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::sqrt_price<T0, T1>(arg0),
+            fee_rate           : 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::swap_fee_rate<T0, T1>(arg0),
+        };
+        0x2::event::emit<PoolInfo>(v2);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
