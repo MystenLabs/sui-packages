@@ -1,0 +1,14 @@
+module 0xcb4ca1550bbb2d79b7e85b952ad9ba6bcbf5914214862f5f283609ffbf12ea82::cope {
+    struct COPE has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: COPE, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0xf4054b4c967ea64173453f593a0ec98cb6aa351635cbc412f4fdf5f804bb98db::token_emitter::create_currency<COPE>(arg0, 9, b"COPE", b"Cope.meme", b"A high adrenaline game that turns market chaos into memecoin style wins", 0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,UklGRsIFAABXRUJQVlA4ILYFAABQIwCdASqAAIAAPm0uk0WkIqGXzCWQQAbEsgQ4AMi43LwvLv81SM+DvL55y8j/6Ae6PxMv1Y66/6x/gB8HvPA6QD/Df4zra/Qr8tP2UP77/qfR0//7TOHe+KiyBb/6pbUygC6b8x1BFPQRkOB9mXpI6IQRgJ+sj9/jewJFhwh5cnETGPVxc/QxEN+IR/dtN56exbE0DW5hyxbHog1+Dw43CT9XpVWIZeSeTr1MreC0BAMFd4oC1EQaxgWOfRHtf4iGewYGBIm89orFbgTx0AOUwuis2iG/rOpKyUJ8S5PasxPzr1c8wUMuWFTGou2HxDjy6/QcjcDZQv0dUSusUSUOd00uVqgBAZ6c9Lftd//LCPYiSOwHzN9oFOiqX6PvHatIEAAA/tkfBtjMSf2bdyb+MiD59feVJrT8mC79wjkjDDIOgLABM/SvhmNR9N6eB+xUSoOVZcNPw5aLbHHgCVRI5bhUtpNZzEpJuJOCobT6bvwExRJXBzBG7rPlkRQLy7/1RVp5xmQRZ2f7y2BACPeBXPvfLanrITlQT/OwzchATkjSa5Pj2W/Dhhhj0Ubczbpmp1wpSS53Cs6ILSXKPAjsFPPFCHDK84ZHEmuYk1gEUdDMhS8TEl4I9dFNJ9+iBKqdtlsZC5eMvmMb0zxxEPKUd9W4TLhLe/ZQCK3leDc32Td5qA54399qiA8ghlbKj8vmOEcT/xWpGNvqjlab+RcFwzGC14rwTAK9n4HdIbQ25G4u8XHCNEApFAXLSlIetk6Yk83Loc4TMbgNborKbYW4vKSYE29s5wdQSNJRlf6Vj4ttWL2Ca1+NC7mSzn2imBQmPtOSNJwX82ivjbg2Gg3/ulACS2OqueoOJneUaf9613RNS0h5WFUv6p/Y9Luuh1JdZiTV7MntHVKA0eW4l419N3pS/QtO1DGYLooykrnFJR1nWHlbV/y4BWRhxfq6rq2VCMyuhRRupOVUhvIvIkUZgu0dnXfIJ7hA4+uVuBA8VjwJpyH0/jawb5xPqwcaHmGIKSVUdeFjzUA5/uDK/bigGHHujZFN/jSfcNIkIDzwS39ZVJjiTeqd8RP2YNjLbg9qNlEeSXBBRLR5V5g7A0sBhpWPx5MC7K5DWQ8UlGJCDX7LIeGYptyauM2PzQaUHF/V+J3tYY2ttwoM8BqyQ34sEdS5u9nV70EGjAuJDqFWk76fr1+y4ApRcBfzHNnKPiQS1j/u7UXS++SFJ1pL3Bkv9JotEKYoxysLyVcHTt0qYUqM33Mqitl91AUehCBaDln5K3lhafS+OBMWMt9XqOQh1wZoVcYZgaI0R1A8iiATJWweqhSZkdWMv0ylhPe9E0NmIztjV9BrR7aPhkIMru4JvEWrY4W+GPV6+Oe54v1QeSuB062S5fWgIbHiILqzFHgDrvm7zcuuV62wDcDMQFjMN75dt6AefN1GBozSaPJ45p80IKB0m0kddo/wt/2suYnFh2CORPJyvO7Kk1Q5pSwPgJiZWxEg3ClirKRLlj2rVhsgc3Oi2TjCR+3D6NAYEXvogmg7/x8OLumDJhrwvuhrdAKWdXgyvYM87ONLEr3VL6fYxh+rXDvoW2zcCjyx3/i/jiANI9kMHjMxH1eERjkjhUIPGa7kpExwDhuL7xM8xgQvTjw5vd7EfFT8yrJ3+Czspjuibc9ht4wq0/0hb3vfafTy6AEZOrgKdGYgYO6RTX+HNvwqguBisteQFdwFktT4Dsk6VAXOYPAeyRbX1xsA6QIXcQNeRnKkXG3PLg/W/ddmQRZuhP8i1lh2VtDzyFwI4DMiNClh28hlTIZbcUpgtIKiRw47MAke8TwNgeFiqHfr03GnuAlSIeb4o8Mxdz8tL7lkUXSHgHxmSLR5F04OCOpltWGe+SjS/inDoUDBdY+AycUdvTbALyrIR55EOleJs8YLg0iZZkDP4emrAB7PKq0gAAAA"), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<COPE>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<COPE>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
