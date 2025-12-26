@@ -1,0 +1,1289 @@
+module 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::vaults {
+    struct AdminCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct VaultsManager has store, key {
+        id: 0x2::object::UID,
+        index: u64,
+        package_version: u64,
+        vault_to_pool_maps: 0x2::table::Table<0x2::object::ID, 0x2::object::ID>,
+        price_oracles: 0x2::table::Table<0x2::object::ID, OracleInfo>,
+        acl: 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::ACL,
+    }
+
+    struct OracleInfo has drop, store {
+        clmm_pool: 0x2::object::ID,
+        slippage: u8,
+    }
+
+    struct Vault<phantom T0> has store, key {
+        id: 0x2::object::UID,
+        pool: 0x2::object::ID,
+        liquidity: u128,
+        protocol_fee_rate: u64,
+        is_pause: bool,
+        positions: vector<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>,
+        lp_token_treasury: 0x2::coin::TreasuryCap<T0>,
+        harvest_assets: 0x2::bag::Bag,
+        protocol_fees: 0x2::bag::Bag,
+        max_quota: u128,
+        status: u8,
+        quota_based_type: 0x1::type_name::TypeName,
+        finish_rebalance_threshold: u64,
+        flash_loan_count: u8,
+    }
+
+    struct FlashLoanReceipt {
+        vault_id: 0x2::object::ID,
+        repay_type: 0x1::type_name::TypeName,
+        repay_amount: u64,
+    }
+
+    struct VaultStatus<phantom T0, phantom T1> has store, key {
+        id: 0x2::object::UID,
+        allow_deposit: bool,
+        allow_remove: bool,
+        is_exit: bool,
+        buffer_a: 0x2::balance::Balance<T0>,
+        buffer_b: 0x2::balance::Balance<T1>,
+    }
+
+    struct InitEvent has copy, drop {
+        admin_cap_id: 0x2::object::ID,
+        manager_id: 0x2::object::ID,
+    }
+
+    struct CreateEvent has copy, drop {
+        id: 0x2::object::ID,
+        clmm_pool: 0x2::object::ID,
+        clmm_position: 0x2::object::ID,
+        wrapped_position: 0x2::object::ID,
+        tick_lower: u32,
+        tick_upper: u32,
+        lp_token_treasury: 0x2::object::ID,
+    }
+
+    struct DepositEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        before_liquidity: u128,
+        delta_liquidity: u128,
+        before_supply: u64,
+        lp_amount: u64,
+    }
+
+    struct RemoveEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        lp_amount: u64,
+        liquidity: u128,
+        amount_a: u64,
+        amount_b: u64,
+        protocol_fee_a_amount: u64,
+        protocol_fee_b_amount: u64,
+    }
+
+    struct ReinvestEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        amount_a: u64,
+        amount_b: u64,
+        remaining_amount_a: u64,
+        remaining_amount_b: u64,
+        delta_liquidity: u128,
+        current_sqrt_price: u128,
+    }
+
+    struct ReinvestV2Event has copy, drop {
+        vault_id: 0x2::object::ID,
+        amount_a: u64,
+        amount_b: u64,
+        remaining_amount_a: u64,
+        remaining_amount_b: u64,
+        delta_liquidity: u128,
+        current_sqrt_price: u128,
+        lp_supply: u64,
+    }
+
+    struct MigrateLiquidityEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        old_position: 0x2::object::ID,
+        new_position: 0x2::object::ID,
+        old_wrapped_position: 0x2::object::ID,
+        new_wrapped_position: 0x2::object::ID,
+        remaining_amount: u64,
+        old_tick_lower: 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32,
+        old_tick_upper: 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32,
+        old_liquidity: u128,
+        new_liquidity: u128,
+        current_sqrt_price: u128,
+        tick_lower: 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32,
+        tick_upper: 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32,
+    }
+
+    struct RebalanceEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        amount_a: u64,
+        amount_b: u64,
+        remaining_amount_a: u64,
+        remaining_amount_b: u64,
+        delta_liquidity: u128,
+        current_sqrt_price: u128,
+    }
+
+    struct FeeClaimedEvent has copy, drop {
+        amount_a: u64,
+        amount_b: u64,
+        vault_id: 0x2::object::ID,
+    }
+
+    struct HarvestEvent has copy, drop {
+        amount: u64,
+        rewarder_type: 0x1::type_name::TypeName,
+        vault_id: 0x2::object::ID,
+    }
+
+    struct RewarderClaimedEvent has copy, drop {
+        amount: u64,
+        rewarder_type: 0x1::type_name::TypeName,
+        vault_id: 0x2::object::ID,
+    }
+
+    struct PauseEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+    }
+
+    struct UnpauseEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+    }
+
+    struct UpdateFeeRateEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        old_fee_rate: u64,
+        new_fee_rate: u64,
+    }
+
+    struct ClaimProtocolFeeEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        amount: u64,
+        type_name: 0x1::type_name::TypeName,
+    }
+
+    struct SetPackageVersionEvent has copy, drop {
+        new_version: u64,
+        old_version: u64,
+    }
+
+    struct SetRolesEvent has copy, drop {
+        member: address,
+        roles: u128,
+    }
+
+    struct AddRoleEvent has copy, drop {
+        member: address,
+        role: u8,
+    }
+
+    struct RemoveRoleEvent has copy, drop {
+        member: address,
+        role: u8,
+    }
+
+    struct RemoveMemberEvent has copy, drop {
+        member: address,
+    }
+
+    struct UpdateMaxQuotaEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        old_quota: u128,
+        new_quota: u128,
+    }
+
+    struct UpdateRebalanceThresoldEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        old_thresold: u64,
+        new_thresold: u64,
+    }
+
+    struct AddOraclePoolEvent has copy, drop {
+        coin_a: 0x1::type_name::TypeName,
+        coin_b: 0x1::type_name::TypeName,
+        oracle_pool: 0x2::object::ID,
+        slippage: u8,
+    }
+
+    struct RemoveOraclePoolEvent has copy, drop {
+        coin_a: 0x1::type_name::TypeName,
+        coin_b: 0x1::type_name::TypeName,
+    }
+
+    struct UpdateSlippageEvent has copy, drop {
+        old_slippage: u8,
+        new_slippage: u8,
+    }
+
+    struct FlashLoanEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        loan_type: 0x1::type_name::TypeName,
+        repay_type: 0x1::type_name::TypeName,
+        amount: u64,
+        repay_amount: u64,
+        oracle_pool: 0x2::object::ID,
+        current_sqrt_price: u128,
+    }
+
+    struct FlashLoanV2Event has copy, drop {
+        vault_id: 0x2::object::ID,
+        loan_type: 0x1::type_name::TypeName,
+        repay_type: 0x1::type_name::TypeName,
+        amount: u64,
+        repay_amount: u64,
+        base_to_quote_price: u128,
+    }
+
+    struct RepayFlashLoanEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        repay_type: 0x1::type_name::TypeName,
+        repay_amount: u64,
+    }
+
+    struct ExitVaultEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        lp_amount: u64,
+        total_lp_amount: u64,
+        amount_a: u64,
+        amount_b: u64,
+    }
+
+    struct FinalizeExitEvent has copy, drop {
+        vault_id: 0x2::object::ID,
+        amount_a: u64,
+        amount_b: u64,
+    }
+
+    public fun remove<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: &mut 0x2::coin::Coin<T2>, arg8: u64, arg9: u64, arg10: u64, arg11: &0x2::clock::Clock, arg12: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, 0x2::coin::Coin<T1>) {
+        checked_package_version(arg0);
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.status == 1, 17);
+        assert!(0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg6) == arg1.pool, 41);
+        if (0x2::dynamic_object_field::exists_with_type<vector<u8>, VaultStatus<T0, T1>>(&arg1.id, b"exit_state")) {
+            assert!(0x2::dynamic_object_field::borrow<vector<u8>, VaultStatus<T0, T1>>(&arg1.id, b"exit_state").allow_remove, 40);
+        };
+        assert!(arg8 > 0, 5);
+        assert!(0x2::coin::value<T2>(arg7) >= arg8, 9);
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions) == 1, 2);
+        let (_, _) = collect_clmm_fee<T0, T1, T2>(arg1, arg3, arg5, arg6);
+        let v2 = total_token_amount<T2>(arg1);
+        let v3 = 0x1::vector::borrow_mut<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&mut arg1.positions, 0);
+        assert!(v2 >= arg8, 9);
+        let v4 = get_share_liquidity_by_amount(arg8, 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::info_liquidity(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::borrow_position_info<T0, T1>(arg6, 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position>(0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::borrow_clmm_position(v3)))), v2);
+        arg1.liquidity = arg1.liquidity - v4;
+        let (v5, v6) = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::remove_liquidity<T0, T1>(arg3, arg5, arg2, arg4, arg6, v3, v4, arg9, arg10, arg11);
+        let v7 = v6;
+        let v8 = v5;
+        let v9 = 0x2::balance::value<T0>(&v8);
+        let v10 = 0x2::balance::value<T1>(&v7);
+        let (v11, v12) = if (arg1.protocol_fee_rate == 0) {
+            (0, 0)
+        } else {
+            let v13 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::full_math_u64::mul_div_ceil(v9, arg1.protocol_fee_rate, 10000);
+            let v14 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::full_math_u64::mul_div_ceil(v10, arg1.protocol_fee_rate, 10000);
+            merge_protocol_asset<T0, T2>(arg1, 0x2::balance::split<T0>(&mut v8, v13));
+            merge_protocol_asset<T1, T2>(arg1, 0x2::balance::split<T1>(&mut v7, v14));
+            (v13, v14)
+        };
+        assert!(v9 - v11 >= arg9, 1);
+        assert!(v10 - v12 >= arg10, 1);
+        let v15 = RemoveEvent{
+            vault_id              : 0x2::object::id<Vault<T2>>(arg1),
+            lp_amount             : arg8,
+            liquidity             : v4,
+            amount_a              : v9,
+            amount_b              : v10,
+            protocol_fee_a_amount : v11,
+            protocol_fee_b_amount : v12,
+        };
+        0x2::event::emit<RemoveEvent>(v15);
+        0x2::coin::burn<T2>(&mut arg1.lp_token_treasury, 0x2::coin::split<T2>(arg7, arg8, arg12));
+        (0x2::coin::from_balance<T0>(v8, arg12), 0x2::coin::from_balance<T1>(v7, arg12))
+    }
+
+    public fun collect_fee<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg5: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_operation_role(arg0, 0x2::tx_context::sender(arg5));
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.status == 1, 17);
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions) == 1, 2);
+        assert!(arg1.pool == 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg4), 41);
+        let (v0, v1) = collect_clmm_fee<T0, T1, T2>(arg1, arg2, arg3, arg4);
+        let v2 = FeeClaimedEvent{
+            amount_a : v0,
+            amount_b : v1,
+            vault_id : 0x2::object::id<Vault<T2>>(arg1),
+        };
+        0x2::event::emit<FeeClaimedEvent>(v2);
+    }
+
+    public fun harvest<T0, T1>(arg0: &VaultsManager, arg1: &mut Vault<T1>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.pool == 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::clmm_pool_id(arg4), 41);
+        harvest_internal<T0, T1>(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    public fun add_role(arg0: &AdminCap, arg1: &mut VaultsManager, arg2: address, arg3: u8) {
+        checked_package_version(arg1);
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::add_role(&mut arg1.acl, arg2, arg3);
+        let v0 = AddRoleEvent{
+            member : arg2,
+            role   : arg3,
+        };
+        0x2::event::emit<AddRoleEvent>(v0);
+    }
+
+    public fun remove_member(arg0: &AdminCap, arg1: &mut VaultsManager, arg2: address) {
+        checked_package_version(arg1);
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::remove_member(&mut arg1.acl, arg2);
+        let v0 = RemoveMemberEvent{member: arg2};
+        0x2::event::emit<RemoveMemberEvent>(v0);
+    }
+
+    public fun remove_role(arg0: &AdminCap, arg1: &mut VaultsManager, arg2: address, arg3: u8) {
+        checked_package_version(arg1);
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::remove_role(&mut arg1.acl, arg2, arg3);
+        let v0 = RemoveRoleEvent{
+            member : arg2,
+            role   : arg3,
+        };
+        0x2::event::emit<RemoveRoleEvent>(v0);
+    }
+
+    public fun set_roles(arg0: &AdminCap, arg1: &mut VaultsManager, arg2: address, arg3: u128) {
+        checked_package_version(arg1);
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::set_roles(&mut arg1.acl, arg2, arg3);
+        let v0 = SetRolesEvent{
+            member : arg2,
+            roles  : arg3,
+        };
+        0x2::event::emit<SetRolesEvent>(v0);
+    }
+
+    public fun add_coin_info<T0>(arg0: &VaultsManager, arg1: &mut 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::OracleRegistry, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State, arg3: &0x2::coin::CoinMetadata<T0>, arg4: vector<u8>, arg5: u64, arg6: u64, arg7: &0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_oracle_manager_role(arg0, 0x2::tx_context::sender(arg7));
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::add_coin_info<T0>(arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    public fun add_coin_info_use_currency<T0>(arg0: &VaultsManager, arg1: &mut 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::OracleRegistry, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State, arg3: &0x2::coin_registry::Currency<T0>, arg4: vector<u8>, arg5: u64, arg6: u64, arg7: &0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_oracle_manager_role(arg0, 0x2::tx_context::sender(arg7));
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::add_coin_info_use_currency<T0>(arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    public fun init_oracle_registry(arg0: &mut VaultsManager, arg1: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_oracle_manager_role(arg0, 0x2::tx_context::sender(arg1));
+        assert!(!0x2::dynamic_field::exists_<vector<u8>>(&arg0.id, b"oracle_registry"), 49);
+        0x2::dynamic_field::add<vector<u8>, 0x2::object::ID>(&mut arg0.id, b"oracle_registry", 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::init_oracle_registry(arg1));
+    }
+
+    public fun remove_coin_info<T0>(arg0: &VaultsManager, arg1: &mut 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::OracleRegistry, arg2: &0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_oracle_manager_role(arg0, 0x2::tx_context::sender(arg2));
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::remove_coin_info<T0>(arg1);
+    }
+
+    public fun update_coin_slippage<T0>(arg0: &VaultsManager, arg1: &mut 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::OracleRegistry, arg2: u64, arg3: &0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_oracle_manager_role(arg0, 0x2::tx_context::sender(arg3));
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::update_coin_slippage<T0>(arg1, arg2);
+    }
+
+    public fun update_price<T0>(arg0: &VaultsManager, arg1: &mut 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::OracleRegistry, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::update_price<T0>(arg1, arg2, arg3);
+    }
+
+    public fun update_price_age<T0>(arg0: &VaultsManager, arg1: &mut 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::OracleRegistry, arg2: u64, arg3: &0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_oracle_manager_role(arg0, 0x2::tx_context::sender(arg3));
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::update_price_age<T0>(arg1, arg2);
+    }
+
+    public fun add_oracle_pool<T0, T1>(arg0: &mut VaultsManager, arg1: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg2: u8, arg3: &0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg3));
+        let v0 = new_pool_key<T0, T1>();
+        assert!(!0x2::table::contains<0x2::object::ID, OracleInfo>(&arg0.price_oracles, v0), 22);
+        let v1 = OracleInfo{
+            clmm_pool : 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg1),
+            slippage  : arg2,
+        };
+        0x2::table::add<0x2::object::ID, OracleInfo>(&mut arg0.price_oracles, v0, v1);
+        let v2 = AddOraclePoolEvent{
+            coin_a      : 0x1::type_name::with_defining_ids<T0>(),
+            coin_b      : 0x1::type_name::with_defining_ids<T1>(),
+            oracle_pool : 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg1),
+            slippage    : arg2,
+        };
+        0x2::event::emit<AddOraclePoolEvent>(v2);
+    }
+
+    public fun borrow_wrapped_position<T0>(arg0: &Vault<T0>) : &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT {
+        0x1::vector::borrow<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg0.positions, 0)
+    }
+
+    fun calculate_updated_quota<T0, T1>(arg0: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg1: 0x1::type_name::TypeName, arg2: u128, arg3: 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32, arg4: 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32) : u128 {
+        let v0 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price<T0, T1>(arg0);
+        let (v1, v2) = 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::utils::get_amount_by_liquidity(arg3, arg4, 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_tick_index<T0, T1>(arg0), v0, arg2, true);
+        assert!(0x1::type_name::with_defining_ids<T0>() == arg1 || 0x1::type_name::with_defining_ids<T1>() == arg1, 19);
+        let v3 = 0x1::type_name::with_defining_ids<T0>() == arg1;
+        get_tvl_of_based_coin(v0, v1, v2, v3)
+    }
+
+    public fun check_emergency_pause_role(arg0: &VaultsManager, arg1: address) {
+        assert!(0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::has_role(&arg0.acl, arg1, 4), 32);
+    }
+
+    public fun check_emergency_restore_version(arg0: &VaultsManager) {
+        assert!(arg0.package_version == 18446744073709551000, 31);
+    }
+
+    fun check_is_fix_coin_a(arg0: 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32, arg1: 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32, arg2: 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::i32::I32, arg3: u128, arg4: u64, arg5: u64) : (bool, u64, u64) {
+        if (arg3 >= 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick_math::get_sqrt_price_at_tick(arg1)) {
+            let (_, v4, v5) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::clmm_math::get_liquidity_by_amount(arg0, arg1, arg2, arg3, arg5, false);
+            (false, v4, v5)
+        } else {
+            let (_, v7, v8) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::clmm_math::get_liquidity_by_amount(arg0, arg1, arg2, arg3, arg4, true);
+            if (v8 <= arg5) {
+                (true, v7, v8)
+            } else {
+                let (_, v10, v11) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::clmm_math::get_liquidity_by_amount(arg0, arg1, arg2, arg3, arg5, false);
+                (false, v10, v11)
+            }
+        }
+    }
+
+    public fun check_operation_role(arg0: &VaultsManager, arg1: address) {
+        assert!(0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::has_role(&arg0.acl, arg1, 1) || 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::has_role(&arg0.acl, arg1, 2), 12);
+    }
+
+    public fun check_oracle_manager_role(arg0: &VaultsManager, arg1: address) {
+        assert!(0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::has_role(&arg0.acl, arg1, 5), 13);
+    }
+
+    public fun check_pool_manager_role(arg0: &VaultsManager, arg1: address) {
+        assert!(0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::has_role(&arg0.acl, arg1, 3), 13);
+    }
+
+    public fun check_protocol_fee_claim_role(arg0: &VaultsManager, arg1: address) {
+        assert!(0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::has_role(&arg0.acl, arg1, 0), 11);
+    }
+
+    public fun check_rebalance_role(arg0: &VaultsManager, arg1: address) {
+        assert!(0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::has_role(&arg0.acl, arg1, 2), 12);
+    }
+
+    public fun check_reinvest_role(arg0: &VaultsManager, arg1: address) {
+        assert!(0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::has_role(&arg0.acl, arg1, 1), 12);
+    }
+
+    public fun checked_package_version(arg0: &VaultsManager) {
+        assert!(13 >= arg0.package_version, 3);
+    }
+
+    public fun claim_protocol_fee<T0, T1>(arg0: &VaultsManager, arg1: &mut Vault<T1>, arg2: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_protocol_fee_claim_role(arg0, 0x2::tx_context::sender(arg2));
+        let v0 = take_protocol_asset<T0, T1>(arg1);
+        0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(v0, arg2), 0x2::tx_context::sender(arg2));
+        let v1 = ClaimProtocolFeeEvent{
+            vault_id  : 0x2::object::id<Vault<T1>>(arg1),
+            amount    : 0x2::balance::value<T0>(&v0),
+            type_name : 0x1::type_name::with_defining_ids<T0>(),
+        };
+        0x2::event::emit<ClaimProtocolFeeEvent>(v1);
+    }
+
+    fun collect_clmm_fee<T0, T1, T2>(arg0: &mut Vault<T2>, arg1: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg3: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>) : (u64, u64) {
+        let (v0, v1) = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::collect_fee<T0, T1>(arg1, arg2, arg3, 0x1::vector::borrow<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg0.positions, 0), true);
+        let v2 = v1;
+        let v3 = v0;
+        merge_harvest_asset<T0, T2>(arg0, v3);
+        merge_harvest_asset<T1, T2>(arg0, v2);
+        (0x2::balance::value<T0>(&v3), 0x2::balance::value<T1>(&v2))
+    }
+
+    public fun collect_rewarder<T0, T1, T2, T3>(arg0: &VaultsManager, arg1: &mut Vault<T3>, arg2: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg5: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::rewarder::RewarderGlobalVault, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.pool == 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg4), 41);
+        collect_rewarder_internal<T0, T1, T2, T3>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    }
+
+    fun collect_rewarder_internal<T0, T1, T2, T3>(arg0: &VaultsManager, arg1: &mut Vault<T3>, arg2: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg5: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::rewarder::RewarderGlobalVault, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        check_operation_role(arg0, 0x2::tx_context::sender(arg7));
+        assert!(arg1.status == 1, 17);
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions) == 1, 2);
+        let v0 = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::collect_clmm_reward<T2, T0, T1>(arg2, arg3, arg4, 0x1::vector::borrow<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions, 0), arg5, 0x2::coin::zero<T2>(arg7), true, arg6, arg7);
+        merge_harvest_asset<T2, T3>(arg1, v0);
+        let v1 = RewarderClaimedEvent{
+            amount        : 0x2::balance::value<T2>(&v0),
+            rewarder_type : 0x1::type_name::with_defining_ids<T2>(),
+            vault_id      : 0x2::object::id<Vault<T3>>(arg1),
+        };
+        0x2::event::emit<RewarderClaimedEvent>(v1);
+    }
+
+    public fun create_vault<T0, T1, T2>(arg0: &mut VaultsManager, arg1: 0x2::coin::TreasuryCap<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: u32, arg8: u32, arg9: bool, arg10: u128, arg11: u64, arg12: &0x2::clock::Clock, arg13: &mut 0x2::tx_context::TxContext) {
+        abort 1
+    }
+
+    public fun create_vault_v2<T0, T1, T2>(arg0: &mut VaultsManager, arg1: 0x2::coin::TreasuryCap<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: 0x2::coin::Coin<T0>, arg8: 0x2::coin::Coin<T1>, arg9: u32, arg10: u32, arg11: bool, arg12: u128, arg13: u64, arg14: &0x2::clock::Clock, arg15: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg15));
+        assert!(0x2::coin::total_supply<T2>(&arg1) == 0, 14);
+        let v0 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::open_position<T0, T1>(arg5, arg6, arg9, arg10, arg15);
+        let v1 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::add_liquidity_fix_coin<T0, T1>(arg5, arg6, &mut v0, 0x2::coin::value<T0>(&arg7), true, arg14);
+        let (v2, v3) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::add_liquidity_pay_amount<T0, T1>(&v1);
+        assert!(v2 == 0x2::coin::value<T0>(&arg7), 9);
+        assert!(v3 <= 0x2::coin::value<T1>(&arg8), 9);
+        0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::repay_add_liquidity<T0, T1>(arg5, arg6, 0x2::coin::into_balance<T0>(arg7), 0x2::coin::into_balance<T1>(0x2::coin::split<T1>(&mut arg8, v3, arg15)), v1);
+        let v4 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::info_liquidity(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::borrow_position_info<T0, T1>(arg6, 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position>(&v0)));
+        0x2::transfer::public_transfer<0x2::coin::Coin<T1>>(arg8, 0x2::tx_context::sender(arg15));
+        assert!(v4 <= 18446744073709551615, 4);
+        0x2::transfer::public_transfer<0x2::coin::Coin<T2>>(0x2::coin::mint<T2>(&mut arg1, (v4 as u64), arg15), 0x2::tx_context::sender(arg15));
+        let v5 = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::deposit_v2<T0, T1>(arg3, arg2, arg4, arg6, v0, arg14, arg15);
+        let v6 = if (arg11) {
+            0x1::type_name::with_defining_ids<T0>()
+        } else {
+            0x1::type_name::with_defining_ids<T1>()
+        };
+        let v7 = 0x1::vector::empty<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>();
+        0x1::vector::push_back<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&mut v7, v5);
+        let v8 = Vault<T2>{
+            id                         : 0x2::object::new(arg15),
+            pool                       : 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg6),
+            liquidity                  : v4,
+            protocol_fee_rate          : 0,
+            is_pause                   : false,
+            positions                  : v7,
+            lp_token_treasury          : arg1,
+            harvest_assets             : 0x2::bag::new(arg15),
+            protocol_fees              : 0x2::bag::new(arg15),
+            max_quota                  : arg12,
+            status                     : 1,
+            quota_based_type           : v6,
+            finish_rebalance_threshold : arg13,
+            flash_loan_count           : 0,
+        };
+        0x2::table::add<0x2::object::ID, 0x2::object::ID>(&mut arg0.vault_to_pool_maps, 0x2::object::id<Vault<T2>>(&v8), 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg6));
+        let v9 = VaultStatus<T0, T1>{
+            id            : 0x2::derived_object::claim<vector<u8>>(&mut v8.id, b"exit_state"),
+            allow_deposit : true,
+            allow_remove  : true,
+            is_exit       : false,
+            buffer_a      : 0x2::balance::zero<T0>(),
+            buffer_b      : 0x2::balance::zero<T1>(),
+        };
+        0x2::dynamic_object_field::add<vector<u8>, VaultStatus<T0, T1>>(&mut v8.id, b"exit_state", v9);
+        let v10 = CreateEvent{
+            id                : 0x2::object::id<Vault<T2>>(&v8),
+            clmm_pool         : 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg6),
+            clmm_position     : 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position>(&v0),
+            wrapped_position  : 0x2::object::id<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&v5),
+            tick_lower        : arg9,
+            tick_upper        : arg10,
+            lp_token_treasury : 0x2::object::id<0x2::coin::TreasuryCap<T2>>(&arg1),
+        };
+        0x2::event::emit<CreateEvent>(v10);
+        0x2::transfer::share_object<Vault<T2>>(v8);
+    }
+
+    public fun deposit<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: 0x2::coin::Coin<T0>, arg8: 0x2::coin::Coin<T1>, arg9: u64, arg10: u64, arg11: bool, arg12: &0x2::clock::Clock, arg13: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T2> {
+        checked_package_version(arg0);
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.status == 1, 17);
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions) == 1, 2);
+        assert!(0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg6) == arg1.pool, 41);
+        let (_, _) = collect_clmm_fee<T0, T1, T2>(arg1, arg3, arg5, arg6);
+        if (0x2::dynamic_object_field::exists_with_type<vector<u8>, VaultStatus<T0, T1>>(&arg1.id, b"exit_state")) {
+            assert!(0x2::dynamic_object_field::borrow<vector<u8>, VaultStatus<T0, T1>>(&arg1.id, b"exit_state").allow_deposit, 39);
+        };
+        let v2 = total_token_amount<T2>(arg1);
+        let v3 = 0x1::vector::borrow_mut<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&mut arg1.positions, 0);
+        let v4 = 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position>(0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::borrow_clmm_position(v3));
+        let v5 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::info_liquidity(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::borrow_position_info<T0, T1>(arg6, v4));
+        let (v6, v7) = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::add_liquidity_fix_coin<T0, T1>(arg3, arg5, arg2, arg4, arg6, v3, arg7, arg8, arg9, arg10, arg11, arg12, arg13);
+        let v8 = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::borrow_clmm_position(v3);
+        let v9 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::info_liquidity(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::borrow_position_info<T0, T1>(arg6, v4)) - v5;
+        arg1.liquidity = arg1.liquidity + v9;
+        if (arg1.max_quota != 0) {
+            let (v10, v11) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::tick_range(v8);
+            assert!(calculate_updated_quota<T0, T1>(arg6, arg1.quota_based_type, arg1.liquidity, v10, v11) <= arg1.max_quota, 16);
+        };
+        let v12 = get_lp_amount_by_liquidity(v2, v9, v5);
+        assert!(v12 > 0, 5);
+        assert!(v12 < ((18446744073709551616 - 1) as u128) - (v2 as u128), 4);
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::utils::send_coin<T0>(0x2::coin::from_balance<T0>(v6, arg13), 0x2::tx_context::sender(arg13));
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::utils::send_coin<T1>(0x2::coin::from_balance<T1>(v7, arg13), 0x2::tx_context::sender(arg13));
+        let v13 = DepositEvent{
+            vault_id         : 0x2::object::id<Vault<T2>>(arg1),
+            before_liquidity : v5,
+            delta_liquidity  : v9,
+            before_supply    : v2,
+            lp_amount        : (v12 as u64),
+        };
+        0x2::event::emit<DepositEvent>(v13);
+        0x2::coin::mint<T2>(&mut arg1.lp_token_treasury, (v12 as u64), arg13)
+    }
+
+    public fun deposit_with_slippage<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: 0x2::coin::Coin<T0>, arg8: 0x2::coin::Coin<T1>, arg9: u64, arg10: u64, arg11: bool, arg12: u64, arg13: &0x2::clock::Clock, arg14: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T2> {
+        let v0 = deposit<T0, T1, T2>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg13, arg14);
+        assert!(0x2::coin::value<T2>(&v0) >= arg12, 48);
+        v0
+    }
+
+    public fun emergency_pause(arg0: &mut VaultsManager, arg1: &0x2::tx_context::TxContext) {
+        check_emergency_pause_role(arg0, 0x2::tx_context::sender(arg1));
+        arg0.package_version = 9223372036854775808;
+    }
+
+    public fun exit_vault<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg3: 0x2::coin::Coin<T2>, arg4: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, 0x2::coin::Coin<T1>) {
+        checked_package_version(arg0);
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.status == 1, 17);
+        assert!(0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg2) == arg1.pool, 41);
+        let v0 = total_token_amount<T2>(arg1);
+        assert!(0x2::dynamic_object_field::exists_with_type<vector<u8>, VaultStatus<T0, T1>>(&arg1.id, b"exit_state"), 37);
+        let v1 = 0x2::dynamic_object_field::borrow_mut<vector<u8>, VaultStatus<T0, T1>>(&mut arg1.id, b"exit_state");
+        assert!(v1.is_exit, 38);
+        let v2 = 0x2::coin::value<T2>(&arg3);
+        assert!(v2 > 0, 5);
+        let v3 = 0x2::balance::split<T0>(&mut v1.buffer_a, 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::full_math_u64::mul_div_floor(0x2::balance::value<T0>(&v1.buffer_a), v2, v0));
+        let v4 = 0x2::balance::split<T1>(&mut v1.buffer_b, 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::full_math_u64::mul_div_floor(0x2::balance::value<T1>(&v1.buffer_b), v2, v0));
+        let v5 = ExitVaultEvent{
+            vault_id        : 0x2::object::id<Vault<T2>>(arg1),
+            lp_amount       : v2,
+            total_lp_amount : v0,
+            amount_a        : 0x2::balance::value<T0>(&v3),
+            amount_b        : 0x2::balance::value<T1>(&v4),
+        };
+        0x2::event::emit<ExitVaultEvent>(v5);
+        0x2::coin::burn<T2>(&mut arg1.lp_token_treasury, arg3);
+        (0x2::coin::from_balance<T0>(v3, arg4), 0x2::coin::from_balance<T1>(v4, arg4))
+    }
+
+    public fun finalize_exit<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg3: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg3));
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.status == 1, 17);
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions) == 0, 42);
+        assert!(0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg2) == arg1.pool, 41);
+        assert!(0x2::dynamic_object_field::exists_with_type<vector<u8>, VaultStatus<T0, T1>>(&arg1.id, b"exit_state"), 37);
+        assert!(!0x2::dynamic_object_field::borrow<vector<u8>, VaultStatus<T0, T1>>(&arg1.id, b"exit_state").is_exit, 43);
+        let v0 = 0x2::balance::zero<T0>();
+        let v1 = 0x2::balance::zero<T1>();
+        if (0x2::bag::contains<0x1::string::String>(&arg1.harvest_assets, 0x1::string::from_ascii(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())))) {
+            let v2 = take_harvest_asset<T0, T2>(arg1);
+            0x2::balance::join<T0>(&mut v0, v2);
+        };
+        if (0x2::bag::contains<0x1::string::String>(&arg1.harvest_assets, 0x1::string::from_ascii(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T1>())))) {
+            let v3 = take_harvest_asset<T1, T2>(arg1);
+            0x2::balance::join<T1>(&mut v1, v3);
+        };
+        assert!(0x2::bag::length(&arg1.harvest_assets) == 0, 44);
+        let v4 = 0x2::dynamic_object_field::borrow_mut<vector<u8>, VaultStatus<T0, T1>>(&mut arg1.id, b"exit_state");
+        v4.is_exit = true;
+        assert!(!v4.allow_remove, 44);
+        assert!(!v4.allow_deposit, 44);
+        0x2::balance::join<T0>(&mut v4.buffer_a, v0);
+        0x2::balance::join<T1>(&mut v4.buffer_b, v1);
+        let v5 = FinalizeExitEvent{
+            vault_id : 0x2::object::id<Vault<T2>>(arg1),
+            amount_a : 0x2::balance::value<T0>(&v0),
+            amount_b : 0x2::balance::value<T1>(&v1),
+        };
+        0x2::event::emit<FinalizeExitEvent>(v5);
+    }
+
+    public fun flash_loan<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg3: u64, arg4: bool, arg5: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, 0x2::coin::Coin<T1>, FlashLoanReceipt) {
+        checked_package_version(arg0);
+        check_operation_role(arg0, 0x2::tx_context::sender(arg5));
+        assert!(!arg1.is_pause, 6);
+        assert!(arg3 > 0, 24);
+        assert!(arg1.flash_loan_count == 0, 27);
+        arg1.flash_loan_count = arg1.flash_loan_count + 1;
+        let v0 = new_pool_key<T0, T1>();
+        assert!(0x2::table::contains<0x2::object::ID, OracleInfo>(&arg0.price_oracles, v0), 23);
+        let v1 = 0x2::table::borrow<0x2::object::ID, OracleInfo>(&arg0.price_oracles, v0);
+        assert!(v1.clmm_pool == 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg2), 26);
+        let v2 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price<T0, T1>(arg2);
+        let v3 = (v2 as u256) * 100000000000000000000 / 18446744073709551616;
+        let (v4, v5, v6) = if (arg4) {
+            let v7 = take_harvest_asset_by_amount<T0, T2>(arg1, arg3);
+            (0x2::coin::from_balance<T0>(v7, arg5), 0x2::coin::zero<T1>(arg5), (((arg3 as u256) * v3 * v3 / 100000000000000000000 / 100000000000000000000) as u64))
+        } else {
+            let v8 = take_harvest_asset_by_amount<T1, T2>(arg1, arg3);
+            (0x2::coin::zero<T0>(arg5), 0x2::coin::from_balance<T1>(v8, arg5), (((arg3 as u256) * 100000000000000000000 / v3 * v3 / 100000000000000000000) as u64))
+        };
+        let v9 = v6 - v6 * (v1.slippage as u64) / 2000;
+        let (v10, v11) = if (arg4) {
+            (0x1::type_name::with_defining_ids<T0>(), 0x1::type_name::with_defining_ids<T1>())
+        } else {
+            (0x1::type_name::with_defining_ids<T1>(), 0x1::type_name::with_defining_ids<T0>())
+        };
+        let v12 = FlashLoanReceipt{
+            vault_id     : 0x2::object::id<Vault<T2>>(arg1),
+            repay_type   : v11,
+            repay_amount : v9,
+        };
+        let v13 = FlashLoanEvent{
+            vault_id           : 0x2::object::id<Vault<T2>>(arg1),
+            loan_type          : v10,
+            repay_type         : v11,
+            amount             : arg3,
+            repay_amount       : v9,
+            oracle_pool        : 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg2),
+            current_sqrt_price : v2,
+        };
+        0x2::event::emit<FlashLoanEvent>(v13);
+        (v4, v5, v12)
+    }
+
+    public fun flash_loan_all<T0, T1, T2>(arg0: &VaultsManager, arg1: &0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::OracleRegistry, arg2: &mut Vault<T2>, arg3: &0x2::clock::Clock, arg4: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, FlashLoanReceipt) {
+        let v0 = harvest_assets_amount<T0, T2>(arg2);
+        flash_loan_v2<T0, T1, T2>(arg0, arg1, arg2, v0, arg3, arg4)
+    }
+
+    public fun flash_loan_v2<T0, T1, T2>(arg0: &VaultsManager, arg1: &0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::OracleRegistry, arg2: &mut Vault<T2>, arg3: u64, arg4: &0x2::clock::Clock, arg5: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, FlashLoanReceipt) {
+        checked_package_version(arg0);
+        check_operation_role(arg0, 0x2::tx_context::sender(arg5));
+        assert!(!arg2.is_pause, 6);
+        assert!(arg3 > 0, 24);
+        let v0 = 0x1::type_name::with_defining_ids<T0>();
+        let v1 = 0x1::type_name::with_defining_ids<T1>();
+        assert!(v0 != v1, 36);
+        assert!(arg2.flash_loan_count == 0, 27);
+        arg2.flash_loan_count = arg2.flash_loan_count + 1;
+        let v2 = 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::get_price<T0>(arg1, arg4);
+        let v3 = 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::get_price<T1>(arg1, arg4);
+        let (v4, _) = 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::calculate_prices(&v2, &v3);
+        assert!(harvest_assets_amount<T0, T2>(arg2) >= arg3, 29);
+        let v6 = take_harvest_asset_by_amount<T0, T2>(arg2, arg3);
+        let v7 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::full_math_u128::mul_div_ceil(v4, (arg3 as u128), 0x1::u128::pow(10, 20));
+        assert!(v7 < 18446744073709551615, 34);
+        let v8 = 0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::full_math_u64::mul_div_ceil((v7 as u64), 10000 - (0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::slippage(0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::coin_info<T0>(arg1)) + 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::slippage(0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::oracle_registry::coin_info<T1>(arg1))) / 2, 10000);
+        let v9 = FlashLoanReceipt{
+            vault_id     : 0x2::object::id<Vault<T2>>(arg2),
+            repay_type   : v1,
+            repay_amount : v8,
+        };
+        let v10 = FlashLoanV2Event{
+            vault_id            : 0x2::object::id<Vault<T2>>(arg2),
+            loan_type           : v0,
+            repay_type          : v1,
+            amount              : arg3,
+            repay_amount        : v8,
+            base_to_quote_price : v4,
+        };
+        0x2::event::emit<FlashLoanV2Event>(v10);
+        (0x2::coin::from_balance<T0>(v6, arg5), v9)
+    }
+
+    fun get_lp_amount_by_liquidity(arg0: u64, arg1: u128, arg2: u128) : u128 {
+        if (arg0 == 0) {
+            return arg1
+        };
+        0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::full_math_u128::mul_div_floor((arg0 as u128), arg1, arg2)
+    }
+
+    public fun get_position_amounts<T0, T1, T2>(arg0: &Vault<T2>, arg1: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg2: u64) : (u64, u64) {
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg0.positions) == 1, 2);
+        let v0 = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::borrow_clmm_position(0x1::vector::borrow<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg0.positions, 0));
+        let (v1, v2) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::tick_range(v0);
+        0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::utils::get_amount_by_liquidity(v1, v2, 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_tick_index<T0, T1>(arg1), 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price<T0, T1>(arg1), get_share_liquidity_by_amount(arg2, 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::info_liquidity(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::borrow_position_info<T0, T1>(arg1, 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position>(v0))), total_token_amount<T2>(arg0)), false)
+    }
+
+    fun get_share_liquidity_by_amount(arg0: u64, arg1: u128, arg2: u64) : u128 {
+        0x714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57::full_math_u128::mul_div_floor((arg0 as u128), arg1, (arg2 as u128))
+    }
+
+    fun get_tvl_of_based_coin(arg0: u128, arg1: u64, arg2: u64, arg3: bool) : u128 {
+        let v0 = (arg0 as u256) * 100000000000000000000 / 18446744073709551616;
+        if (arg3) {
+            (arg1 as u128) + (((arg2 as u256) * 100000000000000000000 / v0 * v0 / 100000000000000000000) as u128)
+        } else {
+            (arg2 as u128) + (((arg1 as u256) * v0 * v0 / 100000000000000000000 / 100000000000000000000) as u128)
+        }
+    }
+
+    public fun goverance_collect_rewarder<T0, T1, T2, T3>(arg0: &VaultsManager, arg1: &mut Vault<T3>, arg2: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg5: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::rewarder::RewarderGlobalVault, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        check_emergency_restore_version(arg0);
+        assert!(arg1.is_pause, 33);
+        assert!(arg1.pool == 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg4), 41);
+        collect_rewarder_internal<T0, T1, T2, T3>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    }
+
+    public fun goverance_harvest<T0, T1>(arg0: &VaultsManager, arg1: &mut Vault<T1>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x2::clock::Clock, arg6: &0x2::tx_context::TxContext) {
+        check_emergency_restore_version(arg0);
+        assert!(arg1.is_pause, 33);
+        assert!(arg1.pool == 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::clmm_pool_id(arg4), 41);
+        harvest_internal<T0, T1>(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    public fun governance_migrate_position<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) : 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position {
+        abort 0
+    }
+
+    fun harvest_assets_amount<T0, T1>(arg0: &Vault<T1>) : u64 {
+        let v0 = 0x1::string::from_ascii(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>()));
+        if (!0x2::bag::contains<0x1::string::String>(&arg0.harvest_assets, v0)) {
+            return 0
+        };
+        0x2::balance::value<T0>(0x2::bag::borrow<0x1::string::String, 0x2::balance::Balance<T0>>(&arg0.harvest_assets, v0))
+    }
+
+    fun harvest_internal<T0, T1>(arg0: &VaultsManager, arg1: &mut Vault<T1>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x2::clock::Clock, arg6: &0x2::tx_context::TxContext) {
+        check_operation_role(arg0, 0x2::tx_context::sender(arg6));
+        assert!(arg1.status == 1, 17);
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions) == 1, 2);
+        let v0 = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::harvest<T0>(arg3, arg2, arg4, 0x1::vector::borrow<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions, 0), arg5);
+        merge_harvest_asset<T0, T1>(arg1, v0);
+        let v1 = HarvestEvent{
+            amount        : 0x2::balance::value<T0>(&v0),
+            rewarder_type : 0x1::type_name::with_defining_ids<T0>(),
+            vault_id      : 0x2::object::id<Vault<T1>>(arg1),
+        };
+        0x2::event::emit<HarvestEvent>(v1);
+    }
+
+    fun init(arg0: &mut 0x2::tx_context::TxContext) {
+        let v0 = AdminCap{id: 0x2::object::new(arg0)};
+        let v1 = VaultsManager{
+            id                 : 0x2::object::new(arg0),
+            index              : 0,
+            package_version    : 13,
+            vault_to_pool_maps : 0x2::table::new<0x2::object::ID, 0x2::object::ID>(arg0),
+            price_oracles      : 0x2::table::new<0x2::object::ID, OracleInfo>(arg0),
+            acl                : 0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::acl::new(arg0),
+        };
+        let v2 = InitEvent{
+            admin_cap_id : 0x2::object::id<AdminCap>(&v0),
+            manager_id   : 0x2::object::id<VaultsManager>(&v1),
+        };
+        0x2::event::emit<InitEvent>(v2);
+        let v3 = &mut v1;
+        set_roles(&v0, v3, 0x2::tx_context::sender(arg0), 0 | 1 << 3 | 1 << 1);
+        0x2::transfer::transfer<AdminCap>(v0, 0x2::tx_context::sender(arg0));
+        0x2::transfer::share_object<VaultsManager>(v1);
+    }
+
+    public fun init_vault_status<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>) {
+        checked_package_version(arg0);
+        assert!(0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg2) == arg1.pool, 41);
+        assert!(!0x2::dynamic_object_field::exists_with_type<vector<u8>, VaultStatus<T0, T1>>(&arg1.id, b"exit_state"), 45);
+        let v0 = VaultStatus<T0, T1>{
+            id            : 0x2::derived_object::claim<vector<u8>>(&mut arg1.id, b"exit_state"),
+            allow_deposit : true,
+            allow_remove  : true,
+            is_exit       : false,
+            buffer_a      : 0x2::balance::zero<T0>(),
+            buffer_b      : 0x2::balance::zero<T1>(),
+        };
+        0x2::dynamic_object_field::add<vector<u8>, VaultStatus<T0, T1>>(&mut arg1.id, b"exit_state", v0);
+    }
+
+    fun merge_harvest_asset<T0, T1>(arg0: &mut Vault<T1>, arg1: 0x2::balance::Balance<T0>) {
+        if (0x2::balance::value<T0>(&arg1) == 0) {
+            0x2::balance::destroy_zero<T0>(arg1);
+            return
+        };
+        let v0 = 0x1::string::from_ascii(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>()));
+        if (0x2::bag::contains<0x1::string::String>(&arg0.harvest_assets, v0)) {
+            0x2::balance::join<T0>(0x2::bag::borrow_mut<0x1::string::String, 0x2::balance::Balance<T0>>(&mut arg0.harvest_assets, v0), arg1);
+        } else {
+            0x2::bag::add<0x1::string::String, 0x2::balance::Balance<T0>>(&mut arg0.harvest_assets, v0, arg1);
+        };
+    }
+
+    fun merge_protocol_asset<T0, T1>(arg0: &mut Vault<T1>, arg1: 0x2::balance::Balance<T0>) {
+        if (0x2::balance::value<T0>(&arg1) == 0) {
+            0x2::balance::destroy_zero<T0>(arg1);
+            return
+        };
+        let v0 = 0x1::string::from_ascii(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>()));
+        if (0x2::bag::contains<0x1::string::String>(&arg0.protocol_fees, v0)) {
+            0x2::balance::join<T0>(0x2::bag::borrow_mut<0x1::string::String, 0x2::balance::Balance<T0>>(&mut arg0.protocol_fees, v0), arg1);
+        } else {
+            0x2::bag::add<0x1::string::String, 0x2::balance::Balance<T0>>(&mut arg0.protocol_fees, v0, arg1);
+        };
+    }
+
+    public fun migrate_liquidity<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: u64, arg8: u64, arg9: u32, arg10: u32, arg11: &0x2::clock::Clock, arg12: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_rebalance_role(arg0, 0x2::tx_context::sender(arg12));
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.status == 1, 17);
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions) == 1, 2);
+        assert!(0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg6) == arg1.pool, 41);
+        arg1.status = 2;
+        let v0 = 0x1::vector::pop_back<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&mut arg1.positions);
+        let v1 = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::borrow_clmm_position(&v0);
+        let (v2, v3) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::tick_range(v1);
+        let (v4, v5) = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::close_position_v2<T0, T1>(arg3, arg2, arg4, arg5, arg6, v0, arg7, arg8, arg11, arg12);
+        let v6 = v5;
+        let v7 = v4;
+        let v8 = 0x2::balance::value<T0>(&v7);
+        let v9 = 0x2::balance::value<T1>(&v6);
+        let v10 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::open_position<T0, T1>(arg5, arg6, arg9, arg10, arg12);
+        let v11 = 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position>(&v10);
+        let (v12, v13) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::tick_range(&v10);
+        let v14 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price<T0, T1>(arg6);
+        let (v15, v16, v17) = check_is_fix_coin_a(v12, v13, 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_tick_index<T0, T1>(arg6), v14, v8, v9);
+        let (v18, v19) = if (v15) {
+            (v8, v17 + v17 * (0x2::table::borrow<0x2::object::ID, OracleInfo>(&arg0.price_oracles, new_pool_key<T0, T1>()).slippage as u64) / 2000)
+        } else {
+            (v16 + v16 * (0x2::table::borrow<0x2::object::ID, OracleInfo>(&arg0.price_oracles, new_pool_key<T0, T1>()).slippage as u64) / 2000, v9)
+        };
+        let v20 = if (v15) {
+            v8
+        } else {
+            v9
+        };
+        let v21 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::add_liquidity_fix_coin<T0, T1>(arg5, arg6, &mut v10, v20, v15, arg11);
+        let (v22, v23) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::add_liquidity_pay_amount<T0, T1>(&v21);
+        0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::repay_add_liquidity<T0, T1>(arg5, arg6, 0x2::balance::split<T0>(&mut v7, v22), 0x2::balance::split<T1>(&mut v6, v23), v21);
+        let v24 = if (v15) {
+            assert!(0x2::balance::value<T0>(&v7) == 0, 8);
+            assert!(v23 <= v19, 47);
+            0x2::balance::value<T1>(&v6)
+        } else {
+            assert!(0x2::balance::value<T1>(&v6) == 0, 8);
+            assert!(v22 <= v18, 47);
+            0x2::balance::value<T0>(&v7)
+        };
+        let v25 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::info_liquidity(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::borrow_position_info<T0, T1>(arg6, v11));
+        arg1.liquidity = v25;
+        let v26 = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::deposit_v2<T0, T1>(arg3, arg2, arg4, arg6, v10, arg11, arg12);
+        let v27 = MigrateLiquidityEvent{
+            vault_id             : 0x2::object::id<Vault<T2>>(arg1),
+            old_position         : 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position>(v1),
+            new_position         : v11,
+            old_wrapped_position : 0x2::object::id<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&v0),
+            new_wrapped_position : 0x2::object::id<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&v26),
+            remaining_amount     : v24,
+            old_tick_lower       : v2,
+            old_tick_upper       : v3,
+            old_liquidity        : 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::info_liquidity(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::borrow_position_info<T0, T1>(arg6, 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position>(v1))),
+            new_liquidity        : v25,
+            current_sqrt_price   : v14,
+            tick_lower           : v12,
+            tick_upper           : v13,
+        };
+        0x2::event::emit<MigrateLiquidityEvent>(v27);
+        merge_harvest_asset<T0, T2>(arg1, v7);
+        merge_harvest_asset<T1, T2>(arg1, v6);
+        0x1::vector::push_back<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&mut arg1.positions, v26);
+    }
+
+    public fun new_pool_key<T0, T1>() : 0x2::object::ID {
+        let v0 = 0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>());
+        let v1 = *0x1::ascii::as_bytes(&v0);
+        let v2 = 0x1::type_name::into_string(0x1::type_name::with_defining_ids<T1>());
+        let v3 = *0x1::ascii::as_bytes(&v2);
+        let v4 = 0x1::vector::length<u8>(&v1);
+        let v5 = 0x1::vector::length<u8>(&v3);
+        let v6 = 0;
+        let v7 = false;
+        while (v6 < v5) {
+            let v8 = *0x1::vector::borrow<u8>(&v3, v6);
+            if (!v7 && v6 < v4) {
+                let v9 = *0x1::vector::borrow<u8>(&v1, v6);
+                if (v9 < v8) {
+                    abort 21
+                };
+                if (v9 > v8) {
+                    v7 = true;
+                };
+            };
+            0x1::vector::push_back<u8>(&mut v1, v8);
+            v6 = v6 + 1;
+        };
+        if (!v7) {
+            if (v4 < v5) {
+                abort 21
+            };
+            if (v4 == v5) {
+                abort 20
+            };
+        };
+        0x2::object::id_from_bytes(0x2::hash::blake2b256(&v1))
+    }
+
+    public fun package_version() : u64 {
+        13
+    }
+
+    public fun pause<T0>(arg0: &VaultsManager, arg1: &mut Vault<T0>, arg2: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg2));
+        arg1.is_pause = true;
+        let v0 = PauseEvent{vault_id: 0x2::object::id<Vault<T0>>(arg1)};
+        0x2::event::emit<PauseEvent>(v0);
+    }
+
+    public fun pool_id<T0>(arg0: &Vault<T0>) : 0x2::object::ID {
+        arg0.pool
+    }
+
+    public fun rebalance<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: bool, arg8: &0x2::clock::Clock, arg9: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_rebalance_role(arg0, 0x2::tx_context::sender(arg9));
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.status == 2, 18);
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions) == 1, 2);
+        assert!(arg1.flash_loan_count == 0, 27);
+        assert!(arg1.pool == 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg6), 41);
+        let (v0, v1, v2, v3, v4) = reinvest_harvest_assets<T0, T1, T2>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg8, arg9);
+        let v5 = RebalanceEvent{
+            vault_id           : 0x2::object::id<Vault<T2>>(arg1),
+            amount_a           : v0,
+            amount_b           : v1,
+            remaining_amount_a : v2,
+            remaining_amount_b : v3,
+            delta_liquidity    : v4,
+            current_sqrt_price : 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price<T0, T1>(arg6),
+        };
+        0x2::event::emit<RebalanceEvent>(v5);
+        if (arg7) {
+            let v6 = 0x1::type_name::with_defining_ids<T0>() == arg1.quota_based_type;
+            assert!((get_tvl_of_based_coin(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price<T0, T1>(arg6), harvest_assets_amount<T0, T2>(arg1), harvest_assets_amount<T1, T2>(arg1), v6) as u64) <= arg1.finish_rebalance_threshold, 28);
+            arg1.status = 1;
+        };
+    }
+
+    public fun reinvest<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_reinvest_role(arg0, 0x2::tx_context::sender(arg8));
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.status == 1, 17);
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions) == 1, 2);
+        assert!(arg1.pool == 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg6), 41);
+        let (v0, v1, v2, v3, v4) = reinvest_harvest_assets<T0, T1, T2>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+        let v5 = ReinvestV2Event{
+            vault_id           : 0x2::object::id<Vault<T2>>(arg1),
+            amount_a           : v0,
+            amount_b           : v1,
+            remaining_amount_a : v2,
+            remaining_amount_b : v3,
+            delta_liquidity    : v4,
+            current_sqrt_price : 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price<T0, T1>(arg6),
+            lp_supply          : total_token_amount<T2>(arg1),
+        };
+        0x2::event::emit<ReinvestV2Event>(v5);
+    }
+
+    fun reinvest_harvest_assets<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) : (u64, u64, u64, u64, u128) {
+        let v0 = take_harvest_asset<T0, T2>(arg1);
+        let v1 = 0x2::coin::from_balance<T0>(v0, arg8);
+        let v2 = take_harvest_asset<T1, T2>(arg1);
+        let v3 = 0x2::coin::from_balance<T1>(v2, arg8);
+        let v4 = 0x1::vector::borrow_mut<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&mut arg1.positions, 0);
+        let v5 = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::borrow_clmm_position(v4);
+        let (v6, v7) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::tick_range(v5);
+        let v8 = 0x2::coin::value<T0>(&v1);
+        let v9 = 0x2::coin::value<T1>(&v3);
+        let v10 = 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position>(v5);
+        let v11 = new_pool_key<T0, T1>();
+        assert!(0x2::table::contains<0x2::object::ID, OracleInfo>(&arg0.price_oracles, v11), 23);
+        let (v12, v13, v14) = check_is_fix_coin_a(v6, v7, 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_tick_index<T0, T1>(arg6), 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price<T0, T1>(arg6), v8, v9);
+        let (v15, v16) = if (v12) {
+            (v8, v14 + v14 * (0x2::table::borrow<0x2::object::ID, OracleInfo>(&arg0.price_oracles, v11).slippage as u64) / 2000)
+        } else {
+            (v13 + v13 * (0x2::table::borrow<0x2::object::ID, OracleInfo>(&arg0.price_oracles, v11).slippage as u64) / 2000, v9)
+        };
+        let (v17, v18) = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::add_liquidity_fix_coin<T0, T1>(arg3, arg5, arg2, arg4, arg6, v4, v1, v3, v15, v16, v12, arg7, arg8);
+        let v19 = v18;
+        let v20 = v17;
+        let v21 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::info_liquidity(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::borrow_position_info<T0, T1>(arg6, v10)) - 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::info_liquidity(0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::borrow_position_info<T0, T1>(arg6, v10));
+        assert!(v21 > 0, 30);
+        arg1.liquidity = arg1.liquidity + v21;
+        merge_harvest_asset<T0, T2>(arg1, v20);
+        merge_harvest_asset<T1, T2>(arg1, v19);
+        (v8, v9, 0x2::balance::value<T0>(&v20), 0x2::balance::value<T1>(&v19), v21)
+    }
+
+    public fun remove_all_liquidity<T0, T1, T2>(arg0: &VaultsManager, arg1: &mut Vault<T2>, arg2: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::rewarder::RewarderManager, arg3: &0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::config::GlobalConfig, arg4: &mut 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::Pool, arg5: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg7: u64, arg8: u64, arg9: &0x2::clock::Clock, arg10: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg10));
+        assert!(!arg1.is_pause, 6);
+        assert!(arg1.status == 1, 17);
+        assert!(0x1::vector::length<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&arg1.positions) == 1, 2);
+        assert!(0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>>(arg6) == arg1.pool, 41);
+        assert!(0x2::dynamic_object_field::exists_with_type<vector<u8>, VaultStatus<T0, T1>>(&arg1.id, b"exit_state"), 37);
+        let v0 = 0x2::dynamic_object_field::borrow_mut<vector<u8>, VaultStatus<T0, T1>>(&mut arg1.id, b"exit_state");
+        v0.allow_deposit = false;
+        v0.allow_remove = false;
+        v0.is_exit = false;
+        let (v1, v2) = 0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::close_position_v2<T0, T1>(arg3, arg2, arg4, arg5, arg6, 0x1::vector::pop_back<0x11ea791d82b5742cc8cab0bf7946035c97d9001d7c3803a93f119753da66f526::pool::WrappedPositionNFT>(&mut arg1.positions), arg7, arg8, arg9, arg10);
+        merge_harvest_asset<T0, T2>(arg1, v1);
+        merge_harvest_asset<T1, T2>(arg1, v2);
+    }
+
+    fun remove_liquidity_from_clmm<T0, T1>(arg0: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::position::Position, arg3: u128, arg4: u64, arg5: u64, arg6: &0x2::clock::Clock) : (0x2::balance::Balance<T0>, 0x2::balance::Balance<T1>) {
+        let (v0, v1) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::remove_liquidity<T0, T1>(arg0, arg1, arg2, arg3, arg6);
+        let v2 = v1;
+        let v3 = v0;
+        assert!(0x2::balance::value<T0>(&v3) >= arg4, 1);
+        assert!(0x2::balance::value<T1>(&v2) >= arg5, 1);
+        let (v4, v5) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::collect_fee<T0, T1>(arg0, arg1, arg2, false);
+        0x2::balance::join<T0>(&mut v3, v4);
+        0x2::balance::join<T1>(&mut v2, v5);
+        (v3, v2)
+    }
+
+    public fun remove_oracle_pool<T0, T1>(arg0: &mut VaultsManager, arg1: &0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg1));
+        let v0 = new_pool_key<T0, T1>();
+        assert!(0x2::table::contains<0x2::object::ID, OracleInfo>(&arg0.price_oracles, v0), 23);
+        0x2::table::remove<0x2::object::ID, OracleInfo>(&mut arg0.price_oracles, v0);
+        let v1 = RemoveOraclePoolEvent{
+            coin_a : 0x1::type_name::with_defining_ids<T0>(),
+            coin_b : 0x1::type_name::with_defining_ids<T1>(),
+        };
+        0x2::event::emit<RemoveOraclePoolEvent>(v1);
+    }
+
+    public fun repay_flash_loan<T0, T1>(arg0: &VaultsManager, arg1: &mut Vault<T1>, arg2: FlashLoanReceipt, arg3: 0x2::coin::Coin<T0>, arg4: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_operation_role(arg0, 0x2::tx_context::sender(arg4));
+        assert!(!arg1.is_pause, 6);
+        arg1.flash_loan_count = arg1.flash_loan_count - 1;
+        let FlashLoanReceipt {
+            vault_id     : v0,
+            repay_type   : v1,
+            repay_amount : v2,
+        } = arg2;
+        assert!(0x1::type_name::with_defining_ids<T0>() == v1, 25);
+        assert!(0x2::object::id<Vault<T1>>(arg1) == v0, 25);
+        assert!(0x2::coin::value<T0>(&arg3) >= v2, 46);
+        merge_harvest_asset<T0, T1>(arg1, 0x2::coin::into_balance<T0>(arg3));
+        let v3 = RepayFlashLoanEvent{
+            vault_id     : v0,
+            repay_type   : v1,
+            repay_amount : 0x2::coin::value<T0>(&arg3),
+        };
+        0x2::event::emit<RepayFlashLoanEvent>(v3);
+    }
+
+    fun take_harvest_asset<T0, T1>(arg0: &mut Vault<T1>) : 0x2::balance::Balance<T0> {
+        let v0 = 0x1::string::from_ascii(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>()));
+        if (!0x2::bag::contains<0x1::string::String>(&arg0.harvest_assets, v0)) {
+            return 0x2::balance::zero<T0>()
+        };
+        0x2::bag::remove<0x1::string::String, 0x2::balance::Balance<T0>>(&mut arg0.harvest_assets, v0)
+    }
+
+    fun take_harvest_asset_by_amount<T0, T1>(arg0: &mut Vault<T1>, arg1: u64) : 0x2::balance::Balance<T0> {
+        let v0 = 0x1::string::from_ascii(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>()));
+        assert!(0x2::bag::contains<0x1::string::String>(&arg0.harvest_assets, v0), 7);
+        let v1 = 0x2::bag::borrow_mut<0x1::string::String, 0x2::balance::Balance<T0>>(&mut arg0.harvest_assets, v0);
+        assert!(0x2::balance::value<T0>(v1) >= arg1, 29);
+        if (0x2::balance::value<T0>(v1) == 0) {
+            0x2::balance::destroy_zero<T0>(0x2::bag::remove<0x1::string::String, 0x2::balance::Balance<T0>>(&mut arg0.harvest_assets, v0));
+        };
+        0x2::balance::split<T0>(v1, arg1)
+    }
+
+    fun take_protocol_asset<T0, T1>(arg0: &mut Vault<T1>) : 0x2::balance::Balance<T0> {
+        let v0 = 0x1::string::from_ascii(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>()));
+        if (!0x2::bag::contains<0x1::string::String>(&arg0.protocol_fees, v0)) {
+            return 0x2::balance::zero<T0>()
+        };
+        0x2::bag::remove<0x1::string::String, 0x2::balance::Balance<T0>>(&mut arg0.protocol_fees, v0)
+    }
+
+    public fun total_token_amount<T0>(arg0: &Vault<T0>) : u64 {
+        0x2::coin::total_supply<T0>(&arg0.lp_token_treasury)
+    }
+
+    public fun unpause<T0>(arg0: &VaultsManager, arg1: &mut Vault<T0>, arg2: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg2));
+        arg1.is_pause = false;
+        let v0 = UnpauseEvent{vault_id: 0x2::object::id<Vault<T0>>(arg1)};
+        0x2::event::emit<UnpauseEvent>(v0);
+    }
+
+    public fun update_max_quota<T0>(arg0: &VaultsManager, arg1: &mut Vault<T0>, arg2: u128, arg3: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg3));
+        assert!(!arg1.is_pause, 6);
+        arg1.max_quota = arg2;
+        let v0 = UpdateMaxQuotaEvent{
+            vault_id  : 0x2::object::id<Vault<T0>>(arg1),
+            old_quota : arg1.max_quota,
+            new_quota : arg2,
+        };
+        0x2::event::emit<UpdateMaxQuotaEvent>(v0);
+    }
+
+    public entry fun update_package_version(arg0: &AdminCap, arg1: &mut VaultsManager, arg2: u64) {
+        checked_package_version(arg1);
+        arg1.package_version = 13;
+        let v0 = SetPackageVersionEvent{
+            new_version : arg2,
+            old_version : arg1.package_version,
+        };
+        0x2::event::emit<SetPackageVersionEvent>(v0);
+    }
+
+    public fun update_protocol_fee_rate<T0>(arg0: &VaultsManager, arg1: &mut Vault<T0>, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg3));
+        assert!(arg2 <= 2000, 10);
+        assert!(!arg1.is_pause, 6);
+        arg1.protocol_fee_rate = arg2;
+        let v0 = UpdateFeeRateEvent{
+            vault_id     : 0x2::object::id<Vault<T0>>(arg1),
+            old_fee_rate : arg1.protocol_fee_rate,
+            new_fee_rate : arg2,
+        };
+        0x2::event::emit<UpdateFeeRateEvent>(v0);
+    }
+
+    public fun update_rebalance_threshold<T0>(arg0: &VaultsManager, arg1: &mut Vault<T0>, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg3));
+        assert!(!arg1.is_pause, 6);
+        arg1.finish_rebalance_threshold = arg2;
+        let v0 = UpdateRebalanceThresoldEvent{
+            vault_id     : 0x2::object::id<Vault<T0>>(arg1),
+            old_thresold : arg1.finish_rebalance_threshold,
+            new_thresold : arg2,
+        };
+        0x2::event::emit<UpdateRebalanceThresoldEvent>(v0);
+    }
+
+    public fun update_rebalance_thresold<T0>(arg0: &VaultsManager, arg1: &mut Vault<T0>, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        abort 1
+    }
+
+    public fun update_slippage<T0, T1>(arg0: &mut VaultsManager, arg1: u8, arg2: &0x2::tx_context::TxContext) {
+        checked_package_version(arg0);
+        check_pool_manager_role(arg0, 0x2::tx_context::sender(arg2));
+        let v0 = new_pool_key<T0, T1>();
+        assert!(0x2::table::contains<0x2::object::ID, OracleInfo>(&arg0.price_oracles, v0), 23);
+        let v1 = 0x2::table::borrow_mut<0x2::object::ID, OracleInfo>(&mut arg0.price_oracles, v0);
+        v1.slippage = arg1;
+        let v2 = UpdateSlippageEvent{
+            old_slippage : v1.slippage,
+            new_slippage : arg1,
+        };
+        0x2::event::emit<UpdateSlippageEvent>(v2);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
