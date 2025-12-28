@@ -1,0 +1,181 @@
+{
+  "package_id": "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ]
+      }
+    },
+    {
+      "module_name": "constants",
+      "call_graph": {
+        "get_fee_dominator": [],
+        "get_k_scale": [],
+        "get_price_precision": []
+      }
+    },
+    {
+      "module_name": "formula",
+      "call_graph": {
+        "compute_base_out": [
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::constants::get_k_scale",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::constants::get_price_precision",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::formula::isqrt"
+        ],
+        "compute_quote_out": [
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::constants::get_k_scale",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::constants::get_price_precision"
+        ],
+        "compute_withdraw_penalty": [],
+        "isqrt": []
+      }
+    },
+    {
+      "module_name": "math",
+      "call_graph": {
+        "add": [],
+        "add_u64": [
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::math::to_fixed_decimal"
+        ],
+        "div_u64": [],
+        "mul_u64": [],
+        "sub": [],
+        "to_fixed_decimal": [],
+        "to_raw_value": []
+      }
+    },
+    {
+      "module_name": "oracle",
+      "call_graph": {
+        "get_price": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_to_bytes",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_is_negative",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_positive",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_price",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::get_bytes",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_identifier",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_info_from_price_info_object",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::pyth::get_price_no_older_than"
+        ]
+      }
+    },
+    {
+      "module_name": "pool",
+      "call_graph": {
+        "contribute_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "create_pool": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::constants::get_fee_dominator",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::constants::get_k_scale",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::oracle::get_price"
+        ],
+        "deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::update_prices_and_target"
+        ],
+        "flash_buy_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::formula::compute_base_out",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::get_mid_price",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::update_prices_and_target"
+        ],
+        "flash_sell_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::formula::compute_quote_out",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::get_mid_price",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::update_prices_and_target"
+        ],
+        "get_fee_rate": [],
+        "get_mid_price": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::u64::pow",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::constants::get_price_precision"
+        ],
+        "get_user_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "repay_reserve": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join"
+        ],
+        "set_fee_rate": [
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::constants::get_fee_dominator"
+        ],
+        "set_k": [
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::constants::get_k_scale"
+        ],
+        "update_prices_and_target": [
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::oracle::get_price"
+        ],
+        "withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::formula::compute_withdraw_penalty",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::update_prices_and_target"
+        ]
+      }
+    },
+    {
+      "module_name": "swap",
+      "call_graph": {
+        "compute_fee_amount": [
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::constants::get_fee_dominator"
+        ],
+        "flash_buy_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::flash_buy_base",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::get_fee_rate",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::swap::compute_fee_amount"
+        ],
+        "flash_sell_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::flash_sell_base",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::get_fee_rate",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::swap::compute_fee_amount"
+        ],
+        "repay_flash_buy_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::contribute_fee",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::repay_reserve"
+        ],
+        "repay_flash_sell_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::contribute_fee",
+          "0xdb1d6ee14a7fc1864361b87e194e893f5271b9f180ddf645b51b35301d0a854a::pool::repay_reserve"
+        ]
+      }
+    }
+  ]
+}
