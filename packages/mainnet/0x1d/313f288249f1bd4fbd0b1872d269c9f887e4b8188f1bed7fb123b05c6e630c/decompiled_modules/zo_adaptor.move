@@ -1,0 +1,12 @@
+module 0x491b8fd79bf92ca4a4c2f5836dcf2c1b2140bc070a1e988c4e7316e3444569cd::zo_adaptor {
+    public fun get_zo_position_value<T0, T1>(arg0: &0x87c13bb9157c3d51d61c7802704539d9d4782e838aadc41df0d6f0cc117298ba::pool::Pool<T0, T1>, arg1: &0x87c13bb9157c3d51d61c7802704539d9d4782e838aadc41df0d6f0cc117298ba::pool::CredentialV2<T0, T1>, arg2: &0x491b8fd79bf92ca4a4c2f5836dcf2c1b2140bc070a1e988c4e7316e3444569cd::vault_oracle::OracleConfig, arg3: &0x2::clock::Clock) : u256 {
+        0x491b8fd79bf92ca4a4c2f5836dcf2c1b2140bc070a1e988c4e7316e3444569cd::vault_utils::mul_with_oracle_price((((((0x87c13bb9157c3d51d61c7802704539d9d4782e838aadc41df0d6f0cc117298ba::pool::pool_acc_reward_per_share<T0, T1>(arg0) - 0x87c13bb9157c3d51d61c7802704539d9d4782e838aadc41df0d6f0cc117298ba::pool::credential_v2_acc_reward_per_share<T0, T1>(arg1)) as u256) * (0x87c13bb9157c3d51d61c7802704539d9d4782e838aadc41df0d6f0cc117298ba::pool::pool_staked_amount<T0, T1>(arg0) as u256) / (1000000000000000000 as u256)) as u128) as u256), 0x491b8fd79bf92ca4a4c2f5836dcf2c1b2140bc070a1e988c4e7316e3444569cd::vault_oracle::get_normalized_asset_price(arg2, arg3, 0x1::type_name::into_string(0x1::type_name::with_defining_ids<T1>()))) + 0x491b8fd79bf92ca4a4c2f5836dcf2c1b2140bc070a1e988c4e7316e3444569cd::vault_utils::mul_with_oracle_price((0x2::balance::value<T0>(0x87c13bb9157c3d51d61c7802704539d9d4782e838aadc41df0d6f0cc117298ba::pool::credential_v2_stake_ref<T0, T1>(arg1)) as u256), 0x491b8fd79bf92ca4a4c2f5836dcf2c1b2140bc070a1e988c4e7316e3444569cd::vault_oracle::get_normalized_asset_price(arg2, arg3, 0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())))
+    }
+
+    public fun update_zo_position_value<T0, T1, T2>(arg0: &mut 0x491b8fd79bf92ca4a4c2f5836dcf2c1b2140bc070a1e988c4e7316e3444569cd::vault::Vault<T0>, arg1: &0x491b8fd79bf92ca4a4c2f5836dcf2c1b2140bc070a1e988c4e7316e3444569cd::vault_oracle::OracleConfig, arg2: &0x2::clock::Clock, arg3: 0x1::ascii::String, arg4: &mut 0x87c13bb9157c3d51d61c7802704539d9d4782e838aadc41df0d6f0cc117298ba::pool::Pool<T1, T2>, arg5: &0x87c13bb9157c3d51d61c7802704539d9d4782e838aadc41df0d6f0cc117298ba::pool::CredentialV2<T1, T2>) {
+        0x491b8fd79bf92ca4a4c2f5836dcf2c1b2140bc070a1e988c4e7316e3444569cd::vault::finish_update_asset_value<T0>(arg0, arg3, get_zo_position_value<T1, T2>(arg4, arg5, arg1, arg2), 0x2::clock::timestamp_ms(arg2));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
