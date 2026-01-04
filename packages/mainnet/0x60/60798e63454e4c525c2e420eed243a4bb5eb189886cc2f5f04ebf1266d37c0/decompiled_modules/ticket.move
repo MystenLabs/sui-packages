@@ -1,0 +1,282 @@
+module 0x6060798e63454e4c525c2e420eed243a4bb5eb189886cc2f5f04ebf1266d37c0::ticket {
+    struct Stats has key {
+        id: 0x2::object::UID,
+        total_files: u64,
+        total_bytes: u64,
+    }
+
+    struct Ticket has store, key {
+        id: 0x2::object::UID,
+        identity_hash: vector<u8>,
+        sender: address,
+        blob_id: vector<u8>,
+        wrapped_key: vector<u8>,
+        encrypted_metadata: vector<u8>,
+        file_size: u64,
+        downloads_remaining: u64,
+        downloads_total: u64,
+        expires_at: u64,
+        created_at: u64,
+        gas_pot: 0x2::balance::Balance<0x2::sui::SUI>,
+    }
+
+    struct TicketCreated has copy, drop {
+        ticket_id: 0x2::object::ID,
+        sender: address,
+        identity_hash: vector<u8>,
+        downloads_total: u64,
+        expires_at: u64,
+        gas_pot_amount: u64,
+    }
+
+    struct TicketClaimed has copy, drop {
+        ticket_id: 0x2::object::ID,
+        downloads_remaining: u64,
+    }
+
+    struct TicketRevoked has copy, drop {
+        ticket_id: 0x2::object::ID,
+        sender: address,
+        refund_amount: u64,
+    }
+
+    struct TicketCleanedUp has copy, drop {
+        ticket_id: 0x2::object::ID,
+        sender: address,
+        refund_amount: u64,
+    }
+
+    public fun sender(arg0: &Ticket) : address {
+        arg0.sender
+    }
+
+    public fun blob_id(arg0: &Ticket) : &vector<u8> {
+        &arg0.blob_id
+    }
+
+    public fun cleanup_exhausted(arg0: Ticket, arg1: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0.downloads_remaining == 0, 13);
+        let v0 = arg0.sender;
+        let Ticket {
+            id                  : v1,
+            identity_hash       : _,
+            sender              : _,
+            blob_id             : _,
+            wrapped_key         : _,
+            encrypted_metadata  : _,
+            file_size           : _,
+            downloads_remaining : _,
+            downloads_total     : _,
+            expires_at          : _,
+            created_at          : _,
+            gas_pot             : v12,
+        } = arg0;
+        let v13 = v12;
+        let v14 = 0x2::balance::value<0x2::sui::SUI>(&v13);
+        let v15 = TicketCleanedUp{
+            ticket_id     : 0x2::object::id<Ticket>(&arg0),
+            sender        : v0,
+            refund_amount : v14,
+        };
+        0x2::event::emit<TicketCleanedUp>(v15);
+        if (v14 > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(v13, arg1), v0);
+        } else {
+            0x2::balance::destroy_zero<0x2::sui::SUI>(v13);
+        };
+        0x2::object::delete(v1);
+    }
+
+    public fun cleanup_expired(arg0: Ticket, arg1: &0x2::clock::Clock, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::clock::timestamp_ms(arg1) >= arg0.expires_at, 12);
+        let v0 = arg0.sender;
+        let Ticket {
+            id                  : v1,
+            identity_hash       : _,
+            sender              : _,
+            blob_id             : _,
+            wrapped_key         : _,
+            encrypted_metadata  : _,
+            file_size           : _,
+            downloads_remaining : _,
+            downloads_total     : _,
+            expires_at          : _,
+            created_at          : _,
+            gas_pot             : v12,
+        } = arg0;
+        let v13 = v12;
+        let v14 = 0x2::balance::value<0x2::sui::SUI>(&v13);
+        let v15 = TicketCleanedUp{
+            ticket_id     : 0x2::object::id<Ticket>(&arg0),
+            sender        : v0,
+            refund_amount : v14,
+        };
+        0x2::event::emit<TicketCleanedUp>(v15);
+        if (v14 > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(v13, arg2), v0);
+        } else {
+            0x2::balance::destroy_zero<0x2::sui::SUI>(v13);
+        };
+        0x2::object::delete(v1);
+    }
+
+    public fun complete_download(arg0: &mut Ticket, arg1: &0x2::clock::Clock) {
+        assert!(0x2::clock::timestamp_ms(arg1) < arg0.expires_at, 0);
+        assert!(arg0.downloads_remaining > 0, 1);
+        arg0.downloads_remaining = arg0.downloads_remaining - 1;
+        let v0 = TicketClaimed{
+            ticket_id           : 0x2::object::id<Ticket>(arg0),
+            downloads_remaining : arg0.downloads_remaining,
+        };
+        0x2::event::emit<TicketClaimed>(v0);
+    }
+
+    public fun create_ticket(arg0: &mut Stats, arg1: vector<u8>, arg2: vector<u8>, arg3: vector<u8>, arg4: vector<u8>, arg5: u64, arg6: u64, arg7: u64, arg8: 0x2::coin::Coin<0x2::sui::SUI>, arg9: &0x2::clock::Clock, arg10: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::clock::timestamp_ms(arg9);
+        assert!(0x1::vector::length<u8>(&arg1) == 32, 3);
+        assert!(!0x1::vector::is_empty<u8>(&arg2), 9);
+        assert!(!0x1::vector::is_empty<u8>(&arg3), 10);
+        assert!(arg7 > v0, 4);
+        let v1 = arg7 - v0;
+        assert!(v1 >= 1800000, 8);
+        assert!(v1 <= 31536000000, 7);
+        assert!(arg6 > 0, 5);
+        assert!(arg6 <= 1000, 6);
+        assert!(0x2::coin::value<0x2::sui::SUI>(&arg8) >= arg6 * 5000000, 11);
+        arg0.total_files = arg0.total_files + 1;
+        arg0.total_bytes = arg0.total_bytes + arg5;
+        let v2 = Ticket{
+            id                  : 0x2::object::new(arg10),
+            identity_hash       : arg1,
+            sender              : 0x2::tx_context::sender(arg10),
+            blob_id             : arg2,
+            wrapped_key         : arg3,
+            encrypted_metadata  : arg4,
+            file_size           : arg5,
+            downloads_remaining : arg6,
+            downloads_total     : arg6,
+            expires_at          : arg7,
+            created_at          : v0,
+            gas_pot             : 0x2::coin::into_balance<0x2::sui::SUI>(arg8),
+        };
+        let v3 = TicketCreated{
+            ticket_id       : 0x2::object::id<Ticket>(&v2),
+            sender          : 0x2::tx_context::sender(arg10),
+            identity_hash   : v2.identity_hash,
+            downloads_total : arg6,
+            expires_at      : arg7,
+            gas_pot_amount  : 0x2::coin::value<0x2::sui::SUI>(&arg8),
+        };
+        0x2::event::emit<TicketCreated>(v3);
+        0x2::transfer::share_object<Ticket>(v2);
+    }
+
+    public fun created_at(arg0: &Ticket) : u64 {
+        arg0.created_at
+    }
+
+    public fun downloads_remaining(arg0: &Ticket) : u64 {
+        arg0.downloads_remaining
+    }
+
+    public fun downloads_total(arg0: &Ticket) : u64 {
+        arg0.downloads_total
+    }
+
+    public fun encrypted_metadata(arg0: &Ticket) : &vector<u8> {
+        &arg0.encrypted_metadata
+    }
+
+    public fun estimate_gas_pot(arg0: u64) : u64 {
+        arg0 * 5000000
+    }
+
+    public fun expires_at(arg0: &Ticket) : u64 {
+        arg0.expires_at
+    }
+
+    public fun file_size(arg0: &Ticket) : u64 {
+        arg0.file_size
+    }
+
+    public fun gas_pot_balance(arg0: &Ticket) : u64 {
+        0x2::balance::value<0x2::sui::SUI>(&arg0.gas_pot)
+    }
+
+    public fun get_stats(arg0: &Stats) : (u64, u64) {
+        (arg0.total_files, arg0.total_bytes)
+    }
+
+    public fun has_downloads(arg0: &Ticket) : bool {
+        arg0.downloads_remaining > 0
+    }
+
+    public fun identity_hash(arg0: &Ticket) : &vector<u8> {
+        &arg0.identity_hash
+    }
+
+    fun init(arg0: &mut 0x2::tx_context::TxContext) {
+        let v0 = Stats{
+            id          : 0x2::object::new(arg0),
+            total_files : 0,
+            total_bytes : 0,
+        };
+        0x2::transfer::share_object<Stats>(v0);
+    }
+
+    public fun is_claimable(arg0: &Ticket, arg1: &0x2::clock::Clock) : bool {
+        !is_expired(arg0, arg1) && has_downloads(arg0)
+    }
+
+    public fun is_expired(arg0: &Ticket, arg1: &0x2::clock::Clock) : bool {
+        0x2::clock::timestamp_ms(arg1) >= arg0.expires_at
+    }
+
+    public fun revoke_ticket(arg0: Ticket, arg1: &mut 0x2::tx_context::TxContext) {
+        assert!(arg0.sender == 0x2::tx_context::sender(arg1), 2);
+        let v0 = arg0.sender;
+        let Ticket {
+            id                  : v1,
+            identity_hash       : _,
+            sender              : _,
+            blob_id             : _,
+            wrapped_key         : _,
+            encrypted_metadata  : _,
+            file_size           : _,
+            downloads_remaining : _,
+            downloads_total     : _,
+            expires_at          : _,
+            created_at          : _,
+            gas_pot             : v12,
+        } = arg0;
+        let v13 = v12;
+        let v14 = 0x2::balance::value<0x2::sui::SUI>(&v13);
+        let v15 = TicketRevoked{
+            ticket_id     : 0x2::object::id<Ticket>(&arg0),
+            sender        : v0,
+            refund_amount : v14,
+        };
+        0x2::event::emit<TicketRevoked>(v15);
+        if (v14 > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(v13, arg1), v0);
+        } else {
+            0x2::balance::destroy_zero<0x2::sui::SUI>(v13);
+        };
+        0x2::object::delete(v1);
+    }
+
+    public fun total_bytes(arg0: &Stats) : u64 {
+        arg0.total_bytes
+    }
+
+    public fun total_files(arg0: &Stats) : u64 {
+        arg0.total_files
+    }
+
+    public fun wrapped_key(arg0: &Ticket) : &vector<u8> {
+        &arg0.wrapped_key
+    }
+
+    // decompiled from Move bytecode v6
+}
+
