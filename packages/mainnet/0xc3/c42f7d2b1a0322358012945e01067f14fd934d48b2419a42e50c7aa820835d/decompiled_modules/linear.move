@@ -1,0 +1,171 @@
+module 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::linear {
+    struct LINEAR has drop {
+        dummy_field: bool,
+    }
+
+    struct LinearStream<phantom T0> has store, key {
+        id: 0x2::object::UID,
+        recipient: address,
+        total_deposit: u64,
+        balance: 0x2::balance::Balance<T0>,
+        released: u64,
+        start: u64,
+        end: u64,
+        cliff: 0x1::option::Option<u64>,
+        cancelable: bool,
+        is_canceled: bool,
+    }
+
+    public fun id<T0>(arg0: &LinearStream<T0>) : 0x2::object::ID {
+        0x2::object::id<LinearStream<T0>>(arg0)
+    }
+
+    public fun claim<T0>(arg0: &mut LinearStream<T0>, arg1: &0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::global_config::GlobalConfig, arg2: &0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::version::VersionRegistry, arg3: &0x2::clock::Clock, arg4: 0x2::coin::Coin<0x2::sui::SUI>, arg5: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg5) == arg0.recipient, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::eunauthorized());
+        assert!(!arg0.is_canceled, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::ealready_canceled());
+        0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::version::check_version(arg2);
+        let v0 = 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::global_config::get_claim_fee(arg1);
+        assert!(0x2::coin::value<0x2::sui::SUI>(&arg4) >= v0, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::einsufficient_claim_fee());
+        let v1 = 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::global_config::get_fee_recipient(arg1);
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::split<0x2::sui::SUI>(&mut arg4, v0, arg5), v1);
+        if (0x2::coin::value<0x2::sui::SUI>(&arg4) > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(arg4, 0x2::tx_context::sender(arg5));
+        } else {
+            0x2::coin::destroy_zero<0x2::sui::SUI>(arg4);
+        };
+        0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::events::emit_fee_collected(v0, v1, 0x1::option::some<0x2::object::ID>(0x2::object::id<LinearStream<T0>>(arg0)));
+        let v2 = 0x2::clock::timestamp_ms(arg3);
+        assert!(v2 >= arg0.start, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::estream_not_started());
+        let v3 = get_claimable_amount<T0>(arg0, v2);
+        assert!(v3 > 0, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::enothing_to_claim());
+        let v4 = 0x2::balance::value<T0>(&arg0.balance);
+        let v5 = if (v3 > v4) {
+            v4
+        } else {
+            v3
+        };
+        arg0.released = arg0.released + v5;
+        0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::events::emit_tokens_claimed(0x2::object::id<LinearStream<T0>>(arg0), v5, arg0.recipient, arg0.released);
+        0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(0x2::balance::split<T0>(&mut arg0.balance, v5), arg5), arg0.recipient);
+        if (arg0.released >= arg0.total_deposit) {
+            0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::events::emit_stream_completed(0x2::object::id<LinearStream<T0>>(arg0), arg0.released, v2);
+        };
+    }
+
+    public fun cancel<T0>(arg0: &mut LinearStream<T0>, arg1: 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::cancel_cap::CancelCap, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::cancel_cap::get_stream_id(&arg1) == 0x2::object::id<LinearStream<T0>>(arg0), 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::einvalid_cancel_cap());
+        assert!(arg0.cancelable, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::enot_cancelable());
+        assert!(!arg0.is_canceled, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::ealready_canceled());
+        let v0 = 0x2::clock::timestamp_ms(arg2);
+        let v1 = 0x2::tx_context::sender(arg3);
+        let v2 = get_vested_amount<T0>(arg0, v0);
+        let v3 = 0x2::balance::value<T0>(&arg0.balance);
+        let v4 = if (v2 > arg0.released) {
+            v2 - arg0.released
+        } else {
+            0
+        };
+        let v5 = if (v4 > v3) {
+            v3
+        } else {
+            v4
+        };
+        if (v5 > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(0x2::balance::split<T0>(&mut arg0.balance, v5), arg3), arg0.recipient);
+        };
+        let v6 = 0x2::balance::value<T0>(&arg0.balance);
+        if (v6 > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(0x2::balance::split<T0>(&mut arg0.balance, v6), arg3), v1);
+        };
+        arg0.is_canceled = true;
+        arg0.released = arg0.released + v5;
+        0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::cancel_cap::destroy_cancel_cap(arg1);
+        0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::events::emit_stream_canceled(0x2::object::id<LinearStream<T0>>(arg0), v1, arg0.recipient, v5, v6, v0);
+    }
+
+    public fun cancelable<T0>(arg0: &LinearStream<T0>) : bool {
+        arg0.cancelable
+    }
+
+    public fun cliff<T0>(arg0: &LinearStream<T0>) : 0x1::option::Option<u64> {
+        arg0.cliff
+    }
+
+    public fun end<T0>(arg0: &LinearStream<T0>) : u64 {
+        arg0.end
+    }
+
+    public fun get_claimable_amount<T0>(arg0: &LinearStream<T0>, arg1: u64) : u64 {
+        0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::math::calculate_claimable_amount(get_vested_amount<T0>(arg0, arg1), arg0.released)
+    }
+
+    public fun get_vested_amount<T0>(arg0: &LinearStream<T0>, arg1: u64) : u64 {
+        if (0x1::option::is_some<u64>(&arg0.cliff)) {
+            0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::math::calculate_vested_amount_with_cliff(arg0.total_deposit, arg0.start, *0x1::option::borrow<u64>(&arg0.cliff), arg0.end, arg1)
+        } else {
+            0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::math::calculate_vested_amount(arg0.total_deposit, arg0.start, arg0.end, arg1)
+        }
+    }
+
+    fun init(arg0: LINEAR, arg1: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x2::package::Publisher>(0x2::package::claim<LINEAR>(arg0, arg1), 0x2::tx_context::sender(arg1));
+    }
+
+    public fun is_canceled<T0>(arg0: &LinearStream<T0>) : bool {
+        arg0.is_canceled
+    }
+
+    public fun is_completed<T0>(arg0: &LinearStream<T0>) : bool {
+        arg0.released >= arg0.total_deposit
+    }
+
+    public(friend) fun new_stream<T0>(arg0: address, arg1: 0x2::coin::Coin<T0>, arg2: u64, arg3: u64, arg4: 0x1::option::Option<u64>, arg5: bool, arg6: &mut 0x2::tx_context::TxContext) : LinearStream<T0> {
+        let v0 = 0x2::coin::value<T0>(&arg1);
+        assert!(arg3 > arg2, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::einvalid_time_range());
+        assert!(v0 > 0, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::einvalid_amount());
+        if (0x1::option::is_some<u64>(&arg4)) {
+            let v1 = *0x1::option::borrow<u64>(&arg4);
+            assert!(v1 >= arg2, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::einvalid_cliff());
+            assert!(v1 <= arg3, 0xc3c42f7d2b1a0322358012945e01067f14fd934d48b2419a42e50c7aa820835d::error::einvalid_cliff());
+        };
+        LinearStream<T0>{
+            id            : 0x2::object::new(arg6),
+            recipient     : arg0,
+            total_deposit : v0,
+            balance       : 0x2::coin::into_balance<T0>(arg1),
+            released      : 0,
+            start         : arg2,
+            end           : arg3,
+            cliff         : arg4,
+            cancelable    : arg5,
+            is_canceled   : false,
+        }
+    }
+
+    public fun recipient<T0>(arg0: &LinearStream<T0>) : address {
+        arg0.recipient
+    }
+
+    public fun released<T0>(arg0: &LinearStream<T0>) : u64 {
+        arg0.released
+    }
+
+    public fun remaining_balance<T0>(arg0: &LinearStream<T0>) : u64 {
+        0x2::balance::value<T0>(&arg0.balance)
+    }
+
+    public fun start<T0>(arg0: &LinearStream<T0>) : u64 {
+        arg0.start
+    }
+
+    public fun strategy_type() : u8 {
+        1
+    }
+
+    public fun total_deposit<T0>(arg0: &LinearStream<T0>) : u64 {
+        arg0.total_deposit
+    }
+
+    // decompiled from Move bytecode v6
+}
+
