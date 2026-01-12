@@ -1,0 +1,15 @@
+module 0x3c708984e6d0d9ca06e2005f710b306101bf3309db38e582a1dc1c6ad2794b6d::reader {
+    struct PriceRead has copy, drop {
+        sqrt_price: u128,
+    }
+
+    public fun read_price<T0, T1>(arg0: &0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T0, T1>) : u128 {
+        let v0 = 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::current_sqrt_price<T0, T1>(arg0);
+        let v1 = PriceRead{sqrt_price: v0};
+        0x2::event::emit<PriceRead>(v1);
+        v0
+    }
+
+    // decompiled from Move bytecode v6
+}
+

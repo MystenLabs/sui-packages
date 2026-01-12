@@ -1,0 +1,39 @@
+module 0x3c708984e6d0d9ca06e2005f710b306101bf3309db38e582a1dc1c6ad2794b6d::reader {
+    struct PriceRead has copy, drop {
+        sqrt_price: u128,
+    }
+
+    struct PositionInfo has copy, drop {
+        liquidity: u128,
+        fee_a: u64,
+        fee_b: u64,
+        reward_0: u64,
+    }
+
+    public fun has_rewards(arg0: &0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::position::Position) : bool {
+        0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::position::coins_owed_reward(arg0, 0) > 0
+    }
+
+    public fun read_position(arg0: &0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::position::Position) : (u128, u64, u64) {
+        let v0 = 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::position::liquidity(arg0);
+        let (v1, v2) = 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::position::get_accrued_fee(arg0);
+        let v3 = PositionInfo{
+            liquidity : v0,
+            fee_a     : v1,
+            fee_b     : v2,
+            reward_0  : 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::position::coins_owed_reward(arg0, 0),
+        };
+        0x2::event::emit<PositionInfo>(v3);
+        (v0, v1, v2)
+    }
+
+    public fun read_price<T0, T1>(arg0: &0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T0, T1>) : u128 {
+        let v0 = 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::current_sqrt_price<T0, T1>(arg0);
+        let v1 = PriceRead{sqrt_price: v0};
+        0x2::event::emit<PriceRead>(v1);
+        v0
+    }
+
+    // decompiled from Move bytecode v6
+}
+
