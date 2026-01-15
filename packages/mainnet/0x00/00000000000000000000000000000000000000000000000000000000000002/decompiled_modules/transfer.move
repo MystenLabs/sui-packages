@@ -14,7 +14,7 @@ module 0x2::transfer {
 
     native public(friend) fun freeze_object_impl<T0: key>(arg0: T0);
     public fun party_transfer<T0: key>(arg0: T0, arg1: 0x2::party::Party) {
-        assert!(0x2::party::is_single_owner(&arg1), 13836747248740204551);
+        assert!(0x2::party::is_single_owner(&arg1), 13836747240150269959);
         let (v0, v1, v2) = 0x2::party::into_native(arg1);
         party_transfer_impl<T0>(arg0, v0, v1, v2);
     }
@@ -25,7 +25,7 @@ module 0x2::transfer {
     }
 
     public fun public_party_transfer<T0: store + key>(arg0: T0, arg1: 0x2::party::Party) {
-        assert!(0x2::party::is_single_owner(&arg1), 13836747317459681287);
+        assert!(0x2::party::is_single_owner(&arg1), 13836747300279812103);
         let (v0, v1, v2) = 0x2::party::into_native(arg1);
         party_transfer_impl<T0>(arg0, v0, v1, v2);
     }

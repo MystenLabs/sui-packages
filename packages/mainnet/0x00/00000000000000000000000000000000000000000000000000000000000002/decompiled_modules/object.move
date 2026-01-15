@@ -7,6 +7,11 @@ module 0x2::object {
         id: ID,
     }
 
+    public(friend) fun address_alias_state() : UID {
+        let v0 = ID{bytes: @0xa};
+        UID{id: v0}
+    }
+
     public(friend) fun authenticator_state() : UID {
         let v0 = ID{bytes: @0x7};
         UID{id: v0}

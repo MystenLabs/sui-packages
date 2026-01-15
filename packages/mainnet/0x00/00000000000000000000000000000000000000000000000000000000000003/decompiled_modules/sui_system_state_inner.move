@@ -83,7 +83,7 @@ module 0x3::sui_system_state_inner {
         arg0.epoch
     }
 
-    public(friend) fun advance_epoch(arg0: &mut SuiSystemStateInnerV2, arg1: u64, arg2: u64, arg3: 0x2::balance::Balance<0x2::sui::SUI>, arg4: 0x2::balance::Balance<0x2::sui::SUI>, arg5: u64, arg6: u64, arg7: u64, arg8: u64, arg9: u64, arg10: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<0x2::sui::SUI> {
+    public(friend) fun advance_epoch(arg0: &mut SuiSystemStateInnerV2, arg1: u64, arg2: u64, arg3: 0x2::balance::Balance<0x2::sui::SUI>, arg4: 0x2::balance::Balance<0x2::sui::SUI>, arg5: u64, arg6: u64, arg7: u64, arg8: u64, arg9: u64, arg10: u64, arg11: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<0x2::sui::SUI> {
         arg0.epoch_start_timestamp_ms = arg9;
         let v0 = 10000;
         assert!(arg7 <= v0 && arg8 <= v0, 5);
@@ -95,10 +95,10 @@ module 0x3::sui_system_state_inner {
         let v1 = arg5 + arg0.safe_mode_storage_rebates;
         arg0.safe_mode_storage_rebates = 0;
         arg0.safe_mode_non_refundable_storage_fee = 0;
-        let v2 = 0x3::storage_fund::total_balance(&arg0.storage_fund);
+        let v2 = 0x3::storage_fund::total_balance(&arg0.storage_fund) + arg10;
         let v3 = 0x2::balance::value<0x2::sui::SUI>(&arg4);
         let v4 = 0x2::balance::zero<0x2::sui::SUI>();
-        let v5 = 0x2::tx_context::epoch(arg10);
+        let v5 = 0x2::tx_context::epoch(arg11);
         if (v5 >= arg0.parameters.stake_subsidy_start_epoch && arg9 >= arg0.epoch_start_timestamp_ms + arg0.parameters.epoch_duration_ms) {
             if (0x3::stake_subsidy::get_distribution_counter(&arg0.stake_subsidy) == 540 && v5 > 560) {
                 let v6 = 0;
@@ -115,7 +115,7 @@ module 0x3::sui_system_state_inner {
         let v9 = (((v7 as u128) * (arg7 as u128) / (10000 as u128)) as u64);
         arg0.epoch = arg0.epoch + 1;
         assert!(arg1 == arg0.epoch, 8);
-        0x3::validator_set::advance_epoch(&mut arg0.validators, &mut arg4, &mut v8, &mut arg0.validator_report_records, arg8, arg0.parameters.validator_low_stake_grace_period, arg10);
+        0x3::validator_set::advance_epoch(&mut arg0.validators, &mut arg4, &mut v8, &mut arg0.validator_report_records, arg8, arg0.parameters.validator_low_stake_grace_period, arg11);
         arg0.protocol_version = arg2;
         arg0.reference_gas_price = 0x3::validator_set::derive_reference_gas_price(&arg0.validators);
         0x2::balance::join<0x2::sui::SUI>(&mut v8, arg4);
@@ -206,6 +206,14 @@ module 0x3::sui_system_state_inner {
 
     public(friend) fun epoch_start_timestamp_ms(arg0: &SuiSystemStateInnerV2) : u64 {
         arg0.epoch_start_timestamp_ms
+    }
+
+    public(friend) fun extra_fields(arg0: &SuiSystemStateInnerV2) : &0x2::bag::Bag {
+        &arg0.extra_fields
+    }
+
+    public(friend) fun extra_fields_mut(arg0: &mut SuiSystemStateInnerV2) : &mut 0x2::bag::Bag {
+        &mut arg0.extra_fields
     }
 
     fun extract_coin_balance(arg0: vector<0x2::coin::Coin<0x2::sui::SUI>>, arg1: 0x1::option::Option<u64>, arg2: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<0x2::sui::SUI> {

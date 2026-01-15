@@ -45,7 +45,7 @@ module 0x2::balance {
     }
 
     public fun increase_supply<T0>(arg0: &mut Supply<T0>, arg1: u64) : Balance<T0> {
-        assert!(arg1 < 18446744073709551615 - arg0.value, 1);
+        assert!(arg1 <= 18446744073709551615 - arg0.value, 1);
         arg0.value = arg0.value + arg1;
         Balance<T0>{value: arg1}
     }
@@ -57,7 +57,7 @@ module 0x2::balance {
     }
 
     public fun redeem_funds<T0>(arg0: 0x2::funds_accumulator::Withdrawal<Balance<T0>>) : Balance<T0> {
-        0x2::funds_accumulator::redeem<Balance<T0>>(arg0)
+        0x2::funds_accumulator::redeem<Balance<T0>>(arg0, 0x1::internal::permit<Balance<T0>>())
     }
 
     public fun send_funds<T0>(arg0: Balance<T0>, arg1: address) {
@@ -83,7 +83,7 @@ module 0x2::balance {
         split<T0>(arg0, v0)
     }
 
-    public(friend) fun withdraw_funds_from_object<T0>(arg0: &mut 0x2::object::UID, arg1: u64) : 0x2::funds_accumulator::Withdrawal<Balance<T0>> {
+    public fun withdraw_funds_from_object<T0>(arg0: &mut 0x2::object::UID, arg1: u64) : 0x2::funds_accumulator::Withdrawal<Balance<T0>> {
         0x2::funds_accumulator::withdraw_from_object<Balance<T0>>(arg0, (arg1 as u256))
     }
 

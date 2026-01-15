@@ -4,6 +4,10 @@ module 0x3::sui_system {
         version: u64,
     }
 
+    struct AccumulatorStorageCostKey has copy, drop, store {
+        dummy_field: bool,
+    }
+
     public(friend) fun calculate_rewards(arg0: &mut SuiSystemState, arg1: &0x3::staking_pool::StakedSui, arg2: &0x2::tx_context::TxContext) : u64 {
         let v0 = 0x3::staking_pool::pool_id(arg1);
         0x3::staking_pool::calculate_rewards(0x3::validator::get_staking_pool_ref(0x3::validator_set::validator_by_pool_id(0x3::sui_system_state_inner::validators_mut(load_system_state_mut(arg0)), &v0)), arg1, 0x2::tx_context::epoch(arg2))
@@ -23,7 +27,8 @@ module 0x3::sui_system {
 
     fun advance_epoch(arg0: 0x2::balance::Balance<0x2::sui::SUI>, arg1: 0x2::balance::Balance<0x2::sui::SUI>, arg2: &mut SuiSystemState, arg3: u64, arg4: u64, arg5: u64, arg6: u64, arg7: u64, arg8: u64, arg9: u64, arg10: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<0x2::sui::SUI> {
         assert!(0x2::tx_context::sender(arg10) == @0x0, 0);
-        0x3::sui_system_state_inner::advance_epoch(load_system_state_mut(arg2), arg3, arg4, arg0, arg1, arg5, arg6, arg7, arg8, arg9, arg10)
+        let v0 = get_accumulator_storage_fund_amount(arg2);
+        0x3::sui_system_state_inner::advance_epoch(load_system_state_mut(arg2), arg3, arg4, arg0, arg1, arg5, arg6, arg7, arg8, arg9, v0, arg10)
     }
 
     public fun convert_to_fungible_staked_sui(arg0: &mut SuiSystemState, arg1: 0x3::staking_pool::StakedSui, arg2: &mut 0x2::tx_context::TxContext) : 0x3::staking_pool::FungibleStakedSui {
@@ -38,6 +43,16 @@ module 0x3::sui_system {
         };
         0x2::dynamic_field::add<u64, 0x3::sui_system_state_inner::SuiSystemStateInner>(&mut v1.id, v0, 0x3::sui_system_state_inner::create(arg1, arg2, arg3, arg4, arg5, arg6, arg7));
         0x2::transfer::share_object<SuiSystemState>(v1);
+    }
+
+    fun get_accumulator_storage_fund_amount(arg0: &mut SuiSystemState) : u64 {
+        let v0 = 0x3::sui_system_state_inner::extra_fields(load_system_state(arg0));
+        let v1 = AccumulatorStorageCostKey{dummy_field: false};
+        if (0x2::bag::contains<AccumulatorStorageCostKey>(v0, v1)) {
+            *0x2::bag::borrow<AccumulatorStorageCostKey, u64>(v0, v1)
+        } else {
+            0
+        }
     }
 
     fun load_inner_maybe_upgrade(arg0: &mut SuiSystemState) : &mut 0x3::sui_system_state_inner::SuiSystemStateInnerV2 {
@@ -224,6 +239,17 @@ module 0x3::sui_system {
 
     fun validator_voting_powers(arg0: &mut SuiSystemState) : 0x2::vec_map::VecMap<address, u64> {
         0x3::sui_system_state_inner::active_validator_voting_powers(load_system_state(arg0))
+    }
+
+    fun write_accumulator_storage_cost(arg0: &mut SuiSystemState, arg1: u64, arg2: &0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg2) == @0x0, 0);
+        let v0 = 0x3::sui_system_state_inner::extra_fields_mut(load_system_state_mut(arg0));
+        let v1 = AccumulatorStorageCostKey{dummy_field: false};
+        if (0x2::bag::contains<AccumulatorStorageCostKey>(v0, v1)) {
+            *0x2::bag::borrow_mut<AccumulatorStorageCostKey, u64>(v0, v1) = arg1;
+        } else {
+            0x2::bag::add<AccumulatorStorageCostKey, u64>(v0, v1, arg1);
+        };
     }
 
     // decompiled from Move bytecode v6

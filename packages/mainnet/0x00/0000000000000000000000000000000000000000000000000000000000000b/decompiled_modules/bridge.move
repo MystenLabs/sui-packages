@@ -26,6 +26,17 @@ module 0xb::bridge {
         amount: u64,
     }
 
+    struct TokenDepositedEventV2 has copy, drop {
+        seq_num: u64,
+        source_chain: u8,
+        sender_address: vector<u8>,
+        target_chain: u8,
+        target_address: vector<u8>,
+        token_type: u8,
+        amount: u64,
+        timestamp_ms: u64,
+    }
+
     struct EmergencyOpEvent has copy, drop {
         frozen: bool,
     }
@@ -81,35 +92,41 @@ module 0xb::bridge {
         assert!(!v0.paused, 8);
         0xb::committee::verify_signatures(&v0.committee, arg1, arg2);
         assert!(0xb::message::message_type(&arg1) == 0xb::message_types::token(), 17);
-        assert!(0xb::message::message_version(&arg1) == 1, 12);
-        let v1 = 0xb::message::extract_token_bridge_payload(&arg1);
-        assert!(0xb::message::source_chain(&arg1) == v0.chain_id || 0xb::message::token_target_chain(&v1) == v0.chain_id, 4);
-        let v2 = 0xb::message::key(&arg1);
-        if (0xb::message::source_chain(&arg1) == v0.chain_id) {
-            let v3 = 0x2::linked_table::borrow_mut<0xb::message::BridgeMessageKey, BridgeRecord>(&mut v0.token_transfer_records, v2);
-            assert!(v3.message == arg1, 2);
-            assert!(!v3.claimed, 10);
-            if (0x1::option::is_some<vector<vector<u8>>>(&v3.verified_signatures)) {
-                let v4 = TokenTransferAlreadyApproved{message_key: v2};
-                0x2::event::emit<TokenTransferAlreadyApproved>(v4);
-                return
-            };
-            v3.verified_signatures = 0x1::option::some<vector<vector<u8>>>(arg2);
+        assert!(0xb::message::message_version(&arg1) <= 0xb::message::token_transfer_message_version(), 12);
+        let v1 = if (0xb::message::message_version(&arg1) == 2) {
+            let v2 = 0xb::message::extract_token_bridge_payload_v2(&arg1);
+            0xb::message::to_token_payload_v1(&v2)
         } else {
-            if (0x2::linked_table::contains<0xb::message::BridgeMessageKey, BridgeRecord>(&v0.token_transfer_records, v2)) {
-                let v5 = TokenTransferAlreadyApproved{message_key: v2};
-                0x2::event::emit<TokenTransferAlreadyApproved>(v5);
+            0xb::message::extract_token_bridge_payload(&arg1)
+        };
+        let v3 = v1;
+        assert!(0xb::message::source_chain(&arg1) == v0.chain_id || 0xb::message::token_target_chain(&v3) == v0.chain_id, 4);
+        let v4 = 0xb::message::key(&arg1);
+        if (0xb::message::source_chain(&arg1) == v0.chain_id) {
+            let v5 = 0x2::linked_table::borrow_mut<0xb::message::BridgeMessageKey, BridgeRecord>(&mut v0.token_transfer_records, v4);
+            assert!(v5.message == arg1, 2);
+            assert!(!v5.claimed, 10);
+            if (0x1::option::is_some<vector<vector<u8>>>(&v5.verified_signatures)) {
+                let v6 = TokenTransferAlreadyApproved{message_key: v4};
+                0x2::event::emit<TokenTransferAlreadyApproved>(v6);
                 return
             };
-            let v6 = BridgeRecord{
+            v5.verified_signatures = 0x1::option::some<vector<vector<u8>>>(arg2);
+        } else {
+            if (0x2::linked_table::contains<0xb::message::BridgeMessageKey, BridgeRecord>(&v0.token_transfer_records, v4)) {
+                let v7 = TokenTransferAlreadyApproved{message_key: v4};
+                0x2::event::emit<TokenTransferAlreadyApproved>(v7);
+                return
+            };
+            let v8 = BridgeRecord{
                 message             : arg1,
                 verified_signatures : 0x1::option::some<vector<vector<u8>>>(arg2),
                 claimed             : false,
             };
-            0x2::linked_table::push_back<0xb::message::BridgeMessageKey, BridgeRecord>(&mut v0.token_transfer_records, v2, v6);
+            0x2::linked_table::push_back<0xb::message::BridgeMessageKey, BridgeRecord>(&mut v0.token_transfer_records, v4, v8);
         };
-        let v7 = TokenTransferApproved{message_key: v2};
-        0x2::event::emit<TokenTransferApproved>(v7);
+        let v9 = TokenTransferApproved{message_key: v4};
+        0x2::event::emit<TokenTransferApproved>(v9);
     }
 
     public fun claim_and_transfer_token<T0>(arg0: &mut Bridge, arg1: &0x2::clock::Clock, arg2: u8, arg3: u64, arg4: &mut 0x2::tx_context::TxContext) {
@@ -140,25 +157,32 @@ module 0xb::bridge {
         let v4 = 0xb::message_types::token();
         assert!(&v3 == &v4, 0);
         assert!(0x1::option::is_some<vector<vector<u8>>>(&v2.verified_signatures), 1);
-        let v5 = 0xb::message::extract_token_bridge_payload(&v2.message);
-        if (v2.claimed) {
-            let v6 = TokenTransferAlreadyClaimed{message_key: v1};
-            0x2::event::emit<TokenTransferAlreadyClaimed>(v6);
-            return (0x1::option::none<0x2::coin::Coin<T0>>(), 0x2::address::from_bytes(0xb::message::token_target_address(&v5)))
+        let v5 = false;
+        let v6 = if (0xb::message::message_version(&v2.message) == 2) {
+            let v7 = 0xb::message::extract_token_bridge_payload_v2(&v2.message);
+            v5 = 0x2::clock::timestamp_ms(arg1) > 0xb::message::timestamp_ms(&v7) + 172800000;
+            0xb::message::to_token_payload_v1(&v7)
+        } else {
+            0xb::message::extract_token_bridge_payload(&v2.message)
         };
-        let v7 = 0xb::message::token_target_chain(&v5);
-        assert!(v7 == v0.chain_id, 4);
-        assert!(0xb::treasury::token_id<T0>(&v0.treasury) == 0xb::message::token_type(&v5), 3);
-        let v8 = 0xb::message::token_amount(&v5);
-        if (!0xb::limiter::check_and_record_sending_transfer<T0>(&mut v0.limiter, &v0.treasury, arg1, 0xb::chain_ids::get_route(arg2, v7), v8)) {
-            let v9 = TokenTransferLimitExceed{message_key: v1};
-            0x2::event::emit<TokenTransferLimitExceed>(v9);
-            return (0x1::option::none<0x2::coin::Coin<T0>>(), 0x2::address::from_bytes(0xb::message::token_target_address(&v5)))
+        if (v2.claimed) {
+            let v8 = TokenTransferAlreadyClaimed{message_key: v1};
+            0x2::event::emit<TokenTransferAlreadyClaimed>(v8);
+            return (0x1::option::none<0x2::coin::Coin<T0>>(), 0x2::address::from_bytes(0xb::message::token_target_address(&v6)))
+        };
+        let v9 = 0xb::message::token_target_chain(&v6);
+        assert!(v9 == v0.chain_id, 4);
+        assert!(0xb::treasury::token_id<T0>(&v0.treasury) == 0xb::message::token_type(&v6), 3);
+        let v10 = 0xb::message::token_amount(&v6);
+        if (!v5 && !0xb::limiter::check_and_record_sending_transfer<T0>(&mut v0.limiter, &v0.treasury, arg1, 0xb::chain_ids::get_route(arg2, v9), v10)) {
+            let v11 = TokenTransferLimitExceed{message_key: v1};
+            0x2::event::emit<TokenTransferLimitExceed>(v11);
+            return (0x1::option::none<0x2::coin::Coin<T0>>(), 0x2::address::from_bytes(0xb::message::token_target_address(&v6)))
         };
         v2.claimed = true;
-        let v10 = TokenTransferClaimed{message_key: v1};
-        0x2::event::emit<TokenTransferClaimed>(v10);
-        (0x1::option::some<0x2::coin::Coin<T0>>(0xb::treasury::mint<T0>(&mut v0.treasury, v8, arg4)), 0x2::address::from_bytes(0xb::message::token_target_address(&v5)))
+        let v12 = TokenTransferClaimed{message_key: v1};
+        0x2::event::emit<TokenTransferClaimed>(v12);
+        (0x1::option::some<0x2::coin::Coin<T0>>(0xb::treasury::mint<T0>(&mut v0.treasury, v10, arg4)), 0x2::address::from_bytes(0xb::message::token_target_address(&v6)))
     }
 
     public fun committee_registration(arg0: &mut Bridge, arg1: &mut 0x3::sui_system::SuiSystemState, arg2: vector<u8>, arg3: vector<u8>, arg4: &0x2::tx_context::TxContext) {
@@ -300,22 +324,14 @@ module 0xb::bridge {
 
     public fun send_token<T0>(arg0: &mut Bridge, arg1: u8, arg2: vector<u8>, arg3: 0x2::coin::Coin<T0>, arg4: &mut 0x2::tx_context::TxContext) {
         let v0 = load_inner_mut(arg0);
-        assert!(!v0.paused, 8);
-        assert!(0xb::chain_ids::is_valid_route(v0.chain_id, arg1), 16);
-        assert!(0x1::vector::length<u8>(&arg2) == 20, 18);
         let v1 = get_current_seq_num_and_increment(v0, 0xb::message_types::token());
         let v2 = 0xb::treasury::token_id<T0>(&v0.treasury);
         let v3 = 0x2::balance::value<T0>(0x2::coin::balance<T0>(&arg3));
+        assert!(0x1::vector::length<u8>(&arg2) == 20, 18);
         assert!(v3 > 0, 19);
         let v4 = 0xb::message::create_token_bridge_message(v0.chain_id, v1, 0x2::address::to_bytes(0x2::tx_context::sender(arg4)), arg1, arg2, v2, v3);
-        0xb::treasury::burn<T0>(&mut v0.treasury, arg3);
-        let v5 = BridgeRecord{
-            message             : v4,
-            verified_signatures : 0x1::option::none<vector<vector<u8>>>(),
-            claimed             : false,
-        };
-        0x2::linked_table::push_back<0xb::message::BridgeMessageKey, BridgeRecord>(&mut v0.token_transfer_records, 0xb::message::key(&v4), v5);
-        let v6 = TokenDepositedEvent{
+        send_token_internal<T0>(v0, arg1, arg3, v4);
+        let v5 = TokenDepositedEvent{
             seq_num        : v1,
             source_chain   : v0.chain_id,
             sender_address : 0x2::address::to_bytes(0x2::tx_context::sender(arg4)),
@@ -324,7 +340,41 @@ module 0xb::bridge {
             token_type     : v2,
             amount         : v3,
         };
-        0x2::event::emit<TokenDepositedEvent>(v6);
+        0x2::event::emit<TokenDepositedEvent>(v5);
+    }
+
+    fun send_token_internal<T0>(arg0: &mut BridgeInner, arg1: u8, arg2: 0x2::coin::Coin<T0>, arg3: 0xb::message::BridgeMessage) {
+        assert!(!arg0.paused, 8);
+        assert!(0xb::chain_ids::is_valid_route(arg0.chain_id, arg1), 16);
+        0xb::treasury::burn<T0>(&mut arg0.treasury, arg2);
+        let v0 = BridgeRecord{
+            message             : arg3,
+            verified_signatures : 0x1::option::none<vector<vector<u8>>>(),
+            claimed             : false,
+        };
+        0x2::linked_table::push_back<0xb::message::BridgeMessageKey, BridgeRecord>(&mut arg0.token_transfer_records, 0xb::message::key(&arg3), v0);
+    }
+
+    public fun send_token_v2<T0>(arg0: &mut Bridge, arg1: u8, arg2: vector<u8>, arg3: 0x2::coin::Coin<T0>, arg4: &0x2::clock::Clock, arg5: &mut 0x2::tx_context::TxContext) {
+        let v0 = load_inner_mut(arg0);
+        let v1 = get_current_seq_num_and_increment(v0, 0xb::message_types::token());
+        let v2 = 0xb::treasury::token_id<T0>(&v0.treasury);
+        let v3 = 0x2::balance::value<T0>(0x2::coin::balance<T0>(&arg3));
+        assert!(0x1::vector::length<u8>(&arg2) == 20, 18);
+        assert!(v3 > 0, 19);
+        let v4 = 0xb::message::create_token_bridge_message_v2(v0.chain_id, v1, 0x2::address::to_bytes(0x2::tx_context::sender(arg5)), arg1, arg2, v2, v3, 0x2::clock::timestamp_ms(arg4));
+        send_token_internal<T0>(v0, arg1, arg3, v4);
+        let v5 = TokenDepositedEventV2{
+            seq_num        : v1,
+            source_chain   : v0.chain_id,
+            sender_address : 0x2::address::to_bytes(0x2::tx_context::sender(arg5)),
+            target_chain   : arg1,
+            target_address : arg2,
+            token_type     : v2,
+            amount         : v3,
+            timestamp_ms   : 0x2::clock::timestamp_ms(arg4),
+        };
+        0x2::event::emit<TokenDepositedEventV2>(v5);
     }
 
     public fun update_node_url(arg0: &mut Bridge, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {

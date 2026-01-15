@@ -21,6 +21,15 @@ module 0xb::message {
         amount: u64,
     }
 
+    struct TokenTransferPayloadV2 has drop {
+        sender_address: vector<u8>,
+        target_chain: u8,
+        target_address: vector<u8>,
+        token_type: u8,
+        amount: u64,
+        timestamp_ms: u64,
+    }
+
     struct EmergencyOp has drop {
         op_type: u8,
     }
@@ -144,6 +153,28 @@ module 0xb::message {
         }
     }
 
+    public fun create_token_bridge_message_v2(arg0: u8, arg1: u64, arg2: vector<u8>, arg3: u8, arg4: vector<u8>, arg5: u8, arg6: u64, arg7: u64) : BridgeMessage {
+        0xb::chain_ids::assert_valid_chain_id(arg0);
+        0xb::chain_ids::assert_valid_chain_id(arg3);
+        let v0 = b"";
+        0x1::vector::push_back<u8>(&mut v0, (0x1::vector::length<u8>(&arg2) as u8));
+        0x1::vector::append<u8>(&mut v0, arg2);
+        0x1::vector::push_back<u8>(&mut v0, arg3);
+        0x1::vector::push_back<u8>(&mut v0, (0x1::vector::length<u8>(&arg4) as u8));
+        0x1::vector::append<u8>(&mut v0, arg4);
+        0x1::vector::push_back<u8>(&mut v0, arg5);
+        0x1::vector::append<u8>(&mut v0, reverse_bytes(0x2::bcs::to_bytes<u64>(&arg6)));
+        0x1::vector::append<u8>(&mut v0, reverse_bytes(0x2::bcs::to_bytes<u64>(&arg7)));
+        assert!(0x1::vector::length<u8>(&v0) == 72, 5);
+        BridgeMessage{
+            message_type    : 0xb::message_types::token(),
+            message_version : 2,
+            seq_num         : arg1,
+            source_chain    : arg0,
+            payload         : v0,
+        }
+    }
+
     public fun create_update_asset_price_message(arg0: u8, arg1: u8, arg2: u64, arg3: u64) : BridgeMessage {
         0xb::chain_ids::assert_valid_chain_id(arg1);
         let v0 = 0x1::vector::empty<u8>();
@@ -233,6 +264,7 @@ module 0xb::message {
     }
 
     public fun extract_token_bridge_payload(arg0: &BridgeMessage) : TokenTransferPayload {
+        assert!(message_version(arg0) == 1, 7);
         let v0 = 0x2::bcs::new(arg0.payload);
         let v1 = 0x2::bcs::peel_u8(&mut v0);
         let v2 = &mut v0;
@@ -245,6 +277,25 @@ module 0xb::message {
             target_address : 0x2::bcs::peel_vec_u8(&mut v0),
             token_type     : 0x2::bcs::peel_u8(&mut v0),
             amount         : peel_u64_be(v2),
+        }
+    }
+
+    public fun extract_token_bridge_payload_v2(arg0: &BridgeMessage) : TokenTransferPayloadV2 {
+        assert!(message_version(arg0) == 2, 7);
+        let v0 = 0x2::bcs::new(arg0.payload);
+        let v1 = 0x2::bcs::peel_u8(&mut v0);
+        let v2 = &mut v0;
+        0xb::chain_ids::assert_valid_chain_id(v1);
+        let v3 = &mut v0;
+        let v4 = 0x2::bcs::into_remainder_bytes(v0);
+        assert!(0x1::vector::is_empty<u8>(&v4), 0);
+        TokenTransferPayloadV2{
+            sender_address : 0x2::bcs::peel_vec_u8(&mut v0),
+            target_chain   : v1,
+            target_address : 0x2::bcs::peel_vec_u8(&mut v0),
+            token_type     : 0x2::bcs::peel_u8(&mut v0),
+            amount         : peel_u64_be(v2),
+            timestamp_ms   : peel_u64_be(v3),
         }
     }
 
@@ -360,14 +411,34 @@ module 0xb::message {
         arg0.source_chain
     }
 
+    public fun timestamp_ms(arg0: &TokenTransferPayloadV2) : u64 {
+        arg0.timestamp_ms
+    }
+
     public fun to_parsed_token_transfer_message(arg0: &BridgeMessage) : ParsedTokenTransferMessage {
         assert!(message_type(arg0) == 0xb::message_types::token(), 6);
+        let v0 = if (message_version(arg0) == 2) {
+            let v1 = extract_token_bridge_payload_v2(arg0);
+            to_token_payload_v1(&v1)
+        } else {
+            extract_token_bridge_payload(arg0)
+        };
         ParsedTokenTransferMessage{
             message_version : message_version(arg0),
             seq_num         : seq_num(arg0),
             source_chain    : source_chain(arg0),
             payload         : payload(arg0),
-            parsed_payload  : extract_token_bridge_payload(arg0),
+            parsed_payload  : v0,
+        }
+    }
+
+    public(friend) fun to_token_payload_v1(arg0: &TokenTransferPayloadV2) : TokenTransferPayload {
+        TokenTransferPayload{
+            sender_address : arg0.sender_address,
+            target_chain   : arg0.target_chain,
+            target_address : arg0.target_address,
+            token_type     : arg0.token_type,
+            amount         : arg0.amount,
         }
     }
 
@@ -389,6 +460,10 @@ module 0xb::message {
 
     public fun token_target_chain(arg0: &TokenTransferPayload) : u8 {
         arg0.target_chain
+    }
+
+    public fun token_transfer_message_version() : u8 {
+        2
     }
 
     public fun token_type(arg0: &TokenTransferPayload) : u8 {
