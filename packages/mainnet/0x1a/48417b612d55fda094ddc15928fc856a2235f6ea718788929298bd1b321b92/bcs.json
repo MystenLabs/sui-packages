@@ -1,0 +1,978 @@
+{
+  "dataType": "package",
+  "id": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92",
+  "version": 1,
+  "moduleMap": {
+    "math_utils": "oRzrCwYAAAAHAQACAwIZBRtEB19hCMABIAbgAT4MngLgBQACAAQAAQAAAwIDAAAFAgMAAAAEBQAAAQYFAAIDAwEDAgQEAQQFAwMCAgICAwEGAwIDAgICAQ8FBAQEDw8NDwEPAwMPDwEPDw8DAwASDwEPAw8DAw8PDwMPAQ8PDw8PFmNhbGN1bGF0ZV9wcmljZV9hbW91bnQaY2FsY3VsYXRlX3Rva2VuX2Zyb21fcHJpY2UKbWF0aF91dGlscw1zYWZlX211bF91MTI4DHNhZmVfbXVsX3U2NAhzYWZlX3BvdxpIQXthLVX9oJTdwVko/IVqIjX26nGHiJKSmL0bMhuSAwgBAAAAAAAAAAQQ//////////8AAAAAAAAAAA8g/////////////////////wAAAAAAAAAAAAAAAAAAAAAAAQAAAxALADULATUYDAIKAgcBJQQLBQ0HACcLAjQCAQEAAAcQCwBNCwFNGAwCCgIHAiUECwUNBwAnCwI1AgIBAAAIQgoBMgAAAAAAAAAAAAAAAAAAAAAhBAYyAQAAAAAAAAAAAAAAAAAAAAIyAQAAAAAAAAAAAAAAAAAAAAwECwAMAgsBDAMKAzIAAAAAAAAAAAAAAAAAAAAAJARACgMyAQAAAAAAAAAAAAAAAAAAABwyAQAAAAAAAAAAAAAAAAAAACEEJwUXCwRNCgJNGAwFCgUHAiUEIgUkBwAnCwU1DAQKAzIBAAAAAAAAAAAAAAAAAAAAJAQ7CgJNCwJNGAwGCgYHAiUENgU4BwAnCwY1DAILAzEBMAwDBQwLBAIDAQAACUwLAE0LAU0YDAsLAjQLAzQWDBELBDQMEAoRChAmBCwLEQsQFwwIMgoAAAAAAAAAAAAAAAAAAAALCDURAk0MBwoLCgcaDA4LCwsHGQwNCw4LDUoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQMBgwFBTwLEAsRFwwJMgoAAAAAAAAAAAAAAAAAAAALCTURAk0MCgsLCwoYCQwGDAULBQsGDAwMDwoPBwFNJQRGBUgHACcLDzQLDAIEAQAAC1wLBDQLBTQWDBALATQMCQsATQwRCwJNDAoKEAoJJgQwCxALCRcMCzIKAAAAAAAAAAAAAAAAAAAACws1EQJNDA4LEQsOGAwPCg8KChoMFQsPCwoZDBMLFQsTSgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAwHDAYFTAsJCxAXDAwyCgAAAAAAAAAAAAAAAAAAAAsMNRECTQwNCwoLDRgMCAoRCggaDBYLEQsIGQwUCxYLFEoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQMBwwGCwYLBwwSDBcKFwcBTSUEVgVYBwAnCxc0CxICAA==",
+    "oracle_provider": "oRzrCwYAAAALAQAhAiFcA33UAgTRAzAFgQTgAwfhB4gQCOkXgAEG6Rj1AQreGswBDKocnBgNxjQ4AF0AVgNHA18DYgNjA2YDdgF3AYQBAiACKwJbAngCfAJ+AAgDAAAGCAAACQcAAAIHAAANBwAABAMAAA4DAAAQAwAADwMAAAMDAAAFAgACAQcAAwcHAAQKBwAFCwcABQwMAAcRDAAIEgcACgAIAAwVBAANEwwCBwEEAQ8UAgAASQABAAAjAgEAAC8DBAAAMAMFAABFBgcAADsIBwAAggEJCgAAUAMKAAAhCwEAAEYIBAAAQQgMAABOCAoAAG4NAQAAfQ4BAABKDwEAAH8QAQAAJBAEAABxEAEAADcGEQAAOBIFAABNBgoAAD8TFAAAHxUBAABLFgoAAEIDBAAAQwMFAAAyFwQAADoXBQAAgwEYCgAAURkKAAAdBAQAABYaBAAAbxsBAACFARwBAACGAR0BAAAcGgQAAEAeBAAAPh4EAABPHgoAAWtHSAABbEdIAAI0RgoAAjVGBAACNkYEAAMzREUAAzlERQADREQEAAQxQiAABTxAQQAFPT4/AAY5GUMACIEBIAwACSI8CgEACnoxBAALKSgBAQMMWAIfAA0XLwECBwQNGikqAgcEDRstNAIHBA0iKQoCBwQNWAIiAgcEDWgtLgIHBA5wKAEBCA9tJSYAPCE8IzwkPic7IzkjOyE5IT0hOCE9IzgjNjI6IzY1OCQ2NzskOiQ2OTY6OSQ9JDQmAggKBwgVAAEHCBUFBggBCBEGCBAGCA8GCBIBAwEIAAIGCAEIEQECAQYIAQMGCAEIEQYIDwEBBQcIAQgRCgICBggVAQgRAwcIAQEGCBUDBwgBBQYIFQkHCAEIEQMKBQMDAwYIEgYIFQUHCAEIEQMGCBIGCBUBBggDAwYIAQgRBggSAgYIAQMBBggEBAcIAQgRAwYIEgMGCAEIEQUFBggQBggPBgoCBggSAwIGCA8GCgIDBggQBggPBggSAgMDAwcIAQMGCBUCBggDBQIGCAMDAQYIAAEIEwEKAgIIEQgCAQsUAgkACQECCBEIAwIDCAQBBggVAQUBCAEBCQACBgsUAgkACQEJAAEGCQEBBggCAQgCAgcLFAIJAAkBCQABCQEDBwsUAgkACQEJAAkBAggDAwEGCBIBCAkFBQMHCAMDAwEHCQEBCAUHBQMGCAMDCAQDCgUBCAYJBQYIAwcIAwMDAwcIBAMDAQgHAQgIAwEDBggEAgYKCQAGCQAUBAQIDQMDAwQICwMEAwMDAwQECAwIDgMICwEGCA8BCA4BBggOAQgNAQYIDQEIDAEGCAwBCAsBBggLAgQEAQQWBAQIDQMDAwQICwMEAQMDAwMEBAgMCA4DAwgLAggNCA4FAwMDCAwDBUNsb2NrA0k2NBFNYW51YWxQcmljZUNvbmZpZx1NYW51YWxQcmljZUNvbmZpZ1VwZGF0ZWRFdmVudBxNYW51YWxQcmljZURpcmVjdFVwZGF0ZUV2ZW50D09SQUNMRV9QUk9WSURFUg5PcmFjbGVQcm92aWRlcgVQcmljZQlQcmljZURhdGEPUHJpY2VGZWVkQ29uZmlnD1ByaWNlSWRlbnRpZmllcglQcmljZUluZm8PUHJpY2VJbmZvT2JqZWN0ElByaWNlVXBkYXRlUmVxdWVzdB5QcmljZVVwZGF0ZVJlcXVlc3RDcmVhdGVkRXZlbnQfUHJpY2VVcGRhdGVSZXF1ZXN0RXhlY3V0ZWRFdmVudB1QcmljZVVwZGF0ZVJlcXVlc3RTaWduZWRFdmVudAVTdGF0ZQZTdHJpbmcFVGFibGUJVHhDb250ZXh0A1VJRAxhYnNfZGlmZl91NjQDYWRkCGFzc2V0X2lkEWF1dGhvcml6ZWRfYWRtaW5zBmJvcnJvdwpib3Jyb3dfbXV0IWNhbGN1bGF0ZV9wcmljZV9jaGFuZ2VfcGVyY2VudGFnZRNjZWlsX2Rpdl9tc190b19zZWNzFGNoYW5nZV9wZXJjZW50YWdlX2JwHGNsZWFudXBfcHJpY2VfdXBkYXRlX3JlcXVlc3QFY2xvY2sUY29uZmlndXJlX3ByaWNlX2ZlZWQIY29udGFpbnMZY3JlYXRlX2FuZF9zaGFyZV9wcm92aWRlchtjcmVhdGVfcHJpY2VfdXBkYXRlX3JlcXVlc3QKY3JlYXRlZF9hdA1jdXJyZW50X3ByaWNlGWRpcmVjdF91cGRhdGVfY29vbGRvd25fbXMLZHVtbXlfZmllbGQEZW1pdAdlbmFibGVkBWV2ZW50CGV4ZWN1dGVkCGV4ZWN1dG9yCmV4cGlyZXNfYXQPZ2V0X2Fzc2V0X3ByaWNlFGdldF9hc3NldF9wcmljZV9kYXRhCWdldF9ieXRlcxtnZXRfY3VycmVudF9wcmljZV9mcm9tX3B5dGgIZ2V0X2V4cG8PZ2V0X2lzX25lZ2F0aXZlGWdldF9tYWduaXR1ZGVfaWZfbmVnYXRpdmUZZ2V0X21hZ25pdHVkZV9pZl9wb3NpdGl2ZRdnZXRfbWFudWFsX3ByaWNlX2NvbmZpZxVnZXRfbWFudWFsX3ByaWNlX2RhdGEJZ2V0X3ByaWNlGGdldF9wcmljZV9kYXRhX2Zyb21fcHl0aBJnZXRfcHJpY2VfZGVjaW1hbHMUZ2V0X3ByaWNlX2lkZW50aWZpZXIlZ2V0X3ByaWNlX2luZm9fZnJvbV9wcmljZV9pbmZvX29iamVjdBNnZXRfcHJpY2VfdGltZXN0YW1wGGdldF9wcmljZV91cGRhdGVfcmVxdWVzdA9nZXRfcHJpY2VfdmFsdWURZ2V0X3Byb3ZpZGVyX25hbWUOZ2V0X3B5dGhfcHJpY2UTZ2V0X3B5dGhfcHJpY2VfZGF0YQ1nZXRfdGltZXN0YW1wEmdldF90b2tlbl9kZWNpbWFscwtnZXRfdmVyc2lvbgNpNjQCaWQEaW5pdBdpbml0aWFsaXplX21hbnVhbF9wcmljZRNpc19hdXRob3JpemVkX2FkbWluCGlzX2ZyZXNoF2lzX21hbnVhbF9wcmljZV9lbmFibGVkCWlzX3BhdXNlZBNpc19wcmljZV9kYXRhX2ZyZXNoDmlzX3ByaWNlX2ZyZXNoE2lzX3B5dGhfcHJpY2VfZnJlc2gcbGFzdF9kaXJlY3RfdXBkYXRlX3RpbWVzdGFtcBVsYXN0X3VwZGF0ZV90aW1lc3RhbXAMbGFzdF91cGRhdGVyFG1hbnVhbF9wcmljZV9jb25maWdzCm1hdGhfdXRpbHMEbmFtZQNuZXcJbmV3X3ByaWNlD25leHRfcmVxdWVzdF9pZAZvYmplY3QJb2xkX3ByaWNlD29yYWNsZV9wcm92aWRlcgVvd25lcgVwcmljZRlwcmljZV9jaGFuZ2VfdGhyZXNob2xkX2JwC3ByaWNlX2ZlZWRzEHByaWNlX2lkZW50aWZpZXIKcHJpY2VfaW5mbxVwcmljZV91cGRhdGVfcmVxdWVzdHMIcHJvcG9zZXIEcHl0aAxweXRoX2ZlZWRfaWQGcmVtb3ZlCnJlcXVlc3RfaWQTcmVxdWlyZWRfc2lnbmF0dXJlcw1zYWZlX211bF91MTI4CHNhZmVfcG93BnNlbmRlcgpzZXRfcGF1c2VkF3NldF9zdGFsZW5lc3NfdGhyZXNob2xkDHNoYXJlX29iamVjdBlzaWduX3ByaWNlX3VwZGF0ZV9yZXF1ZXN0D3NpZ25hdHVyZV9jb3VudApzaWduYXR1cmVzBnNpZ25lchNzdGFsZW5lc3NfdGhyZXNob2xkBXN0YXRlBnN0cmluZwV0YWJsZQl0aW1lc3RhbXAMdGltZXN0YW1wX21zDnRva2VuX2RlY2ltYWxzCHRyYW5zZmVyEnRyYW5zZmVyX293bmVyc2hpcAp0eF9jb250ZXh0GnVwZGF0ZV9tYW51YWxfcHJpY2VfZGlyZWN0B3VwZGF0ZXIEdXRmOBN2YWxpZGF0ZV9wcmljZV9mZWVkFnZhbGlkYXRlX3ByaWNlX2ZlZWRfaWQGdmVjdG9yF3ZlcmlmeV9hdXRob3JpemVkX2FkbWluFnZlcmlmeV9jb29sZG93bl9wZXJpb2QHdmVyc2lvbhpIQXthLVX9oJTdwVko/IVqIjX26nGHiJKSmL0bMhuSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAo2X8c1qxmNzW+CNHSttAqFZ5xFYZGEwbOYKK3pqVlqeAwgBAAAAAAAAAAMIAgAAAAAAAAADCAMAAAAAAAAAAwgEAAAAAAAAAAMIBQAAAAAAAAADCAYAAAAAAAAAAwgHAAAAAAAAAAMICAAAAAAAAAADCAkAAAAAAAAAAwgKAAAAAAAAAAMICwAAAAAAAAADCAwAAAAAAAAAAwgNAAAAAAAAAAMIDgAAAAAAAAADCA8AAAAAAAAAAwgQAAAAAAAAAAMIEQAAAAAAAAADCBIAAAAAAAAAAwgTAAAAAAAAAAMIAJh/MwAAAAACAQgDCEBCDwAAAAAACgITElB5dGggT3JhY2xlIHYxLjAuMAMIAFwmBQAAAAAAAgNfA3kDTAEBAgpICBOHAQNXCBFhCxQCCBEIAnUDTgFVCxQCCBEIA2QLFAIDCARaA14FAgIDGAgRZwoCewIDAgoYCBEqASYDUwNSA1QFGQoFYAMnA2oDBAIKaQMYCBFcA1kDHgNlBXMKBSUDLgMsAQUCBhgIEVwDWQMeA4ABBXkDBgIIGAgRaQNcA1kDHgNlBWoDeQMHAgUYCBFpA3QFcgN5AwgCBhgIEWkDXANZAy0FeQMJAgcYCBEqARkKBWADJwNqA3kDCgIBKAEAAAAAAQECAQEAAAEUCgARNwcVBxYRMwoAOAAHEwkKADgBCgA4AgYAAAAAAAAAAAsALhE/EgE4AwICAQAAETMKABAAFCAEBgUQCwIBCwABCwMBCwQBBwQnCgAQAQoBOAQELAoAEAEKATgFDAUKBRACFAQqCwIBCwABCwMBCwQBCwUQAxQCCwUBCwALAQsCCwMLBBEYAgMBAAAROAoAEAAUIAQGBRALAgELAAELAwELBAEHBCcKABABCgE4BAQxCgAQAQoBOAUMBQoFEAIUBC8LAgELAAELAwELBAEKBRADFAsFEAQUCBIAAgsFAQsACwELAgsDCwQRGQIEAQAAAREKABAFCgE4BgQGBQoLAAEHBScLABAFCwE4BxAGFAIFAQAAAQIHFAIGAQAAKyAKAAoBERQECgsAAQsCAQgCCgAQBQoBOAYgBBYLAAELAgEJAgsAEAULATgHDAMLAgsDEAcRHAIHAQAAASEKAAoBERQEDgsCAQsAAQsDAQsEAQgCCwAQBQsBOAYgBBwLAgELAwELBAEJAgsCCwMLBBEdAggBAAAsKgsEET8KABAIFCEECAUMCwABBw8nCgMxEiUEEQUVCwABBwYnCgELAgsDEgIMBQoAEAUKATgGBCQKAA8FCgE4CAELAA8FCwELBTgJAgkBAAABBAsAEAkUAgoBAAABBAsAEAoUAgsBAAABBAsAEAAUAgwBAAABGgsCET8KABAIFCEECAUMCwABBw8nCgAQABQKASEEFQsAAQILAQsADwAVAg0BAAABGgsCET8KABAIFCEECAUMCwABBw8nCgAQCBQKASEEFQsAAQILAQsADwgVAg4BAAAwcQoIET8KABAIFCEECAUQCwABCwgBCwcBBw8nCgIGAAAAAAAAAAAkBBUFHQsAAQsIAQsHAQcOJw4DQSYGAAAAAAAAAAAkBCMFKwsAAQsIAQsHAQcHJwoGBgAAAAAAAAAAJAQwBTgLAAELCAELBwEHDCcKBg4DQSYlBD4FRgsAAQsIAQsHAQcMJwsHETUMCgoBCAsCCgoGAAAAAAAAAAALCBE/CwMKBAoFCgYSAwwJCgAQAQoBOAQEYAoADwEKATgKAQsADwEKAQoJOAsLAQgOCRALFAsECwULBgsKEgk4DAIPAQAAM2kKAgYAAAAAAAAAACQEBQUNCwABCwQBCwMBBw4nCgAQAQoBOAQEEwUbCwABCwQBCwMBBw0nCwAPAQoBOA0MBwoHEAIUBCUFLQsEAQsHAQsDAQcNJwsEET8MBQoHLgoFESELAxE1DAgKBy4KCBEiCgcQAxQKAhEjDAYKBgoHEAwUJQRIBUwLBwEHCCcKBxADFAwJCgIKBw8DFQoICgcPBBUKCAoHDw0VCgULBw8OFQsBCwkLAgsGCwULCBIFOA4CEAEAADZ0CgIGAAAAAAAAAAAkBAUFDQsAAQsEAQsDAQcOJwoAEAEKATgEBBMFGwsAAQsEAQsDAQcNJwoAEAEKATgFDAcKBxACFAQlBS8LAAELBAELBwELAwEHDScLBBE/DAUKBwoFESELAxE1DAgKBxADFAoCESMMBgoAEA8UDAoKABAPFAYBAAAAAAAAABYKAA8PFUAmAAAAAAAAAAAMCw0LCgVEJgoKCgEKBxADFAoCCgYKBQsLCggKCAcXFgkSBAwJCwAPEAoKCwk4DwsBCgoKBxADFAsCCwYLBQsHEBEUCwgSBjgQCwoCEQEAADi7AQoAEBAKAjgRBAYFDgsAAQsEAQsDAQcKJwoADxAKAjgSDAsKCxASFCAEGQUjCwsBCwABCwQBCwMBBxEnCgsQExQKASEEKgU0CwsBCwABCwQBCwMBBwonCwMRNQwICggKCxAUFCUEPgVGCwsBCwABCwQBBxAnCwQRPwwFCgAQAQoBOAQETwVVCwsBCwABBw0nCgAQAQoBOAUMBgoGCgURIQsGEBEUDAwGAAAAAAAAAAAMCQoJCgsQFUEmIwR9CgsQFQoJQiYUCgUiBHIFeAsLAQsAAQcLJwsJBgEAAAAAAAAAFgwJBWMKCw8VCgVEJgoLEBVBJgwNCgEKAgoFCg0KCBIHOBMLDQsMJgS2AQsADwEKATgNDAcKBxADFAwKCgsQFhQKBw8DFQoICgcPBBUKBQsHDw4VCAoLDxIVCwELAgsKCwsQFhQLBQsIEgg4FAW6AQsLAQsAAQISAQAAAQULABABCwE4BQITAQAAEQ4LABABCwE4BQwDCgMQAxQLAxAEFAgSAAIUAQAAAREKABABCgE4BCAECgsAAQkCCwAQAQsBOAUQAhQCFQEAAAEFCwAQEAsBOBUCFgEAADs/CgAQEAoCOBEEBgUMCwABCwMBBwonCgAQEAoCOBUMBgoGEBMUCwEhBBgFIAsGAQsAAQsDAQcKJwsDETUMBQoGEBIUBCwLBgEIDAQFMgsFCwYQFBQkDAQLBAQ1BTkLAAEHEicLAA8QCwI4FgECFwEAAAESCgAQAQoBOAQgBAoLAAEJAgsAEAELATgFEAsOAjgXAhgAAAArHwoAEAUKATgGBAYFEAsCAQsAAQsDAQsEAQcFJwoAEAULATgHDAULAgsDCwUQBwsECwAQFxQRGgIZAAAAKx8KABAFCgE4BgQGBRALAgELAAELAwELBAEHBScKABAFCwE4BwwFCwILAwsFEAcLBAsAEBcUERsCGgAAAD2JAQoBETEMFg4WETAMBw4HES8LAhQhBA0FFQsAAQsBAQsDAQcDJwoDETUMCAsACwELAxEyDBULCAboAwAAAAAAABoMCQ4VES4MFwsEER4MEAsJCxcRHwsQJQQuBTAHACcOFREtDBgOGBEpIAQ4BToHAScOGBErDA8OFREsDAwODBEpBG0ODBEqDA0KDQcUNCQEWwsNBxQ0FwwKMgoAAAAAAAAAAAAAAAAAAAALCjURKAwLCw81CwsaDAUFagcUNAsNFwwRMgoAAAAAAAAAAAAAAAAAAAALETURKAwTCw81CxMRJwwFCwUMBgV9DgwRKwcUNBYMEjIKAAAAAAAAAAAAAAAAAAAACxI1ESgMFAsPNQsUEScMBgsGDA4KDjL//////////wAAAAAAAAAAJQSEAQWGAQcCJwsONAIbAAAASZIBCgERMQwXDhcRMAwHDgcRLwsCFCEEDQUVCwABCwEBCwMBBwMnCgMRNQwICwALAQsDETIMFgsIBugDAAAAAAAAGgwJDhYRLgwZCwQRHgwRCwkKGREfCxElDA8KDwQwBTIHACcLGQboAwAAAAAAABgMGA4WES0MGg4aESkgBD4FQAcBJw4aESsMEA4WESwMDA4MESkEcw4MESoMDQoNBxQ0JARhCw0HFDQXDAoyCgAAAAAAAAAAAAAAAAAAAAsKNREoDAsLEDULCxoMBQVwBxQ0Cw0XDBIyCgAAAAAAAAAAAAAAAAAAAAsSNREoDBQLEDULFBEnDAULBQwGBYMBDgwRKwcUNBYMEzIKAAAAAAAAAAAAAAAAAAAACxM1ESgMFQsQNQsVEScMBgsGDA4KDjL//////////wAAAAAAAAAAJQSKAQWMAQcCJwsONAsYCw8SAAIcAAAASgwLABExDAMOAxEwDAIOAhEvCwEUIQIdAAAASxgKAhE1DAMLAAsBCwIRMgwGCwMG6AMAAAAAAAAaDAQOBhEuDAcHExEeDAULBAsHER8LBSUCHgAAABoTCgAG6AMAAAAAAAAaDAILAAboAwAAAAAAABkGAAAAAAAAAAAhBA0LAgwBBRELAgYBAAAAAAAAABYMAQsBAh8AAAAEDwoACgEkBAkLAAsBFwwCBQ0LAQsAFwwCCwICIAEAAAEaCwIRPwoAEAgUIQQIBQwLAAEHDycKAQYAAAAAAAAAACQEEQUVCwABBw4nCwELAA8XFQIhAAAAAQkLABALDgE4FwQGBQgHBycCIgAAAAQZCgEKABANFCYEDQsBCgAQDRQXDAIFDwYAAAAAAAAAAAwCCwILABAYFCYEFgUYBwknAiMAAAAEHAoABgAAAAAAAAAAIQQGBhAnAAAAAAAAAgoBCgAkBA8LAQoAFwwCBRMKAAsBFwwCCwI1MhAnAAAAAAAAAAAAAAAAAAAYCwA1GjQCJAEAAAEECwAQGRQCJQEAAAEECwAQGhQCJgEAAAEECwAQGxQCAQUBBgMBAwIDAwEDAgICAQEJAQEBAgMGAwcDBAMFAQgBBwMJBAkEAQQIBAYEAwEEAwgAAAABAAIA",
+    "oracle_registry": "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",
+    "upgrade_governance": "oRzrCwYAAAALAQASAhI8A06kAQTyARoFjAKEAgeQBMIICNIMYAayDWQKlg51DIsP9wcNghcYAEYAMgAzAUgCHgIxAj8CQQJDAAoHAAAJCAAACwMAAA0DAAAMAwAAAAMAAAgCAAECCAACAwgAAgQMAAUBBwAFBwQABgUMAgcBBAEIBgIAACoAAQAAFgIBAAAXAwQAADsFAQAAHwYBAABEBwEAAEIIAQAAKAkKAAArCwwAACMNDgAAJw0EAAAmDQ8AAEoQAQAASQsBAAIOJwEAAiQdDwACJR0EAAIsHAwAAxUrDAEABBwaAQEDBSkVDwEIBS0SEwAGDx4BAgcEBhMhKgIHBAYUIiMCBwQGFSEMAgcEBi0SFwIHBAc6GgEBCAgdGAQACDkYEQAUFBoWGxkWFhMfGRYYFhMkFCYTKBMpFxYSEQIIBgcIDQAFBggICAkKBQMHCA0FBwgBBggICAoDBggNAQMDBwgBAwYIDQUHCAEHCAgGCAcDBggNBAcIAQoFAwYIDQMHCAEFBggNAgYIAQMBBggAAgYIAQUBAQEGCAEBBgoFAQgKAgYIAQYICAEFAQcIDQEICwEICAEGCQACAwgAAQsMAgkACQEBBggNAQgBAQkABwUICgMDCAADCgUCBggICAoBBggIAwcLDAIJAAkBCQAJAQEIAgUFAwMHCAADAgYLDAIJAAkBCQACBwsMAgkACQEJAAEHCQEBCAMDAwcIAAMBCAcEBwgIBggJBggHBggNAQgEAQgFAQYJAQIGCgkABgkAEUFkbWluVXBkYXRlZEV2ZW50AklEDk9yYWNsZVByb3ZpZGVyDk9yYWNsZVJlZ2lzdHJ5EFJlZ2lzdHJ5QWRtaW5DYXAFVGFibGUJVHhDb250ZXh0A1VJRBJVUEdSQURFX0dPVkVSTkFOQ0URVXBncmFkZUdvdmVybmFuY2UOVXBncmFkZVJlcXVlc3QaVXBncmFkZVJlcXVlc3RDcmVhdGVkRXZlbnQbVXBncmFkZVJlcXVlc3RFeGVjdXRlZEV2ZW50GVVwZ3JhZGVSZXF1ZXN0U2lnbmVkRXZlbnQRYWN0aXZhdGVfcHJvdmlkZXIDYWRkCWFkbWluX2NhcAZhZG1pbnMRYXV0aG9yaXplZF9hZG1pbnMGYm9ycm93CmJvcnJvd19tdXQIY29udGFpbnMbY3JlYXRlX2FuZF9zaGFyZV9nb3Zlcm5hbmNlFmNyZWF0ZV91cGdyYWRlX3JlcXVlc3QKY3JlYXRlZF9hdBNjdXJyZW50X3Byb3ZpZGVyX2lkD2N1cnJlbnRfdmVyc2lvbgtkdW1teV9maWVsZARlbWl0EmVwb2NoX3RpbWVzdGFtcF9tcwVldmVudBdleGVjdXRlX3VwZ3JhZGVfcmVxdWVzdAhleGVjdXRlZAhleGVjdXRvcgpleHBpcmVzX2F0FWdldF9hdXRob3JpemVkX2FkbWlucxdnZXRfY3VycmVudF9wcm92aWRlcl9pZBxnZXRfY3VycmVudF9wcm92aWRlcl92ZXJzaW9uD2dldF9yZWdpc3RyeV9pZBdnZXRfcmVxdWlyZWRfc2lnbmF0dXJlcxNnZXRfdXBncmFkZV9yZXF1ZXN0AmlkBGluaXQTaXNfYXV0aG9yaXplZF9hZG1pbhZpc19wcm92aWRlcl9yZWdpc3RlcmVkA25ldw9uZXdfcHJvdmlkZXJfaWQLbmV3X3ZlcnNpb24PbmV4dF9yZXF1ZXN0X2lkBm9iamVjdA9vcmFjbGVfcHJvdmlkZXIPb3JhY2xlX3JlZ2lzdHJ5BW93bmVyCHByb3Bvc2VyC3JlZ2lzdHJ5X2lkCnJlcXVlc3RfaWQTcmVxdWlyZWRfc2lnbmF0dXJlcwZzZW5kZXIMc2hhcmVfb2JqZWN0FHNpZ25fdXBncmFkZV9yZXF1ZXN0D3NpZ25hdHVyZV9jb3VudApzaWduYXR1cmVzBnNpZ25lcgV0YWJsZQl0aW1lc3RhbXAIdHJhbnNmZXISdHJhbnNmZXJfb3duZXJzaGlwCnR4X2NvbnRleHQYdXBkYXRlX2F1dGhvcml6ZWRfYWRtaW5zCnVwZGF0ZWRfYnkSdXBncmFkZV9nb3Zlcm5hbmNlEHVwZ3JhZGVfcmVxdWVzdHMGdmVjdG9yF3ZlcmlmeV9hdXRob3JpemVkX2FkbWluG3ZlcmlmeV9yZWdpc3RyeV9hc3NvY2lhdGlvbhpIQXthLVX9oJTdwVko/IVqIjX26nGHiJKSmL0bMhuSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgMIAQAAAAAAAAADCAIAAAAAAAAAAwgDAAAAAAAAAAMIBAAAAAAAAAADCAUAAAAAAAAAAwgGAAAAAAAAAAMIBwAAAAAAAAADCAgAAAAAAAAAAwgJAAAAAAAAAAMIAIQMJAAAAAAAAgo3Ay4ICi8DGQgKGgM1BT0KBRgDIgMgAQECCCkICzYIChAICRIKBTgDRwsMAgMIADADNAUCAgc3Ay4ICi8DGQgKGgM1BUADAwIFNwM+BTwDOANAAwQCBTcDLggKLwMhBUADBQIEEQoFOANFBUADBgIBGwEAAAAAAQECAQEAAAEzCgMGAAAAAAAAAAAkBAUFCwsAAQsEAQcDJwoDDgJBESUEEQUXCwABCwQBBwMnDgJBEQYAAAAAAAAAACQEHQUjCwABCwQBBwAnCgQRFQsAOAALAQsCCwMKBDgBBgAAAAAAAAAACwQuER0SATgCAgIBAAAbXQoALgoBEQwKBBEdDAUKAC4KBRENCgMGAAAAAAAAAAAkBBAFGAsBAQsAAQsEAQcGJwoBCgIREQQdBSULAQELAAELBAEHBycKAREPDAYLAREQDAgLBBEcDAcKABAAFAwKCgAQABQGAQAAAAAAAAAWCgAPABVAEQAAAAAAAAAADAsNCwoFRBEKCgoCCgMKBgoICgULCwoHCgcHCRYJEgAMCQsADwEKCgsJOAMKCgsCCwMLBgsICwULBxICOAQLCgIDAQAAIF4KABABCgE4BQQGBQwLAAELAgEHAScKAhEdDAMKAC4KAxENCgAQAhQMBwsADwEKATgGDAYKBhADFCAEIgUoCwYBCwIBBwUnCwIRHAwECgQKBhAEFCUEMgU2CwYBBwQnBgAAAAAAAAAADAUKBQoGEAVBESMEUAoGEAUKBUIRFAoDIgRHBUsLBgEHAicLBQYBAAAAAAAAABYMBQU4CgYPBQoDRBELAQsDCwYQBUERCwcLBBIDOAcCBAEAACWEAQoALgoBLhEMCgAQAQoDOAUECwUVCwEBCwIBCwABCwQBBwEnCgAQAhQMBwoADwEKAzgGDAYKBhADFCAEJAUwCwYBCwEBCwIBCwABCwQBBwUnCgI4CAoGEAYUIQQ4BUQLBgELAQELAgELAAELBAEHBycKBBEcDAUKBQoGEAQUJQROBVoLBgELAQELAgELAAELBAEHBCcKBhAFQRELByYEYQVtCwYBCwEBCwIBCwABCwQBBwMnCwELABAHCwIKBBEOCAoGDwMVCwMKBhAGFAsGEAgUCwQRHQsFEgQ4CQIFAQAAAUYKAxEdCgAQCRQhBAgFDgsAAQsDAQcIJwoCBgAAAAAAAAAAJAQTBRkLAAELAwEHAycKAg4BQRElBB8FJQsAAQsDAQcDJw4BQREGAAAAAAAAAAAkBCsFMQsAAQsDAQcAJwsBCgAPChULAgoADwIVCgAQChQLABACFAoDER0LAxEcEgU4CgIGAQAAARELAhEdCgAQCRQhBAgFDAsAAQcIJwsBCwAPCRUCBwEAAAEFCwAQAQsBOAsCCAEAAAEFCwAQCg4BOAwCCQEAAAEDCwAQCgIKAQAAAQQLABACFAILAQAAAQQLABALFAIMAAAAAQsLABALFAsBOAAhBAgFCgcIJwINAAAAAQkLABAKDgE4DAQGBQgHACcCAQYBBQEEAAkACAAGAAEBAgACAQcBAwEBAA=="
+  },
+  "typeOriginTable": [
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "PriceData",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "OracleProvider",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "PriceFeedConfig",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "ManualPriceConfig",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "PriceUpdateRequest",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "ManualPriceDirectUpdateEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "PriceUpdateRequestCreatedEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "PriceUpdateRequestSignedEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "PriceUpdateRequestExecutedEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "ManualPriceConfigUpdatedEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_provider",
+      "datatype_name": "ORACLE_PROVIDER",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_registry",
+      "datatype_name": "ProviderInfo",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_registry",
+      "datatype_name": "RegistryAdminCap",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_registry",
+      "datatype_name": "OracleRegistry",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_registry",
+      "datatype_name": "ProviderRegisteredEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_registry",
+      "datatype_name": "ProviderActivatedEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_registry",
+      "datatype_name": "ProviderDeactivatedEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "oracle_registry",
+      "datatype_name": "ORACLE_REGISTRY",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "upgrade_governance",
+      "datatype_name": "UpgradeRequest",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "upgrade_governance",
+      "datatype_name": "UpgradeGovernance",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "upgrade_governance",
+      "datatype_name": "UpgradeRequestCreatedEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "upgrade_governance",
+      "datatype_name": "UpgradeRequestSignedEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "upgrade_governance",
+      "datatype_name": "UpgradeRequestExecutedEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "upgrade_governance",
+      "datatype_name": "AdminUpdatedEvent",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    },
+    {
+      "module_name": "upgrade_governance",
+      "datatype_name": "UPGRADE_GOVERNANCE",
+      "package": "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92"
+    }
+  ],
+  "linkageTable": {
+    "0x0000000000000000000000000000000000000000000000000000000000000001": {
+      "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000001",
+      "upgraded_version": 20
+    },
+    "0x0000000000000000000000000000000000000000000000000000000000000002": {
+      "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "upgraded_version": 47
+    },
+    "0x5306f64e312b581766351c07af79c72fcb1cd25147157fdc2f8ad76de9a3fb6a": {
+      "upgraded_id": "0x5306f64e312b581766351c07af79c72fcb1cd25147157fdc2f8ad76de9a3fb6a",
+      "upgraded_version": 1
+    },
+    "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e": {
+      "upgraded_id": "0x04e20ddf36af412a4096f9014f4a565af9e812db9a05cc40254846cf6ed0ad91",
+      "upgraded_version": 2
+    }
+  },
+  "functionMap": {
+    "math_utils": {
+      "calculate_price_amount": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64",
+          "u8",
+          "u8",
+          "u8"
+        ],
+        "return": [
+          "u64",
+          "bool"
+        ]
+      },
+      "calculate_token_from_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u8",
+          "u64",
+          "u8",
+          "u8",
+          "u8"
+        ],
+        "return": [
+          "u64",
+          "bool"
+        ]
+      },
+      "safe_mul_u128": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "safe_mul_u64": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "safe_pow": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      }
+    },
+    "oracle_provider": {
+      "abs_diff_u64": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "calculate_price_change_percentage": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "ceil_div_ms_to_secs": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "cleanup_price_update_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "configure_price_feed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "vector<u8>",
+          "u8",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_and_share_provider": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_price_update_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_asset_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_asset_price_data": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::PriceData"
+        ]
+      },
+      "get_current_price_from_pyth": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_manual_price_config": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::ManualPriceConfig"
+        ]
+      },
+      "get_manual_price_data": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::PriceData"
+        ]
+      },
+      "get_price_data_from_pyth": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&vector<u8>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "u64"
+        ],
+        "return": [
+          "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::PriceData"
+        ]
+      },
+      "get_price_decimals": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "get_price_timestamp": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::PriceData"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_price_update_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "u64"
+        ],
+        "return": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::PriceUpdateRequest"
+        ]
+      },
+      "get_price_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::PriceData"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_provider_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "get_pyth_price": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_pyth_price_data": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::PriceData"
+        ]
+      },
+      "get_token_decimals": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "get_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::ORACLE_PROVIDER",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "initialize_manual_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "vector<address>",
+          "u64",
+          "u64",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_authorized_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_manual_price_enabled": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_price_data_fresh": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::PriceData"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_price_fresh": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_pyth_price_fresh": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::state::State",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "set_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "bool",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "set_staleness_threshold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "sign_price_update_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_ownership": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_manual_price_direct": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "validate_price_feed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "validate_price_feed_id": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject",
+          "&vector<u8>"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "verify_authorized_admin": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::ManualPriceConfig",
+          "address"
+        ],
+        "return": []
+      },
+      "verify_cooldown_period": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::ManualPriceConfig",
+          "u64"
+        ],
+        "return": []
+      }
+    },
+    "oracle_registry": {
+      "activate_provider": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry",
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::RegistryAdminCap",
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_and_share_registry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "deactivate_provider": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry",
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::RegistryAdminCap",
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_current_provider_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_current_provider_id_for_protocols": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_current_provider_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_major_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_minor_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_patch_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_provider_id_by_version": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry",
+          "u64"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_provider_info": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::ProviderInfo"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::ORACLE_REGISTRY",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_provider_active": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "is_provider_registered": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "register_provider": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry",
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::RegistryAdminCap",
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      }
+    },
+    "upgrade_governance": {
+      "create_and_share_governance": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry",
+          "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::RegistryAdminCap",
+          "vector<address>",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "create_upgrade_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance",
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "execute_upgrade_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance",
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry",
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_provider::OracleProvider",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "get_authorized_admins": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance"
+        ],
+        "return": [
+          "&vector<address>"
+        ]
+      },
+      "get_registry_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "get_required_signatures": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_upgrade_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance",
+          "u64"
+        ],
+        "return": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeRequest"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UPGRADE_GOVERNANCE",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "is_authorized_admin": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance",
+          "address"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "sign_upgrade_request": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "transfer_ownership": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance",
+          "address",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "update_authorized_admins": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance",
+          "vector<address>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "verify_authorized_admin": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance",
+          "address"
+        ],
+        "return": []
+      },
+      "verify_registry_association": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::upgrade_governance::UpgradeGovernance",
+          "&0x1a48417b612d55fda094ddc15928fc856a2235f6ea718788929298bd1b321b92::oracle_registry::OracleRegistry"
+        ],
+        "return": []
+      }
+    }
+  }
+}
