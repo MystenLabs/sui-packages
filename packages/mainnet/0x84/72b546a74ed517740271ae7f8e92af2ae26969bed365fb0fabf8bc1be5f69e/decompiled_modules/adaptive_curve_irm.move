@@ -1,0 +1,94 @@
+module 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::adaptive_curve_irm {
+    struct AdaptiveCurveIrm has store {
+        rate_at_target: 0x2::table::Table<u64, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt>,
+    }
+
+    public(friend) fun borrow_rate(arg0: &mut AdaptiveCurveIrm, arg1: u64, arg2: u128, arg3: u128, arg4: u64, arg5: &0x2::clock::Clock) : u128 {
+        let (v0, v1) = compute_borrow_rate(arg0, arg1, arg2, arg3, arg4, 0x2::clock::timestamp_ms(arg5));
+        let v2 = v1;
+        let v3 = v0;
+        if (0x2::table::contains<u64, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt>(&arg0.rate_at_target, arg1)) {
+            *0x2::table::borrow_mut<u64, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt>(&mut arg0.rate_at_target, arg1) = v2;
+        } else {
+            0x2::table::add<u64, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt>(&mut arg0.rate_at_target, arg1, v2);
+        };
+        let v4 = 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_value(&v3);
+        0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::events::emit_borrow_rate_update(arg1, v4, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_value(&v2));
+        v4
+    }
+
+    public(friend) fun borrow_rate_view(arg0: &AdaptiveCurveIrm, arg1: u64, arg2: u128, arg3: u128, arg4: u64, arg5: &0x2::clock::Clock) : u128 {
+        let (v0, _) = compute_borrow_rate(arg0, arg1, arg2, arg3, arg4, 0x2::clock::timestamp_ms(arg5));
+        let v2 = v0;
+        0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_value(&v2)
+    }
+
+    fun compute_borrow_rate(arg0: &AdaptiveCurveIrm, arg1: u64, arg2: u128, arg3: u128, arg4: u64, arg5: u64) : (0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt) {
+        let v0 = if (arg2 > 0) {
+            0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::math::w_div_down(arg3, arg2))
+        } else {
+            0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_zero()
+        };
+        let v1 = 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(900000000000000000);
+        let v2 = if (0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_gte(v0, v1)) {
+            0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::math::wad() - 900000000000000000)
+        } else {
+            v1
+        };
+        let v3 = 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_w_div_to_zero(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_sub(v0, v1), v2);
+        let v4 = if (0x2::table::contains<u64, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt>(&arg0.rate_at_target, arg1)) {
+            *0x2::table::borrow<u64, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt>(&arg0.rate_at_target, arg1)
+        } else {
+            0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_zero()
+        };
+        let v5 = v4;
+        let (v6, v7) = if (0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_value(&v5) == 0) {
+            (0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(1268391680), 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(1268391680))
+        } else {
+            let v8 = if (arg4 == 0) {
+                0
+            } else {
+                arg5 - arg4
+            };
+            let v9 = 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_w_mul_to_zero(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_w_mul_to_zero(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(1585489599189), v3), 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(((v8 / 1000) as u128)));
+            if (0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_value(&v9) == 0) {
+                (v5, v5)
+            } else {
+                let v10 = new_rate_at_target(v5, v9);
+                let v11 = new_rate_at_target(v5, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_halve(&v9));
+                let v12 = 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_add(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_add(v5, v10), 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_double(&v11));
+                (0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_quarter(&v12), v10)
+            }
+        };
+        (curve(v6, v3), v7)
+    }
+
+    public(friend) fun create(arg0: &mut 0x2::tx_context::TxContext) : AdaptiveCurveIrm {
+        AdaptiveCurveIrm{rate_at_target: 0x2::table::new<u64, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt>(arg0)}
+    }
+
+    fun curve(arg0: 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt, arg1: 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt) : 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt {
+        let v0 = 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::math::wad());
+        let v1 = if (0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_is_negative(&arg1)) {
+            0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_sub(v0, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_w_div_to_zero(v0, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(4000000000000000000)))
+        } else {
+            0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_sub(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(4000000000000000000), v0)
+        };
+        0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_w_mul_to_zero(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_add(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_w_mul_to_zero(v1, arg1), v0), arg0)
+    }
+
+    fun new_rate_at_target(arg0: 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt, arg1: 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt) : 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt {
+        0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_bound(0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_w_mul_to_zero(arg0, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::w_exp(arg1)), 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(31709792), 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_from_u128(63419583968))
+    }
+
+    public(friend) fun rate_at_target_view(arg0: &AdaptiveCurveIrm, arg1: u64) : u128 {
+        if (0x2::table::contains<u64, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt>(&arg0.rate_at_target, arg1)) {
+            0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::signed_value(0x2::table::borrow<u64, 0x8472b546a74ed517740271ae7f8e92af2ae26969bed365fb0fabf8bc1be5f69e::signed_int::SignedInt>(&arg0.rate_at_target, arg1))
+        } else {
+            1268391680
+        }
+    }
+
+    // decompiled from Move bytecode v6
+}
+
