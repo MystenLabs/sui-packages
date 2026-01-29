@@ -3,6 +3,40 @@ module 0x1::u128 {
         arg0 ^ 340282366920938463463374607431768211455
     }
 
+    public fun checked_add(arg0: u128, arg1: u128) : 0x1::option::Option<u128> {
+        if (arg1 > 340282366920938463463374607431768211455 - arg0) {
+            0x1::option::none<u128>()
+        } else {
+            0x1::option::some<u128>(arg0 + arg1)
+        }
+    }
+
+    public fun checked_div(arg0: u128, arg1: u128) : 0x1::option::Option<u128> {
+        if (arg1 == 0) {
+            0x1::option::none<u128>()
+        } else {
+            0x1::option::some<u128>(arg0 / arg1)
+        }
+    }
+
+    public fun checked_mul(arg0: u128, arg1: u128) : 0x1::option::Option<u128> {
+        if (arg0 == 0 || arg1 == 0) {
+            0x1::option::some<u128>(0)
+        } else if (arg1 > 340282366920938463463374607431768211455 / arg0) {
+            0x1::option::none<u128>()
+        } else {
+            0x1::option::some<u128>(arg0 * arg1)
+        }
+    }
+
+    public fun checked_sub(arg0: u128, arg1: u128) : 0x1::option::Option<u128> {
+        if (arg0 < arg1) {
+            0x1::option::none<u128>()
+        } else {
+            0x1::option::some<u128>(arg0 - arg1)
+        }
+    }
+
     public fun diff(arg0: u128, arg1: u128) : u128 {
         if (arg0 > arg1) {
             arg0 - arg1

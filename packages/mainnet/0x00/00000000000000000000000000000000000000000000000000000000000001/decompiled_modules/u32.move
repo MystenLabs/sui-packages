@@ -3,6 +3,40 @@ module 0x1::u32 {
         arg0 ^ 4294967295
     }
 
+    public fun checked_add(arg0: u32, arg1: u32) : 0x1::option::Option<u32> {
+        if (arg1 > 4294967295 - arg0) {
+            0x1::option::none<u32>()
+        } else {
+            0x1::option::some<u32>(arg0 + arg1)
+        }
+    }
+
+    public fun checked_div(arg0: u32, arg1: u32) : 0x1::option::Option<u32> {
+        if (arg1 == 0) {
+            0x1::option::none<u32>()
+        } else {
+            0x1::option::some<u32>(arg0 / arg1)
+        }
+    }
+
+    public fun checked_mul(arg0: u32, arg1: u32) : 0x1::option::Option<u32> {
+        if (arg0 == 0 || arg1 == 0) {
+            0x1::option::some<u32>(0)
+        } else if (arg1 > 4294967295 / arg0) {
+            0x1::option::none<u32>()
+        } else {
+            0x1::option::some<u32>(arg0 * arg1)
+        }
+    }
+
+    public fun checked_sub(arg0: u32, arg1: u32) : 0x1::option::Option<u32> {
+        if (arg0 < arg1) {
+            0x1::option::none<u32>()
+        } else {
+            0x1::option::some<u32>(arg0 - arg1)
+        }
+    }
+
     public fun diff(arg0: u32, arg1: u32) : u32 {
         if (arg0 > arg1) {
             arg0 - arg1

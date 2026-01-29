@@ -64,6 +64,13 @@ module 0x2::balance {
         0x2::funds_accumulator::add_impl<Balance<T0>>(arg0, arg1);
     }
 
+    public fun settled_funds_value<T0>(arg0: &0x2::accumulator::AccumulatorRoot, arg1: address) : u64 {
+        if (!0x2::accumulator::accumulator_u128_exists<Balance<T0>>(arg0, arg1)) {
+            return 0
+        };
+        (0x1::u128::min(18446744073709551615, 0x2::accumulator::accumulator_u128_read<Balance<T0>>(arg0, arg1)) as u64)
+    }
+
     public fun split<T0>(arg0: &mut Balance<T0>, arg1: u64) : Balance<T0> {
         assert!(arg0.value >= arg1, 2);
         arg0.value = arg0.value - arg1;

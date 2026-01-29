@@ -20,6 +20,16 @@ module 0x2::accumulator {
         Key<T0>{address: arg0}
     }
 
+    public(friend) fun accumulator_u128_exists<T0>(arg0: &AccumulatorRoot, arg1: address) : bool {
+        let v0 = Key<T0>{address: arg1};
+        root_has_accumulator<T0, U128>(arg0, v0)
+    }
+
+    public(friend) fun accumulator_u128_read<T0>(arg0: &AccumulatorRoot, arg1: address) : u128 {
+        let v0 = Key<T0>{address: arg1};
+        root_borrow_accumulator<T0, U128>(arg0, v0).value
+    }
+
     fun create(arg0: &0x2::tx_context::TxContext) {
         assert!(0x2::tx_context::sender(arg0) == @0x0, 0);
         let v0 = AccumulatorRoot{id: 0x2::object::sui_accumulator_root_object_id()};
@@ -42,6 +52,10 @@ module 0x2::accumulator {
 
     public(friend) fun root_add_accumulator<T0, T1: store>(arg0: &mut AccumulatorRoot, arg1: Key<T0>, arg2: T1) {
         0x2::dynamic_field::add<Key<T0>, T1>(&mut arg0.id, arg1, arg2);
+    }
+
+    public(friend) fun root_borrow_accumulator<T0, T1: store>(arg0: &AccumulatorRoot, arg1: Key<T0>) : &T1 {
+        0x2::dynamic_field::borrow<Key<T0>, T1>(&arg0.id, arg1)
     }
 
     public(friend) fun root_borrow_accumulator_mut<T0, T1: store>(arg0: &mut AccumulatorRoot, arg1: Key<T0>) : &mut T1 {
