@@ -1,0 +1,3008 @@
+module 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::market {
+    struct Market<phantom T0> has key {
+        id: 0x2::object::UID,
+        disabled_functions: 0x2::vec_set::VecSet<FunctionMask<T0>>,
+        vaults_locked: bool,
+        symbols_locked: bool,
+        referral_rate: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate,
+        rebase_fee_model: 0x2::object::ID,
+        referrals: 0x2::table::Table<address, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::Referral>,
+        vaults: 0x2::bag::Bag,
+        symbols: 0x2::bag::Bag,
+        positions: 0x2::bag::Bag,
+        orders: 0x2::bag::Bag,
+        lp_supply: 0x2::balance::Supply<T0>,
+        version: u64,
+    }
+
+    struct FunctionMask<phantom T0> has copy, drop, store {
+        name: u8,
+    }
+
+    struct SymbolConfig has store, key {
+        id: 0x2::object::UID,
+        max_opening_size: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+        max_opening_size_enabled: bool,
+        max_opening_size_per_position: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+        max_opening_size_per_position_enabled: bool,
+        instant_exit_fee_config: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::PositionInstantExitFeeConfig,
+    }
+
+    struct LossProtectionVaultConfig<phantom T0> has store, key {
+        id: 0x2::object::UID,
+        enabled: bool,
+        vault: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::LossProtectionVault<T0>,
+        liquidation_percentage: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate,
+        loss_percentage: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate,
+    }
+
+    struct WrappedPositionConfig<phantom T0, phantom T1> has key {
+        id: 0x2::object::UID,
+        enabled: bool,
+        inner: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::PositionConfig,
+    }
+
+    struct PositionCap<phantom T0, phantom T1, phantom T2> has key {
+        id: 0x2::object::UID,
+    }
+
+    struct OrderCap<phantom T0, phantom T1, phantom T2, phantom T3> has key {
+        id: 0x2::object::UID,
+        position_id: 0x1::option::Option<0x2::object::ID>,
+    }
+
+    struct LONG has drop {
+        dummy_field: bool,
+    }
+
+    struct SHORT has drop {
+        dummy_field: bool,
+    }
+
+    struct VaultName<phantom T0> has copy, drop, store {
+        dummy_field: bool,
+    }
+
+    struct LossProtectionVaultName<phantom T0> has copy, drop, store {
+        dummy_field: bool,
+    }
+
+    struct SymbolName<phantom T0, phantom T1> has copy, drop, store {
+        dummy_field: bool,
+    }
+
+    struct PositionName<phantom T0, phantom T1, phantom T2> has copy, drop, store {
+        id: 0x2::object::ID,
+        owner: address,
+    }
+
+    struct OrderName<phantom T0, phantom T1, phantom T2, phantom T3> has copy, drop, store {
+        id: 0x2::object::ID,
+        owner: address,
+        position_id: 0x1::option::Option<0x2::object::ID>,
+    }
+
+    struct MarketCreated has copy, drop {
+        referrals_parent: 0x2::object::ID,
+        vaults_parent: 0x2::object::ID,
+        symbols_parent: 0x2::object::ID,
+        positions_parent: 0x2::object::ID,
+        orders_parent: 0x2::object::ID,
+        version: u64,
+    }
+
+    struct FunctionStatusUpdated has copy, drop {
+        func_name: u8,
+        enabled: bool,
+    }
+
+    struct VaultCreated<phantom T0> has copy, drop {
+        dummy_field: bool,
+    }
+
+    struct VaultRemoved<phantom T0> has copy, drop {
+        dummy_field: bool,
+    }
+
+    struct VaultEmptied<phantom T0> has copy, drop {
+        withdrawn_amount: u64,
+    }
+
+    struct LossProtectionVaultCreated<phantom T0> has copy, drop {
+        liquidation_percentage: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate,
+        loss_percentage: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate,
+    }
+
+    struct LossProtectionVaultConfigUpdated<phantom T0> has copy, drop {
+        liquidation_percentage: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate,
+        loss_percentage: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate,
+    }
+
+    struct LossProtectionVaultEnabledUpdated<phantom T0> has copy, drop {
+        enabled: bool,
+    }
+
+    struct LossProtectionVaultDeposited<phantom T0> has copy, drop {
+        depositer: address,
+        deposit_amount: u64,
+        after_balance: u64,
+    }
+
+    struct LossProtectionVaultWithdrawn<phantom T0> has copy, drop {
+        withdrawer: address,
+        withdraw_amount: u64,
+        after_balance: u64,
+    }
+
+    struct SymbolCreated<phantom T0, phantom T1> has copy, drop {
+        dummy_field: bool,
+    }
+
+    struct SymbolRemoved<phantom T0, phantom T1> has copy, drop {
+        dummy_field: bool,
+    }
+
+    struct CollateralAdded<phantom T0, phantom T1, phantom T2> has copy, drop {
+        dummy_field: bool,
+    }
+
+    struct CollateralRemoved<phantom T0, phantom T1, phantom T2> has copy, drop {
+        dummy_field: bool,
+    }
+
+    struct SymbolStatusUpdated<phantom T0, phantom T1> has copy, drop {
+        open_enabled: bool,
+        decrease_enabled: bool,
+        liquidate_enabled: bool,
+    }
+
+    struct VaultStatusUpdated has copy, drop {
+        enabled: bool,
+    }
+
+    struct FeeConfigUpdated<phantom T0> has copy, drop {
+        fee_rate_percent: u8,
+        fee_collector: address,
+    }
+
+    struct VaultFeederUpdated<phantom T0> has copy, drop {
+        vault_name: VaultName<T0>,
+        feeder: 0x2::object::ID,
+    }
+
+    struct VaultWeightUpdated<phantom T0> has copy, drop {
+        vault_name: VaultName<T0>,
+        weight: u256,
+    }
+
+    struct SymbolFeederUpdated<phantom T0, phantom T1> has copy, drop {
+        symbol_name: SymbolName<T0, T1>,
+        feeder: 0x2::object::ID,
+    }
+
+    struct SymbolAggPriceConfigParamsUpdated<phantom T0, phantom T1> has copy, drop {
+        symbol_name: SymbolName<T0, T1>,
+        max_interval: u64,
+        max_price_confidence: u64,
+    }
+
+    struct ForcePositionCleared<phantom T0, phantom T1, phantom T2> has copy, drop {
+        position_name: PositionName<T0, T1, T2>,
+    }
+
+    struct PositionConfigReplaced<phantom T0, phantom T1> has copy, drop {
+        max_leverage: u64,
+        min_holding_duration: u64,
+        max_reserved_multiplier: u64,
+        min_collateral_value: u256,
+        min_order_fee_value: u256,
+        open_fee_bps: u128,
+        decrease_fee_bps: u128,
+        liquidation_threshold: u128,
+        liquidation_bonus: u128,
+    }
+
+    struct ReferralRateUpdated has copy, drop {
+        referral_rate: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate,
+    }
+
+    struct ReferralAdded has copy, drop {
+        owner: address,
+        referrer: address,
+        referral_rate: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate,
+    }
+
+    struct ReferralRebateRateUpdated has copy, drop {
+        owner: address,
+        referrer: address,
+        referral_rate: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate,
+    }
+
+    struct PositionClaimed<T0: copy + drop, T1: copy + drop> has copy, drop {
+        position_name: 0x1::option::Option<T0>,
+        event: T1,
+    }
+
+    struct ForcePositionSettled<phantom T0, phantom T1, phantom T2> has copy, drop {
+        position_name: PositionName<T0, T1, T2>,
+        timestamp: u64,
+    }
+
+    struct AdminLiquidityAdded<phantom T0> has copy, drop {
+        depositer: address,
+        deposit_amount: u64,
+        after_liquidity: u64,
+    }
+
+    struct Deposited<phantom T0> has copy, drop {
+        minter: address,
+        price: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+        deposit_amount: u64,
+        mint_amount: u64,
+        fee_value: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+        referrer: address,
+    }
+
+    struct Withdrawn<phantom T0> has copy, drop {
+        burner: address,
+        price: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+        withdraw_amount: u64,
+        burn_amount: u64,
+        fee_value: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+    }
+
+    struct Swapped<phantom T0, phantom T1> has copy, drop {
+        swapper: address,
+        source_price: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+        dest_price: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+        source_amount: u64,
+        dest_amount: u64,
+        fee_value: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+    }
+
+    struct OrderCreated<T0: copy + drop, T1: copy + drop> has copy, drop {
+        order_name: T0,
+        event: T1,
+    }
+
+    struct OrderExecuted<T0: copy + drop, T1: copy + drop> has copy, drop {
+        executor: address,
+        order_name: T0,
+        claim: T1,
+    }
+
+    struct OrderCleared<T0: copy + drop> has copy, drop {
+        order_name: T0,
+    }
+
+    struct VaultInfo has drop {
+        price: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::AggPrice,
+        value: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+    }
+
+    struct TradingFeederKey has copy, drop, store {
+        id: 0x2::object::ID,
+    }
+
+    struct TradingFeederKeyV1 has copy, drop, store {
+        id: 0x2::object::ID,
+    }
+
+    struct TradingFeederPriceConfig has store, key {
+        id: 0x2::object::UID,
+        max_interval: u64,
+        max_confidence: u64,
+        use_confidence_adjusted_price: bool,
+        confidence_adjust_percentage: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+    }
+
+    struct TradingFeederPriceConfigV1 has store, key {
+        id: 0x2::object::UID,
+        max_interval: u64,
+        max_confidence: u64,
+        use_confidence_adjusted_price: bool,
+        confidence_adjust_percentage: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+    }
+
+    struct VaultsValuation {
+        timestamp: u64,
+        num: u64,
+        handled: 0x2::vec_map::VecMap<0x1::type_name::TypeName, VaultInfo>,
+        total_weight: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+        value: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+    }
+
+    struct SymbolsValuation {
+        timestamp: u64,
+        num: u64,
+        lp_supply_amount: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal,
+        handled: 0x2::vec_set::VecSet<0x1::type_name::TypeName>,
+        value: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::sdecimal::SDecimal,
+    }
+
+    public fun swap<T0, T1, T2>(arg0: &mut Market<T0>, arg1: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel, arg2: 0x2::coin::Coin<T1>, arg3: u64, arg4: VaultsValuation, arg5: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 3)), 10001);
+        check_version<T0>(arg0);
+        assert!(0x2::object::id<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel>(arg1) == arg0.rebase_fee_model, 10014);
+        assert!(0x1::type_name::get<T1>() != 0x1::type_name::get<T2>(), 10015);
+        let v0 = 0x2::tx_context::sender(arg5);
+        let (v1, v2, v3) = finalize_vaults_valuation<T0>(arg0, arg4);
+        let v4 = v1;
+        let v5 = 0x1::type_name::get<VaultName<T1>>();
+        let (_, v7) = 0x2::vec_map::remove<0x1::type_name::TypeName, VaultInfo>(&mut v4, &v5);
+        let VaultInfo {
+            price : v8,
+            value : v9,
+        } = v7;
+        let v10 = v8;
+        let v11 = 0x1::type_name::get<VaultName<T2>>();
+        let (_, v13) = 0x2::vec_map::remove<0x1::type_name::TypeName, VaultInfo>(&mut v4, &v11);
+        let VaultInfo {
+            price : v14,
+            value : v15,
+        } = v13;
+        let v16 = v14;
+        let v17 = VaultName<T1>{dummy_field: false};
+        let (v18, v19) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::swap_in<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg0.vaults, v17), arg1, &v10, 0x2::coin::into_balance<T1>(arg2), v9, v3, v2);
+        let v20 = VaultName<T2>{dummy_field: false};
+        let (v21, v22) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::swap_out<T2>(0x2::bag::borrow_mut<VaultName<T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T2>>(&mut arg0.vaults, v20), arg1, &v16, arg3, v18, v15, v3, v2);
+        let v23 = v21;
+        pay_from_balance<T2>(v23, v0, arg5);
+        let v24 = Swapped<T1, T2>{
+            swapper       : v0,
+            source_price  : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v10),
+            dest_price    : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v16),
+            source_amount : 0x2::coin::value<T1>(&arg2),
+            dest_amount   : 0x2::balance::value<T2>(&v23),
+            fee_value     : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::add(v19, v22),
+        };
+        0x2::event::emit<Swapped<T1, T2>>(v24);
+    }
+
+    entry fun update_agg_price_config_params<T0, T1, T2>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u64, arg3: u64) {
+        check_version<T0>(arg1);
+        let v0 = SymbolName<T1, T2>{dummy_field: false};
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::update_agg_price_config_params(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::mut_symbol_price_config(0x2::bag::borrow_mut<SymbolName<T1, T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v0)), arg2, arg3);
+        let v1 = SymbolName<T1, T2>{dummy_field: false};
+        let v2 = SymbolAggPriceConfigParamsUpdated<T1, T2>{
+            symbol_name          : v1,
+            max_interval         : arg2,
+            max_price_confidence : arg3,
+        };
+        0x2::event::emit<SymbolAggPriceConfigParamsUpdated<T1, T2>>(v2);
+    }
+
+    entry fun add_collateral_to_symbol<T0, T1, T2, T3>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = SymbolName<T2, T3>{dummy_field: false};
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::add_collateral_to_symbol<T1>(0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v0));
+        let v1 = CollateralAdded<T1, T2, T3>{dummy_field: false};
+        0x2::event::emit<CollateralAdded<T1, T2, T3>>(v1);
+    }
+
+    entry fun add_new_referral<T0>(arg0: &mut Market<T0>, arg1: address, arg2: &0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 21)), 10001);
+        check_version<T0>(arg0);
+        let v0 = 0x2::tx_context::sender(arg2);
+        assert!(!0x2::table::contains<address, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::Referral>(&arg0.referrals, v0), 10005);
+        0x2::table::add<address, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::Referral>(&mut arg0.referrals, v0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::new_referral(arg1, arg0.referral_rate));
+        let v1 = ReferralAdded{
+            owner         : v0,
+            referrer      : arg1,
+            referral_rate : arg0.referral_rate,
+        };
+        0x2::event::emit<ReferralAdded>(v1);
+    }
+
+    entry fun add_new_symbol<T0, T1, T2>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u64, arg3: u64, arg4: &0x2::coin::CoinMetadata<T1>, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: u256, arg7: u128, arg8: u64, arg9: u64, arg10: u64, arg11: u256, arg12: u256, arg13: u128, arg14: u128, arg15: u128, arg16: u128, arg17: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        validate_fee_bps((arg13 as u256));
+        validate_fee_bps((arg14 as u256));
+        validate_liquidation_params((arg15 as u256), (arg16 as u256));
+        validate_leverage(arg8);
+        validate_holding_duration(arg9);
+        assert!(!arg1.symbols_locked, 10003);
+        let v0 = WrappedPositionConfig<T1, T2>{
+            id      : 0x2::object::new(arg17),
+            enabled : true,
+            inner   : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::new_position_config(arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16),
+        };
+        0x2::transfer::share_object<WrappedPositionConfig<T1, T2>>(v0);
+        let v1 = SymbolName<T1, T2>{dummy_field: false};
+        0x2::bag::add<SymbolName<T1, T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v1, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::new_symbol(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::create_funding_fee_model(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg6), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg7), arg17), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::new_agg_price_config<T1>(arg2, arg3, arg4, arg5)));
+        let v2 = SymbolCreated<T1, T2>{dummy_field: false};
+        0x2::event::emit<SymbolCreated<T1, T2>>(v2);
+    }
+
+    entry fun add_new_symbol_with_currency<T0, T1, T2>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u64, arg3: u64, arg4: &0x2::coin_registry::Currency<T1>, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: u256, arg7: u128, arg8: u64, arg9: u64, arg10: u64, arg11: u256, arg12: u256, arg13: u128, arg14: u128, arg15: u128, arg16: u128, arg17: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        validate_fee_bps((arg13 as u256));
+        validate_fee_bps((arg14 as u256));
+        validate_liquidation_params((arg15 as u256), (arg16 as u256));
+        validate_leverage(arg8);
+        validate_holding_duration(arg9);
+        assert!(!arg1.symbols_locked, 10003);
+        let v0 = WrappedPositionConfig<T1, T2>{
+            id      : 0x2::object::new(arg17),
+            enabled : true,
+            inner   : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::new_position_config(arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16),
+        };
+        0x2::transfer::share_object<WrappedPositionConfig<T1, T2>>(v0);
+        let v1 = SymbolName<T1, T2>{dummy_field: false};
+        0x2::bag::add<SymbolName<T1, T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v1, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::new_symbol(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::create_funding_fee_model(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg6), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg7), arg17), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::new_agg_price_config_from_currency<T1>(arg2, arg3, arg4, arg5)));
+        let v2 = SymbolCreated<T1, T2>{dummy_field: false};
+        0x2::event::emit<SymbolCreated<T1, T2>>(v2);
+    }
+
+    entry fun add_new_vault<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u256, arg3: u64, arg4: u64, arg5: &0x2::coin::CoinMetadata<T1>, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: u256, arg8: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        validate_vault_weight(arg2);
+        assert!(!arg1.vaults_locked, 10004);
+        let v0 = VaultName<T1>{dummy_field: false};
+        0x2::bag::add<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::new_vault<T1>(arg2, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::create_reserving_fee_model(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg7), arg8), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::new_agg_price_config<T1>(arg3, arg4, arg5, arg6)));
+        let v1 = VaultCreated<T1>{dummy_field: false};
+        0x2::event::emit<VaultCreated<T1>>(v1);
+    }
+
+    entry fun add_new_vault_with_currency<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u256, arg3: u64, arg4: u64, arg5: &0x2::coin_registry::Currency<T1>, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: u256, arg8: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        validate_vault_weight(arg2);
+        assert!(!arg1.vaults_locked, 10004);
+        let v0 = VaultName<T1>{dummy_field: false};
+        0x2::bag::add<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::new_vault<T1>(arg2, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::create_reserving_fee_model(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg7), arg8), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::new_agg_price_config_from_currency<T1>(arg3, arg4, arg5, arg6)));
+        let v1 = VaultCreated<T1>{dummy_field: false};
+        0x2::event::emit<VaultCreated<T1>>(v1);
+    }
+
+    public entry fun admin_add_liquidity_to_vault<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: 0x2::coin::Coin<T1>, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 27)), 10001);
+        check_version<T0>(arg1);
+        let v0 = VaultName<T1>{dummy_field: false};
+        let (_, v2) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::admin_add_liquidity_to_vault<T1>(arg0, 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v0), 0x2::coin::into_balance<T1>(arg2));
+        let v3 = AdminLiquidityAdded<T1>{
+            depositer       : 0x2::tx_context::sender(arg3),
+            deposit_amount  : 0x2::coin::value<T1>(&arg2),
+            after_liquidity : v2,
+        };
+        0x2::event::emit<AdminLiquidityAdded<T1>>(v3);
+    }
+
+    entry fun admin_deposit_to_loss_protection_vault<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: 0x2::coin::Coin<T1>, arg3: &0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = LossProtectionVaultName<T1>{dummy_field: false};
+        assert!(0x2::dynamic_object_field::exists_<LossProtectionVaultName<T1>>(&arg1.id, v0), 10038);
+        let v1 = LossProtectionVaultName<T1>{dummy_field: false};
+        let v2 = 0x2::dynamic_object_field::borrow_mut<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&mut arg1.id, v1);
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::deposit_to_loss_protection_vault<T1>(&mut v2.vault, 0x2::coin::into_balance<T1>(arg2));
+        let v3 = LossProtectionVaultDeposited<T1>{
+            depositer      : 0x2::tx_context::sender(arg3),
+            deposit_amount : 0x2::coin::value<T1>(&arg2),
+            after_balance  : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::loss_protection_vault_value<T1>(&v2.vault),
+        };
+        0x2::event::emit<LossProtectionVaultDeposited<T1>>(v3);
+    }
+
+    entry fun admin_set_loss_protection_vault_enabled<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: bool) {
+        check_version<T0>(arg1);
+        let v0 = LossProtectionVaultName<T1>{dummy_field: false};
+        assert!(0x2::dynamic_object_field::exists_<LossProtectionVaultName<T1>>(&arg1.id, v0), 10038);
+        let v1 = LossProtectionVaultName<T1>{dummy_field: false};
+        0x2::dynamic_object_field::borrow_mut<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&mut arg1.id, v1).enabled = arg2;
+        let v2 = LossProtectionVaultEnabledUpdated<T1>{enabled: arg2};
+        0x2::event::emit<LossProtectionVaultEnabledUpdated<T1>>(v2);
+    }
+
+    entry fun admin_update_loss_protection_vault_config<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u128, arg3: u128) {
+        check_version<T0>(arg1);
+        let v0 = LossProtectionVaultName<T1>{dummy_field: false};
+        assert!(0x2::dynamic_object_field::exists_<LossProtectionVaultName<T1>>(&arg1.id, v0), 10038);
+        let v1 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg2);
+        let v2 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg3);
+        validate_loss_protection_percentage(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::to_raw(v1));
+        validate_loss_protection_percentage(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::to_raw(v2));
+        let v3 = LossProtectionVaultName<T1>{dummy_field: false};
+        let v4 = 0x2::dynamic_object_field::borrow_mut<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&mut arg1.id, v3);
+        v4.liquidation_percentage = v1;
+        v4.loss_percentage = v2;
+        let v5 = LossProtectionVaultConfigUpdated<T1>{
+            liquidation_percentage : v1,
+            loss_percentage        : v2,
+        };
+        0x2::event::emit<LossProtectionVaultConfigUpdated<T1>>(v5);
+    }
+
+    entry fun admin_update_referral_rebate_rate<T0>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: address, arg3: u128, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 28)), 10001);
+        check_version<T0>(arg1);
+        assert!(0x2::table::contains<address, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::Referral>(&arg1.referrals, arg2), 10041);
+        validate_referral_rate((arg3 as u256));
+        let v0 = 0x2::table::borrow_mut<address, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::Referral>(&mut arg1.referrals, arg2);
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::set_rebate_rate(v0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg3));
+        let v1 = ReferralRebateRateUpdated{
+            owner         : arg2,
+            referrer      : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::get_referrer(v0),
+            referral_rate : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::get_rebate_rate(v0),
+        };
+        0x2::event::emit<ReferralRebateRateUpdated>(v1);
+    }
+
+    entry fun admin_withdraw_from_loss_protection_vault<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = LossProtectionVaultName<T1>{dummy_field: false};
+        assert!(0x2::dynamic_object_field::exists_<LossProtectionVaultName<T1>>(&arg1.id, v0), 10038);
+        let v1 = LossProtectionVaultName<T1>{dummy_field: false};
+        let v2 = 0x2::dynamic_object_field::borrow_mut<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&mut arg1.id, v1);
+        let v3 = 0x2::tx_context::sender(arg3);
+        0x2::transfer::public_transfer<0x2::coin::Coin<T1>>(0x2::coin::from_balance<T1>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::withdraw_from_loss_protection_vault<T1>(&mut v2.vault, arg2), arg3), v3);
+        let v4 = LossProtectionVaultWithdrawn<T1>{
+            withdrawer      : v3,
+            withdraw_amount : arg2,
+            after_balance   : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::loss_protection_vault_value<T1>(&v2.vault),
+        };
+        0x2::event::emit<LossProtectionVaultWithdrawn<T1>>(v4);
+    }
+
+    fun apply_price_impact_to_price(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::AggPriceConfig, arg1: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal, arg2: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate, arg3: bool, arg4: bool) : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::AggPrice {
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::apply_price_impact(arg0, arg1, arg2, arg3, arg4)
+    }
+
+    fun borrow_trading_price_config_for_feeder(arg0: &0x2::object::UID, arg1: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject) : &TradingFeederPriceConfigV1 {
+        let v0 = TradingFeederKeyV1{id: 0x2::object::id<0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject>(arg1)};
+        0x2::dynamic_object_field::borrow<TradingFeederKeyV1, TradingFeederPriceConfigV1>(arg0, v0)
+    }
+
+    public fun calculate_market_lp_price<T0>(arg0: &mut Market<T0>, arg1: VaultsValuation, arg2: SymbolsValuation) : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal {
+        check_version<T0>(arg0);
+        let (_, _, _, v3) = validate_market_valuation<T0>(arg0, arg1, arg2);
+        let v4 = lp_supply_amount<T0>(arg0);
+        if (0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::is_zero(&v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::div(v3, v4)
+        }
+    }
+
+    fun check_version<T0>(arg0: &Market<T0>) {
+        assert!(arg0.version <= 12, 10020);
+    }
+
+    public entry fun clear_closed_position<T0, T1, T2, T3>(arg0: &mut Market<T0>, arg1: PositionCap<T1, T2, T3>, arg2: &0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 12)), 10001);
+        check_version<T0>(arg0);
+        let PositionCap { id: v0 } = arg1;
+        let v1 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::uid_to_inner(&v0),
+            owner : 0x2::tx_context::sender(arg2),
+        };
+        if (0x2::bag::contains<PositionName<T1, T2, T3>>(&arg0.positions, v1)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::destroy_position<T1>(0x2::bag::remove<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg0.positions, v1));
+        };
+        0x2::object::delete(v0);
+    }
+
+    public entry fun clear_decrease_market_order<T0, T1, T2, T3, T4>(arg0: &mut Market<T0>, arg1: OrderCap<T1, T2, T3, T4>, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 38)), 10001);
+        check_version<T0>(arg0);
+        let v0 = 0x2::tx_context::sender(arg2);
+        let OrderCap {
+            id          : v1,
+            position_id : v2,
+        } = arg1;
+        let v3 = v1;
+        let v4 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::uid_to_inner(&v3),
+            owner       : v0,
+            position_id : v2,
+        };
+        0x2::object::delete(v3);
+        let v5 = OrderCleared<OrderName<T1, T2, T3, T4>>{order_name: v4};
+        0x2::event::emit<OrderCleared<OrderName<T1, T2, T3, T4>>>(v5);
+        pay_from_balance<T4>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::destroy_decrease_market_order<T4>(0x2::bag::remove<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreaseMarketOrder<T4>>(&mut arg0.orders, v4)), v0, arg2);
+    }
+
+    public entry fun clear_decrease_position_order<T0, T1, T2, T3, T4>(arg0: &mut Market<T0>, arg1: OrderCap<T1, T2, T3, T4>, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 13)), 10001);
+        check_version<T0>(arg0);
+        let v0 = 0x2::tx_context::sender(arg2);
+        let OrderCap {
+            id          : v1,
+            position_id : v2,
+        } = arg1;
+        let v3 = v1;
+        let v4 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::uid_to_inner(&v3),
+            owner       : v0,
+            position_id : v2,
+        };
+        0x2::object::delete(v3);
+        let v5 = OrderCleared<OrderName<T1, T2, T3, T4>>{order_name: v4};
+        0x2::event::emit<OrderCleared<OrderName<T1, T2, T3, T4>>>(v5);
+        pay_from_balance<T4>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::destroy_decrease_position_order<T4>(0x2::bag::remove<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreasePositionOrder<T4>>(&mut arg0.orders, v4)), v0, arg2);
+    }
+
+    public entry fun clear_open_market_order<T0, T1, T2, T3, T4>(arg0: &mut Market<T0>, arg1: OrderCap<T1, T2, T3, T4>, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 31)), 10001);
+        check_version<T0>(arg0);
+        let v0 = 0x2::tx_context::sender(arg2);
+        let OrderCap {
+            id          : v1,
+            position_id : v2,
+        } = arg1;
+        let v3 = v1;
+        let v4 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::uid_to_inner(&v3),
+            owner       : v0,
+            position_id : v2,
+        };
+        let (v5, v6) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::destroy_open_market_order<T1, T4>(0x2::bag::remove<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenMarketOrder<T1, T4>>(&mut arg0.orders, v4));
+        0x2::object::delete(v3);
+        let v7 = OrderCleared<OrderName<T1, T2, T3, T4>>{order_name: v4};
+        0x2::event::emit<OrderCleared<OrderName<T1, T2, T3, T4>>>(v7);
+        pay_from_balance<T1>(v5, v0, arg2);
+        pay_from_balance<T4>(v6, v0, arg2);
+    }
+
+    public entry fun clear_open_position_order<T0, T1, T2, T3, T4>(arg0: &mut Market<T0>, arg1: OrderCap<T1, T2, T3, T4>, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 16)), 10001);
+        check_version<T0>(arg0);
+        let v0 = 0x2::tx_context::sender(arg2);
+        let OrderCap {
+            id          : v1,
+            position_id : v2,
+        } = arg1;
+        let v3 = v1;
+        let v4 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::uid_to_inner(&v3),
+            owner       : v0,
+            position_id : v2,
+        };
+        let (v5, v6) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::destroy_open_position_order<T1, T4>(0x2::bag::remove<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenPositionOrder<T1, T4>>(&mut arg0.orders, v4));
+        0x2::object::delete(v3);
+        let v7 = OrderCleared<OrderName<T1, T2, T3, T4>>{order_name: v4};
+        0x2::event::emit<OrderCleared<OrderName<T1, T2, T3, T4>>>(v7);
+        pay_from_balance<T1>(v5, v0, arg2);
+        pay_from_balance<T4>(v6, v0, arg2);
+    }
+
+    fun compute_price_impact_spread<T0>(arg0: &0x2::object::UID, arg1: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::AggPrice, arg2: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal, arg3: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal, arg4: u64, arg5: bool) : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate {
+        let v0 = 0x2::dynamic_object_field::borrow<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfigKey<T0>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfig>(arg0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::new_config_key<T0>());
+        let v1 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::max_oi_long(v0);
+        let v2 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::max_oi_short(v0);
+        let v3 = if (0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::is_zero(&v1)) {
+            let v4 = SymbolName<T0, LONG>{dummy_field: false};
+            if (0x2::dynamic_object_field::exists_<SymbolName<T0, LONG>>(arg0, v4)) {
+                0x2::dynamic_object_field::borrow<SymbolName<T0, LONG>, SymbolConfig>(arg0, v4).max_opening_size
+            } else {
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+            }
+        } else {
+            v1
+        };
+        let v5 = if (0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::is_zero(&v2)) {
+            let v6 = SymbolName<T0, SHORT>{dummy_field: false};
+            if (0x2::dynamic_object_field::exists_<SymbolName<T0, SHORT>>(arg0, v6)) {
+                0x2::dynamic_object_field::borrow<SymbolName<T0, SHORT>, SymbolConfig>(arg0, v6).max_opening_size
+            } else {
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+            }
+        } else {
+            v2
+        };
+        let (v7, v8, v9, v10) = if (arg5) {
+            (arg2, arg3, v3, v5)
+        } else {
+            (arg3, arg2, v5, v3)
+        };
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::compute_average_spread_rate(v0, v7, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(arg1, arg4), v8, v9, v10)
+    }
+
+    public(friend) fun create_market<T0>(arg0: 0x2::balance::Supply<T0>, arg1: 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate, arg2: &mut 0x2::tx_context::TxContext) {
+        let v0 = Market<T0>{
+            id                 : 0x2::object::new(arg2),
+            disabled_functions : 0x2::vec_set::empty<FunctionMask<T0>>(),
+            vaults_locked      : false,
+            symbols_locked     : false,
+            referral_rate      : arg1,
+            rebase_fee_model   : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::create_rebase_fee_model(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_permyriad(1), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(10000000000000000), arg2),
+            referrals          : 0x2::table::new<address, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::Referral>(arg2),
+            vaults             : 0x2::bag::new(arg2),
+            symbols            : 0x2::bag::new(arg2),
+            positions          : 0x2::bag::new(arg2),
+            orders             : 0x2::bag::new(arg2),
+            lp_supply          : arg0,
+            version            : 12,
+        };
+        let v1 = MarketCreated{
+            referrals_parent : 0x2::object::id<0x2::table::Table<address, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::Referral>>(&v0.referrals),
+            vaults_parent    : 0x2::object::id<0x2::bag::Bag>(&v0.vaults),
+            symbols_parent   : 0x2::object::id<0x2::bag::Bag>(&v0.symbols),
+            positions_parent : 0x2::object::id<0x2::bag::Bag>(&v0.positions),
+            orders_parent    : 0x2::object::id<0x2::bag::Bag>(&v0.orders),
+            version          : v0.version,
+        };
+        0x2::event::emit<MarketCreated>(v1);
+        0x2::transfer::share_object<Market<T0>>(v0);
+    }
+
+    entry fun create_symbol_funding<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u256, arg3: u256, arg4: u128, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let (v0, v1) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::create_funding_state<T1>(arg5, arg2, arg3, arg4, arg6);
+        0x2::dynamic_object_field::add<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::FundingStateKey<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::FundingState>(&mut arg1.id, v1, v0);
+    }
+
+    public fun create_symbols_valuation<T0>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>) : SymbolsValuation {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 18)), 10001);
+        assert!(!arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        arg1.symbols_locked = true;
+        SymbolsValuation{
+            timestamp        : 0x2::clock::timestamp_ms(arg0) / 1000,
+            num              : 0x2::bag::length(&arg1.symbols),
+            lp_supply_amount : lp_supply_amount<T0>(arg1),
+            handled          : 0x2::vec_set::empty<0x1::type_name::TypeName>(),
+            value            : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::sdecimal::zero(),
+        }
+    }
+
+    public fun create_vaults_valuation<T0>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>) : VaultsValuation {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 17)), 10001);
+        check_version<T0>(arg1);
+        assert!(!arg1.vaults_locked, 10002);
+        arg1.vaults_locked = true;
+        VaultsValuation{
+            timestamp    : 0x2::clock::timestamp_ms(arg0) / 1000,
+            num          : 0x2::bag::length(&arg1.vaults),
+            handled      : 0x2::vec_map::empty<0x1::type_name::TypeName, VaultInfo>(),
+            total_weight : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(),
+            value        : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(),
+        }
+    }
+
+    public entry fun decrease_position<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &PositionCap<T1, T2, T3>, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg4: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: 0x2::coin::Coin<T4>, arg8: u8, arg9: bool, arg10: u64, arg11: u256, arg12: u256, arg13: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 6)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        decrease_position_common_v1<T0, T1, T2, T3, T4>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, 0x1::option::none<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(), 0x1::option::none<0x2::object::ID>(), arg13);
+    }
+
+    fun decrease_position_common_v1<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &PositionCap<T1, T2, T3>, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg4: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: 0x2::coin::Coin<T4>, arg8: u8, arg9: bool, arg10: u64, arg11: u256, arg12: u256, arg13: 0x1::option::Option<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>, arg14: 0x1::option::Option<0x2::object::ID>, arg15: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 26)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        assert!(arg10 > 0, 10018);
+        assert!(0x2::coin::value<T4>(&arg7) > 0, 10019);
+        assert!(0x1::type_name::get<T1>() == 0x1::type_name::get<T4>(), 10031);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg15);
+        let v3 = parse_direction<T3>();
+        let v4 = SymbolName<T2, LONG>{dummy_field: false};
+        let v5 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v4))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v6 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v7 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v6)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v6))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v8 = SymbolName<T2, T3>{dummy_field: false};
+        let v9 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v8);
+        let v10 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::uid_to_inner(&arg2.id),
+            owner : v2,
+        };
+        let v11 = if (exists_trading_price_config_for_feeder(&arg1.id, arg6)) {
+            let v12 = borrow_trading_price_config_for_feeder(&arg1.id, arg6);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v9), arg6, v0, v12.max_interval, v12.max_confidence, v12.use_confidence_adjusted_price, v12.confidence_adjust_percentage, v3)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v9), arg6, v0)
+        };
+        let v13 = v11;
+        let v14 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg12);
+        let (v15, v16) = get_referral_data(&arg1.referrals, v2);
+        let v17 = if (v3) {
+            let v18 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v13);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::lt(&v18, &v14)
+        } else {
+            let v19 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v13);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::gt(&v19, &v14)
+        };
+        if (v17 || !arg9) {
+            assert!(arg8 < 2, 10007);
+            let v20 = VaultName<T1>{dummy_field: false};
+            let v21 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v20)), arg5, v0);
+            let v22 = 0x2::coin::into_balance<T4>(arg7);
+            let v23 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(&v21, 0x2::balance::value<T4>(&v22));
+            let v24 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::config_min_order_fee_value(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::position_config<T1>(0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v10)));
+            assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::ge(&v23, &v24), 10032);
+            let v25 = 0x2::object::new(arg15);
+            let v26 = OrderName<T1, T2, T3, T4>{
+                id          : 0x2::object::uid_to_inner(&v25),
+                owner       : v2,
+                position_id : 0x1::option::some<0x2::object::ID>(v10.id),
+            };
+            let (v27, v28) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::new_decrease_position_order<T4>(v0, arg9, arg10, v14, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg11), v22, arg14, arg13, v16);
+            0x2::bag::add<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreasePositionOrder<T4>>(&mut arg1.orders, v26, v27);
+            let v29 = OrderCap<T1, T2, T3, T4>{
+                id          : v25,
+                position_id : v26.position_id,
+            };
+            0x2::transfer::transfer<OrderCap<T1, T2, T3, T4>>(v29, v2);
+            let v30 = OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateDecreasePositionOrderEvent>{
+                order_name : v26,
+                event      : v28,
+            };
+            0x2::event::emit<OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateDecreasePositionOrderEvent>>(v30);
+        } else {
+            assert!(arg8 > 0, 10008);
+            let v31 = VaultName<T1>{dummy_field: false};
+            let v32 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v31);
+            let v33 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v32), arg5, v0);
+            let v34 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+            let v35 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v34)) {
+                apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v9), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v13), compute_price_impact_spread<T2>(&arg1.id, &v13, v5, v7, arg10, v3), v3, false)
+            } else {
+                v13
+            };
+            let v36 = v35;
+            let v37 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg1.id, 10001);
+            let v38 = get_symbol_instant_exit_fee_config<T2, T3>(&arg1.id);
+            let v39 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v37);
+            let v40 = LossProtectionVaultName<T1>{dummy_field: false};
+            let v41 = if (0x2::dynamic_object_field::exists_<LossProtectionVaultName<T1>>(&arg1.id, v40)) {
+                if (0x2::dynamic_object_field::borrow<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&arg1.id, v40).enabled) {
+                    let v42 = 0x2::dynamic_object_field::borrow_mut<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&mut arg1.id, v40);
+                    0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::decrease_position_v1_1_with_loss_protection<T1>(v32, v9, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_rate(v37), 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v10), arg3, arg4, &v33, &v36, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg11), v15, arg13, v3, arg10, lp_supply_amount<T0>(arg1), &v38, v0, v16, v1, &mut v42.vault, v42.loss_percentage)
+                } else {
+                    0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::decrease_position_v1_1<T1>(v32, v9, v37, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v10), arg3, arg4, &v33, &v36, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg11), v15, arg13, v3, arg10, lp_supply_amount<T0>(arg1), &v38, v0, v16, v1)
+                }
+            } else {
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::decrease_position_v1_1<T1>(v32, v9, v37, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v10), arg3, arg4, &v33, &v36, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg11), v15, arg13, v3, arg10, lp_supply_amount<T0>(arg1), &v38, v0, v16, v1)
+            };
+            let (v43, v44, v45, v46, v47) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_decrease_position_result_v1<T1>(v41);
+            let v48 = v46;
+            pay_from_balance<T1>(v43, v2, arg15);
+            pay_from_balance<T1>(v44, v16, arg15);
+            pay_from_balance<T1>(v45, v39, arg15);
+            if (0x1::option::is_some<0x2::balance::Balance<T1>>(&v48)) {
+                if (0x1::option::is_some<0x2::object::ID>(&arg14)) {
+                    let v49 = *0x1::option::borrow<0x2::object::ID>(&arg14);
+                    pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v48), 0x2::object::id_to_address(&v49), arg15);
+                } else {
+                    pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v48), v39, arg15);
+                };
+            } else {
+                0x1::option::destroy_none<0x2::balance::Balance<T1>>(v48);
+            };
+            0x2::transfer::public_transfer<0x2::coin::Coin<T4>>(arg7, v2);
+            let v50 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>{
+                position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v10),
+                event         : v47,
+            };
+            0x2::event::emit<PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>>(v50);
+        };
+    }
+
+    fun decrease_position_common_v2<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &PositionCap<T1, T2, T3>, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: 0x2::coin::Coin<T4>, arg6: u8, arg7: bool, arg8: u64, arg9: u256, arg10: u256, arg11: u256, arg12: 0x1::option::Option<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>, arg13: 0x1::option::Option<0x2::object::ID>, arg14: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 42)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        assert!(arg8 > 0, 10018);
+        assert!(0x2::coin::value<T4>(&arg5) > 0, 10019);
+        assert!(0x1::type_name::get<T1>() == 0x1::type_name::get<T4>(), 10031);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = 0x2::tx_context::sender(arg14);
+        let v2 = parse_direction<T3>();
+        let v3 = SymbolName<T2, LONG>{dummy_field: false};
+        let v4 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v3)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v3))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v5 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v6 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v5)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v5))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v7 = SymbolName<T2, T3>{dummy_field: false};
+        let v8 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v7);
+        let v9 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::uid_to_inner(&arg2.id),
+            owner : v1,
+        };
+        let v10 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v8);
+        let v11 = if (exists_trading_price_config_for_feeder(&arg1.id, arg4)) {
+            let v12 = borrow_trading_price_config_for_feeder(&arg1.id, arg4);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(v10, arg4, v0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::max_interval_of(v10), v12.max_confidence, v12.use_confidence_adjusted_price, v12.confidence_adjust_percentage, v2)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(v10, arg4, v0)
+        };
+        let v13 = v11;
+        let v14 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg10);
+        let (_, v16) = get_referral_data(&arg1.referrals, v1);
+        let v17 = if (v2) {
+            let v18 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v13);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::lt(&v18, &v14)
+        } else {
+            let v19 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v13);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::gt(&v19, &v14)
+        };
+        if (v17 || !arg7) {
+            assert!(arg6 < 2, 10007);
+            let v20 = VaultName<T1>{dummy_field: false};
+            let v21 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v20)), arg3, v0);
+            let v22 = 0x2::coin::into_balance<T4>(arg5);
+            let v23 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(&v21, 0x2::balance::value<T4>(&v22));
+            let v24 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::config_min_order_fee_value(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::position_config<T1>(0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v9)));
+            assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::ge(&v23, &v24), 10032);
+            let v25 = 0x2::object::new(arg14);
+            let v26 = OrderName<T1, T2, T3, T4>{
+                id          : 0x2::object::uid_to_inner(&v25),
+                owner       : v1,
+                position_id : 0x1::option::some<0x2::object::ID>(v9.id),
+            };
+            let (v27, v28) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::new_decrease_position_order<T4>(v0, arg7, arg8, v14, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg9), v22, arg13, arg12, v16);
+            0x2::bag::add<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreasePositionOrder<T4>>(&mut arg1.orders, v26, v27);
+            let v29 = OrderCap<T1, T2, T3, T4>{
+                id          : v25,
+                position_id : v26.position_id,
+            };
+            0x2::transfer::transfer<OrderCap<T1, T2, T3, T4>>(v29, v1);
+            let v30 = OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateDecreasePositionOrderEvent>{
+                order_name : v26,
+                event      : v28,
+            };
+            0x2::event::emit<OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateDecreasePositionOrderEvent>>(v30);
+        } else {
+            assert!(arg6 > 0, 10008);
+            let v31 = VaultName<T1>{dummy_field: false};
+            let v32 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v31)), arg3, v0);
+            let v33 = 0x2::coin::into_balance<T4>(arg5);
+            let v34 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(&v32, 0x2::balance::value<T4>(&v33));
+            let v35 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::config_min_order_fee_value(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::position_config<T1>(0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v9)));
+            assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::ge(&v34, &v35), 10032);
+            let v36 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+            let v37 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v36)) {
+                apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v8), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v13), compute_price_impact_spread<T2>(&arg1.id, &v13, v4, v6, arg8, v2), v2, false)
+            } else {
+                v13
+            };
+            let v38 = v37;
+            let v39 = 0x2::object::new(arg14);
+            let v40 = OrderName<T1, T2, T3, T4>{
+                id          : 0x2::object::uid_to_inner(&v39),
+                owner       : v1,
+                position_id : 0x1::option::some<0x2::object::ID>(v9.id),
+            };
+            let (v41, v42) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::new_decrease_market_order<T4>(v0, arg7, arg8, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v38), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg11), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg9), v33, arg13, arg12, v16);
+            0x2::bag::add<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreaseMarketOrder<T4>>(&mut arg1.orders, v40, v41);
+            let v43 = OrderCap<T1, T2, T3, T4>{
+                id          : v39,
+                position_id : v40.position_id,
+            };
+            0x2::transfer::transfer<OrderCap<T1, T2, T3, T4>>(v43, v1);
+            let v44 = OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateDecreaseMarketOrderEvent>{
+                order_name : v40,
+                event      : v42,
+            };
+            0x2::event::emit<OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateDecreaseMarketOrderEvent>>(v44);
+        };
+    }
+
+    public entry fun decrease_position_v2<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &PositionCap<T1, T2, T3>, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: 0x2::coin::Coin<T4>, arg6: u8, arg7: bool, arg8: u64, arg9: u256, arg10: u256, arg11: u256, arg12: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 35)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        decrease_position_common_v2<T0, T1, T2, T3, T4>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, 0x1::option::none<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(), 0x1::option::none<0x2::object::ID>(), arg12);
+    }
+
+    public entry fun decrease_position_with_scard<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &PositionCap<T1, T2, T3>, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg4: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: 0x2::coin::Coin<T4>, arg8: u8, arg9: bool, arg10: u64, arg11: u256, arg12: u256, arg13: &0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard, arg14: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 7)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        assert!(arg10 > 0, 10018);
+        assert!(0x2::coin::value<T4>(&arg7) > 0, 10019);
+        decrease_position_common_v1<T0, T1, T2, T3, T4>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, 0x1::option::some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::scard::calculate_card_rebate_rate(arg13)), 0x1::option::some<0x2::object::ID>(0x2::object::id<0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard>(arg13)), arg14);
+    }
+
+    public entry fun decrease_position_with_scard_v2<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &PositionCap<T1, T2, T3>, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: 0x2::coin::Coin<T4>, arg6: u8, arg7: bool, arg8: u64, arg9: u256, arg10: u256, arg11: u256, arg12: &0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard, arg13: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 36)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        assert!(arg8 > 0, 10018);
+        assert!(0x2::coin::value<T4>(&arg5) > 0, 10019);
+        decrease_position_common_v2<T0, T1, T2, T3, T4>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, 0x1::option::some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::scard::calculate_card_rebate_rate(arg12)), 0x1::option::some<0x2::object::ID>(0x2::object::id<0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard>(arg12)), arg13);
+    }
+
+    public entry fun decrease_reserved_from_position<T0, T1, T2, T3>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &PositionCap<T1, T2, T3>, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg4: u64, arg5: &0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 8)), 10001);
+        assert!(arg4 > 0, 10018);
+        assert!(!arg1.vaults_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = VaultName<T1>{dummy_field: false};
+        let v1 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::uid_to_inner(&arg2.id),
+            owner : 0x2::tx_context::sender(arg5),
+        };
+        let v2 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreaseReservedFromPositionEvent>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v1),
+            event         : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::decrease_reserved_from_position<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v0), 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v1), arg3, arg4, 0x2::clock::timestamp_ms(arg0) / 1000),
+        };
+        0x2::event::emit<PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreaseReservedFromPositionEvent>>(v2);
+    }
+
+    public fun deposit<T0, T1>(arg0: &mut Market<T0>, arg1: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel, arg2: 0x2::coin::Coin<T1>, arg3: u64, arg4: VaultsValuation, arg5: SymbolsValuation, arg6: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 1)), 10001);
+        check_version<T0>(arg0);
+        assert!(0x2::object::id<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel>(arg1) == arg0.rebase_fee_model, 10014);
+        let v0 = 0x2::tx_context::sender(arg6);
+        let (_, v2) = get_referral_data(&arg0.referrals, v0);
+        let v3 = 0x2::balance::supply_value<T0>(&arg0.lp_supply);
+        let (v4, v5, v6, v7) = finalize_market_valuation<T0>(arg0, arg4, arg5);
+        let v8 = v4;
+        let v9 = 0x1::type_name::get<VaultName<T1>>();
+        let (_, v11) = 0x2::vec_map::remove<0x1::type_name::TypeName, VaultInfo>(&mut v8, &v9);
+        let VaultInfo {
+            price : v12,
+            value : v13,
+        } = v11;
+        let v14 = v12;
+        let v15 = VaultName<T1>{dummy_field: false};
+        let (v16, v17) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::deposit<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg0.vaults, v15), arg1, &v14, 0x2::coin::into_balance<T1>(arg2), arg3, v3, v7, v13, v6, v5);
+        pay_from_balance<T0>(0x2::balance::increase_supply<T0>(&mut arg0.lp_supply, v16), v0, arg6);
+        let v18 = Deposited<T1>{
+            minter         : v0,
+            price          : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v14),
+            deposit_amount : 0x2::coin::value<T1>(&arg2),
+            mint_amount    : v16,
+            fee_value      : v17,
+            referrer       : v2,
+        };
+        0x2::event::emit<Deposited<T1>>(v18);
+    }
+
+    public fun deposit_ptb<T0, T1>(arg0: &mut Market<T0>, arg1: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel, arg2: 0x2::coin::Coin<T1>, arg3: u64, arg4: VaultsValuation, arg5: SymbolsValuation, arg6: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T0> {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 24)), 10001);
+        check_version<T0>(arg0);
+        assert!(0x2::object::id<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel>(arg1) == arg0.rebase_fee_model, 10014);
+        let v0 = 0x2::tx_context::sender(arg6);
+        let (_, v2) = get_referral_data(&arg0.referrals, v0);
+        let v3 = 0x2::balance::supply_value<T0>(&arg0.lp_supply);
+        let (v4, v5, v6, v7) = finalize_market_valuation<T0>(arg0, arg4, arg5);
+        let v8 = v4;
+        let v9 = 0x1::type_name::get<VaultName<T1>>();
+        let (_, v11) = 0x2::vec_map::remove<0x1::type_name::TypeName, VaultInfo>(&mut v8, &v9);
+        let VaultInfo {
+            price : v12,
+            value : v13,
+        } = v11;
+        let v14 = v12;
+        let v15 = VaultName<T1>{dummy_field: false};
+        let (v16, v17) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::deposit<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg0.vaults, v15), arg1, &v14, 0x2::coin::into_balance<T1>(arg2), arg3, v3, v7, v13, v6, v5);
+        let v18 = Deposited<T1>{
+            minter         : v0,
+            price          : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v14),
+            deposit_amount : 0x2::coin::value<T1>(&arg2),
+            mint_amount    : v16,
+            fee_value      : v17,
+            referrer       : v2,
+        };
+        0x2::event::emit<Deposited<T1>>(v18);
+        0x2::coin::from_balance<T0>(0x2::balance::increase_supply<T0>(&mut arg0.lp_supply, v16), arg6)
+    }
+
+    public entry fun execute_decrease_market_order<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: address, arg7: address, arg8: address, arg9: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 37)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg9);
+        let v3 = parse_direction<T3>();
+        let v4 = SymbolName<T2, LONG>{dummy_field: false};
+        let v5 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v4))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v6 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v7 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v6)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v6))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v8 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::id_from_address(arg8),
+            owner : arg6,
+        };
+        let v9 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg7),
+            owner       : arg6,
+            position_id : 0x1::option::some<0x2::object::ID>(v8.id),
+        };
+        let v10 = 0x2::bag::borrow_mut<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreaseMarketOrder<T4>>(&mut arg1.orders, v9);
+        let v11 = VaultName<T1>{dummy_field: false};
+        let v12 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v11);
+        let v13 = SymbolName<T2, T3>{dummy_field: false};
+        let v14 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v13);
+        let v15 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v12), arg4, v0);
+        let v16 = if (exists_trading_price_config_for_feeder(&arg1.id, arg5)) {
+            let v17 = borrow_trading_price_config_for_feeder(&arg1.id, arg5);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14), arg5, v0, v17.max_interval, v17.max_confidence, v17.use_confidence_adjusted_price, v17.confidence_adjust_percentage, v3)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14), arg5, v0)
+        };
+        let v18 = v16;
+        let v19 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+        let v20 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v19)) {
+            apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v18), compute_price_impact_spread<T2>(&arg1.id, &v18, v5, v7, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_decrease_amount_market_order<T4>(0x2::bag::borrow<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreaseMarketOrder<T4>>(&arg1.orders, v9)), v3), v3, false)
+        } else {
+            v18
+        };
+        let v21 = v20;
+        let v22 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg1.id, 10001);
+        let (v23, v24) = get_referral_data(&arg1.referrals, arg6);
+        let v25 = get_symbol_instant_exit_fee_config<T2, T3>(&arg1.id);
+        let (v26, v27) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_decrease_market_order<T1, T4>(v10, v12, v14, v22, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v15, &v21, v23, v3, lp_supply_amount<T0>(arg1), &v25, v0, v1);
+        let (v28, v29, v30, v31, v32) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_decrease_position_result_v1<T1>(v26);
+        let v33 = v31;
+        let v34 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v22);
+        pay_from_balance<T1>(v28, arg6, arg9);
+        pay_from_balance<T1>(v29, v24, arg9);
+        pay_from_balance<T1>(v30, v34, arg9);
+        if (0x1::option::is_some<0x2::balance::Balance<T1>>(&v33)) {
+            if (0x1::option::is_some<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_decrease_market_order<T4>(v10))) {
+                let v35 = *0x1::option::borrow<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_decrease_market_order<T4>(v10));
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v33), 0x2::object::id_to_address(&v35), arg9);
+            } else {
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v33), v34, arg9);
+            };
+        } else {
+            0x1::option::destroy_none<0x2::balance::Balance<T1>>(v33);
+        };
+        let v36 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v8),
+            event         : v32,
+        };
+        let v37 = OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>>{
+            executor   : v2,
+            order_name : v9,
+            claim      : v36,
+        };
+        0x2::event::emit<OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>>>(v37);
+        pay_from_balance<T4>(v27, v2, arg9);
+    }
+
+    public entry fun execute_decrease_market_order_v2<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &0x460fe6da5e82b6633a57cbb17bb09e61252d2db836f133f9188b2835f9d2824::core::OracleRegistry, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: &0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::state::StorkState, arg8: address, arg9: address, arg10: address, arg11: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 46)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg11);
+        let v3 = parse_direction<T3>();
+        let v4 = SymbolName<T2, LONG>{dummy_field: false};
+        let v5 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v4))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v6 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v7 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v6)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v6))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v8 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::id_from_address(arg10),
+            owner : arg8,
+        };
+        let v9 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg9),
+            owner       : arg8,
+            position_id : 0x1::option::some<0x2::object::ID>(v8.id),
+        };
+        let v10 = 0x2::bag::borrow_mut<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreaseMarketOrder<T4>>(&mut arg1.orders, v9);
+        let v11 = VaultName<T1>{dummy_field: false};
+        let v12 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v11);
+        let v13 = SymbolName<T2, T3>{dummy_field: false};
+        let v14 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v13);
+        let v15 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v12), arg5, v0);
+        let v16 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14);
+        let v17 = if (exists_trading_price_config_for_feeder(&arg1.id, arg6)) {
+            let v18 = borrow_trading_price_config_for_feeder(&arg1.id, arg6);
+            let v19 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::oracle_adapter::get_validated_price<T2>(arg4, arg6, arg7, arg0, v18.max_interval);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_normalized_price_with_trading_price_config(v16, &v19, v18.max_confidence, v18.use_confidence_adjusted_price, v18.confidence_adjust_percentage, v3)
+        } else {
+            let v20 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::oracle_adapter::get_validated_price<T2>(arg4, arg6, arg7, arg0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::max_interval_of(v16));
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_normalized_price(v16, &v20)
+        };
+        let v21 = v17;
+        let v22 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+        let v23 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v22)) {
+            apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v21), compute_price_impact_spread<T2>(&arg1.id, &v21, v5, v7, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_decrease_amount_market_order<T4>(0x2::bag::borrow<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreaseMarketOrder<T4>>(&arg1.orders, v9)), v3), v3, false)
+        } else {
+            v21
+        };
+        let v24 = v23;
+        let v25 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg1.id, 10001);
+        let (v26, v27) = get_referral_data(&arg1.referrals, arg8);
+        let v28 = get_symbol_instant_exit_fee_config<T2, T3>(&arg1.id);
+        let v29 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v25);
+        let v30 = LossProtectionVaultName<T1>{dummy_field: false};
+        let (v31, v32) = if (0x2::dynamic_object_field::exists_<LossProtectionVaultName<T1>>(&arg1.id, v30)) {
+            let (v33, v34) = if (0x2::dynamic_object_field::borrow<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&arg1.id, v30).enabled) {
+                let v35 = 0x2::dynamic_object_field::borrow_mut<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&mut arg1.id, v30);
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_decrease_market_order_with_loss_protection<T1, T4>(v10, v12, v14, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_rate(v25), 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v15, &v24, v26, v3, lp_supply_amount<T0>(arg1), &v28, v0, v1, &mut v35.vault, v35.loss_percentage)
+            } else {
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_decrease_market_order<T1, T4>(v10, v12, v14, v25, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v15, &v24, v26, v3, lp_supply_amount<T0>(arg1), &v28, v0, v1)
+            };
+            (v34, v33)
+        } else {
+            let (v36, v37) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_decrease_market_order<T1, T4>(v10, v12, v14, v25, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v15, &v24, v26, v3, lp_supply_amount<T0>(arg1), &v28, v0, v1);
+            (v37, v36)
+        };
+        let (v38, v39, v40, v41, v42) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_decrease_position_result_v1<T1>(v32);
+        let v43 = v41;
+        pay_from_balance<T1>(v38, arg8, arg11);
+        pay_from_balance<T1>(v39, v27, arg11);
+        pay_from_balance<T1>(v40, v29, arg11);
+        if (0x1::option::is_some<0x2::balance::Balance<T1>>(&v43)) {
+            if (0x1::option::is_some<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_decrease_market_order<T4>(v10))) {
+                let v44 = *0x1::option::borrow<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_decrease_market_order<T4>(v10));
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v43), 0x2::object::id_to_address(&v44), arg11);
+            } else {
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v43), v29, arg11);
+            };
+        } else {
+            0x1::option::destroy_none<0x2::balance::Balance<T1>>(v43);
+        };
+        let v45 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v8),
+            event         : v42,
+        };
+        let v46 = OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>>{
+            executor   : v2,
+            order_name : v9,
+            claim      : v45,
+        };
+        0x2::event::emit<OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>>>(v46);
+        pay_from_balance<T4>(v31, v2, arg11);
+    }
+
+    public entry fun execute_decrease_position_order<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: address, arg7: address, arg8: address, arg9: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 14)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg9);
+        let v3 = parse_direction<T3>();
+        let v4 = SymbolName<T2, LONG>{dummy_field: false};
+        let v5 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v4))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v6 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v7 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v6)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v6))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v8 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::id_from_address(arg8),
+            owner : arg6,
+        };
+        let v9 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg7),
+            owner       : arg6,
+            position_id : 0x1::option::some<0x2::object::ID>(v8.id),
+        };
+        let v10 = 0x2::bag::borrow_mut<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreasePositionOrder<T4>>(&mut arg1.orders, v9);
+        let v11 = VaultName<T1>{dummy_field: false};
+        let v12 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v11);
+        let v13 = SymbolName<T2, T3>{dummy_field: false};
+        let v14 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v13);
+        let v15 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v12), arg4, v0);
+        let v16 = if (exists_trading_price_config_for_feeder(&arg1.id, arg5)) {
+            let v17 = borrow_trading_price_config_for_feeder(&arg1.id, arg5);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14), arg5, v0, v17.max_interval, v17.max_confidence, v17.use_confidence_adjusted_price, v17.confidence_adjust_percentage, v3)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14), arg5, v0)
+        };
+        let v18 = v16;
+        let v19 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+        let v20 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v19)) {
+            apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v18), compute_price_impact_spread<T2>(&arg1.id, &v18, v5, v7, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_decrease_amount<T4>(0x2::bag::borrow<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreasePositionOrder<T4>>(&arg1.orders, v9)), v3), v3, false)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v18))
+        };
+        let v21 = v20;
+        let v22 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg1.id, 10001);
+        let (v23, v24) = get_referral_data(&arg1.referrals, arg6);
+        let v25 = get_symbol_instant_exit_fee_config<T2, T3>(&arg1.id);
+        let (v26, v27) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_decrease_position_order_v2<T1, T4>(v10, v12, v14, v22, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v15, &v18, &v21, v23, v3, lp_supply_amount<T0>(arg1), &v25, v0, v1);
+        let (v28, v29, v30, v31, v32) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_decrease_position_result_v1<T1>(v26);
+        let v33 = v31;
+        let v34 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v22);
+        pay_from_balance<T1>(v28, arg6, arg9);
+        pay_from_balance<T1>(v29, v24, arg9);
+        pay_from_balance<T1>(v30, v34, arg9);
+        if (0x1::option::is_some<0x2::balance::Balance<T1>>(&v33)) {
+            if (0x1::option::is_some<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_decrease_order<T4>(v10))) {
+                let v35 = *0x1::option::borrow<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_decrease_order<T4>(v10));
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v33), 0x2::object::id_to_address(&v35), arg9);
+            } else {
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v33), v34, arg9);
+            };
+        } else {
+            0x1::option::destroy_none<0x2::balance::Balance<T1>>(v33);
+        };
+        let v36 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v8),
+            event         : v32,
+        };
+        let v37 = OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>>{
+            executor   : v2,
+            order_name : v9,
+            claim      : v36,
+        };
+        0x2::event::emit<OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>>>(v37);
+        pay_from_balance<T4>(v27, v2, arg9);
+    }
+
+    public entry fun execute_decrease_position_order_v2<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &0x460fe6da5e82b6633a57cbb17bb09e61252d2db836f133f9188b2835f9d2824::core::OracleRegistry, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: &0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::state::StorkState, arg8: address, arg9: address, arg10: address, arg11: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 47)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg11);
+        let v3 = parse_direction<T3>();
+        let v4 = SymbolName<T2, LONG>{dummy_field: false};
+        let v5 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v4))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v6 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v7 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v6)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v6))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v8 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::id_from_address(arg10),
+            owner : arg8,
+        };
+        let v9 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg9),
+            owner       : arg8,
+            position_id : 0x1::option::some<0x2::object::ID>(v8.id),
+        };
+        let v10 = 0x2::bag::borrow_mut<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreasePositionOrder<T4>>(&mut arg1.orders, v9);
+        let v11 = VaultName<T1>{dummy_field: false};
+        let v12 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v11);
+        let v13 = SymbolName<T2, T3>{dummy_field: false};
+        let v14 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v13);
+        let v15 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v12), arg5, v0);
+        let v16 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14);
+        let v17 = if (exists_trading_price_config_for_feeder(&arg1.id, arg6)) {
+            let v18 = borrow_trading_price_config_for_feeder(&arg1.id, arg6);
+            let v19 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::oracle_adapter::get_validated_price<T2>(arg4, arg6, arg7, arg0, v18.max_interval);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_normalized_price_with_trading_price_config(v16, &v19, v18.max_confidence, v18.use_confidence_adjusted_price, v18.confidence_adjust_percentage, v3)
+        } else {
+            let v20 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::oracle_adapter::get_validated_price<T2>(arg4, arg6, arg7, arg0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::max_interval_of(v16));
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_normalized_price(v16, &v20)
+        };
+        let v21 = v17;
+        let v22 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+        let v23 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v22)) {
+            apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v21), compute_price_impact_spread<T2>(&arg1.id, &v21, v5, v7, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_decrease_amount<T4>(0x2::bag::borrow<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreasePositionOrder<T4>>(&arg1.orders, v9)), v3), v3, false)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v14), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v21))
+        };
+        let v24 = v23;
+        let v25 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg1.id, 10001);
+        let (v26, v27) = get_referral_data(&arg1.referrals, arg8);
+        let v28 = get_symbol_instant_exit_fee_config<T2, T3>(&arg1.id);
+        let v29 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v25);
+        let v30 = LossProtectionVaultName<T1>{dummy_field: false};
+        let (v31, v32) = if (0x2::dynamic_object_field::exists_<LossProtectionVaultName<T1>>(&arg1.id, v30)) {
+            let (v33, v34) = if (0x2::dynamic_object_field::borrow<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&arg1.id, v30).enabled) {
+                let v35 = 0x2::dynamic_object_field::borrow_mut<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&mut arg1.id, v30);
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_decrease_position_order_v2_with_loss_protection<T1, T4>(v10, v12, v14, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_rate(v25), 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v15, &v21, &v24, v26, v3, lp_supply_amount<T0>(arg1), &v28, v0, v1, &mut v35.vault, v35.loss_percentage)
+            } else {
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_decrease_position_order_v2<T1, T4>(v10, v12, v14, v25, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v15, &v21, &v24, v26, v3, lp_supply_amount<T0>(arg1), &v28, v0, v1)
+            };
+            (v34, v33)
+        } else {
+            let (v36, v37) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_decrease_position_order_v2<T1, T4>(v10, v12, v14, v25, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v15, &v21, &v24, v26, v3, lp_supply_amount<T0>(arg1), &v28, v0, v1);
+            (v37, v36)
+        };
+        let (v38, v39, v40, v41, v42) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_decrease_position_result_v1<T1>(v32);
+        let v43 = v41;
+        pay_from_balance<T1>(v38, arg8, arg11);
+        pay_from_balance<T1>(v39, v27, arg11);
+        pay_from_balance<T1>(v40, v29, arg11);
+        if (0x1::option::is_some<0x2::balance::Balance<T1>>(&v43)) {
+            if (0x1::option::is_some<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_decrease_order<T4>(v10))) {
+                let v44 = *0x1::option::borrow<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_decrease_order<T4>(v10));
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v43), 0x2::object::id_to_address(&v44), arg11);
+            } else {
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v43), v29, arg11);
+            };
+        } else {
+            0x1::option::destroy_none<0x2::balance::Balance<T1>>(v43);
+        };
+        let v45 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v8),
+            event         : v42,
+        };
+        let v46 = OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>>{
+            executor   : v2,
+            order_name : v9,
+            claim      : v45,
+        };
+        0x2::event::emit<OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEventV1>>>(v46);
+        pay_from_balance<T4>(v31, v2, arg11);
+    }
+
+    public entry fun execute_open_market_order<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: address, arg7: address, arg8: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 30)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg8);
+        let v3 = parse_direction<T3>();
+        let v4 = SymbolName<T2, LONG>{dummy_field: false};
+        let v5 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v4))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v6 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v7 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v6)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v6))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v8 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg7),
+            owner       : arg6,
+            position_id : 0x1::option::none<0x2::object::ID>(),
+        };
+        let v9 = 0x2::bag::borrow_mut<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenMarketOrder<T1, T4>>(&mut arg1.orders, v8);
+        let v10 = VaultName<T1>{dummy_field: false};
+        let v11 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v10);
+        let v12 = SymbolName<T2, T3>{dummy_field: false};
+        let v13 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v12);
+        let v14 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v11), arg4, v0);
+        let v15 = if (exists_trading_price_config_for_feeder(&arg1.id, arg5)) {
+            let v16 = borrow_trading_price_config_for_feeder(&arg1.id, arg5);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13), arg5, v0, v16.max_interval, v16.max_confidence, v16.use_confidence_adjusted_price, v16.confidence_adjust_percentage, !v3)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13), arg5, v0)
+        };
+        let v17 = v15;
+        let v18 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+        let v19 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v18)) {
+            apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v17), compute_price_impact_spread<T2>(&arg1.id, &v17, v5, v7, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_open_amount_market_order<T1, T4>(0x2::bag::borrow<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenMarketOrder<T1, T4>>(&arg1.orders, v8)), v3), v3, true)
+        } else {
+            v17
+        };
+        let v20 = v19;
+        let v21 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg1.id, 10001);
+        let (v22, v23) = get_referral_data(&arg1.referrals, arg6);
+        let (v24, v25) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_open_market_order<T1, T4>(v9, v11, v13, v21, arg2, arg3, &v14, &v20, v22, v3, lp_supply_amount<T0>(arg1), v0, v1);
+        let (v26, v27, v28, v29, v30) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_open_position_result<T1>(v24);
+        let v31 = v29;
+        let v32 = 0x2::object::new(arg8);
+        let v33 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::uid_to_inner(&v32),
+            owner : arg6,
+        };
+        0x2::bag::add<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v33, v26);
+        let v34 = PositionCap<T1, T2, T3>{id: v32};
+        0x2::transfer::transfer<PositionCap<T1, T2, T3>>(v34, arg6);
+        let v35 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v21);
+        pay_from_balance<T1>(v27, v23, arg8);
+        pay_from_balance<T1>(v28, v35, arg8);
+        if (0x1::option::is_some<0x2::balance::Balance<T1>>(&v31)) {
+            if (0x1::option::is_some<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_open_market_order<T1, T4>(v9))) {
+                let v36 = *0x1::option::borrow<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_open_market_order<T1, T4>(v9));
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v31), 0x2::object::id_to_address(&v36), arg8);
+            } else {
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v31), v35, arg8);
+            };
+        } else {
+            0x1::option::destroy_none<0x2::balance::Balance<T1>>(v31);
+        };
+        let v37 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v33),
+            event         : v30,
+        };
+        let v38 = OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>>{
+            executor   : v2,
+            order_name : v8,
+            claim      : v37,
+        };
+        0x2::event::emit<OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>>>(v38);
+        pay_from_balance<T4>(v25, v2, arg8);
+    }
+
+    public entry fun execute_open_market_order_v2<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &0x460fe6da5e82b6633a57cbb17bb09e61252d2db836f133f9188b2835f9d2824::core::OracleRegistry, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: &0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::state::StorkState, arg8: address, arg9: address, arg10: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 45)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg10);
+        let v3 = parse_direction<T3>();
+        let v4 = SymbolName<T2, LONG>{dummy_field: false};
+        let v5 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v4))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v6 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v7 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v6)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v6))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v8 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg9),
+            owner       : arg8,
+            position_id : 0x1::option::none<0x2::object::ID>(),
+        };
+        let v9 = 0x2::bag::borrow_mut<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenMarketOrder<T1, T4>>(&mut arg1.orders, v8);
+        let v10 = VaultName<T1>{dummy_field: false};
+        let v11 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v10);
+        let v12 = SymbolName<T2, T3>{dummy_field: false};
+        let v13 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v12);
+        let v14 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v11), arg5, v0);
+        let v15 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13);
+        let v16 = if (exists_trading_price_config_for_feeder(&arg1.id, arg6)) {
+            let v17 = borrow_trading_price_config_for_feeder(&arg1.id, arg6);
+            let v18 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::oracle_adapter::get_validated_price<T2>(arg4, arg6, arg7, arg0, v17.max_interval);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_normalized_price_with_trading_price_config(v15, &v18, v17.max_confidence, v17.use_confidence_adjusted_price, v17.confidence_adjust_percentage, !v3)
+        } else {
+            let v19 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::oracle_adapter::get_validated_price<T2>(arg4, arg6, arg7, arg0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::max_interval_of(v15));
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_normalized_price(v15, &v19)
+        };
+        let v20 = v16;
+        let v21 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+        let v22 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v21)) {
+            apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v20), compute_price_impact_spread<T2>(&arg1.id, &v20, v5, v7, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_open_amount_market_order<T1, T4>(0x2::bag::borrow<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenMarketOrder<T1, T4>>(&arg1.orders, v8)), v3), v3, true)
+        } else {
+            v20
+        };
+        let v23 = v22;
+        let v24 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg1.id, 10001);
+        let (v25, v26) = get_referral_data(&arg1.referrals, arg8);
+        let (v27, v28) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_open_market_order<T1, T4>(v9, v11, v13, v24, arg2, arg3, &v14, &v23, v25, v3, lp_supply_amount<T0>(arg1), v0, v1);
+        let (v29, v30, v31, v32, v33) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_open_position_result<T1>(v27);
+        let v34 = v32;
+        let v35 = 0x2::object::new(arg10);
+        let v36 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::uid_to_inner(&v35),
+            owner : arg8,
+        };
+        0x2::bag::add<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v36, v29);
+        let v37 = PositionCap<T1, T2, T3>{id: v35};
+        0x2::transfer::transfer<PositionCap<T1, T2, T3>>(v37, arg8);
+        let v38 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v24);
+        pay_from_balance<T1>(v30, v26, arg10);
+        pay_from_balance<T1>(v31, v38, arg10);
+        if (0x1::option::is_some<0x2::balance::Balance<T1>>(&v34)) {
+            if (0x1::option::is_some<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_open_market_order<T1, T4>(v9))) {
+                let v39 = *0x1::option::borrow<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_open_market_order<T1, T4>(v9));
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v34), 0x2::object::id_to_address(&v39), arg10);
+            } else {
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v34), v38, arg10);
+            };
+        } else {
+            0x1::option::destroy_none<0x2::balance::Balance<T1>>(v34);
+        };
+        let v40 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v36),
+            event         : v33,
+        };
+        let v41 = OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>>{
+            executor   : v2,
+            order_name : v8,
+            claim      : v40,
+        };
+        0x2::event::emit<OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>>>(v41);
+        pay_from_balance<T4>(v28, v2, arg10);
+    }
+
+    public entry fun execute_open_position_order<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: address, arg7: address, arg8: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 15)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg8);
+        let v3 = parse_direction<T3>();
+        let v4 = SymbolName<T2, LONG>{dummy_field: false};
+        let v5 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v4))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v6 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v7 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v6)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v6))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v8 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg7),
+            owner       : arg6,
+            position_id : 0x1::option::none<0x2::object::ID>(),
+        };
+        let v9 = 0x2::bag::borrow_mut<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenPositionOrder<T1, T4>>(&mut arg1.orders, v8);
+        let v10 = VaultName<T1>{dummy_field: false};
+        let v11 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v10);
+        let v12 = SymbolName<T2, T3>{dummy_field: false};
+        let v13 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v12);
+        let v14 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v11), arg4, v0);
+        let v15 = if (exists_trading_price_config_for_feeder(&arg1.id, arg5)) {
+            let v16 = borrow_trading_price_config_for_feeder(&arg1.id, arg5);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13), arg5, v0, v16.max_interval, v16.max_confidence, v16.use_confidence_adjusted_price, v16.confidence_adjust_percentage, !v3)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13), arg5, v0)
+        };
+        let v17 = v15;
+        let v18 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+        let v19 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v18)) {
+            apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v17), compute_price_impact_spread<T2>(&arg1.id, &v17, v5, v7, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_open_amount<T1, T4>(0x2::bag::borrow<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenPositionOrder<T1, T4>>(&arg1.orders, v8)), v3), v3, true)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v17))
+        };
+        let v20 = v19;
+        let v21 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg1.id, 10001);
+        let (v22, v23) = get_referral_data(&arg1.referrals, arg6);
+        let (v24, v25) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_open_position_order_v2<T1, T4>(v9, v11, v13, v21, arg2, arg3, &v14, &v17, &v20, v22, v3, lp_supply_amount<T0>(arg1), v0, v1);
+        let (v26, v27, v28, v29, v30) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_open_position_result<T1>(v24);
+        let v31 = v29;
+        let v32 = 0x2::object::new(arg8);
+        let v33 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::uid_to_inner(&v32),
+            owner : arg6,
+        };
+        0x2::bag::add<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v33, v26);
+        let v34 = PositionCap<T1, T2, T3>{id: v32};
+        0x2::transfer::transfer<PositionCap<T1, T2, T3>>(v34, arg6);
+        let v35 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v21);
+        pay_from_balance<T1>(v27, v23, arg8);
+        pay_from_balance<T1>(v28, v35, arg8);
+        if (0x1::option::is_some<0x2::balance::Balance<T1>>(&v31)) {
+            if (0x1::option::is_some<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_open_order<T1, T4>(v9))) {
+                let v36 = *0x1::option::borrow<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_open_order<T1, T4>(v9));
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v31), 0x2::object::id_to_address(&v36), arg8);
+            } else {
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v31), v35, arg8);
+            };
+        } else {
+            0x1::option::destroy_none<0x2::balance::Balance<T1>>(v31);
+        };
+        let v37 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v33),
+            event         : v30,
+        };
+        let v38 = OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>>{
+            executor   : v2,
+            order_name : v8,
+            claim      : v37,
+        };
+        0x2::event::emit<OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>>>(v38);
+        pay_from_balance<T4>(v25, v2, arg8);
+    }
+
+    public entry fun execute_open_position_order_v2<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &0x460fe6da5e82b6633a57cbb17bb09e61252d2db836f133f9188b2835f9d2824::core::OracleRegistry, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: &0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::state::StorkState, arg8: address, arg9: address, arg10: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 44)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg10);
+        let v3 = parse_direction<T3>();
+        let v4 = SymbolName<T2, LONG>{dummy_field: false};
+        let v5 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v4))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v6 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v7 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v6)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v6))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v8 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg9),
+            owner       : arg8,
+            position_id : 0x1::option::none<0x2::object::ID>(),
+        };
+        let v9 = 0x2::bag::borrow_mut<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenPositionOrder<T1, T4>>(&mut arg1.orders, v8);
+        let v10 = VaultName<T1>{dummy_field: false};
+        let v11 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v10);
+        let v12 = SymbolName<T2, T3>{dummy_field: false};
+        let v13 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v12);
+        let v14 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v11), arg5, v0);
+        let v15 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13);
+        let v16 = if (exists_trading_price_config_for_feeder(&arg1.id, arg6)) {
+            let v17 = borrow_trading_price_config_for_feeder(&arg1.id, arg6);
+            let v18 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::oracle_adapter::get_validated_price<T2>(arg4, arg6, arg7, arg0, v17.max_interval);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_normalized_price_with_trading_price_config(v15, &v18, v17.max_confidence, v17.use_confidence_adjusted_price, v17.confidence_adjust_percentage, !v3)
+        } else {
+            let v19 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::oracle_adapter::get_validated_price<T2>(arg4, arg6, arg7, arg0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::max_interval_of(v15));
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_normalized_price(v15, &v19)
+        };
+        let v20 = v16;
+        let v21 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+        let v22 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v21)) {
+            apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v20), compute_price_impact_spread<T2>(&arg1.id, &v20, v5, v7, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_open_amount<T1, T4>(0x2::bag::borrow<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenPositionOrder<T1, T4>>(&arg1.orders, v8)), v3), v3, true)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::from_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v13), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v20))
+        };
+        let v23 = v22;
+        let v24 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg1.id, 10001);
+        let (v25, v26) = get_referral_data(&arg1.referrals, arg8);
+        let (v27, v28) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::execute_open_position_order_v2<T1, T4>(v9, v11, v13, v24, arg2, arg3, &v14, &v20, &v23, v25, v3, lp_supply_amount<T0>(arg1), v0, v1);
+        let (v29, v30, v31, v32, v33) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_open_position_result<T1>(v27);
+        let v34 = v32;
+        let v35 = 0x2::object::new(arg10);
+        let v36 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::uid_to_inner(&v35),
+            owner : arg8,
+        };
+        0x2::bag::add<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v36, v29);
+        let v37 = PositionCap<T1, T2, T3>{id: v35};
+        0x2::transfer::transfer<PositionCap<T1, T2, T3>>(v37, arg8);
+        let v38 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v24);
+        pay_from_balance<T1>(v30, v26, arg10);
+        pay_from_balance<T1>(v31, v38, arg10);
+        if (0x1::option::is_some<0x2::balance::Balance<T1>>(&v34)) {
+            if (0x1::option::is_some<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_open_order<T1, T4>(v9))) {
+                let v39 = *0x1::option::borrow<0x2::object::ID>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::get_scard_id_from_open_order<T1, T4>(v9));
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v34), 0x2::object::id_to_address(&v39), arg10);
+            } else {
+                pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v34), v38, arg10);
+            };
+        } else {
+            0x1::option::destroy_none<0x2::balance::Balance<T1>>(v34);
+        };
+        let v40 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v36),
+            event         : v33,
+        };
+        let v41 = OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>>{
+            executor   : v2,
+            order_name : v8,
+            claim      : v40,
+        };
+        0x2::event::emit<OrderExecuted<OrderName<T1, T2, T3, T4>, PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>>>(v41);
+        pay_from_balance<T4>(v28, v2, arg10);
+    }
+
+    fun exists_trading_price_config_for_feeder(arg0: &0x2::object::UID, arg1: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject) : bool {
+        let v0 = TradingFeederKeyV1{id: 0x2::object::id<0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject>(arg1)};
+        0x2::dynamic_object_field::exists_<TradingFeederKeyV1>(arg0, v0)
+    }
+
+    fun finalize_market_valuation<T0>(arg0: &mut Market<T0>, arg1: VaultsValuation, arg2: SymbolsValuation) : (0x2::vec_map::VecMap<0x1::type_name::TypeName, VaultInfo>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal) {
+        check_version<T0>(arg0);
+        let (v0, v1, v2) = finalize_vaults_valuation<T0>(arg0, arg1);
+        let v3 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::sdecimal::add_with_decimal(finalize_symbols_valuation<T0>(arg0, arg2), v2);
+        assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::sdecimal::is_positive(&v3), 10013);
+        (v0, v1, v2, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::sdecimal::value(&v3))
+    }
+
+    fun finalize_symbols_valuation<T0>(arg0: &mut Market<T0>, arg1: SymbolsValuation) : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::sdecimal::SDecimal {
+        check_version<T0>(arg0);
+        let SymbolsValuation {
+            timestamp        : _,
+            num              : v1,
+            lp_supply_amount : _,
+            handled          : v3,
+            value            : v4,
+        } = arg1;
+        let v5 = v3;
+        assert!(0x2::vec_set::size<0x1::type_name::TypeName>(&v5) == v1, 10012);
+        arg0.symbols_locked = false;
+        v4
+    }
+
+    fun finalize_vaults_valuation<T0>(arg0: &mut Market<T0>, arg1: VaultsValuation) : (0x2::vec_map::VecMap<0x1::type_name::TypeName, VaultInfo>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal) {
+        check_version<T0>(arg0);
+        let VaultsValuation {
+            timestamp    : _,
+            num          : v1,
+            handled      : v2,
+            total_weight : v3,
+            value        : v4,
+        } = arg1;
+        let v5 = v2;
+        assert!(0x2::vec_map::size<0x1::type_name::TypeName, VaultInfo>(&v5) == v1, 10011);
+        arg0.vaults_locked = false;
+        (v5, v3, v4)
+    }
+
+    entry fun force_clear_closed_position<T0, T1, T2, T3>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: address, arg3: address, arg4: &0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::id_from_address(arg2),
+            owner : arg3,
+        };
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::destroy_position<T1>(0x2::bag::remove<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v0));
+        let v1 = ForcePositionCleared<T1, T2, T3>{position_name: v0};
+        0x2::event::emit<ForcePositionCleared<T1, T2, T3>>(v1);
+    }
+
+    entry fun force_clear_executed_decrease_market_order<T0, T1, T2, T3, T4>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: address, arg3: address, arg4: 0x1::option::Option<address>, arg5: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 39)), 10001);
+        check_version<T0>(arg1);
+        let v0 = if (0x1::option::is_some<address>(&arg4)) {
+            0x1::option::some<0x2::object::ID>(0x2::object::id_from_address(0x1::option::destroy_some<address>(arg4)))
+        } else {
+            0x1::option::none<0x2::object::ID>()
+        };
+        let v1 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg3),
+            owner       : arg2,
+            position_id : v0,
+        };
+        if (0x2::bag::contains<OrderName<T1, T2, T3, T4>>(&arg1.orders, v1)) {
+            pay_from_balance<T4>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::destroy_decrease_market_order<T4>(0x2::bag::remove<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreaseMarketOrder<T4>>(&mut arg1.orders, v1)), arg2, arg5);
+            let v2 = OrderCleared<OrderName<T1, T2, T3, T4>>{order_name: v1};
+            0x2::event::emit<OrderCleared<OrderName<T1, T2, T3, T4>>>(v2);
+        };
+    }
+
+    entry fun force_clear_executed_decrease_position_order<T0, T1, T2, T3, T4>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: address, arg3: address, arg4: 0x1::option::Option<address>, arg5: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 23)), 10001);
+        check_version<T0>(arg1);
+        let v0 = if (0x1::option::is_some<address>(&arg4)) {
+            0x1::option::some<0x2::object::ID>(0x2::object::id_from_address(0x1::option::destroy_some<address>(arg4)))
+        } else {
+            0x1::option::none<0x2::object::ID>()
+        };
+        let v1 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg3),
+            owner       : arg2,
+            position_id : v0,
+        };
+        if (0x2::bag::contains<OrderName<T1, T2, T3, T4>>(&arg1.orders, v1)) {
+            pay_from_balance<T4>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::destroy_decrease_position_order<T4>(0x2::bag::remove<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::DecreasePositionOrder<T4>>(&mut arg1.orders, v1)), arg2, arg5);
+            let v2 = OrderCleared<OrderName<T1, T2, T3, T4>>{order_name: v1};
+            0x2::event::emit<OrderCleared<OrderName<T1, T2, T3, T4>>>(v2);
+        };
+    }
+
+    entry fun force_clear_executed_open_market_order<T0, T1, T2, T3, T4>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: address, arg3: address, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 32)), 10001);
+        check_version<T0>(arg1);
+        let v0 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg3),
+            owner       : arg2,
+            position_id : 0x1::option::none<0x2::object::ID>(),
+        };
+        if (0x2::bag::contains<OrderName<T1, T2, T3, T4>>(&arg1.orders, v0)) {
+            let (v1, v2) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::destroy_open_market_order<T1, T4>(0x2::bag::remove<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenMarketOrder<T1, T4>>(&mut arg1.orders, v0));
+            pay_from_balance<T1>(v1, arg2, arg4);
+            pay_from_balance<T4>(v2, arg2, arg4);
+            let v3 = OrderCleared<OrderName<T1, T2, T3, T4>>{order_name: v0};
+            0x2::event::emit<OrderCleared<OrderName<T1, T2, T3, T4>>>(v3);
+        };
+    }
+
+    entry fun force_clear_executed_open_position_order<T0, T1, T2, T3, T4>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: address, arg3: address, arg4: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 22)), 10001);
+        check_version<T0>(arg1);
+        let v0 = OrderName<T1, T2, T3, T4>{
+            id          : 0x2::object::id_from_address(arg3),
+            owner       : arg2,
+            position_id : 0x1::option::none<0x2::object::ID>(),
+        };
+        if (0x2::bag::contains<OrderName<T1, T2, T3, T4>>(&arg1.orders, v0)) {
+            let (v1, v2) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::destroy_open_position_order<T1, T4>(0x2::bag::remove<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenPositionOrder<T1, T4>>(&mut arg1.orders, v0));
+            pay_from_balance<T1>(v1, arg2, arg4);
+            pay_from_balance<T4>(v2, arg2, arg4);
+            let v3 = OrderCleared<OrderName<T1, T2, T3, T4>>{order_name: v0};
+            0x2::event::emit<OrderCleared<OrderName<T1, T2, T3, T4>>>(v3);
+        };
+    }
+
+    entry fun force_close_position<T0, T1, T2, T3>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &0x2::clock::Clock, arg2: &mut Market<T0>, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg4: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: address, arg8: address, arg9: &mut 0x2::tx_context::TxContext) {
+        assert!(!arg2.vaults_locked && !arg2.symbols_locked, 10002);
+        check_version<T0>(arg2);
+        let v0 = 0x2::clock::timestamp_ms(arg1) / 1000;
+        let v1 = parse_direction<T3>();
+        let v2 = VaultName<T1>{dummy_field: false};
+        let v3 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg2.vaults, v2);
+        let v4 = SymbolName<T2, T3>{dummy_field: false};
+        let v5 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg2.symbols, v4);
+        let v6 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::id_from_address(arg8),
+            owner : arg7,
+        };
+        let v7 = 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg2.positions, v6);
+        let v8 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::position_amount<T1>(v7);
+        let v9 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v3), arg5, v0);
+        let v10 = if (exists_trading_price_config_for_feeder(&arg2.id, arg6)) {
+            let v11 = borrow_trading_price_config_for_feeder(&arg2.id, arg6);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v5), arg6, v0, v11.max_interval, v11.max_confidence, v11.use_confidence_adjusted_price, v11.confidence_adjust_percentage, v1)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v5), arg6, v0)
+        };
+        let v12 = v10;
+        let v13 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg2.id, 10001);
+        let (v14, v15) = get_referral_data(&arg2.referrals, arg7);
+        let (v16, v17, v18, v19, v20) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_decrease_position_result<T1>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::decrease_position<T1>(v3, v5, v13, v7, arg3, arg4, &v9, &v12, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(), v14, 0x1::option::none<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(), v1, v8, lp_supply_amount<T0>(arg2), v0, v15));
+        0x1::option::destroy_none<0x2::balance::Balance<T1>>(v19);
+        pay_from_balance<T1>(v16, arg7, arg9);
+        pay_from_balance<T1>(v17, v15, arg9);
+        pay_from_balance<T1>(v18, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v13), arg9);
+        let v21 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEvent>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v6),
+            event         : v20,
+        };
+        0x2::event::emit<PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::DecreasePositionSuccessEvent>>(v21);
+    }
+
+    entry fun force_settle_position<T0, T1, T2, T3>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &0x2::clock::Clock, arg2: &mut Market<T0>, arg3: address, arg4: address, arg5: &mut 0x2::tx_context::TxContext) {
+        assert!(!arg2.vaults_locked && !arg2.symbols_locked, 10002);
+        check_version<T0>(arg2);
+        let v0 = VaultName<T1>{dummy_field: false};
+        let v1 = SymbolName<T2, T3>{dummy_field: false};
+        let v2 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::id_from_address(arg4),
+            owner : arg3,
+        };
+        pay_from_balance<T1>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::force_settle_position<T1>(arg0, 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg2.vaults, v0), 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg2.symbols, v1), 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg2.positions, v2)), arg3, arg5);
+        let v3 = ForcePositionSettled<T1, T2, T3>{
+            position_name : v2,
+            timestamp     : 0x2::clock::timestamp_ms(arg1) / 1000,
+        };
+        0x2::event::emit<ForcePositionSettled<T1, T2, T3>>(v3);
+    }
+
+    fun get_price_impact_config_if_enabled<T0>(arg0: &0x2::object::UID) : 0x1::option::Option<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate> {
+        let v0 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::new_config_key<T0>();
+        if (!0x2::dynamic_object_field::exists_<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfigKey<T0>>(arg0, v0)) {
+            return 0x1::option::none<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>()
+        };
+        if (!0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::is_enabled(0x2::dynamic_object_field::borrow<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfigKey<T0>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfig>(arg0, v0))) {
+            return 0x1::option::none<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>()
+        };
+        0x1::option::some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::zero())
+    }
+
+    fun get_referral_data(arg0: &0x2::table::Table<address, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::Referral>, arg1: address) : (0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate, address) {
+        if (0x2::table::contains<address, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::Referral>(arg0, arg1)) {
+            let v2 = 0x2::table::borrow<address, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::Referral>(arg0, arg1);
+            (0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::get_rebate_rate(v2), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::referral::get_referrer(v2))
+        } else {
+            (0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::zero(), @0x0)
+        }
+    }
+
+    fun get_symbol_instant_exit_fee_config<T0, T1>(arg0: &0x2::object::UID) : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::PositionInstantExitFeeConfig {
+        let v0 = SymbolName<T0, T1>{dummy_field: false};
+        if (0x2::dynamic_object_field::exists_<SymbolName<T0, T1>>(arg0, v0)) {
+            0x2::dynamic_object_field::borrow<SymbolName<T0, T1>, SymbolConfig>(arg0, v0).instant_exit_fee_config
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::default_position_instant_exit_fee_config()
+        }
+    }
+
+    public fun position<T0, T1, T2, T3>(arg0: &Market<T0>, arg1: 0x2::object::ID, arg2: address) : &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1> {
+        let v0 = PositionName<T1, T2, T3>{
+            id    : arg1,
+            owner : arg2,
+        };
+        0x2::bag::borrow<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&arg0.positions, v0)
+    }
+
+    public fun has_symbol<T0, T1, T2>(arg0: &Market<T0>) : bool {
+        let v0 = SymbolName<T1, T2>{dummy_field: false};
+        0x2::bag::contains<SymbolName<T1, T2>>(&arg0.symbols, v0)
+    }
+
+    public fun has_vault<T0, T1>(arg0: &Market<T0>) : bool {
+        let v0 = VaultName<T1>{dummy_field: false};
+        0x2::bag::contains<VaultName<T1>>(&arg0.vaults, v0)
+    }
+
+    entry fun init_price_impact_config<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: bool, arg3: u128, arg4: u128, arg5: u128, arg6: u256, arg7: u256, arg8: u256, arg9: u256, arg10: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::new_config_key<T1>();
+        if (!0x2::dynamic_object_field::exists_<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfigKey<T1>>(&arg1.id, v0)) {
+            0x2::dynamic_object_field::add<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfigKey<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfig>(&mut arg1.id, v0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::new_price_impact_config(arg10, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
+        };
+    }
+
+    entry fun init_symbol_config<T0, T1, T2>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = SymbolName<T1, T2>{dummy_field: false};
+        if (!0x2::dynamic_object_field::exists_<SymbolName<T1, T2>>(&arg1.id, v0)) {
+            let v1 = SymbolConfig{
+                id                                    : 0x2::object::new(arg2),
+                max_opening_size                      : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(),
+                max_opening_size_enabled              : false,
+                max_opening_size_per_position         : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(),
+                max_opening_size_per_position_enabled : false,
+                instant_exit_fee_config               : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::default_position_instant_exit_fee_config(),
+            };
+            0x2::dynamic_object_field::add<SymbolName<T1, T2>, SymbolConfig>(&mut arg1.id, v0, v1);
+        };
+    }
+
+    entry fun initialize_loss_protection_vault<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u128, arg3: u128, arg4: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg2);
+        let v1 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg3);
+        validate_loss_protection_percentage(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::to_raw(v0));
+        validate_loss_protection_percentage(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::to_raw(v1));
+        let v2 = LossProtectionVaultConfig<T1>{
+            id                     : 0x2::object::new(arg4),
+            enabled                : true,
+            vault                  : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::new_loss_protection_vault<T1>(),
+            liquidation_percentage : v0,
+            loss_percentage        : v1,
+        };
+        let v3 = LossProtectionVaultName<T1>{dummy_field: false};
+        0x2::dynamic_object_field::add<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&mut arg1.id, v3, v2);
+        let v4 = LossProtectionVaultCreated<T1>{
+            liquidation_percentage : v0,
+            loss_percentage        : v1,
+        };
+        0x2::event::emit<LossProtectionVaultCreated<T1>>(v4);
+    }
+
+    fun is_function_disabled<T0>(arg0: &Market<T0>, arg1: FunctionMask<T0>) : bool {
+        0x2::vec_set::contains<FunctionMask<T0>>(&arg0.disabled_functions, &arg1)
+    }
+
+    public entry fun liquidate_position<T0, T1, T2, T3>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: address, arg7: address, arg8: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 11)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg8);
+        let v3 = parse_direction<T3>();
+        let v4 = VaultName<T1>{dummy_field: false};
+        let v5 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v4);
+        let v6 = SymbolName<T2, T3>{dummy_field: false};
+        let v7 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v6);
+        let v8 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::id_from_address(arg7),
+            owner : arg6,
+        };
+        let v9 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v5), arg4, v0);
+        let v10 = if (exists_trading_price_config_for_feeder(&arg1.id, arg5)) {
+            let v11 = borrow_trading_price_config_for_feeder(&arg1.id, arg5);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v7), arg5, v0, v11.max_interval, v11.max_confidence, v11.use_confidence_adjusted_price, v11.confidence_adjust_percentage, v3)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v7), arg5, v0)
+        };
+        let v12 = v10;
+        let v13 = LossProtectionVaultName<T1>{dummy_field: false};
+        let (v14, v15) = if (0x2::dynamic_object_field::exists_<LossProtectionVaultName<T1>>(&arg1.id, v13)) {
+            if (0x2::dynamic_object_field::borrow<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&arg1.id, v13).enabled) {
+                let v16 = 0x2::dynamic_object_field::borrow_mut<LossProtectionVaultName<T1>, LossProtectionVaultConfig<T1>>(&mut arg1.id, v13);
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::liquidate_position_v1_with_loss_protection<T1>(v5, v7, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v9, &v12, v3, lp_supply_amount<T0>(arg1), v0, v2, v1, &mut v16.vault, v16.liquidation_percentage)
+            } else {
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::liquidate_position_v1<T1>(v5, v7, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v9, &v12, v3, lp_supply_amount<T0>(arg1), v0, v2, v1)
+            }
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::liquidate_position_v1<T1>(v5, v7, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg2, arg3, &v9, &v12, v3, lp_supply_amount<T0>(arg1), v0, v2, v1)
+        };
+        pay_from_balance<T1>(v14, v2, arg8);
+        let v17 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::LiquidatePositionEvent>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v8),
+            event         : v15,
+        };
+        0x2::event::emit<PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::LiquidatePositionEvent>>(v17);
+    }
+
+    public fun lp_supply_amount<T0>(arg0: &Market<T0>) : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal {
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::div_by_u64(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_u64(0x2::balance::supply_value<T0>(&arg0.lp_supply)), 1000000)
+    }
+
+    entry fun migrate_version<T0>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>) {
+        assert!(arg1.version < 12, 10021);
+        arg1.version = 12;
+    }
+
+    fun new_function_mask<T0>(arg0: &Market<T0>, arg1: u8) : FunctionMask<T0> {
+        FunctionMask<T0>{name: arg1}
+    }
+
+    public entry fun open_position<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &WrappedPositionConfig<T2, T3>, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: 0x2::coin::Coin<T1>, arg8: 0x2::coin::Coin<T4>, arg9: u8, arg10: u64, arg11: u64, arg12: u256, arg13: u256, arg14: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 4)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        open_position_common<T0, T1, T2, T3, T4>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, 0x1::option::none<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(), 0x1::option::none<0x2::object::ID>(), arg14);
+    }
+
+    fun open_position_common<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &WrappedPositionConfig<T2, T3>, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: 0x2::coin::Coin<T1>, arg8: 0x2::coin::Coin<T4>, arg9: u8, arg10: u64, arg11: u64, arg12: u256, arg13: u256, arg14: 0x1::option::Option<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>, arg15: 0x1::option::Option<0x2::object::ID>, arg16: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 40)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        assert!(arg10 > 0, 10016);
+        assert!(0x2::coin::value<T1>(&arg7) > 0, 10017);
+        assert!(0x2::coin::value<T4>(&arg8) > 0, 10019);
+        assert!(0x1::type_name::get<T1>() == 0x1::type_name::get<T4>(), 10031);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg16);
+        let v3 = parse_direction<T3>();
+        let v4 = SymbolName<T2, LONG>{dummy_field: false};
+        let v5 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v4)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v4))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v6 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v7 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v6)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v6))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v8 = SymbolName<T2, T3>{dummy_field: false};
+        let v9 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v8);
+        let (v10, v11, v12, v13) = if (0x2::dynamic_object_field::exists_<SymbolName<T2, T3>>(&arg1.id, v8)) {
+            let v14 = 0x2::dynamic_object_field::borrow<SymbolName<T2, T3>, SymbolConfig>(&arg1.id, v8);
+            (v14.max_opening_size, v14.max_opening_size_enabled, v14.max_opening_size_per_position, v14.max_opening_size_per_position_enabled)
+        } else {
+            (0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(), false, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(), false)
+        };
+        let v15 = v12;
+        let v16 = v10;
+        let v17 = if (exists_trading_price_config_for_feeder(&arg1.id, arg6)) {
+            let v18 = borrow_trading_price_config_for_feeder(&arg1.id, arg6);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v9), arg6, v0, v18.max_interval, v18.max_confidence, v18.use_confidence_adjusted_price, v18.confidence_adjust_percentage, !v3)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v9), arg6, v0)
+        };
+        let v19 = v17;
+        let v20 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg13);
+        let (v21, v22) = get_referral_data(&arg1.referrals, v2);
+        let v23 = if (v11) {
+            let v24 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero();
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::gt(&v16, &v24)
+        } else {
+            false
+        };
+        if (v23) {
+            let v25 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::add(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(v9), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(&v19, arg10));
+            assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::le(&v25, &v16), 10033);
+        };
+        let v26 = if (v13) {
+            let v27 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero();
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::gt(&v15, &v27)
+        } else {
+            false
+        };
+        if (v26) {
+            let v28 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(&v19, arg10);
+            assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::le(&v28, &v15), 10034);
+        };
+        let v29 = if (v3) {
+            let v30 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v19);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::gt(&v30, &v20)
+        } else {
+            let v31 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v19);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::lt(&v31, &v20)
+        };
+        if (v29) {
+            assert!(arg9 < 2, 10007);
+            let v32 = VaultName<T1>{dummy_field: false};
+            let v33 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v32)), arg5, v0);
+            let v34 = 0x2::coin::into_balance<T4>(arg8);
+            let v35 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(&v33, 0x2::balance::value<T4>(&v34));
+            let v36 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::config_min_order_fee_value(&arg4.inner);
+            assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::ge(&v35, &v36), 10032);
+            let v37 = 0x2::object::new(arg16);
+            let v38 = OrderName<T1, T2, T3, T4>{
+                id          : 0x2::object::uid_to_inner(&v37),
+                owner       : v2,
+                position_id : 0x1::option::none<0x2::object::ID>(),
+            };
+            let (v39, v40) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::new_open_position_order<T1, T4>(v0, arg10, arg11, v20, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg12), arg4.inner, 0x2::coin::into_balance<T1>(arg7), v34, arg15, arg14, v22);
+            0x2::bag::add<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenPositionOrder<T1, T4>>(&mut arg1.orders, v38, v39);
+            let v41 = OrderCap<T1, T2, T3, T4>{
+                id          : v37,
+                position_id : v38.position_id,
+            };
+            0x2::transfer::transfer<OrderCap<T1, T2, T3, T4>>(v41, v2);
+            let v42 = OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateOpenPositionOrderEvent>{
+                order_name : v38,
+                event      : v40,
+            };
+            0x2::event::emit<OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateOpenPositionOrderEvent>>(v42);
+        } else {
+            assert!(arg9 > 0, 10008);
+            let v43 = VaultName<T1>{dummy_field: false};
+            let v44 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v43);
+            let v45 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v44), arg5, v0);
+            let v46 = 0x2::dynamic_object_field::borrow<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&arg1.id, 10001);
+            let v47 = 0x2::object::new(arg16);
+            let v48 = PositionName<T1, T2, T3>{
+                id    : 0x2::object::uid_to_inner(&v47),
+                owner : v2,
+            };
+            let v49 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+            let v50 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v49)) {
+                apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v9), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v19), compute_price_impact_spread<T2>(&arg1.id, &v19, v5, v7, arg10, v3), v3, true)
+            } else {
+                v19
+            };
+            let v51 = v50;
+            let v52 = 0x2::coin::into_balance<T1>(arg7);
+            0x2::balance::destroy_zero<T1>(v52);
+            let (v53, v54, v55, v56, v57) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::unwrap_open_position_result<T1>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::open_position_v1<T1>(v44, v9, v46, arg2, arg3, &arg4.inner, &v45, &v51, &mut v52, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg12), v21, arg14, v3, arg10, arg11, lp_supply_amount<T0>(arg1), v0, v22, v1));
+            let v58 = v56;
+            0x2::bag::add<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v48, v53);
+            let v59 = PositionCap<T1, T2, T3>{id: v47};
+            0x2::transfer::transfer<PositionCap<T1, T2, T3>>(v59, v2);
+            pay_from_balance<T1>(v54, v22, arg16);
+            let v60 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v46);
+            pay_from_balance<T1>(v55, v60, arg16);
+            if (0x1::option::is_some<0x2::balance::Balance<T1>>(&v58)) {
+                if (0x1::option::is_some<0x2::object::ID>(&arg15)) {
+                    let v61 = *0x1::option::borrow<0x2::object::ID>(&arg15);
+                    pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v58), 0x2::object::id_to_address(&v61), arg16);
+                } else {
+                    pay_from_balance<T1>(0x1::option::destroy_some<0x2::balance::Balance<T1>>(v58), v60, arg16);
+                };
+            } else {
+                0x1::option::destroy_none<0x2::balance::Balance<T1>>(v58);
+            };
+            0x2::transfer::public_transfer<0x2::coin::Coin<T4>>(arg8, v2);
+            let v62 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>{
+                position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v48),
+                event         : v57,
+            };
+            0x2::event::emit<PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::OpenPositionSuccessEvent>>(v62);
+        };
+    }
+
+    fun open_position_common_v2<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &WrappedPositionConfig<T2, T3>, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: 0x2::coin::Coin<T1>, arg6: 0x2::coin::Coin<T4>, arg7: u8, arg8: u64, arg9: u64, arg10: u256, arg11: u256, arg12: u256, arg13: 0x1::option::Option<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>, arg14: 0x1::option::Option<0x2::object::ID>, arg15: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 41)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        assert!(arg8 > 0, 10016);
+        assert!(0x2::coin::value<T1>(&arg5) > 0, 10017);
+        assert!(0x2::coin::value<T4>(&arg6) > 0, 10019);
+        assert!(0x1::type_name::get<T1>() == 0x1::type_name::get<T4>(), 10031);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = 0x2::tx_context::sender(arg15);
+        let v2 = parse_direction<T3>();
+        let v3 = SymbolName<T2, LONG>{dummy_field: false};
+        let v4 = if (0x2::bag::contains<SymbolName<T2, LONG>>(&arg1.symbols, v3)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v3))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v5 = SymbolName<T2, SHORT>{dummy_field: false};
+        let v6 = if (0x2::bag::contains<SymbolName<T2, SHORT>>(&arg1.symbols, v5)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(0x2::bag::borrow<SymbolName<T2, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg1.symbols, v5))
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero()
+        };
+        let v7 = SymbolName<T2, T3>{dummy_field: false};
+        let v8 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v7);
+        let (v9, v10, v11, v12) = if (0x2::dynamic_object_field::exists_<SymbolName<T2, T3>>(&arg1.id, v7)) {
+            let v13 = 0x2::dynamic_object_field::borrow<SymbolName<T2, T3>, SymbolConfig>(&arg1.id, v7);
+            (v13.max_opening_size, v13.max_opening_size_enabled, v13.max_opening_size_per_position, v13.max_opening_size_per_position_enabled)
+        } else {
+            (0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(), false, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(), false)
+        };
+        let v14 = v11;
+        let v15 = v9;
+        let v16 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v8);
+        let v17 = if (exists_trading_price_config_for_feeder(&arg1.id, arg4)) {
+            let v18 = borrow_trading_price_config_for_feeder(&arg1.id, arg4);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(v16, arg4, v0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::max_interval_of(v16), v18.max_confidence, v18.use_confidence_adjusted_price, v18.confidence_adjust_percentage, !v2)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(v16, arg4, v0)
+        };
+        let v19 = v17;
+        let v20 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg11);
+        let (_, v22) = get_referral_data(&arg1.referrals, v1);
+        let v23 = if (v10) {
+            let v24 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero();
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::gt(&v15, &v24)
+        } else {
+            false
+        };
+        if (v23) {
+            let v25 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::add(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(v8), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(&v19, arg8));
+            assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::le(&v25, &v15), 10033);
+        };
+        let v26 = if (v12) {
+            let v27 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero();
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::gt(&v14, &v27)
+        } else {
+            false
+        };
+        if (v26) {
+            let v28 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(&v19, arg8);
+            assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::le(&v28, &v14), 10034);
+        };
+        let v29 = if (v2) {
+            let v30 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v19);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::gt(&v30, &v20)
+        } else {
+            let v31 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v19);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::lt(&v31, &v20)
+        };
+        if (v29) {
+            assert!(arg7 < 2, 10007);
+            let v32 = VaultName<T1>{dummy_field: false};
+            let v33 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v32)), arg3, v0);
+            let v34 = 0x2::coin::into_balance<T4>(arg6);
+            let v35 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(&v33, 0x2::balance::value<T4>(&v34));
+            let v36 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::config_min_order_fee_value(&arg2.inner);
+            assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::ge(&v35, &v36), 10032);
+            let v37 = 0x2::object::new(arg15);
+            let v38 = OrderName<T1, T2, T3, T4>{
+                id          : 0x2::object::uid_to_inner(&v37),
+                owner       : v1,
+                position_id : 0x1::option::none<0x2::object::ID>(),
+            };
+            let (v39, v40) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::new_open_position_order<T1, T4>(v0, arg8, arg9, v20, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg10), arg2.inner, 0x2::coin::into_balance<T1>(arg5), v34, arg14, arg13, v22);
+            0x2::bag::add<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenPositionOrder<T1, T4>>(&mut arg1.orders, v38, v39);
+            let v41 = OrderCap<T1, T2, T3, T4>{
+                id          : v37,
+                position_id : v38.position_id,
+            };
+            0x2::transfer::transfer<OrderCap<T1, T2, T3, T4>>(v41, v1);
+            let v42 = OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateOpenPositionOrderEvent>{
+                order_name : v38,
+                event      : v40,
+            };
+            0x2::event::emit<OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateOpenPositionOrderEvent>>(v42);
+        } else {
+            assert!(arg7 > 0, 10008);
+            let v43 = VaultName<T1>{dummy_field: false};
+            let v44 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v43)), arg3, v0);
+            let v45 = 0x2::coin::into_balance<T4>(arg6);
+            let v46 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::coins_to_value(&v44, 0x2::balance::value<T4>(&v45));
+            let v47 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::config_min_order_fee_value(&arg2.inner);
+            assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::ge(&v46, &v47), 10032);
+            let v48 = get_price_impact_config_if_enabled<T2>(&arg1.id);
+            let v49 = if (0x1::option::is_some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(&v48)) {
+                apply_price_impact_to_price(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v8), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v19), compute_price_impact_spread<T2>(&arg1.id, &v19, v4, v6, arg8, v2), v2, true)
+            } else {
+                v19
+            };
+            let v50 = v49;
+            let v51 = 0x2::object::new(arg15);
+            let v52 = OrderName<T1, T2, T3, T4>{
+                id          : 0x2::object::uid_to_inner(&v51),
+                owner       : v1,
+                position_id : 0x1::option::none<0x2::object::ID>(),
+            };
+            let (v53, v54) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::new_open_market_order<T1, T4>(v0, arg8, arg9, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v50), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg12), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg10), arg2.inner, 0x2::coin::into_balance<T1>(arg5), v45, arg14, arg13, v22);
+            0x2::bag::add<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::OpenMarketOrder<T1, T4>>(&mut arg1.orders, v52, v53);
+            let v55 = OrderCap<T1, T2, T3, T4>{
+                id          : v51,
+                position_id : v52.position_id,
+            };
+            0x2::transfer::transfer<OrderCap<T1, T2, T3, T4>>(v55, v1);
+            let v56 = OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateOpenMarketOrderEvent>{
+                order_name : v52,
+                event      : v54,
+            };
+            0x2::event::emit<OrderCreated<OrderName<T1, T2, T3, T4>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::orders::CreateOpenMarketOrderEvent>>(v56);
+        };
+    }
+
+    public entry fun open_position_v2<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &WrappedPositionConfig<T2, T3>, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: 0x2::coin::Coin<T1>, arg6: 0x2::coin::Coin<T4>, arg7: u8, arg8: u64, arg9: u64, arg10: u256, arg11: u256, arg12: u256, arg13: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 33)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        open_position_common_v2<T0, T1, T2, T3, T4>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, 0x1::option::none<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(), 0x1::option::none<0x2::object::ID>(), arg13);
+    }
+
+    public entry fun open_position_with_scard<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg4: &WrappedPositionConfig<T2, T3>, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: 0x2::coin::Coin<T1>, arg8: 0x2::coin::Coin<T4>, arg9: u8, arg10: u64, arg11: u64, arg12: u256, arg13: u256, arg14: &0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard, arg15: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 5)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        assert!(arg10 > 0, 10016);
+        assert!(0x2::coin::value<T1>(&arg7) > 0, 10017);
+        assert!(0x2::coin::value<T4>(&arg8) > 0, 10019);
+        open_position_common<T0, T1, T2, T3, T4>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, 0x1::option::some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::scard::calculate_card_rebate_rate(arg14)), 0x1::option::some<0x2::object::ID>(0x2::object::id<0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard>(arg14)), arg15);
+    }
+
+    public entry fun open_position_with_scard_v2<T0, T1, T2, T3, T4>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &WrappedPositionConfig<T2, T3>, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: 0x2::coin::Coin<T1>, arg6: 0x2::coin::Coin<T4>, arg7: u8, arg8: u64, arg9: u64, arg10: u256, arg11: u256, arg12: u256, arg13: &0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard, arg14: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 34)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        assert!(arg8 > 0, 10016);
+        assert!(0x2::coin::value<T1>(&arg5) > 0, 10017);
+        assert!(0x2::coin::value<T4>(&arg6) > 0, 10019);
+        open_position_common_v2<T0, T1, T2, T3, T4>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, 0x1::option::some<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::Rate>(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::scard::calculate_card_rebate_rate(arg13)), 0x1::option::some<0x2::object::ID>(0x2::object::id<0xe7e651e4974fe367aa2837712d68081efb299c470242a15e2b9c26ea326159ec::card::SudoCard>(arg13)), arg14);
+    }
+
+    public fun parse_direction<T0>() : bool {
+        let v0 = 0x1::type_name::get<T0>();
+        if (v0 == 0x1::type_name::get<LONG>()) {
+            true
+        } else {
+            assert!(v0 == 0x1::type_name::get<SHORT>(), 10006);
+            false
+        }
+    }
+
+    fun pay_from_balance<T0>(arg0: 0x2::balance::Balance<T0>, arg1: address, arg2: &mut 0x2::tx_context::TxContext) {
+        if (0x2::balance::value<T0>(&arg0) > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(arg0, arg2), arg1);
+        } else {
+            0x2::balance::destroy_zero<T0>(arg0);
+        };
+    }
+
+    public entry fun pledge_in_position<T0, T1, T2, T3>(arg0: &mut Market<T0>, arg1: &PositionCap<T1, T2, T3>, arg2: 0x2::coin::Coin<T1>, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 9)), 10001);
+        check_version<T0>(arg0);
+        let v0 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::uid_to_inner(&arg1.id),
+            owner : 0x2::tx_context::sender(arg3),
+        };
+        let v1 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::PledgeInPositionEvent>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v0),
+            event         : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::pledge_in_position<T1>(0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg0.positions, v0), 0x2::coin::into_balance<T1>(arg2)),
+        };
+        0x2::event::emit<PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::PledgeInPositionEvent>>(v1);
+    }
+
+    public fun rebase_fee_model<T0>(arg0: &Market<T0>) : &0x2::object::ID {
+        &arg0.rebase_fee_model
+    }
+
+    public entry fun redeem_from_position<T0, T1, T2, T3>(arg0: &0x2::clock::Clock, arg1: &mut Market<T0>, arg2: &PositionCap<T1, T2, T3>, arg3: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg4: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: u64, arg8: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg1, new_function_mask<T0>(arg1, 10)), 10001);
+        assert!(!arg1.vaults_locked && !arg1.symbols_locked, 10002);
+        check_version<T0>(arg1);
+        let v0 = 0x2::clock::timestamp_ms(arg0) / 1000;
+        let v1 = update_symbol_oi_funding<T0, T2>(arg1, v0);
+        let v2 = 0x2::tx_context::sender(arg8);
+        let v3 = parse_direction<T3>();
+        let v4 = VaultName<T1>{dummy_field: false};
+        let v5 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v4);
+        let v6 = SymbolName<T2, T3>{dummy_field: false};
+        let v7 = 0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v6);
+        let v8 = PositionName<T1, T2, T3>{
+            id    : 0x2::object::uid_to_inner(&arg2.id),
+            owner : v2,
+        };
+        let v9 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v5), arg5, v0);
+        let v10 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v7);
+        let v11 = if (exists_trading_price_config_for_feeder(&arg1.id, arg6)) {
+            let v12 = borrow_trading_price_config_for_feeder(&arg1.id, arg6);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(v10, arg6, v0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::max_interval_of(v10), v12.max_confidence, v12.use_confidence_adjusted_price, v12.confidence_adjust_percentage, v3)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(v10, arg6, v0)
+        };
+        let v13 = v11;
+        let (v14, v15) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::redeem_from_position_v1<T1>(v5, v7, 0x2::bag::borrow_mut<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::Position<T1>>(&mut arg1.positions, v8), arg3, arg4, &v9, &v13, v3, arg7, lp_supply_amount<T0>(arg1), v0, v1);
+        pay_from_balance<T1>(v14, v2, arg8);
+        let v16 = PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::RedeemFromPositionEvent>{
+            position_name : 0x1::option::some<PositionName<T1, T2, T3>>(v8),
+            event         : v15,
+        };
+        0x2::event::emit<PositionClaimed<PositionName<T1, T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::RedeemFromPositionEvent>>(v16);
+    }
+
+    entry fun remove_collateral_from_symbol<T0, T1, T2, T3>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = SymbolName<T2, T3>{dummy_field: false};
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::remove_collateral_from_symbol<T1>(0x2::bag::borrow_mut<SymbolName<T2, T3>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v0));
+        let v1 = CollateralRemoved<T1, T2, T3>{dummy_field: false};
+        0x2::event::emit<CollateralRemoved<T1, T2, T3>>(v1);
+    }
+
+    entry fun remove_symbol_from_bag<T0, T1, T2>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: &0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = SymbolName<T1, T2>{dummy_field: false};
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::use_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::destroy_symbol(0x2::bag::remove<SymbolName<T1, T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v0)));
+        let v1 = SymbolRemoved<T1, T2>{dummy_field: false};
+        0x2::event::emit<SymbolRemoved<T1, T2>>(v1);
+    }
+
+    public fun remove_trading_price_config_for_feeder<T0>(arg0: &mut Market<T0>, arg1: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject) : TradingFeederPriceConfig {
+        abort 0
+    }
+
+    public fun remove_trading_price_config_for_feeder_v1<T0>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject) : TradingFeederPriceConfigV1 {
+        check_version<T0>(arg1);
+        let v0 = TradingFeederKeyV1{id: 0x2::object::id<0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject>(arg2)};
+        0x2::dynamic_object_field::remove<TradingFeederKeyV1, TradingFeederPriceConfigV1>(&mut arg1.id, v0)
+    }
+
+    entry fun replace_position_config<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut WrappedPositionConfig<T0, T1>, arg2: u64, arg3: u64, arg4: u64, arg5: u256, arg6: u256, arg7: u128, arg8: u128, arg9: u128, arg10: u128) {
+        validate_fee_bps((arg7 as u256));
+        validate_fee_bps((arg8 as u256));
+        validate_liquidation_params((arg9 as u256), (arg10 as u256));
+        validate_leverage(arg2);
+        validate_holding_duration(arg3);
+        arg1.inner = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::new_position_config(arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+        let v0 = PositionConfigReplaced<T0, T1>{
+            max_leverage            : arg2,
+            min_holding_duration    : arg3,
+            max_reserved_multiplier : arg4,
+            min_collateral_value    : arg5,
+            min_order_fee_value     : arg6,
+            open_fee_bps            : arg7,
+            decrease_fee_bps        : arg8,
+            liquidation_threshold   : arg9,
+            liquidation_bonus       : arg10,
+        };
+        0x2::event::emit<PositionConfigReplaced<T0, T1>>(v0);
+    }
+
+    entry fun replace_symbol_feeder<T0, T1, T2>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject) {
+        check_version<T0>(arg1);
+        let v0 = SymbolName<T1, T2>{dummy_field: false};
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::update_agg_price_config_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::mut_symbol_price_config(0x2::bag::borrow_mut<SymbolName<T1, T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v0)), arg2);
+        let v1 = SymbolName<T1, T2>{dummy_field: false};
+        let v2 = SymbolFeederUpdated<T1, T2>{
+            symbol_name : v1,
+            feeder      : 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::uid_to_inner(arg2),
+        };
+        0x2::event::emit<SymbolFeederUpdated<T1, T2>>(v2);
+    }
+
+    entry fun replace_vault_feeder<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject) {
+        check_version<T0>(arg1);
+        let v0 = VaultName<T1>{dummy_field: false};
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::update_agg_price_config_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::mut_vault_price_config<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v0)), arg2);
+        let v1 = VaultName<T1>{dummy_field: false};
+        let v2 = VaultFeederUpdated<T1>{
+            vault_name : v1,
+            feeder     : 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::uid_to_inner(arg2),
+        };
+        0x2::event::emit<VaultFeederUpdated<T1>>(v2);
+    }
+
+    entry fun replace_vault_weight<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u256) {
+        check_version<T0>(arg1);
+        validate_vault_weight(arg2);
+        let v0 = VaultName<T1>{dummy_field: false};
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::set_vault_weight<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v0), arg2);
+        let v1 = VaultName<T1>{dummy_field: false};
+        let v2 = VaultWeightUpdated<T1>{
+            vault_name : v1,
+            weight     : arg2,
+        };
+        0x2::event::emit<VaultWeightUpdated<T1>>(v2);
+    }
+
+    entry fun set_fee_config<T0>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u8, arg3: address, arg4: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_percent(arg2);
+        validate_config_fee_rate((0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::to_raw(v0) as u256));
+        if (0x2::dynamic_object_field::exists_<u64>(&arg1.id, 10001)) {
+            let v1 = 0x2::dynamic_object_field::borrow_mut<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&mut arg1.id, 10001);
+            if (0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::to_raw(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_rate(v1)) != 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::to_raw(v0) || 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::get_fee_collector(v1) != arg3) {
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::set_fee_config_rate(v1, v0, arg3);
+                let v2 = FeeConfigUpdated<T0>{
+                    fee_rate_percent : arg2,
+                    fee_collector    : arg3,
+                };
+                0x2::event::emit<FeeConfigUpdated<T0>>(v2);
+            };
+        } else {
+            0x2::dynamic_object_field::add<u64, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::FeeConfig>(&mut arg1.id, 10001, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::fee::new_fee_config(v0, arg3, arg4));
+            let v3 = FeeConfigUpdated<T0>{
+                fee_rate_percent : arg2,
+                fee_collector    : arg3,
+            };
+            0x2::event::emit<FeeConfigUpdated<T0>>(v3);
+        };
+    }
+
+    entry fun set_function_status<T0>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u8, arg3: bool) {
+        check_version<T0>(arg1);
+        let v0 = new_function_mask<T0>(arg1, arg2);
+        if (arg3) {
+            if (0x2::vec_set::contains<FunctionMask<T0>>(&arg1.disabled_functions, &v0)) {
+                0x2::vec_set::remove<FunctionMask<T0>>(&mut arg1.disabled_functions, &v0);
+            };
+        } else if (!0x2::vec_set::contains<FunctionMask<T0>>(&arg1.disabled_functions, &v0)) {
+            0x2::vec_set::insert<FunctionMask<T0>>(&mut arg1.disabled_functions, v0);
+        };
+        let v1 = FunctionStatusUpdated{
+            func_name : arg2,
+            enabled   : arg3,
+        };
+        0x2::event::emit<FunctionStatusUpdated>(v1);
+    }
+
+    entry fun set_price_impact_config<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u128, arg3: u128, arg4: u128, arg5: u256, arg6: u256, arg7: u256, arg8: u256, arg9: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::new_config_key<T1>();
+        if (0x2::dynamic_object_field::exists_<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfigKey<T1>>(&arg1.id, v0)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::update_config(0x2::dynamic_object_field::borrow_mut<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfigKey<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfig>(&mut arg1.id, v0), arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+        } else {
+            0x2::dynamic_object_field::add<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfigKey<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfig>(&mut arg1.id, v0, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::new_price_impact_config(arg9, true, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+        };
+    }
+
+    entry fun set_price_impact_enabled<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: bool) {
+        check_version<T0>(arg1);
+        let v0 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::new_config_key<T1>();
+        if (0x2::dynamic_object_field::exists_<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfigKey<T1>>(&arg1.id, v0)) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::set_enabled(0x2::dynamic_object_field::borrow_mut<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfigKey<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::price_impact::PriceImpactConfig>(&mut arg1.id, v0), arg2);
+        };
+    }
+
+    entry fun set_referral_rate<T0>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u128, arg3: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        validate_referral_rate((arg2 as u256));
+        arg1.referral_rate = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg2);
+        let v0 = ReferralRateUpdated{referral_rate: arg1.referral_rate};
+        0x2::event::emit<ReferralRateUpdated>(v0);
+    }
+
+    entry fun set_symbol_funding_enabled<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: bool) {
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::set_funding_state_enabled(0x2::dynamic_object_field::borrow_mut<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::FundingStateKey<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::FundingState>(&mut arg1.id, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::new_funding_state_key<T1>()), arg2);
+    }
+
+    entry fun set_symbol_instant_exit_fee_config<T0, T1, T2>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u64, arg3: bool, arg4: u128, arg5: u64, arg6: bool, arg7: u128, arg8: u64, arg9: bool, arg10: u128, arg11: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = SymbolName<T1, T2>{dummy_field: false};
+        if (0x2::dynamic_object_field::exists_<SymbolName<T1, T2>>(&arg1.id, v0)) {
+            let v1 = 0x2::dynamic_object_field::borrow_mut<SymbolName<T1, T2>, SymbolConfig>(&mut arg1.id, v0);
+            v1.instant_exit_fee_config = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::set_position_instant_exit_fee_config(&mut v1.instant_exit_fee_config, arg2, arg3, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg4), arg5, arg6, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg7), arg8, arg9, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg10));
+        } else {
+            let v2 = SymbolConfig{
+                id                                    : 0x2::object::new(arg11),
+                max_opening_size                      : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(),
+                max_opening_size_enabled              : false,
+                max_opening_size_per_position         : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(),
+                max_opening_size_per_position_enabled : false,
+                instant_exit_fee_config               : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::new_position_instant_exit_fee_config(arg2, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg4), arg3, arg5, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg7), arg6, arg8, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::rate::from_raw(arg10), arg9),
+            };
+            0x2::dynamic_object_field::add<SymbolName<T1, T2>, SymbolConfig>(&mut arg1.id, v0, v2);
+        };
+    }
+
+    entry fun set_symbol_max_opening_size<T0, T1, T2>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u256, arg3: bool, arg4: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = SymbolName<T1, T2>{dummy_field: false};
+        if (0x2::dynamic_object_field::exists_<SymbolName<T1, T2>>(&arg1.id, v0)) {
+            let v1 = 0x2::dynamic_object_field::borrow_mut<SymbolName<T1, T2>, SymbolConfig>(&mut arg1.id, v0);
+            v1.max_opening_size = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg2);
+            v1.max_opening_size_enabled = arg3;
+        } else {
+            let v2 = SymbolConfig{
+                id                                    : 0x2::object::new(arg4),
+                max_opening_size                      : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg2),
+                max_opening_size_enabled              : arg3,
+                max_opening_size_per_position         : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(),
+                max_opening_size_per_position_enabled : false,
+                instant_exit_fee_config               : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::default_position_instant_exit_fee_config(),
+            };
+            0x2::dynamic_object_field::add<SymbolName<T1, T2>, SymbolConfig>(&mut arg1.id, v0, v2);
+        };
+    }
+
+    entry fun set_symbol_max_opening_size_per_position<T0, T1, T2>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u256, arg3: bool, arg4: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = SymbolName<T1, T2>{dummy_field: false};
+        if (0x2::dynamic_object_field::exists_<SymbolName<T1, T2>>(&arg1.id, v0)) {
+            let v1 = 0x2::dynamic_object_field::borrow_mut<SymbolName<T1, T2>, SymbolConfig>(&mut arg1.id, v0);
+            v1.max_opening_size_per_position = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg2);
+            v1.max_opening_size_per_position_enabled = arg3;
+        } else {
+            let v2 = SymbolConfig{
+                id                                    : 0x2::object::new(arg4),
+                max_opening_size                      : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::zero(),
+                max_opening_size_enabled              : false,
+                max_opening_size_per_position         : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg2),
+                max_opening_size_per_position_enabled : arg3,
+                instant_exit_fee_config               : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::position::default_position_instant_exit_fee_config(),
+            };
+            0x2::dynamic_object_field::add<SymbolName<T1, T2>, SymbolConfig>(&mut arg1.id, v0, v2);
+        };
+    }
+
+    entry fun set_symbol_status<T0, T1, T2>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: bool, arg3: bool, arg4: bool) {
+        check_version<T0>(arg1);
+        let v0 = SymbolName<T1, T2>{dummy_field: false};
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::set_symbol_status(0x2::bag::borrow_mut<SymbolName<T1, T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg1.symbols, v0), arg2, arg3, arg4);
+        let v1 = SymbolStatusUpdated<T1, T2>{
+            open_enabled      : arg2,
+            decrease_enabled  : arg3,
+            liquidate_enabled : arg4,
+        };
+        0x2::event::emit<SymbolStatusUpdated<T1, T2>>(v1);
+    }
+
+    entry fun set_trading_price_config_for_feeder<T0>(arg0: &mut Market<T0>, arg1: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg2: u64, arg3: u64, arg4: bool, arg5: u256, arg6: &mut 0x2::tx_context::TxContext) {
+        abort 0
+    }
+
+    entry fun set_trading_price_config_for_feeder_v1<T0>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg3: u64, arg4: u64, arg5: bool, arg6: u256, arg7: &mut 0x2::tx_context::TxContext) {
+        check_version<T0>(arg1);
+        let v0 = TradingFeederKeyV1{id: 0x2::object::id<0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject>(arg2)};
+        let v1 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_raw(arg6);
+        let v2 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::from_u64(1);
+        assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::le(&v1, &v2), 10037);
+        if (0x2::dynamic_object_field::exists_<TradingFeederKeyV1>(&arg1.id, v0)) {
+            let v3 = 0x2::dynamic_object_field::borrow_mut<TradingFeederKeyV1, TradingFeederPriceConfigV1>(&mut arg1.id, v0);
+            v3.max_interval = arg3;
+            v3.max_confidence = arg4;
+            v3.use_confidence_adjusted_price = arg5;
+            v3.confidence_adjust_percentage = v1;
+        } else {
+            let v4 = TradingFeederPriceConfigV1{
+                id                            : 0x2::object::new(arg7),
+                max_interval                  : arg3,
+                max_confidence                : arg4,
+                use_confidence_adjusted_price : arg5,
+                confidence_adjust_percentage  : v1,
+            };
+            0x2::dynamic_object_field::add<TradingFeederKeyV1, TradingFeederPriceConfigV1>(&mut arg1.id, v0, v4);
+        };
+    }
+
+    entry fun set_vault_status<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: bool) {
+        check_version<T0>(arg1);
+        let v0 = VaultName<T1>{dummy_field: false};
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::set_vault_status<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg1.vaults, v0), arg2);
+        let v1 = VaultStatusUpdated{enabled: arg2};
+        0x2::event::emit<VaultStatusUpdated>(v1);
+    }
+
+    public fun swap_v2<T0, T1, T2>(arg0: &mut Market<T0>, arg1: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel, arg2: 0x2::coin::Coin<T1>, arg3: u64, arg4: VaultsValuation, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 43)), 10001);
+        check_version<T0>(arg0);
+        let v0 = swap_v2_ptb<T0, T1, T2>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+        let v1 = 0x2::tx_context::sender(arg7);
+        pay_from_balance<T2>(0x2::coin::into_balance<T2>(v0), v1, arg7);
+    }
+
+    public fun swap_v2_ptb<T0, T1, T2>(arg0: &mut Market<T0>, arg1: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel, arg2: 0x2::coin::Coin<T1>, arg3: u64, arg4: VaultsValuation, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg7: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T2> {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 43)), 10001);
+        check_version<T0>(arg0);
+        assert!(0x2::object::id<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel>(arg1) == arg0.rebase_fee_model, 10014);
+        assert!(0x1::type_name::get<T1>() != 0x1::type_name::get<T2>(), 10015);
+        let v0 = arg4.timestamp;
+        let (v1, v2, v3) = finalize_vaults_valuation<T0>(arg0, arg4);
+        let v4 = v1;
+        let v5 = 0x1::type_name::get<VaultName<T1>>();
+        let (_, v7) = 0x2::vec_map::remove<0x1::type_name::TypeName, VaultInfo>(&mut v4, &v5);
+        let VaultInfo {
+            price : _,
+            value : v9,
+        } = v7;
+        let v10 = 0x1::type_name::get<VaultName<T2>>();
+        let (_, v12) = 0x2::vec_map::remove<0x1::type_name::TypeName, VaultInfo>(&mut v4, &v10);
+        let VaultInfo {
+            price : _,
+            value : v14,
+        } = v12;
+        let v15 = &arg0.id;
+        let v16 = VaultName<T1>{dummy_field: false};
+        let v17 = if (exists_trading_price_config_for_feeder(v15, arg5)) {
+            let v18 = borrow_trading_price_config_for_feeder(v15, arg5);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(0x2::bag::borrow<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&arg0.vaults, v16)), arg5, v0, v18.max_interval, v18.max_confidence, v18.use_confidence_adjusted_price, v18.confidence_adjust_percentage, true)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(0x2::bag::borrow<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&arg0.vaults, v16)), arg5, v0)
+        };
+        let v19 = v17;
+        let v20 = VaultName<T2>{dummy_field: false};
+        let v21 = if (exists_trading_price_config_for_feeder(v15, arg6)) {
+            let v22 = borrow_trading_price_config_for_feeder(v15, arg6);
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder_with_trading_price_config(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T2>(0x2::bag::borrow<VaultName<T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T2>>(&arg0.vaults, v20)), arg6, v0, v22.max_interval, v22.max_confidence, v22.use_confidence_adjusted_price, v22.confidence_adjust_percentage, false)
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T2>(0x2::bag::borrow<VaultName<T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T2>>(&arg0.vaults, v20)), arg6, v0)
+        };
+        let v23 = v21;
+        let v24 = VaultName<T1>{dummy_field: false};
+        let (v25, v26) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::swap_in<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg0.vaults, v24), arg1, &v19, 0x2::coin::into_balance<T1>(arg2), v9, v3, v2);
+        let v27 = VaultName<T2>{dummy_field: false};
+        let (v28, v29) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::swap_out<T2>(0x2::bag::borrow_mut<VaultName<T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T2>>(&mut arg0.vaults, v27), arg1, &v23, arg3, v25, v14, v3, v2);
+        let v30 = v28;
+        let v31 = Swapped<T1, T2>{
+            swapper       : 0x2::tx_context::sender(arg7),
+            source_price  : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v19),
+            dest_price    : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v23),
+            source_amount : 0x2::coin::value<T1>(&arg2),
+            dest_amount   : 0x2::balance::value<T2>(&v30),
+            fee_value     : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::add(v26, v29),
+        };
+        0x2::event::emit<Swapped<T1, T2>>(v31);
+        0x2::coin::from_balance<T2>(v30, arg7)
+    }
+
+    public fun symbol<T0, T1, T2>(arg0: &Market<T0>) : &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol {
+        let v0 = SymbolName<T1, T2>{dummy_field: false};
+        0x2::bag::borrow<SymbolName<T1, T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg0.symbols, v0)
+    }
+
+    entry fun update_symbol_funding_params<T0, T1>(arg0: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::admin::AdminCap, arg1: &mut Market<T0>, arg2: u256, arg3: u256, arg4: u128) {
+        0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::update_funding_model_params(0x2::dynamic_object_field::borrow_mut<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::FundingStateKey<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::FundingState>(&mut arg1.id, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::new_funding_state_key<T1>()), arg2, arg3, arg4);
+    }
+
+    fun update_symbol_oi_funding<T0, T1>(arg0: &mut Market<T0>, arg1: u64) : bool {
+        let v0 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::new_funding_state_key<T1>();
+        if (0x2::dynamic_object_field::exists_<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::FundingStateKey<T1>>(&arg0.id, v0)) {
+            let v1 = 0x2::dynamic_object_field::borrow_mut<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::FundingStateKey<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::FundingState>(&mut arg0.id, v0);
+            if (0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::is_enabled(v1)) {
+                let v2 = SymbolName<T1, LONG>{dummy_field: false};
+                let v3 = SymbolName<T1, SHORT>{dummy_field: false};
+                let v4 = 0x2::bag::borrow<SymbolName<T1, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg0.symbols, v2);
+                let v5 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_unrealised_funding_fee_value(v4, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::srate::zero());
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_last_update(v4);
+                let v6 = 0x2::bag::borrow<SymbolName<T1, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&arg0.symbols, v3);
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_last_update(v6);
+                let v7 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::compute_oi_funding(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(v4), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_acc_funding_rate(v4, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::srate::zero()), v5, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_opening_size(v6), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_acc_funding_rate(v6, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::srate::zero()), 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_unrealised_funding_fee_value(v6, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::srate::zero()), v1, arg1);
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::refresh_symbol_oi_funding(v7, 0x2::bag::borrow_mut<SymbolName<T1, LONG>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg0.symbols, v2), true);
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::refresh_symbol_oi_funding(v7, 0x2::bag::borrow_mut<SymbolName<T1, SHORT>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg0.symbols, v3), false);
+                0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::set_funding_state_last_update(v1, arg1);
+                return true
+            };
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::funding::set_funding_state_last_update(v1, arg1);
+        };
+        false
+    }
+
+    fun validate_config_fee_rate(arg0: u256) {
+        assert!(arg0 >= 10000000000000000 && arg0 <= 500000000000000000, 10029);
+    }
+
+    fun validate_fee_bps(arg0: u256) {
+        assert!(arg0 >= 100000000000000 && arg0 <= 20000000000000000, 10024);
+    }
+
+    fun validate_holding_duration(arg0: u64) {
+        assert!(arg0 >= 10, 10023);
+    }
+
+    fun validate_leverage(arg0: u64) {
+        assert!(arg0 >= 1 && arg0 <= 100, 10025);
+    }
+
+    fun validate_liquidation_params(arg0: u256, arg1: u256) {
+        assert!(arg0 >= 10000000000000000 && arg0 <= 999000000000000000, 10026);
+        assert!(arg1 >= 10000000000000000 && arg1 <= 999000000000000000, 10027);
+        assert!(arg0 + arg1 < 1000000000000000000, 10028);
+    }
+
+    fun validate_loss_protection_percentage(arg0: u128) {
+        assert!((arg0 as u256) <= 1000000000000000000, 10040);
+    }
+
+    public fun validate_market_valuation<T0>(arg0: &mut Market<T0>, arg1: VaultsValuation, arg2: SymbolsValuation) : (0x2::vec_map::VecMap<0x1::type_name::TypeName, VaultInfo>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::Decimal) {
+        check_version<T0>(arg0);
+        let (v0, v1, v2) = finalize_vaults_valuation<T0>(arg0, arg1);
+        let v3 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::sdecimal::add_with_decimal(finalize_symbols_valuation<T0>(arg0, arg2), v2);
+        assert!(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::sdecimal::is_positive(&v3), 10013);
+        (v0, v1, v2, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::sdecimal::value(&v3))
+    }
+
+    fun validate_referral_rate(arg0: u256) {
+        assert!(arg0 >= 10000000000000000 && arg0 <= 900000000000000000, 10030);
+    }
+
+    fun validate_vault_weight(arg0: u256) {
+        assert!(arg0 >= 10000000000000000 && arg0 <= 1000000000000000000, 10022);
+    }
+
+    public fun valuate_symbol<T0, T1, T2>(arg0: &mut Market<T0>, arg1: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::FundingFeeModel, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg3: &mut SymbolsValuation) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 20)), 10001);
+        check_version<T0>(arg0);
+        let v0 = arg3.timestamp;
+        let v1 = update_symbol_oi_funding<T0, T1>(arg0, v0);
+        let v2 = SymbolName<T1, T2>{dummy_field: false};
+        let v3 = 0x2::bag::borrow_mut<SymbolName<T1, T2>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Symbol>(&mut arg0.symbols, v2);
+        let v4 = 0x1::type_name::get<SymbolName<T1, T2>>();
+        assert!(!0x2::vec_set::contains<0x1::type_name::TypeName>(&arg3.handled, &v4), 10010);
+        let v5 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::symbol_price_config(v3), arg2, v0);
+        let v6 = if (v1) {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::valuate_symbol_after_oi_funding_update(v3, &v5, parse_direction<T2>())
+        } else {
+            0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::valuate_symbol(v3, arg1, &v5, parse_direction<T2>(), arg3.lp_supply_amount, v0)
+        };
+        arg3.value = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::sdecimal::add(arg3.value, v6);
+        0x2::vec_set::insert<0x1::type_name::TypeName>(&mut arg3.handled, v4);
+    }
+
+    public fun valuate_vault<T0, T1>(arg0: &mut Market<T0>, arg1: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::ReservingFeeModel, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg3: &mut VaultsValuation) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 19)), 10001);
+        check_version<T0>(arg0);
+        let v0 = arg3.timestamp;
+        let v1 = VaultName<T1>{dummy_field: false};
+        let v2 = 0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg0.vaults, v1);
+        let v3 = 0x1::type_name::get<VaultName<T1>>();
+        assert!(!0x2::vec_map::contains<0x1::type_name::TypeName, VaultInfo>(&arg3.handled, &v3), 10009);
+        let v4 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::parse_pyth_feeder(0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_price_config<T1>(v2), arg2, v0);
+        let v5 = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::valuate_vault<T1>(v2, arg1, &v4, v0);
+        arg3.value = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::add(arg3.value, v5);
+        arg3.total_weight = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::decimal::add(arg3.total_weight, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::vault_weight<T1>(v2));
+        let v6 = VaultInfo{
+            price : v4,
+            value : v5,
+        };
+        0x2::vec_map::insert<0x1::type_name::TypeName, VaultInfo>(&mut arg3.handled, v3, v6);
+    }
+
+    public fun vault<T0, T1>(arg0: &Market<T0>) : &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1> {
+        let v0 = VaultName<T1>{dummy_field: false};
+        0x2::bag::borrow<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&arg0.vaults, v0)
+    }
+
+    public fun withdraw<T0, T1>(arg0: &mut Market<T0>, arg1: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel, arg2: 0x2::coin::Coin<T0>, arg3: u64, arg4: VaultsValuation, arg5: SymbolsValuation, arg6: &mut 0x2::tx_context::TxContext) {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 2)), 10001);
+        check_version<T0>(arg0);
+        assert!(0x2::object::id<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel>(arg1) == arg0.rebase_fee_model, 10014);
+        let v0 = 0x2::tx_context::sender(arg6);
+        let v1 = 0x2::balance::supply_value<T0>(&arg0.lp_supply);
+        let (v2, v3, v4, v5) = finalize_market_valuation<T0>(arg0, arg4, arg5);
+        let v6 = v2;
+        let v7 = 0x1::type_name::get<VaultName<T1>>();
+        let (_, v9) = 0x2::vec_map::remove<0x1::type_name::TypeName, VaultInfo>(&mut v6, &v7);
+        let VaultInfo {
+            price : v10,
+            value : v11,
+        } = v9;
+        let v12 = v10;
+        let v13 = VaultName<T1>{dummy_field: false};
+        let v14 = 0x2::balance::decrease_supply<T0>(&mut arg0.lp_supply, 0x2::coin::into_balance<T0>(arg2));
+        let (v15, v16) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::withdraw<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg0.vaults, v13), arg1, &v12, v14, arg3, v1, v5, v11, v4, v3);
+        let v17 = v15;
+        pay_from_balance<T1>(v17, v0, arg6);
+        let v18 = Withdrawn<T1>{
+            burner          : v0,
+            price           : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v12),
+            withdraw_amount : 0x2::balance::value<T1>(&v17),
+            burn_amount     : v14,
+            fee_value       : v16,
+        };
+        0x2::event::emit<Withdrawn<T1>>(v18);
+    }
+
+    public fun withdraw_ptb<T0, T1>(arg0: &mut Market<T0>, arg1: &0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel, arg2: 0x2::coin::Coin<T0>, arg3: u64, arg4: VaultsValuation, arg5: SymbolsValuation, arg6: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T1> {
+        assert!(!is_function_disabled<T0>(arg0, new_function_mask<T0>(arg0, 25)), 10001);
+        check_version<T0>(arg0);
+        assert!(0x2::object::id<0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::model::RebaseFeeModel>(arg1) == arg0.rebase_fee_model, 10014);
+        let v0 = 0x2::balance::supply_value<T0>(&arg0.lp_supply);
+        let (v1, v2, v3, v4) = finalize_market_valuation<T0>(arg0, arg4, arg5);
+        let v5 = v1;
+        let v6 = 0x1::type_name::get<VaultName<T1>>();
+        let (_, v8) = 0x2::vec_map::remove<0x1::type_name::TypeName, VaultInfo>(&mut v5, &v6);
+        let VaultInfo {
+            price : v9,
+            value : v10,
+        } = v8;
+        let v11 = v9;
+        let v12 = VaultName<T1>{dummy_field: false};
+        let v13 = 0x2::balance::decrease_supply<T0>(&mut arg0.lp_supply, 0x2::coin::into_balance<T0>(arg2));
+        let (v14, v15) = 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::withdraw<T1>(0x2::bag::borrow_mut<VaultName<T1>, 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::pool::Vault<T1>>(&mut arg0.vaults, v12), arg1, &v11, v13, arg3, v0, v4, v10, v3, v2);
+        let v16 = v14;
+        let v17 = Withdrawn<T1>{
+            burner          : 0x2::tx_context::sender(arg6),
+            price           : 0x7fd8aba1652c58b6397c799fd375e748e5053145cb7e126d303e0a1545fd1fec::agg_price::price_of(&v11),
+            withdraw_amount : 0x2::balance::value<T1>(&v16),
+            burn_amount     : v13,
+            fee_value       : v15,
+        };
+        0x2::event::emit<Withdrawn<T1>>(v17);
+        0x2::coin::from_balance<T1>(v16, arg6)
+    }
+
+    // decompiled from Move bytecode v6
+}
+
