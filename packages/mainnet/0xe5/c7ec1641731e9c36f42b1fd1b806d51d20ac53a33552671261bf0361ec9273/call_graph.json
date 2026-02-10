@@ -1,0 +1,1362 @@
+{
+  "package_id": "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273",
+  "module_call_graphs": [
+    {
+      "module_name": "authority",
+      "call_graph": {
+        "create_assistant_cap": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new"
+        ],
+        "delete_assistant_cap": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::delete"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ]
+      }
+    },
+    {
+      "module_name": "constants",
+      "call_graph": {
+        "b9_scaling": [],
+        "default_lp_coin_image": [],
+        "force_withdraw_pause_ms": [],
+        "lp_decimals": [],
+        "max_force_withdraw_delay": [],
+        "max_lock_period": [],
+        "max_markets_in_vault": [],
+        "max_owner_fee_rate": [],
+        "max_pending_orders_per_position": [],
+        "min_deposit_usd": [],
+        "min_force_withdraw_position_usd": [],
+        "min_owner_lock_usd": [],
+        "min_pause_vault_for_force_withdraw_frequency_ms": [],
+        "version": []
+      }
+    },
+    {
+      "module_name": "errors",
+      "call_graph": {
+        "bad_new_vault_version": [],
+        "cannot_force_withdraw": [],
+        "clearing_house_id_not_found": [],
+        "exceeding_max_total_deposited_collateral": [],
+        "force_withdraw_above_margin_ratio_tolerance": [],
+        "force_withdraw_below_margin_ratio": [],
+        "force_withdraw_collateral_leftover": [],
+        "force_withdraw_delay_not_passed": [],
+        "force_withdraw_tolerance": [],
+        "invalid_collateral_pfs_tolerance": [],
+        "invalid_force_withdraw_delay": [],
+        "invalid_lock_period": [],
+        "invalid_lp_decimals": [],
+        "invalid_max_markets_in_vault": [],
+        "invalid_max_pending_orders_per_position": [],
+        "invalid_owner_fee_rate": [],
+        "invalid_sender": [],
+        "invalid_split_amount": [],
+        "invalid_version": [],
+        "lock_period_not_passed": [],
+        "max_markets_exceeded": [],
+        "max_pending_orders_exceeded": [],
+        "must_force_withdraw": [],
+        "negative_amount_to_withdraw": [],
+        "non_zero_total_supply": [],
+        "not_all_chs_processed": [],
+        "not_enough_collateral_balance": [],
+        "not_enough_fees": [],
+        "owner_locked_amount_not_enough": [],
+        "package_already_created": [],
+        "pause_vault_for_force_withdraw_too_frequent": [],
+        "queue_is_empty": [],
+        "queue_is_not_empty": [],
+        "slippage_check": [],
+        "user_deposit_amount_not_enough": [],
+        "user_lp_calculation_negative": [],
+        "user_lp_calculation_zero": [],
+        "vault_temporarily_paused": [],
+        "withdraw_amount_too_big": [],
+        "withdraw_amount_zero": [],
+        "withdraw_request_already_exists": [],
+        "withdraw_request_does_not_exist": [],
+        "wrong_base_oracle": [],
+        "wrong_collateral_oracle": [],
+        "wrong_order_ids_in_force_withdraw": [],
+        "wrong_vault_for_session": []
+      }
+    },
+    {
+      "module_name": "events",
+      "call_graph": {
+        "emit_add_yield_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_create_withdraw_request": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_created_vault_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_max_markets_updated": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_max_pending_orders_updated": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_owner_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_remove_withdraw_request": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_collateral_pfs_info": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_collateral_pfs_tolerance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_force_withdraw_delay": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_lock_period": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_max_total_deposited_collateral": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_min_force_withdraw_position_usd": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_min_pause_vault_for_force_withdraw_frequency_ms": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_owner_fee_rate": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_vault_metadata": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_vault_total_deposited_collateral": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_update_vault_version": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_user_deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_user_force_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_user_withdraw_request_set_slippage": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_withdraw_fees": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ]
+      }
+    },
+    {
+      "module_name": "interface",
+      "call_graph": {
+        "add_yield": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::add_yield"
+        ],
+        "admin_pause_vault_for_force_withdraw": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::admin_pause_vault_for_force_withdraw"
+        ],
+        "admin_start_force_withdraw_session_for_address": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::start_force_withdraw_session"
+        ],
+        "allocate_collateral_to_position": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::allocate_collateral_to_position"
+        ],
+        "cancel_orders": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::cancel_orders"
+        ],
+        "create_assistant_cap": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::authority::create_assistant_cap"
+        ],
+        "create_market_position": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::create_market_position"
+        ],
+        "create_stop_order_ticket": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::create_stop_order_ticket"
+        ],
+        "create_vault": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::create_vault"
+        ],
+        "create_withdraw_request": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::create_withdraw_request"
+        ],
+        "deallocate_collateral_from_position": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::deallocate_collateral_from_position"
+        ],
+        "delete_assistant_cap": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::authority::delete_assistant_cap"
+        ],
+        "delete_stop_order_ticket": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::delete_stop_order_ticket"
+        ],
+        "edit_stop_order_ticket_details": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::edit_stop_order_ticket_details"
+        ],
+        "edit_stop_order_ticket_executors": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::edit_stop_order_ticket_executors"
+        ],
+        "end_deposit_session": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::end_deposit_session"
+        ],
+        "end_perpetuals_session": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::end_perpetuals_session"
+        ],
+        "end_withdraw_session": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::end_withdraw_session"
+        ],
+        "end_withdraw_session_and_transfer_to_recipient": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::end_withdraw_session_and_transfer_to_recipient"
+        ],
+        "join": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::join_user_lp_coin"
+        ],
+        "liquidate": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::liquidate"
+        ],
+        "liquidate_session": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::liquidate_session"
+        ],
+        "pause_vault_for_force_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::pause_vault_for_force_withdraw"
+        ],
+        "place_limit_order": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::place_limit_order"
+        ],
+        "place_limit_order_session": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::place_limit_order_session"
+        ],
+        "place_market_order": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::place_market_order"
+        ],
+        "place_market_order_session": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::place_market_order_session"
+        ],
+        "place_stop_order_sltp": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::place_stop_order_sltp"
+        ],
+        "place_stop_order_standalone": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::place_stop_order_standalone"
+        ],
+        "process_clearing_house_for_deposit": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::process_clearing_house_for_deposit"
+        ],
+        "process_clearing_house_for_force_withdraw": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::process_clearing_house_for_force_withdraw"
+        ],
+        "process_clearing_house_for_withdraw": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::process_clearing_house_for_withdraw"
+        ],
+        "remove_withdraw_request": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::remove_withdraw_request"
+        ],
+        "resume_vault_for_force_withdraw": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::resume_vault_for_force_withdraw"
+        ],
+        "set_curator_logo_url": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::metadata::set_curator_logo_url"
+        ],
+        "set_curator_name": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::metadata::set_curator_name"
+        ],
+        "set_curator_url": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::metadata::set_curator_url"
+        ],
+        "set_deposit_session_sender": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::set_deposit_session_sender"
+        ],
+        "set_description": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::metadata::set_description"
+        ],
+        "set_extra_field": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::metadata::set_extra_field"
+        ],
+        "set_name": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::metadata::set_name"
+        ],
+        "set_new_withdraw_request_slippage": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::set_new_withdraw_request_slippage"
+        ],
+        "set_position_initial_margin_ratio": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::set_position_initial_margin_ratio"
+        ],
+        "set_vault_total_deposited_collateral": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::set_vault_total_deposited_collateral"
+        ],
+        "split": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::split_user_lp_coin"
+        ],
+        "start_deposit_session": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::start_deposit_session"
+        ],
+        "start_force_withdraw_session": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::start_force_withdraw_session"
+        ],
+        "start_owner_process_withdraw_request": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::start_owner_process_withdraw_request"
+        ],
+        "start_owner_withdraw_session": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::start_owner_withdraw_session"
+        ],
+        "start_perpetuals_session": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::perpetuals_api::start_perpetuals_session"
+        ],
+        "update_collateral_pfs_info": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_collateral_pfs_info"
+        ],
+        "update_collateral_pfs_tolerance": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_collateral_pfs_tolerance"
+        ],
+        "update_force_withdraw_delay": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_force_withdraw_delay"
+        ],
+        "update_lock_period": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_lock_period"
+        ],
+        "update_max_markets_in_vault": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_max_markets_in_vault"
+        ],
+        "update_max_pending_orders_per_position": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_max_pending_orders_per_position"
+        ],
+        "update_max_total_deposited_collateral": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_max_total_deposited_collateral"
+        ],
+        "update_min_force_withdraw_position_usd": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_min_force_withdraw_position_usd"
+        ],
+        "update_min_pause_vault_for_force_withdraw_frequency_ms": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_min_pause_vault_for_force_withdraw_frequency_ms"
+        ],
+        "update_owner_fee_rate": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_owner_fee_rate"
+        ],
+        "update_vault_version": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::update_vault_version"
+        ],
+        "withdraw_fees": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::withdraw_fees"
+        ]
+      }
+    },
+    {
+      "module_name": "keys",
+      "call_graph": {
+        "account_cap_key": [],
+        "owner_fees_key": [],
+        "owner_user_lp_coin_key": [],
+        "stop_order_ticket": [],
+        "vault_metadata_key": [],
+        "withdraw_request": []
+      }
+    },
+    {
+      "module_name": "metadata",
+      "call_graph": {
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::extract",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::derived_object::claim",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::derived_object::exists",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_inner",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::from_keys_values",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::vault_metadata_key"
+        ],
+        "set_curator_logo_url": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::fill",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_vault_metadata"
+        ],
+        "set_curator_name": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::fill",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_vault_metadata"
+        ],
+        "set_curator_url": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::fill",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_vault_metadata"
+        ],
+        "set_description": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_vault_metadata"
+        ],
+        "set_extra_field": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::vec_map::insert",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_vault_metadata"
+        ],
+        "set_name": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_vault_metadata"
+        ]
+      }
+    },
+    {
+      "module_name": "perpetuals_api",
+      "call_graph": {
+        "allocate_collateral_to_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_collateral_value",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_market_params",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::allocate_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_scaling_factor",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_amounts",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_pending_orders_counter",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::abs",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::to_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::max_markets_exceeded",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::not_enough_collateral_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_vault_is_not_paused",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::ch_ids_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::max_markets_in_vault",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "cancel_orders": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::cancel_orders",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_vault_is_not_paused",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "create_market_position": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::exists_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::create_market_position",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "create_stop_order_ticket": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::create_stop_order_ticket",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::add_stop_order_ticket_dof",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "deallocate_collateral_from_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_market_params",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::deallocate_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::deallocate_free_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_scaling_factor",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_amounts",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_pending_orders_counter",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::abs",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::to_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::max_markets_exceeded",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_vault_is_not_paused",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::ch_ids_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::max_markets_in_vault",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "delete_stop_order_ticket": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::delete_stop_order_ticket",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::remove_stop_order_ticket_dof",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "edit_stop_order_ticket_details": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::edit_stop_order_ticket_details",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::add_stop_order_ticket_dof",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::remove_stop_order_ticket_dof",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "edit_stop_order_ticket_executors": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::edit_stop_order_ticket_executors",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::add_stop_order_ticket_dof",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::remove_stop_order_ticket_dof",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "end_perpetuals_session": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_account_id_in_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_market_params",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::end_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_scaling_factor",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_amounts",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_pending_orders_counter",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::abs",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::to_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::max_markets_exceeded",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::wrong_vault_for_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::ch_ids_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::max_markets_in_vault",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "liquidate": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::end_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::liquidate",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::share_clearing_house",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::start_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_vault_is_not_paused",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "liquidate_session": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_account_id_in_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::liquidate",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::wrong_vault_for_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "place_limit_order": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::end_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::place_limit_order",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::start_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_pending_orders_counter",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::max_pending_orders_exceeded",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_vault_is_not_paused",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::max_pending_orders_per_position",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "place_limit_order_session": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_account_id_in_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::place_limit_order",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::wrong_vault_for_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "place_market_order": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::end_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::place_market_order",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::start_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_vault_is_not_paused",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "place_market_order_session": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_account_id_in_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::place_market_order",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::wrong_vault_for_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "place_stop_order_sltp": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::exists_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_market_params",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::create_market_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::place_stop_order_sltp",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_scaling_factor",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_amounts",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_pending_orders_counter",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::abs",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::to_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::max_markets_exceeded",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_vault_is_not_paused",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::ch_ids_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::max_markets_in_vault",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::remove_stop_order_ticket_dof",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "place_stop_order_standalone": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::exists_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_market_params",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::create_market_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::place_stop_order_standalone",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_scaling_factor",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_amounts",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_pending_orders_counter",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::abs",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::to_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::max_markets_exceeded",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_vault_is_not_paused",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::ch_ids_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::max_markets_in_vault",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::remove_stop_order_ticket_dof",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "set_position_initial_margin_ratio": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::set_position_initial_margin_ratio",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "start_perpetuals_session": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::start_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_vault_is_not_paused",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ]
+      }
+    },
+    {
+      "module_name": "vault",
+      "call_graph": {
+        "account_cap": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_object_field::borrow",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::account_cap_key"
+        ],
+        "account_cap_mut": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_object_field::borrow_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::account_cap_key"
+        ],
+        "add_stop_order_ticket_dof": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_object_field::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::stop_order_ticket"
+        ],
+        "add_yield": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::check_valid_account_cap",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::deposit_collateral",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_add_yield_event",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id"
+        ],
+        "admin_pause_vault_for_force_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::force_withdraw_pause_ms",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::force_withdraw_delay_not_passed",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::withdraw_request",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_withdraw_request_exists",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "assert_base_price_feed_storage_is_correct": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::wrong_base_oracle"
+        ],
+        "assert_collateral_price_feed_storage_is_correct": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::wrong_collateral_oracle"
+        ],
+        "assert_minimum_owner_locked_liquidity": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::oracle::get_price",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_balance",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::greater_than_eq",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::mul",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::min_owner_lock_usd",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::owner_locked_amount_not_enough"
+        ],
+        "assert_minimum_user_deposit": [
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_balance",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::greater_than_eq",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::mul",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::min_deposit_usd",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::user_deposit_amount_not_enough"
+        ],
+        "assert_vault_creation_parameters_are_valid": [
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::is_neg",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::less_than_eq",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::max_force_withdraw_delay",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::max_lock_period",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::max_owner_fee_rate",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_force_withdraw_delay",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_lock_period",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_owner_fee_rate"
+        ],
+        "assert_vault_is_not_paused": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::vault_temporarily_paused"
+        ],
+        "assert_withdraw_request_does_not_already_exist": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::exists_",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::withdraw_request_already_exists",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::withdraw_request"
+        ],
+        "assert_withdraw_request_exists": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::exists_",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::withdraw_request_does_not_exist",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::withdraw_request"
+        ],
+        "burn_lp_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::decrease_supply"
+        ],
+        "ch_ids": [],
+        "ch_ids_mut": [],
+        "create_deposit_session": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_collateral_value",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_balance",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::mul",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::ch_ids"
+        ],
+        "create_vault": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::from_ascii",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::into_string",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::with_defining_ids",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::get_decimals",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::total_supply",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::treasury_into_supply",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin_registry::migrate_legacy_metadata",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_object_field::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::consume_policy_and_share_account",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::create_and_return_account",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::deposit_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::registry::get_collateral_info",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::lp_decimals",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::max_markets_in_vault",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::max_pending_orders_per_position",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::min_force_withdraw_position_usd",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::min_pause_vault_for_force_withdraw_frequency_ms",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_lp_decimals",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::non_zero_total_supply",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::wrong_collateral_oracle",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_created_vault_event",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::account_cap_key",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::owner_fees_key",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::owner_user_lp_coin_key",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::metadata::new",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_minimum_owner_locked_liquidity",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_vault_creation_parameters_are_valid",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::give_vault_owner_capability",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::mint_lp_balance"
+        ],
+        "create_withdraw_request": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::lock_period_not_passed",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::withdraw_amount_too_big",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::withdraw_amount_zero",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_create_withdraw_request",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::withdraw_request",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_withdraw_request_does_not_already_exist",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::split_user_lp_coin",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "create_withdraw_session": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::ch_ids"
+        ],
+        "end_deposit_session": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_share_object",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::deposit_collateral",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_balance",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::is_neg",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::mul",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::to_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::b9_scaling",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::not_all_chs_processed",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::slippage_check",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::user_lp_calculation_negative",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::user_lp_calculation_zero",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_user_deposit",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::lp_supply_value",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::mint_lp_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::multiply_by_rational_ifixed",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "end_withdraw_session": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::u64::min",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::balance_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::delete",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_collateral_value",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::withdraw_collateral",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::add",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::div",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_balance",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::greater_than",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::is_neg",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::mul",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::neg",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::sub",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::to_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::b9_scaling",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_sender",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::not_all_chs_processed",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::slippage_check",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_owner_withdraw",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_user_force_withdraw",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::burn_lp_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::lp_supply_value",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::multiply_by_rational_ifixed",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::owner_fees_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "end_withdraw_session_and_transfer_to_recipient": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::u64::min",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::balance_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::delete",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_collateral_value",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::withdraw_collateral",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::add",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::div",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_balance",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::greater_than",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::is_neg",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::mul",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::neg",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::sub",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::to_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::b9_scaling",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::not_all_chs_processed",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::slippage_check",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_owner_withdraw",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_user_force_withdraw",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::burn_lp_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::lp_supply_value",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::multiply_by_rational_ifixed",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::owner_fees_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "force_withdraw_delay": [],
+        "get_mut_stop_order_ticket_dof": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_object_field::borrow_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::stop_order_ticket"
+        ],
+        "get_vault_margin_in_market": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_market_state",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_cum_funding_rates",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::compute_margin_with_fundings",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::is_neg",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap"
+        ],
+        "give_vault_owner_capability": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_inner",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer"
+        ],
+        "id": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_inner"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::package::claim",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "join_user_lp_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::delete"
+        ],
+        "last_paused_timestamp_ms": [],
+        "lock_period": [],
+        "lp_supply_value": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::supply_value"
+        ],
+        "max_markets_in_vault": [],
+        "max_pending_orders_per_position": [],
+        "min_force_withdraw_position_usd": [],
+        "min_pause_vault_for_force_withdraw_frequency_ms": [],
+        "mint_lp_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::increase_supply"
+        ],
+        "multiply_by_rational_ifixed": [
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::div",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::mul"
+        ],
+        "owner_fee_rate": [],
+        "owner_fees": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::owner_fees_key"
+        ],
+        "owner_fees_mut": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::owner_fees_key"
+        ],
+        "pause_vault_for_force_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::force_withdraw_pause_ms",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::force_withdraw_delay_not_passed",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::pause_vault_for_force_withdraw_too_frequent",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::withdraw_request",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_withdraw_request_exists",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "process_clearing_house_for_deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::extract",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_market_params",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::share_clearing_house",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_base_pfs_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_base_pfs_source_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_base_pfs_tolerance",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::oracle::get_price",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::add",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_u64",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::clearing_house_id_not_found",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_base_price_feed_storage_is_correct",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::get_vault_margin_in_market",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "process_clearing_house_for_force_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::destroy_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::extract",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::u64::min",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::gas_price",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::get_cap_account_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::calculate_taker_fees",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_imr_for_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_market_params",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_market_state",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_position",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_session_execution_price",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::cancel_orders",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::deallocate_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::deallocate_free_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::end_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::place_market_order",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::set_position_initial_margin_ratio",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::share_clearing_house",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::start_session",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_additional_gas_price_taker_fee",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_base_pfs_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_base_pfs_source_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_base_pfs_tolerance",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_collateral_haircut",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_cum_funding_rates",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_maker_taker_fees",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_margin_ratio_initial",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::oracle::get_price",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::abs_net_base",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::calculate_position_funding_internal",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_amounts",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_collateral",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_pending_amounts",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_pending_orders_counter",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::position::get_position_upnl",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::abs",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::add",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::div",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_balance",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_u64",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::greater_than_eq",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::is_neg",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::less_than_eq",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::max",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::mul",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::sub",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::to_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::b9_scaling",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::cannot_force_withdraw",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::clearing_house_id_not_found",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::force_withdraw_above_margin_ratio_tolerance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::force_withdraw_below_margin_ratio",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::force_withdraw_collateral_leftover",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::negative_amount_to_withdraw",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::wrong_order_ids_in_force_withdraw",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_base_price_feed_storage_is_correct",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::get_vault_margin_in_market",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::lp_supply_value",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "process_clearing_house_for_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::extract",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::vector::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::clearing_house::get_market_params",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::interface::share_clearing_house",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_base_pfs_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_base_pfs_source_id",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_base_pfs_tolerance",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::market::get_margin_ratio_initial",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::oracle::get_price",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::add",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_u64",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::clearing_house_id_not_found",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::must_force_withdraw",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_base_price_feed_storage_is_correct",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::get_vault_margin_in_market",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "remove_stop_order_ticket_dof": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_object_field::remove",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::stop_order_ticket"
+        ],
+        "remove_withdraw_request": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::remove",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_remove_withdraw_request",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::withdraw_request",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_withdraw_request_exists",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "resume_vault_for_force_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "set_deposit_session_sender": [],
+        "set_new_withdraw_request_slippage": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_user_withdraw_request_set_slippage",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_withdraw_request_exists",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::withdraw_request_mut"
+        ],
+        "set_vault_total_deposited_collateral": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_vault_total_deposited_collateral",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::lp_supply_value"
+        ],
+        "split_user_lp_coin": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::div",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::from_balance",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::mul",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::b9_scaling",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_split_amount"
+        ],
+        "start_deposit_session": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::check_valid_account_cap",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::oracle::get_price",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::exceeding_max_total_deposited_collateral",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_collateral_price_feed_storage_is_correct",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_minimum_user_deposit",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::create_deposit_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "start_force_withdraw_session": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::remove",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::oracle::get_price",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::force_withdraw_delay_not_passed",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::withdraw_request",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_collateral_price_feed_storage_is_correct",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_withdraw_request_exists",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::create_withdraw_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "start_owner_process_withdraw_request": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::remove",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::check_valid_account_cap",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::oracle::get_price",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::withdraw_request",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_collateral_price_feed_storage_is_correct",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_withdraw_request_exists",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::create_withdraw_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "start_owner_withdraw_session": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::account::check_valid_account_cap",
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::oracle::get_price",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::withdraw_amount_too_big",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::withdraw_amount_zero",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::account_cap",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::assert_collateral_price_feed_storage_is_correct",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::create_withdraw_session",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::split_user_lp_coin",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "update_collateral_pfs_info": [
+          "0x45b45e93b1d4cd1f616ab9b3ebe8df84b92171558faa394707cc3b69fde9fe33::registry::get_collateral_info",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_collateral_pfs_info",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id"
+        ],
+        "update_collateral_pfs_tolerance": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_collateral_pfs_tolerance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id"
+        ],
+        "update_force_withdraw_delay": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::max_force_withdraw_delay",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_lock_period",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_force_withdraw_delay",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "update_lock_period": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::max_lock_period",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_lock_period",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_lock_period",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "update_max_markets_in_vault": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::max_markets_in_vault",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_max_markets_in_vault",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_max_markets_updated",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "update_max_pending_orders_per_position": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::max_pending_orders_per_position",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_max_pending_orders_per_position",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_max_pending_orders_updated",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "update_max_total_deposited_collateral": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_max_total_deposited_collateral",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "update_min_force_withdraw_position_usd": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_min_force_withdraw_position_usd",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id"
+        ],
+        "update_min_pause_vault_for_force_withdraw_frequency_ms": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_min_pause_vault_for_force_withdraw_frequency_ms",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id"
+        ],
+        "update_owner_fee_rate": [
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::is_neg",
+          "0x46234ba81f3a5ba6571383233df0f9ea5fe60a3a327537be1f5fec447bced693::ifixed::less_than_eq",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::max_owner_fee_rate",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_owner_fee_rate",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_owner_fee_rate",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "update_vault_version": [
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::bad_new_vault_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_update_vault_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id"
+        ],
+        "user_lp_coin_info": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "vault_owner_cap_vault_id": [],
+        "version": [],
+        "withdraw_fees": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::constants::version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::invalid_version",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::errors::not_enough_fees",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::events::emit_withdraw_fees",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::id",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::owner_fees_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::vault::version"
+        ],
+        "withdraw_request_mut": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut",
+          "0xe5c7ec1641731e9c36f42b1fd1b806d51d20ac53a33552671261bf0361ec9273::keys::withdraw_request"
+        ]
+      }
+    }
+  ]
+}
