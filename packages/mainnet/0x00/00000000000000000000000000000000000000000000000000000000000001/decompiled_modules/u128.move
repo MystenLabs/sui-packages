@@ -29,6 +29,22 @@ module 0x1::u128 {
         }
     }
 
+    public fun checked_shl(arg0: u128, arg1: u8) : 0x1::option::Option<u128> {
+        if (arg1 >= 128) {
+            0x1::option::none<u128>()
+        } else {
+            0x1::option::some<u128>(arg0 << arg1)
+        }
+    }
+
+    public fun checked_shr(arg0: u128, arg1: u8) : 0x1::option::Option<u128> {
+        if (arg1 >= 128) {
+            0x1::option::none<u128>()
+        } else {
+            0x1::option::some<u128>(arg0 >> arg1)
+        }
+    }
+
     public fun checked_sub(arg0: u128, arg1: u128) : 0x1::option::Option<u128> {
         if (arg0 < arg1) {
             0x1::option::none<u128>()
@@ -50,6 +66,42 @@ module 0x1::u128 {
             arg0 / arg1
         } else {
             arg0 / arg1 + 1
+        }
+    }
+
+    public fun lossless_div(arg0: u128, arg1: u128) : 0x1::option::Option<u128> {
+        if (arg1 == 0) {
+            0x1::option::none<u128>()
+        } else if (arg0 % arg1 == 0) {
+            0x1::option::some<u128>(arg0 / arg1)
+        } else {
+            0x1::option::none<u128>()
+        }
+    }
+
+    public fun lossless_shl(arg0: u128, arg1: u8) : 0x1::option::Option<u128> {
+        if (arg1 >= 128) {
+            0x1::option::none<u128>()
+        } else {
+            let v1 = arg0 << arg1;
+            if (v1 >> arg1 == arg0) {
+                0x1::option::some<u128>(v1)
+            } else {
+                0x1::option::none<u128>()
+            }
+        }
+    }
+
+    public fun lossless_shr(arg0: u128, arg1: u8) : 0x1::option::Option<u128> {
+        if (arg1 >= 128) {
+            0x1::option::none<u128>()
+        } else {
+            let v1 = arg0 >> arg1;
+            if (v1 << arg1 == arg0) {
+                0x1::option::some<u128>(v1)
+            } else {
+                0x1::option::none<u128>()
+            }
         }
     }
 
@@ -83,6 +135,34 @@ module 0x1::u128 {
             v1 = v1 - 1;
         };
         v2
+    }
+
+    public fun saturating_add(arg0: u128, arg1: u128) : u128 {
+        let v0 = 340282366920938463463374607431768211455;
+        if (arg1 > v0 - arg0) {
+            v0
+        } else {
+            arg0 + arg1
+        }
+    }
+
+    public fun saturating_mul(arg0: u128, arg1: u128) : u128 {
+        let v0 = 340282366920938463463374607431768211455;
+        if (arg0 == 0 || arg1 == 0) {
+            0
+        } else if (arg1 > v0 / arg0) {
+            v0
+        } else {
+            arg0 * arg1
+        }
+    }
+
+    public fun saturating_sub(arg0: u128, arg1: u128) : u128 {
+        if (arg0 < arg1) {
+            0
+        } else {
+            arg0 - arg1
+        }
     }
 
     public fun sqrt(arg0: u128) : u128 {

@@ -53,6 +53,34 @@ module 0x1::u256 {
         }
     }
 
+    public fun lossless_div(arg0: u256, arg1: u256) : 0x1::option::Option<u256> {
+        if (arg1 == 0) {
+            0x1::option::none<u256>()
+        } else if (arg0 % arg1 == 0) {
+            0x1::option::some<u256>(arg0 / arg1)
+        } else {
+            0x1::option::none<u256>()
+        }
+    }
+
+    public fun lossless_shl(arg0: u256, arg1: u8) : 0x1::option::Option<u256> {
+        let v0 = arg0 << arg1;
+        if (v0 >> arg1 == arg0) {
+            0x1::option::some<u256>(v0)
+        } else {
+            0x1::option::none<u256>()
+        }
+    }
+
+    public fun lossless_shr(arg0: u256, arg1: u8) : 0x1::option::Option<u256> {
+        let v0 = arg0 >> arg1;
+        if (v0 << arg1 == arg0) {
+            0x1::option::some<u256>(v0)
+        } else {
+            0x1::option::none<u256>()
+        }
+    }
+
     public fun max(arg0: u256, arg1: u256) : u256 {
         if (arg0 > arg1) {
             arg0
@@ -83,6 +111,34 @@ module 0x1::u256 {
             v1 = v1 - 1;
         };
         v2
+    }
+
+    public fun saturating_add(arg0: u256, arg1: u256) : u256 {
+        let v0 = 115792089237316195423570985008687907853269984665640564039457584007913129639935;
+        if (arg1 > v0 - arg0) {
+            v0
+        } else {
+            arg0 + arg1
+        }
+    }
+
+    public fun saturating_mul(arg0: u256, arg1: u256) : u256 {
+        let v0 = 115792089237316195423570985008687907853269984665640564039457584007913129639935;
+        if (arg0 == 0 || arg1 == 0) {
+            0
+        } else if (arg1 > v0 / arg0) {
+            v0
+        } else {
+            arg0 * arg1
+        }
+    }
+
+    public fun saturating_sub(arg0: u256, arg1: u256) : u256 {
+        if (arg0 < arg1) {
+            0
+        } else {
+            arg0 - arg1
+        }
     }
 
     public fun to_string(arg0: u256) : 0x1::string::String {

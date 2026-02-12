@@ -23,6 +23,36 @@ module 0x1::type_name {
         as_string(arg0)
     }
 
+    public fun datatype_string(arg0: &TypeName) : 0x1::ascii::String {
+        assert!(!is_primitive(arg0), 0);
+        let v0 = 0x1::address::length() * 2 + 2;
+        let v1 = 0x1::ascii::as_bytes(&arg0.name);
+        let v2 = 58;
+        while (0x1::vector::borrow<u8>(v1, v0) != &v2) {
+            v0 = v0 + 1;
+        };
+        let v3 = v0 + 1;
+        assert!(0x1::vector::borrow<u8>(v1, v3) == &v2, 13906834801408606207);
+        let v4 = v3 + 1;
+        v0 = v4;
+        assert!(0x1::vector::borrow<u8>(v1, v4) != &v2, 13906834809998540799);
+        let v5 = b"";
+        let v6 = 60;
+        loop {
+            let v7 = 0x1::vector::borrow<u8>(v1, v0);
+            if (v7 == &v6) {
+                break
+            };
+            0x1::vector::push_back<u8>(&mut v5, *v7);
+            let v8 = v0 + 1;
+            v0 = v8;
+            if (v8 >= 0x1::vector::length<u8>(v1)) {
+                break
+            };
+        };
+        0x1::ascii::string(v5)
+    }
+
     native public fun defining_id<T0>() : address;
     public fun get<T0>() : TypeName {
         with_defining_ids<T0>()

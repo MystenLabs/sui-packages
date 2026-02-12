@@ -29,6 +29,22 @@ module 0x1::u8 {
         }
     }
 
+    public fun checked_shl(arg0: u8, arg1: u8) : 0x1::option::Option<u8> {
+        if (arg1 >= 8) {
+            0x1::option::none<u8>()
+        } else {
+            0x1::option::some<u8>(arg0 << arg1)
+        }
+    }
+
+    public fun checked_shr(arg0: u8, arg1: u8) : 0x1::option::Option<u8> {
+        if (arg1 >= 8) {
+            0x1::option::none<u8>()
+        } else {
+            0x1::option::some<u8>(arg0 >> arg1)
+        }
+    }
+
     public fun checked_sub(arg0: u8, arg1: u8) : 0x1::option::Option<u8> {
         if (arg0 < arg1) {
             0x1::option::none<u8>()
@@ -50,6 +66,42 @@ module 0x1::u8 {
             arg0 / arg1
         } else {
             arg0 / arg1 + 1
+        }
+    }
+
+    public fun lossless_div(arg0: u8, arg1: u8) : 0x1::option::Option<u8> {
+        if (arg1 == 0) {
+            0x1::option::none<u8>()
+        } else if (arg0 % arg1 == 0) {
+            0x1::option::some<u8>(arg0 / arg1)
+        } else {
+            0x1::option::none<u8>()
+        }
+    }
+
+    public fun lossless_shl(arg0: u8, arg1: u8) : 0x1::option::Option<u8> {
+        if (arg1 >= 8) {
+            0x1::option::none<u8>()
+        } else {
+            let v1 = arg0 << arg1;
+            if (v1 >> arg1 == arg0) {
+                0x1::option::some<u8>(v1)
+            } else {
+                0x1::option::none<u8>()
+            }
+        }
+    }
+
+    public fun lossless_shr(arg0: u8, arg1: u8) : 0x1::option::Option<u8> {
+        if (arg1 >= 8) {
+            0x1::option::none<u8>()
+        } else {
+            let v1 = arg0 >> arg1;
+            if (v1 << arg1 == arg0) {
+                0x1::option::some<u8>(v1)
+            } else {
+                0x1::option::none<u8>()
+            }
         }
     }
 
@@ -83,6 +135,34 @@ module 0x1::u8 {
             v1 = v1 - 1;
         };
         v2
+    }
+
+    public fun saturating_add(arg0: u8, arg1: u8) : u8 {
+        let v0 = 255;
+        if (arg1 > v0 - arg0) {
+            v0
+        } else {
+            arg0 + arg1
+        }
+    }
+
+    public fun saturating_mul(arg0: u8, arg1: u8) : u8 {
+        let v0 = 255;
+        if (arg0 == 0 || arg1 == 0) {
+            0
+        } else if (arg1 > v0 / arg0) {
+            v0
+        } else {
+            arg0 * arg1
+        }
+    }
+
+    public fun saturating_sub(arg0: u8, arg1: u8) : u8 {
+        if (arg0 < arg1) {
+            0
+        } else {
+            arg0 - arg1
+        }
     }
 
     public fun sqrt(arg0: u8) : u8 {
