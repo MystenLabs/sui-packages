@@ -1,0 +1,226 @@
+{
+  "package_id": "0xc2b68764240d3053f08bd19b2d6a1505e6d8638dcb7f35870a27c83679671b31",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "assert_app_is_authorized": [
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::admin::has_authorized"
+        ],
+        "assert_app_is_deauthorized": [
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::admin::has_authorized"
+        ],
+        "authorize": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::admin::assert_app_is_deauthorized",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::events::emit_authorized_app_event"
+        ],
+        "create_admin_cap": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new"
+        ],
+        "deauthorize": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::remove",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::admin::assert_app_is_authorized",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::events::emit_deauthorized_app_event"
+        ],
+        "has_authorized": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::exists_"
+        ]
+      }
+    },
+    {
+      "module_name": "events",
+      "call_graph": {
+        "emit_authorized_app_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address"
+        ],
+        "emit_deauthorized_app_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::uid_to_address"
+        ],
+        "emit_swap_completed_event": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::string",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ]
+      }
+    },
+    {
+      "module_name": "protocol_fee",
+      "call_graph": {
+        "assert_interacting_with_most_up_to_date_package": [
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::version::assert_interacting_with_most_up_to_date_package"
+        ],
+        "change_fee_percentages": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::extract",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::is_some",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::epoch",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::protocol_fee::assert_interacting_with_most_up_to_date_package"
+        ],
+        "create_config": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::epoch",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::types::is_one_time_witness",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::version::current_version"
+        ],
+        "dev_wallet": [],
+        "dev_wallet_fee": [],
+        "distribute_protocol_fees": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::protocol_fee::assert_interacting_with_most_up_to_date_package",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::protocol_fee::take_percent_base_18",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::treasury::deposit"
+        ],
+        "referee_discount": [],
+        "take_percent_base_18": [],
+        "total_protocol_fee": [],
+        "treasury_fee": [],
+        "update_dev_wallet_address": [
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::protocol_fee::assert_interacting_with_most_up_to_date_package"
+        ]
+      }
+    },
+    {
+      "module_name": "router",
+      "call_graph": {
+        "assert_admin_has_authorized_package": [
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::admin::has_authorized"
+        ],
+        "assert_correct_amount_out": [],
+        "assert_expected_balance_in_w1": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::type_to_bytes"
+        ],
+        "assert_expected_coin_in": [],
+        "assert_previous_swap_was_valid": [],
+        "assert_route_starts_with_non_zero_value": [],
+        "begin_router_tx": [],
+        "begin_router_tx_and_collect_fees": [],
+        "begin_router_tx_and_collect_sui_fee": [],
+        "begin_router_tx_r1_w1": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::take",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::protocol_fee::dev_wallet",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::protocol_fee::take_percent_base_18",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::assert_route_starts_with_non_zero_value",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::collect_integrator_fee",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::type_to_bytes"
+        ],
+        "begin_router_tx_sui_r1_w1": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::protocol_fee::dev_wallet",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::assert_route_starts_with_non_zero_value",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::collect_integrator_fee",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::type_to_bytes"
+        ],
+        "calculate_percentage": [],
+        "collect_integrator_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::protocol_fee::distribute_protocol_fees"
+        ],
+        "end_router_tx": [],
+        "end_router_tx_and_pay_fees": [],
+        "end_router_tx_r1_w1": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::none",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::take",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::events::emit_swap_completed_event",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::assert_correct_amount_out",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::type_to_bytes"
+        ],
+        "init": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::package::claim",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::admin::create_admin_cap",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::protocol_fee::create_config",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::treasury::create_treasury"
+        ],
+        "initiate_path": [],
+        "initiate_path_by_percent": [],
+        "initiate_path_by_percent_w1": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::calculate_percentage",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::initiate_path_w1"
+        ],
+        "initiate_path_w1": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::assert_previous_swap_was_valid",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::type_to_bytes",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::update_final_swap_metadata",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::update_previous_swap_metadata"
+        ],
+        "type_to_bytes": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::as_bytes",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::as_string",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::with_defining_ids"
+        ],
+        "update_final_swap_metadata": [],
+        "update_path_metadata": [],
+        "update_path_metadata_w1": [
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::assert_admin_has_authorized_package",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::type_to_bytes",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::router::update_previous_swap_metadata"
+        ],
+        "update_previous_swap_metadata": []
+      }
+    },
+    {
+      "module_name": "treasury",
+      "call_graph": {
+        "assert_interacting_with_most_up_to_date_package": [
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::version::assert_interacting_with_most_up_to_date_package"
+        ],
+        "balance_of": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::with_defining_ids",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::treasury::assert_interacting_with_most_up_to_date_package"
+        ],
+        "create_treasury": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::bag::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::version::current_version"
+        ],
+        "deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::borrow_id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id_to_address",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0xe5099fcd45747074d0ef5eabce07a9bd1c3b0c1862435bf2a09c3a81e0604373::treasury::assert_interacting_with_most_up_to_date_package"
+        ]
+      }
+    },
+    {
+      "module_name": "utils",
+      "call_graph": {
+        "split_and_transfer": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::pay::split_and_transfer"
+        ],
+        "transfer_or_destroy": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer"
+        ]
+      }
+    },
+    {
+      "module_name": "version",
+      "call_graph": {
+        "assert_interacting_with_most_up_to_date_package": [],
+        "current_version": []
+      }
+    }
+  ]
+}
