@@ -1,0 +1,502 @@
+{
+  "package_id": "0x003202035bfa42eb130030cf80456061adf28d67b7ad4aaaeef5e1e6d35cbcd5",
+  "module_call_graphs": [
+    {
+      "module_name": "admin",
+      "call_graph": {
+        "create_and_transfer": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ]
+      }
+    },
+    {
+      "module_name": "cannibal",
+      "call_graph": {
+        "init": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::admin::create_and_transfer"
+        ]
+      }
+    },
+    {
+      "module_name": "config",
+      "call_graph": {
+        "deposit_fee_bps": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::exists_"
+        ],
+        "init_deposit_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::add"
+        ],
+        "set_deposit_fee": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::dynamic_field::borrow_mut"
+        ]
+      }
+    },
+    {
+      "module_name": "constants",
+      "call_graph": {}
+    },
+    {
+      "module_name": "errors",
+      "call_graph": {}
+    },
+    {
+      "module_name": "events",
+      "call_graph": {
+        "emit_claimed": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_deposit_fee_updated": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_deposited": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_fee_updated": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_feed_added": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_feed_removed": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_fees_collected": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_limits_updated": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_market_created": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_market_resolved": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_market_voided": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_migrated": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_paused": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_refunded": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_treasury_withdrawn": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_unclaimed_swept": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "emit_unpaused": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ]
+      }
+    },
+    {
+      "module_name": "market",
+      "call_graph": {
+        "collect_fees": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::withdraw_all"
+        ],
+        "created_at": [],
+        "deadline": [],
+        "duration": [],
+        "ensure_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::empty"
+        ],
+        "execute_claim": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::claimed",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::mark_claimed",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::no_amount",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::yes_amount"
+        ],
+        "execute_deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::ensure_position",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::add_no",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::add_yes"
+        ],
+        "execute_refund": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow_mut",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::claimed",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::mark_claimed",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::no_amount",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::position::yes_amount"
+        ],
+        "execute_resolve": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::withdraw_all"
+        ],
+        "fee_bps": [],
+        "fees_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "has_position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains"
+        ],
+        "is_resolvable": [],
+        "is_trading_open": [],
+        "mark_voided": [],
+        "market_number": [],
+        "new": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new"
+        ],
+        "no_deposits": [],
+        "no_pool_value": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "outcome": [],
+        "position": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow"
+        ],
+        "pyth_feed_id": [],
+        "resolved": [],
+        "resolved_at": [],
+        "resolved_price": [],
+        "resolver": [],
+        "share": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object"
+        ],
+        "should_void": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "sweep_remaining": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::withdraw_all"
+        ],
+        "target_price": [],
+        "token_symbol": [],
+        "total_volume": [],
+        "trade_count": [],
+        "trading_cutoff": [],
+        "uid": [],
+        "voided": [],
+        "yes_deposits": [],
+        "yes_pool_value": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ]
+      }
+    },
+    {
+      "module_name": "position",
+      "call_graph": {
+        "add_no": [],
+        "add_yes": [],
+        "claimed": [],
+        "empty": [],
+        "mark_claimed": [],
+        "no_amount": [],
+        "total_deposited": [],
+        "yes_amount": []
+      }
+    },
+    {
+      "module_name": "price",
+      "call_graph": {
+        "normalize_price": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::price::pow10",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_is_negative",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_negative",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_positive"
+        ],
+        "pow10": [],
+        "read_price": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::price::normalize_price",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_is_negative",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_positive",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_expo",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_price",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_timestamp",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::get_bytes",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_identifier",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_info_from_price_info_object",
+          "0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::pyth::get_price_no_older_than"
+        ]
+      }
+    },
+    {
+      "module_name": "registry",
+      "call_graph": {
+        "admin_add_feed": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::add",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_feed_added"
+        ],
+        "admin_collect_fees": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::registry::collect_fees"
+        ],
+        "admin_migrate": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::config::init_deposit_fee",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_migrated"
+        ],
+        "admin_pause": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_paused"
+        ],
+        "admin_remove_feed": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::remove",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_feed_removed"
+        ],
+        "admin_sweep_unclaimed": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_unclaimed_swept",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::deadline",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::resolved",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::resolved_at",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::sweep_remaining",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::voided"
+        ],
+        "admin_unpause": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_unpaused"
+        ],
+        "admin_update_deposit_fee": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::config::set_deposit_fee",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_deposit_fee_updated",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::registry_inner::validate_deposit_fee"
+        ],
+        "admin_update_fee": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_fee_updated",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::registry_inner::validate_fee"
+        ],
+        "admin_update_limits": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_limits_updated"
+        ],
+        "admin_void": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_market_voided",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::mark_voided",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::resolved",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::voided"
+        ],
+        "admin_withdraw_treasury": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_treasury_withdrawn"
+        ],
+        "claim": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_claimed",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::execute_claim"
+        ],
+        "collect_fees": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_fees_collected",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::collect_fees"
+        ],
+        "create_and_share": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::config::init_deposit_fee"
+        ],
+        "create_market": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::borrow",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::table::contains",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_market_created",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::new",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::share",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::registry_inner::calculate_trading_cutoff"
+        ],
+        "create_registry": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::registry::create_and_share"
+        ],
+        "deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::config::deposit_fee_bps",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_deposited",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::execute_deposit",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::is_trading_open",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::no_deposits",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::yes_deposits"
+        ],
+        "deposit_fee_bps": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::config::deposit_fee_bps"
+        ],
+        "fee_bps": [],
+        "market_count": [],
+        "max_bet": [],
+        "min_bet": [],
+        "min_pool": [],
+        "paused": [],
+        "refund": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_refunded",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::execute_refund"
+        ],
+        "resolve": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::utf8",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_market_resolved",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::events::emit_market_voided",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::execute_resolve",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::is_resolvable",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::mark_voided",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::no_deposits",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::pyth_feed_id",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::resolved",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::should_void",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::target_price",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::voided",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::yes_deposits",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::price::read_price"
+        ],
+        "split_treasury": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split"
+        ],
+        "treasury_balance": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "version": []
+      }
+    },
+    {
+      "module_name": "registry_inner",
+      "call_graph": {
+        "calculate_trading_cutoff": [],
+        "validate_deposit_fee": [],
+        "validate_fee": []
+      }
+    },
+    {
+      "module_name": "vault",
+      "call_graph": {
+        "admin_emergency_withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance"
+        ],
+        "admin_pause": [],
+        "admin_unpause": [],
+        "admin_update_fee_split": [],
+        "admin_update_ops_wallet": [],
+        "admin_update_seed": [],
+        "calc_nav_per_share": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "create_and_share": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::share_object",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender"
+        ],
+        "deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::new",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::vault::calc_nav_per_share"
+        ],
+        "depositor_share_bps": [],
+        "distribute_treasury": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::transfer::public_transfer",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::registry::split_treasury",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::registry::treasury_balance"
+        ],
+        "is_paused": [],
+        "markets_seeded": [],
+        "nav_per_share": [
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::vault::calc_nav_per_share"
+        ],
+        "ops_wallet": [],
+        "protocol_share_bps": [],
+        "receipt_deposited_amount": [],
+        "receipt_deposited_at": [],
+        "receipt_shares": [],
+        "return_funds": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit"
+        ],
+        "seed_market": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::execute_deposit",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::market::is_trading_open"
+        ],
+        "seed_per_side": [],
+        "total_claim_revenue": [],
+        "total_deposited": [],
+        "total_fees_earned": [],
+        "total_refund_revenue": [],
+        "total_seed_cost": [],
+        "total_shares": [],
+        "total_value": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value"
+        ],
+        "total_withdrawn": [],
+        "withdraw": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::delete",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x0399abdf475acdfbc50ebd6b609ed7fc22dfac34bf7b8633738c53b62ddb3c57::vault::calc_nav_per_share"
+        ]
+      }
+    }
+  ]
+}
