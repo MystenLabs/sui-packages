@@ -1,0 +1,53 @@
+module 0xeae2b84dfdf134553e6c5419b0666e8780c71fd750c0ca43065baf41cdab77b5::ecx {
+    struct ECX has drop {
+        dummy_field: bool,
+    }
+
+    struct AdminCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct PauseState has key {
+        id: 0x2::object::UID,
+        is_paused: bool,
+    }
+
+    public fun burn(arg0: &mut 0x2::coin::TreasuryCap<ECX>, arg1: 0x2::coin::Coin<ECX>) {
+        0x2::coin::burn<ECX>(arg0, arg1);
+    }
+
+    public fun transfer(arg0: 0x2::coin::Coin<ECX>, arg1: address, arg2: &PauseState) {
+        assert!(!arg2.is_paused, 1);
+        0x2::transfer::public_transfer<0x2::coin::Coin<ECX>>(arg0, arg1);
+    }
+
+    fun init(arg0: ECX, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ECX>(arg0, 9, b"ECX", b"Ecox", b"Custom SUI Token: Ecox", 0x1::option::none<0x2::url::Url>(), arg1);
+        let v2 = v0;
+        let v3 = PauseState{
+            id        : 0x2::object::new(arg1),
+            is_paused : false,
+        };
+        0x2::transfer::share_object<PauseState>(v3);
+        0x2::coin::mint_and_transfer<ECX>(&mut v2, 1000000000000000000, 0x2::tx_context::sender(arg1), arg1);
+        let v4 = AdminCap{id: 0x2::object::new(arg1)};
+        0x2::transfer::public_transfer<AdminCap>(v4, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ECX>>(v2, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<ECX>>(v1);
+    }
+
+    public fun mint(arg0: &AdminCap, arg1: &mut 0x2::coin::TreasuryCap<ECX>, arg2: u64, arg3: address, arg4: &mut 0x2::tx_context::TxContext) {
+        0x2::coin::mint_and_transfer<ECX>(arg1, arg2, arg3, arg4);
+    }
+
+    public fun pause(arg0: &AdminCap, arg1: &mut PauseState) {
+        arg1.is_paused = true;
+    }
+
+    public fun unpause(arg0: &AdminCap, arg1: &mut PauseState) {
+        arg1.is_paused = false;
+    }
+
+    // decompiled from Move bytecode v6
+}
+
