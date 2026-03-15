@@ -1,0 +1,214 @@
+module 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::multi_layer {
+    struct LayerOrderInfo has copy, drop {
+        layer: u8,
+        order_id: u128,
+        price: u64,
+        quantity: u64,
+        filled_quantity: u64,
+        expire_timestamp: u64,
+        is_bid: bool,
+    }
+
+    fun find_layer_order(arg0: &vector<LayerOrderInfo>, arg1: u8, arg2: bool) : 0x1::option::Option<LayerOrderInfo> {
+        let v0 = 0;
+        while (v0 < 0x1::vector::length<LayerOrderInfo>(arg0)) {
+            let v1 = 0x1::vector::borrow<LayerOrderInfo>(arg0, v0);
+            if (v1.layer == arg1 && v1.is_bid == arg2) {
+                return 0x1::option::some<LayerOrderInfo>(*v1)
+            };
+            v0 = v0 + 1;
+        };
+        0x1::option::none<LayerOrderInfo>()
+    }
+
+    fun get_orders_by_layer<T0, T1>(arg0: &0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>, arg1: &0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager, arg2: &0x2::clock::Clock) : vector<LayerOrderInfo> {
+        let v0 = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::get_account_order_details<T0, T1>(arg0, arg1);
+        let v1 = 0x1::vector::empty<LayerOrderInfo>();
+        let v2 = 0;
+        while (v2 < 0x1::vector::length<0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order::Order>(&v0)) {
+            let v3 = 0x1::vector::borrow<0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order::Order>(&v0, v2);
+            v2 = v2 + 1;
+            if (0x2::clock::timestamp_ms(arg2) > 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order::expire_timestamp(v3)) {
+                continue
+            };
+            let v4 = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order::filled_quantity(v3);
+            let v5 = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order::quantity(v3);
+            if (v4 >= v5) {
+                continue
+            };
+            let (v6, v7, _) = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orderbook_analyzer::parse_order_id(0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order::order_id(v3));
+            let v9 = LayerOrderInfo{
+                layer            : ((0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order::client_order_id(v3) & 15) as u8),
+                order_id         : 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order::order_id(v3),
+                price            : v7,
+                quantity         : v5,
+                filled_quantity  : v4,
+                expire_timestamp : 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::order::expire_timestamp(v3),
+                is_bid           : v6,
+            };
+            0x1::vector::push_back<LayerOrderInfo>(&mut v1, v9);
+        };
+        v1
+    }
+
+    public(friend) fun process_layers<T0, T1, T2, T3>(arg0: &mut 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::mm_state::MMState, arg1: &0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::mm_registry::MMRegistry, arg2: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::BalanceManager, arg3: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>, arg4: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T2, T3>, arg5: &0x2::clock::Clock, arg6: u64, arg7: u64, arg8: u64, arg9: u64, arg10: u64, arg11: &vector<u64>, arg12: &vector<u64>, arg13: &vector<u64>, arg14: &vector<u64>, arg15: &vector<u64>, arg16: u64, arg17: u64, arg18: u64, arg19: &0x1::option::Option<0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orderbook_analyzer::OrderbookSnapshot>, arg20: u64, arg21: &0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::balance_manager::TradeProof, arg22: &0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::config::MMConfig, arg23: u64, arg24: u64, arg25: u64, arg26: u64, arg27: u64, arg28: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::clock::timestamp_ms(arg5);
+        0x2::object::id<0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>>(arg3);
+        let v1 = 0x1::vector::length<u64>(arg11);
+        assert!(0x1::vector::length<u64>(arg12) == v1, 4);
+        assert!(0x1::vector::length<u64>(arg13) == v1, 4);
+        assert!(0x1::vector::length<u64>(arg14) == v1, 4);
+        assert!(0x1::vector::length<u64>(arg15) == v1, 4);
+        let v2 = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::config::is_dry_run(arg22);
+        let v3 = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::config::enable_deep_payment(arg22);
+        let v4 = get_orders_by_layer<T0, T1>(arg3, arg2, arg5);
+        if (!v2 && 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::config::enable_deep_refill(arg22)) {
+            let v5 = 0;
+            let v6 = 0;
+            while (v6 < v1) {
+                let v7 = v5 + *0x1::vector::borrow<u64>(arg13, v6);
+                v5 = v7 + *0x1::vector::borrow<u64>(arg14, v6);
+                v6 = v6 + 1;
+            };
+            let (_, _) = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::deep_manager::ensure_deep_balance<T0, T1, T2, T3>(arg3, arg4, arg2, arg21, v5, arg6, arg22, arg5, arg28);
+        };
+        let v10 = 0;
+        while (v10 < v1) {
+            let v11 = (v10 as u8);
+            let v12 = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::inv_sizing::apply_multiplier(*0x1::vector::borrow<u64>(arg13, v10), arg17, arg24, arg25);
+            let v13 = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::inv_sizing::apply_multiplier(*0x1::vector::borrow<u64>(arg14, v10), arg18, arg24, arg25);
+            let v14 = *0x1::vector::borrow<u64>(arg15, v10);
+            let v15 = v10 >= arg16;
+            let v16 = arg9 >> 4 << 4 | v10;
+            let v17 = arg6 * (100000 - *0x1::vector::borrow<u64>(arg11, v10)) / 100000;
+            let v18 = arg6 * (100000 + *0x1::vector::borrow<u64>(arg12, v10)) / 100000;
+            let v19 = v17;
+            let v20 = v18;
+            if (arg27 > 0 && v17 >= arg27) {
+                v19 = arg27 * (100000 - arg7) / 100000;
+            };
+            if (arg26 > 0 && v18 <= arg26) {
+                v20 = arg26 * (100000 + arg8) / 100000;
+            };
+            let v21 = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orders::round_bid_price(v19, arg23);
+            v19 = v21;
+            let v22 = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orders::round_ask_price(v20, arg23);
+            v20 = v22;
+            let v23 = if (v10 == 0) {
+                if (0x1::option::is_some<0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orderbook_analyzer::OrderbookSnapshot>(arg19)) {
+                    arg20 > 0
+                } else {
+                    false
+                }
+            } else {
+                false
+            };
+            if (v23) {
+                let v24 = 0x1::option::borrow<0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orderbook_analyzer::OrderbookSnapshot>(arg19);
+                let (v25, v26) = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orderbook_analyzer::find_queue_snipe_price(v24, v21, true, arg23, arg20);
+                let v27 = if (v26) {
+                    v25
+                } else {
+                    0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orders::round_bid_price(v25, arg23)
+                };
+                v19 = v27;
+                let (v28, v29) = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orderbook_analyzer::find_queue_snipe_price(v24, v22, false, arg23, arg20);
+                let v30 = if (v29) {
+                    v28
+                } else {
+                    0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orders::round_ask_price(v28, arg23)
+                };
+                v20 = v30;
+                let v31 = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orderbook_analyzer::best_bid(v24);
+                let v32 = 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::orderbook_analyzer::best_ask(v24);
+                if (v32 > 0 && v27 >= v32) {
+                    let v33 = if (v32 > arg23) {
+                        v32 - arg23
+                    } else {
+                        arg23
+                    };
+                    v19 = v33;
+                };
+                if (v31 > 0 && v30 <= v31) {
+                    v20 = v31 + arg23;
+                };
+            };
+            let v34 = if (v12 >= arg25) {
+                if (v12 >= 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::config::min_order_size(arg22)) {
+                    v19 >= 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::config::min_price(arg22)
+                } else {
+                    false
+                }
+            } else {
+                false
+            };
+            let v35 = if (v13 >= arg25) {
+                if (v13 >= 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::config::min_order_size(arg22)) {
+                    v20 <= 0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::config::max_price(arg22)
+                } else {
+                    false
+                }
+            } else {
+                false
+            };
+            let v36 = find_layer_order(&v4, v11, true);
+            let v37 = find_layer_order(&v4, v11, false);
+            if (!v2) {
+                if (v15) {
+                    if (0x1::option::is_some<LayerOrderInfo>(&v36)) {
+                        0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::cancel_order<T0, T1>(arg3, arg2, arg21, 0x1::option::borrow<LayerOrderInfo>(&v36).order_id, arg5, arg28);
+                    };
+                } else if (0x1::option::is_some<LayerOrderInfo>(&v36)) {
+                    let v38 = 0x1::option::borrow<LayerOrderInfo>(&v36);
+                    if (should_requote_price(v38.price, v19, v14) || should_refresh_order(v38.expire_timestamp, v0)) {
+                        0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::cancel_order<T0, T1>(arg3, arg2, arg21, v38.order_id, arg5, arg28);
+                        if (v34) {
+                            0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_limit_order<T0, T1>(arg3, arg2, arg21, v16, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::post_only(), 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::cancel_maker(), v19, v12, true, v3, arg10, arg5, arg28);
+                        };
+                    };
+                } else if (v34) {
+                    0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_limit_order<T0, T1>(arg3, arg2, arg21, v16, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::post_only(), 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::cancel_maker(), v19, v12, true, v3, arg10, arg5, arg28);
+                };
+                if (v15) {
+                    if (0x1::option::is_some<LayerOrderInfo>(&v37)) {
+                        0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::cancel_order<T0, T1>(arg3, arg2, arg21, 0x1::option::borrow<LayerOrderInfo>(&v37).order_id, arg5, arg28);
+                    };
+                } else if (0x1::option::is_some<LayerOrderInfo>(&v37)) {
+                    let v39 = 0x1::option::borrow<LayerOrderInfo>(&v37);
+                    if (should_requote_price(v39.price, v20, v14) || should_refresh_order(v39.expire_timestamp, v0)) {
+                        0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::cancel_order<T0, T1>(arg3, arg2, arg21, v39.order_id, arg5, arg28);
+                        if (v35) {
+                            0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_limit_order<T0, T1>(arg3, arg2, arg21, v16, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::post_only(), 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::cancel_maker(), v20, v13, false, v3, arg10, arg5, arg28);
+                        };
+                    };
+                } else if (v35) {
+                    0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::place_limit_order<T0, T1>(arg3, arg2, arg21, v16, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::post_only(), 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::constants::cancel_maker(), v20, v13, false, v3, arg10, arg5, arg28);
+                };
+            };
+            v10 = v10 + 1;
+        };
+        0xd68c86ef4f62c3cfb443c666d1ce834901a6e629bb78a26f77579f913973a18b::mm_state::record_order_time(arg0, v0);
+    }
+
+    fun should_refresh_order(arg0: u64, arg1: u64) : bool {
+        if (arg1 >= arg0) {
+            return true
+        };
+        arg0 - arg1 <= 30000
+    }
+
+    fun should_requote_price(arg0: u64, arg1: u64, arg2: u64) : bool {
+        if (arg0 == 0 || arg1 == 0) {
+            return true
+        };
+        let v0 = if (arg0 >= arg1) {
+            (arg0 - arg1) * 100000 / arg1
+        } else {
+            (arg1 - arg0) * 100000 / arg1
+        };
+        v0 > arg2
+    }
+
+    // decompiled from Move bytecode v6
+}
+
