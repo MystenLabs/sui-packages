@@ -1,0 +1,55 @@
+module 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_entry {
+    struct SuilendLegAuth has drop {
+        dummy_field: bool,
+    }
+
+    public fun deposit_to_suilend<T0, T1, T2>(arg0: &mut 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_pool::LLVPool<T1, T2>, arg1: &mut 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::DepositReceipt<T1>, arg2: u64, arg3: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg4: u64, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) {
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_validation::validate_suilend_config<T1, T2>(arg0, 0x2::object::id<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>>(arg3), arg4);
+        let v0 = SuilendLegAuth{dummy_field: false};
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::sync_for_deposit<T1, T2, SuilendLegAuth>(arg0, arg1, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND(), 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::get_underlying_balance<T0, T1>(arg3, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_pool::query_holding_balance<T1, T2, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::CToken<T0, T1>>(arg0, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND())), arg5, &v0);
+        let (v1, v2) = 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::begin_deposit_leg<T1, T2, SuilendLegAuth>(arg1, arg0, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND(), arg2, &v0);
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::store_deposit_holding<T1, T2, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::CToken<T0, T1>, SuilendLegAuth>(arg1, arg0, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND(), 0x2::coin::into_balance<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::CToken<T0, T1>>(0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::deposit<T0, T1>(arg3, arg4, arg5, 0x2::coin::from_balance<T1>(v1, arg6), arg6)), &v0);
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::finish_deposit_leg<T1, T2, SuilendLegAuth>(arg1, arg0, v2, 0x2::balance::zero<T1>(), &v0);
+    }
+
+    public fun register_suilend_leg_auth<T0, T1>(arg0: &0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_admin::LLVGlobal, arg1: &mut 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_pool::LLVPool<T0, T1>, arg2: &0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_admin::LLVPoolAdminCap) {
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_admin::assert_version(arg0);
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_pool::register_protocol_leg_auth<T0, T1, SuilendLegAuth>(arg1, arg2, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND());
+    }
+
+    public fun sync_suilend<T0, T1, T2>(arg0: &mut 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_pool::LLVPool<T1, T2>, arg1: &0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg2: &0x2::clock::Clock, arg3: &0x2::tx_context::TxContext) {
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_validation::validate_suilend_market<T1, T2>(arg0, 0x2::object::id<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>>(arg1));
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::keeper_sync_protocol_balance<T1, T2>(arg0, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND(), 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::get_underlying_balance<T0, T1>(arg1, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_pool::query_holding_balance<T1, T2, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::CToken<T0, T1>>(arg0, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND())), arg2, arg3);
+    }
+
+    public fun withdraw_from_suilend<T0, T1, T2>(arg0: &mut 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_pool::LLVPool<T1, T2>, arg1: &mut 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::WithdrawReceipt<T1, T2>, arg2: u128, arg3: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg4: u64, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) {
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_validation::validate_suilend_config<T1, T2>(arg0, 0x2::object::id<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>>(arg3), arg4);
+        let v0 = 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_pool::query_holding_balance<T1, T2, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::CToken<T0, T1>>(arg0, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND());
+        let v1 = SuilendLegAuth{dummy_field: false};
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::sync_for_withdraw<T1, T2, SuilendLegAuth>(arg0, arg1, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND(), 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::get_underlying_balance<T0, T1>(arg3, v0), arg5, &v1);
+        let (v2, v3) = 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::get_ctoken_ratio<T0, T1>(arg3);
+        let v4 = 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::select_ctoken_withdraw_amount(arg2, v0, v2, v3, 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::get_immediate_available_liquidity<T0, T1>(arg3));
+        if (v4 == 0) {
+            return
+        };
+        let (v5, v6) = 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::begin_withdraw_leg<T1, T2, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::CToken<T0, T1>, SuilendLegAuth>(arg1, arg0, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND(), v4, &v1);
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::finish_withdraw_leg<T1, T2, SuilendLegAuth>(arg1, arg0, v6, 0x2::coin::into_balance<T1>(0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::withdraw<T0, T1>(arg3, arg4, arg5, 0x2::coin::from_balance<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::CToken<T0, T1>>(v5, arg6), arg6)), &v1);
+    }
+
+    public fun withdraw_from_suilend_sui<T0, T1>(arg0: &mut 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_pool::LLVPool<0x2::sui::SUI, T1>, arg1: &mut 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::WithdrawReceipt<0x2::sui::SUI, T1>, arg2: u128, arg3: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg4: u64, arg5: &mut 0x3::sui_system::SuiSystemState, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_validation::validate_suilend_config<0x2::sui::SUI, T1>(arg0, 0x2::object::id<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>>(arg3), arg4);
+        let v0 = 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_pool::query_holding_balance<0x2::sui::SUI, T1, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::CToken<T0, 0x2::sui::SUI>>(arg0, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND());
+        let v1 = SuilendLegAuth{dummy_field: false};
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::sync_for_withdraw<0x2::sui::SUI, T1, SuilendLegAuth>(arg0, arg1, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND(), 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::get_underlying_balance<T0, 0x2::sui::SUI>(arg3, v0), arg6, &v1);
+        let (v2, v3) = 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::get_ctoken_ratio<T0, 0x2::sui::SUI>(arg3);
+        let v4 = 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::select_ctoken_withdraw_amount(arg2, v0, v2, v3, 0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::get_immediate_available_liquidity<T0, 0x2::sui::SUI>(arg3));
+        if (v4 == 0) {
+            return
+        };
+        let (v5, v6) = 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::begin_withdraw_leg<0x2::sui::SUI, T1, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::CToken<T0, 0x2::sui::SUI>, SuilendLegAuth>(arg1, arg0, 0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_allocation_plan::PROTOCOL_SUILEND(), v4, &v1);
+        0xb9b67cf78b0dd24400363d1027ff01c720c64c3a446309885fcbef24abd799e8::llv_user_entry::finish_withdraw_leg<0x2::sui::SUI, T1, SuilendLegAuth>(arg1, arg0, v6, 0x2::coin::into_balance<0x2::sui::SUI>(0xbc4385ba442cf5117cdd31b64c0c8fd71c17859cf1e0302c6ca6f865a22073cb::suilend_adapter::withdraw_sui<T0>(arg3, arg4, arg6, 0x2::coin::from_balance<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::CToken<T0, 0x2::sui::SUI>>(v5, arg7), arg5, arg7)), &v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
