@@ -1,0 +1,54 @@
+module 0x43e45134100d74872d9c86fd16d1e2bff070ca25d9e0a8b6a848f7347451a8a3::momentum_agg {
+    struct MomentumAgg has drop {
+        dummy_field: bool,
+    }
+
+    public fun swap<T0, T1, T2>(arg0: &0xbd5ce8a980d4533417cffe9245ded402d6ba6d01205d96df1dcc4318088d07fe::liquidator::Liquidator, arg1: &mut 0xbd5ce8a980d4533417cffe9245ded402d6ba6d01205d96df1dcc4318088d07fe::custom_liquidate::CustomLiquidateReceipt<T0>, arg2: &mut 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::Pool<T1, T2>, arg3: &0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::version::Version, arg4: bool, arg5: u64, arg6: &0x2::clock::Clock, arg7: &0x2::tx_context::TxContext) {
+        let (v0, v1) = if (arg4) {
+            let v2 = MomentumAgg{dummy_field: false};
+            swap_a2b<T1, T2>(arg2, arg3, 0xbd5ce8a980d4533417cffe9245ded402d6ba6d01205d96df1dcc4318088d07fe::custom_liquidate::take_balance<MomentumAgg, T0, T1>(arg1, arg0, v2, arg5), arg6, arg7)
+        } else {
+            let v3 = MomentumAgg{dummy_field: false};
+            swap_b2a<T1, T2>(arg2, arg3, 0xbd5ce8a980d4533417cffe9245ded402d6ba6d01205d96df1dcc4318088d07fe::custom_liquidate::take_balance<MomentumAgg, T0, T2>(arg1, arg0, v3, arg5), arg6, arg7)
+        };
+        let v4 = v1;
+        let v5 = v0;
+        if (0x2::balance::value<T1>(&v5) > 0) {
+            let v6 = MomentumAgg{dummy_field: false};
+            0xbd5ce8a980d4533417cffe9245ded402d6ba6d01205d96df1dcc4318088d07fe::custom_liquidate::put_balance<MomentumAgg, T0, T1>(arg1, arg0, v6, v5);
+        } else {
+            0x2::balance::destroy_zero<T1>(v5);
+        };
+        if (0x2::balance::value<T2>(&v4) > 0) {
+            let v7 = MomentumAgg{dummy_field: false};
+            0xbd5ce8a980d4533417cffe9245ded402d6ba6d01205d96df1dcc4318088d07fe::custom_liquidate::put_balance<MomentumAgg, T0, T2>(arg1, arg0, v7, v4);
+        } else {
+            0x2::balance::destroy_zero<T2>(v4);
+        };
+    }
+
+    fun swap_a2b<T0, T1>(arg0: &mut 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::Pool<T0, T1>, arg1: &0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::version::Version, arg2: 0x2::balance::Balance<T0>, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) : (0x2::balance::Balance<T0>, 0x2::balance::Balance<T1>) {
+        let v0 = 0x2::balance::value<T0>(&arg2);
+        if (v0 == 0) {
+            0x2::balance::destroy_zero<T0>(arg2);
+            return (0x2::balance::zero<T0>(), 0x2::balance::zero<T1>())
+        };
+        let (v1, v2, v3) = 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::flash_swap<T0, T1>(arg0, true, true, v0, 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::tick_math::min_sqrt_price(), arg3, arg1, arg4);
+        0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::repay_flash_swap<T0, T1>(arg0, v3, arg2, 0x2::balance::zero<T1>(), arg1, arg4);
+        (v1, v2)
+    }
+
+    fun swap_b2a<T0, T1>(arg0: &mut 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::Pool<T0, T1>, arg1: &0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::version::Version, arg2: 0x2::balance::Balance<T1>, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) : (0x2::balance::Balance<T0>, 0x2::balance::Balance<T1>) {
+        let v0 = 0x2::balance::value<T1>(&arg2);
+        if (v0 == 0) {
+            0x2::balance::destroy_zero<T1>(arg2);
+            return (0x2::balance::zero<T0>(), 0x2::balance::zero<T1>())
+        };
+        let (v1, v2, v3) = 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::flash_swap<T0, T1>(arg0, false, true, v0, 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::tick_math::max_sqrt_price(), arg3, arg1, arg4);
+        0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::repay_flash_swap<T0, T1>(arg0, v3, 0x2::balance::zero<T0>(), arg2, arg1, arg4);
+        (v1, v2)
+    }
+
+    // decompiled from Move bytecode v6
+}
+
