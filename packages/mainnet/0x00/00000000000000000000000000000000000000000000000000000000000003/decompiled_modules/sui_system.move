@@ -9,8 +9,7 @@ module 0x3::sui_system {
     }
 
     public(friend) fun calculate_rewards(arg0: &mut SuiSystemState, arg1: &0x3::staking_pool::StakedSui, arg2: &0x2::tx_context::TxContext) : u64 {
-        let v0 = 0x3::staking_pool::pool_id(arg1);
-        0x3::staking_pool::calculate_rewards(0x3::validator::get_staking_pool_ref(0x3::validator_set::validator_by_pool_id(0x3::sui_system_state_inner::validators_mut(load_system_state_mut(arg0)), &v0)), arg1, 0x2::tx_context::epoch(arg2))
+        0x3::staking_pool::calculate_rewards(0x3::validator::get_staking_pool_ref(0x3::validator_set::validator_by_pool_id(0x3::sui_system_state_inner::validators_mut(load_system_state_mut(arg0)), 0x3::staking_pool::pool_id(arg1))), arg1, 0x2::tx_context::epoch(arg2))
     }
 
     public fun active_validator_addresses(arg0: &mut SuiSystemState) : vector<address> {
@@ -80,7 +79,7 @@ module 0x3::sui_system {
     }
 
     public fun pool_exchange_rates(arg0: &mut SuiSystemState, arg1: &0x2::object::ID) : &0x2::table::Table<u64, 0x3::staking_pool::PoolTokenExchangeRate> {
-        0x3::sui_system_state_inner::pool_exchange_rates(load_system_state_mut(arg0), arg1)
+        0x3::sui_system_state_inner::pool_exchange_rates(load_system_state_mut(arg0), *arg1)
     }
 
     public fun redeem_fungible_staked_sui(arg0: &mut SuiSystemState, arg1: 0x3::staking_pool::FungibleStakedSui, arg2: &0x2::tx_context::TxContext) : 0x2::balance::Balance<0x2::sui::SUI> {

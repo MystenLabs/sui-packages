@@ -267,6 +267,10 @@ module 0x3::validator {
             true
         } else if (v0.p2p_address == v1.p2p_address) {
             true
+        } else if (v0.primary_address == v1.primary_address) {
+            true
+        } else if (v0.worker_address == v1.worker_address) {
+            true
         } else if (v0.protocol_pubkey_bytes == v1.protocol_pubkey_bytes) {
             true
         } else if (v0.network_pubkey_bytes == v1.network_pubkey_bytes) {
@@ -304,34 +308,34 @@ module 0x3::validator {
                 if (v12) {
                     true
                 } else {
-                    let v15 = v1.next_epoch_protocol_pubkey_bytes;
-                    let v16 = v0.next_epoch_protocol_pubkey_bytes;
+                    let v15 = v1.next_epoch_primary_address;
+                    let v16 = v0.next_epoch_primary_address;
                     let v17 = &v16;
-                    let v18 = if (0x1::option::is_some<vector<u8>>(v17)) {
-                        let v19 = 0x1::option::borrow<vector<u8>>(v17);
+                    let v18 = if (0x1::option::is_some<0x1::string::String>(v17)) {
+                        let v19 = 0x1::option::borrow<0x1::string::String>(v17);
                         let v20 = &v15;
-                        0x1::option::is_some<vector<u8>>(v20) && v19 == 0x1::option::borrow<vector<u8>>(v20)
+                        0x1::option::is_some<0x1::string::String>(v20) && v19 == 0x1::option::borrow<0x1::string::String>(v20)
                     } else {
                         false
                     };
                     if (v18) {
                         true
                     } else {
-                        let v21 = v1.next_epoch_network_pubkey_bytes;
-                        let v22 = v0.next_epoch_network_pubkey_bytes;
+                        let v21 = v1.next_epoch_worker_address;
+                        let v22 = v0.next_epoch_worker_address;
                         let v23 = &v22;
-                        let v24 = if (0x1::option::is_some<vector<u8>>(v23)) {
-                            let v25 = 0x1::option::borrow<vector<u8>>(v23);
+                        let v24 = if (0x1::option::is_some<0x1::string::String>(v23)) {
+                            let v25 = 0x1::option::borrow<0x1::string::String>(v23);
                             let v26 = &v21;
-                            0x1::option::is_some<vector<u8>>(v26) && v25 == 0x1::option::borrow<vector<u8>>(v26)
+                            0x1::option::is_some<0x1::string::String>(v26) && v25 == 0x1::option::borrow<0x1::string::String>(v26)
                         } else {
                             false
                         };
                         if (v24) {
                             true
                         } else {
-                            let v27 = v1.next_epoch_worker_pubkey_bytes;
-                            let v28 = v0.next_epoch_network_pubkey_bytes;
+                            let v27 = v1.next_epoch_protocol_pubkey_bytes;
+                            let v28 = v0.next_epoch_protocol_pubkey_bytes;
                             let v29 = &v28;
                             let v30 = if (0x1::option::is_some<vector<u8>>(v29)) {
                                 let v31 = 0x1::option::borrow<vector<u8>>(v29);
@@ -343,8 +347,8 @@ module 0x3::validator {
                             if (v30) {
                                 true
                             } else {
-                                let v33 = v1.next_epoch_worker_pubkey_bytes;
-                                let v34 = v0.next_epoch_worker_pubkey_bytes;
+                                let v33 = v1.next_epoch_network_pubkey_bytes;
+                                let v34 = v0.next_epoch_network_pubkey_bytes;
                                 let v35 = &v34;
                                 let v36 = if (0x1::option::is_some<vector<u8>>(v35)) {
                                     let v37 = 0x1::option::borrow<vector<u8>>(v35);
@@ -356,8 +360,8 @@ module 0x3::validator {
                                 if (v36) {
                                     true
                                 } else {
-                                    let v39 = v1.next_epoch_network_pubkey_bytes;
-                                    let v40 = v0.next_epoch_worker_pubkey_bytes;
+                                    let v39 = v1.next_epoch_worker_pubkey_bytes;
+                                    let v40 = v0.next_epoch_network_pubkey_bytes;
                                     let v41 = &v40;
                                     let v42 = if (0x1::option::is_some<vector<u8>>(v41)) {
                                         let v43 = 0x1::option::borrow<vector<u8>>(v41);
@@ -369,142 +373,214 @@ module 0x3::validator {
                                     if (v42) {
                                         true
                                     } else {
-                                        let v45 = &v0.next_epoch_net_address;
-                                        let v46 = if (0x1::option::is_some<0x1::string::String>(v45)) {
-                                            let v47 = v1.net_address;
-                                            0x1::option::borrow<0x1::string::String>(v45) == &v47
+                                        let v45 = v1.next_epoch_worker_pubkey_bytes;
+                                        let v46 = v0.next_epoch_worker_pubkey_bytes;
+                                        let v47 = &v46;
+                                        let v48 = if (0x1::option::is_some<vector<u8>>(v47)) {
+                                            let v49 = 0x1::option::borrow<vector<u8>>(v47);
+                                            let v50 = &v45;
+                                            0x1::option::is_some<vector<u8>>(v50) && v49 == 0x1::option::borrow<vector<u8>>(v50)
                                         } else {
                                             false
                                         };
-                                        if (v46) {
+                                        if (v48) {
                                             true
                                         } else {
-                                            let v48 = &v0.next_epoch_p2p_address;
-                                            let v49 = if (0x1::option::is_some<0x1::string::String>(v48)) {
-                                                let v50 = v1.p2p_address;
-                                                0x1::option::borrow<0x1::string::String>(v48) == &v50
+                                            let v51 = v1.next_epoch_network_pubkey_bytes;
+                                            let v52 = v0.next_epoch_worker_pubkey_bytes;
+                                            let v53 = &v52;
+                                            let v54 = if (0x1::option::is_some<vector<u8>>(v53)) {
+                                                let v55 = 0x1::option::borrow<vector<u8>>(v53);
+                                                let v56 = &v51;
+                                                0x1::option::is_some<vector<u8>>(v56) && v55 == 0x1::option::borrow<vector<u8>>(v56)
                                             } else {
                                                 false
                                             };
-                                            if (v49) {
+                                            if (v54) {
                                                 true
                                             } else {
-                                                let v51 = &v0.next_epoch_protocol_pubkey_bytes;
-                                                let v52 = if (0x1::option::is_some<vector<u8>>(v51)) {
-                                                    let v53 = v1.protocol_pubkey_bytes;
-                                                    0x1::option::borrow<vector<u8>>(v51) == &v53
+                                                let v57 = &v0.next_epoch_net_address;
+                                                let v58 = if (0x1::option::is_some<0x1::string::String>(v57)) {
+                                                    let v59 = v1.net_address;
+                                                    0x1::option::borrow<0x1::string::String>(v57) == &v59
                                                 } else {
                                                     false
                                                 };
-                                                if (v52) {
+                                                if (v58) {
                                                     true
                                                 } else {
-                                                    let v54 = &v0.next_epoch_network_pubkey_bytes;
-                                                    let v55 = if (0x1::option::is_some<vector<u8>>(v54)) {
-                                                        let v56 = v1.network_pubkey_bytes;
-                                                        0x1::option::borrow<vector<u8>>(v54) == &v56
+                                                    let v60 = &v0.next_epoch_p2p_address;
+                                                    let v61 = if (0x1::option::is_some<0x1::string::String>(v60)) {
+                                                        let v62 = v1.p2p_address;
+                                                        0x1::option::borrow<0x1::string::String>(v60) == &v62
                                                     } else {
                                                         false
                                                     };
-                                                    if (v55) {
+                                                    if (v61) {
                                                         true
                                                     } else {
-                                                        let v57 = &v0.next_epoch_network_pubkey_bytes;
-                                                        let v58 = if (0x1::option::is_some<vector<u8>>(v57)) {
-                                                            let v59 = v1.worker_pubkey_bytes;
-                                                            0x1::option::borrow<vector<u8>>(v57) == &v59
+                                                        let v63 = &v0.next_epoch_primary_address;
+                                                        let v64 = if (0x1::option::is_some<0x1::string::String>(v63)) {
+                                                            let v65 = v1.primary_address;
+                                                            0x1::option::borrow<0x1::string::String>(v63) == &v65
                                                         } else {
                                                             false
                                                         };
-                                                        if (v58) {
+                                                        if (v64) {
                                                             true
                                                         } else {
-                                                            let v60 = &v0.next_epoch_worker_pubkey_bytes;
-                                                            let v61 = if (0x1::option::is_some<vector<u8>>(v60)) {
-                                                                let v62 = v1.worker_pubkey_bytes;
-                                                                0x1::option::borrow<vector<u8>>(v60) == &v62
+                                                            let v66 = &v0.next_epoch_worker_address;
+                                                            let v67 = if (0x1::option::is_some<0x1::string::String>(v66)) {
+                                                                let v68 = v1.worker_address;
+                                                                0x1::option::borrow<0x1::string::String>(v66) == &v68
                                                             } else {
                                                                 false
                                                             };
-                                                            if (v61) {
+                                                            if (v67) {
                                                                 true
                                                             } else {
-                                                                let v63 = &v0.next_epoch_worker_pubkey_bytes;
-                                                                let v64 = if (0x1::option::is_some<vector<u8>>(v63)) {
-                                                                    let v65 = v1.network_pubkey_bytes;
-                                                                    0x1::option::borrow<vector<u8>>(v63) == &v65
+                                                                let v69 = &v0.next_epoch_protocol_pubkey_bytes;
+                                                                let v70 = if (0x1::option::is_some<vector<u8>>(v69)) {
+                                                                    let v71 = v1.protocol_pubkey_bytes;
+                                                                    0x1::option::borrow<vector<u8>>(v69) == &v71
                                                                 } else {
                                                                     false
                                                                 };
-                                                                if (v64) {
+                                                                if (v70) {
                                                                     true
                                                                 } else {
-                                                                    let v66 = &v1.next_epoch_net_address;
-                                                                    let v67 = if (0x1::option::is_some<0x1::string::String>(v66)) {
-                                                                        let v68 = v0.net_address;
-                                                                        0x1::option::borrow<0x1::string::String>(v66) == &v68
+                                                                    let v72 = &v0.next_epoch_network_pubkey_bytes;
+                                                                    let v73 = if (0x1::option::is_some<vector<u8>>(v72)) {
+                                                                        let v74 = v1.network_pubkey_bytes;
+                                                                        0x1::option::borrow<vector<u8>>(v72) == &v74
                                                                     } else {
                                                                         false
                                                                     };
-                                                                    if (v67) {
+                                                                    if (v73) {
                                                                         true
                                                                     } else {
-                                                                        let v69 = &v1.next_epoch_p2p_address;
-                                                                        let v70 = if (0x1::option::is_some<0x1::string::String>(v69)) {
-                                                                            let v71 = v0.p2p_address;
-                                                                            0x1::option::borrow<0x1::string::String>(v69) == &v71
+                                                                        let v75 = &v0.next_epoch_network_pubkey_bytes;
+                                                                        let v76 = if (0x1::option::is_some<vector<u8>>(v75)) {
+                                                                            let v77 = v1.worker_pubkey_bytes;
+                                                                            0x1::option::borrow<vector<u8>>(v75) == &v77
                                                                         } else {
                                                                             false
                                                                         };
-                                                                        if (v70) {
+                                                                        if (v76) {
                                                                             true
                                                                         } else {
-                                                                            let v72 = &v1.next_epoch_protocol_pubkey_bytes;
-                                                                            let v73 = if (0x1::option::is_some<vector<u8>>(v72)) {
-                                                                                let v74 = v0.protocol_pubkey_bytes;
-                                                                                0x1::option::borrow<vector<u8>>(v72) == &v74
+                                                                            let v78 = &v0.next_epoch_worker_pubkey_bytes;
+                                                                            let v79 = if (0x1::option::is_some<vector<u8>>(v78)) {
+                                                                                let v80 = v1.worker_pubkey_bytes;
+                                                                                0x1::option::borrow<vector<u8>>(v78) == &v80
                                                                             } else {
                                                                                 false
                                                                             };
-                                                                            if (v73) {
+                                                                            if (v79) {
                                                                                 true
                                                                             } else {
-                                                                                let v75 = &v1.next_epoch_network_pubkey_bytes;
-                                                                                let v76 = if (0x1::option::is_some<vector<u8>>(v75)) {
-                                                                                    let v77 = v0.network_pubkey_bytes;
-                                                                                    0x1::option::borrow<vector<u8>>(v75) == &v77
+                                                                                let v81 = &v0.next_epoch_worker_pubkey_bytes;
+                                                                                let v82 = if (0x1::option::is_some<vector<u8>>(v81)) {
+                                                                                    let v83 = v1.network_pubkey_bytes;
+                                                                                    0x1::option::borrow<vector<u8>>(v81) == &v83
                                                                                 } else {
                                                                                     false
                                                                                 };
-                                                                                if (v76) {
+                                                                                if (v82) {
                                                                                     true
                                                                                 } else {
-                                                                                    let v78 = &v1.next_epoch_network_pubkey_bytes;
-                                                                                    let v79 = if (0x1::option::is_some<vector<u8>>(v78)) {
-                                                                                        let v80 = v0.worker_pubkey_bytes;
-                                                                                        0x1::option::borrow<vector<u8>>(v78) == &v80
+                                                                                    let v84 = &v1.next_epoch_net_address;
+                                                                                    let v85 = if (0x1::option::is_some<0x1::string::String>(v84)) {
+                                                                                        let v86 = v0.net_address;
+                                                                                        0x1::option::borrow<0x1::string::String>(v84) == &v86
                                                                                     } else {
                                                                                         false
                                                                                     };
-                                                                                    if (v79) {
+                                                                                    if (v85) {
                                                                                         true
                                                                                     } else {
-                                                                                        let v81 = &v1.next_epoch_worker_pubkey_bytes;
-                                                                                        let v82 = if (0x1::option::is_some<vector<u8>>(v81)) {
-                                                                                            let v83 = v0.worker_pubkey_bytes;
-                                                                                            0x1::option::borrow<vector<u8>>(v81) == &v83
+                                                                                        let v87 = &v1.next_epoch_p2p_address;
+                                                                                        let v88 = if (0x1::option::is_some<0x1::string::String>(v87)) {
+                                                                                            let v89 = v0.p2p_address;
+                                                                                            0x1::option::borrow<0x1::string::String>(v87) == &v89
                                                                                         } else {
                                                                                             false
                                                                                         };
-                                                                                        if (v82) {
+                                                                                        if (v88) {
                                                                                             true
                                                                                         } else {
-                                                                                            let v84 = &v1.next_epoch_worker_pubkey_bytes;
-                                                                                            if (0x1::option::is_some<vector<u8>>(v84)) {
-                                                                                                let v85 = v0.network_pubkey_bytes;
-                                                                                                0x1::option::borrow<vector<u8>>(v84) == &v85
+                                                                                            let v90 = &v1.next_epoch_primary_address;
+                                                                                            let v91 = if (0x1::option::is_some<0x1::string::String>(v90)) {
+                                                                                                let v92 = v0.primary_address;
+                                                                                                0x1::option::borrow<0x1::string::String>(v90) == &v92
                                                                                             } else {
                                                                                                 false
+                                                                                            };
+                                                                                            if (v91) {
+                                                                                                true
+                                                                                            } else {
+                                                                                                let v93 = &v1.next_epoch_worker_address;
+                                                                                                let v94 = if (0x1::option::is_some<0x1::string::String>(v93)) {
+                                                                                                    let v95 = v0.worker_address;
+                                                                                                    0x1::option::borrow<0x1::string::String>(v93) == &v95
+                                                                                                } else {
+                                                                                                    false
+                                                                                                };
+                                                                                                if (v94) {
+                                                                                                    true
+                                                                                                } else {
+                                                                                                    let v96 = &v1.next_epoch_protocol_pubkey_bytes;
+                                                                                                    let v97 = if (0x1::option::is_some<vector<u8>>(v96)) {
+                                                                                                        let v98 = v0.protocol_pubkey_bytes;
+                                                                                                        0x1::option::borrow<vector<u8>>(v96) == &v98
+                                                                                                    } else {
+                                                                                                        false
+                                                                                                    };
+                                                                                                    if (v97) {
+                                                                                                        true
+                                                                                                    } else {
+                                                                                                        let v99 = &v1.next_epoch_network_pubkey_bytes;
+                                                                                                        let v100 = if (0x1::option::is_some<vector<u8>>(v99)) {
+                                                                                                            let v101 = v0.network_pubkey_bytes;
+                                                                                                            0x1::option::borrow<vector<u8>>(v99) == &v101
+                                                                                                        } else {
+                                                                                                            false
+                                                                                                        };
+                                                                                                        if (v100) {
+                                                                                                            true
+                                                                                                        } else {
+                                                                                                            let v102 = &v1.next_epoch_network_pubkey_bytes;
+                                                                                                            let v103 = if (0x1::option::is_some<vector<u8>>(v102)) {
+                                                                                                                let v104 = v0.worker_pubkey_bytes;
+                                                                                                                0x1::option::borrow<vector<u8>>(v102) == &v104
+                                                                                                            } else {
+                                                                                                                false
+                                                                                                            };
+                                                                                                            if (v103) {
+                                                                                                                true
+                                                                                                            } else {
+                                                                                                                let v105 = &v1.next_epoch_worker_pubkey_bytes;
+                                                                                                                let v106 = if (0x1::option::is_some<vector<u8>>(v105)) {
+                                                                                                                    let v107 = v0.worker_pubkey_bytes;
+                                                                                                                    0x1::option::borrow<vector<u8>>(v105) == &v107
+                                                                                                                } else {
+                                                                                                                    false
+                                                                                                                };
+                                                                                                                if (v106) {
+                                                                                                                    true
+                                                                                                                } else {
+                                                                                                                    let v108 = &v1.next_epoch_worker_pubkey_bytes;
+                                                                                                                    if (0x1::option::is_some<vector<u8>>(v108)) {
+                                                                                                                        let v109 = v0.network_pubkey_bytes;
+                                                                                                                        0x1::option::borrow<vector<u8>>(v108) == &v109
+                                                                                                                    } else {
+                                                                                                                        false
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
                                                                                             }
                                                                                         }
                                                                                     }
@@ -669,7 +745,7 @@ module 0x3::validator {
 
     public(friend) fun request_set_gas_price(arg0: &mut Validator, arg1: 0x3::validator_cap::ValidatorOperationCap, arg2: u64) {
         assert!(arg2 < 100000, 102);
-        assert!(*0x3::validator_cap::verified_operation_cap_address(&arg1) == arg0.metadata.sui_address, 101);
+        assert!(0x3::validator_cap::verified_operation_cap_address(&arg1) == arg0.metadata.sui_address, 101);
         arg0.next_epoch_gas_price = arg2;
     }
 
@@ -682,7 +758,7 @@ module 0x3::validator {
     public(friend) fun set_candidate_gas_price(arg0: &mut Validator, arg1: 0x3::validator_cap::ValidatorOperationCap, arg2: u64) {
         assert!(is_preactive(arg0), 10);
         assert!(arg2 < 100000, 102);
-        assert!(*0x3::validator_cap::verified_operation_cap_address(&arg1) == arg0.metadata.sui_address, 101);
+        assert!(0x3::validator_cap::verified_operation_cap_address(&arg1) == arg0.metadata.sui_address, 101);
         arg0.next_epoch_gas_price = arg2;
         arg0.gas_price = arg2;
     }
@@ -740,6 +816,7 @@ module 0x3::validator {
 
     public(friend) fun update_candidate_protocol_pubkey(arg0: &mut Validator, arg1: vector<u8>, arg2: vector<u8>) {
         assert!(is_preactive(arg0), 10);
+        assert!(0x1::vector::length<u8>(&arg1) == 96, 16);
         arg0.metadata.protocol_pubkey_bytes = arg1;
         arg0.metadata.proof_of_possession = arg2;
         validate_metadata(&arg0.metadata);
@@ -797,6 +874,7 @@ module 0x3::validator {
     }
 
     public(friend) fun update_next_epoch_protocol_pubkey(arg0: &mut Validator, arg1: vector<u8>, arg2: vector<u8>) {
+        assert!(0x1::vector::length<u8>(&arg1) == 96, 16);
         arg0.metadata.next_epoch_protocol_pubkey_bytes = 0x1::option::some<vector<u8>>(arg1);
         arg0.metadata.next_epoch_proof_of_possession = 0x1::option::some<vector<u8>>(arg2);
         validate_metadata(&arg0.metadata);

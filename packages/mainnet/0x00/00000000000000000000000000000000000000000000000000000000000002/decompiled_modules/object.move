@@ -107,6 +107,15 @@ module 0x2::object {
         UID{id: v0}
     }
 
+    public(friend) fun sui_display_registry_address() : address {
+        @0xd
+    }
+
+    public(friend) fun sui_display_registry_object_id() : UID {
+        let v0 = ID{bytes: @0xd};
+        UID{id: v0}
+    }
+
     fun sui_system_state(arg0: &0x2::tx_context::TxContext) : UID {
         assert!(0x2::tx_context::sender(arg0) == @0x0, 0);
         let v0 = ID{bytes: @0x5};

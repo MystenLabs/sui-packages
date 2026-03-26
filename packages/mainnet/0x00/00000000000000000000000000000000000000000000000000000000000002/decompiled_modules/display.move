@@ -53,6 +53,15 @@ module 0x2::display {
         }
     }
 
+    public(friend) fun destroy<T0: key>(arg0: Display<T0>) {
+        let Display {
+            id      : v0,
+            fields  : _,
+            version : _,
+        } = arg0;
+        0x2::object::delete(v0);
+    }
+
     public entry fun edit<T0: key>(arg0: &mut Display<T0>, arg1: 0x1::string::String, arg2: 0x1::string::String) {
         let (_, _) = 0x2::vec_map::remove<0x1::string::String, 0x1::string::String>(&mut arg0.fields, &arg1);
         add_internal<T0>(arg0, arg1, arg2);

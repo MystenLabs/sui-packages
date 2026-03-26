@@ -53,11 +53,31 @@ module 0x3::genesis {
             } = 0x1::vector::pop_back<TokenAllocation>(&mut arg1);
             let v4 = v3;
             if (0x1::option::is_some<address>(&v4)) {
-                0x3::validator::request_add_stake_at_genesis(0x3::validator_set::get_validator_mut(arg2, 0x1::option::destroy_some<address>(v4)), 0x2::balance::split<0x2::sui::SUI>(&mut arg0, v2), v1, arg3);
+                let v5 = 0;
+                let v6;
+                while (v5 < 0x1::vector::length<0x3::validator::Validator>(arg2)) {
+                    if (0x3::validator::sui_address(0x1::vector::borrow<0x3::validator::Validator>(arg2, v5)) == 0x1::option::destroy_some<address>(v4)) {
+                        v6 = 0x1::option::some<u64>(v5);
+                        /* label 8 */
+                        if (0x1::option::is_some<u64>(&v6)) {
+                            0x3::validator::request_add_stake_at_genesis(0x1::vector::borrow_mut<0x3::validator::Validator>(arg2, 0x1::option::destroy_some<u64>(v6)), 0x2::balance::split<0x2::sui::SUI>(&mut arg0, v2), v1, arg3);
+                            /* label 12 */
+                            v0 = v0 + 1;
+                            /* goto 1 */
+                            continue
+                        } else {
+                            0x1::option::destroy_none<u64>(v6);
+                            abort 2
+                        };
+                    };
+                    v5 = v5 + 1;
+                };
+                v6 = 0x1::option::none<u64>();
+                /* goto 8 */
             } else {
                 0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x2::balance::split<0x2::sui::SUI>(&mut arg0, v2), arg3), v1);
+                /* goto 12 */
             };
-            v0 = v0 + 1;
         };
         0x1::vector::destroy_empty<TokenAllocation>(arg1);
         0x2::balance::destroy_zero<0x2::sui::SUI>(arg0);

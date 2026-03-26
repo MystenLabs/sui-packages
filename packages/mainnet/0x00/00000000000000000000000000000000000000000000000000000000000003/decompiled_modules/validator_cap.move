@@ -27,8 +27,8 @@ module 0x3::validator_cap {
         &arg0.authorizer_validator_address
     }
 
-    public(friend) fun verified_operation_cap_address(arg0: &ValidatorOperationCap) : &address {
-        &arg0.authorizer_validator_address
+    public(friend) fun verified_operation_cap_address(arg0: &ValidatorOperationCap) : address {
+        arg0.authorizer_validator_address
     }
 
     // decompiled from Move bytecode v6

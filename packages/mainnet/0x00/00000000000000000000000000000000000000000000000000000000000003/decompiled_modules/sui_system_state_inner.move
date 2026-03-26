@@ -260,7 +260,7 @@ module 0x3::sui_system_state_inner {
         0x3::storage_fund::total_balance(&arg0.storage_fund)
     }
 
-    public(friend) fun pool_exchange_rates(arg0: &mut SuiSystemStateInnerV2, arg1: &0x2::object::ID) : &0x2::table::Table<u64, 0x3::staking_pool::PoolTokenExchangeRate> {
+    public(friend) fun pool_exchange_rates(arg0: &mut SuiSystemStateInnerV2, arg1: 0x2::object::ID) : &0x2::table::Table<u64, 0x3::staking_pool::PoolTokenExchangeRate> {
         0x3::validator_set::pool_exchange_rates(&mut arg0.validators, arg1)
     }
 
@@ -279,7 +279,7 @@ module 0x3::sui_system_state_inner {
     }
 
     fun report_validator_impl(arg0: 0x3::validator_cap::ValidatorOperationCap, arg1: address, arg2: &mut 0x2::vec_map::VecMap<address, 0x2::vec_set::VecSet<address>>) {
-        let v0 = *0x3::validator_cap::verified_operation_cap_address(&arg0);
+        let v0 = 0x3::validator_cap::verified_operation_cap_address(&arg0);
         assert!(v0 != arg1, 3);
         if (!0x2::vec_map::contains<address, 0x2::vec_set::VecSet<address>>(arg2, &arg1)) {
             0x2::vec_map::insert<address, 0x2::vec_set::VecSet<address>>(arg2, arg1, 0x2::vec_set::singleton<address>(v0));
@@ -321,12 +321,12 @@ module 0x3::sui_system_state_inner {
     }
 
     public(friend) fun request_set_commission_rate(arg0: &mut SuiSystemStateInnerV2, arg1: u64, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator_set::request_set_commission_rate(&mut arg0.validators, arg1, arg2);
+        0x3::validator::request_set_commission_rate(0x3::validator_set::active_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun request_set_gas_price(arg0: &mut SuiSystemStateInnerV2, arg1: &0x3::validator_cap::UnverifiedValidatorOperationCap, arg2: u64) {
         let v0 = 0x3::validator_set::verify_cap(&mut arg0.validators, arg1, 2);
-        0x3::validator::request_set_gas_price(0x3::validator_set::get_validator_mut_with_verified_cap(&mut arg0.validators, &v0, false), v0, arg2);
+        0x3::validator::request_set_gas_price(0x3::validator_set::any_validator_mut(&mut arg0.validators, 0x3::validator_cap::verified_operation_cap_address(&v0)), v0, arg2);
     }
 
     public(friend) fun request_withdraw_stake(arg0: &mut SuiSystemStateInnerV2, arg1: 0x3::staking_pool::StakedSui, arg2: &0x2::tx_context::TxContext) : 0x2::balance::Balance<0x2::sui::SUI> {
@@ -334,16 +334,16 @@ module 0x3::sui_system_state_inner {
     }
 
     public(friend) fun rotate_operation_cap(arg0: &mut SuiSystemStateInnerV2, arg1: &mut 0x2::tx_context::TxContext) {
-        0x3::validator::new_unverified_validator_operation_cap_and_transfer(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg1), arg1);
+        0x3::validator::new_unverified_validator_operation_cap_and_transfer(0x3::validator_set::any_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg1)), arg1);
     }
 
     public(friend) fun set_candidate_validator_commission_rate(arg0: &mut SuiSystemStateInnerV2, arg1: u64, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::set_candidate_commission_rate(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        0x3::validator::set_candidate_commission_rate(0x3::validator_set::candidate_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun set_candidate_validator_gas_price(arg0: &mut SuiSystemStateInnerV2, arg1: &0x3::validator_cap::UnverifiedValidatorOperationCap, arg2: u64) {
         let v0 = 0x3::validator_set::verify_cap(&mut arg0.validators, arg1, 3);
-        0x3::validator::set_candidate_gas_price(0x3::validator_set::get_validator_mut_with_verified_cap(&mut arg0.validators, &v0, true), v0, arg2);
+        0x3::validator::set_candidate_gas_price(0x3::validator_set::candidate_validator_mut(&mut arg0.validators, 0x3::validator_cap::verified_operation_cap_address(&v0)), v0, arg2);
     }
 
     public(friend) fun store_execution_time_estimates(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>) {
@@ -391,7 +391,7 @@ module 0x3::sui_system_state_inner {
     fun undo_report_validator_impl(arg0: 0x3::validator_cap::ValidatorOperationCap, arg1: address, arg2: &mut 0x2::vec_map::VecMap<address, 0x2::vec_set::VecSet<address>>) {
         assert!(0x2::vec_map::contains<address, 0x2::vec_set::VecSet<address>>(arg2, &arg1), 4);
         let v0 = 0x2::vec_map::get_mut<address, 0x2::vec_set::VecSet<address>>(arg2, &arg1);
-        let v1 = *0x3::validator_cap::verified_operation_cap_address(&arg0);
+        let v1 = 0x3::validator_cap::verified_operation_cap_address(&arg0);
         assert!(0x2::vec_set::contains<address>(v0, &v1), 4);
         0x2::vec_set::remove<address>(v0, &v1);
         if (0x2::vec_set::is_empty<address>(v0)) {
@@ -400,85 +400,95 @@ module 0x3::sui_system_state_inner {
     }
 
     public(friend) fun update_candidate_validator_network_address(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_candidate_network_address(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        0x3::validator::update_candidate_network_address(0x3::validator_set::candidate_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun update_candidate_validator_network_pubkey(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_candidate_network_pubkey(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        0x3::validator::update_candidate_network_pubkey(0x3::validator_set::candidate_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun update_candidate_validator_p2p_address(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_candidate_p2p_address(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        0x3::validator::update_candidate_p2p_address(0x3::validator_set::candidate_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun update_candidate_validator_primary_address(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_candidate_primary_address(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        0x3::validator::update_candidate_primary_address(0x3::validator_set::candidate_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun update_candidate_validator_protocol_pubkey(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: vector<u8>, arg3: &0x2::tx_context::TxContext) {
-        0x3::validator::update_candidate_protocol_pubkey(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg3), arg1, arg2);
+        0x3::validator::update_candidate_protocol_pubkey(0x3::validator_set::candidate_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg3)), arg1, arg2);
     }
 
     public(friend) fun update_candidate_validator_worker_address(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_candidate_worker_address(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        0x3::validator::update_candidate_worker_address(0x3::validator_set::candidate_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun update_candidate_validator_worker_pubkey(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_candidate_worker_pubkey(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        0x3::validator::update_candidate_worker_pubkey(0x3::validator_set::candidate_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun update_validator_description(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_description(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        0x3::validator::update_description(0x3::validator_set::any_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun update_validator_image_url(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_image_url(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        0x3::validator::update_image_url(0x3::validator_set::any_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun update_validator_name(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_name(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        let v0 = 0x2::tx_context::sender(arg2);
+        let v1 = 0x3::validator_set::any_validator_mut(&mut arg0.validators, v0);
+        0x3::validator::update_name(v1, arg1);
+        let v2 = v1;
+        if (!0x3::validator_set::is_validator_candidate(&arg0.validators, v0)) {
+            0x3::validator_set::assert_no_pending_or_active_duplicates(&arg0.validators, v2);
+        };
     }
 
     public(friend) fun update_validator_next_epoch_network_address(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        let v0 = 0x3::validator_set::get_validator_mut_with_ctx(&mut arg0.validators, arg2);
+        let v0 = 0x3::validator_set::active_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2));
         0x3::validator::update_next_epoch_network_address(v0, arg1);
         0x3::validator_set::assert_no_pending_or_active_duplicates(&arg0.validators, v0);
     }
 
     public(friend) fun update_validator_next_epoch_network_pubkey(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        let v0 = 0x3::validator_set::get_validator_mut_with_ctx(&mut arg0.validators, arg2);
+        let v0 = 0x3::validator_set::active_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2));
         0x3::validator::update_next_epoch_network_pubkey(v0, arg1);
         0x3::validator_set::assert_no_pending_or_active_duplicates(&arg0.validators, v0);
     }
 
     public(friend) fun update_validator_next_epoch_p2p_address(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        let v0 = 0x3::validator_set::get_validator_mut_with_ctx(&mut arg0.validators, arg2);
+        let v0 = 0x3::validator_set::active_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2));
         0x3::validator::update_next_epoch_p2p_address(v0, arg1);
         0x3::validator_set::assert_no_pending_or_active_duplicates(&arg0.validators, v0);
     }
 
     public(friend) fun update_validator_next_epoch_primary_address(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_next_epoch_primary_address(0x3::validator_set::get_validator_mut_with_ctx(&mut arg0.validators, arg2), arg1);
+        let v0 = 0x3::validator_set::active_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2));
+        0x3::validator::update_next_epoch_primary_address(v0, arg1);
+        0x3::validator_set::assert_no_pending_or_active_duplicates(&arg0.validators, v0);
     }
 
     public(friend) fun update_validator_next_epoch_protocol_pubkey(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: vector<u8>, arg3: &0x2::tx_context::TxContext) {
-        let v0 = 0x3::validator_set::get_validator_mut_with_ctx(&mut arg0.validators, arg3);
+        let v0 = 0x3::validator_set::active_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg3));
         0x3::validator::update_next_epoch_protocol_pubkey(v0, arg1, arg2);
         0x3::validator_set::assert_no_pending_or_active_duplicates(&arg0.validators, v0);
     }
 
     public(friend) fun update_validator_next_epoch_worker_address(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_next_epoch_worker_address(0x3::validator_set::get_validator_mut_with_ctx(&mut arg0.validators, arg2), arg1);
+        let v0 = 0x3::validator_set::active_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2));
+        0x3::validator::update_next_epoch_worker_address(v0, arg1);
+        0x3::validator_set::assert_no_pending_or_active_duplicates(&arg0.validators, v0);
     }
 
     public(friend) fun update_validator_next_epoch_worker_pubkey(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        let v0 = 0x3::validator_set::get_validator_mut_with_ctx(&mut arg0.validators, arg2);
+        let v0 = 0x3::validator_set::active_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2));
         0x3::validator::update_next_epoch_worker_pubkey(v0, arg1);
         0x3::validator_set::assert_no_pending_or_active_duplicates(&arg0.validators, v0);
     }
 
     public(friend) fun update_validator_project_url(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        0x3::validator::update_project_url(0x3::validator_set::get_validator_mut_with_ctx_including_candidates(&mut arg0.validators, arg2), arg1);
+        0x3::validator::update_project_url(0x3::validator_set::any_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2)), arg1);
     }
 
     public(friend) fun v1_to_v2(arg0: SuiSystemStateInner) : SuiSystemStateInnerV2 {
