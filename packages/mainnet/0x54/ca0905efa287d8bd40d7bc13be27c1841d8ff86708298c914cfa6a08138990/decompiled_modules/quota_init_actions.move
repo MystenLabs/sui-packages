@@ -1,0 +1,31 @@
+module 0x54ca0905efa287d8bd40d7bc13be27c1841d8ff86708298c914cfa6a08138990::quota_init_actions {
+    struct SetQuotasAction has drop, store {
+        users: vector<address>,
+        period_ms: u64,
+        feeless_proposal_amount: u64,
+        sponsor_amount: u64,
+    }
+
+    public fun add_set_quotas_spec(arg0: &mut 0x30705bcf8eb9c97dfd72e5abc1dde6bfde560972a4f44b5cd1cef8da7cf168b1::action_spec_builder::Builder, arg1: vector<address>, arg2: u64, arg3: u64, arg4: u64) {
+        let v0 = arg3 == 0 && arg4 == 0;
+        if (!v0) {
+            assert!(arg2 > 0, 1);
+        };
+        let v1 = SetQuotasAction{
+            users                   : arg1,
+            period_ms               : arg2,
+            feeless_proposal_amount : arg3,
+            sponsor_amount          : arg4,
+        };
+        0x30705bcf8eb9c97dfd72e5abc1dde6bfde560972a4f44b5cd1cef8da7cf168b1::action_spec_builder::add(arg0, 0x3cacffe79bfedd8d0e1473d8e57b95b729803b680e4badb11a545e5cd2660cf2::intents::new_action_spec_with_typename(0x1::type_name::with_original_ids<0x54ca0905efa287d8bd40d7bc13be27c1841d8ff86708298c914cfa6a08138990::quota_actions::SetQuotas>(), 0x2::bcs::to_bytes<SetQuotasAction>(&v1), 1));
+        let v2 = 0x3cacffe79bfedd8d0e1473d8e57b95b729803b680e4badb11a545e5cd2660cf2::action_events::new_builder();
+        0x3cacffe79bfedd8d0e1473d8e57b95b729803b680e4badb11a545e5cd2660cf2::action_events::add_vector_address(&mut v2, b"users", &arg1);
+        0x3cacffe79bfedd8d0e1473d8e57b95b729803b680e4badb11a545e5cd2660cf2::action_events::add_u64(&mut v2, b"period_ms", arg2);
+        0x3cacffe79bfedd8d0e1473d8e57b95b729803b680e4badb11a545e5cd2660cf2::action_events::add_u64(&mut v2, b"feeless_proposal_amount", arg3);
+        0x3cacffe79bfedd8d0e1473d8e57b95b729803b680e4badb11a545e5cd2660cf2::action_events::add_u64(&mut v2, b"sponsor_amount", arg4);
+        0x3cacffe79bfedd8d0e1473d8e57b95b729803b680e4badb11a545e5cd2660cf2::action_events::emit_action_params(v2, 0x30705bcf8eb9c97dfd72e5abc1dde6bfde560972a4f44b5cd1cef8da7cf168b1::action_spec_builder::source_type(arg0), 0x30705bcf8eb9c97dfd72e5abc1dde6bfde560972a4f44b5cd1cef8da7cf168b1::action_spec_builder::source_id(arg0), 0x30705bcf8eb9c97dfd72e5abc1dde6bfde560972a4f44b5cd1cef8da7cf168b1::action_spec_builder::outcome_index(arg0), 0x1::string::from_ascii(0x1::type_name::into_string(0x1::type_name::with_original_ids<0x54ca0905efa287d8bd40d7bc13be27c1841d8ff86708298c914cfa6a08138990::quota_actions::SetQuotas>())), 0x30705bcf8eb9c97dfd72e5abc1dde6bfde560972a4f44b5cd1cef8da7cf168b1::action_spec_builder::next_action_index(arg0));
+    }
+
+    // decompiled from Move bytecode v6
+}
+
