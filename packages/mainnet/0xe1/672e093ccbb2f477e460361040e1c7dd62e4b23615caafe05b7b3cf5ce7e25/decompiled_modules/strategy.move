@@ -1,0 +1,201 @@
+module 0xe1672e093ccbb2f477e460361040e1c7dd62e4b23615caafe05b7b3cf5ce7e25::strategy {
+    struct YieldReceipt<phantom T0> {
+        strategy_id: u8,
+        asset_amount: u64,
+    }
+
+    struct ProtocolInfo has copy, drop, store {
+        strategy_id: u8,
+        name: 0x1::string::String,
+        has_rewards: bool,
+    }
+
+    struct StrategyRegistry has key {
+        id: 0x2::object::UID,
+        protocols: 0x2::vec_map::VecMap<u8, ProtocolInfo>,
+        protocol_access_cap: 0x1::option::Option<0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::ProtocolAccessCap>,
+    }
+
+    struct ProtocolRegisteredEvent has copy, drop {
+        strategy_id: u8,
+        name: 0x1::string::String,
+    }
+
+    public fun borrow_for_reroute<T0>(arg0: &StrategyRegistry, arg1: &mut 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::Vault<T0>) : (0x2::balance::Balance<T0>, 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::BorrowReceipt<T0>) {
+        0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::borrow_all_for_strategy<T0>(arg1, borrow_protocol_access_cap(arg0))
+    }
+
+    public(friend) fun borrow_protocol_access_cap(arg0: &StrategyRegistry) : &0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::ProtocolAccessCap {
+        0x1::option::borrow<0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::ProtocolAccessCap>(&arg0.protocol_access_cap)
+    }
+
+    public fun count_available(arg0: &StrategyRegistry) : u64 {
+        0x2::vec_map::length<u8, ProtocolInfo>(&arg0.protocols)
+    }
+
+    public fun create_registry(arg0: &mut 0x2::tx_context::TxContext) {
+        let v0 = StrategyRegistry{
+            id                  : 0x2::object::new(arg0),
+            protocols           : 0x2::vec_map::empty<u8, ProtocolInfo>(),
+            protocol_access_cap : 0x1::option::none<0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::ProtocolAccessCap>(),
+        };
+        0x2::transfer::share_object<StrategyRegistry>(v0);
+    }
+
+    public fun create_yield_receipt<T0>(arg0: u8, arg1: u64) : YieldReceipt<T0> {
+        YieldReceipt<T0>{
+            strategy_id  : arg0,
+            asset_amount : arg1,
+        }
+    }
+
+    public fun decode_strategy(arg0: u8) : (u8, u8) {
+        (arg0 >> 4, arg0 & 15)
+    }
+
+    public fun encode_strategy(arg0: u8, arg1: u8) : u8 {
+        arg0 << 4 | arg1
+    }
+
+    public fun finish_reroute_usdc<T0, T1>(arg0: &StrategyRegistry, arg1: &mut 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::Vault<T0>, arg2: 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::BorrowReceipt<T0>, arg3: 0x2::balance::Balance<T1>, arg4: YieldReceipt<T1>) {
+        let YieldReceipt {
+            strategy_id  : v0,
+            asset_amount : v1,
+        } = arg4;
+        let (_, v3) = decode_strategy(v0);
+        assert!(v3 == 1, 405);
+        0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::commit_strategy<T0, T1>(arg1, borrow_protocol_access_cap(arg0), arg2, arg3, v0, v1);
+    }
+
+    public fun finish_reroute_usdsui<T0, T1>(arg0: &StrategyRegistry, arg1: &mut 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::Vault<T0>, arg2: 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::BorrowReceipt<T0>, arg3: 0x2::balance::Balance<T1>, arg4: YieldReceipt<T1>, arg5: vector<u8>, arg6: &0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price_info::PriceInfoObject, arg7: &0x2::clock::Clock) {
+        let YieldReceipt {
+            strategy_id  : v0,
+            asset_amount : v1,
+        } = arg4;
+        let (_, v3) = decode_strategy(v0);
+        assert!(v3 == 2, 405);
+        let v4 = 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price_info::get_price_info_from_price_info_object(arg6);
+        let v5 = 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price_info::get_price_identifier(&v4);
+        assert!(0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price_identifier::get_bytes(&v5) == arg5, 404);
+        let v6 = 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::pyth::get_price_no_older_than(arg6, arg7, 60);
+        let v7 = 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price::get_price(&v6);
+        let v8 = 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price::get_expo(&v6);
+        let v9 = 1;
+        let v10 = 0;
+        while (v10 < 9) {
+            v9 = v9 * 10;
+            v10 = v10 + 1;
+        };
+        v10 = 0;
+        while (v10 < 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::i64::get_magnitude_if_negative(&v8)) {
+            v9 = v9 * 10;
+            v10 = v10 + 1;
+        };
+        0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::commit_strategy<T0, T1>(arg1, borrow_protocol_access_cap(arg0), arg2, arg3, v0, (((v1 as u128) * (0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::i64::get_magnitude_if_positive(&v7) as u128) * 1000000 / v9) as u64));
+    }
+
+    public fun finish_withdraw<T0>(arg0: &StrategyRegistry, arg1: &mut 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::Vault<T0>, arg2: 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::BorrowReceipt<T0>, arg3: 0x2::coin::Coin<T0>) {
+        0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::repay_withdraw<T0>(arg1, borrow_protocol_access_cap(arg0), arg2, arg3);
+    }
+
+    public fun get_protocol_info(arg0: &StrategyRegistry, arg1: u8) : ProtocolInfo {
+        assert!(0x2::vec_map::contains<u8, ProtocolInfo>(&arg0.protocols, &arg1), 401);
+        *0x2::vec_map::get<u8, ProtocolInfo>(&arg0.protocols, &arg1)
+    }
+
+    public fun has_rewards(arg0: &StrategyRegistry, arg1: u8) : bool {
+        assert!(0x2::vec_map::contains<u8, ProtocolInfo>(&arg0.protocols, &arg1), 401);
+        0x2::vec_map::get<u8, ProtocolInfo>(&arg0.protocols, &arg1).has_rewards
+    }
+
+    public fun is_available(arg0: &StrategyRegistry, arg1: u8) : bool {
+        0x2::vec_map::contains<u8, ProtocolInfo>(&arg0.protocols, &arg1)
+    }
+
+    public fun issue_yield_promise_for_spoke<T0, T1>(arg0: &StrategyRegistry, arg1: &0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::Vault<T0>, arg2: u64) : 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::YieldPromise<T0> {
+        0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::issue_yield_promise<T0, T1>(arg1, borrow_protocol_access_cap(arg0), arg2)
+    }
+
+    public fun list_available(arg0: &StrategyRegistry) : vector<u8> {
+        let v0 = 0x1::vector::empty<u8>();
+        let v1 = 0;
+        while (v1 < 0x2::vec_map::length<u8, ProtocolInfo>(&arg0.protocols)) {
+            let (v2, _) = 0x2::vec_map::get_entry_by_idx<u8, ProtocolInfo>(&arg0.protocols, v1);
+            0x1::vector::push_back<u8>(&mut v0, *v2);
+            v1 = v1 + 1;
+        };
+        v0
+    }
+
+    public fun name(arg0: &ProtocolInfo) : 0x1::string::String {
+        arg0.name
+    }
+
+    public(friend) fun register_protocol(arg0: &mut StrategyRegistry, arg1: u8, arg2: 0x1::string::String, arg3: bool) {
+        assert!(arg1 != 0, 402);
+        assert!(!0x2::vec_map::contains<u8, ProtocolInfo>(&arg0.protocols, &arg1), 400);
+        let v0 = ProtocolInfo{
+            strategy_id : arg1,
+            name        : arg2,
+            has_rewards : arg3,
+        };
+        0x2::vec_map::insert<u8, ProtocolInfo>(&mut arg0.protocols, arg1, v0);
+        let v1 = ProtocolRegisteredEvent{
+            strategy_id : arg1,
+            name        : arg2,
+        };
+        0x2::event::emit<ProtocolRegisteredEvent>(v1);
+    }
+
+    public fun repay_promise_usdc<T0>(arg0: &StrategyRegistry, arg1: &mut 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::Vault<T0>, arg2: 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::YieldPromise<T0>, arg3: 0x2::coin::Coin<T0>) {
+        assert!(0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::promise_type<T0>(&arg2) == 0x1::type_name::with_defining_ids<T0>(), 999);
+        0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::commit_unwind<T0>(arg1, borrow_protocol_access_cap(arg0), arg2, arg3, 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::promise_expected<T0>(&arg2));
+    }
+
+    public fun repay_promise_usdsui<T0, T1>(arg0: &StrategyRegistry, arg1: &mut 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::Vault<T0>, arg2: 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::YieldPromise<T0>, arg3: 0x2::coin::Coin<T0>, arg4: vector<u8>, arg5: &0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price_info::PriceInfoObject, arg6: &0x2::clock::Clock) {
+        assert!(0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::promise_type<T0>(&arg2) == 0x1::type_name::with_defining_ids<T1>(), 999);
+        let v0 = 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price_info::get_price_info_from_price_info_object(arg5);
+        let v1 = 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price_info::get_price_identifier(&v0);
+        assert!(0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price_identifier::get_bytes(&v1) == arg4, 404);
+        let v2 = 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::pyth::get_price_no_older_than(arg5, arg6, 60);
+        let v3 = 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price::get_price(&v2);
+        let v4 = 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::price::get_expo(&v2);
+        let v5 = 1;
+        let v6 = 0;
+        while (v6 < 9) {
+            v5 = v5 * 10;
+            v6 = v6 + 1;
+        };
+        v6 = 0;
+        while (v6 < 0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::i64::get_magnitude_if_negative(&v4)) {
+            v5 = v5 * 10;
+            v6 = v6 + 1;
+        };
+        0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::commit_unwind<T0>(arg1, borrow_protocol_access_cap(arg0), arg2, arg3, (((0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::promise_expected<T0>(&arg2) as u128) * (0x1359dac4d63abc896caa6a8971e4affec7c75590944ca33186c48c614a80583a::i64::get_magnitude_if_positive(&v3) as u128) * 1000000 / v5) as u64));
+    }
+
+    public(friend) fun set_protocol_access_cap(arg0: &mut StrategyRegistry, arg1: 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::ProtocolAccessCap) {
+        0x1::option::fill<0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::ProtocolAccessCap>(&mut arg0.protocol_access_cap, arg1);
+    }
+
+    public fun stable_usdc() : u8 {
+        1
+    }
+
+    public fun stable_usdsui() : u8 {
+        2
+    }
+
+    public(friend) fun update_has_rewards(arg0: &mut StrategyRegistry, arg1: u8, arg2: bool) {
+        assert!(0x2::vec_map::contains<u8, ProtocolInfo>(&arg0.protocols, &arg1), 401);
+        0x2::vec_map::get_mut<u8, ProtocolInfo>(&mut arg0.protocols, &arg1).has_rewards = arg2;
+    }
+
+    public fun withdraw_yield_for_spoke<T0, T1>(arg0: &StrategyRegistry, arg1: &mut 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::Vault<T0>) : (0x2::balance::Balance<T1>, 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::YieldPromise<T0>) {
+        let v0 = borrow_protocol_access_cap(arg0);
+        (0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::take_yield_balance<T0, T1>(arg1, v0), 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::issue_yield_promise<T0, T1>(arg1, v0, 0xfda1e060539599ba4792a9a5ded85e80f1ffe580fb3910a4db5fa4c3a82dbaff::vault::last_deployed_amount<T0>(arg1)))
+    }
+
+    // decompiled from Move bytecode v6
+}
+
