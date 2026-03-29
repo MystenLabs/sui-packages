@@ -1,0 +1,319 @@
+module 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::admin {
+    struct AdminCapBurnedEvent has copy, drop {
+        burned_by: address,
+    }
+
+    struct DaoAdminCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct GovernanceActionPayload {
+        action_type: u8,
+        payload: vector<u8>,
+    }
+
+    public fun bootstrap_register_harvest_protocol(arg0: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::HarvestConfig, arg1: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg2: u8, arg3: u64, arg4: 0x2::object::ID, arg5: u8) {
+        assert!(0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::protocol_count(arg0) < 10, 903);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::register_harvest_protocol(arg0, arg2, arg3, arg4, arg5);
+    }
+
+    public fun bootstrap_register_protocol(arg0: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg1: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg2: u8, arg3: vector<u8>, arg4: bool) {
+        assert!(0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::count_available(arg0) < 14, 903);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::register_protocol(arg0, arg2, 0x1::string::utf8(arg3), arg4);
+    }
+
+    public fun bootstrap_register_tvl_object(arg0: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::tvl::TvlRegistry, arg1: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg2: u8, arg3: address) {
+        assert!(!0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::tvl::has_registered_object(arg0, arg2), 903);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::tvl::register_protocol_object(arg0, arg2, arg3);
+    }
+
+    public fun burn_admin_cap(arg0: 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &0x2::tx_context::TxContext) {
+        let v0 = AdminCapBurnedEvent{burned_by: 0x2::tx_context::sender(arg1)};
+        0x2::event::emit<AdminCapBurnedEvent>(v0);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::burn_admin_cap(arg0);
+    }
+
+    public fun create_gov_action_payload(arg0: &DaoAdminCap, arg1: u8, arg2: vector<u8>) : GovernanceActionPayload {
+        GovernanceActionPayload{
+            action_type : arg1,
+            payload     : arg2,
+        }
+    }
+
+    public fun execute_dao_increase_tvl_cap<T0>(arg0: GovernanceActionPayload, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::Vault<T0>, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry) {
+        let GovernanceActionPayload {
+            action_type : v0,
+            payload     : v1,
+        } = arg0;
+        assert!(v0 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_update_tvl_cap(), 901);
+        let v2 = 0x2::bcs::new(v1);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::update_tvl_cap<T0>(arg1, 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2), 0x2::bcs::peel_u64(&mut v2));
+    }
+
+    public fun execute_dao_register_protocol(arg0: GovernanceActionPayload, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry) {
+        let GovernanceActionPayload {
+            action_type : v0,
+            payload     : v1,
+        } = arg0;
+        assert!(v0 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_register_protocol(), 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::register_protocol(arg1, 0x2::bcs::peel_u8(&mut v2), 0x1::string::utf8(0x2::bcs::peel_vec_u8(&mut v2)), 0x2::bcs::peel_bool(&mut v2));
+    }
+
+    public fun execute_dao_set_ema_alpha(arg0: GovernanceActionPayload, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::apy::ApyRegistry) {
+        let GovernanceActionPayload {
+            action_type : v0,
+            payload     : v1,
+        } = arg0;
+        assert!(v0 == 20, 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::apy::set_ema_alpha(arg1, 0x2::bcs::peel_u64(&mut v2));
+    }
+
+    public fun execute_dao_set_fee_recipient<T0>(arg0: GovernanceActionPayload, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::Vault<T0>, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry) {
+        let GovernanceActionPayload {
+            action_type : v0,
+            payload     : v1,
+        } = arg0;
+        assert!(v0 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_set_fee_recipient(), 901);
+        let v2 = 0x2::bcs::new(v1);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::update_fee_recipient<T0>(arg1, 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2), 0x2::bcs::peel_address(&mut v2));
+    }
+
+    public fun execute_dao_update_config(arg0: GovernanceActionPayload, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::crank::CrankConfig) {
+        let GovernanceActionPayload {
+            action_type : v0,
+            payload     : v1,
+        } = arg0;
+        assert!(v0 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_update_crank_config(), 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::crank::update_config(arg1, 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2));
+    }
+
+    public fun execute_dao_update_fee<T0>(arg0: GovernanceActionPayload, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::Vault<T0>, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry) {
+        let GovernanceActionPayload {
+            action_type : v0,
+            payload     : v1,
+        } = arg0;
+        assert!(v0 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_update_fee(), 901);
+        let v2 = 0x2::bcs::new(v1);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::update_performance_fee<T0>(arg1, 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2), 0x2::bcs::peel_u64(&mut v2));
+    }
+
+    public fun execute_increase_tvl_cap<T0>(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::Vault<T0>, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let v0 = 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2);
+        let (v1, v2) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), v0);
+        assert!(v1 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_update_tvl_cap(), 901);
+        let v3 = 0x2::bcs::new(v2);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::update_tvl_cap<T0>(arg1, v0, 0x2::bcs::peel_u64(&mut v3));
+    }
+
+    public fun execute_register_harvest_protocol(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::HarvestConfig, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2));
+        assert!(v0 == 25, 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::register_harvest_protocol(arg1, 0x2::bcs::peel_u8(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::object::id_from_address(0x2::bcs::peel_address(&mut v2)), 0x2::bcs::peel_u8(&mut v2));
+    }
+
+    public fun execute_register_protocol(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg2: u64, arg3: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg2, arg3), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg1));
+        assert!(v0 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_register_protocol(), 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::register_protocol(arg1, 0x2::bcs::peel_u8(&mut v2), 0x1::string::utf8(0x2::bcs::peel_vec_u8(&mut v2)), 0x2::bcs::peel_bool(&mut v2));
+    }
+
+    public fun execute_register_tvl_object(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::tvl::TvlRegistry, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2));
+        assert!(v0 == 24, 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::tvl::register_protocol_object(arg1, 0x2::bcs::peel_u8(&mut v2), 0x2::bcs::peel_address(&mut v2));
+    }
+
+    public fun execute_set_depeg_status<T0>(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::Vault<T0>, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let v0 = 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2);
+        let (v1, v2) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), v0);
+        assert!(v1 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_set_depeg_status(), 901);
+        let v3 = 0x2::bcs::new(v2);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::set_depeg_status<T0>(arg1, v0, 0x2::bcs::peel_bool(&mut v3));
+    }
+
+    public fun execute_set_ema_alpha(arg0: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::apy::ApyRegistry, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg1, arg3, arg4), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2));
+        assert!(v0 == 20, 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::apy::set_ema_alpha(arg0, 0x2::bcs::peel_u64(&mut v2));
+    }
+
+    public fun execute_set_fee_recipient<T0>(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::Vault<T0>, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let v0 = 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2);
+        let (v1, v2) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), v0);
+        assert!(v1 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_set_fee_recipient(), 901);
+        let v3 = 0x2::bcs::new(v2);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::update_fee_recipient<T0>(arg1, v0, 0x2::bcs::peel_address(&mut v3));
+    }
+
+    public fun execute_set_harvest_cooldown(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::HarvestConfig, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2));
+        assert!(v0 == 21, 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::set_cooldown_ms(arg1, 0x2::bcs::peel_u64(&mut v2));
+    }
+
+    public fun execute_set_harvest_slippage(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::HarvestConfig, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2));
+        assert!(v0 == 23, 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::set_harvest_slippage_bps(arg1, 0x2::bcs::peel_u64(&mut v2));
+    }
+
+    public fun execute_set_harvest_threshold(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::HarvestConfig, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2));
+        assert!(v0 == 22, 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::set_min_threshold(arg1, 0x2::bcs::peel_u8(&mut v2), 0x2::bcs::peel_u64(&mut v2));
+    }
+
+    public fun execute_set_pyth_price_id(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::HarvestConfig, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2));
+        assert!(v0 == 27, 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::set_pyth_price_id(arg1, 0x2::bcs::peel_u8(&mut v2), 0x2::object::id_from_address(0x2::bcs::peel_address(&mut v2)), 0x2::bcs::peel_u8(&mut v2));
+    }
+
+    public fun execute_unregister_harvest_protocol(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::HarvestConfig, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2));
+        assert!(v0 == 28, 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::harvest::unregister_harvest_protocol(arg1, 0x2::bcs::peel_u8(&mut v2));
+    }
+
+    public fun execute_update_config(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::crank::CrankConfig, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2));
+        assert!(v0 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_update_crank_config(), 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::crank::update_config(arg1, 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2), 0x2::bcs::peel_u64(&mut v2));
+    }
+
+    public fun execute_update_fee<T0>(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::Vault<T0>, arg2: &0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: u64, arg4: &0x2::clock::Clock) {
+        let v0 = 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg2);
+        let (v1, v2) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg3, arg4), v0);
+        assert!(v1 == 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_update_fee(), 901);
+        let v3 = 0x2::bcs::new(v2);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::update_performance_fee<T0>(arg1, v0, 0x2::bcs::peel_u64(&mut v3));
+    }
+
+    public fun execute_update_has_rewards(arg0: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg1: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg2: u64, arg3: &0x2::clock::Clock) {
+        let (v0, v1) = 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::destroy_action(0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::execute(arg0, arg2, arg3), 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::borrow_protocol_access_cap(arg1));
+        assert!(v0 == 26, 901);
+        let v2 = 0x2::bcs::new(v1);
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::update_has_rewards(arg1, 0x2::bcs::peel_u8(&mut v2), 0x2::bcs::peel_bool(&mut v2));
+    }
+
+    public fun initialize_strategy_registry<T0>(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::Vault<T0>, arg2: &mut 0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::StrategyRegistry, arg3: &mut 0x2::tx_context::TxContext) {
+        0xe745e6d233082d7e92001397f741d59fa0ed5fc3dc9d20b22efab5451203d48::strategy::set_protocol_access_cap(arg2, 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::create_protocol_access_cap<T0>(arg1, arg0, arg3));
+    }
+
+    public fun mint_dao_admin_cap(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x2::tx_context::TxContext) : DaoAdminCap {
+        DaoAdminCap{id: 0x2::object::new(arg1)}
+    }
+
+    public fun propose_increase_tvl_cap(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u64, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) : u64 {
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_update_tvl_cap(), 0x2::bcs::to_bytes<u64>(&arg2), arg3, arg4)
+    }
+
+    public fun propose_register_harvest_protocol(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u8, arg3: u64, arg4: 0x2::object::ID, arg5: u8, arg6: &0x2::clock::Clock, arg7: &0x2::tx_context::TxContext) : u64 {
+        let v0 = 0x1::vector::empty<u8>();
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u8>(&arg2));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u64>(&arg3));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<0x2::object::ID>(&arg4));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u8>(&arg5));
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 25, v0, arg6, arg7)
+    }
+
+    public fun propose_register_protocol(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u8, arg3: vector<u8>, arg4: bool, arg5: &0x2::clock::Clock, arg6: &0x2::tx_context::TxContext) : u64 {
+        let v0 = 0x1::vector::empty<u8>();
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u8>(&arg2));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<vector<u8>>(&arg3));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<bool>(&arg4));
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_register_protocol(), v0, arg5, arg6)
+    }
+
+    public fun propose_register_tvl_object(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u8, arg3: address, arg4: &0x2::clock::Clock, arg5: &0x2::tx_context::TxContext) : u64 {
+        let v0 = 0x1::vector::empty<u8>();
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u8>(&arg2));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<address>(&arg3));
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 24, v0, arg4, arg5)
+    }
+
+    public fun propose_set_depeg_status(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: bool, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) : u64 {
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_set_depeg_status(), 0x2::bcs::to_bytes<bool>(&arg2), arg3, arg4)
+    }
+
+    public fun propose_set_ema_alpha(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u64, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) : u64 {
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 20, 0x2::bcs::to_bytes<u64>(&arg2), arg3, arg4)
+    }
+
+    public fun propose_set_fee_recipient(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: address, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) : u64 {
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_set_fee_recipient(), 0x2::bcs::to_bytes<address>(&arg2), arg3, arg4)
+    }
+
+    public fun propose_set_harvest_cooldown(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u64, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) : u64 {
+        assert!(arg2 >= 3600000, 902);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 21, 0x2::bcs::to_bytes<u64>(&arg2), arg3, arg4)
+    }
+
+    public fun propose_set_harvest_slippage(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u64, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) : u64 {
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::floors::assert_slippage(arg2, false);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 23, 0x2::bcs::to_bytes<u64>(&arg2), arg3, arg4)
+    }
+
+    public fun propose_set_harvest_threshold(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u8, arg3: u64, arg4: &0x2::clock::Clock, arg5: &0x2::tx_context::TxContext) : u64 {
+        let v0 = 0x1::vector::empty<u8>();
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u8>(&arg2));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u64>(&arg3));
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 22, v0, arg4, arg5)
+    }
+
+    public fun propose_set_pyth_price_id(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u8, arg3: 0x2::object::ID, arg4: u8, arg5: &0x2::clock::Clock, arg6: &0x2::tx_context::TxContext) : u64 {
+        let v0 = 0x1::vector::empty<u8>();
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u8>(&arg2));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<0x2::object::ID>(&arg3));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u8>(&arg4));
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 27, v0, arg5, arg6)
+    }
+
+    public fun propose_unregister_harvest_protocol(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u8, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) : u64 {
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 28, 0x2::bcs::to_bytes<u8>(&arg2), arg3, arg4)
+    }
+
+    public fun propose_update_config(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u64, arg3: u64, arg4: u64, arg5: u64, arg6: u64, arg7: u64, arg8: u64, arg9: &0x2::clock::Clock, arg10: &0x2::tx_context::TxContext) : u64 {
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::floors::assert_spread(arg2);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::floors::assert_min_apy(arg3);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::floors::assert_cooldown(arg4);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::floors::assert_slippage(arg5, false);
+        let v0 = 0x1::vector::empty<u8>();
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u64>(&arg2));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u64>(&arg3));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u64>(&arg4));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u64>(&arg5));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u64>(&arg6));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u64>(&arg7));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u64>(&arg8));
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_update_crank_config(), v0, arg9, arg10)
+    }
+
+    public fun propose_update_fee(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u64, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) : u64 {
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::floors::assert_rewards_fee(arg2);
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::action_update_fee(), 0x2::bcs::to_bytes<u64>(&arg2), arg3, arg4)
+    }
+
+    public fun propose_update_has_rewards(arg0: &0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::vault::AdminCap, arg1: &mut 0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::TimelockRegistry, arg2: u8, arg3: bool, arg4: &0x2::clock::Clock, arg5: &0x2::tx_context::TxContext) : u64 {
+        let v0 = 0x1::vector::empty<u8>();
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<u8>(&arg2));
+        0x1::vector::append<u8>(&mut v0, 0x2::bcs::to_bytes<bool>(&arg3));
+        0x155e878bde7ed3db6efd77f5e459f25db739ac205d7abbca828df604cfe984ce::timelock::propose(arg1, arg0, 26, v0, arg4, arg5)
+    }
+
+    // decompiled from Move bytecode v6
+}
+
