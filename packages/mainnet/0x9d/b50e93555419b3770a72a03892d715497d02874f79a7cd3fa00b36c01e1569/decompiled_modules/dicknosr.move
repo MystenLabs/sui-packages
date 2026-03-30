@@ -1,0 +1,14 @@
+module 0x9db50e93555419b3770a72a03892d715497d02874f79a7cd3fa00b36c01e1569::dicknosr {
+    struct DICKNOSR has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: DICKNOSR, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0xf4054b4c967ea64173453f593a0ec98cb6aa351635cbc412f4fdf5f804bb98db::token_emitter::create_currency<DICKNOSR>(arg0, 6, b"DICKNOSR", b"Dicknosaur", b"", 0x2::url::new_unsafe_from_bytes(b"data:image/webp;base64,UklGRkAFAABXRUJQVlA4IDQFAACwHQCdASqAAIAAPm02lkgkIyKjpRZpoIANiWdsrVxYvOE6VJVX435pMMBtYG5ZxEBX6xPxeQo0kmGftI9K0bbD24YHD6RIsNL0kVp1al/C0XiTaj2tn9IVQo51cstYyq6Fvgbdt7mR0+iW2Q5Um3dlyByeYn0vwed1lPE+r5tWImdijzjYgWLaU6TxerkHMyz2FQvR5XuL/f7dckvylaAH5nuXKm6HneqMPX9Q4k9PF96isIG0h7wlnPxIj0si2C4USLvv+/7FduukW21XZz3z1n35uqFZOrqWI5FKZ/SxRP/d4+hxz3pq4FJR/GQdfy1od3BtPQAA/vCTv7vuBi337C/TFTYZeqjEfwFPsJ8/pbrih7T0JEkOPjqyJlh62yK6mG8PkQmtH67qmqZ2MC+Z60GEvBfTZDQ/Ks6x7n/GhEpBc3S2RYE5XmlGTclyTT/6TQnOlxb7ftCay2aHHjMwND025a0Pw7D2I1qBvu0NJV5R0KybvU3+ZtieIEs8k9uC39oM1oXkxvnXfcnqo4eTt+0v7Vyy1qzSS7IK5/pqc5TJQBEkRIkAzP7XT0E8D6Y1rnqQFREKbLcyOXIhaTKiEcN0JVT/A8HAOc0Lzl4QSJ1wlFt0y6A+guzmWoVOpiQR2d6nj2Yv9y/TLum/UXSk9401Pi37xIC/EhsJJVBdx8b41/l+XNxUJ4zxqtd+jZzQaIE+RHs9OWMH0d64ew8PA3zxwK8GMs2HoBuUPv2EK6SpPZ5+q+Ej0b4ANf3a18l7D2TumtBv7DN8hSjq8Xi5P1ydYUweknyGGQW4jxKE3ybgwDC8ehz8v9yR+byiG2PUAolZtRTZStTt1QcvTh8TUnn2hs44IDQa+UjbsX8FGPJMwnFwoAAjZh7N5RE46vu3a7djArTpMSpB7Gt+Xiup4wmGsbz3cPQNRHLAHmfY8IDRz4GoAHQbWA5iGrnYuWcHQlZ1zwWztISAyoivec26dAsnt6IRql9+8k7tuvuqi4xnX5KOpSJJtZXV8gLDEyMV7iZYwmBWLcvYzVrGSCSD9TM4ufO36qog5+s5tlbmnnKK4bHPySA04rAuB0GeGYTNyauvvtl0MREnRK0aE/beJ5nJHQodYile02DNiOL9QSUltSJgHZLptq7A3YNCDQ8UOAhZX7MXPiRqMe9/ldNVZOo/4jo/McH9WJsH/wNW+O9zkFkESbd8B28ieDOMfWP+1G4FWnC9FikTO2QWHr9QoPHsuI6uuKOjXruxYc2RHOXEFei52/vPqBlxpa3U1jnJ6UaZjhr7HKudhtCkeVbCrgvDOcnMAv8vACSD6d/e6OjrTyuU3m0OzvEN9nQlO3bGsk2QXuU+gFIEhldIgYKznViWR7PFsRT/r6gDnp4tnQ3F4EGICqGEdlZVnv/NAMnAOC6LtNKgphK0OBmmwRxSzgorotX6YuePxwJBiuXoZXOWx07xauKGtLLqPV1dixECfsICifmT/W8ecb1iFZtGAQxkl9E9z0EASG4iYM/JhFujHAF7t0I0C7sA3afBfQ2bpfpIg60kzOyHiAOjE9KETkEVrG0eY0V57CZ6HL6pTuW8VmSHDelx16hNg+I8efPPmbK5EmV951nwvWZ9kcMi6b5ax+elESTdD5ua60MDt1A5umT0zQS0DYLojGKHIjHDYrwGxsxAE+innX29FZvJbsYCnmFuRmMJB3dI6MvajwkfYeIAe3Ww+r5ZwtvvEI8bQINYoR6XkdejIGRoYYFVSZy8/MlfdO5TaN9FFDi9a4BnAAA="), arg1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<DICKNOSR>>(v0, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<DICKNOSR>>(v1);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
