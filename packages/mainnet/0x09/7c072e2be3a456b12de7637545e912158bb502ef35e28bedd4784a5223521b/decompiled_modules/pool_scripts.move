@@ -1,0 +1,147 @@
+module 0x97c072e2be3a456b12de7637545e912158bb502ef35e28bedd4784a5223521b::pool_scripts {
+    struct Event<T0: copy + drop> has copy, drop {
+        event: T0,
+    }
+
+    fun cleanup_swap<T0, T1, T2, T3, T4: store, T5: drop, T6, T7>(arg0: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg1: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::Pool<T2, T3, T4, T5>, arg2: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg3: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::VaultRegistry, arg5: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_registry::MarginRegistry, arg6: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T6>, arg7: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T7>, arg8: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg9: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg10: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::AbyssSupplierCap, arg11: &mut 0x2::coin::Coin<T0>, arg12: &mut 0x2::coin::Coin<T1>, arg13: 0x2::coin::Coin<T2>, arg14: 0x2::coin::Coin<T3>, arg15: bool, arg16: u64, arg17: &0x2::clock::Clock, arg18: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::coin::value<T2>(&arg13);
+        let v1 = 0x2::coin::value<T3>(&arg14);
+        if (v0 > 0) {
+            let v2 = 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::burn_btoken<T0, T2, T6>(arg2, arg0, arg4, arg5, arg6, arg8, arg10, &mut arg13, v0, arg17, arg18);
+            if (!arg15) {
+                assert!(0x2::coin::value<T0>(&v2) >= arg16, 0);
+            };
+            0x2::coin::join<T0>(arg11, v2);
+        };
+        if (v1 > 0) {
+            let v3 = 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::burn_btoken<T1, T3, T7>(arg3, arg0, arg4, arg5, arg7, arg9, arg10, &mut arg14, v1, arg17, arg18);
+            if (arg15) {
+                assert!(0x2::coin::value<T1>(&v3) >= arg16, 0);
+            };
+            0x2::coin::join<T1>(arg12, v3);
+        };
+        0x2::coin::destroy_zero<T2>(arg13);
+        0x2::coin::destroy_zero<T3>(arg14);
+        0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::fee_crank::crank_fees<T0, T1, T4, T5, T2, T3>(arg1, arg0, arg2, arg3, arg18);
+    }
+
+    public fun cpmm_swap<T0, T1, T2, T3, T4: drop, T5, T6>(arg0: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::Pool<T2, T3, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::cpmm::CpQuoter, T4>, arg1: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg2: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg3: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::VaultRegistry, arg5: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_registry::MarginRegistry, arg6: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T5>, arg7: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T6>, arg8: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg9: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg10: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::AbyssSupplierCap, arg11: &mut 0x2::coin::Coin<T0>, arg12: &mut 0x2::coin::Coin<T1>, arg13: bool, arg14: u64, arg15: u64, arg16: &0x2::clock::Clock, arg17: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1, v2) = to_btokens<T0, T1, T2, T3, T5, T6>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg16, arg17);
+        let v3 = v1;
+        let v4 = v0;
+        0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::cpmm::swap<T2, T3, T4>(arg0, arg1, &mut v4, &mut v3, arg13, v2, 0, arg17);
+        cleanup_swap<T0, T1, T2, T3, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::cpmm::CpQuoter, T4, T5, T6>(arg1, arg0, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, v4, v3, arg13, arg15, arg16, arg17);
+    }
+
+    public fun deposit_liquidity<T0, T1, T2, T3, T4: store, T5: drop, T6, T7>(arg0: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::Pool<T2, T3, T4, T5>, arg1: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg2: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg3: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::VaultRegistry, arg5: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_registry::MarginRegistry, arg6: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T6>, arg7: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T7>, arg8: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg9: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg10: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::AbyssSupplierCap, arg11: &mut 0x2::coin::Coin<T0>, arg12: &mut 0x2::coin::Coin<T1>, arg13: u64, arg14: u64, arg15: &0x2::clock::Clock, arg16: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T5> {
+        let v0 = 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::mint_btoken<T0, T2, T6>(arg2, arg1, arg4, arg5, arg6, arg8, arg10, arg11, arg13, arg15, arg16);
+        let v1 = if (0x2::coin::value<T1>(arg12) == 0) {
+            0x2::coin::zero<T3>(arg16)
+        } else {
+            0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::mint_btoken<T1, T3, T7>(arg3, arg1, arg4, arg5, arg7, arg9, arg10, arg12, arg14, arg15, arg16)
+        };
+        let v2 = v1;
+        let (v3, _) = 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::deposit_liquidity<T2, T3, T4, T5>(arg0, arg1, &mut v0, &mut v2, 0x2::coin::value<T2>(&v0), 0x2::coin::value<T3>(&v2), arg16);
+        let v5 = 0x2::coin::value<T2>(&v0);
+        let v6 = 0x2::coin::value<T3>(&v2);
+        if (v5 > 0) {
+            0x2::coin::join<T0>(arg11, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::burn_btoken<T0, T2, T6>(arg2, arg1, arg4, arg5, arg6, arg8, arg10, &mut v0, v5, arg15, arg16));
+        };
+        if (v6 > 0) {
+            0x2::coin::join<T1>(arg12, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::burn_btoken<T1, T3, T7>(arg3, arg1, arg4, arg5, arg7, arg9, arg10, &mut v2, v6, arg15, arg16));
+        };
+        0x2::coin::destroy_zero<T2>(v0);
+        0x2::coin::destroy_zero<T3>(v2);
+        v3
+    }
+
+    public(friend) fun emit_event<T0: copy + drop>(arg0: T0) {
+        let v0 = Event<T0>{event: arg0};
+        0x2::event::emit<Event<T0>>(v0);
+    }
+
+    public fun omm_swap<T0, T1, T2, T3, T4: drop, T5, T6>(arg0: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::Pool<T2, T3, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::omm::OracleQuoter, T4>, arg1: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg2: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg3: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::VaultRegistry, arg5: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_registry::MarginRegistry, arg6: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T5>, arg7: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T6>, arg8: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg9: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg10: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::AbyssSupplierCap, arg11: 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::oracles::OraclePriceUpdate, arg12: 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::oracles::OraclePriceUpdate, arg13: &mut 0x2::coin::Coin<T0>, arg14: &mut 0x2::coin::Coin<T1>, arg15: bool, arg16: u64, arg17: u64, arg18: &0x2::clock::Clock, arg19: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1, v2) = to_btokens<T0, T1, T2, T3, T5, T6>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg13, arg14, arg15, arg16, arg18, arg19);
+        let v3 = v1;
+        let v4 = v0;
+        0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::omm::swap<T0, T1, T2, T3, T4, T5, T6>(arg0, arg1, arg2, arg3, arg6, arg7, arg8, arg9, arg11, arg12, &mut v4, &mut v3, arg15, v2, 0, arg18, arg19);
+        cleanup_swap<T0, T1, T2, T3, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::omm::OracleQuoter, T4, T5, T6>(arg1, arg0, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg13, arg14, v4, v3, arg15, arg17, arg18, arg19);
+    }
+
+    public fun quote_cpmm_swap<T0, T1, T2, T3, T4: drop, T5, T6>(arg0: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::Pool<T2, T3, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::cpmm::CpQuoter, T4>, arg1: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg2: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg3: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T5>, arg5: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T6>, arg6: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg7: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg8: bool, arg9: u64, arg10: &0x2::clock::Clock) : 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::SwapQuote {
+        to_underlying_quote<T0, T1, T2, T3, T5, T6>(arg1, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::cpmm::quote_swap<T2, T3, T4>(arg0, arg1, to_btoken_amount_in<T0, T1, T2, T3, T5, T6>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10), arg8), arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg10)
+    }
+
+    public fun quote_deposit<T0, T1, T2, T3, T4: store, T5: drop, T6, T7>(arg0: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::Pool<T2, T3, T4, T5>, arg1: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg2: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg3: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T6>, arg5: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T7>, arg6: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg7: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg8: u64, arg9: u64, arg10: &0x2::clock::Clock) : 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::DepositQuote {
+        let v0 = 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::quote_deposit<T2, T3, T4, T5>(arg0, arg1, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::to_btokens<T0, T2, T6>(arg2, arg1, arg4, arg6, arg8, arg10), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::to_btokens<T1, T3, T7>(arg3, arg1, arg5, arg7, arg9, arg10));
+        let v1 = 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::deposit_quote(arg1, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::initial_deposit(&v0), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T0, T2, T6>(arg2, arg1, arg4, arg6, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::deposit_a(&v0), arg10), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T1, T3, T7>(arg3, arg1, arg5, arg7, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::deposit_b(&v0), arg10), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::mint_lp(&v0));
+        emit_event<0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::DepositQuote>(v1);
+        v1
+    }
+
+    public fun quote_omm_swap<T0, T1, T2, T3, T4: drop, T5, T6>(arg0: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::Pool<T2, T3, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::omm::OracleQuoter, T4>, arg1: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg2: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg3: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T5>, arg5: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T6>, arg6: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg7: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg8: 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::oracles::OraclePriceUpdate, arg9: 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::oracles::OraclePriceUpdate, arg10: u64, arg11: bool, arg12: &0x2::clock::Clock) : 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::SwapQuote {
+        to_underlying_quote<T0, T1, T2, T3, T5, T6>(arg1, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::omm::quote_swap<T0, T1, T2, T3, T4, T5, T6>(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, to_btoken_amount_in<T0, T1, T2, T3, T5, T6>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg11, arg10, arg12), arg11, arg12), arg2, arg3, arg4, arg5, arg6, arg7, arg11, arg12)
+    }
+
+    public fun quote_redeem<T0, T1, T2, T3, T4: store, T5: drop, T6, T7>(arg0: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::Pool<T2, T3, T4, T5>, arg1: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg2: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg3: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T6>, arg5: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T7>, arg6: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg7: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg8: u64, arg9: &0x2::clock::Clock) : 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::RedeemQuote {
+        let v0 = 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::quote_redeem<T2, T3, T4, T5>(arg0, arg1, arg8);
+        let v1 = 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::redeem_quote(arg1, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T0, T2, T6>(arg2, arg1, arg4, arg6, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::withdraw_a(&v0), arg9), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T1, T3, T7>(arg3, arg1, arg5, arg7, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::withdraw_b(&v0), arg9), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::burn_lp(&v0));
+        emit_event<0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::RedeemQuote>(v1);
+        v1
+    }
+
+    public fun redeem_liquidity<T0, T1, T2, T3, T4: store, T5: drop, T6, T7>(arg0: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::Pool<T2, T3, T4, T5>, arg1: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg2: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg3: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::VaultRegistry, arg5: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_registry::MarginRegistry, arg6: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T6>, arg7: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T7>, arg8: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg9: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg10: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::AbyssSupplierCap, arg11: 0x2::coin::Coin<T5>, arg12: u64, arg13: u64, arg14: &0x2::clock::Clock, arg15: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, 0x2::coin::Coin<T1>) {
+        let (v0, v1, _) = 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::pool::redeem_liquidity<T2, T3, T4, T5>(arg0, arg1, arg11, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::to_btokens<T0, T2, T6>(arg2, arg1, arg6, arg8, arg12, arg14), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::to_btokens<T1, T3, T7>(arg3, arg1, arg7, arg9, arg13, arg14), arg15);
+        let v3 = v1;
+        let v4 = v0;
+        0x2::coin::destroy_zero<T2>(v4);
+        0x2::coin::destroy_zero<T3>(v3);
+        (0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::burn_btoken<T0, T2, T6>(arg2, arg1, arg4, arg5, arg6, arg8, arg10, &mut v4, 0x2::coin::value<T2>(&v4), arg14, arg15), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::burn_btoken<T1, T3, T7>(arg3, arg1, arg4, arg5, arg7, arg9, arg10, &mut v3, 0x2::coin::value<T3>(&v3), arg14, arg15))
+    }
+
+    public fun send_coin<T0>(arg0: 0x2::coin::Coin<T0>, arg1: address) {
+        if (0x2::coin::value<T0>(&arg0) > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(arg0, arg1);
+        } else {
+            0x2::coin::destroy_zero<T0>(arg0);
+        };
+    }
+
+    fun to_btoken_amount_in<T0, T1, T2, T3, T4, T5>(arg0: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg1: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg2: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg3: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T4>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T5>, arg5: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg6: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg7: bool, arg8: u64, arg9: &0x2::clock::Clock) : u64 {
+        if (arg7) {
+            0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::to_btokens<T0, T2, T4>(arg1, arg0, arg3, arg5, arg8, arg9)
+        } else {
+            0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::to_btokens<T1, T3, T5>(arg2, arg0, arg4, arg6, arg8, arg9)
+        }
+    }
+
+    fun to_btokens<T0, T1, T2, T3, T4, T5>(arg0: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg1: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg2: &mut 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg3: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::VaultRegistry, arg4: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_registry::MarginRegistry, arg5: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T4>, arg6: &mut 0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T5>, arg7: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg8: &mut 0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg9: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::vault_registry::AbyssSupplierCap, arg10: &mut 0x2::coin::Coin<T0>, arg11: &mut 0x2::coin::Coin<T1>, arg12: bool, arg13: u64, arg14: &0x2::clock::Clock, arg15: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T2>, 0x2::coin::Coin<T3>, u64) {
+        let (v0, v1) = if (arg12) {
+            (0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::mint_btoken<T0, T2, T4>(arg1, arg0, arg3, arg4, arg5, arg7, arg9, arg10, arg13, arg14, arg15), 0x2::coin::zero<T3>(arg15))
+        } else {
+            (0x2::coin::zero<T2>(arg15), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::mint_btoken<T1, T3, T5>(arg2, arg0, arg3, arg4, arg6, arg8, arg9, arg11, arg13, arg14, arg15))
+        };
+        let v2 = v1;
+        let v3 = v0;
+        let v4 = if (arg12) {
+            0x2::coin::value<T2>(&v3)
+        } else {
+            0x2::coin::value<T3>(&v2)
+        };
+        (v3, v2, v4)
+    }
+
+    fun to_underlying_quote<T0, T1, T2, T3, T4, T5>(arg0: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::global_config::GlobalConfig, arg1: 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::SwapQuote, arg2: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T0, T2>, arg3: &0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::Bank<T1, T3>, arg4: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T0, T4>, arg5: &0x90a75f641859f4d77a4349d67e518e1dd9ecb4fac079e220fa46b7a7f164e0a5::abyss_vault::Vault<T1, T5>, arg6: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T0>, arg7: &0x97d9473771b01f77b0940c589484184b49f6444627ec121314fae6a6d36fb86b::margin_pool::MarginPool<T1>, arg8: bool, arg9: &0x2::clock::Clock) : 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::SwapQuote {
+        let (v0, v1, v2, v3) = if (arg8) {
+            (0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T0, T2, T4>(arg2, arg0, arg4, arg6, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::amount_in(&arg1), arg9), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T1, T3, T5>(arg3, arg0, arg5, arg7, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::amount_out(&arg1), arg9), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T1, T3, T5>(arg3, arg0, arg5, arg7, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::protocol_fees(0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::output_fees(&arg1)), arg9), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T1, T3, T5>(arg3, arg0, arg5, arg7, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::pool_fees(0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::output_fees(&arg1)), arg9))
+        } else {
+            (0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T1, T3, T5>(arg3, arg0, arg5, arg7, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::amount_in(&arg1), arg9), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T0, T2, T4>(arg2, arg0, arg4, arg6, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::amount_out(&arg1), arg9), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T0, T2, T4>(arg2, arg0, arg4, arg6, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::protocol_fees(0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::output_fees(&arg1)), arg9), 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::bank::from_btokens<T0, T2, T4>(arg2, arg0, arg4, arg6, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::pool_fees(0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::output_fees(&arg1)), arg9))
+        };
+        let v4 = 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::quote(arg0, 0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::pool_id(&arg1), v0, v1, v2, v3, arg8);
+        emit_event<0xca0b5304b4c74c15ca1e3590cd981aa2215fc672b98ffb64927b7e1b7c63f32::quote::SwapQuote>(v4);
+        v4
+    }
+
+    // decompiled from Move bytecode v6
+}
+
