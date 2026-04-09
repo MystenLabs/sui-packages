@@ -181,6 +181,6 @@ module 0x2::vec_map {
         }
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

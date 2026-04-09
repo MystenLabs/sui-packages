@@ -156,6 +156,6 @@ module 0x2::linked_table {
         arg0.size = arg0.size + 1;
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

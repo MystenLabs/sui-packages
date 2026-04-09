@@ -31,6 +31,6 @@ module 0x3::validator_cap {
         arg0.authorizer_validator_address
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

@@ -9,6 +9,6 @@ module 0x2::vdf {
     }
 
     native fun vdf_verify_internal(arg0: &vector<u8>, arg1: &vector<u8>, arg2: &vector<u8>, arg3: u64) : bool;
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

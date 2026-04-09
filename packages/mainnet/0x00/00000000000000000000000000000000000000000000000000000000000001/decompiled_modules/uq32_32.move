@@ -94,6 +94,6 @@ module 0x1::uq32_32 {
         arg0.pos0
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

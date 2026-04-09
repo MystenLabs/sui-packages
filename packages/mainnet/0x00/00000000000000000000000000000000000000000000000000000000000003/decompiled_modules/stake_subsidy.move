@@ -36,6 +36,6 @@ module 0x3::stake_subsidy {
         arg0.distribution_counter
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

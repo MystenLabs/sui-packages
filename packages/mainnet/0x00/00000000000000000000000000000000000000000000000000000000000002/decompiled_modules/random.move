@@ -338,6 +338,6 @@ module 0x2::random {
         v0.random_bytes = arg2;
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

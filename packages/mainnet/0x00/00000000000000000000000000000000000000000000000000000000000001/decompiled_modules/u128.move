@@ -228,6 +228,6 @@ module 0x1::u128 {
         }
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

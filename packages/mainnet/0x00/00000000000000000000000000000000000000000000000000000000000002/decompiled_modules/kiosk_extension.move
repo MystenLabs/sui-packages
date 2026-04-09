@@ -93,6 +93,6 @@ module 0x2::kiosk_extension {
         &mut extension_mut<T0>(arg1).storage
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

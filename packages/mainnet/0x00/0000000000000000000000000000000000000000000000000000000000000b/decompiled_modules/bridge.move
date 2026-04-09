@@ -381,6 +381,6 @@ module 0xb::bridge {
         0xb::committee::update_node_url(&mut load_inner_mut(arg0).committee, arg1, arg2);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

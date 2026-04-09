@@ -162,6 +162,6 @@ module 0x1::type_name {
     native public fun original_id<T0>() : address;
     native public fun with_defining_ids<T0>() : TypeName;
     native public fun with_original_ids<T0>() : TypeName;
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

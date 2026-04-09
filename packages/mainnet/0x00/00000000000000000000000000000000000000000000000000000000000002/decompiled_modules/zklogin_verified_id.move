@@ -49,6 +49,6 @@ module 0x2::zklogin_verified_id {
         abort 0
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

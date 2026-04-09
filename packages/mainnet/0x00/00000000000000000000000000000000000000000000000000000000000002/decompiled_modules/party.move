@@ -64,6 +64,6 @@ module 0x2::party {
         v0
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

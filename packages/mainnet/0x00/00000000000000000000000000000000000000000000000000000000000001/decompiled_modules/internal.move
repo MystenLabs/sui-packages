@@ -7,6 +7,6 @@ module 0x1::internal {
         Permit<T0>{dummy_field: false}
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

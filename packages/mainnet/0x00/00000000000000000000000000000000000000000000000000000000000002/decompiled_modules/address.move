@@ -44,6 +44,6 @@ module 0x2::address {
     }
 
     native public fun to_u256(arg0: address) : u256;
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

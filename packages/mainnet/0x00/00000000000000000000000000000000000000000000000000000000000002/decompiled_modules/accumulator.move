@@ -82,6 +82,6 @@ module 0x2::accumulator {
         arg0.value = arg0.value + arg1 - arg2;
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

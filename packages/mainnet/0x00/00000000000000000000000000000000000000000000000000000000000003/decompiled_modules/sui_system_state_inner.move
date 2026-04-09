@@ -575,6 +575,6 @@ module 0x3::sui_system_state_inner {
         &mut arg0.validators
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

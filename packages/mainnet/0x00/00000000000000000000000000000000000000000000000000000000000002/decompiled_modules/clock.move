@@ -22,6 +22,6 @@ module 0x2::clock {
         arg0.timestamp_ms
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

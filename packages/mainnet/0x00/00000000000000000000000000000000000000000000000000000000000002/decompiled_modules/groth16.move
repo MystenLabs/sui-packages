@@ -65,6 +65,6 @@ module 0x2::groth16 {
     }
 
     native fun verify_groth16_proof_internal(arg0: u8, arg1: &vector<u8>, arg2: &vector<u8>, arg3: &vector<u8>, arg4: &vector<u8>, arg5: &vector<u8>, arg6: &vector<u8>) : bool;
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

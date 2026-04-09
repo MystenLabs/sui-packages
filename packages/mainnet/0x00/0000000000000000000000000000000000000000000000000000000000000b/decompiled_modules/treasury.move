@@ -139,6 +139,6 @@ module 0xb::treasury {
         0x2::event::emit<UpdateTokenPriceEvent>(v2);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

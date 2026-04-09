@@ -400,6 +400,6 @@ module 0x2::kiosk {
         0x2::coin::take<0x2::sui::SUI>(&mut arg0.profits, v0, arg3)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

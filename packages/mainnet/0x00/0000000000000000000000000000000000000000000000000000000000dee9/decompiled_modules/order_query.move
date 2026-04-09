@@ -119,6 +119,6 @@ module 0xdee9::order_query {
         &arg0.orders
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

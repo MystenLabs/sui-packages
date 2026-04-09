@@ -685,6 +685,6 @@ module 0xdee9::clob_v2 {
         0xdee9::custodian_v2::withdraw_asset<T1>(&mut arg0.quote_custodian, arg1, arg2, arg3)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

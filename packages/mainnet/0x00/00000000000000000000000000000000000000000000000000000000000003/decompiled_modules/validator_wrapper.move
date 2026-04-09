@@ -26,6 +26,6 @@ module 0x3::validator_wrapper {
         assert!(version(arg0) == 1, 0);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

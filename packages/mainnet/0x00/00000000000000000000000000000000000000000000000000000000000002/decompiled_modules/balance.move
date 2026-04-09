@@ -98,6 +98,6 @@ module 0x2::balance {
         Balance<T0>{value: 0}
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

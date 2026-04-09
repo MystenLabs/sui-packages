@@ -124,6 +124,6 @@ module 0x2::config {
         0x2::transfer::transfer<Config<T0>>(arg0, arg1);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

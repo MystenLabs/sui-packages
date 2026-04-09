@@ -195,6 +195,6 @@ module 0x1::u256 {
         }
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

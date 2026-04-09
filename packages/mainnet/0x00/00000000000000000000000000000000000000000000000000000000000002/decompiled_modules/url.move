@@ -19,6 +19,6 @@ module 0x2::url {
         arg0.url = arg1;
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

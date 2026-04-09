@@ -127,6 +127,6 @@ module 0x3::genesis {
         0x3::sui_system::create(arg0, v0, 0x2::balance::zero<0x2::sui::SUI>(), arg2.protocol_version, arg2.chain_start_timestamp_ms, 0x3::sui_system_state_inner::create_system_parameters(arg2.epoch_duration_ms, arg2.stake_subsidy_start_epoch, arg2.max_validator_count, arg2.min_validator_joining_stake, arg2.validator_low_stake_threshold, arg2.validator_very_low_stake_threshold, arg2.validator_low_stake_grace_period, arg5), 0x3::stake_subsidy::create(0x2::balance::split<0x2::sui::SUI>(&mut arg1, v18), arg2.stake_subsidy_initial_distribution_amount, arg2.stake_subsidy_period_length, arg2.stake_subsidy_decrease_rate, arg5), arg5);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

@@ -58,6 +58,6 @@ module 0x2::tx_context {
         option_sponsor()
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

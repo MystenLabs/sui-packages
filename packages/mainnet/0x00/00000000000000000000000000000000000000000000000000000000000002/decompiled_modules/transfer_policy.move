@@ -170,6 +170,6 @@ module 0x2::transfer_policy {
         0x2::coin::take<0x2::sui::SUI>(&mut arg0.balance, v0, arg3)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

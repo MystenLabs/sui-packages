@@ -89,6 +89,6 @@ module 0x2::dynamic_object_field {
         0x2::dynamic_field::remove_child_object<T1>(0x2::object::uid_to_address(v1), v2)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

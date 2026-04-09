@@ -17,6 +17,6 @@ module 0xb::crypto {
         v4
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

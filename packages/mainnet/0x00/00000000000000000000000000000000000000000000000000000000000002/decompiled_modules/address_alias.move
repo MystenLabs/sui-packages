@@ -52,6 +52,6 @@ module 0x2::address_alias {
         arg0.aliases = v0;
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

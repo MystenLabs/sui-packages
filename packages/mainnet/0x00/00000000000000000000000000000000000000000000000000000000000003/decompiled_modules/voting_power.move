@@ -136,6 +136,6 @@ module 0x3::voting_power {
         0x1::vector::destroy_empty<VotingPowerInfoV2>(arg1);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

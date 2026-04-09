@@ -83,6 +83,6 @@ module 0x2::ristretto255 {
         0x2::group_ops::from_bytes<Scalar>(5, x"0000000000000000000000000000000000000000000000000000000000000000", true)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

@@ -37,6 +37,6 @@ module 0x1::fixed_point32 {
         (v0 as u64)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

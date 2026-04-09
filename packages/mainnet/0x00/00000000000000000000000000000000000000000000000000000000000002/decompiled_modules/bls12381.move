@@ -192,6 +192,6 @@ module 0x2::bls12381 {
         0x2::group_ops::convert<UncompressedG1, G1>(4, 1, arg0)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

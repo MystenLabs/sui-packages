@@ -138,6 +138,6 @@ module 0x2::object {
         arg0.id
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

@@ -494,6 +494,6 @@ module 0xb::message {
         arg0.sending_chain
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

@@ -84,6 +84,6 @@ module 0xdee9::math {
         (v2, ((v0 * v1 / 1000000000) as u64))
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

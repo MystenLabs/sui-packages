@@ -343,6 +343,6 @@ module 0x2::token {
         0x1::string::utf8(b"transfer")
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

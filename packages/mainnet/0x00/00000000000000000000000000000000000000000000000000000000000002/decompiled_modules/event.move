@@ -6,6 +6,6 @@ module 0x2::event {
     }
 
     native fun emit_authenticated_impl<T0, T1: copy + drop>(arg0: address, arg1: address, arg2: T1);
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

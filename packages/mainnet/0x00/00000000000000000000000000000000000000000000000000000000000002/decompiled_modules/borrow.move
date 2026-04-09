@@ -43,6 +43,6 @@ module 0x2::borrow {
         0x1::option::fill<T0>(&mut arg0.value, arg1);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

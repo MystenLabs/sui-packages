@@ -185,6 +185,6 @@ module 0xb::committee {
         assert!(v3 >= 0xb::message::required_voting_power(&arg1), 0);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

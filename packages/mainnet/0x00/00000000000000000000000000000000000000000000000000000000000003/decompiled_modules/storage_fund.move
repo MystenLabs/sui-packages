@@ -27,6 +27,6 @@ module 0x3::storage_fund {
         0x2::balance::value<0x2::sui::SUI>(&arg0.total_object_storage_rebates)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

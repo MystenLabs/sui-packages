@@ -81,6 +81,6 @@ module 0xdee9::custodian {
         0x2::coin::from_balance<T0>(decrease_user_available_balance<T0>(arg0, arg2, arg1), arg3)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

@@ -128,6 +128,6 @@ module 0xb::chain_ids {
         v10
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

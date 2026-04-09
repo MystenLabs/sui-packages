@@ -70,6 +70,6 @@ module 0x2::table_vec {
         pop_back<T0>(arg0)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

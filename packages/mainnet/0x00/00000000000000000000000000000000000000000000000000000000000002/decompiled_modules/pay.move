@@ -52,6 +52,6 @@ module 0x2::pay {
         0x1::vector::destroy_empty<u64>(arg1);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

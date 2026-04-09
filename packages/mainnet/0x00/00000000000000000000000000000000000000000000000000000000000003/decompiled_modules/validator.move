@@ -913,6 +913,6 @@ module 0x3::validator {
         &arg0.metadata.worker_pubkey_bytes
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

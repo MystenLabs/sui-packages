@@ -416,6 +416,6 @@ module 0x3::staking_pool {
         0x2::balance::split<0x2::sui::SUI>(&mut arg0.rewards_pool, 0x1::u64::min(v2, 0x2::balance::value<0x2::sui::SUI>(&arg0.rewards_pool)))
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

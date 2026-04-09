@@ -79,6 +79,6 @@ module 0x2::accumulator_settlement {
         0x2::bcs::peel_u256(&mut v0)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

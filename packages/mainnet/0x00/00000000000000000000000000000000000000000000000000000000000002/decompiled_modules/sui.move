@@ -18,6 +18,6 @@ module 0x2::sui {
         0x2::transfer::public_transfer<0x2::coin::Coin<SUI>>(arg0, arg1);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

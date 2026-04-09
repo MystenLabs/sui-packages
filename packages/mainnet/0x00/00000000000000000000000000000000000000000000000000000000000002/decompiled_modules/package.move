@@ -157,6 +157,6 @@ module 0x2::package {
         arg0.version
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

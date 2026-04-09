@@ -54,6 +54,6 @@ module 0x2::bag {
         0x2::dynamic_field::remove<T0, T1>(&mut arg0.id, arg1)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

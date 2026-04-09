@@ -307,6 +307,6 @@ module 0xdee9::critbit {
         };
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

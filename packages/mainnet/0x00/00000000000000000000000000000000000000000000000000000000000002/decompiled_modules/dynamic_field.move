@@ -73,6 +73,6 @@ module 0x2::dynamic_field {
         }
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

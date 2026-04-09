@@ -370,6 +370,6 @@ module 0x2::coin {
         arg1.symbol = arg2;
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

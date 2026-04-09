@@ -89,6 +89,6 @@ module 0x2::vec_set {
         0x1::vector::length<T0>(&arg0.contents)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

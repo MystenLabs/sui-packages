@@ -100,6 +100,6 @@ module 0x2::group_ops {
         Element<T0>{bytes: internal_sum(arg0, &v0)}
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

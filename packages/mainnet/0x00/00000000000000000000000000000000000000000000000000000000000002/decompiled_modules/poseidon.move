@@ -16,6 +16,6 @@ module 0x2::poseidon {
     }
 
     native fun poseidon_bn254_internal(arg0: &vector<vector<u8>>) : vector<u8>;
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

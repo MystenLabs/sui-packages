@@ -38,6 +38,6 @@ module 0x2::zklogin_verified_issuer {
         0x2::transfer::transfer<VerifiedIssuer>(v1, v0);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

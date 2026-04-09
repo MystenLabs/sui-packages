@@ -27,6 +27,6 @@ module 0x2::math {
         0x1::u128::sqrt(arg0)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

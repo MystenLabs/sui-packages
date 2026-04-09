@@ -175,6 +175,6 @@ module 0x1::ascii {
         /* goto 6 */
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

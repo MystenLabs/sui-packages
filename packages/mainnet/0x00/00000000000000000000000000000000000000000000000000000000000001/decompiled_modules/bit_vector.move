@@ -75,6 +75,6 @@ module 0x1::bit_vector {
         *0x1::vector::borrow_mut<bool>(&mut arg0.bit_field, arg1) = false;
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

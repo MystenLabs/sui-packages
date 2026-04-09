@@ -292,6 +292,6 @@ module 0x2::deny_list {
         0x2::config::remove_for_next_epoch<ConfigWriteCap, AddressKey, bool>(borrow_per_type_config_mut(arg0, arg1, arg2), &mut v1, v0, arg4);
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

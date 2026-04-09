@@ -65,6 +65,6 @@ module 0x2::transfer {
 
     native public(friend) fun share_object_impl<T0: key>(arg0: T0);
     native public(friend) fun transfer_impl<T0: key>(arg0: T0, arg1: address);
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 

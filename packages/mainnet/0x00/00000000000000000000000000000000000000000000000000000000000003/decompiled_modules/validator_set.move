@@ -860,6 +860,6 @@ module 0x3::validator_set {
         0x3::validator_cap::into_verified(arg1)
     }
 
-    // decompiled from Move bytecode v6
+    // decompiled from Move bytecode v7
 }
 
