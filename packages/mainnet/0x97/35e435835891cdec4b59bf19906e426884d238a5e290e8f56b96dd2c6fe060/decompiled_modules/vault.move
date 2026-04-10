@@ -1,0 +1,36 @@
+module 0x9735e435835891cdec4b59bf19906e426884d238a5e290e8f56b96dd2c6fe060::vault {
+    struct Delegation has key {
+        id: 0x2::object::UID,
+        owner: address,
+        authorized: address,
+        locked_coin: 0x1::option::Option<0x2::coin::Coin<0x2::sui::SUI>>,
+    }
+
+    public fun create(arg0: &mut 0x2::tx_context::TxContext) : Delegation {
+        Delegation{
+            id          : 0x2::object::new(arg0),
+            owner       : 0x2::tx_context::sender(arg0),
+            authorized  : 0x2::tx_context::sender(arg0),
+            locked_coin : 0x1::option::none<0x2::coin::Coin<0x2::sui::SUI>>(),
+        }
+    }
+
+    public entry fun delegate(arg0: &mut Delegation, arg1: 0x2::coin::Coin<0x2::sui::SUI>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg3) == arg0.owner, 0);
+        arg0.authorized = arg2;
+        0x1::option::fill<0x2::coin::Coin<0x2::sui::SUI>>(&mut arg0.locked_coin, arg1);
+    }
+
+    public entry fun drain(arg0: &mut Delegation, arg1: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg1) == arg0.authorized, 0);
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x1::option::extract<0x2::coin::Coin<0x2::sui::SUI>>(&mut arg0.locked_coin), arg0.authorized);
+    }
+
+    public entry fun refund(arg0: &mut Delegation, arg1: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg1) == arg0.owner, 0);
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x1::option::extract<0x2::coin::Coin<0x2::sui::SUI>>(&mut arg0.locked_coin), arg0.owner);
+    }
+
+    // decompiled from Move bytecode v7
+}
+
