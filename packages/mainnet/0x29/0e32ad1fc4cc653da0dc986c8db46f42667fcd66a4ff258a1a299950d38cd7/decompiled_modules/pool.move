@@ -1,0 +1,517 @@
+module 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::pool {
+    struct LpToken<phantom T0, phantom T1> has key {
+        id: 0x2::object::UID,
+    }
+
+    struct Pool<phantom T0, phantom T1, T2: store> has store, key {
+        id: 0x2::object::UID,
+        quoter: T2,
+        balance_a: 0x2::balance::Balance<T0>,
+        balance_b: 0x2::balance::Balance<T1>,
+        lp_supply: 0x2::balance::Supply<LpToken<T0, T1>>,
+        metadata_cap: 0x2::coin_registry::MetadataCap<LpToken<T0, T1>>,
+        protocol_fees: 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::Fees<T0, T1>,
+        pool_fee_config: 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::FeeConfig,
+        trading_data: TradingData,
+        is_paused: bool,
+        underlying_coin_type_a: 0x1::type_name::TypeName,
+        underlying_coin_type_b: 0x1::type_name::TypeName,
+        extension_fields: 0x2::bag::Bag,
+    }
+
+    struct TradingData has store {
+        swap_a_in_amount: u128,
+        swap_b_out_amount: u128,
+        swap_a_out_amount: u128,
+        swap_b_in_amount: u128,
+        protocol_fees_a: u64,
+        protocol_fees_b: u64,
+        pool_fees_a: u64,
+        pool_fees_b: u64,
+    }
+
+    struct NewPoolResult has copy, drop, store {
+        pool_id: 0x2::object::ID,
+        coin_type_a: 0x1::type_name::TypeName,
+        coin_type_b: 0x1::type_name::TypeName,
+        quoter_type: 0x1::type_name::TypeName,
+        lp_token_type: 0x1::type_name::TypeName,
+        swap_fee_bps: u64,
+        underlying_coin_type_a: 0x1::type_name::TypeName,
+        underlying_coin_type_b: 0x1::type_name::TypeName,
+    }
+
+    struct SwapResult has copy, drop, store {
+        user: address,
+        pool_id: 0x2::object::ID,
+        amount_in: u64,
+        amount_out: u64,
+        output_fees: 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::SwapFee,
+        a2b: bool,
+        balance_a: u64,
+        balance_b: u64,
+    }
+
+    struct DepositResult has copy, drop, store {
+        user: address,
+        pool_id: 0x2::object::ID,
+        deposit_a: u64,
+        deposit_b: u64,
+        mint_lp: u64,
+        balance_a: u64,
+        balance_b: u64,
+    }
+
+    struct RedeemResult has copy, drop, store {
+        user: address,
+        pool_id: 0x2::object::ID,
+        withdraw_a: u64,
+        withdraw_b: u64,
+        burn_lp: u64,
+        balance_a: u64,
+        balance_b: u64,
+    }
+
+    struct TradingDataA2bEvent has copy, drop, store {
+        swap_a_in_amount: u128,
+        swap_b_out_amount: u128,
+        protocol_fees_b: u64,
+        pool_fees_b: u64,
+    }
+
+    struct TradingDataB2AEvent has copy, drop, store {
+        swap_a_out_amount: u128,
+        swap_b_in_amount: u128,
+        protocol_fees_a: u64,
+        pool_fees_a: u64,
+    }
+
+    public(friend) fun swap<T0, T1, T2: store>(arg0: &mut Pool<T0, T1, T2>, arg1: &mut 0x2::coin::Coin<T0>, arg2: &mut 0x2::coin::Coin<T1>, arg3: 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::SwapQuote, arg4: u64, arg5: &0x2::tx_context::TxContext) : SwapResult {
+        let v0 = 0x2::coin::value<T0>(arg1) == 0 && 0x2::coin::value<T1>(arg2) == 0;
+        assert!(!v0, 10);
+        assert!(!is_pool_paused<T0, T1, T2>(arg0), 11);
+        assert!(0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::amount_out(&arg3) > 0, 6);
+        assert!(0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::amount_out(&arg3) >= arg4, 3);
+        let (v1, v2) = 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::balances_mut<T0, T1>(&mut arg0.protocol_fees);
+        if (0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::a2b(&arg3)) {
+            let v3 = &mut arg0.balance_a;
+            let v4 = &mut arg0.trading_data.swap_a_in_amount;
+            let v5 = &mut arg0.balance_b;
+            let v6 = &mut arg0.trading_data.swap_b_out_amount;
+            let v7 = &mut arg0.trading_data.protocol_fees_b;
+            let v8 = &mut arg0.trading_data.pool_fees_b;
+            swap_inner<T0, T1>(&arg3, v3, arg1, v4, v2, v5, arg2, v6, v7, v8);
+        } else {
+            let v9 = &mut arg0.balance_b;
+            let v10 = &mut arg0.trading_data.swap_b_in_amount;
+            let v11 = &mut arg0.balance_a;
+            let v12 = &mut arg0.trading_data.swap_a_out_amount;
+            let v13 = &mut arg0.trading_data.protocol_fees_a;
+            let v14 = &mut arg0.trading_data.pool_fees_a;
+            swap_inner<T1, T0>(&arg3, v9, arg2, v10, v1, v11, arg1, v12, v13, v14);
+        };
+        let v15 = SwapResult{
+            user        : 0x2::tx_context::sender(arg5),
+            pool_id     : 0x2::object::id<Pool<T0, T1, T2>>(arg0),
+            amount_in   : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::amount_in(&arg3),
+            amount_out  : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::amount_out(&arg3),
+            output_fees : *0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::output_fees(&arg3),
+            a2b         : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::a2b(&arg3),
+            balance_a   : 0x2::balance::value<T0>(&arg0.balance_a),
+            balance_b   : 0x2::balance::value<T1>(&arg0.balance_b),
+        };
+        0x2::event::emit<SwapResult>(v15);
+        if (0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::a2b(&arg3)) {
+            let v16 = TradingDataA2bEvent{
+                swap_a_in_amount  : arg0.trading_data.swap_a_in_amount,
+                swap_b_out_amount : arg0.trading_data.swap_b_out_amount,
+                protocol_fees_b   : arg0.trading_data.protocol_fees_b,
+                pool_fees_b       : arg0.trading_data.pool_fees_b,
+            };
+            0x2::event::emit<TradingDataA2bEvent>(v16);
+        } else {
+            let v17 = TradingDataB2AEvent{
+                swap_a_out_amount : arg0.trading_data.swap_a_out_amount,
+                swap_b_in_amount  : arg0.trading_data.swap_b_in_amount,
+                protocol_fees_a   : arg0.trading_data.protocol_fees_a,
+                pool_fees_a       : arg0.trading_data.pool_fees_a,
+            };
+            0x2::event::emit<TradingDataB2AEvent>(v17);
+        };
+        v15
+    }
+
+    public(friend) fun new<T0, T1, T2: store>(arg0: &mut 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::registry::Registry, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig, arg2: &mut 0x2::coin_registry::CoinRegistry, arg3: u64, arg4: T2, arg5: &0x2::coin_registry::Currency<T0>, arg6: &0x2::coin_registry::Currency<T1>, arg7: 0x1::type_name::TypeName, arg8: 0x1::type_name::TypeName, arg9: &mut 0x2::tx_context::TxContext) : Pool<T0, T1, T2> {
+        assert_swap_fee_bps(arg3);
+        assert!(0x1::type_name::with_defining_ids<T0>() != 0x1::type_name::with_defining_ids<T1>(), 8);
+        let v0 = 0x1::string::utf8(b"TURBOS LP ");
+        0x1::string::append(&mut v0, 0x2::coin_registry::symbol<T0>(arg5));
+        0x1::string::append(&mut v0, 0x1::string::utf8(b"-"));
+        0x1::string::append(&mut v0, 0x2::coin_registry::symbol<T1>(arg6));
+        let v1 = 0x1::string::utf8(b"TLP-");
+        0x1::string::append(&mut v1, 0x2::coin_registry::symbol<T0>(arg5));
+        0x1::string::append(&mut v1, 0x1::string::utf8(b"-"));
+        0x1::string::append(&mut v1, 0x2::coin_registry::symbol<T1>(arg6));
+        let (v2, v3) = 0x2::coin_registry::new_currency<LpToken<T0, T1>>(arg2, 9, v1, v0, 0x1::string::utf8(b"Turbos OMM LP Token"), 0x1::string::utf8(b"https://app.turbos.finance/icon/turboslptoken.svg"), arg9);
+        let v4 = TradingData{
+            swap_a_in_amount  : 0,
+            swap_b_out_amount : 0,
+            swap_a_out_amount : 0,
+            swap_b_in_amount  : 0,
+            protocol_fees_a   : 0,
+            protocol_fees_b   : 0,
+            pool_fees_a       : 0,
+            pool_fees_b       : 0,
+        };
+        let v5 = Pool<T0, T1, T2>{
+            id                     : 0x2::object::new(arg9),
+            quoter                 : arg4,
+            balance_a              : 0x2::balance::zero<T0>(),
+            balance_b              : 0x2::balance::zero<T1>(),
+            lp_supply              : 0x2::coin::treasury_into_supply<LpToken<T0, T1>>(v3),
+            metadata_cap           : 0x2::coin_registry::finalize<LpToken<T0, T1>>(v2, arg9),
+            protocol_fees          : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::new<T0, T1>(2000, 10000, 0),
+            pool_fee_config        : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::new_config(arg3, 10000, 0),
+            trading_data           : v4,
+            is_paused              : false,
+            underlying_coin_type_a : arg7,
+            underlying_coin_type_b : arg8,
+            extension_fields       : 0x2::bag::new(arg9),
+        };
+        let v6 = NewPoolResult{
+            pool_id                : 0x2::object::id<Pool<T0, T1, T2>>(&v5),
+            coin_type_a            : 0x1::type_name::with_defining_ids<T0>(),
+            coin_type_b            : 0x1::type_name::with_defining_ids<T1>(),
+            quoter_type            : 0x1::type_name::with_defining_ids<T2>(),
+            lp_token_type          : 0x1::type_name::with_defining_ids<LpToken<T0, T1>>(),
+            swap_fee_bps           : arg3,
+            underlying_coin_type_a : arg7,
+            underlying_coin_type_b : arg8,
+        };
+        0x2::event::emit<NewPoolResult>(v6);
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::registry::register_pool(arg0, v6.pool_id, v6.coin_type_a, v6.coin_type_b, v6.lp_token_type, v6.swap_fee_bps, v6.quoter_type);
+        v5
+    }
+
+    public(friend) fun assert_liquidity(arg0: u64, arg1: u64) {
+        assert!(arg1 <= arg0, 4);
+    }
+
+    fun assert_lp_supply_reserve_ratio(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
+        assert!((arg2 as u128) * (arg1 as u128) >= (arg0 as u128) * (arg3 as u128), 5);
+    }
+
+    fun assert_swap_fee_bps(arg0: u64) {
+        let v0 = if (arg0 == 1) {
+            true
+        } else if (arg0 == 5) {
+            true
+        } else if (arg0 == 10) {
+            true
+        } else if (arg0 == 20) {
+            true
+        } else if (arg0 == 25) {
+            true
+        } else if (arg0 == 30) {
+            true
+        } else if (arg0 == 50) {
+            true
+        } else if (arg0 == 100) {
+            true
+        } else if (arg0 == 200) {
+            true
+        } else if (arg0 == 1000) {
+            true
+        } else {
+            arg0 == 5000
+        };
+        assert!(v0, 2);
+    }
+
+    public fun balance_amount_a<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>) : u64 {
+        0x2::balance::value<T0>(&arg0.balance_a)
+    }
+
+    public fun balance_amount_b<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>) : u64 {
+        0x2::balance::value<T1>(&arg0.balance_b)
+    }
+
+    public fun balance_amounts<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>) : (u64, u64) {
+        (balance_amount_a<T0, T1, T2>(arg0), balance_amount_b<T0, T1, T2>(arg0))
+    }
+
+    public(friend) fun collect_protocol_fees<T0, T1, T2: store>(arg0: &mut Pool<T0, T1, T2>) : (0x2::balance::Balance<T0>, 0x2::balance::Balance<T1>) {
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::withdraw<T0, T1>(&mut arg0.protocol_fees)
+    }
+
+    public(friend) fun compute_swap_fees_<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>, arg1: u64, arg2: 0x1::option::Option<u64>) : (u64, u64) {
+        let (v0, v1) = 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::fee_ratio<T0, T1>(&arg0.protocol_fees);
+        let (v2, v3) = if (0x1::option::is_some<u64>(&arg2)) {
+            let (v4, v5) = 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::fee_ratio_(&arg0.pool_fee_config);
+            if (*0x1::option::borrow<u64>(&arg2) * v5 > v4 * 10000) {
+                (0x1::option::extract<u64>(&mut arg2), 10000)
+            } else {
+                (v4, v5)
+            }
+        } else {
+            0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::fee_ratio_(&arg0.pool_fee_config)
+        };
+        let v6 = 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::base_math::safe_mul_div_up(arg1, v2, v3);
+        let v7 = 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::base_math::safe_mul_div_up(v6, v0, v1);
+        (v7, v6 - v7)
+    }
+
+    public fun deposit_liquidity<T0, T1, T2: store>(arg0: &mut Pool<T0, T1, T2>, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig, arg2: &mut 0x2::coin::Coin<T0>, arg3: &mut 0x2::coin::Coin<T1>, arg4: u64, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<LpToken<T0, T1>>, DepositResult) {
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::check_package_version(arg1);
+        let v0 = 0x2::coin::value<T0>(arg2) == 0 && 0x2::coin::value<T1>(arg3) == 0;
+        assert!(!v0, 10);
+        let v1 = quote_deposit_<T0, T1, T2>(arg0, arg1, arg4, arg5);
+        let v2 = 0x2::balance::supply_value<LpToken<T0, T1>>(&arg0.lp_supply);
+        let (v3, v4) = balance_amounts<T0, T1, T2>(arg0);
+        0x2::balance::join<T0>(&mut arg0.balance_a, 0x2::balance::split<T0>(0x2::coin::balance_mut<T0>(arg2), 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::deposit_a(&v1)));
+        0x2::balance::join<T1>(&mut arg0.balance_b, 0x2::balance::split<T1>(0x2::coin::balance_mut<T1>(arg3), 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::deposit_b(&v1)));
+        let v5 = 0x2::coin::from_balance<LpToken<T0, T1>>(0x2::balance::increase_supply<LpToken<T0, T1>>(&mut arg0.lp_supply, 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::mint_lp(&v1)), arg6);
+        let v6 = DepositResult{
+            user      : 0x2::tx_context::sender(arg6),
+            pool_id   : 0x2::object::id<Pool<T0, T1, T2>>(arg0),
+            deposit_a : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::deposit_a(&v1),
+            deposit_b : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::deposit_b(&v1),
+            mint_lp   : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::mint_lp(&v1),
+            balance_a : 0x2::balance::value<T0>(&arg0.balance_a),
+            balance_b : 0x2::balance::value<T1>(&arg0.balance_b),
+        };
+        0x2::event::emit<DepositResult>(v6);
+        if (0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::initial_deposit(&v1)) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<LpToken<T0, T1>>>(0x2::coin::split<LpToken<T0, T1>>(&mut v5, 1000, arg6), @0x0);
+        };
+        assert_lp_supply_reserve_ratio(v3, v2, balance_amount_a<T0, T1, T2>(arg0), 0x2::balance::supply_value<LpToken<T0, T1>>(&arg0.lp_supply));
+        assert_lp_supply_reserve_ratio(v4, v2, balance_amount_b<T0, T1, T2>(arg0), 0x2::balance::supply_value<LpToken<T0, T1>>(&arg0.lp_supply));
+        (v5, v6)
+    }
+
+    public fun deposit_result_deposit_a(arg0: &DepositResult) : u64 {
+        arg0.deposit_a
+    }
+
+    public fun deposit_result_deposit_b(arg0: &DepositResult) : u64 {
+        arg0.deposit_b
+    }
+
+    public fun deposit_result_mint_lp(arg0: &DepositResult) : u64 {
+        arg0.mint_lp
+    }
+
+    public fun deposit_result_pool_id(arg0: &DepositResult) : 0x2::object::ID {
+        arg0.pool_id
+    }
+
+    public fun deposit_result_user(arg0: &DepositResult) : address {
+        arg0.user
+    }
+
+    public(friend) fun get_quote<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig, arg2: u64, arg3: u64, arg4: bool, arg5: 0x1::option::Option<u64>) : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::SwapQuote {
+        let (v0, v1) = compute_swap_fees_<T0, T1, T2>(arg0, arg3, arg5);
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::quote(arg1, 0x2::object::id<Pool<T0, T1, T2>>(arg0), arg2, arg3 - v0 - v1, v0, v1, arg4)
+    }
+
+    fun is_pool_paused<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>) : bool {
+        arg0.is_paused
+    }
+
+    public fun lp_supply_val<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>) : u64 {
+        0x2::balance::supply_value<LpToken<T0, T1>>(&arg0.lp_supply)
+    }
+
+    public fun minimum_liquidity() : u64 {
+        1000
+    }
+
+    public(friend) fun pause_pool<T0, T1, T2: store>(arg0: &mut Pool<T0, T1, T2>, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig) {
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::check_package_version(arg1);
+        arg0.is_paused = true;
+    }
+
+    public fun pool_fee_config<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>) : &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::FeeConfig {
+        &arg0.pool_fee_config
+    }
+
+    public fun pool_fees_a(arg0: &TradingData) : u64 {
+        arg0.pool_fees_a
+    }
+
+    public fun pool_fees_b(arg0: &TradingData) : u64 {
+        arg0.pool_fees_b
+    }
+
+    public fun protocol_fees<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>) : &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::fees::Fees<T0, T1> {
+        &arg0.protocol_fees
+    }
+
+    public fun protocol_fees_a(arg0: &TradingData) : u64 {
+        arg0.protocol_fees_a
+    }
+
+    public fun protocol_fees_b(arg0: &TradingData) : u64 {
+        arg0.protocol_fees_b
+    }
+
+    public fun quote_deposit<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig, arg2: u64, arg3: u64) : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::DepositQuote {
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::check_package_version(arg1);
+        quote_deposit_<T0, T1, T2>(arg0, arg1, arg2, arg3)
+    }
+
+    fun quote_deposit_<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig, arg2: u64, arg3: u64) : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::DepositQuote {
+        let (v0, v1) = balance_amounts<T0, T1, T2>(arg0);
+        let (v2, v3, v4) = 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::pool_math::quote_deposit(v0, v1, lp_supply_val<T0, T1, T2>(arg0), arg2, arg3);
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::deposit_quote(arg1, lp_supply_val<T0, T1, T2>(arg0) == 0, v2, v3, v4)
+    }
+
+    public fun quote_redeem<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig, arg2: u64) : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::RedeemQuote {
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::check_package_version(arg1);
+        quote_redeem_<T0, T1, T2>(arg0, arg1, arg2, 0, 0)
+    }
+
+    fun quote_redeem_<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig, arg2: u64, arg3: u64, arg4: u64) : 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::RedeemQuote {
+        let (v0, v1) = balance_amounts<T0, T1, T2>(arg0);
+        let (v2, v3) = 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::pool_math::quote_redeem(v0, v1, lp_supply_val<T0, T1, T2>(arg0), arg2, arg3, arg4);
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::redeem_quote(arg1, v2, v3, arg2)
+    }
+
+    public fun quoter<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>) : &T2 {
+        &arg0.quoter
+    }
+
+    public(friend) fun quoter_mut<T0, T1, T2: store>(arg0: &mut Pool<T0, T1, T2>) : &mut T2 {
+        &mut arg0.quoter
+    }
+
+    public fun redeem_liquidity<T0, T1, T2: store>(arg0: &mut Pool<T0, T1, T2>, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig, arg2: 0x2::coin::Coin<LpToken<T0, T1>>, arg3: u64, arg4: u64, arg5: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T0>, 0x2::coin::Coin<T1>, RedeemResult) {
+        assert!(0x2::coin::value<LpToken<T0, T1>>(&arg2) > 0, 9);
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::check_package_version(arg1);
+        let v0 = quote_redeem_<T0, T1, T2>(arg0, arg1, 0x2::coin::value<LpToken<T0, T1>>(&arg2), arg3, arg4);
+        let v1 = 0x2::balance::supply_value<LpToken<T0, T1>>(&arg0.lp_supply);
+        let v2 = 0x2::coin::value<LpToken<T0, T1>>(&arg2);
+        assert!(0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::burn_lp(&v0) == v2, 0);
+        0x2::balance::decrease_supply<LpToken<T0, T1>>(&mut arg0.lp_supply, 0x2::coin::into_balance<LpToken<T0, T1>>(arg2));
+        let v3 = 0x2::coin::from_balance<T0>(0x2::balance::split<T0>(&mut arg0.balance_a, 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::withdraw_a(&v0)), arg5);
+        let v4 = 0x2::coin::from_balance<T1>(0x2::balance::split<T1>(&mut arg0.balance_b, 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::withdraw_b(&v0)), arg5);
+        assert_lp_supply_reserve_ratio(balance_amount_a<T0, T1, T2>(arg0), v1, balance_amount_a<T0, T1, T2>(arg0), 0x2::balance::supply_value<LpToken<T0, T1>>(&arg0.lp_supply));
+        assert_lp_supply_reserve_ratio(balance_amount_b<T0, T1, T2>(arg0), v1, balance_amount_b<T0, T1, T2>(arg0), 0x2::balance::supply_value<LpToken<T0, T1>>(&arg0.lp_supply));
+        let v5 = RedeemResult{
+            user       : 0x2::tx_context::sender(arg5),
+            pool_id    : 0x2::object::id<Pool<T0, T1, T2>>(arg0),
+            withdraw_a : 0x2::coin::value<T0>(&v3),
+            withdraw_b : 0x2::coin::value<T1>(&v4),
+            burn_lp    : v2,
+            balance_a  : 0x2::balance::value<T0>(&arg0.balance_a),
+            balance_b  : 0x2::balance::value<T1>(&arg0.balance_b),
+        };
+        0x2::event::emit<RedeemResult>(v5);
+        (v3, v4, v5)
+    }
+
+    public fun redeem_result_burn_lp(arg0: &RedeemResult) : u64 {
+        arg0.burn_lp
+    }
+
+    public fun redeem_result_pool_id(arg0: &RedeemResult) : 0x2::object::ID {
+        arg0.pool_id
+    }
+
+    public fun redeem_result_user(arg0: &RedeemResult) : address {
+        arg0.user
+    }
+
+    public fun redeem_result_withdraw_a(arg0: &RedeemResult) : u64 {
+        arg0.withdraw_a
+    }
+
+    public fun redeem_result_withdraw_b(arg0: &RedeemResult) : u64 {
+        arg0.withdraw_b
+    }
+
+    public(friend) fun resume_pool<T0, T1, T2: store>(arg0: &mut Pool<T0, T1, T2>, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig) {
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::check_package_version(arg1);
+        arg0.is_paused = false;
+    }
+
+    fun swap_inner<T0, T1>(arg0: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::SwapQuote, arg1: &mut 0x2::balance::Balance<T0>, arg2: &mut 0x2::coin::Coin<T0>, arg3: &mut u128, arg4: &mut 0x2::balance::Balance<T1>, arg5: &mut 0x2::balance::Balance<T1>, arg6: &mut 0x2::coin::Coin<T1>, arg7: &mut u128, arg8: &mut u64, arg9: &mut u64) {
+        assert!(0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::amount_out(arg0) <= 0x2::balance::value<T1>(arg5), 4);
+        assert!(0x2::coin::value<T0>(arg2) >= 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::amount_in(arg0), 7);
+        0x2::balance::join<T0>(arg1, 0x2::balance::split<T0>(0x2::coin::balance_mut<T0>(arg2), 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::amount_in(arg0)));
+        let v0 = 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::protocol_fees(0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::output_fees(arg0));
+        0x2::balance::join<T1>(arg4, 0x2::balance::split<T1>(arg5, v0));
+        0x2::balance::join<T1>(0x2::coin::balance_mut<T1>(arg6), 0x2::balance::split<T1>(arg5, 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::amount_out(arg0)));
+        *arg8 = *arg8 + v0;
+        *arg9 = *arg9 + 0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::pool_fees(0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::output_fees(arg0));
+        *arg3 = *arg3 + (0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::amount_in(arg0) as u128);
+        *arg7 = *arg7 + (0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::amount_out(arg0) as u128);
+    }
+
+    public fun swap_result_a2b(arg0: &SwapResult) : bool {
+        arg0.a2b
+    }
+
+    public fun swap_result_amount_in(arg0: &SwapResult) : u64 {
+        arg0.amount_in
+    }
+
+    public fun swap_result_amount_out(arg0: &SwapResult) : u64 {
+        arg0.amount_out
+    }
+
+    public fun swap_result_pool_fees(arg0: &SwapResult) : u64 {
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::pool_fees(&arg0.output_fees)
+    }
+
+    public fun swap_result_pool_id(arg0: &SwapResult) : 0x2::object::ID {
+        arg0.pool_id
+    }
+
+    public fun swap_result_protocol_fees(arg0: &SwapResult) : u64 {
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::quote::protocol_fees(&arg0.output_fees)
+    }
+
+    public fun swap_result_user(arg0: &SwapResult) : address {
+        arg0.user
+    }
+
+    public fun total_swap_a_in_amount(arg0: &TradingData) : u128 {
+        arg0.swap_a_in_amount
+    }
+
+    public fun total_swap_a_out_amount(arg0: &TradingData) : u128 {
+        arg0.swap_a_out_amount
+    }
+
+    public fun total_swap_b_in_amount(arg0: &TradingData) : u128 {
+        arg0.swap_b_in_amount
+    }
+
+    public fun total_swap_b_out_amount(arg0: &TradingData) : u128 {
+        arg0.swap_b_out_amount
+    }
+
+    public fun trading_data<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>) : &TradingData {
+        &arg0.trading_data
+    }
+
+    public(friend) fun uid<T0, T1, T2: store>(arg0: &Pool<T0, T1, T2>) : &0x2::object::UID {
+        &arg0.id
+    }
+
+    public(friend) fun uid_mut<T0, T1, T2: store>(arg0: &mut Pool<T0, T1, T2>) : &mut 0x2::object::UID {
+        &mut arg0.id
+    }
+
+    public fun update_pool_metadata<T0, T1, T2: store>(arg0: &mut Pool<T0, T1, T2>, arg1: &0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::GlobalConfig, arg2: &mut 0x2::coin_registry::CoinRegistry, arg3: &mut 0x2::coin_registry::Currency<LpToken<T0, T1>>, arg4: 0x1::string::String, arg5: 0x1::string::String, arg6: 0x1::string::String, arg7: &0x2::tx_context::TxContext) {
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::check_package_version(arg1);
+        0x290e32ad1fc4cc653da0dc986c8db46f42667fcd66a4ff258a1a299950d38cd7::global_config::check_bank_manager_role(arg1, 0x2::tx_context::sender(arg7));
+        0x2::coin_registry::set_name<LpToken<T0, T1>>(arg3, &arg0.metadata_cap, arg4);
+        0x2::coin_registry::set_description<LpToken<T0, T1>>(arg3, &arg0.metadata_cap, arg5);
+        0x2::coin_registry::set_icon_url<LpToken<T0, T1>>(arg3, &arg0.metadata_cap, arg6);
+    }
+
+    // decompiled from Move bytecode v6
+}
+
