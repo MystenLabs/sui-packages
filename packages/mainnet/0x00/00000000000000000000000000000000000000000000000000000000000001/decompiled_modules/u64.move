@@ -61,12 +61,16 @@ module 0x1::u64 {
         }
     }
 
-    public fun divide_and_round_up(arg0: u64, arg1: u64) : u64 {
+    public fun div_ceil(arg0: u64, arg1: u64) : u64 {
         if (arg0 % arg1 == 0) {
             arg0 / arg1
         } else {
             arg0 / arg1 + 1
         }
+    }
+
+    public fun divide_and_round_up(arg0: u64, arg1: u64) : u64 {
+        div_ceil(arg0, arg1)
     }
 
     public fun lossless_div(arg0: u64, arg1: u64) : 0x1::option::Option<u64> {
@@ -119,6 +123,21 @@ module 0x1::u64 {
         } else {
             arg1
         }
+    }
+
+    public fun mul_div(arg0: u64, arg1: u64, arg2: u64) : u64 {
+        (((arg0 as u128) * (arg1 as u128) / (arg2 as u128)) as u64)
+    }
+
+    public fun mul_div_ceil(arg0: u64, arg1: u64, arg2: u64) : u64 {
+        let v0 = (arg0 as u128) * (arg1 as u128);
+        let v1 = (arg2 as u128);
+        let v2 = if (v0 % v1 == 0) {
+            v0 / v1
+        } else {
+            v0 / v1 + 1
+        };
+        (v2 as u64)
     }
 
     public fun pow(arg0: u64, arg1: u8) : u64 {

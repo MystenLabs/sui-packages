@@ -34,7 +34,7 @@ module 0x3::voting_power {
 
     public(friend) fun set_voting_power(arg0: &mut vector<0x3::validator::Validator>, arg1: u64) {
         let v0 = 10000;
-        let v1 = 0x1::u64::min(v0, 0x1::u64::max(1000, 0x1::u64::divide_and_round_up(v0, 0x1::vector::length<0x3::validator::Validator>(arg0))));
+        let v1 = 0x1::u64::min(v0, 0x1::u64::max(1000, 0x1::u64::div_ceil(v0, 0x1::vector::length<0x3::validator::Validator>(arg0))));
         let (v2, v3) = init_voting_power_info(arg0, v1, arg1);
         let v4 = v2;
         let v5 = &mut v4;
@@ -48,7 +48,7 @@ module 0x3::voting_power {
         let v1 = 0x1::vector::length<VotingPowerInfoV2>(arg0);
         while (v0 < v1 && arg2 > 0) {
             let v2 = 0x1::vector::borrow_mut<VotingPowerInfoV2>(arg0, v0);
-            let v3 = 0x1::u64::min(arg2, 0x1::u64::min(arg1, v2.voting_power + 0x1::u64::divide_and_round_up(arg2, v1 - v0)) - v2.voting_power);
+            let v3 = 0x1::u64::min(arg2, 0x1::u64::min(arg1, v2.voting_power + 0x1::u64::div_ceil(arg2, v1 - v0)) - v2.voting_power);
             v2.voting_power = v2.voting_power + v3;
             assert!(v2.voting_power <= arg1, 3);
             arg2 = arg2 - v3;

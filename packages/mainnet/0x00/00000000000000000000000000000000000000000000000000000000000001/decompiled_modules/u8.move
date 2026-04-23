@@ -61,12 +61,16 @@ module 0x1::u8 {
         }
     }
 
-    public fun divide_and_round_up(arg0: u8, arg1: u8) : u8 {
+    public fun div_ceil(arg0: u8, arg1: u8) : u8 {
         if (arg0 % arg1 == 0) {
             arg0 / arg1
         } else {
             arg0 / arg1 + 1
         }
+    }
+
+    public fun divide_and_round_up(arg0: u8, arg1: u8) : u8 {
+        div_ceil(arg0, arg1)
     }
 
     public fun lossless_div(arg0: u8, arg1: u8) : 0x1::option::Option<u8> {
@@ -119,6 +123,21 @@ module 0x1::u8 {
         } else {
             arg1
         }
+    }
+
+    public fun mul_div(arg0: u8, arg1: u8, arg2: u8) : u8 {
+        (((arg0 as u16) * (arg1 as u16) / (arg2 as u16)) as u8)
+    }
+
+    public fun mul_div_ceil(arg0: u8, arg1: u8, arg2: u8) : u8 {
+        let v0 = (arg0 as u16) * (arg1 as u16);
+        let v1 = (arg2 as u16);
+        let v2 = if (v0 % v1 == 0) {
+            v0 / v1
+        } else {
+            v0 / v1 + 1
+        };
+        (v2 as u8)
     }
 
     public fun pow(arg0: u8, arg1: u8) : u8 {

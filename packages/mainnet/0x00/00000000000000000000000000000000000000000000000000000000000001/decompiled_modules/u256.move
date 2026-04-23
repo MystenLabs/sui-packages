@@ -45,12 +45,16 @@ module 0x1::u256 {
         }
     }
 
-    public fun divide_and_round_up(arg0: u256, arg1: u256) : u256 {
+    public fun div_ceil(arg0: u256, arg1: u256) : u256 {
         if (arg0 % arg1 == 0) {
             arg0 / arg1
         } else {
             arg0 / arg1 + 1
         }
+    }
+
+    public fun divide_and_round_up(arg0: u256, arg1: u256) : u256 {
+        div_ceil(arg0, arg1)
     }
 
     public fun lossless_div(arg0: u256, arg1: u256) : 0x1::option::Option<u256> {
