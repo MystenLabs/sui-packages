@@ -117,7 +117,7 @@ module 0x2::transfer_policy {
 
     public fun has_rule<T0, T1: drop>(arg0: &TransferPolicy<T0>) : bool {
         let v0 = RuleKey<T1>{dummy_field: false};
-        0x2::dynamic_field::exists_<RuleKey<T1>>(&arg0.id, v0)
+        0x2::dynamic_field::exists<RuleKey<T1>>(&arg0.id, v0)
     }
 
     public fun item<T0>(arg0: &TransferRequest<T0>) : 0x2::object::ID {

@@ -29,7 +29,7 @@ module 0x1::bit_vector {
         assert!(arg0 > 0, 131073);
         assert!(arg0 < 1024, 131073);
         let v0 = 0;
-        let v1 = 0x1::vector::empty<bool>();
+        let v1 = vector[];
         while (v0 < arg0) {
             0x1::vector::push_back<bool>(&mut v1, false);
             v0 = v0 + 1;

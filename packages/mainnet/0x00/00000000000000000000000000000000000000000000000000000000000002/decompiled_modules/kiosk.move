@@ -79,7 +79,7 @@ module 0x2::kiosk {
             id           : arg2,
             is_exclusive : false,
         };
-        0x2::dynamic_field::remove_if_exists<Listing, u64>(&mut arg0.id, v0);
+        0x2::dynamic_field::remove_opt<Listing, u64>(&mut arg0.id, v0);
         let v1 = Item{id: arg2};
         0x2::dynamic_object_field::remove<Item, T0>(&mut arg0.id, v1)
     }
@@ -145,7 +145,7 @@ module 0x2::kiosk {
 
     public fun has_item(arg0: &Kiosk, arg1: 0x2::object::ID) : bool {
         let v0 = Item{id: arg1};
-        0x2::dynamic_object_field::exists_<Item>(&arg0.id, v0)
+        0x2::dynamic_object_field::exists<Item>(&arg0.id, v0)
     }
 
     public fun has_item_with_type<T0: store + key>(arg0: &Kiosk, arg1: 0x2::object::ID) : bool {
@@ -158,7 +158,7 @@ module 0x2::kiosk {
             id           : arg1,
             is_exclusive : false,
         };
-        0x2::dynamic_field::exists_<Listing>(&arg0.id, v0) || is_listed_exclusively(arg0, arg1)
+        0x2::dynamic_field::exists<Listing>(&arg0.id, v0) || is_listed_exclusively(arg0, arg1)
     }
 
     public fun is_listed_exclusively(arg0: &Kiosk, arg1: 0x2::object::ID) : bool {
@@ -166,12 +166,12 @@ module 0x2::kiosk {
             id           : arg1,
             is_exclusive : true,
         };
-        0x2::dynamic_field::exists_<Listing>(&arg0.id, v0)
+        0x2::dynamic_field::exists<Listing>(&arg0.id, v0)
     }
 
     public fun is_locked(arg0: &Kiosk, arg1: 0x2::object::ID) : bool {
         let v0 = Lock{id: arg1};
-        0x2::dynamic_field::exists_<Lock>(&arg0.id, v0)
+        0x2::dynamic_field::exists<Lock>(&arg0.id, v0)
     }
 
     public fun item_count(arg0: &Kiosk) : u32 {
@@ -281,7 +281,7 @@ module 0x2::kiosk {
         arg0.item_count = arg0.item_count - 1;
         assert!(v1 == 0x2::coin::value<0x2::sui::SUI>(&arg2), 1);
         let v3 = Lock{id: arg1};
-        0x2::dynamic_field::remove_if_exists<Lock, bool>(&mut arg0.id, v3);
+        0x2::dynamic_field::remove_opt<Lock, bool>(&mut arg0.id, v3);
         0x2::coin::put<0x2::sui::SUI>(&mut arg0.profits, arg2);
         let v4 = ItemPurchased<T0>{
             kiosk : 0x2::object::id<Kiosk>(arg0),
@@ -323,7 +323,7 @@ module 0x2::kiosk {
         0x2::coin::put<0x2::sui::SUI>(&mut arg0.profits, arg2);
         arg0.item_count = arg0.item_count - 1;
         let v6 = Lock{id: v2};
-        0x2::dynamic_field::remove_if_exists<Lock, bool>(&mut arg0.id, v6);
+        0x2::dynamic_field::remove_opt<Lock, bool>(&mut arg0.id, v6);
         let v7 = Item{id: v2};
         (0x2::dynamic_object_field::remove<Item, T0>(&mut arg0.id, v7), 0x2::transfer_policy::new_request<T0>(v2, v4, 0x2::object::id<Kiosk>(arg0)))
     }

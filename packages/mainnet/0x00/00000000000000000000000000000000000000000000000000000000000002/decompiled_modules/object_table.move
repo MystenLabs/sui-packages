@@ -43,7 +43,7 @@ module 0x2::object_table {
     }
 
     public fun contains<T0: copy + drop + store, T1: store + key>(arg0: &ObjectTable<T0, T1>, arg1: T0) : bool {
-        0x2::dynamic_object_field::exists_<T0>(&arg0.id, arg1)
+        0x2::dynamic_object_field::exists<T0>(&arg0.id, arg1)
     }
 
     public fun is_empty<T0: copy + drop + store, T1: store + key>(arg0: &ObjectTable<T0, T1>) : bool {

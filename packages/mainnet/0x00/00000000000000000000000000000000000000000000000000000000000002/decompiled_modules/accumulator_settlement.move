@@ -28,7 +28,7 @@ module 0x2::accumulator_settlement {
     }
 
     fun new_stream_head(arg0: u256, arg1: u64, arg2: u64) : EventStreamHead {
-        let v0 = 0x1::vector::empty<u256>();
+        let v0 = vector[];
         let v1 = &mut v0;
         add_to_mmr(arg0, v1);
         EventStreamHead{

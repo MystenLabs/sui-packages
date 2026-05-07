@@ -20,6 +20,10 @@ module 0x3::sui_system {
         0x3::sui_system_state_inner::active_validator_addresses(load_system_state_ref(arg0))
     }
 
+    public fun active_validator_stake_amount(arg0: &SuiSystemState, arg1: address) : u64 {
+        0x3::sui_system_state_inner::validator_stake_amount(load_system_state_ref(arg0), arg1)
+    }
+
     public fun active_validator_voting_powers(arg0: &SuiSystemState) : 0x2::vec_map::VecMap<address, u64> {
         0x3::sui_system_state_inner::active_validator_voting_powers(load_system_state_ref(arg0))
     }

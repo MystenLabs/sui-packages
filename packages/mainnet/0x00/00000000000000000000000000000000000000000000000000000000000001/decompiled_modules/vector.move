@@ -132,7 +132,7 @@ module 0x1::vector {
     }
 
     public fun take<T0: drop>(arg0: vector<T0>, arg1: u64) : vector<T0> {
-        assert!(arg1 <= length<T0>(&arg0), 13906834930257625087);
+        assert!(arg1 <= length<T0>(&arg0), 13906834883012984831);
         if (arg1 == length<T0>(&arg0)) {
             return arg0
         };

@@ -249,8 +249,8 @@ module 0xdee9::clob {
         };
         let v4 = 0xdee9::critbit::find_closest_key<TickLevel>(&arg0.asks, arg1);
         arg1 = v4;
-        let v5 = 0x1::vector::empty<u64>();
-        let v6 = 0x1::vector::empty<u64>();
+        let v5 = vector[];
+        let v6 = vector[];
         if (v4 == 0) {
             return (v5, v6)
         };
@@ -277,8 +277,8 @@ module 0xdee9::clob {
         };
         let v4 = 0xdee9::critbit::find_closest_key<TickLevel>(&arg0.bids, arg1);
         arg1 = v4;
-        let v5 = 0x1::vector::empty<u64>();
-        let v6 = 0x1::vector::empty<u64>();
+        let v5 = vector[];
+        let v6 = vector[];
         if (v4 == 0) {
             return (v5, v6)
         };

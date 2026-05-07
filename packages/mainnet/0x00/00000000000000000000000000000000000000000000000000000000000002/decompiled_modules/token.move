@@ -200,7 +200,7 @@ module 0x2::token {
     }
 
     public fun has_rule_config<T0, T1>(arg0: &TokenPolicy<T0>) : bool {
-        0x2::dynamic_field::exists_<RuleKey<T1>>(&arg0.id, key<T1>())
+        0x2::dynamic_field::exists<RuleKey<T1>>(&arg0.id, key<T1>())
     }
 
     public fun has_rule_config_with_type<T0, T1, T2: store>(arg0: &TokenPolicy<T0>) : bool {

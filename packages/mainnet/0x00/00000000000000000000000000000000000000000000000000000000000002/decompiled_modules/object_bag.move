@@ -43,7 +43,7 @@ module 0x2::object_bag {
     }
 
     public fun contains<T0: copy + drop + store>(arg0: &ObjectBag, arg1: T0) : bool {
-        0x2::dynamic_object_field::exists_<T0>(&arg0.id, arg1)
+        0x2::dynamic_object_field::exists<T0>(&arg0.id, arg1)
     }
 
     public fun contains_with_type<T0: copy + drop + store, T1: store + key>(arg0: &ObjectBag, arg1: T0) : bool {

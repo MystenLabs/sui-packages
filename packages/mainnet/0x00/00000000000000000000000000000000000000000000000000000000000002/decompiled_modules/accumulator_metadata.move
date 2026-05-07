@@ -22,7 +22,7 @@ module 0x2::accumulator_metadata {
 
     fun get_accumulator_object_count(arg0: &0x2::accumulator::AccumulatorRoot) : u64 {
         let v0 = AccumulatorObjectCountKey{dummy_field: false};
-        if (0x2::dynamic_field::exists_<AccumulatorObjectCountKey>(0x2::accumulator::root_id(arg0), v0)) {
+        if (0x2::dynamic_field::exists<AccumulatorObjectCountKey>(0x2::accumulator::root_id(arg0), v0)) {
             *0x2::dynamic_field::borrow<AccumulatorObjectCountKey, u64>(0x2::accumulator::root_id(arg0), v0)
         } else {
             0
@@ -31,7 +31,7 @@ module 0x2::accumulator_metadata {
 
     fun record_accumulator_object_changes(arg0: &mut 0x2::accumulator::AccumulatorRoot, arg1: u64, arg2: u64) {
         let v0 = AccumulatorObjectCountKey{dummy_field: false};
-        if (0x2::dynamic_field::exists_<AccumulatorObjectCountKey>(0x2::accumulator::root_id_mut(arg0), v0)) {
+        if (0x2::dynamic_field::exists<AccumulatorObjectCountKey>(0x2::accumulator::root_id_mut(arg0), v0)) {
             let v1 = 0x2::dynamic_field::borrow_mut<AccumulatorObjectCountKey, u64>(0x2::accumulator::root_id_mut(arg0), v0);
             assert!(*v1 + arg1 >= arg2, 0);
             *v1 = *v1 + arg1 - arg2;

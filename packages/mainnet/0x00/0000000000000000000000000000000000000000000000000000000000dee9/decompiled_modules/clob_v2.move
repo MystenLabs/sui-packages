@@ -419,8 +419,8 @@ module 0xdee9::clob_v2 {
     }
 
     public fun get_level2_book_status_ask_side<T0, T1>(arg0: &Pool<T0, T1>, arg1: u64, arg2: u64, arg3: &0x2::clock::Clock) : (vector<u64>, vector<u64>) {
-        let v0 = 0x1::vector::empty<u64>();
-        let v1 = 0x1::vector::empty<u64>();
+        let v0 = vector[];
+        let v1 = vector[];
         if (0xdee9::critbit::is_empty<TickLevel>(&arg0.asks)) {
             return (v0, v1)
         };
@@ -452,8 +452,8 @@ module 0xdee9::clob_v2 {
     }
 
     public fun get_level2_book_status_bid_side<T0, T1>(arg0: &Pool<T0, T1>, arg1: u64, arg2: u64, arg3: &0x2::clock::Clock) : (vector<u64>, vector<u64>) {
-        let v0 = 0x1::vector::empty<u64>();
-        let v1 = 0x1::vector::empty<u64>();
+        let v0 = vector[];
+        let v1 = vector[];
         if (0xdee9::critbit::is_empty<TickLevel>(&arg0.bids)) {
             return (v0, v1)
         };

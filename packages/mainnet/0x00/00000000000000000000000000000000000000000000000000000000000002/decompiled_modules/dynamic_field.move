@@ -29,9 +29,13 @@ module 0x2::dynamic_field {
     native public(friend) fun add_child_object<T0: key>(arg0: address, arg1: T0);
     native public(friend) fun borrow_child_object<T0: key>(arg0: &0x2::object::UID, arg1: address) : &T0;
     native public(friend) fun borrow_child_object_mut<T0: key>(arg0: &mut 0x2::object::UID, arg1: address) : &mut T0;
-    public fun exists_<T0: copy + drop + store>(arg0: &0x2::object::UID, arg1: T0) : bool {
+    public fun exists<T0: copy + drop + store>(arg0: &0x2::object::UID, arg1: T0) : bool {
         let v0 = 0x2::object::uid_to_address(arg0);
         has_child_object(v0, hash_type_and_key<T0>(v0, arg1))
+    }
+
+    public fun exists_<T0: copy + drop + store>(arg0: &0x2::object::UID, arg1: T0) : bool {
+        exists<T0>(arg0, arg1)
     }
 
     public fun exists_with_type<T0: copy + drop + store, T1: store>(arg0: &0x2::object::UID, arg1: T0) : bool {
@@ -66,11 +70,21 @@ module 0x2::dynamic_field {
 
     native public(friend) fun remove_child_object<T0: key>(arg0: address, arg1: address) : T0;
     public fun remove_if_exists<T0: copy + drop + store, T1: store>(arg0: &mut 0x2::object::UID, arg1: T0) : 0x1::option::Option<T1> {
-        if (exists_<T0>(arg0, arg1)) {
+        remove_opt<T0, T1>(arg0, arg1)
+    }
+
+    public fun remove_opt<T0: copy + drop + store, T1: store>(arg0: &mut 0x2::object::UID, arg1: T0) : 0x1::option::Option<T1> {
+        if (exists<T0>(arg0, arg1)) {
             0x1::option::some<T1>(remove<T0, T1>(arg0, arg1))
         } else {
             0x1::option::none<T1>()
         }
+    }
+
+    public fun replace<T0: copy + drop + store, T1: store, T2: store>(arg0: &mut 0x2::object::UID, arg1: T0, arg2: T1) : 0x1::option::Option<T2> {
+        let v0 = remove_opt<T0, T2>(arg0, arg1);
+        add<T0, T1>(arg0, arg1, arg2);
+        v0
     }
 
     // decompiled from Move bytecode v7

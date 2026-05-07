@@ -15,7 +15,7 @@ module 0x2::config {
 
     public(friend) fun add_for_next_epoch<T0, T1: copy + drop + store, T2: copy + drop + store>(arg0: &mut Config<T0>, arg1: &mut T0, arg2: T1, arg3: T2, arg4: &mut 0x2::tx_context::TxContext) : 0x1::option::Option<T2> {
         let v0 = 0x2::tx_context::epoch(arg4);
-        if (!0x2::dynamic_field::exists_<T1>(&arg0.id, arg2)) {
+        if (!0x2::dynamic_field::exists<T1>(&arg0.id, arg2)) {
             let v2 = SettingData<T2>{
                 newer_value_epoch : v0,
                 newer_value       : 0x1::option::some<T2>(arg3),
@@ -88,7 +88,7 @@ module 0x2::config {
     native fun read_setting_impl<T0: key, T1: store, T2: store, T3: copy + drop + store>(arg0: address, arg1: address, arg2: u64) : 0x1::option::Option<T3>;
     public(friend) fun remove_for_next_epoch<T0, T1: copy + drop + store, T2: copy + drop + store>(arg0: &mut Config<T0>, arg1: &mut T0, arg2: T1, arg3: &mut 0x2::tx_context::TxContext) : 0x1::option::Option<T2> {
         let v0 = 0x2::tx_context::epoch(arg3);
-        if (!0x2::dynamic_field::exists_<T1>(&arg0.id, arg2)) {
+        if (!0x2::dynamic_field::exists<T1>(&arg0.id, arg2)) {
             return 0x1::option::none<T2>()
         };
         let v1 = 0x2::dynamic_field::borrow_mut<T1, Setting<T2>>(&mut arg0.id, arg2);

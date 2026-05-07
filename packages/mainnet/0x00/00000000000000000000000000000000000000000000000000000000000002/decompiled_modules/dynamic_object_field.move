@@ -39,9 +39,13 @@ module 0x2::dynamic_object_field {
         0x2::dynamic_field::remove_child_object<T1>(0x2::object::uid_to_address(v1), v2)
     }
 
-    public fun exists_<T0: copy + drop + store>(arg0: &0x2::object::UID, arg1: T0) : bool {
+    public fun exists<T0: copy + drop + store>(arg0: &0x2::object::UID, arg1: T0) : bool {
         let v0 = Wrapper<T0>{name: arg1};
         0x2::dynamic_field::exists_with_type<Wrapper<T0>, 0x2::object::ID>(arg0, v0)
+    }
+
+    public fun exists_<T0: copy + drop + store>(arg0: &0x2::object::UID, arg1: T0) : bool {
+        exists<T0>(arg0, arg1)
     }
 
     public fun id<T0: copy + drop + store>(arg0: &0x2::object::UID, arg1: T0) : 0x1::option::Option<0x2::object::ID> {
@@ -87,6 +91,20 @@ module 0x2::dynamic_object_field {
         let (v1, v2) = 0x2::dynamic_field::field_info<Wrapper<T0>>(arg0, v0);
         0x2::dynamic_field::remove<Wrapper<T0>, 0x2::object::ID>(arg0, v0);
         0x2::dynamic_field::remove_child_object<T1>(0x2::object::uid_to_address(v1), v2)
+    }
+
+    public fun remove_opt<T0: copy + drop + store, T1: store + key>(arg0: &mut 0x2::object::UID, arg1: T0) : 0x1::option::Option<T1> {
+        if (exists<T0>(arg0, arg1)) {
+            0x1::option::some<T1>(remove<T0, T1>(arg0, arg1))
+        } else {
+            0x1::option::none<T1>()
+        }
+    }
+
+    public fun replace<T0: copy + drop + store, T1: store + key, T2: store + key>(arg0: &mut 0x2::object::UID, arg1: T0, arg2: T1) : 0x1::option::Option<T2> {
+        let v0 = remove_opt<T0, T2>(arg0, arg1);
+        add<T0, T1>(arg0, arg1, arg2);
+        v0
     }
 
     // decompiled from Move bytecode v7

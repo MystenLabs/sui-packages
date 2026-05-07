@@ -68,7 +68,7 @@ module 0x2::kiosk_extension {
 
     public fun is_installed<T0: drop>(arg0: &0x2::kiosk::Kiosk) : bool {
         let v0 = ExtensionKey<T0>{dummy_field: false};
-        0x2::dynamic_field::exists_<ExtensionKey<T0>>(0x2::kiosk::uid(arg0), v0)
+        0x2::dynamic_field::exists<ExtensionKey<T0>>(0x2::kiosk::uid(arg0), v0)
     }
 
     public fun lock<T0: drop, T1: store + key>(arg0: T0, arg1: &mut 0x2::kiosk::Kiosk, arg2: T1, arg3: &0x2::transfer_policy::TransferPolicy<T1>) {

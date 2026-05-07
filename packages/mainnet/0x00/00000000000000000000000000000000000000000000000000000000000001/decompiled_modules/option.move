@@ -88,7 +88,9 @@ module 0x1::option {
     }
 
     public fun some<T0>(arg0: T0) : Option<T0> {
-        Option<T0>{vec: 0x1::vector::singleton<T0>(arg0)}
+        let v0 = 0x1::vector::empty<T0>();
+        0x1::vector::push_back<T0>(&mut v0, arg0);
+        Option<T0>{vec: v0}
     }
 
     public fun swap_or_fill<T0>(arg0: &mut Option<T0>, arg1: T0) : Option<T0> {

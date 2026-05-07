@@ -117,7 +117,7 @@ module 0x2::deny_list {
             per_type_index : arg1,
             per_type_key   : arg2,
         };
-        0x2::dynamic_object_field::exists_<ConfigKey>(&arg0.id, v0)
+        0x2::dynamic_object_field::exists<ConfigKey>(&arg0.id, v0)
     }
 
     fun per_type_list(arg0: &mut 0x2::tx_context::TxContext) : PerTypeList {
