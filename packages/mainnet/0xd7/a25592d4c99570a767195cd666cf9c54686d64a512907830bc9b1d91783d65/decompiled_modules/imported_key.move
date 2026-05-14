@@ -1,0 +1,14 @@
+module 0xd7a25592d4c99570a767195cd666cf9c54686d64a512907830bc9b1d91783d65::imported_key {
+    public fun request_imported_key_dwallet_verification(arg0: &0xd7a25592d4c99570a767195cd666cf9c54686d64a512907830bc9b1d91783d65::acl::OperatorCap, arg1: &mut 0xd7a25592d4c99570a767195cd666cf9c54686d64a512907830bc9b1d91783d65::account::Account, arg2: &mut 0xdd24c62739923fbf582f49ef190b4a007f981ca6eb209ca94f3a8eaf7c611317::coordinator::DWalletCoordinator, arg3: 0x2::object::ID, arg4: u32, arg5: vector<u8>, arg6: vector<u8>, arg7: address, arg8: vector<u8>, arg9: vector<u8>, arg10: vector<u8>, arg11: &mut 0x2::coin::Coin<0x7262fb2f7a3a14c888c438a3cd9b912469a58cf60f367352c46584262e8299aa::ika::IKA>, arg12: &mut 0x2::coin::Coin<0x2::sui::SUI>, arg13: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0xdd24c62739923fbf582f49ef190b4a007f981ca6eb209ca94f3a8eaf7c611317::coordinator::request_imported_key_dwallet_verification(arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, 0xdd24c62739923fbf582f49ef190b4a007f981ca6eb209ca94f3a8eaf7c611317::coordinator::register_session_identifier(arg2, arg10, arg13), arg11, arg12, arg13);
+        0xd7a25592d4c99570a767195cd666cf9c54686d64a512907830bc9b1d91783d65::account::store_imported_key_cap(arg1, 0xdd24c62739923fbf582f49ef190b4a007f981ca6eb209ca94f3a8eaf7c611317::coordinator_inner::imported_key_dwallet_id(&v0), v0, arg13);
+    }
+
+    public fun request_imported_key_sign(arg0: &mut 0xd7a25592d4c99570a767195cd666cf9c54686d64a512907830bc9b1d91783d65::account::Account, arg1: &mut 0xdd24c62739923fbf582f49ef190b4a007f981ca6eb209ca94f3a8eaf7c611317::coordinator::DWalletCoordinator, arg2: 0x2::object::ID, arg3: 0xdd24c62739923fbf582f49ef190b4a007f981ca6eb209ca94f3a8eaf7c611317::coordinator_inner::UnverifiedPresignCap, arg4: u32, arg5: u32, arg6: vector<u8>, arg7: vector<u8>, arg8: vector<u8>, arg9: &mut 0x2::coin::Coin<0x7262fb2f7a3a14c888c438a3cd9b912469a58cf60f367352c46584262e8299aa::ika::IKA>, arg10: &mut 0x2::coin::Coin<0x2::sui::SUI>, arg11: &mut 0x2::tx_context::TxContext) : 0x2::object::ID {
+        assert!(0xd7a25592d4c99570a767195cd666cf9c54686d64a512907830bc9b1d91783d65::account::has_imported_key_dwallet(arg0, arg2), 1);
+        0xdd24c62739923fbf582f49ef190b4a007f981ca6eb209ca94f3a8eaf7c611317::coordinator::request_imported_key_sign_and_return_id(arg1, 0xdd24c62739923fbf582f49ef190b4a007f981ca6eb209ca94f3a8eaf7c611317::coordinator::verify_presign_cap(arg1, arg3, arg11), 0xdd24c62739923fbf582f49ef190b4a007f981ca6eb209ca94f3a8eaf7c611317::coordinator::approve_imported_key_message(arg1, 0xd7a25592d4c99570a767195cd666cf9c54686d64a512907830bc9b1d91783d65::account::imported_key_cap(arg0, arg2), arg4, arg5, arg6), arg7, 0xdd24c62739923fbf582f49ef190b4a007f981ca6eb209ca94f3a8eaf7c611317::coordinator::register_session_identifier(arg1, arg8, arg11), arg9, arg10, arg11)
+    }
+
+    // decompiled from Move bytecode v6
+}
+
