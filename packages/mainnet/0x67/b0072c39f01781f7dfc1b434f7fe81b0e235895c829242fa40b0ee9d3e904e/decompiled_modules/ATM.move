@@ -1,0 +1,22 @@
+module 0x67b0072c39f01781f7dfc1b434f7fe81b0e235895c829242fa40b0ee9d3e904e::ATM {
+    struct ATM has drop {
+        dummy_field: bool,
+    }
+
+    public entry fun burn(arg0: &mut 0x2::coin::TreasuryCap<ATM>, arg1: 0x2::coin::Coin<ATM>) {
+        0x2::coin::burn<ATM>(arg0, arg1);
+    }
+
+    public entry fun mint(arg0: &mut 0x2::coin::TreasuryCap<ATM>, arg1: u64, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x2::coin::Coin<ATM>>(0x2::coin::mint<ATM>(arg0, arg1, arg3), arg2);
+    }
+
+    fun init(arg0: ATM, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<ATM>(arg0, 4, b"ATM", b"ATM", b"ATM is the Core Engine of Autonomous Finance", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://lxtry1211.s3.us-west-1.amazonaws.com/atm_token.png")), arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<ATM>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<ATM>>(v0, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v7
+}
+
