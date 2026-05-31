@@ -1,0 +1,91 @@
+module 0x5ea91cfad5399ecbf7ef1669379ea305e9bf9a4fda50667b8be82bda5da452ee::liability {
+    struct Credit<phantom T0> has store {
+        value: u64,
+    }
+
+    struct Debt<phantom T0> has store {
+        value: u64,
+    }
+
+    public fun add_credit<T0>(arg0: &mut Credit<T0>, arg1: Credit<T0>) : u64 {
+        let Credit { value: v0 } = arg1;
+        arg0.value = arg0.value + v0;
+        arg0.value
+    }
+
+    public fun add_debt<T0>(arg0: &mut Debt<T0>, arg1: Debt<T0>) : u64 {
+        let Debt { value: v0 } = arg1;
+        arg0.value = arg0.value + v0;
+        arg0.value
+    }
+
+    public fun auto_settle<T0>(arg0: &mut Credit<T0>, arg1: &mut Debt<T0>) : (u64, u64) {
+        let v0 = arg0.value;
+        let v1 = arg1.value;
+        if (v0 >= v1) {
+            arg0.value = v0 - v1;
+            arg1.value = 0;
+        } else {
+            arg0.value = 0;
+            arg1.value = v1 - v0;
+        };
+        (arg0.value, arg1.value)
+    }
+
+    public fun credit_value<T0>(arg0: &Credit<T0>) : u64 {
+        arg0.value
+    }
+
+    public fun debt_value<T0>(arg0: &Debt<T0>) : u64 {
+        arg0.value
+    }
+
+    public fun destroy_zero_credit<T0>(arg0: Credit<T0>) {
+        let Credit { value: v0 } = arg0;
+        assert!(v0 == 0, 1);
+    }
+
+    public fun destroy_zero_debt<T0>(arg0: Debt<T0>) {
+        let Debt { value: v0 } = arg0;
+        assert!(v0 == 0, 2);
+    }
+
+    public fun new<T0>(arg0: u64) : (Credit<T0>, Debt<T0>) {
+        let v0 = Credit<T0>{value: arg0};
+        let v1 = Debt<T0>{value: arg0};
+        (v0, v1)
+    }
+
+    public fun settle_credit<T0>(arg0: &mut Debt<T0>, arg1: Credit<T0>) : 0x1::option::Option<Credit<T0>> {
+        let v0 = &mut arg1;
+        let (v1, _) = auto_settle<T0>(v0, arg0);
+        if (v1 > 0) {
+            0x1::option::some<Credit<T0>>(arg1)
+        } else {
+            destroy_zero_credit<T0>(arg1);
+            0x1::option::none<Credit<T0>>()
+        }
+    }
+
+    public fun settle_debt<T0>(arg0: &mut Credit<T0>, arg1: Debt<T0>) : 0x1::option::Option<Debt<T0>> {
+        let v0 = &mut arg1;
+        let (_, v2) = auto_settle<T0>(arg0, v0);
+        if (v2 > 0) {
+            0x1::option::some<Debt<T0>>(arg1)
+        } else {
+            destroy_zero_debt<T0>(arg1);
+            0x1::option::none<Debt<T0>>()
+        }
+    }
+
+    public fun zero_credit<T0>() : Credit<T0> {
+        Credit<T0>{value: 0}
+    }
+
+    public fun zero_debt<T0>() : Debt<T0> {
+        Debt<T0>{value: 0}
+    }
+
+    // decompiled from Move bytecode v7
+}
+
