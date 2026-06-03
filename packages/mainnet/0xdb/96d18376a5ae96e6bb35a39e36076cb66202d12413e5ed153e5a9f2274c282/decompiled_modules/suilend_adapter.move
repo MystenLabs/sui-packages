@@ -1,0 +1,207 @@
+module 0xdb96d18376a5ae96e6bb35a39e36076cb66202d12413e5ed153e5a9f2274c282::suilend_adapter {
+    struct SuilendWitness<phantom T0> has drop {
+        dummy_field: bool,
+    }
+
+    struct SuilendAdapter<phantom T0, phantom T1, phantom T2> has store, key {
+        id: 0x2::object::UID,
+        coin_in: u64,
+        obligation_owner_cap: 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::ObligationOwnerCap<T0>,
+        reserve_array_index: u64,
+        reward_index_table: 0x2::table::Table<0x1::type_name::TypeName, u64>,
+        reward_pool_table: 0x2::table::Table<0x1::type_name::TypeName, 0x2::object::ID>,
+        apr: u256,
+    }
+
+    public fun new<T0, T1, T2>(arg0: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg1: u64, arg2: vector<0x1::type_name::TypeName>, arg3: vector<u64>, arg4: vector<0x1::type_name::TypeName>, arg5: vector<0x2::object::ID>, arg6: &0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::acl::AdminWitness<0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::sam::SAM>, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::table::new<0x1::type_name::TypeName, u64>(arg7);
+        let v1 = 0x2::table::new<0x1::type_name::TypeName, 0x2::object::ID>(arg7);
+        0x1::vector::reverse<u64>(&mut arg3);
+        assert!(0x1::vector::length<0x1::type_name::TypeName>(&arg2) == 0x1::vector::length<u64>(&arg3), 13906834380501811199);
+        0x1::vector::reverse<0x1::type_name::TypeName>(&mut arg2);
+        let v2 = 0;
+        while (v2 < 0x1::vector::length<0x1::type_name::TypeName>(&arg2)) {
+            0x2::table::add<0x1::type_name::TypeName, u64>(&mut v0, 0x1::vector::pop_back<0x1::type_name::TypeName>(&mut arg2), 0x1::vector::pop_back<u64>(&mut arg3));
+            v2 = v2 + 1;
+        };
+        0x1::vector::destroy_empty<0x1::type_name::TypeName>(arg2);
+        0x1::vector::destroy_empty<u64>(arg3);
+        0x1::vector::reverse<0x2::object::ID>(&mut arg5);
+        assert!(0x1::vector::length<0x1::type_name::TypeName>(&arg4) == 0x1::vector::length<0x2::object::ID>(&arg5), 13906834397681680383);
+        0x1::vector::reverse<0x1::type_name::TypeName>(&mut arg4);
+        let v3 = 0;
+        while (v3 < 0x1::vector::length<0x1::type_name::TypeName>(&arg4)) {
+            0x2::table::add<0x1::type_name::TypeName, 0x2::object::ID>(&mut v1, 0x1::vector::pop_back<0x1::type_name::TypeName>(&mut arg4), 0x1::vector::pop_back<0x2::object::ID>(&mut arg5));
+            v3 = v3 + 1;
+        };
+        0x1::vector::destroy_empty<0x1::type_name::TypeName>(arg4);
+        0x1::vector::destroy_empty<0x2::object::ID>(arg5);
+        let v4 = SuilendAdapter<T0, T1, T2>{
+            id                   : 0x2::object::new(arg7),
+            coin_in              : 0,
+            obligation_owner_cap : 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::create_obligation<T0>(arg0, arg7),
+            reserve_array_index  : arg1,
+            reward_index_table   : v0,
+            reward_pool_table    : v1,
+            apr                  : 0,
+        };
+        0x2::transfer::public_share_object<SuilendAdapter<T0, T1, T2>>(v4);
+    }
+
+    public fun allocate_to_protocol<T0, T1, T2>(arg0: &mut SuilendAdapter<T0, T1, T2>, arg1: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::SAMState<T1, T2>, arg2: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg3: 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::rbr::RebalanceRequest<T1>, arg4: &0x2::clock::Clock, arg5: &0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::sam_allowed_versions::AllowedVersions, arg6: &mut 0x2::tx_context::TxContext) {
+        let v0 = SuilendWitness<T2>{dummy_field: false};
+        let v1 = 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::allocate_to_protocol<T1, T2, SuilendWitness<T2>>(arg1, arg3, v0, arg5, arg6);
+        arg0.coin_in = arg0.coin_in + 0x2::balance::value<T1>(&v1);
+        0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::deposit_ctokens_into_obligation<T0, T1>(arg2, arg0.reserve_array_index, &arg0.obligation_owner_cap, arg4, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::deposit_liquidity_and_mint_ctokens<T0, T1>(arg2, arg0.reserve_array_index, arg4, 0x2::coin::from_balance<T1>(v1, arg6), arg6), arg6);
+    }
+
+    public fun approve_protocol_request<T0, T1, T2, T3>(arg0: &mut SuilendAdapter<T0, T1, T2>, arg1: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::SAMState<T1, T2>, arg2: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg3: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::ptr::ProtocolRequest<T1>, arg4: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg5: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T3>, arg6: &0x2::clock::Clock, arg7: 0x1::option::Option<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::RateLimiterExemption<T0, T1>>, arg8: &0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::sam_allowed_versions::AllowedVersions, arg9: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T3> {
+        let (v0, v1) = swap_rewards<T0, T1, T2, T3>(arg0, arg2, arg4, arg5, arg6, arg9);
+        let v2 = v0;
+        let v3 = redeem_growth<T0, T1, T2>(arg0, arg2, arg6, arg7, arg9);
+        0x2::balance::join<T1>(&mut v2, v3);
+        let v4 = SuilendWitness<T2>{dummy_field: false};
+        0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::approve_protocol_request<T1, T2, SuilendWitness<T2>>(arg1, arg3, get_available_liquidity<T0, T1, T2>(arg0, arg2, 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::decimals<T1, T2>(arg1)), get_apr<T0, T1, T2>(arg0), v2, v4, arg8, arg9);
+        0x2::coin::from_balance<T3>(v1, arg9)
+    }
+
+    public fun approve_protocol_request_three_rewards<T0, T1, T2, T3, T4, T5>(arg0: &mut SuilendAdapter<T0, T1, T2>, arg1: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::SAMState<T1, T2>, arg2: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg3: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::ptr::ProtocolRequest<T1>, arg4: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg5: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T3>, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T4>, arg7: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T5>, arg8: &0x2::clock::Clock, arg9: 0x1::option::Option<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::RateLimiterExemption<T0, T1>>, arg10: &0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::sam_allowed_versions::AllowedVersions, arg11: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T3>, 0x2::coin::Coin<T4>, 0x2::coin::Coin<T5>) {
+        let (v0, v1) = swap_rewards<T0, T1, T2, T3>(arg0, arg2, arg4, arg5, arg8, arg11);
+        let v2 = v0;
+        let (v3, v4) = swap_rewards<T0, T1, T2, T4>(arg0, arg2, arg4, arg6, arg8, arg11);
+        let (v5, v6) = swap_rewards<T0, T1, T2, T5>(arg0, arg2, arg4, arg7, arg8, arg11);
+        let v7 = redeem_growth<T0, T1, T2>(arg0, arg2, arg8, arg9, arg11);
+        0x2::balance::join<T1>(&mut v2, v7);
+        0x2::balance::join<T1>(&mut v2, v3);
+        0x2::balance::join<T1>(&mut v2, v5);
+        let v8 = SuilendWitness<T2>{dummy_field: false};
+        0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::approve_protocol_request<T1, T2, SuilendWitness<T2>>(arg1, arg3, get_available_liquidity<T0, T1, T2>(arg0, arg2, 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::decimals<T1, T2>(arg1)), get_apr<T0, T1, T2>(arg0), v2, v8, arg10, arg11);
+        (0x2::coin::from_balance<T3>(v1, arg11), 0x2::coin::from_balance<T4>(v4, arg11), 0x2::coin::from_balance<T5>(v6, arg11))
+    }
+
+    public fun approve_protocol_request_two_rewards<T0, T1, T2, T3, T4>(arg0: &mut SuilendAdapter<T0, T1, T2>, arg1: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::SAMState<T1, T2>, arg2: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg3: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::ptr::ProtocolRequest<T1>, arg4: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg5: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T3>, arg6: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T4>, arg7: &0x2::clock::Clock, arg8: 0x1::option::Option<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::RateLimiterExemption<T0, T1>>, arg9: &0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::sam_allowed_versions::AllowedVersions, arg10: &mut 0x2::tx_context::TxContext) : (0x2::coin::Coin<T3>, 0x2::coin::Coin<T4>) {
+        let (v0, v1) = swap_rewards<T0, T1, T2, T3>(arg0, arg2, arg4, arg5, arg7, arg10);
+        let v2 = v0;
+        let (v3, v4) = swap_rewards<T0, T1, T2, T4>(arg0, arg2, arg4, arg6, arg7, arg10);
+        let v5 = redeem_growth<T0, T1, T2>(arg0, arg2, arg7, arg8, arg10);
+        0x2::balance::join<T1>(&mut v2, v5);
+        0x2::balance::join<T1>(&mut v2, v3);
+        let v6 = SuilendWitness<T2>{dummy_field: false};
+        0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::approve_protocol_request<T1, T2, SuilendWitness<T2>>(arg1, arg3, get_available_liquidity<T0, T1, T2>(arg0, arg2, 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::decimals<T1, T2>(arg1)), get_apr<T0, T1, T2>(arg0), v2, v6, arg9, arg10);
+        (0x2::coin::from_balance<T3>(v1, arg10), 0x2::coin::from_balance<T4>(v4, arg10))
+    }
+
+    fun claim_rewards<T0, T1, T2, T3>(arg0: &SuilendAdapter<T0, T1, T2>, arg1: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg2: &0x2::clock::Clock, arg3: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<T3> {
+        0x2::coin::into_balance<T3>(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::claim_rewards<T0, T3>(arg1, &arg0.obligation_owner_cap, arg2, arg0.reserve_array_index, *0x2::table::borrow<0x1::type_name::TypeName, u64>(&arg0.reward_index_table, 0x1::type_name::get<T3>()), true, arg3))
+    }
+
+    fun get_apr<T0, T1, T2>(arg0: &SuilendAdapter<T0, T1, T2>) : 0x99a1d666d9e4792bee2f34a2693aeab95a57b3c662da2e68574a03e929e60b0e::fixed18::Fixed18 {
+        0x99a1d666d9e4792bee2f34a2693aeab95a57b3c662da2e68574a03e929e60b0e::fixed18::from_raw_u256(arg0.apr)
+    }
+
+    fun get_available_liquidity<T0, T1, T2>(arg0: &SuilendAdapter<T0, T1, T2>, arg1: &0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg2: u8) : 0x99a1d666d9e4792bee2f34a2693aeab95a57b3c662da2e68574a03e929e60b0e::fixed18::Fixed18 {
+        let v0 = 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::available_amount<T0>(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::reserve<T0, T1>(arg1));
+        let v1 = if (v0 < arg0.coin_in) {
+            v0
+        } else {
+            arg0.coin_in
+        };
+        0x99a1d666d9e4792bee2f34a2693aeab95a57b3c662da2e68574a03e929e60b0e::fixed18::u64_to_fixed18(v1, arg2)
+    }
+
+    fun redeem_growth<T0, T1, T2>(arg0: &SuilendAdapter<T0, T1, T2>, arg1: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg2: &0x2::clock::Clock, arg3: 0x1::option::Option<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::RateLimiterExemption<T0, T1>>, arg4: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<T1> {
+        let v0 = 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::decimal::saturating_floor(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::decimal::mul(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::ctoken_ratio<T0>(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::reserve<T0, T1>(arg1)), 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::decimal::from(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::obligation::deposited_ctoken_amount<T0, T1>(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::obligation<T0>(arg1, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::obligation_id<T0>(&arg0.obligation_owner_cap))))));
+        if (v0 <= arg0.coin_in) {
+            return 0x2::balance::zero<T1>()
+        };
+        let v1 = 0xad013d5fde39e15eabda32b3dbdafd67dac32b798ce63237c27a8f73339b9b6f::u64::mul_div(v0 - arg0.coin_in, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::ctoken_supply<T0>(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::reserve<T0, T1>(arg1)), v0);
+        withdraw_sui_amount<T0, T1, T2>(arg0, arg1, arg2, arg3, v1, arg4)
+    }
+
+    public fun set_reward_index_table<T0, T1, T2>(arg0: &mut SuilendAdapter<T0, T1, T2>, arg1: vector<0x1::type_name::TypeName>, arg2: vector<0x1::type_name::TypeName>, arg3: vector<u64>, arg4: &0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::acl::AdminWitness<0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::sam::SAM>) {
+        0x1::vector::reverse<0x1::type_name::TypeName>(&mut arg1);
+        let v0 = 0;
+        while (v0 < 0x1::vector::length<0x1::type_name::TypeName>(&arg1)) {
+            0x2::table::remove<0x1::type_name::TypeName, u64>(&mut arg0.reward_index_table, 0x1::vector::pop_back<0x1::type_name::TypeName>(&mut arg1));
+            v0 = v0 + 1;
+        };
+        0x1::vector::destroy_empty<0x1::type_name::TypeName>(arg1);
+        0x1::vector::reverse<u64>(&mut arg3);
+        assert!(0x1::vector::length<0x1::type_name::TypeName>(&arg2) == 0x1::vector::length<u64>(&arg3), 13906834509350830079);
+        0x1::vector::reverse<0x1::type_name::TypeName>(&mut arg2);
+        let v1 = 0;
+        while (v1 < 0x1::vector::length<0x1::type_name::TypeName>(&arg2)) {
+            0x2::table::add<0x1::type_name::TypeName, u64>(&mut arg0.reward_index_table, 0x1::vector::pop_back<0x1::type_name::TypeName>(&mut arg2), 0x1::vector::pop_back<u64>(&mut arg3));
+            v1 = v1 + 1;
+        };
+        0x1::vector::destroy_empty<0x1::type_name::TypeName>(arg2);
+        0x1::vector::destroy_empty<u64>(arg3);
+    }
+
+    public fun set_reward_pool_table<T0, T1, T2>(arg0: &mut SuilendAdapter<T0, T1, T2>, arg1: vector<0x1::type_name::TypeName>, arg2: vector<0x1::type_name::TypeName>, arg3: vector<0x2::object::ID>, arg4: &0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::acl::AdminWitness<0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::sam::SAM>) {
+        0x1::vector::reverse<0x1::type_name::TypeName>(&mut arg1);
+        let v0 = 0;
+        while (v0 < 0x1::vector::length<0x1::type_name::TypeName>(&arg1)) {
+            0x2::table::remove<0x1::type_name::TypeName, 0x2::object::ID>(&mut arg0.reward_pool_table, 0x1::vector::pop_back<0x1::type_name::TypeName>(&mut arg1));
+            v0 = v0 + 1;
+        };
+        0x1::vector::destroy_empty<0x1::type_name::TypeName>(arg1);
+        0x1::vector::reverse<0x2::object::ID>(&mut arg3);
+        assert!(0x1::vector::length<0x1::type_name::TypeName>(&arg2) == 0x1::vector::length<0x2::object::ID>(&arg3), 13906834578070306815);
+        0x1::vector::reverse<0x1::type_name::TypeName>(&mut arg2);
+        let v1 = 0;
+        while (v1 < 0x1::vector::length<0x1::type_name::TypeName>(&arg2)) {
+            0x2::table::add<0x1::type_name::TypeName, 0x2::object::ID>(&mut arg0.reward_pool_table, 0x1::vector::pop_back<0x1::type_name::TypeName>(&mut arg2), 0x1::vector::pop_back<0x2::object::ID>(&mut arg3));
+            v1 = v1 + 1;
+        };
+        0x1::vector::destroy_empty<0x1::type_name::TypeName>(arg2);
+        0x1::vector::destroy_empty<0x2::object::ID>(arg3);
+    }
+
+    fun swap_rewards<T0, T1, T2, T3>(arg0: &SuilendAdapter<T0, T1, T2>, arg1: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg3: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T3>, arg4: &0x2::clock::Clock, arg5: &mut 0x2::tx_context::TxContext) : (0x2::balance::Balance<T1>, 0x2::balance::Balance<T3>) {
+        assert!(*0x2::table::borrow<0x1::type_name::TypeName, 0x2::object::ID>(&arg0.reward_pool_table, 0x1::type_name::get<T3>()) == 0x2::object::id<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T1, T3>>(arg3), 13906835913805135871);
+        let v0 = claim_rewards<T0, T1, T2, T3>(arg0, arg1, arg4, arg5);
+        let (v1, v2, v3) = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::flash_swap<T1, T3>(arg2, arg3, false, true, 0x2::balance::value<T3>(&v0), 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick_math::min_sqrt_price(), arg4);
+        let v4 = v3;
+        let v5 = v2;
+        0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::repay_flash_swap<T1, T3>(arg2, arg3, 0x2::balance::zero<T1>(), 0x2::balance::split<T3>(&mut v0, 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::swap_pay_amount<T1, T3>(&v4)), v4);
+        0x2::balance::join<T3>(&mut v5, v0);
+        (v1, v5)
+    }
+
+    public fun update_apr<T0, T1, T2>(arg0: &mut SuilendAdapter<T0, T1, T2>, arg1: u256, arg2: &0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::acl::AdminWitness<0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::sam::SAM>) {
+        arg0.apr = arg1;
+    }
+
+    fun withdraw_inner<T0, T1, T2>(arg0: &SuilendAdapter<T0, T1, T2>, arg1: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg2: &0x2::clock::Clock, arg3: 0x1::option::Option<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::RateLimiterExemption<T0, T1>>, arg4: u64, arg5: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<T1> {
+        0x2::coin::into_balance<T1>(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::redeem_ctokens_and_withdraw_liquidity<T0, T1>(arg1, arg0.reserve_array_index, arg2, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::withdraw_ctokens<T0, T1>(arg1, arg0.reserve_array_index, &arg0.obligation_owner_cap, arg2, arg4, arg5), arg3, arg5))
+    }
+
+    public fun withdraw_rbr<T0, T1, T2>(arg0: &mut SuilendAdapter<T0, T1, T2>, arg1: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::SAMState<T1, T2>, arg2: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg3: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::rbr::RebalanceRequest<T1>, arg4: &0x2::clock::Clock, arg5: 0x1::option::Option<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::RateLimiterExemption<T0, T1>>, arg6: &0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::sam_allowed_versions::AllowedVersions, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::rbr::amount<T1>(arg3);
+        arg0.coin_in = arg0.coin_in - v0;
+        let v1 = withdraw_sui_amount<T0, T1, T2>(arg0, arg2, arg4, arg5, v0, arg7);
+        let v2 = SuilendWitness<T2>{dummy_field: false};
+        0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::fill_rebalance_request<T1, T2, SuilendWitness<T2>>(arg1, arg3, v1, v2, arg6, arg7);
+    }
+
+    fun withdraw_sui_amount<T0, T1, T2>(arg0: &SuilendAdapter<T0, T1, T2>, arg1: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg2: &0x2::clock::Clock, arg3: 0x1::option::Option<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::RateLimiterExemption<T0, T1>>, arg4: u64, arg5: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<T1> {
+        let v0 = 0xad013d5fde39e15eabda32b3dbdafd67dac32b798ce63237c27a8f73339b9b6f::u64::mul_div(arg4, 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::ctoken_supply<T0>(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::reserve<T0, T1>(arg1)), 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::decimal::saturating_floor(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::decimal::mul(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::ctoken_ratio<T0>(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::reserve<T0, T1>(arg1)), 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::decimal::from(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::reserve::ctoken_supply<T0>(0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::reserve<T0, T1>(arg1))))));
+        withdraw_inner<T0, T1, T2>(arg0, arg1, arg2, arg3, v0, arg5)
+    }
+
+    public fun withdraw_wdr<T0, T1, T2>(arg0: &mut SuilendAdapter<T0, T1, T2>, arg1: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::SAMState<T1, T2>, arg2: &mut 0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::LendingMarket<T0>, arg3: &mut 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::wdr::WithdrawRequest<T1>, arg4: &0x2::clock::Clock, arg5: 0x1::option::Option<0xf95b06141ed4a174f239417323bde3f209b972f5930d8521ea38a52aff3a6ddf::lending_market::RateLimiterExemption<T0, T1>>, arg6: &0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::sam_allowed_versions::AllowedVersions, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::wdr::get_coin_amount<T1>(arg3);
+        arg0.coin_in = arg0.coin_in - v0;
+        let v1 = withdraw_sui_amount<T0, T1, T2>(arg0, arg2, arg4, arg5, v0, arg7);
+        let v2 = SuilendWitness<T2>{dummy_field: false};
+        0xd2550407673e08d06c4b1f16f31bb7313e5de02c5212f6e0627250e3bc72f282::state::fill_withdraw_request<T1, T2, SuilendWitness<T2>>(arg1, arg3, v1, v2, arg6, arg7);
+    }
+
+    public fun witness_type<T0>() : 0x1::type_name::TypeName {
+        0x1::type_name::get<SuilendWitness<T0>>()
+    }
+
+    // decompiled from Move bytecode v7
+}
+
