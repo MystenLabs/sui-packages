@@ -1,0 +1,121 @@
+module 0x606e7f02a02f36c237053ebf87b3fcf8688c79c79db700e8a0f902a87333ba2e::lofi16 {
+    struct LOFI16 has drop {
+        dummy_field: bool,
+    }
+
+    struct AdminCap has store, key {
+        id: 0x2::object::UID,
+        admin_address: address,
+        buy_tax_rate: u64,
+        sell_tax_rate: u64,
+    }
+
+    struct TaxStorage has key {
+        id: 0x2::object::UID,
+        dex_pools: 0x2::table::Table<address, bool>,
+    }
+
+    struct CoinSocialLinks has key {
+        id: 0x2::object::UID,
+        website: 0x1::string::String,
+        twitter: 0x1::string::String,
+        telegram: 0x1::string::String,
+    }
+
+    public entry fun change_admin_wallet(arg0: &mut AdminCap, arg1: address, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg2) == arg0.admin_address, 1);
+        arg0.admin_address = arg1;
+    }
+
+    public fun get_telegram(arg0: &CoinSocialLinks) : &0x1::string::String {
+        &arg0.telegram
+    }
+
+    public fun get_twitter(arg0: &CoinSocialLinks) : &0x1::string::String {
+        &arg0.twitter
+    }
+
+    public fun get_website(arg0: &CoinSocialLinks) : &0x1::string::String {
+        &arg0.website
+    }
+
+    fun init(arg0: LOFI16, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::tx_context::sender(arg1);
+        let v1 = b"https://i.postimg.cc/mgPSv160/LOFI.png";
+        let v2 = if (0x1::vector::is_empty<u8>(&v1)) {
+            0x1::option::none<0x2::url::Url>()
+        } else {
+            0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(v1))
+        };
+        let (v3, v4) = 0x2::coin::create_currency<LOFI16>(arg0, 9, b"LOFI16", b"LOFI16", b"LOFI16", v2, arg1);
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<LOFI16>>(v4);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<LOFI16>>(v3, v0);
+        let v5 = CoinSocialLinks{
+            id       : 0x2::object::new(arg1),
+            website  : 0x1::string::utf8(b"https://i.postimg.cc/mgPSv160/LOFI.png"),
+            twitter  : 0x1::string::utf8(b""),
+            telegram : 0x1::string::utf8(b""),
+        };
+        0x2::transfer::share_object<CoinSocialLinks>(v5);
+        let v6 = AdminCap{
+            id            : 0x2::object::new(arg1),
+            admin_address : @0xd67b13c40817ad1159067cfb54aa2b244f521eb2cce18cb7b7f5ea9003eecb11,
+            buy_tax_rate  : 0,
+            sell_tax_rate : 300,
+        };
+        0x2::transfer::public_transfer<AdminCap>(v6, v0);
+        let v7 = TaxStorage{
+            id        : 0x2::object::new(arg1),
+            dex_pools : 0x2::table::new<address, bool>(arg1),
+        };
+        0x2::transfer::share_object<TaxStorage>(v7);
+    }
+
+    public fun is_dex_pool(arg0: &TaxStorage, arg1: address) : bool {
+        0x2::table::contains<address, bool>(&arg0.dex_pools, arg1)
+    }
+
+    public entry fun register_dex_pool(arg0: &AdminCap, arg1: &mut TaxStorage, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg3) == arg0.admin_address, 1);
+        if (!0x2::table::contains<address, bool>(&arg1.dex_pools, arg2)) {
+            0x2::table::add<address, bool>(&mut arg1.dex_pools, arg2, true);
+        };
+    }
+
+    public entry fun transfer_with_tax(arg0: &TaxStorage, arg1: &AdminCap, arg2: &mut 0x2::coin::Coin<LOFI16>, arg3: u64, arg4: address, arg5: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0;
+        let v1 = 0x2::table::contains<address, bool>(&arg0.dex_pools, 0x2::tx_context::sender(arg5));
+        let v2 = 0x2::table::contains<address, bool>(&arg0.dex_pools, arg4);
+        if (v1 && !v2) {
+            v0 = arg1.buy_tax_rate;
+        } else if (!v1 && v2) {
+            v0 = arg1.sell_tax_rate;
+        };
+        let v3 = 0x2::balance::split<LOFI16>(0x2::coin::balance_mut<LOFI16>(arg2), arg3);
+        if (v0 > 0) {
+            let v4 = arg3 * v0 / 10000;
+            0x2::transfer::public_transfer<0x2::coin::Coin<LOFI16>>(0x2::coin::from_balance<LOFI16>(0x2::balance::split<LOFI16>(&mut v3, v4), arg5), arg1.admin_address);
+            0x2::transfer::public_transfer<0x2::coin::Coin<LOFI16>>(0x2::coin::from_balance<LOFI16>(0x2::balance::split<LOFI16>(&mut v3, arg3 - v4), arg5), arg4);
+            0x2::balance::destroy_zero<LOFI16>(v3);
+        } else {
+            0x2::transfer::public_transfer<0x2::coin::Coin<LOFI16>>(0x2::coin::from_balance<LOFI16>(v3, arg5), arg4);
+        };
+    }
+
+    public entry fun unregister_dex_pool(arg0: &AdminCap, arg1: &mut TaxStorage, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg3) == arg0.admin_address, 1);
+        if (0x2::table::contains<address, bool>(&arg1.dex_pools, arg2)) {
+            0x2::table::remove<address, bool>(&mut arg1.dex_pools, arg2);
+        };
+    }
+
+    public entry fun update_tax_rates(arg0: &mut AdminCap, arg1: u64, arg2: u64, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(0x2::tx_context::sender(arg3) == arg0.admin_address, 1);
+        assert!(arg1 <= 500 && arg2 <= 500, 2);
+        arg0.buy_tax_rate = arg1;
+        arg0.sell_tax_rate = arg2;
+    }
+
+    // decompiled from Move bytecode v7
+}
+
