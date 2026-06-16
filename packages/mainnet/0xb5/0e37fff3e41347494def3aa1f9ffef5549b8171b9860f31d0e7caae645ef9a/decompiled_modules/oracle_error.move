@@ -1,0 +1,88 @@
+module 0xbc3765f20da7192407de1a2cf92082982ad73fac247bc10a29933ad0766b6735::oracle_error {
+    public(friend) fun asset_already_registered() : u64 {
+        8000019
+    }
+
+    public(friend) fun asset_not_registered() : u64 {
+        8000020
+    }
+
+    public(friend) fun asset_source_conflict() : u64 {
+        8000021
+    }
+
+    public(friend) fun ema_spot_price_too_different() : u64 {
+        8000009
+    }
+
+    public(friend) fun future_pyth_price() : u64 {
+        8000006
+    }
+
+    public(friend) fun illegal_pyth_price_object() : u64 {
+        8000004
+    }
+
+    public(friend) fun invalid_bound() : u64 {
+        8000018
+    }
+
+    public(friend) fun invalid_conf_range() : u64 {
+        8000005
+    }
+
+    public(friend) fun invalid_delay_tolerance() : u64 {
+        8000012
+    }
+
+    public(friend) fun oracle_price_not_found_error() : u64 {
+        8000007
+    }
+
+    public(friend) fun oracle_stale_price_error() : u64 {
+        8000010
+    }
+
+    public(friend) fun oracle_zero_price_error() : u64 {
+        8000011
+    }
+
+    public(friend) fun pyth_price_conf_too_large() : u64 {
+        8000002
+    }
+
+    public(friend) fun pyth_price_decimals_too_large() : u64 {
+        8000000
+    }
+
+    public(friend) fun pyth_price_too_old() : u64 {
+        8000001
+    }
+
+    public(friend) fun pyth_spot_ema_price_decimals_not_match() : u64 {
+        8000003
+    }
+
+    public(friend) fun stork_value_overflow() : u64 {
+        8000015
+    }
+
+    public(friend) fun unknown_oracle_base_token() : u64 {
+        8000008
+    }
+
+    public(friend) fun value_above_upper_bound() : u64 {
+        8000017
+    }
+
+    public(friend) fun value_below_lower_bound() : u64 {
+        8000016
+    }
+
+    public(friend) fun version_not_match() : u64 {
+        8000013
+    }
+
+    // decompiled from Move bytecode v7
+}
+
