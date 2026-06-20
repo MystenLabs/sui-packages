@@ -1,0 +1,67 @@
+module 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::controller {
+    public fun add_black_list(arg0: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg1: address, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::controller(arg0) == 0x2::tx_context::sender(arg2), 201);
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::add_black_list(arg0, arg1);
+    }
+
+    public fun add_white_list<T0, T1>(arg0: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg1: address, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::controller(arg0) == 0x2::tx_context::sender(arg2), 201);
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::add_white_list<T0, T1>(arg0, arg1);
+    }
+
+    public fun modify_buy_tax<T0, T1>(arg0: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg1: u8, arg2: &mut 0x2::tx_context::TxContext) {
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::modify_buy_tax<T0, T1>(arg0, arg1, arg2);
+    }
+
+    public fun modify_config<T0, T1>(arg0: &0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::owner::OwnerCap, arg1: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg2: address, arg3: 0x1::ascii::String, arg4: &mut 0x2::tx_context::TxContext) {
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::modify_pool_config<T0, T1>(arg1, arg2, arg3);
+    }
+
+    public fun modify_controller(arg0: &0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::owner::OwnerCap, arg1: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::modify_controller(arg1, arg2);
+    }
+
+    public fun modify_rebot_addr<T0, T1>(arg0: &0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::owner::OwnerCap, arg1: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::modify_rebot_addr<T0, T1>(arg1, arg2);
+    }
+
+    public fun modify_sell_tax<T0, T1>(arg0: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg1: u8, arg2: &mut 0x2::tx_context::TxContext) {
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::modify_sell_tax<T0, T1>(arg0, arg1, arg2);
+    }
+
+    public fun modify_swap_caller<T0, T1>(arg0: &0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::owner::OwnerCap, arg1: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::modify_swap_caller<T0, T1>(arg1, arg2);
+    }
+
+    public fun modify_switch_config<T0, T1>(arg0: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg1: bool, arg2: bool, arg3: &mut 0x2::tx_context::TxContext) {
+        assert!(0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::controller(arg0) == 0x2::tx_context::sender(arg3), 201);
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::modify_switch_config<T0, T1>(arg0, arg1, arg2);
+    }
+
+    public fun pause(arg0: &0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::owner::OwnerCap, arg1: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(!0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::is_emergency(arg1), 202);
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::pause(arg1);
+    }
+
+    public fun remove_black_list(arg0: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg1: address, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::controller(arg0) == 0x2::tx_context::sender(arg2), 201);
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::remove_black_list(arg0, arg1);
+    }
+
+    public fun remove_white_list<T0, T1>(arg0: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg1: address, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::controller(arg0) == 0x2::tx_context::sender(arg2), 201);
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::remove_white_list<T0, T1>(arg0, arg1);
+    }
+
+    public fun resume(arg0: &0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::owner::OwnerCap, arg1: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg2: &mut 0x2::tx_context::TxContext) {
+        assert!(0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::is_emergency(arg1), 203);
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::resume(arg1);
+    }
+
+    public fun upgrade_version(arg0: &0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::owner::OwnerCap, arg1: &mut 0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::Global, arg2: &mut 0x2::tx_context::TxContext) {
+        0xa74af6ab271682c2397104b182642857beb61af4f1769ea4301064bdaff2e7d::implements::upgrade_version(arg1);
+    }
+
+    // decompiled from Move bytecode v7
+}
+
