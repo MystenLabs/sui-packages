@@ -1,0 +1,40 @@
+module 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_flows {
+    public fun return_to_proxy<T0, T1>(arg0: &mut 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_vault::Vault<T0, T1>, arg1: &mut 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CrossChainAssetManager<T0>, arg2: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CcamProcessorCap, arg3: &mut 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_proxy::ProxyAssetManager<T0>, arg4: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_proxy::ProxyProcessorCap, arg5: u64, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_proxy::receive_funds<T0>(arg3, arg4, 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::return_to_proxy<T0>(arg1, arg2, arg5, arg7), arg6, arg7);
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_vault::return_funds_from_proxy<T0, T1>(arg0, arg3, arg4, 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_proxy::return_funds<T0>(arg3, arg4, arg5, arg6, arg7), arg6, arg7);
+    }
+
+    public fun execute_adapter<T0, T1, T2: key>(arg0: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CrossChainAssetManager<T0>, arg1: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CcamProcessorCap, arg2: &mut 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::ConcordAdapter<T0, T1>, arg3: &mut 0x38887fa7aa3bedeb6964bdf271bd1415b032b8606fcc23ec687c13ddfde8721b::concord_lending_vault::LendingVault<T0, T1, T2>, arg4: u32, arg5: u64, arg6: u64, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T0> {
+        assert!(arg4 == 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::action_redeem(), 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_errors::invalid_argument());
+        let v0 = 0x2::object::id<0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::ConcordAdapter<T0, T1>>(arg2);
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::assert_adapter_active<T0>(arg0, 0x2::object::id_to_address(&v0));
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::assert_processor_cap<T0>(arg0, arg1, arg8);
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::execute_redeem<T0, T1, T2>(arg2, arg0, arg3, arg5, arg6, arg7, arg8)
+    }
+
+    public fun execute_adapter_collateral_redeem<T0, T1, T2: key>(arg0: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CrossChainAssetManager<T0>, arg1: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CcamProcessorCap, arg2: &mut 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::ConcordAdapter<T0, T1>, arg3: &mut 0x38887fa7aa3bedeb6964bdf271bd1415b032b8606fcc23ec687c13ddfde8721b::concord_lending_vault::LendingVault<T0, T1, T2>, arg4: u64, arg5: u64, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T1> {
+        let v0 = 0x2::object::id<0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::ConcordAdapter<T0, T1>>(arg2);
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::assert_adapter_active<T0>(arg0, 0x2::object::id_to_address(&v0));
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::assert_processor_cap<T0>(arg0, arg1, arg7);
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::execute_redeem_collateral<T0, T1, T2>(arg2, arg0, arg3, arg4, arg5, arg6, arg7)
+    }
+
+    public fun execute_adapter_same_asset<T0, T1: key>(arg0: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CrossChainAssetManager<T0>, arg1: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CcamProcessorCap, arg2: &mut 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::ConcordAdapter<T0, T0>, arg3: &mut 0x38887fa7aa3bedeb6964bdf271bd1415b032b8606fcc23ec687c13ddfde8721b::concord_lending_vault::LendingVault<T0, T0, T1>, arg4: u64, arg5: u64, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T0> {
+        let v0 = 0x2::object::id<0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::ConcordAdapter<T0, T0>>(arg2);
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::assert_adapter_active<T0>(arg0, 0x2::object::id_to_address(&v0));
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::assert_processor_cap<T0>(arg0, arg1, arg7);
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::execute_redeem_same_asset<T0, T1>(arg2, arg0, arg3, arg4, arg5, arg6, arg7)
+    }
+
+    public fun forward_funds_to_escrow<T0>(arg0: &mut 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_proxy::ProxyAssetManager<T0>, arg1: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_proxy::ProxyProcessorCap, arg2: &mut 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CrossChainAssetManager<T0>, arg3: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CcamProcessorCap, arg4: address, arg5: u64, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::deposit<T0>(arg2, arg3, 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_proxy::forward_funds<T0>(arg0, arg1, arg4, arg5, arg6, arg7), arg7);
+    }
+
+    public fun push_and_execute<T0, T1, T2: key>(arg0: &mut 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CrossChainAssetManager<T0>, arg1: &0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::CcamProcessorCap, arg2: &mut 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::ConcordAdapter<T0, T1>, arg3: &mut 0x38887fa7aa3bedeb6964bdf271bd1415b032b8606fcc23ec687c13ddfde8721b::concord_lending_vault::LendingVault<T0, T1, T2>, arg4: &0x38887fa7aa3bedeb6964bdf271bd1415b032b8606fcc23ec687c13ddfde8721b::concord_offer_book::OfferBook, arg5: address, arg6: u64, arg7: u32, arg8: u64, arg9: &0x2::clock::Clock, arg10: &mut 0x2::tx_context::TxContext) {
+        assert!(arg7 == 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::action_deposit(), 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_errors::invalid_argument());
+        0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_concord_adapter::execute_deposit<T0, T1, T2>(arg2, arg0, arg3, arg4, 0xea833adbc0cea09e325477b8408699a53c088900b1ddcadc11ad9bfc8893fd5b::stoken_cross_chain_asset_manager::push_to_adapter<T0>(arg0, arg1, arg5, arg6, arg9, arg10), arg8, arg9, arg10);
+    }
+
+    // decompiled from Move bytecode v7
+}
+
