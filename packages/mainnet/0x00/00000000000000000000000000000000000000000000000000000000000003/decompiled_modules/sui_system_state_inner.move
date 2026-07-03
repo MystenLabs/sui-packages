@@ -436,13 +436,9 @@ module 0x3::sui_system_state_inner {
     }
 
     public(friend) fun update_validator_name(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {
-        let v0 = 0x2::tx_context::sender(arg2);
-        let v1 = 0x3::validator_set::any_validator_mut(&mut arg0.validators, v0);
-        0x3::validator::update_name(v1, arg1);
-        let v2 = v1;
-        if (!0x3::validator_set::is_validator_candidate(&arg0.validators, v0)) {
-            0x3::validator_set::assert_no_pending_or_active_duplicates(&arg0.validators, v2);
-        };
+        let v0 = 0x3::validator_set::any_validator_mut(&mut arg0.validators, 0x2::tx_context::sender(arg2));
+        0x3::validator::update_name(v0, arg1);
+        0x3::validator_set::assert_no_pending_or_active_duplicates(&arg0.validators, v0);
     }
 
     public(friend) fun update_validator_next_epoch_network_address(arg0: &mut SuiSystemStateInnerV2, arg1: vector<u8>, arg2: &0x2::tx_context::TxContext) {

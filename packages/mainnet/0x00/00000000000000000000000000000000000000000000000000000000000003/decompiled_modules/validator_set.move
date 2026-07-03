@@ -80,14 +80,6 @@ module 0x3::validator_set {
         v5
     }
 
-    fun adjust_stake_and_gas_price(arg0: &mut vector<0x3::validator::Validator>) {
-        let v0 = 0;
-        while (v0 < 0x1::vector::length<0x3::validator::Validator>(arg0)) {
-            0x3::validator::adjust_stake_and_gas_price(0x1::vector::borrow_mut<0x3::validator::Validator>(arg0, v0));
-            v0 = v0 + 1;
-        };
-    }
-
     public(friend) fun convert_to_fungible_staked_sui(arg0: &mut ValidatorSet, arg1: 0x3::staking_pool::StakedSui, arg2: &mut 0x2::tx_context::TxContext) : 0x3::staking_pool::FungibleStakedSui {
         let v0 = 0x3::staking_pool::pool_id(&arg1);
         let v1 = if (0x2::table::contains<0x2::object::ID, address>(&arg0.staking_pool_mappings, v0)) {
@@ -98,23 +90,6 @@ module 0x3::validator_set {
             0x3::validator_wrapper::load_validator_maybe_upgrade(0x2::table::borrow_mut<0x2::object::ID, 0x3::validator_wrapper::ValidatorWrapper>(&mut arg0.inactive_validators, v0))
         };
         0x3::validator::convert_to_fungible_staked_sui(v1, arg1, arg2)
-    }
-
-    fun effectuate_staged_metadata(arg0: &mut ValidatorSet) {
-        let v0 = &mut arg0.active_validators;
-        let v1 = 0;
-        while (v1 < 0x1::vector::length<0x3::validator::Validator>(v0)) {
-            0x3::validator::effectuate_staged_metadata(0x1::vector::borrow_mut<0x3::validator::Validator>(v0, v1));
-            v1 = v1 + 1;
-        };
-    }
-
-    fun process_pending_stakes_and_withdraws(arg0: &mut vector<0x3::validator::Validator>, arg1: &0x2::tx_context::TxContext) {
-        let v0 = 0;
-        while (v0 < 0x1::vector::length<0x3::validator::Validator>(arg0)) {
-            0x3::validator::process_pending_stakes_and_withdraws(0x1::vector::borrow_mut<0x3::validator::Validator>(arg0, v0), arg1);
-            v0 = v0 + 1;
-        };
     }
 
     public(friend) fun redeem_fungible_staked_sui(arg0: &mut ValidatorSet, arg1: 0x3::staking_pool::FungibleStakedSui, arg2: &0x2::tx_context::TxContext) : 0x2::balance::Balance<0x2::sui::SUI> {
@@ -203,15 +178,28 @@ module 0x3::validator_set {
         let v16 = &mut arg0.active_validators;
         distribute_reward(v16, &v15, &v14, arg1, arg2, arg6);
         let v17 = &mut arg0.active_validators;
-        adjust_stake_and_gas_price(v17);
-        let v18 = &mut arg0.active_validators;
-        process_pending_stakes_and_withdraws(v18, arg6);
+        let v18 = 0;
+        while (v18 < 0x1::vector::length<0x3::validator::Validator>(v17)) {
+            0x3::validator::adjust_stake_and_gas_price(0x1::vector::borrow_mut<0x3::validator::Validator>(v17, v18));
+            v18 = v18 + 1;
+        };
+        let v19 = &mut arg0.active_validators;
+        let v20 = 0;
+        while (v20 < 0x1::vector::length<0x3::validator::Validator>(v19)) {
+            0x3::validator::process_pending_stakes_and_withdraws(0x1::vector::borrow_mut<0x3::validator::Validator>(v19, v20), arg6);
+            v20 = v20 + 1;
+        };
         emit_validator_epoch_events(v0, &arg0.active_validators, &v15, &v14, arg3, &v7);
         process_pending_removals(arg0, arg3, arg6);
-        let v19 = update_validator_positions_and_calculate_total_stake(arg0, arg5, arg3, arg6);
-        arg0.total_stake = v19;
-        0x3::voting_power::set_voting_power(&mut arg0.active_validators, v19);
-        effectuate_staged_metadata(arg0);
+        let v21 = update_validator_positions_and_calculate_total_stake(arg0, arg5, arg3, arg6);
+        arg0.total_stake = v21;
+        0x3::voting_power::set_voting_power(&mut arg0.active_validators, v21);
+        let v22 = &mut arg0.active_validators;
+        let v23 = 0;
+        while (v23 < 0x1::vector::length<0x3::validator::Validator>(v22)) {
+            0x3::validator::effectuate_staged_metadata(0x1::vector::borrow_mut<0x3::validator::Validator>(v22, v23));
+            v23 = v23 + 1;
+        };
     }
 
     public(friend) fun any_validator(arg0: &mut ValidatorSet, arg1: address) : &0x3::validator::Validator {
@@ -239,7 +227,8 @@ module 0x3::validator_set {
     }
 
     public(friend) fun assert_no_pending_or_active_duplicates(arg0: &ValidatorSet, arg1: &0x3::validator::Validator) {
-        assert!(count_duplicates_vec(&arg0.active_validators, arg1) + count_duplicates_tablevec(&arg0.pending_active_validators, arg1) == 1, 2);
+        assert!(!is_duplicate_with_active_validator(arg0, arg1), 2);
+        assert!(!is_duplicate_with_pending_validator(arg0, arg1), 2);
     }
 
     public(friend) fun calculate_total_stakes(arg0: &vector<0x3::validator::Validator>) : u64 {
@@ -354,30 +343,6 @@ module 0x3::validator_set {
         (v0, v1)
     }
 
-    fun count_duplicates_tablevec(arg0: &0x2::table_vec::TableVec<0x3::validator::Validator>, arg1: &0x3::validator::Validator) : u64 {
-        let v0 = 0;
-        let v1 = 0;
-        while (v1 < 0x2::table_vec::length<0x3::validator::Validator>(arg0)) {
-            if (0x3::validator::is_duplicate(0x2::table_vec::borrow<0x3::validator::Validator>(arg0, v1), arg1)) {
-                v0 = v0 + 1;
-            };
-            v1 = v1 + 1;
-        };
-        v0
-    }
-
-    fun count_duplicates_vec(arg0: &vector<0x3::validator::Validator>, arg1: &0x3::validator::Validator) : u64 {
-        let v0 = 0;
-        let v1 = 0;
-        while (v1 < 0x1::vector::length<0x3::validator::Validator>(arg0)) {
-            if (0x3::validator::is_duplicate(0x1::vector::borrow<0x3::validator::Validator>(arg0, v1), arg1)) {
-                v0 = v0 + 1;
-            };
-            v1 = v1 + 1;
-        };
-        v0
-    }
-
     public fun derive_reference_gas_price(arg0: &ValidatorSet) : u64 {
         let v0 = &arg0.active_validators;
         let v1 = 0x1::vector::empty<0x2::priority_queue::Entry<u64>>();
@@ -468,13 +433,16 @@ module 0x3::validator_set {
 
     fun find_validator_from_table_vec(arg0: &0x2::table_vec::TableVec<0x3::validator::Validator>, arg1: address) : 0x1::option::Option<u64> {
         let v0 = 0;
+        let v1;
         while (v0 < 0x2::table_vec::length<0x3::validator::Validator>(arg0)) {
             if (0x3::validator::sui_address(0x2::table_vec::borrow<0x3::validator::Validator>(arg0, v0)) == arg1) {
-                return 0x1::option::some<u64>(v0)
+                v1 = 0x1::option::some<u64>(v0);
+                return v1
             };
             v0 = v0 + 1;
         };
-        0x1::option::none<u64>()
+        v1 = 0x1::option::none<u64>();
+        v1
     }
 
     public(friend) fun get_active_or_pending_or_candidate_validator_ref(arg0: &mut ValidatorSet, arg1: address, arg2: u8) : &0x3::validator::Validator {
@@ -490,7 +458,7 @@ module 0x3::validator_set {
     }
 
     public fun get_active_validator_ref(arg0: &ValidatorSet, arg1: address) : &0x3::validator::Validator {
-        abort 13906840268901974015
+        abort 13906840036973740031
     }
 
     fun get_candidate_or_active_validator_mut(arg0: &mut ValidatorSet, arg1: address) : &mut 0x3::validator::Validator {
@@ -502,19 +470,20 @@ module 0x3::validator_set {
     }
 
     public fun get_pending_validator_ref(arg0: &ValidatorSet, arg1: address) : &0x3::validator::Validator {
-        abort 13906840290376810495
+        abort 13906840058448576511
     }
 
     fun get_validator_indices(arg0: &vector<0x3::validator::Validator>, arg1: &vector<address>) : vector<u64> {
         let v0 = vector[];
         let v1 = 0;
         while (v1 < 0x1::vector::length<address>(arg1)) {
-            let v2 = find_validator(arg0, *0x1::vector::borrow<address>(arg1, v1));
-            if (0x1::option::is_some<u64>(&v2)) {
-                0x1::vector::push_back<u64>(&mut v0, 0x1::option::destroy_some<u64>(v2));
+            let v2 = &mut v0;
+            let v3 = find_validator(arg0, *0x1::vector::borrow<address>(arg1, v1));
+            if (0x1::option::is_some<u64>(&v3)) {
+                0x1::vector::push_back<u64>(v2, 0x1::option::destroy_some<u64>(v3));
                 v1 = v1 + 1;
             } else {
-                0x1::option::destroy_none<u64>(v2);
+                0x1::option::destroy_none<u64>(v3);
                 abort 4
             };
         };
@@ -572,16 +541,35 @@ module 0x3::validator_set {
         0x2::vec_map::contains<address, u64>(&arg0.at_risk_validators, &arg1)
     }
 
-    public(friend) fun is_duplicate_validator(arg0: &vector<0x3::validator::Validator>, arg1: &0x3::validator::Validator) : bool {
-        count_duplicates_vec(arg0, arg1) > 0
-    }
-
     fun is_duplicate_with_active_validator(arg0: &ValidatorSet, arg1: &0x3::validator::Validator) : bool {
-        is_duplicate_validator(&arg0.active_validators, arg1)
+        let v0 = &arg0.active_validators;
+        let v1 = 0;
+        let v2;
+        while (v1 < 0x1::vector::length<0x3::validator::Validator>(v0)) {
+            let v3 = 0x1::vector::borrow<0x3::validator::Validator>(v0, v1);
+            if (0x3::validator::sui_address(v3) != 0x3::validator::sui_address(arg1) && 0x3::validator::is_duplicate(v3, arg1)) {
+                v2 = true;
+                return v2
+            };
+            v1 = v1 + 1;
+        };
+        v2 = false;
+        v2
     }
 
     fun is_duplicate_with_pending_validator(arg0: &ValidatorSet, arg1: &0x3::validator::Validator) : bool {
-        count_duplicates_tablevec(&arg0.pending_active_validators, arg1) > 0
+        let v0 = 0;
+        let v1;
+        while (v0 < 0x2::table_vec::length<0x3::validator::Validator>(&arg0.pending_active_validators)) {
+            let v2 = 0x2::table_vec::borrow<0x3::validator::Validator>(&arg0.pending_active_validators, v0);
+            if (0x3::validator::sui_address(v2) != 0x3::validator::sui_address(arg1) && 0x3::validator::is_duplicate(v2, arg1)) {
+                v1 = true;
+                return v1
+            };
+            v0 = v0 + 1;
+        };
+        v1 = false;
+        v1
     }
 
     public fun is_inactive_validator(arg0: &ValidatorSet, arg1: 0x2::object::ID) : bool {
@@ -628,12 +616,23 @@ module 0x3::validator_set {
 
     fun process_pending_removals(arg0: &mut ValidatorSet, arg1: &mut 0x2::vec_map::VecMap<address, 0x2::vec_set::VecSet<address>>, arg2: &mut 0x2::tx_context::TxContext) {
         let v0 = &mut arg0.pending_removals;
-        sort_removal_list(v0);
-        let v1 = 0;
-        while (v1 < 0x1::vector::length<u64>(&arg0.pending_removals)) {
-            let v2 = 0x1::vector::remove<0x3::validator::Validator>(&mut arg0.active_validators, 0x1::vector::pop_back<u64>(&mut arg0.pending_removals));
-            process_validator_departure(arg0, v2, arg1, true, arg2);
-            v1 = v1 + 1;
+        let v1 = 0x1::vector::length<u64>(v0);
+        if (v1 < 2) {
+        } else {
+            let v2 = 1;
+            while (v2 < v1) {
+                while (v2 > 0 && !(*0x1::vector::borrow<u64>(v0, v2 - 1) <= *0x1::vector::borrow<u64>(v0, v2))) {
+                    0x1::vector::swap<u64>(v0, v2, v2 - 1);
+                    v2 = v2 - 1;
+                };
+                v2 = v2 + 1;
+            };
+        };
+        let v3 = 0;
+        while (v3 < 0x1::vector::length<u64>(&arg0.pending_removals)) {
+            let v4 = 0x1::vector::remove<0x3::validator::Validator>(&mut arg0.active_validators, 0x1::vector::pop_back<u64>(&mut arg0.pending_removals));
+            process_validator_departure(arg0, v4, arg1, true, arg2);
+            v3 = v3 + 1;
         };
     }
 
@@ -662,16 +661,20 @@ module 0x3::validator_set {
         let v0 = 0x2::tx_context::sender(arg1);
         assert!(0x2::table::contains<address, 0x3::validator_wrapper::ValidatorWrapper>(&arg0.validator_candidates, v0), 8);
         let v1 = 0x3::validator_wrapper::destroy(0x2::table::remove<address, 0x3::validator_wrapper::ValidatorWrapper>(&mut arg0.validator_candidates, v0));
-        assert!(!is_duplicate_with_active_validator(arg0, &v1) && !is_duplicate_with_pending_validator(arg0, &v1), 2);
+        assert_no_pending_or_active_duplicates(arg0, &v1);
         assert!(0x3::validator::is_preactive(&v1), 7);
         assert!(can_join(arg0, 0x3::validator::total_stake(&v1), arg1), 5);
         0x2::table_vec::push_back<0x3::validator::Validator>(&mut arg0.pending_active_validators, v1);
     }
 
     public(friend) fun request_add_validator_candidate(arg0: &mut ValidatorSet, arg1: 0x3::validator::Validator, arg2: &mut 0x2::tx_context::TxContext) {
-        assert!(!is_duplicate_with_active_validator(arg0, &arg1) && !is_duplicate_with_pending_validator(arg0, &arg1), 2);
         let v0 = 0x3::validator::sui_address(&arg1);
         assert!(!0x2::table::contains<address, 0x3::validator_wrapper::ValidatorWrapper>(&arg0.validator_candidates, v0), 6);
+        let v1 = find_validator(&arg0.active_validators, v0);
+        assert!(0x1::option::is_none<u64>(&v1), 15);
+        let v2 = find_validator_from_table_vec(&arg0.pending_active_validators, v0);
+        assert!(0x1::option::is_none<u64>(&v2), 15);
+        assert_no_pending_or_active_duplicates(arg0, &arg1);
         assert!(0x3::validator::is_preactive(&arg1), 7);
         0x2::table::add<0x2::object::ID, address>(&mut arg0.staking_pool_mappings, 0x3::validator::staking_pool_id(&arg1), v0);
         0x2::table::add<address, 0x3::validator_wrapper::ValidatorWrapper>(&mut arg0.validator_candidates, 0x3::validator::sui_address(&arg1), 0x3::validator_wrapper::create_v1(arg1, arg2));
@@ -699,22 +702,6 @@ module 0x3::validator_set {
         0x2::table::remove<0x2::object::ID, address>(&mut arg0.staking_pool_mappings, v2);
         0x3::validator::deactivate(&mut v1, 0x2::tx_context::epoch(arg1));
         0x2::table::add<0x2::object::ID, 0x3::validator_wrapper::ValidatorWrapper>(&mut arg0.inactive_validators, v2, 0x3::validator_wrapper::create_v1(v1, arg1));
-    }
-
-    fun sort_removal_list(arg0: &mut vector<u64>) {
-        let v0 = 1;
-        while (v0 < 0x1::vector::length<u64>(arg0)) {
-            let v1 = v0;
-            while (v1 > 0) {
-                v1 = v1 - 1;
-                if (*0x1::vector::borrow<u64>(arg0, v1) > *0x1::vector::borrow<u64>(arg0, v0)) {
-                    0x1::vector::swap<u64>(arg0, v1, v1 + 1);
-                } else {
-                    break
-                };
-            };
-            v0 = v0 + 1;
-        };
     }
 
     public fun staking_pool_mappings(arg0: &ValidatorSet) : &0x2::table::Table<0x2::object::ID, address> {

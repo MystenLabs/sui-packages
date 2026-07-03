@@ -126,6 +126,7 @@ module 0x3::staking_pool {
         0x2::object::delete(v0);
         let v5 = pool_token_exchange_rate_at_epoch(arg0, v2);
         let v6 = get_token_amount(&v5, 0x2::balance::value<0x2::sui::SUI>(&v4));
+        assert!(v6 > 0, 18);
         let v7 = FungibleStakedSuiDataKey{dummy_field: false};
         if (!0x2::bag::contains<FungibleStakedSuiDataKey>(&arg0.extra_fields, v7)) {
             let v8 = FungibleStakedSuiData{
@@ -278,8 +279,10 @@ module 0x3::staking_pool {
         let v0 = if (arg0.sui_balance >= arg0.pending_total_sui_withdraw) {
             arg0.sui_balance - arg0.pending_total_sui_withdraw
         } else {
-            let v1 = UnderflowSuiBalance{dummy_field: false};
-            0x2::bag::add<UnderflowSuiBalance, u64>(&mut arg0.extra_fields, v1, arg0.pending_total_sui_withdraw - arg0.sui_balance);
+            if (!is_inactive(arg0)) {
+                let v1 = UnderflowSuiBalance{dummy_field: false};
+                0x2::bag::add<UnderflowSuiBalance, u64>(&mut arg0.extra_fields, v1, arg0.pending_total_sui_withdraw - arg0.sui_balance);
+            };
             0
         };
         arg0.sui_balance = v0;

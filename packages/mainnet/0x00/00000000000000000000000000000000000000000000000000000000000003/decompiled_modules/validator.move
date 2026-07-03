@@ -753,6 +753,7 @@ module 0x3::validator {
         assert!(is_preactive(arg0), 10);
         assert!(arg1 <= 2000, 8);
         arg0.commission_rate = arg1;
+        arg0.next_epoch_commission_rate = arg1;
     }
 
     public(friend) fun set_candidate_gas_price(arg0: &mut Validator, arg1: 0x3::validator_cap::ValidatorOperationCap, arg2: u64) {

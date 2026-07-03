@@ -88,6 +88,7 @@ module 0x3::genesis {
         let v0 = 0x1::vector::empty<0x3::validator::Validator>();
         0x1::vector::reverse<GenesisValidatorMetadata>(&mut arg3);
         let v1 = 0;
+        /* label 4 */
         while (v1 < 0x1::vector::length<GenesisValidatorMetadata>(&arg3)) {
             let GenesisValidatorMetadata {
                 name                : v2,
@@ -107,24 +108,40 @@ module 0x3::genesis {
                 worker_address      : v16,
             } = 0x1::vector::pop_back<GenesisValidatorMetadata>(&mut arg3);
             let v17 = 0x3::validator::new(v6, v9, v11, v12, v10, v2, v3, v4, v5, v13, v14, v15, v16, v7, v8, arg5);
-            assert!(!0x3::validator_set::is_duplicate_validator(&v0, &v17), 1);
-            0x1::vector::push_back<0x3::validator::Validator>(&mut v0, v17);
-            v1 = v1 + 1;
+            let v18 = &v0;
+            let v19 = 0;
+            let v20;
+            while (v19 < 0x1::vector::length<0x3::validator::Validator>(v18)) {
+                let v21 = 0x1::vector::borrow<0x3::validator::Validator>(v18, v19);
+                let v22 = 0x3::validator::sui_address(v21) != v6 && !0x3::validator::is_duplicate(v21, &v17);
+                if (!v22) {
+                    v20 = false;
+                    /* label 15 */
+                    assert!(v20, 1);
+                    0x1::vector::push_back<0x3::validator::Validator>(&mut v0, v17);
+                    v1 = v1 + 1;
+                    /* goto 4 */
+                    continue
+                };
+                v19 = v19 + 1;
+            };
+            v20 = true;
+            /* goto 15 */
         };
         0x1::vector::destroy_empty<GenesisValidatorMetadata>(arg3);
         let TokenDistributionSchedule {
-            stake_subsidy_fund_mist : v18,
-            allocations             : v19,
+            stake_subsidy_fund_mist : v23,
+            allocations             : v24,
         } = arg4;
-        let v20 = &mut v0;
-        allocate_tokens(arg1, v19, v20, arg5);
-        let v21 = &mut v0;
-        let v22 = 0;
-        while (v22 < 0x1::vector::length<0x3::validator::Validator>(v21)) {
-            0x3::validator::activate(0x1::vector::borrow_mut<0x3::validator::Validator>(v21, v22), 0);
-            v22 = v22 + 1;
+        let v25 = &mut v0;
+        allocate_tokens(arg1, v24, v25, arg5);
+        let v26 = &mut v0;
+        let v27 = 0;
+        while (v27 < 0x1::vector::length<0x3::validator::Validator>(v26)) {
+            0x3::validator::activate(0x1::vector::borrow_mut<0x3::validator::Validator>(v26, v27), 0);
+            v27 = v27 + 1;
         };
-        0x3::sui_system::create(arg0, v0, 0x2::balance::zero<0x2::sui::SUI>(), arg2.protocol_version, arg2.chain_start_timestamp_ms, 0x3::sui_system_state_inner::create_system_parameters(arg2.epoch_duration_ms, arg2.stake_subsidy_start_epoch, arg2.max_validator_count, arg2.min_validator_joining_stake, arg2.validator_low_stake_threshold, arg2.validator_very_low_stake_threshold, arg2.validator_low_stake_grace_period, arg5), 0x3::stake_subsidy::create(0x2::balance::split<0x2::sui::SUI>(&mut arg1, v18), arg2.stake_subsidy_initial_distribution_amount, arg2.stake_subsidy_period_length, arg2.stake_subsidy_decrease_rate, arg5), arg5);
+        0x3::sui_system::create(arg0, v0, 0x2::balance::zero<0x2::sui::SUI>(), arg2.protocol_version, arg2.chain_start_timestamp_ms, 0x3::sui_system_state_inner::create_system_parameters(arg2.epoch_duration_ms, arg2.stake_subsidy_start_epoch, arg2.max_validator_count, arg2.min_validator_joining_stake, arg2.validator_low_stake_threshold, arg2.validator_very_low_stake_threshold, arg2.validator_low_stake_grace_period, arg5), 0x3::stake_subsidy::create(0x2::balance::split<0x2::sui::SUI>(&mut arg1, v23), arg2.stake_subsidy_initial_distribution_amount, arg2.stake_subsidy_period_length, arg2.stake_subsidy_decrease_rate, arg5), arg5);
     }
 
     // decompiled from Move bytecode v7
