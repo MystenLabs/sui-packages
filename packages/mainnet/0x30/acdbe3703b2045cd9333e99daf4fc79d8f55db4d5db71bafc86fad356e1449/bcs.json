@@ -1,0 +1,748 @@
+{
+  "dataType": "package",
+  "id": "0x30acdbe3703b2045cd9333e99daf4fc79d8f55db4d5db71bafc86fad356e1449",
+  "version": 17,
+  "moduleMap": {
+    "liquidity_math": "oRzrCwcAAAUGAQAEAwQyBTYaB1BsCLwBIAzcAVIAAgAGAAUAAQAAAAIDAAABBAUAAAQGAQAAAwYBAAEAAgMAAQEEBQABAwYBAAEEBgEAAQUAAQADDw8PAQ8EDw8PBAIDAwUPDw8DAwEEAg8PABlnZXRfYW1vdW50c19mb3JfbGlxdWlkaXR5GWdldF9saXF1aWRpdHlfZm9yX2Ftb3VudHMObGlxdWlkaXR5X21hdGgIbWF4X3UyNTYIbWluX3UyNTYMbXVsX2Rpdl91MjU2CXRpY2tfbWF0aLBzN1q6l1Vu/3piY/5oakIeM2WHfe229o6pOOI00L+FAAEAAAcFCwALAQsCEQkCAAEBAAAHBgsACwELAgsDEQUCAAIBAAAHBwsACwELAgsDCwQRBgIAAwEAAAcECwALAREIAgAEAQAABwQLAAsBEQcCAAA=",
+    "pool": "oRzrCwcAAAUNAQAeAh5eA3yPAwSLBFQF3wS5BgeYC5QMCKwXgAEGrBjEBArwHJkBC4keBAyNHpAdDZ07KA7FOyQAVABzAWkBeAIbAh0CHwInAikCKwJOAlMCdgJ3Ay0ACAIAAAEMAAAJCAIAAQABAAsIAgABAAEAEAcAAAoDAAAPAwAAAAMAAA0DAAIOBwADEgcABAIEAQABBQMIAAYEDAEAAQcFDAEIAQoHBwAKEwQACwwMAA0RAgAOBggAAD8AAQAAIwIDAgAAACQEAwIAAABqBQYCAAAAawcGAgAAAG0ICQIAAABuCgkCAAAAbAsGAgAAAG8MCQIAAABPDQ4CAAAAUA8BAgAAABYQEQIAAABeEhECAAAAXRMRAgAAAF8UEQIAAABkFQECAAAAYhYXAAAiExECAAAAHhgBAgAAACUZGgAATBscAABNGxwAADkdFwAAOB0XAABnHhwCAAAAdB4fAgAAAC8eFwIAAABGHhoCAAAAYB4XAgAAAGEeFwIAAABVHgMCAAAAWSADAgAAAFcgGgIAAABaICECAAAAWCAiAgAAATpHIgABO0YaAAE8HxwAAT0hRQACeykqAAM3AToBAARDPhcBAARmPzYBAAR8TxcBAAR9ATYBAAY2QQkBAAZCCTYBAAZ8PRcBAAZ9MQkBAAdLLC0BCAd6LgEBCAgVSwECBwQILElFAgcECFxKNwIHBAkqNQEBAwomMgEACkkxMgAKeTQDAAscJygBAgxbLwEBDAxlNQEBCAx2LwEBCA1jJCUADnBDCQEAOiYxKzIrOyg7MDsrLDUsNzw5KDUoNzY7LzUuNSk1Kjc2QC03LzcuNyk3KjUtNQQ4PzcGOD81NEg1SDNINkwJOD0YOwk7Bg84KzUrNzA1MDc2UAw4AggABwgSAAUGCAEPDgMHCBIBCA8EDw4DBwgSBgcLAgIJAAkBCw0BCQADDwYIDAcIEgELDQEJAQUHCwICCQAJAQsNAQkAAw8HCBIGBwsCAgkACQELDQEJAQMPBggMBwgSAQsNAQkABQcLAgIJAAkBCw0BCQEDDwcIEgcHCwICCQAJAQYIEwsNAQkAAw8GCAwHCBIHBwsCAgkACQEGCBMLDQEJAQMPBggMBwgSBwcLAgIJAAkBCw0BCQALDQEJAQ4OBggMBwgSAwsDAgkACQELDQEJAAsNAQkBCAcLAgIJAAkBCw0BCQALDQEJAQ4OBggMBQcIEgYHCwICCQAJAQcLAwIJAAkBCw0BCQALDQEJAQYIDAcIEgILDQEJAAsNAQkBBAcLAgIJAAkBBwsDAgkACQEEBwgSBAcLAgIJAAkBBwsDAgkACQEGCAwHCBIFBwsCAgkACQEHCwMCCQAJAQQGCAwHCBICBgsCAgkACQEHCwMCCQAJAQIDDwEDAQsDAgkACQECBAQBBAMPBAMBDwMPDwQBBgsCAgkACQEBDgEGCwMCCQAJAQIODgIDAwMFCw4BCAEIEQEGCBIBBQEIAAIJAAcIEgEIEQEKAgEICQEIAQQGCBEKCAkKCAkHCBIBCw4BCQABBwsOAQkAAgkABQELDgEIAQEHCBIBCBADAQgPCBABBggQAQkAAQsLAQkAAQkBAgkACQEBCwICCQAJAQEICgEIBQsBAwMDDw8DDw8PCwsBCQEBBgsNAQkAAgcLCwEJAAsLAQkAAgcLCwEJAAMBCAYCCwsBCQAHCBILAQMDAw8PAw8PDwsLAQkAAwYIEwsNAQkABwgSEwMDAwMDCw0BCQADCw0BCQEEAwsDAgkACQEPDw8IBAgECAQIBAMBAQUPDw8DAwQPDw8EAgMIBAIGCBAJAAIHCBAJAAMHCBAJAAkBAQgHEgMDAwMDCw0BCQADCw0BCQEEAw8PDwgECAQODgMQCw0BCQALDQEJAQsNAQkAAwMLDQEJAQMDAwMDDw8IBAgEAwEGCwsBCQABCAgFDw8EBAQDAw8PCAsNAQkACw0BCQELDQEJAAMDCw0BCQEDAwIIEAQDDw8PEUFkZExpcXVpZGl0eUV2ZW50CEFkbWluQ2FwB0JhbGFuY2UFQ2xvY2sEQ29pbgdEaXNwbGF5CUZlZUNvbmZpZwJJRARQT09MBFBvb2wLUG9vbENyZWF0ZWQIUG9zaXRpb24JUHVibGlzaGVyFFJlbW92ZUxpcXVpZGl0eUV2ZW50BlN0cmluZwlTd2FwRXZlbnQIVGlja0luZm8JVHhDb250ZXh0CFR5cGVOYW1lA1VJRAZhX3RvX2IDYWRkDWFkZF9saXF1aWRpdHkIYW1vdW50X2EIYW1vdW50X2IJYW1vdW50X2luCmFtb3VudF9vdXQHYmFsYW5jZQVjbGFpbQVjbG9jaw5jbG9zZV9wb3NpdGlvbgRjb2luC2NvaW5fdHlwZV9hC2NvaW5fdHlwZV9iC2NvbGxlY3RfZmVlC2NyZWF0ZV9wb29sGmNyZWF0ZV9wb29sX3Blcm1pc3Npb25sZXNzCmRlY3JfZ3Jvc3MGZGVsZXRlB2Rpc3BsYXkLZHVtbXlfZmllbGQNZHluYW1pY19maWVsZARlbWl0BWV2ZW50EGV4aXN0c193aXRoX3R5cGUDZmVlCmZlZV9hbW91bnQHZmVlX2JwcxNmZWVfZ3Jvd3RoX2dsb2JhbF9hE2ZlZV9ncm93dGhfZ2xvYmFsX2IYZmVlX2dyb3d0aF9pbnNpZGVfbGFzdF9hGGZlZV9ncm93dGhfaW5zaWRlX2xhc3RfYhRmZWVfZ3Jvd3RoX291dHNpZGVfYRRmZWVfZ3Jvd3RoX291dHNpZGVfYgxmcm9tX2JhbGFuY2UDZ2V0EGdldF9hbW91bnRfb3V0X2EQZ2V0X2Ftb3VudF9vdXRfYhlnZXRfYW1vdW50c19mb3JfbGlxdWlkaXR5GWdldF9saXF1aWRpdHlfZm9yX2Ftb3VudHMWZ2V0X3NxcnRfcmF0aW9fYXRfdGljawZpMzJfbHQCaWQEaW5pdBZpbml0aWFsX3NxcnRfcHJpY2VfeDY0C2luaXRpYWxpemVkDGludG9fYmFsYW5jZQRqb2luCWxpcXVpZGl0eQ9saXF1aWRpdHlfZGVsdGEQbGlxdWlkaXR5X2dsb2JhbA9saXF1aWRpdHlfZ3Jvc3MNbGlxdWlkaXR5X25ldANuZXcSbmV3X3NxcnRfcHJpY2VfeDY0D25ld193aXRoX2ZpZWxkcxxuZXh0X3NxcnRfcHJpY2VfZnJvbV9pbnB1dF9hHG5leHRfc3FydF9wcmljZV9mcm9tX2lucHV0X2IGb2JqZWN0DW9wZW5fcG9zaXRpb24ab3Blbl9wb3NpdGlvbl9hbmRfdHJhbnNmZXIGb3dlZF9hBm93ZWRfYgdwYWNrYWdlBHBvb2wHcG9vbF9pZAtwb3NpdGlvbl9pZBJwb3NpdGlvbl9saXF1aWRpdHkNcG9zaXRpb25fb3dlZBBwb3NpdGlvbl9wb29sX2lkDnBvc2l0aW9uX3RpY2tzD3B1YmxpY190cmFuc2ZlcgZyZW1vdmUQcmVtb3ZlX2xpcXVpZGl0eRlyZW1vdmVfbGlxdWlkaXR5X2ludGVybmFsGHJlbW92ZV9saXF1aWRpdHlfcGFy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DgoJJARFCwABCwQBBwYnCg4LAyMETwsAAQsEAQcGJwsJCg4KADcCFBEWDAgKCAsCIwRgCwABCwQBBwUnCgsGAAAAAAAAAAAkBGsKADcCFDIAAAAAAAAAAAAAAAAAAAAAJAwFBW0JDAULBQSPAQoLTQwMCgA3AhRNDA0LDAcSGAsNGgwKCgpK/////////////////////wAAAAAAAAAAAAAAAAAAAAAkBIYBMv////////////////////8KADYDFQWPAQoANwMUCwo1FgoANgMVCg4KADYBFQoANgQLATgNOA4BCgA2BQoIOA8MDwsANwYROQoELhE+CAsGCwgLCwsOEgY4EAsPCwQ4EQIABQEAAAECBwwnAAYAAABCrwEOATgSDAYKBgYAAAAAAAAAACEEDQsAAQsEAQcEJwoGNQoANwAUNRgyECcAAAAAAAAAAAAAAAAAABo0DAsKBgoLFwwHCgA3ARQMCQoDCgklBCoLAAELBAEHBicKAwcPJgQ0CwABCwQBBwInCgkKADcCFAsHERUMDgoOCgklBEULAAELBAEHBicKDgsDJARPCwABCwQBBwYnCwkKDgoANwIUERcMCAoICwIjBGALAAELBAEHBScKCwYAAAAAAAAAACQEawoANwIUMgAAAAAAAAAAAAAAAAAAAAAkDAUFbQkMBQsFBI8BCgtNDAwKADcCFE0MDQsMBxIYCw0aDAoKCkr/////////////////////AAAAAAAAAAAAAAAAAAAAACQEhgEy/////////////////////woANgcVBY8BCgA3BxQLCjUWCgA2BxUKDgoANgEVCgA2BQsBOBM4FAEKADYECgg4FQwPCwA3BhE5CgQuET4JCwYLCAsLCw4SBjgQCw8LBDgWAgAHAQAABgwLAAsCCwMLBAoGOBcMBwsBCwcLBjgYAgAIAQAACQwLAAsCCwMLBAoGOBkMBwsBCwcLBjgaAgAJAQAARN8BCgMKBBEmIAQLCwABCwYBBwMnCgMRJQwSCgQRJQwUCgA3ARQMEw4BOAwMBw4COBIMCQoTChIKFAoHCgkRJAwPCg8yAAAAAAAAAAAAAAAAAAAAACEELAsAAQsGAQcEJwsTCxILFAoPESMMCgwICwcKCBcMCwsJCgoXDA0KBhE4CgA3BhE5CgMKBAoPCgA3AxQKADcHFAYAAAAAAAAA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",
+    "tick_math": "oRzrCwcAAAUKAQACAgIEAwZLBVFXB6gBmwIIwwMgBuMDhgEK6QQFDO4E6RAN1xUCABEAAAcAAAkAAQAACgIDAAAIAgAAAAsEAwAABwAFAAAPBgUAAA4GBQAAAwUAAAAQBwUAAAEIBQAAAggFAAAMCQoAAA0JCgAABQsMAAAGDQoAAQ4BCAABBggAAQECDg4BDwIPDwMPDw8DBA8PAwMPDwEEBA8PDwQCAwMFDw8PAwMAAw4ODggBAQEBAQEBAQcODwEODgEPCQMDAwMDAwMPDwcEBAQPBAQPA0kzMhVhbW91bnQwX2Zvcl9saXF1aWRpdHkVYW1vdW50MV9mb3JfbGlxdWlkaXR5GWFwcHJveF90aWNrX2F0X3NxcnRfcmF0aW8EYml0cxlnZXRfYW1vdW50c19mb3JfbGlxdWlkaXR5GWdldF9saXF1aWRpdHlfZm9yX2Ftb3VudHMWZ2V0X3NxcnRfcmF0aW9fYXRfdGljawdpMzJfYWJzDGkzMl9mcm9tX3UzMg9pMzJfaXNfbmVnYXRpdmUGaTMyX2x0FWxpcXVpZGl0eV9mb3JfYW1vdW50MBVsaXF1aWRpdHlfZm9yX2Ftb3VudDEIbWF4X3UyNTYIbWluX3UyNTYMbXVsX2Rpdl91MjU2CXRpY2tfbWF0aLBzN1q6l1Vu/3piY/5oakIeM2WHfe229o6pOOI00L+FDgQNo9TFDgToiQ0ADyCahozX57XlOwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8gsHxWYpG/xZa6phKsBuVVSBcAAAAAAAAAAAAAAAAAAAADCAAAAAAAAAAAAwgBAAAAAAAAAA8gAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAgEEDgABAAAOAwsAEgACAAEBAAAOBgsAEAAUSf///38kAgACAQAADx0KABEBBBcLABAAFEn/////HUkBAAAAFgwDCgNJAAAAACEEEkkAAACADAEFFAsDDAELAQwCBRsLABAAFAwCCwICAAMBAAAQOgoASf///38kDAgKAUn///9/JAwJCggEDgoJIAwCBRAJDAILAgQVCAwHBTgKCCAEGwoJDAMFHQkMAwsDBCIJDAYFNgsIBCcLCQwEBSkJDAQLBAQwCwALASMMBQU0CwALASMMBQsFDAYLBgwHCwcCAAQBAAARswIKAEn///9/JAQYCAwGCwBJ/////x1JAQAAABYMBQoFSQAAAAAhBBNJAAAAgAwBBRULBQwBCwEMBAUcCQwGCwAMBAoEBwEkBCIHBCcKBEkBAAAAHEkAAAAAIgQrSgFAWRotFi2qN61vvTO5/P8AAAAAAAAAAAAAAAAAAAAADAIFLUoAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAwCCwIMBwoESQIAAAAcSQAAAAAiBDsLB0o4IQ5YkGmkWTJBPTdycvn/AAAAAAAAAAAAAAAAAAAAABgxgDAMBwoESQQAAAAcSQAAAAAiBEcLB0rI/cfzfDUS7zJpZV8P5fL/AAAAAAAAAAAAAAAAAAAAABgxgDAMBwoESQgAAAAcSQAAAAAiBFMLB0rIHJSg6iQ2HObkEH7KyuX/AAAAAAAAAAAAAAAAAAAAABgxgDAMBwoESRAAAAAcSQAAAAAiBF8LB0ozZpJcg1jbyVlhD9ZDmMv/AAAAAAAAAAAAAAAAAAAAABgxgDAMBwoESSAAAAAcSQAAAAAiBGsLB0qeVLLflmguR4HAmPpBO5f/AAAAAAAAAAAAAAAAAAAAABgxgDAMBwoESUAAAAAcSQAAAAAiBHcLB0odKLUms3jsQzhqyWZkoS7/AAAAAAAAAAAAAAAAAAAAABgxgDAMBwoESYAAAAAcSQAAAAAiBIMBCwdKzC+clvFhxBGooplqBO5d/gAAAAAAAAAAAAAAAAAAAAAYMYAwDAcKBEkAAQAAHEkAAAAAIgSPAQsHSpeimkc7yP/crogKkMeGvvwAAAAAAAAAAAAAAAAAAAAAGDGAMAwHCgRJAAIAABxJAAAAACIEmwELB0pBXIH3TAcrbxcTxDolp4f5AAAAAAAAAAAAAAAAAAAAABgxgDAMBwoESQAEAAAcSQAAAAAiBKcBCwdK52xLjjl6DJQFALciCCs58wAAAAAAAAAAAAAAAAAAAAAYMYAwDAcKBEkACAAAHEkAAAAAIgSzAQsHSiiC6KZ/nLJDdJvConWUFecAAAAAAAAAAAAAAAAAAAAAGDGAMAwHCgRJABAAABxJAAAAACIEvwELB0pDSqqS99hahLgiIP2985fQAAAAAAAAAAAAAAAAAAAAABgxgDAMBwoESQAgAAAcSQAAAAAiBMsBCwdKREvgkB/cZYrfD4ctRkb3qQAAAAAAAAAAAAAAAAAAAAAYMYAwDAcKBEkAQAAAHEkAAAAAIgTXAQsHSuoUryv2PbuQuKHSVqFp2HAAAAAAAAAAAAAAAAAAAAAAGDGAMAwHCgRJAIAAABxJAAAAACIE4wELB0ontS9UBRUjgdmP0JdfE74xAAAAAAAAAAAAAAAAAAAAABgxgDAMBwoESQAAAQAcSQAAAAAiBO8BCwdKfZHp81Ted8bhhHpbi1CqCQAAAAAAAAAAAAAAAAAAAAAYMYAwDAcKBEkAAAIAHEkAAAAAIgT7AQsHSh+y+OHVLNJfXPnFKevn1gIAAAAAAAAAAAAAAAAAAAAAGDGAMAwHCgRJAAAEABxJAAAAACIEhwILB0of6+CkNFviuUE7TuV2XwwAAAAAAAAAAAAAAAAAAAAAABgxgDAMBwoESQAACAAcSQAAAAAiBJMCCwdKseiJSozkT3Fl2cBEiDkEAAAAAAAAAAAAAAAAAAAAAAAYMYAwDAcKBEkAABAAHEkAAAAAIgSfAgsHSrSYSc4gOluLW6QZb0hrAQAAAAAAAAAAAAAAAAAAAAAAGDGAMAwHCwYgBKcCCwRJAAAAACIMAwWpAgkMAwsDBK8CSv//////////////////////////////////////////CwcaDAcLBzEgMAIABQEAAAULCgAKASMEBwsADAIFCQsBDAILAgIABgEAAAULCgAKASQEBwsADAIFCQsBDAILAgIABwEAAAMRCgAHAiMEBwgMAQULCwAHAyYMAQsBBA8HBScHAAIACAEAAAUPCgJKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhBAdKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAwUNCwALARgLAhoMAwsDAgAJAAAADgsLAE0KAgoBFwsCEQgHBgsBEQgCAAoAAAAOCAsATQsCCwEXBwYRCAIACwAAAA4MCwBNCgEHBhEICgILAgsBFxEINQIADAAAAA4JCwBNBwYLAgsBFxEINQIADQEAABI/CgEMDAoCDAsKDAoLJAQMCwIMDAsBDAsKAAoMJQQZCwMLDAsLEQk0BgAAAAAAAAAADAcMBgU8CgAKCyMELgoDCgALCxEJNAwICwMLDAsAEQo0DAkLCAsJDAUMBAU4CwMLDAsLEQo0DAoGAAAAAAAAAAALCgwFDAQLBAsFDAcMBgsGCwcCAA4BAAATOQoBDAsKAgwICgsKCCQEDAsCDAsLAQwICgAKCyUEFgsDCwsLCBELDAcFNwoACggjBDALAwoACwgRCwwJCwQLCwsAEQwMCgoJCgojBCsLCQwFBS0LCgwFCwUMBgU1CwQLCwsIEQwMBgsGDAcLBwIAAAAA"
+  },
+  "typeOriginTable": [
+    {
+      "module_name": "tick_math",
+      "datatype_name": "I32",
+      "package": "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85"
+    },
+    {
+      "module_name": "pool",
+      "datatype_name": "POOL",
+      "package": "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85"
+    },
+    {
+      "module_name": "pool",
+      "datatype_name": "AdminCap",
+      "package": "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85"
+    },
+    {
+      "module_name": "pool",
+      "datatype_name": "Pool",
+      "package": "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85"
+    },
+    {
+      "module_name": "pool",
+      "datatype_name": "Position",
+      "package": "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85"
+    },
+    {
+      "module_name": "pool",
+      "datatype_name": "TickInfo",
+      "package": "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85"
+    },
+    {
+      "module_name": "pool",
+      "datatype_name": "PoolCreated",
+      "package": "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85"
+    },
+    {
+      "module_name": "pool",
+      "datatype_name": "SwapEvent",
+      "package": "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85"
+    },
+    {
+      "module_name": "pool",
+      "datatype_name": "AddLiquidityEvent",
+      "package": "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85"
+    },
+    {
+      "module_name": "pool",
+      "datatype_name": "RemoveLiquidityEvent",
+      "package": "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85"
+    }
+  ],
+  "linkageTable": {
+    "0x0000000000000000000000000000000000000000000000000000000000000001": {
+      "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000001",
+      "upgraded_version": 25
+    },
+    "0x0000000000000000000000000000000000000000000000000000000000000002": {
+      "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "upgraded_version": 55
+    },
+    "0x5ef97658a3eee57643f2a7adf724c1558e9e43f778cd3b6c6afbc8d0af52aa71": {
+      "upgraded_id": "0x5ef97658a3eee57643f2a7adf724c1558e9e43f778cd3b6c6afbc8d0af52aa71",
+      "upgraded_version": 1
+    }
+  },
+  "functionMap": {
+    "liquidity_math": {
+      "get_amounts_for_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256",
+          "u256",
+          "u128"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_liquidity_for_amounts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256",
+          "u256",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "max_u256": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "min_u256": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "mul_div_u256": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      }
+    },
+    "pool": {
+      "add_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "close_position": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>"
+        ],
+        "return": []
+      },
+      "collect_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "create_pool": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::AdminCap",
+          "u256",
+          "u32",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "create_pool_permissionless": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u32",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "decr_gross": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u128"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "fee_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_amount_out_a": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256",
+          "u128"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "get_amount_out_b": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256",
+          "u128"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::POOL",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "liquidity_global": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "next_sqrt_price_from_input_a": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u128",
+          "u64"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "next_sqrt_price_from_input_b": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u128",
+          "u64"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "open_position": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u32",
+          "u32",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "open_position_and_transfer": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u32",
+          "u32",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "address",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "pool_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "position_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "position_owed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "position_pool_id": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "position_ticks": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>"
+        ],
+        "return": [
+          "u32",
+          "u32"
+        ]
+      },
+      "remove_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "remove_liquidity_internal": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>",
+          "u128",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "remove_liquidity_partial": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>",
+          "u128",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "reserve_a": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "reserve_b": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "saturating_add_u64": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u256"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "settle_fees": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Position<T0, T1>"
+        ],
+        "return": []
+      },
+      "sqrt_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "swap_a_to_b": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "u256",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_a_to_b_impl": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "u256",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_a_to_b_with_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "&0x5ef97658a3eee57643f2a7adf724c1558e9e43f778cd3b6c6afbc8d0af52aa71::fee::FeeConfig",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "u256",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>"
+        ]
+      },
+      "swap_b_to_a": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "u256",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "swap_b_to_a_impl": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "u256",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "swap_b_to_a_with_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>",
+          "&0x5ef97658a3eee57643f2a7adf724c1558e9e43f778cd3b6c6afbc8d0af52aa71::fee::FeeConfig",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T1>",
+          "u64",
+          "u256",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "tick_spacing": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::pool::Pool<T0, T1>"
+        ],
+        "return": [
+          "u32"
+        ]
+      }
+    },
+    "tick_math": {
+      "amount0_for_liquidity": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "amount1_for_liquidity": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u128",
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "approx_tick_at_sqrt_ratio": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256"
+        ],
+        "return": [
+          "u32"
+        ]
+      },
+      "get_amounts_for_liquidity": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256",
+          "u256",
+          "u128"
+        ],
+        "return": [
+          "u64",
+          "u64"
+        ]
+      },
+      "get_liquidity_for_amounts": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256",
+          "u256",
+          "u64",
+          "u64"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "get_sqrt_ratio_at_tick": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u32"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "i32_abs": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::tick_math::I32"
+        ],
+        "return": [
+          "u32"
+        ]
+      },
+      "i32_from_u32": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u32"
+        ],
+        "return": [
+          "0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::tick_math::I32"
+        ]
+      },
+      "i32_is_negative": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0xb073375aba97556eff7a6263fe686a421e3365877dedb6f68ea938e234d0bf85::tick_math::I32"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "i32_lt": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u32",
+          "u32"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "liquidity_for_amount0": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "liquidity_for_amount1": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64",
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "max_u256": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "min_u256": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      },
+      "mul_div_u256": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "u256",
+          "u256",
+          "u256"
+        ],
+        "return": [
+          "u256"
+        ]
+      }
+    }
+  }
+}
