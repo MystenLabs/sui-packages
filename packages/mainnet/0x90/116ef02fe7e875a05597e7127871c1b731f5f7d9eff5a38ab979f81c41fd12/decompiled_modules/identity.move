@@ -1,0 +1,412 @@
+module 0x55d6fe64890a3feaeafc825c28032a9ff81a4891b35208333ded8abadea17d63::identity {
+    struct ProofOfGenesis has store {
+        creation_mode: u8,
+        persona_commitment: vector<u8>,
+        source_commitment: vector<u8>,
+        creator: address,
+        schema_version: u64,
+        recorded_at_ms: u64,
+    }
+
+    struct ProfileRef has copy, drop, store {
+        uri: 0x1::string::String,
+        content_hash: vector<u8>,
+        schema_version: u64,
+    }
+
+    struct ManifestRef has copy, drop, store {
+        uri: 0x1::string::String,
+        content_hash: vector<u8>,
+        schema_version: u64,
+    }
+
+    struct FundingWalletRef has copy, drop, store {
+        chain_namespace: 0x1::string::String,
+        wallet_ref: 0x1::string::String,
+        purpose: 0x1::string::String,
+    }
+
+    struct ProviderPolicyRef has copy, drop, store {
+        provider: address,
+        policy_uri: 0x1::string::String,
+        policy_hash: vector<u8>,
+        schema_version: u64,
+    }
+
+    struct LivingCharacter has store, key {
+        id: 0x2::object::UID,
+        owner: address,
+        name: 0x1::string::String,
+        protocol_version: u64,
+        paused: bool,
+        proof: ProofOfGenesis,
+        profile: ProfileRef,
+        manifest: ManifestRef,
+        funding_wallets: vector<FundingWalletRef>,
+        provider_policies: vector<ProviderPolicyRef>,
+        created_at_ms: u64,
+        updated_at_ms: u64,
+    }
+
+    struct CharacterMinted has copy, drop {
+        character_id: 0x2::object::ID,
+        owner: address,
+        creator: address,
+        creation_mode: u8,
+        profile_uri: 0x1::string::String,
+        manifest_uri: 0x1::string::String,
+        timestamp_ms: u64,
+    }
+
+    struct ProfileUpdated has copy, drop {
+        character_id: 0x2::object::ID,
+        owner: address,
+        profile_uri: 0x1::string::String,
+        timestamp_ms: u64,
+    }
+
+    struct ManifestUpdated has copy, drop {
+        character_id: 0x2::object::ID,
+        owner: address,
+        manifest_uri: 0x1::string::String,
+        timestamp_ms: u64,
+    }
+
+    struct PauseUpdated has copy, drop {
+        character_id: 0x2::object::ID,
+        owner: address,
+        paused: bool,
+        reason_hash: vector<u8>,
+        timestamp_ms: u64,
+    }
+
+    struct FundingWalletAdded has copy, drop {
+        character_id: 0x2::object::ID,
+        owner: address,
+        chain_namespace: 0x1::string::String,
+        wallet_ref: 0x1::string::String,
+        purpose: 0x1::string::String,
+        timestamp_ms: u64,
+    }
+
+    struct ProviderPolicyAdded has copy, drop {
+        character_id: 0x2::object::ID,
+        owner: address,
+        provider: address,
+        policy_uri: 0x1::string::String,
+        timestamp_ms: u64,
+    }
+
+    struct OwnerTransferred has copy, drop {
+        character_id: 0x2::object::ID,
+        previous_owner: address,
+        new_owner: address,
+        timestamp_ms: u64,
+    }
+
+    struct OwnerTransferredWithRotation has copy, drop {
+        character_id: 0x2::object::ID,
+        previous_owner: address,
+        new_owner: address,
+        previous_secrets_hash: vector<u8>,
+        new_secrets_hash: vector<u8>,
+        timestamp_ms: u64,
+    }
+
+    entry fun add_funding_wallet(arg0: &mut LivingCharacter, arg1: vector<u8>, arg2: vector<u8>, arg3: vector<u8>, arg4: &0x2::clock::Clock, arg5: &0x2::tx_context::TxContext) {
+        assert_owner(arg0, 0x2::tx_context::sender(arg5));
+        assert_not_paused(arg0);
+        assert_valid_ref(&arg1, 11);
+        assert_valid_ref(&arg2, 11);
+        assert_valid_ref(&arg3, 11);
+        let v0 = FundingWalletRef{
+            chain_namespace : 0x1::string::utf8(arg1),
+            wallet_ref      : 0x1::string::utf8(arg2),
+            purpose         : 0x1::string::utf8(arg3),
+        };
+        0x1::vector::push_back<FundingWalletRef>(&mut arg0.funding_wallets, v0);
+        arg0.updated_at_ms = 0x2::clock::timestamp_ms(arg4);
+        let v1 = 0x1::vector::borrow<FundingWalletRef>(&arg0.funding_wallets, 0x1::vector::length<FundingWalletRef>(&arg0.funding_wallets) - 1);
+        let v2 = FundingWalletAdded{
+            character_id    : 0x2::object::uid_to_inner(&arg0.id),
+            owner           : arg0.owner,
+            chain_namespace : v1.chain_namespace,
+            wallet_ref      : v1.wallet_ref,
+            purpose         : v1.purpose,
+            timestamp_ms    : arg0.updated_at_ms,
+        };
+        0x2::event::emit<FundingWalletAdded>(v2);
+    }
+
+    entry fun add_provider_policy(arg0: &mut LivingCharacter, arg1: address, arg2: vector<u8>, arg3: vector<u8>, arg4: u64, arg5: &0x2::clock::Clock, arg6: &0x2::tx_context::TxContext) {
+        assert_owner(arg0, 0x2::tx_context::sender(arg6));
+        assert_not_paused(arg0);
+        assert_valid_ref(&arg2, 12);
+        assert!(0x1::vector::length<u8>(&arg3) > 0, 6);
+        assert!(0x1::vector::length<u8>(&arg3) <= 128, 10);
+        let v0 = ProviderPolicyRef{
+            provider       : arg1,
+            policy_uri     : 0x1::string::utf8(arg2),
+            policy_hash    : arg3,
+            schema_version : arg4,
+        };
+        0x1::vector::push_back<ProviderPolicyRef>(&mut arg0.provider_policies, v0);
+        arg0.updated_at_ms = 0x2::clock::timestamp_ms(arg5);
+        let v1 = ProviderPolicyAdded{
+            character_id : 0x2::object::uid_to_inner(&arg0.id),
+            owner        : arg0.owner,
+            provider     : arg1,
+            policy_uri   : 0x1::vector::borrow<ProviderPolicyRef>(&arg0.provider_policies, 0x1::vector::length<ProviderPolicyRef>(&arg0.provider_policies) - 1).policy_uri,
+            timestamp_ms : arg0.updated_at_ms,
+        };
+        0x2::event::emit<ProviderPolicyAdded>(v1);
+    }
+
+    public fun assert_not_paused(arg0: &LivingCharacter) {
+        assert!(!arg0.paused, 2);
+    }
+
+    public fun assert_owner(arg0: &LivingCharacter, arg1: address) {
+        assert!(arg0.owner == arg1, 1);
+    }
+
+    fun assert_valid_mint_args(arg0: u8, arg1: &vector<u8>, arg2: &vector<u8>, arg3: &vector<u8>, arg4: &vector<u8>, arg5: &vector<u8>, arg6: &vector<u8>) {
+        assert!(arg0 == 1 || arg0 == 2, 7);
+        assert!(0x1::vector::length<u8>(arg1) > 0, 3);
+        assert!(0x1::vector::length<u8>(arg1) <= 128, 8);
+        assert!(0x1::vector::length<u8>(arg2) > 0, 6);
+        assert_valid_uri_hash(arg3, arg4, 4);
+        assert_valid_uri_hash(arg5, arg6, 5);
+    }
+
+    fun assert_valid_ref(arg0: &vector<u8>, arg1: u64) {
+        assert!(0x1::vector::length<u8>(arg0) > 0, 6);
+        assert!(0x1::vector::length<u8>(arg0) <= 512, arg1);
+    }
+
+    fun assert_valid_uri_hash(arg0: &vector<u8>, arg1: &vector<u8>, arg2: u64) {
+        assert!(0x1::vector::length<u8>(arg0) > 0, arg2);
+        assert!(0x1::vector::length<u8>(arg0) <= 2048, 9);
+        assert!(0x1::vector::length<u8>(arg1) > 0, 6);
+        assert!(0x1::vector::length<u8>(arg1) <= 128, 10);
+    }
+
+    fun create(arg0: u8, arg1: vector<u8>, arg2: vector<u8>, arg3: vector<u8>, arg4: vector<u8>, arg5: vector<u8>, arg6: vector<u8>, arg7: vector<u8>, arg8: &0x2::clock::Clock, arg9: &mut 0x2::tx_context::TxContext) : LivingCharacter {
+        assert_valid_mint_args(arg0, &arg1, &arg2, &arg4, &arg5, &arg6, &arg7);
+        let v0 = 0x2::tx_context::sender(arg9);
+        let v1 = 0x2::clock::timestamp_ms(arg8);
+        let v2 = ProfileRef{
+            uri            : 0x1::string::utf8(arg4),
+            content_hash   : arg5,
+            schema_version : 1,
+        };
+        let v3 = ManifestRef{
+            uri            : 0x1::string::utf8(arg6),
+            content_hash   : arg7,
+            schema_version : 1,
+        };
+        let v4 = ProofOfGenesis{
+            creation_mode      : arg0,
+            persona_commitment : arg2,
+            source_commitment  : arg3,
+            creator            : v0,
+            schema_version     : 1,
+            recorded_at_ms     : v1,
+        };
+        let v5 = LivingCharacter{
+            id                : 0x2::object::new(arg9),
+            owner             : v0,
+            name              : 0x1::string::utf8(arg1),
+            protocol_version  : 2,
+            paused            : false,
+            proof             : v4,
+            profile           : v2,
+            manifest          : v3,
+            funding_wallets   : 0x1::vector::empty<FundingWalletRef>(),
+            provider_policies : 0x1::vector::empty<ProviderPolicyRef>(),
+            created_at_ms     : v1,
+            updated_at_ms     : v1,
+        };
+        let v6 = CharacterMinted{
+            character_id  : 0x2::object::uid_to_inner(&v5.id),
+            owner         : v0,
+            creator       : v0,
+            creation_mode : arg0,
+            profile_uri   : v5.profile.uri,
+            manifest_uri  : v5.manifest.uri,
+            timestamp_ms  : v1,
+        };
+        0x2::event::emit<CharacterMinted>(v6);
+        v5
+    }
+
+    public fun create_classified_prompt(arg0: vector<u8>, arg1: vector<u8>, arg2: vector<u8>, arg3: vector<u8>, arg4: vector<u8>, arg5: vector<u8>, arg6: vector<u8>, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) : LivingCharacter {
+        create(2, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+    }
+
+    public fun create_direct_prompt(arg0: vector<u8>, arg1: vector<u8>, arg2: vector<u8>, arg3: vector<u8>, arg4: vector<u8>, arg5: vector<u8>, arg6: vector<u8>, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) : LivingCharacter {
+        create(1, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+    }
+
+    public fun funding_wallet_count(arg0: &LivingCharacter) : u64 {
+        0x1::vector::length<FundingWalletRef>(&arg0.funding_wallets)
+    }
+
+    public(friend) fun guardian_transfer_owner(arg0: &mut LivingCharacter, arg1: address, arg2: address, arg3: &0x2::clock::Clock) {
+        assert!(arg0.owner == arg1, 1);
+        assert_not_paused(arg0);
+        arg0.owner = arg2;
+        arg0.updated_at_ms = 0x2::clock::timestamp_ms(arg3);
+        let v0 = OwnerTransferred{
+            character_id   : 0x2::object::uid_to_inner(&arg0.id),
+            previous_owner : arg1,
+            new_owner      : arg2,
+            timestamp_ms   : arg0.updated_at_ms,
+        };
+        0x2::event::emit<OwnerTransferred>(v0);
+    }
+
+    public fun is_paused(arg0: &LivingCharacter) : bool {
+        arg0.paused
+    }
+
+    public fun manifest_uri(arg0: &LivingCharacter) : 0x1::string::String {
+        arg0.manifest.uri
+    }
+
+    entry fun mint_classified_prompt(arg0: vector<u8>, arg1: vector<u8>, arg2: vector<u8>, arg3: vector<u8>, arg4: vector<u8>, arg5: vector<u8>, arg6: vector<u8>, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) {
+        let v0 = create_classified_prompt(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+        0x2::transfer::public_transfer<LivingCharacter>(v0, 0x2::tx_context::sender(arg8));
+    }
+
+    entry fun mint_direct_prompt(arg0: vector<u8>, arg1: vector<u8>, arg2: vector<u8>, arg3: vector<u8>, arg4: vector<u8>, arg5: vector<u8>, arg6: vector<u8>, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) {
+        let v0 = create_direct_prompt(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+        0x2::transfer::public_transfer<LivingCharacter>(v0, 0x2::tx_context::sender(arg8));
+    }
+
+    public fun name(arg0: &LivingCharacter) : 0x1::string::String {
+        arg0.name
+    }
+
+    public fun owner(arg0: &LivingCharacter) : address {
+        arg0.owner
+    }
+
+    public fun profile_uri(arg0: &LivingCharacter) : 0x1::string::String {
+        arg0.profile.uri
+    }
+
+    public fun proof_creation_mode(arg0: &LivingCharacter) : u8 {
+        arg0.proof.creation_mode
+    }
+
+    public fun proof_creator(arg0: &LivingCharacter) : address {
+        arg0.proof.creator
+    }
+
+    public fun protocol_version(arg0: &LivingCharacter) : u64 {
+        arg0.protocol_version
+    }
+
+    public fun provider_policy_count(arg0: &LivingCharacter) : u64 {
+        0x1::vector::length<ProviderPolicyRef>(&arg0.provider_policies)
+    }
+
+    entry fun set_pause(arg0: &mut LivingCharacter, arg1: bool, arg2: vector<u8>, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) {
+        assert_owner(arg0, 0x2::tx_context::sender(arg4));
+        assert!(0x1::vector::length<u8>(&arg2) <= 128, 10);
+        arg0.paused = arg1;
+        arg0.updated_at_ms = 0x2::clock::timestamp_ms(arg3);
+        let v0 = PauseUpdated{
+            character_id : 0x2::object::uid_to_inner(&arg0.id),
+            owner        : arg0.owner,
+            paused       : arg1,
+            reason_hash  : arg2,
+            timestamp_ms : arg0.updated_at_ms,
+        };
+        0x2::event::emit<PauseUpdated>(v0);
+    }
+
+    public(friend) fun set_paused_from_breaker(arg0: &mut LivingCharacter, arg1: bool, arg2: vector<u8>, arg3: &0x2::clock::Clock) {
+        assert!(0x1::vector::length<u8>(&arg2) <= 128, 10);
+        arg0.paused = arg1;
+        arg0.updated_at_ms = 0x2::clock::timestamp_ms(arg3);
+        let v0 = PauseUpdated{
+            character_id : 0x2::object::uid_to_inner(&arg0.id),
+            owner        : arg0.owner,
+            paused       : arg1,
+            reason_hash  : arg2,
+            timestamp_ms : arg0.updated_at_ms,
+        };
+        0x2::event::emit<PauseUpdated>(v0);
+    }
+
+    entry fun transfer_owner(arg0: LivingCharacter, arg1: address, arg2: &0x2::clock::Clock, arg3: &0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<LivingCharacter>(arg0, 0x2::tx_context::sender(arg3));
+        abort 14
+    }
+
+    entry fun transfer_with_rotation(arg0: LivingCharacter, arg1: address, arg2: vector<u8>, arg3: vector<u8>, arg4: &0x2::clock::Clock, arg5: &0x2::tx_context::TxContext) {
+        assert_owner(&arg0, 0x2::tx_context::sender(arg5));
+        assert_not_paused(&arg0);
+        assert!(0x1::vector::length<u8>(&arg2) <= 128, 10);
+        assert!(0x1::vector::length<u8>(&arg3) > 0, 13);
+        assert!(0x1::vector::length<u8>(&arg3) <= 128, 10);
+        assert!(arg3 != arg2, 13);
+        arg0.owner = arg1;
+        arg0.updated_at_ms = 0x2::clock::timestamp_ms(arg4);
+        let v0 = OwnerTransferredWithRotation{
+            character_id          : 0x2::object::uid_to_inner(&arg0.id),
+            previous_owner        : arg0.owner,
+            new_owner             : arg1,
+            previous_secrets_hash : arg2,
+            new_secrets_hash      : arg3,
+            timestamp_ms          : arg0.updated_at_ms,
+        };
+        0x2::event::emit<OwnerTransferredWithRotation>(v0);
+        0x2::transfer::public_transfer<LivingCharacter>(arg0, arg1);
+    }
+
+    entry fun update_manifest(arg0: &mut LivingCharacter, arg1: vector<u8>, arg2: vector<u8>, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) {
+        assert_owner(arg0, 0x2::tx_context::sender(arg4));
+        assert_not_paused(arg0);
+        assert_valid_uri_hash(&arg1, &arg2, 5);
+        let v0 = ManifestRef{
+            uri            : 0x1::string::utf8(arg1),
+            content_hash   : arg2,
+            schema_version : 1,
+        };
+        arg0.manifest = v0;
+        arg0.updated_at_ms = 0x2::clock::timestamp_ms(arg3);
+        let v1 = ManifestUpdated{
+            character_id : 0x2::object::uid_to_inner(&arg0.id),
+            owner        : arg0.owner,
+            manifest_uri : arg0.manifest.uri,
+            timestamp_ms : arg0.updated_at_ms,
+        };
+        0x2::event::emit<ManifestUpdated>(v1);
+    }
+
+    entry fun update_profile(arg0: &mut LivingCharacter, arg1: vector<u8>, arg2: vector<u8>, arg3: &0x2::clock::Clock, arg4: &0x2::tx_context::TxContext) {
+        assert_owner(arg0, 0x2::tx_context::sender(arg4));
+        assert_not_paused(arg0);
+        assert_valid_uri_hash(&arg1, &arg2, 4);
+        let v0 = ProfileRef{
+            uri            : 0x1::string::utf8(arg1),
+            content_hash   : arg2,
+            schema_version : 1,
+        };
+        arg0.profile = v0;
+        arg0.updated_at_ms = 0x2::clock::timestamp_ms(arg3);
+        let v1 = ProfileUpdated{
+            character_id : 0x2::object::uid_to_inner(&arg0.id),
+            owner        : arg0.owner,
+            profile_uri  : arg0.profile.uri,
+            timestamp_ms : arg0.updated_at_ms,
+        };
+        0x2::event::emit<ProfileUpdated>(v1);
+    }
+
+    // decompiled from Move bytecode v7
+}
+
