@@ -1,0 +1,14 @@
+module 0xca22b09fd3a6a9f93f090f5c4aa17c5e369fac16839f5575cfd2f582d17ba398::hma {
+    public fun sxy<T0, T1>(arg0: &mut 0x70b1d191657bd7dd84711940efb08192a74a2ea30ef66d3f37e869c668894e53::pool::PoolState<T0, T1>, arg1: &mut 0x70b1d191657bd7dd84711940efb08192a74a2ea30ef66d3f37e869c668894e53::pool::RegimeState, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: 0x2::coin::Coin<T0>, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T1> {
+        0xca22b09fd3a6a9f93f090f5c4aa17c5e369fac16839f5575cfd2f582d17ba398::u::tod<T0>(arg4, 0x2::tx_context::sender(arg6));
+        0x70b1d191657bd7dd84711940efb08192a74a2ea30ef66d3f37e869c668894e53::trader::swap_exact_in_base_pyth_core<T0, T1>(arg0, arg1, arg5, arg2, arg3, &mut arg4, 0x2::coin::value<T0>(&arg4), 0, arg6)
+    }
+
+    public fun syx<T0, T1>(arg0: &mut 0x70b1d191657bd7dd84711940efb08192a74a2ea30ef66d3f37e869c668894e53::pool::PoolState<T0, T1>, arg1: &mut 0x70b1d191657bd7dd84711940efb08192a74a2ea30ef66d3f37e869c668894e53::pool::RegimeState, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: 0x2::coin::Coin<T1>, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) : 0x2::coin::Coin<T0> {
+        0xca22b09fd3a6a9f93f090f5c4aa17c5e369fac16839f5575cfd2f582d17ba398::u::tod<T1>(arg4, 0x2::tx_context::sender(arg6));
+        0x70b1d191657bd7dd84711940efb08192a74a2ea30ef66d3f37e869c668894e53::trader::swap_exact_in_quote_pyth_core<T0, T1>(arg0, arg1, arg5, arg2, arg3, &mut arg4, 0x2::coin::value<T1>(&arg4), 0, arg6)
+    }
+
+    // decompiled from Move bytecode v7
+}
+
