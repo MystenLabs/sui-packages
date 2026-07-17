@@ -62,14 +62,15 @@ module 0x2::authenticator_state {
             let v3 = 0x1::vector::borrow<ActiveJwk>(&arg0, v1);
             if (0x1::option::is_none<JwkId>(&v2)) {
                 0x1::option::fill<JwkId>(&mut v2, v3.jwk_id);
+            } else if (jwk_id_equal(0x1::option::borrow<JwkId>(&v2), &v3.jwk_id)) {
+                /* goto 8 */
             } else {
-                if (jwk_id_equal(0x1::option::borrow<JwkId>(&v2), &v3.jwk_id)) {
-                    v1 = v1 + 1;
-                    continue
-                };
                 *0x1::option::borrow_mut<JwkId>(&mut v2) = v3.jwk_id;
             };
             0x1::vector::push_back<ActiveJwk>(&mut v0, *v3);
+            v1 = v1 + 1;
+            continue;
+            /* label 8 */
             v1 = v1 + 1;
         };
         v0

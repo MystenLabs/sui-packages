@@ -30,6 +30,7 @@ module 0x2::linked_table {
             0x2::dynamic_field::borrow_mut<T0, Node<T0, T1>>(&mut arg0.id, v2).next = 0x1::option::some<T0>(arg1);
             0x1::option::some<T0>(v2)
         } else {
+            0x1::option::destroy_none<T0>(v0);
             0x1::option::none<T0>()
         };
         let v3 = Node<T0, T1>{
@@ -46,9 +47,14 @@ module 0x2::linked_table {
     }
 
     public fun pop_back<T0: copy + drop + store, T1: store>(arg0: &mut LinkedTable<T0, T1>) : (T0, T1) {
-        assert!(0x1::option::is_some<T0>(&arg0.tail), 1);
-        let v0 = *0x1::option::borrow<T0>(&arg0.tail);
-        (v0, remove<T0, T1>(arg0, v0))
+        let v0 = arg0.tail;
+        if (0x1::option::is_some<T0>(&v0)) {
+            let v1 = 0x1::option::destroy_some<T0>(v0);
+            return (v1, remove<T0, T1>(arg0, v1))
+        } else {
+            0x1::option::destroy_none<T0>(v0);
+            abort 1
+        };
     }
 
     public fun destroy_empty<T0: copy + drop + store, T1: store>(arg0: LinkedTable<T0, T1>) {
@@ -68,20 +74,24 @@ module 0x2::linked_table {
             next  : v1,
             value : v2,
         } = 0x2::dynamic_field::remove<T0, Node<T0, T1>>(&mut arg0.id, arg1);
-        let v3 = v1;
-        let v4 = v0;
         arg0.size = arg0.size - 1;
-        if (0x1::option::is_some<T0>(&v4)) {
-            0x2::dynamic_field::borrow_mut<T0, Node<T0, T1>>(&mut arg0.id, *0x1::option::borrow<T0>(&v4)).next = v3;
-        };
+        let v3 = v0;
         if (0x1::option::is_some<T0>(&v3)) {
-            0x2::dynamic_field::borrow_mut<T0, Node<T0, T1>>(&mut arg0.id, *0x1::option::borrow<T0>(&v3)).prev = v4;
+            0x2::dynamic_field::borrow_mut<T0, Node<T0, T1>>(&mut arg0.id, 0x1::option::destroy_some<T0>(v3)).next = v1;
+        } else {
+            0x1::option::destroy_none<T0>(v3);
+        };
+        let v4 = v1;
+        if (0x1::option::is_some<T0>(&v4)) {
+            0x2::dynamic_field::borrow_mut<T0, Node<T0, T1>>(&mut arg0.id, 0x1::option::destroy_some<T0>(v4)).prev = v0;
+        } else {
+            0x1::option::destroy_none<T0>(v4);
         };
         if (0x1::option::borrow<T0>(&arg0.head) == &arg1) {
-            arg0.head = v3;
+            arg0.head = v1;
         };
         if (0x1::option::borrow<T0>(&arg0.tail) == &arg1) {
-            arg0.tail = v4;
+            arg0.tail = v0;
         };
         v2
     }
@@ -108,6 +118,40 @@ module 0x2::linked_table {
         &arg0.head
     }
 
+    public fun insert_after<T0: copy + drop + store, T1: store>(arg0: &mut LinkedTable<T0, T1>, arg1: T0, arg2: T0, arg3: T1) {
+        let v0 = 0x1::option::swap_or_fill<T0>(&mut 0x2::dynamic_field::borrow_mut<T0, Node<T0, T1>>(&mut arg0.id, arg1).next, arg2);
+        if (0x1::option::is_some<T0>(&v0)) {
+            0x2::dynamic_field::borrow_mut<T0, Node<T0, T1>>(&mut arg0.id, 0x1::option::destroy_some<T0>(v0)).prev = 0x1::option::some<T0>(arg2);
+        } else {
+            0x1::option::destroy_none<T0>(v0);
+            arg0.tail = 0x1::option::some<T0>(arg2);
+        };
+        let v1 = Node<T0, T1>{
+            prev  : 0x1::option::some<T0>(arg1),
+            next  : v0,
+            value : arg3,
+        };
+        0x2::dynamic_field::add<T0, Node<T0, T1>>(&mut arg0.id, arg2, v1);
+        arg0.size = arg0.size + 1;
+    }
+
+    public fun insert_before<T0: copy + drop + store, T1: store>(arg0: &mut LinkedTable<T0, T1>, arg1: T0, arg2: T0, arg3: T1) {
+        let v0 = 0x1::option::swap_or_fill<T0>(&mut 0x2::dynamic_field::borrow_mut<T0, Node<T0, T1>>(&mut arg0.id, arg1).prev, arg2);
+        if (0x1::option::is_some<T0>(&v0)) {
+            0x2::dynamic_field::borrow_mut<T0, Node<T0, T1>>(&mut arg0.id, 0x1::option::destroy_some<T0>(v0)).next = 0x1::option::some<T0>(arg2);
+        } else {
+            0x1::option::destroy_none<T0>(v0);
+            arg0.head = 0x1::option::some<T0>(arg2);
+        };
+        let v1 = Node<T0, T1>{
+            prev  : v0,
+            next  : 0x1::option::some<T0>(arg1),
+            value : arg3,
+        };
+        0x2::dynamic_field::add<T0, Node<T0, T1>>(&mut arg0.id, arg2, v1);
+        arg0.size = arg0.size + 1;
+    }
+
     public fun is_empty<T0: copy + drop + store, T1: store>(arg0: &LinkedTable<T0, T1>) : bool {
         arg0.size == 0
     }
@@ -126,9 +170,14 @@ module 0x2::linked_table {
     }
 
     public fun pop_front<T0: copy + drop + store, T1: store>(arg0: &mut LinkedTable<T0, T1>) : (T0, T1) {
-        assert!(0x1::option::is_some<T0>(&arg0.head), 1);
-        let v0 = *0x1::option::borrow<T0>(&arg0.head);
-        (v0, remove<T0, T1>(arg0, v0))
+        let v0 = arg0.head;
+        if (0x1::option::is_some<T0>(&v0)) {
+            let v1 = 0x1::option::destroy_some<T0>(v0);
+            return (v1, remove<T0, T1>(arg0, v1))
+        } else {
+            0x1::option::destroy_none<T0>(v0);
+            abort 1
+        };
     }
 
     public fun prev<T0: copy + drop + store, T1: store>(arg0: &LinkedTable<T0, T1>, arg1: T0) : &0x1::option::Option<T0> {
@@ -136,15 +185,16 @@ module 0x2::linked_table {
     }
 
     public fun push_front<T0: copy + drop + store, T1: store>(arg0: &mut LinkedTable<T0, T1>, arg1: T0, arg2: T1) {
-        let v0 = 0x1::option::swap_or_fill<T0>(&mut arg0.head, arg1);
         if (0x1::option::is_none<T0>(&arg0.tail)) {
             0x1::option::fill<T0>(&mut arg0.tail, arg1);
         };
+        let v0 = 0x1::option::swap_or_fill<T0>(&mut arg0.head, arg1);
         let v1 = if (0x1::option::is_some<T0>(&v0)) {
             let v2 = 0x1::option::destroy_some<T0>(v0);
             0x2::dynamic_field::borrow_mut<T0, Node<T0, T1>>(&mut arg0.id, v2).prev = 0x1::option::some<T0>(arg1);
             0x1::option::some<T0>(v2)
         } else {
+            0x1::option::destroy_none<T0>(v0);
             0x1::option::none<T0>()
         };
         let v3 = Node<T0, T1>{

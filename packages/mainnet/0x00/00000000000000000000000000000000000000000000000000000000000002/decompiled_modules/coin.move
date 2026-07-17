@@ -151,11 +151,11 @@ module 0x2::coin {
     }
 
     public fun deny_list_add<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCap<T0>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
-        0x2::deny_list::v1_add(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg2);
+        0x2::deny_list::v1_add(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())), arg2);
     }
 
     public fun deny_list_contains<T0>(arg0: &0x2::deny_list::DenyList, arg1: address) : bool {
-        let v0 = 0x1::type_name::get_with_original_ids<T0>();
+        let v0 = 0x1::type_name::with_defining_ids<T0>();
         if (0x1::type_name::is_primitive(&v0)) {
             return false
         };
@@ -163,41 +163,41 @@ module 0x2::coin {
     }
 
     public fun deny_list_remove<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCap<T0>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
-        0x2::deny_list::v1_remove(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::get_with_original_ids<T0>())), arg2);
+        0x2::deny_list::v1_remove(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())), arg2);
     }
 
     public fun deny_list_v2_add<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCapV2<T0>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
-        0x2::deny_list::v2_add(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg2, arg3);
+        0x2::deny_list::v2_add(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())), arg2, arg3);
     }
 
     public fun deny_list_v2_contains_current_epoch<T0>(arg0: &0x2::deny_list::DenyList, arg1: address, arg2: &0x2::tx_context::TxContext) : bool {
-        0x2::deny_list::v2_contains_current_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg1, arg2)
+        0x2::deny_list::v2_contains_current_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())), arg1, arg2)
     }
 
     public fun deny_list_v2_contains_next_epoch<T0>(arg0: &0x2::deny_list::DenyList, arg1: address) : bool {
-        0x2::deny_list::v2_contains_next_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg1)
+        0x2::deny_list::v2_contains_next_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())), arg1)
     }
 
     public fun deny_list_v2_disable_global_pause<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCapV2<T0>, arg2: &mut 0x2::tx_context::TxContext) {
         assert!(arg1.allow_global_pause, 3);
-        0x2::deny_list::v2_disable_global_pause(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg2);
+        0x2::deny_list::v2_disable_global_pause(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())), arg2);
     }
 
     public fun deny_list_v2_enable_global_pause<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCapV2<T0>, arg2: &mut 0x2::tx_context::TxContext) {
         assert!(arg1.allow_global_pause, 3);
-        0x2::deny_list::v2_enable_global_pause(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg2);
+        0x2::deny_list::v2_enable_global_pause(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())), arg2);
     }
 
     public fun deny_list_v2_is_global_pause_enabled_current_epoch<T0>(arg0: &0x2::deny_list::DenyList, arg1: &0x2::tx_context::TxContext) : bool {
-        0x2::deny_list::v2_is_global_pause_enabled_current_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg1)
+        0x2::deny_list::v2_is_global_pause_enabled_current_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())), arg1)
     }
 
     public fun deny_list_v2_is_global_pause_enabled_next_epoch<T0>(arg0: &0x2::deny_list::DenyList) : bool {
-        0x2::deny_list::v2_is_global_pause_enabled_next_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())))
+        0x2::deny_list::v2_is_global_pause_enabled_next_epoch(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())))
     }
 
     public fun deny_list_v2_remove<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: &mut DenyCapV2<T0>, arg2: address, arg3: &mut 0x2::tx_context::TxContext) {
-        0x2::deny_list::v2_remove(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg2, arg3);
+        0x2::deny_list::v2_remove(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())), arg2, arg3);
     }
 
     public(friend) fun destroy_metadata<T0>(arg0: CoinMetadata<T0>) {
@@ -264,7 +264,7 @@ module 0x2::coin {
     public fun migrate_regulated_currency_to_v2<T0>(arg0: &mut 0x2::deny_list::DenyList, arg1: DenyCap<T0>, arg2: bool, arg3: &mut 0x2::tx_context::TxContext) : DenyCapV2<T0> {
         let DenyCap { id: v0 } = arg1;
         0x2::object::delete(v0);
-        0x2::deny_list::migrate_v1_to_v2(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_original_ids<T0>())), arg3);
+        0x2::deny_list::migrate_v1_to_v2(arg0, 0, 0x1::ascii::into_bytes(0x1::type_name::into_string(0x1::type_name::with_defining_ids<T0>())), arg3);
         DenyCapV2<T0>{
             id                 : 0x2::object::new(arg3),
             allow_global_pause : arg2,
