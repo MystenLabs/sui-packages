@@ -1,0 +1,183 @@
+module 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::flash_arb {
+    public entry fun direct_dlmm_cetus<T0>(arg0: &mut 0x5a5c1d10e4782dbbdec3eb8327ede04bd078b294b97cfdba447b11b846b383ac::lb_pair::LBPair<T0, 0x2::sui::SUI>, arg1: &0x5a5c1d10e4782dbbdec3eb8327ede04bd078b294b97cfdba447b11b846b383ac::config::GlobalConfig, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x2::clock::Clock, arg5: 0x2::coin::Coin<0x2::sui::SUI>, arg6: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg4, arg3, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::dlmm_b<T0, 0x2::sui::SUI>(arg1, arg0, 0x2::coin::into_balance<0x2::sui::SUI>(arg5), arg4, arg6), arg6), arg6), 0x2::tx_context::sender(arg6));
+    }
+
+    public fun flash_backrun_turbos_cetus<T0, T1, T2>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T2>, arg1: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, 0x2::sui::SUI, T1>, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned, arg5: &0x2::clock::Clock, arg6: u64, arg7: u64, arg8: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T2>(arg0, arg6, arg8);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T2>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg5, arg3, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_b<T0, 0x2::sui::SUI, T1>(arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg5, arg4, arg8), arg8), v0, arg8);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, arg7);
+        profit_to_sender<0x2::sui::SUI>(v1, arg8);
+    }
+
+    public fun flash_bluefin_cetus<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T1>, arg1: &mut 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T0, 0x2::sui::SUI>, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg3: &0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::config::GlobalConfig, arg4: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg5: &0x2::clock::Clock, arg6: u64, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T1>(arg0, arg6, arg7);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T1>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg5, arg4, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::bf_b<T0, 0x2::sui::SUI>(arg5, arg3, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg7), arg7), v0, arg7);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg7);
+    }
+
+    public fun flash_bluemove_cetus<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T1>, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg2: &mut 0xb24b6789e088b876afabca733bed2299fbc9e2d6369be4d1acfa17d8145454d9::swap::Dex_Info, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T1>(arg0, arg5, arg6);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T1>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg4, arg3, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::bmr_b<T0, 0x2::sui::SUI>(arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg6), arg6), v0, arg6);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg6);
+    }
+
+    public fun flash_cetus_bluefin<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T1>, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg2: &mut 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T0, 0x2::sui::SUI>, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::config::GlobalConfig, arg5: &0x2::clock::Clock, arg6: u64, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T1>(arg0, arg6, arg7);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T1>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::bf_a<T0, 0x2::sui::SUI>(arg5, arg4, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0x2::sui::SUI>(arg5, arg3, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg7), arg7), v0, arg7);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg7);
+    }
+
+    public fun flash_cetus_bluemove<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T1>, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg2: &mut 0xb24b6789e088b876afabca733bed2299fbc9e2d6369be4d1acfa17d8145454d9::swap::Dex_Info, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T1>(arg0, arg5, arg6);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T1>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::bmr_a<T0, 0x2::sui::SUI>(arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0x2::sui::SUI>(arg4, arg3, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg6), arg6), v0, arg6);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg6);
+    }
+
+    public fun flash_cetus_cetus<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T1>, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T1>(arg0, arg5, arg6);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T1>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg4, arg3, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0x2::sui::SUI>(arg4, arg3, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg6), arg6), v0, arg6);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg6);
+    }
+
+    public fun flash_cetus_crosspool<T0>(arg0: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg3: &0x2::clock::Clock, arg4: u64, arg5: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_swap_cetus<T0, 0x2::sui::SUI>(arg2, arg0, true, true, arg4, arg3);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_cetus_profit_a2b<T0, 0x2::sui::SUI>(arg2, arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0x2::sui::SUI>(arg3, arg2, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_b<T0, 0x2::sui::SUI, 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::FlashSwapReceipt<T0, 0x2::sui::SUI>>(&mut v0), arg5), v0);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<T0>(&v1, 1);
+        profit_to_sender<T0>(v1, arg5);
+    }
+
+    public fun flash_cetus_deepbook<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T1>, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg2: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, 0x2::sui::SUI>, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T1>(arg0, arg5, arg6);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T1>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::d3a<T0, 0x2::sui::SUI>(arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0x2::sui::SUI>(arg4, arg3, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg6), arg4, arg6), v0, arg6);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg6);
+    }
+
+    public fun flash_cetus_dlmm<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T1>, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg2: &mut 0x5a5c1d10e4782dbbdec3eb8327ede04bd078b294b97cfdba447b11b846b383ac::lb_pair::LBPair<T0, 0x2::sui::SUI>, arg3: &0x5a5c1d10e4782dbbdec3eb8327ede04bd078b294b97cfdba447b11b846b383ac::config::GlobalConfig, arg4: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg5: &0x2::clock::Clock, arg6: u64, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T1>(arg0, arg6, arg7);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T1>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::dlmm_a<T0, 0x2::sui::SUI>(arg3, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0x2::sui::SUI>(arg5, arg4, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg7), arg5, arg7), v0, arg7);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg7);
+    }
+
+    public fun flash_cetus_mmt<T0>(arg0: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg1: &mut 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::Pool<0x2::sui::SUI, T0>, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg3: &0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::version::Version, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1, v2) = 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::flash_swap<0x2::sui::SUI, T0>(arg1, false, true, arg5, 79226673515401279992447579055, arg4, arg3, arg6);
+        let v3 = v2;
+        let v4 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0x2::sui::SUI>(arg4, arg2, arg0, v0, arg6);
+        0x2::balance::join<T0>(&mut v4, v1);
+        let (_, v6) = 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::swap_receipt_debts(&v3);
+        0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::repay_flash_swap<0x2::sui::SUI, T0>(arg1, v3, 0x2::balance::zero<0x2::sui::SUI>(), 0x2::balance::split<T0>(&mut v4, v6), arg3, arg6);
+        if (0x2::balance::value<T0>(&v4) > 0) {
+            let v7 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg4, arg2, arg0, v4, arg6);
+            0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v7, 1);
+            profit_to_sender<0x2::sui::SUI>(v7, arg6);
+        } else {
+            0x2::balance::destroy_zero<T0>(v4);
+        };
+    }
+
+    public fun flash_cetus_swap_turbos_sell<T0, T1>(arg0: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg1: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, 0x2::sui::SUI, T1>, arg2: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg3: &0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_swap_cetus<T0, 0x2::sui::SUI>(arg2, arg0, true, true, arg5, arg4);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_cetus_profit_a2b<T0, 0x2::sui::SUI>(arg2, arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_b<T0, 0x2::sui::SUI, T1>(arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_b<T0, 0x2::sui::SUI, 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::FlashSwapReceipt<T0, 0x2::sui::SUI>>(&mut v0), arg4, arg3, arg6), v0);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<T0>(&v1, 1);
+        profit_to_sender<T0>(v1, arg6);
+    }
+
+    public fun flash_cetus_turbos<T0, T1, T2>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T2>, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg2: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, 0x2::sui::SUI, T1>, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned, arg5: &0x2::clock::Clock, arg6: u64, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T2>(arg0, arg6, arg7);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T2>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_a<T0, 0x2::sui::SUI, T1>(arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0x2::sui::SUI>(arg5, arg3, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg7), arg5, arg4, arg7), v0, arg7);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg7);
+    }
+
+    public fun flash_deepbook_cetus<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T1>, arg1: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, 0x2::sui::SUI>, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T1>(arg0, arg5, arg6);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T1>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg4, arg3, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::d3b<T0, 0x2::sui::SUI>(arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg4, arg6), arg6), v0, arg6);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg6);
+    }
+
+    public fun flash_dlmm_cetus<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T1>, arg1: &mut 0x5a5c1d10e4782dbbdec3eb8327ede04bd078b294b97cfdba447b11b846b383ac::lb_pair::LBPair<T0, 0x2::sui::SUI>, arg2: &0x5a5c1d10e4782dbbdec3eb8327ede04bd078b294b97cfdba447b11b846b383ac::config::GlobalConfig, arg3: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg4: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg5: &0x2::clock::Clock, arg6: u64, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T1>(arg0, arg6, arg7);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T1>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg5, arg4, arg3, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::dlmm_b<T0, 0x2::sui::SUI>(arg2, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg5, arg7), arg7), v0, arg7);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg7);
+    }
+
+    public fun flash_dual_turbos_cetus<T0, T1, T2>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T2>, arg1: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, 0x2::sui::SUI, T1>, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned, arg5: &0x2::clock::Clock, arg6: u64, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T2>(arg0, arg6, arg7);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T2>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_a<T0, 0x2::sui::SUI, T1>(arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0x2::sui::SUI>(arg5, arg3, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg5, arg3, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_b<T0, 0x2::sui::SUI, T1>(arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg5, arg4, arg7), arg7), arg7), arg5, arg4, arg7), v0, arg7);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg7);
+    }
+
+    public fun flash_mmt_cetus<T0>(arg0: &mut 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::Pool<0x2::sui::SUI, T0>, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg2: &0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::version::Version, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1, v2) = 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::flash_swap<0x2::sui::SUI, T0>(arg0, true, true, arg5, 4295048017, arg4, arg2, arg6);
+        let v3 = v2;
+        let v4 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg4, arg3, arg1, v1, arg6);
+        0x2::balance::join<0x2::sui::SUI>(&mut v4, v0);
+        let (v5, _) = 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::swap_receipt_debts(&v3);
+        0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::repay_flash_swap<0x2::sui::SUI, T0>(arg0, v3, 0x2::balance::split<0x2::sui::SUI>(&mut v4, v5), 0x2::balance::zero<T0>(), arg2, arg6);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v4, 1);
+        profit_to_sender<0x2::sui::SUI>(v4, arg6);
+    }
+
+    public fun flash_mmt_turbos<T0, T1>(arg0: &mut 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::Pool<0x2::sui::SUI, T0>, arg1: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, 0x2::sui::SUI, T1>, arg2: &0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::version::Version, arg3: &0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1, v2) = 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::flash_swap<0x2::sui::SUI, T0>(arg0, true, true, arg5, 4295048017, arg4, arg2, arg6);
+        let v3 = v2;
+        let v4 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_a<T0, 0x2::sui::SUI, T1>(arg1, v1, arg4, arg3, arg6);
+        0x2::balance::join<0x2::sui::SUI>(&mut v4, v0);
+        let (v5, _) = 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::swap_receipt_debts(&v3);
+        0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::trade::repay_flash_swap<0x2::sui::SUI, T0>(arg0, v3, 0x2::balance::split<0x2::sui::SUI>(&mut v4, v5), 0x2::balance::zero<T0>(), arg2, arg6);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v4, 1);
+        profit_to_sender<0x2::sui::SUI>(v4, arg6);
+    }
+
+    public fun flash_multihop_3dex<T0, T1, T2, T3>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T3>, arg1: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg2: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>, arg3: &mut 0xb24b6789e088b876afabca733bed2299fbc9e2d6369be4d1acfa17d8145454d9::swap::Dex_Info, arg4: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg5: &0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned, arg6: &0x2::clock::Clock, arg7: u64, arg8: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T3>(arg0, arg7, arg8);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T3>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::bmr_a<T1, 0x2::sui::SUI>(arg3, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_a<T0, T1, T2>(arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0x2::sui::SUI>(arg6, arg4, arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg8), arg6, arg5, arg8), arg8), v0, arg8);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg8);
+    }
+
+    public fun flash_triangular_deep<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T1>, arg1: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP, 0x2::sui::SUI>, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>, arg3: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg4: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg5: &0x2::clock::Clock, arg6: u64, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T1>(arg0, arg6, arg7);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T1>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg5, arg4, arg3, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_b_a<T0, 0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP>(arg5, arg4, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::d3b<0xdeeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP, 0x2::sui::SUI>(arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg5, arg7), arg7), arg7), v0, arg7);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg7);
+    }
+
+    public fun flash_turbos_cetus<T0, T1, T2>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T2>, arg1: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, 0x2::sui::SUI, T1>, arg2: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, 0x2::sui::SUI>, arg3: &0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::config::GlobalConfig, arg4: &0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned, arg5: &0x2::clock::Clock, arg6: u64, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T2>(arg0, arg6, arg7);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T2>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::swap_cetus_a_b<T0, 0x2::sui::SUI>(arg5, arg3, arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_b<T0, 0x2::sui::SUI, T1>(arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg5, arg4, arg7), arg7), v0, arg7);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg7);
+    }
+
+    public fun flash_turbos_mmt<T0, T1>(arg0: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, 0x2::sui::SUI, T1>, arg1: &mut 0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::pool::Pool<0x2::sui::SUI, T0>, arg2: &0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned, arg3: &0x70285592c97965e811e0c6f98dccc3a9c2b4ad854b3594faab9597ada267b860::version::Version, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_open_b<T0, 0x2::sui::SUI, T1>(arg0, arg5, arg4, arg2, arg6);
+        let v2 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_close_b<T0, 0x2::sui::SUI, T1>(arg0, v0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::mmt_b<0x2::sui::SUI, T0>(arg4, arg3, arg1, v1, arg6), arg2, arg6);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v2, 1);
+        profit_to_sender<0x2::sui::SUI>(v2, arg6);
+    }
+
+    public fun flash_turbos_turbos<T0, T1, T2, T3>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<0x2::sui::SUI, T3>, arg1: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, 0x2::sui::SUI, T1>, arg2: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, 0x2::sui::SUI, T2>, arg3: &0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Versioned, arg4: &0x2::clock::Clock, arg5: u64, arg6: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::flash_loan_base<0x2::sui::SUI, T3>(arg0, arg5, arg6);
+        let v1 = 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::repay_loan_base<0x2::sui::SUI, T3>(arg0, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_a<T0, 0x2::sui::SUI, T2>(arg2, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::turbos_b<T0, 0x2::sui::SUI, T1>(arg1, 0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::take_all_balance_a<0x2::sui::SUI, 0x2::sui::SUI, 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::vault::FlashLoan>(&mut v0), arg4, arg3, arg6), arg4, arg3, arg6), v0, arg6);
+        0x25bdb02bc9a2df3d0e828dff957566e358b17a6058252e3597ca965385fd70f1::router::add_assert<0x2::sui::SUI>(&v1, 1);
+        profit_to_sender<0x2::sui::SUI>(v1, arg6);
+    }
+
+    public fun profit_to_sender<T0>(arg0: 0x2::balance::Balance<T0>, arg1: &mut 0x2::tx_context::TxContext) {
+        0x2::transfer::public_transfer<0x2::coin::Coin<T0>>(0x2::coin::from_balance<T0>(arg0, arg1), 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v7
+}
+
