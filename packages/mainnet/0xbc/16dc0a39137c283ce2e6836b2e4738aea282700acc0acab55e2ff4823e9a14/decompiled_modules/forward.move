@@ -1,0 +1,406 @@
+module 0xbc16dc0a39137c283ce2e6836b2e4738aea282700acc0acab55e2ff4823e9a14::forward {
+    struct AdminCap has store, key {
+        id: 0x2::object::UID,
+    }
+
+    struct Config has key {
+        id: 0x2::object::UID,
+        open_fee_bps: u64,
+        settle_fee_bps: u64,
+        treasury: address,
+    }
+
+    struct BeaconEntry has drop, store {
+        opener: address,
+        opener_is_long: bool,
+        margin_mist: u64,
+        asset_price_id: vector<u8>,
+    }
+
+    struct Registry has key {
+        id: 0x2::object::UID,
+        offers: 0x2::table::Table<0x2::object::ID, BeaconEntry>,
+    }
+
+    struct Offer has store, key {
+        id: 0x2::object::UID,
+        opener: address,
+        opener_is_long: bool,
+        margin_mist: u64,
+        asset_price_id: vector<u8>,
+        collateral: 0x2::balance::Balance<0x2::sui::SUI>,
+    }
+
+    struct Forward has store, key {
+        id: 0x2::object::UID,
+        entry_sui_price_wad: u256,
+        entry_asset_price_wad: u256,
+        margin_usd_wad: u256,
+        notional_wad: u256,
+        long_collateral: 0x2::balance::Balance<0x2::sui::SUI>,
+        short_collateral: 0x2::balance::Balance<0x2::sui::SUI>,
+        long_addr: address,
+        short_addr: address,
+    }
+
+    struct OfferOpened has copy, drop {
+        offer_id: address,
+        opener: address,
+        opener_is_long: bool,
+        margin_mist: u64,
+        asset_price_id: vector<u8>,
+    }
+
+    struct OfferCancelled has copy, drop {
+        offer_id: address,
+    }
+
+    struct Opened has copy, drop {
+        forward_id: address,
+        long_addr: address,
+        short_addr: address,
+        net_margin_mist: u64,
+        open_fee_mist: u64,
+        entry_sui_price_wad: u256,
+        entry_asset_price_wad: u256,
+    }
+
+    struct Settled has copy, drop {
+        forward_id: address,
+        long_payout_mist: u64,
+        short_payout_mist: u64,
+        settle_fee_mist: u64,
+        exit_sui_price_wad: u256,
+        exit_asset_price_wad: u256,
+    }
+
+    public fun join(arg0: Offer, arg1: 0x2::coin::Coin<0x2::sui::SUI>, arg2: &Config, arg3: &mut Registry, arg4: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg5: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) : Forward {
+        let Offer {
+            id             : v0,
+            opener         : v1,
+            opener_is_long : v2,
+            margin_mist    : v3,
+            asset_price_id : v4,
+            collateral     : v5,
+        } = arg0;
+        let v6 = v0;
+        0x2::object::delete(v6);
+        let BeaconEntry {
+            opener         : _,
+            opener_is_long : _,
+            margin_mist    : _,
+            asset_price_id : _,
+        } = 0x2::table::remove<0x2::object::ID, BeaconEntry>(&mut arg3.offers, 0x2::object::uid_to_inner(&v6));
+        assert!(0x2::coin::value<0x2::sui::SUI>(&arg1) == v3, 0);
+        assert!(feed_id_bytes(arg4) == x"23d7315113f5b1d3ba7a83604c44b94d79f4fd69af77f804fc7f920a6dc65744", 5);
+        assert!(feed_id_bytes(arg5) == v4, 5);
+        let v11 = read_price_wad(arg4, arg6);
+        let v12 = read_price_wad(arg5, arg6);
+        let (v13, v14) = apply_open_fee(v3, arg2.open_fee_bps);
+        let (_, v16) = apply_open_fee(v3, arg2.open_fee_bps);
+        let v17 = v5;
+        let v18 = 0x2::balance::split<0x2::sui::SUI>(&mut v17, v14);
+        let v19 = 0x2::coin::into_balance<0x2::sui::SUI>(arg1);
+        0x2::balance::join<0x2::sui::SUI>(&mut v18, 0x2::balance::split<0x2::sui::SUI>(&mut v19, v16));
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(v18, arg7), arg2.treasury);
+        let v20 = quote_margin_usd_wad(v13, v11);
+        let (v21, v22, v23, v24) = if (v2) {
+            (v1, 0x2::tx_context::sender(arg7), v17, v19)
+        } else {
+            (0x2::tx_context::sender(arg7), v1, v19, v17)
+        };
+        let v25 = Forward{
+            id                    : 0x2::object::new(arg7),
+            entry_sui_price_wad   : v11,
+            entry_asset_price_wad : v12,
+            margin_usd_wad        : v20,
+            notional_wad          : quote_notional_wad(v20, v12),
+            long_collateral       : v23,
+            short_collateral      : v24,
+            long_addr             : v21,
+            short_addr            : v22,
+        };
+        let v26 = Opened{
+            forward_id            : 0x2::object::uid_to_address(&v25.id),
+            long_addr             : v21,
+            short_addr            : v22,
+            net_margin_mist       : v13,
+            open_fee_mist         : v14 + v16,
+            entry_sui_price_wad   : v11,
+            entry_asset_price_wad : v12,
+        };
+        0x2::event::emit<Opened>(v26);
+        v25
+    }
+
+    public fun apply_open_fee(arg0: u64, arg1: u64) : (u64, u64) {
+        let v0 = arg0 * arg1 / 10000;
+        (arg0 - v0, v0)
+    }
+
+    public fun apply_settle_fee(arg0: u64, arg1: u64, arg2: u64, arg3: bool, arg4: u64) : (u64, u64, u64) {
+        let v0 = if (arg3) {
+            arg0 - arg2
+        } else {
+            arg1 - arg2
+        };
+        let v1 = v0 * arg4 / 10000;
+        let (v2, v3) = if (arg3) {
+            (arg0 - v1, arg1)
+        } else {
+            (arg0, arg1 - v1)
+        };
+        (v2, v3, v1)
+    }
+
+    public fun beacon_count(arg0: &Registry) : u64 {
+        0x2::table::length<0x2::object::ID, BeaconEntry>(&arg0.offers)
+    }
+
+    public fun beacon_entry(arg0: &Registry, arg1: 0x2::object::ID) : (address, bool, u64, vector<u8>) {
+        let v0 = 0x2::table::borrow<0x2::object::ID, BeaconEntry>(&arg0.offers, arg1);
+        (v0.opener, v0.opener_is_long, v0.margin_mist, v0.asset_price_id)
+    }
+
+    public fun cancel_offer(arg0: Offer, arg1: &mut Registry, arg2: &mut 0x2::tx_context::TxContext) {
+        let Offer {
+            id             : v0,
+            opener         : v1,
+            opener_is_long : _,
+            margin_mist    : _,
+            asset_price_id : _,
+            collateral     : v5,
+        } = arg0;
+        let v6 = v0;
+        assert!(0x2::tx_context::sender(arg2) == v1, 4);
+        0x2::object::delete(v6);
+        let BeaconEntry {
+            opener         : _,
+            opener_is_long : _,
+            margin_mist    : _,
+            asset_price_id : _,
+        } = 0x2::table::remove<0x2::object::ID, BeaconEntry>(&mut arg1.offers, 0x2::object::uid_to_inner(&v6));
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(v5, arg2), v1);
+        let v11 = OfferCancelled{offer_id: 0x2::object::uid_to_address(&v6)};
+        0x2::event::emit<OfferCancelled>(v11);
+    }
+
+    fun feed_id_bytes(arg0: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject) : vector<u8> {
+        let v0 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_info_from_price_info_object(arg0);
+        let v1 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::get_price_identifier(&v0);
+        0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_identifier::get_bytes(&v1)
+    }
+
+    fun init(arg0: &mut 0x2::tx_context::TxContext) {
+        let v0 = Config{
+            id             : 0x2::object::new(arg0),
+            open_fee_bps   : 10,
+            settle_fee_bps : 500,
+            treasury       : @0xfc7c016c248cea871ba2b1262f577098b0aa59e750db48ea878a4891e34412d4,
+        };
+        0x2::transfer::share_object<Config>(v0);
+        let v1 = Registry{
+            id     : 0x2::object::new(arg0),
+            offers : 0x2::table::new<0x2::object::ID, BeaconEntry>(arg0),
+        };
+        0x2::transfer::share_object<Registry>(v1);
+        let v2 = AdminCap{id: 0x2::object::new(arg0)};
+        0x2::transfer::public_transfer<AdminCap>(v2, 0x2::tx_context::sender(arg0));
+    }
+
+    public fun is_active(arg0: &Registry, arg1: 0x2::object::ID) : bool {
+        0x2::table::contains<0x2::object::ID, BeaconEntry>(&arg0.offers, arg1)
+    }
+
+    public fun long_addr(arg0: &Forward) : address {
+        arg0.long_addr
+    }
+
+    public fun margin_usd_wad(arg0: &Forward) : u256 {
+        arg0.margin_usd_wad
+    }
+
+    fun min_u64(arg0: u64, arg1: u64) : u64 {
+        if (arg0 < arg1) {
+            arg0
+        } else {
+            arg1
+        }
+    }
+
+    public fun notional_wad(arg0: &Forward) : u256 {
+        arg0.notional_wad
+    }
+
+    public fun offer_margin_mist(arg0: &Offer) : u64 {
+        arg0.margin_mist
+    }
+
+    public fun offer_opener(arg0: &Offer) : address {
+        arg0.opener
+    }
+
+    public fun open_fee_bps(arg0: &Config) : u64 {
+        arg0.open_fee_bps
+    }
+
+    public fun open_offer(arg0: 0x2::coin::Coin<0x2::sui::SUI>, arg1: bool, arg2: vector<u8>, arg3: &mut Registry, arg4: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::coin::value<0x2::sui::SUI>(&arg0);
+        assert!(v0 > 0, 1);
+        assert!(0x1::vector::length<u8>(&arg2) == 32, 5);
+        let v1 = Offer{
+            id             : 0x2::object::new(arg4),
+            opener         : 0x2::tx_context::sender(arg4),
+            opener_is_long : arg1,
+            margin_mist    : v0,
+            asset_price_id : arg2,
+            collateral     : 0x2::coin::into_balance<0x2::sui::SUI>(arg0),
+        };
+        let v2 = BeaconEntry{
+            opener         : v1.opener,
+            opener_is_long : arg1,
+            margin_mist    : v0,
+            asset_price_id : v1.asset_price_id,
+        };
+        0x2::table::add<0x2::object::ID, BeaconEntry>(&mut arg3.offers, 0x2::object::uid_to_inner(&v1.id), v2);
+        let v3 = OfferOpened{
+            offer_id       : 0x2::object::uid_to_address(&v1.id),
+            opener         : v1.opener,
+            opener_is_long : arg1,
+            margin_mist    : v0,
+            asset_price_id : v1.asset_price_id,
+        };
+        0x2::event::emit<OfferOpened>(v3);
+        0x2::transfer::share_object<Offer>(v1);
+    }
+
+    public fun pow10(arg0: u8) : u256 {
+        let v0 = 1;
+        let v1 = 0;
+        while (v1 < arg0) {
+            v0 = v0 * 10;
+            v1 = v1 + 1;
+        };
+        v0
+    }
+
+    public fun price_to_wad(arg0: u64, arg1: u8, arg2: bool) : u256 {
+        assert!(arg2, 3);
+        assert!(arg1 <= 18, 3);
+        (arg0 as u256) * pow10(18 - arg1)
+    }
+
+    public fun quote_margin_usd_wad(arg0: u64, arg1: u256) : u256 {
+        (arg0 as u256) * arg1 / 1000000000
+    }
+
+    public fun quote_notional_wad(arg0: u256, arg1: u256) : u256 {
+        arg0 * 1000000000000000000 / arg1
+    }
+
+    public fun quote_value_usd_wad(arg0: u256, arg1: u256) : u256 {
+        arg0 * arg1 / 1000000000000000000
+    }
+
+    fun read_price_wad(arg0: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg1: &0x2::clock::Clock) : u256 {
+        let v0 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::pyth::get_price_no_older_than(arg0, arg1, 120);
+        let v1 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_price(&v0);
+        assert!(!0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_is_negative(&v1), 2);
+        let v2 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price::get_expo(&v0);
+        let v3 = 0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_is_negative(&v2);
+        let v4 = if (v3) {
+            0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_negative(&v2)
+        } else {
+            0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_positive(&v2)
+        };
+        price_to_wad(0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::i64::get_magnitude_if_positive(&v1), (v4 as u8), v3)
+    }
+
+    public fun set_open_fee_bps(arg0: &AdminCap, arg1: &mut Config, arg2: u64) {
+        assert!(arg2 <= 200, 6);
+        arg1.open_fee_bps = arg2;
+    }
+
+    public fun set_settle_fee_bps(arg0: &AdminCap, arg1: &mut Config, arg2: u64) {
+        assert!(arg2 <= 2000, 6);
+        arg1.settle_fee_bps = arg2;
+    }
+
+    public fun set_treasury(arg0: &AdminCap, arg1: &mut Config, arg2: address) {
+        arg1.treasury = arg2;
+    }
+
+    public fun settle(arg0: Forward, arg1: &Config, arg2: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg3: &0x8d97f1cd6ac663735be08d1d2b6d02a159e711586461306ce60a2b7a6a565a9e::price_info::PriceInfoObject, arg4: &0x2::clock::Clock, arg5: &mut 0x2::tx_context::TxContext) {
+        let Forward {
+            id                    : v0,
+            entry_sui_price_wad   : _,
+            entry_asset_price_wad : _,
+            margin_usd_wad        : v3,
+            notional_wad          : v4,
+            long_collateral       : v5,
+            short_collateral      : v6,
+            long_addr             : v7,
+            short_addr            : v8,
+        } = arg0;
+        let v9 = v5;
+        let v10 = v0;
+        0x2::object::delete(v10);
+        assert!(feed_id_bytes(arg2) == x"23d7315113f5b1d3ba7a83604c44b94d79f4fd69af77f804fc7f920a6dc65744", 5);
+        let v11 = read_price_wad(arg2, arg4);
+        let v12 = read_price_wad(arg3, arg4);
+        let v13 = quote_value_usd_wad(v4, v12);
+        let v14 = 0x2::balance::value<0x2::sui::SUI>(&v9);
+        let (v15, v16) = if (v13 >= v3) {
+            (true, v13 - v3)
+        } else {
+            (false, v3 - v13)
+        };
+        let (v17, v18) = settle_split(v14, usd_wad_to_mist(v16, v11), v15);
+        let (v19, v20, v21) = apply_settle_fee(v17, v18, v14, v15, arg1.settle_fee_bps);
+        0x2::balance::join<0x2::sui::SUI>(&mut v9, v6);
+        if (v21 > 0) {
+            0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(v9, arg5), arg1.treasury);
+        } else {
+            0x2::balance::destroy_zero<0x2::sui::SUI>(v9);
+        };
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x2::balance::split<0x2::sui::SUI>(&mut v9, v19), arg5), v7);
+        0x2::transfer::public_transfer<0x2::coin::Coin<0x2::sui::SUI>>(0x2::coin::from_balance<0x2::sui::SUI>(0x2::balance::split<0x2::sui::SUI>(&mut v9, v20), arg5), v8);
+        let v22 = Settled{
+            forward_id           : 0x2::object::uid_to_address(&v10),
+            long_payout_mist     : v19,
+            short_payout_mist    : v20,
+            settle_fee_mist      : v21,
+            exit_sui_price_wad   : v11,
+            exit_asset_price_wad : v12,
+        };
+        0x2::event::emit<Settled>(v22);
+    }
+
+    public fun settle_fee_bps(arg0: &Config) : u64 {
+        arg0.settle_fee_bps
+    }
+
+    public fun settle_split(arg0: u64, arg1: u64, arg2: bool) : (u64, u64) {
+        let v0 = min_u64(arg1, arg0);
+        if (arg2) {
+            (arg0 + v0, arg0 - v0)
+        } else {
+            (arg0 - v0, arg0 + v0)
+        }
+    }
+
+    public fun short_addr(arg0: &Forward) : address {
+        arg0.short_addr
+    }
+
+    public fun treasury(arg0: &Config) : address {
+        arg0.treasury
+    }
+
+    public fun usd_wad_to_mist(arg0: u256, arg1: u256) : u64 {
+        ((arg0 * 1000000000 / arg1) as u64)
+    }
+
+    // decompiled from Move bytecode v7
+}
+
