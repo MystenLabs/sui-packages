@@ -1,0 +1,43 @@
+module 0xb07011a30834315216d4f45deb1e0e2b2e0b6e966f87ca6bda282c9fe4df5096::receipt {
+    struct ReceiptCreated has copy, drop {
+        receipt_id: address,
+        vault_id: address,
+    }
+
+    struct Receipt has store, key {
+        id: 0x2::object::UID,
+        vault_id: address,
+    }
+
+    public(friend) fun create_receipt(arg0: address, arg1: &mut 0x2::tx_context::TxContext) : Receipt {
+        let v0 = Receipt{
+            id       : 0x2::object::new(arg1),
+            vault_id : arg0,
+        };
+        let v1 = ReceiptCreated{
+            receipt_id : 0x2::object::uid_to_address(&v0.id),
+            vault_id   : arg0,
+        };
+        0x2::event::emit<ReceiptCreated>(v1);
+        v0
+    }
+
+    public fun receipt_id(arg0: &Receipt) : address {
+        0x2::object::uid_to_address(&arg0.id)
+    }
+
+    public(friend) fun receipt_id_mut(arg0: &mut Receipt) : &mut 0x2::object::UID {
+        &mut arg0.id
+    }
+
+    public fun receipt_uid(arg0: &Receipt) : &0x2::object::UID {
+        &arg0.id
+    }
+
+    public fun vault_id(arg0: &Receipt) : address {
+        arg0.vault_id
+    }
+
+    // decompiled from Move bytecode v7
+}
+
