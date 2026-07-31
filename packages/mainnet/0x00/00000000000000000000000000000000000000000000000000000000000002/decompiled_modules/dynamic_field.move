@@ -56,7 +56,7 @@ module 0x2::dynamic_field {
 
     native public(friend) fun has_child_object(arg0: address, arg1: address) : bool;
     native public(friend) fun has_child_object_with_ty<T0: key>(arg0: address, arg1: address) : bool;
-    native public(friend) fun hash_type_and_key<T0: copy + drop + store>(arg0: address, arg1: T0) : address;
+    native public(friend) fun hash_type_and_key<T0: copy + drop>(arg0: address, arg1: T0) : address;
     public fun remove<T0: copy + drop + store, T1: store>(arg0: &mut 0x2::object::UID, arg1: T0) : T1 {
         let v0 = 0x2::object::uid_to_address(arg0);
         let Field {
