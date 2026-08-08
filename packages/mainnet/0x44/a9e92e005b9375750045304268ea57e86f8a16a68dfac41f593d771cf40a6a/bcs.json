@@ -1,0 +1,637 @@
+{
+  "dataType": "package",
+  "id": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a",
+  "version": 1,
+  "moduleMap": {
+    "fenwick": "oRzrCwcAAAUMAQAGAgYQAxZmBHwMBYgBagfyAdoBCMwDQAaMBBQKoAQNDK0EwwYN8AoGD/YKAgAJARQBFgAABAABAQwCBwEEAQICAgAADQABAAARAgMAAA4EBQAAAwYHAAAKCAMAABUJBQAAEwkDAAAXBAUAABAEBQAABwEHAAAMAwMAAAsDAwABAw0HAgcEAQQOEAIHBAEFEhMCBwQBBg4PAgcEAQgLBwIHBgENAAsCBwQRCgwKDwoNCg4KEAoBBwgCAQgAAQcIAAEDAgYIAAMBBAMHCAADBAACBggABAEGCAACAwQBCwECCQAJAQQEAwMDAwcLAQIJAAkBCQAJAQIGCwECCQAJAQkAAQEBBgkBAgQDAgcLAQIJAAkBCQABBwkBBQMDBAMEB0ZlbndpY2sFVGFibGUJVHhDb250ZXh0A2FkZAZib3Jyb3cKYm9ycm93X211dAhjb250YWlucw1kZXN0cm95X2VtcHR5BGRyb3AHZmVud2ljawRmaW5kHGhpZ2hlc3RfcG93ZXJfb2ZfdHdvX2F0X21vc3QObG93ZXN0X3NldF9iaXQDbmV3B25vZGVfYXQFbm9kZXMKcHJlZml4X3N1bQlwdXNoX3Nsb3QJcmFmZmxlX3YxBHNpemUFdGFibGUFdG90YWwKdHhfY29udGV4dAl3ZWlnaHRfYXREqekuAFuTdXUARTBCaOpX6G+KFqaN+sQfWT13HPQKagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAwgBAAAAAAAAAAMIAgAAAAAAAAAAAgMPCwECAwQTAxUEAAMAAAcGCwA4AAYAAAAAAAAAADIAAAAAAAAAAAAAAAAAAAAAEgACAAEDAAAMMQoAEAAUDAMKABAAFAYBAAAAAAAAABYMAgoAEAAUBgEAAAAAAAAAFgoADwAVCgIRCgwECgAuCgIGAQAAAAAAAAAXEQgKAC4KAgsEFxEIFwwBCgEyAAAAAAAAAAAAAAAAAAAAACQELQsADwELAgsBOAEFLwsAAQsDAgACAAAABRIKABABCgE4AgQMCwAQAQsBOAMUDAIFEAsAATIAAAAAAAAAAAAAAAAAAAAADAILAgIAAwMAABFDCgEKABAAFCMEBwULCwABBwAnCgIyAAAAAAAAAAAAAAAAAAAAACEEEgsAAQILAQYBAAAAAAAAABYMBAoECgAQABQlBDoKAC4KBBECDAMKABABCgQ4AgQvCwMKAhYKAA8BCgQ4BBUFNAoADwEKBAoCOAEKBAsEEQoWDAQFFgoAEAIUCwIWCwAPAhUCAAQDAAAURQoAEAIUMgAAAAAAAAAAAAAAAAAAAAAkBAcFCwsAAQcBJwoBCgAQAhQjBBIFFgsAAQcBJwYAAAAAAAAAAAwDCwEMBAoAEAAUEQsMBQoFBgAAAAAAAAAAJARBCgMKBRYMAgoCCgAQABQlBDwKAAoCEQIMBgoGCgQlBDwFNgsCDAMLBAsGFwwECwUGAgAAAAAAAAAaDAUFHwsAAQsDAgAFAwAABwQLABACFAIABgMAAAcECwAQABQCAAcDAAAHFQoBCgAQABQjBAcFCwsAAQcAJwoACgEGAQAAAAAAAAAWEQgLAAsBEQgXAgAIAwAACiMKAQoAEAAUJQQHBQsLAAEHACcLAQwCMgAAAAAAAAAAAAAAAAAAAAAMAwoCBgAAAAAAAAAAJAQfCwMKAAoCEQIWDAMKAgsCEQoXDAIFDwsAAQsDAgAJAwAABwYLABMAAQE4BQIACgAAAAcMCgAKAAsABgEAAAAAAAAAFx0GAQAAAAAAAAAWBgIAAAAAAAAAGhwCAAsAAAADFQoABgAAAAAAAAAAIQQGBgAAAAAAAAAAAgYBAAAAAAAAAAwBCgEGAgAAAAAAAAAYCgAlBBMLAQYCAAAAAAAAABgMAQUICwECAAABAAAAAgASAA==",
+    "raffle_v1": "oRzrCwcAAAUNAQAdAh1sA4kBlAMEnQREBeEEugQHmwnkCgj/E2AG3xSyAgqRF9MBC+QYAgzmGM0UDbMtRg75LS4AXgA5AU8BdAIcAiUCKAI1AksCYAJ1AnYCfwKBAQALAgAACQgAAAoMAAAHDAAABAQAAAwIAQABAA4DAAAUAwAADQMAABcDAAABAwABBQQAAggHAQAAAxIHAAQABAEAAQUCCAAGAwwBAAEIBgcACBYEAAkPCAAJEAIAChECAAsTDAIHAQQBDRUCAABAAAEAACoCAwEAACAEBQEAAGIGAQEAAGEHAQEAACYIAQEAACEJAQEAACwKAQEAAC4LAQEAAGcMAQEAACINBQEAACMOBQEAACQPBQEAAGUQAQAAZhEBAACIARITAABFFAEAABsVAQAAGhYBAQAAbxcYAQAAaxcZAQAAfRcZAQAARhcZAQAAdxcZAQAANBcZAQAANxcZAQAAhgEXGgEAAIcBFxsBAABQFxwBAAB5HRkBAABSHRkBAABVHhkAAFYeHwAAVx4ZAABfHhkAACsBIAAAXSEiAAByARgAAHABGAAAcQEYAABzARgAARhEAQABOk4ZAAFIJDMAAVtCGQABfElKAAJKATQBAAJtKjQBAANDLxkABEE9GQEABG48JwEABIMBUhkBAASJAQEnAQAFejgZAAYdOjsBAAY8VAUBAAaDATkZAQAHMCoBAQMISCQlAAiCASgiAAk9TUoACUlLTAALGEMBAgcECx4/TwIHBAsfQEECBwQLKT8fAgcEC0gkMQIHBAxaLQEBDAxoKgEBCA1kKyAANCZEKUMsNCpCMEIyLiAuGTk1RDY4KjYqMioxKgQqEipBMEAwPjA+MjlFOUcJKj8yLyAvGTlQMyo5UzcqMiY3Jj8wMyYCCAAHCBcADQcIAQgNCA0IDQMDAwMDAwMDBwgXAQgDBQcLBQEJAAsQAQkAAwYIDwcIFwELEAEJAAUHCwUBCQAGCAMFAwYIDwUHCwUBCQAFAwMBAgcLBQEJAAYIDwIHCwUBCQAGCAMFBwsFAQkABggDBggTBggPBwgXBAcLBQEJAAYIEwYIDwcIFwMHCwUBCQAGCBMHCBcDBwsFAQkABggDBwgXBAcLBQEJAAYIAQYIAgcIFwIHCwUBCQAHCBcDBwgBBggCAwMHCAEGCAIBBAcIAQYIAgMHCBcBCxABCBUCBwgBBggCAgYIAQYIAgIGCwUBCQAGCAMBBgsFAQkAAQIBAwELDAEFAQsMAQMBCA0CBgsFAQkABQEGCAEBAQEFAQYIAwEIEQIIAggBAQcIFwEIEgEIFQELDgEJAAEGCBIBCAEBCQABBggXAQgCAgkABQQBAQsFAQkACBEBBggNAgUIBAELFgIJAAkBAgMFAQgLAQsMAQkAAQgGAQsFAQkAAgMLEAEJAAEGCA8BBgsQAQkAAQcLEAEJAAEHCw4BCQACBwsOAQkAAwIHCw4BCQALDgEJAAQDBwgEAwMCBgsWAgkACQEJAAIHCxYCCQAJAQkAAQcJAQEHCAsDBwsWAgkACQEJAAkBAwcICwMEAQgHAwECAQEICAUIFAMEBAUBBggLAQQCBggTBwgXAQgUAwcIFAQEAgYICwQBBgkBAQgJAwMDAwEGCw4BCQABCAoCCw4BCQAHCBcDAwcIBAUHQmFsYW5jZQdDbGFpbWVkBUNsb2NrBENvaW4HRW50cmFudAdGZW53aWNrAklEC09wZXJhdG9yQ2FwBk9wdGlvbghQbGF0Zm9ybQtQbGF0Zm9ybUNhcAlSQUZGTEVfVjEGUmFmZmxlDFJhZmZsZUNsb3NlZA1SYWZmbGVDcmVhdGVkBlJhbmRvbQ9SYW5kb21HZW5lcmF0b3IDU1VJBlN0cmluZwVUYWJsZQ1UaWNrZXRzQm91Z2h0CVR4Q29udGV4dANVSUQLV2lubmVyRHJhd24DYWRkBmFtb3VudA9hc3NlcnRfb3BlcmF0b3ITYXNzZXJ0X3BsYXRmb3JtX2NhcAdiYWxhbmNlC2JhbGFuY2VfbXV0BmJvcnJvdwpib3Jyb3dfbXV0C2J1eV90aWNrZXRzBmNhbmNlbBdjbGFpbV9vcGVyYXRvcl9wcm9jZWVkcxJjbGFpbV9wbGF0Zm9ybV9mZWUMY2xhaW1fcmVmdW5kBWNsb2NrBWNsb3NlDGNsb3Nlc19hdF9tcwRjb2luCGNvbnRhaW5zDWNyZWF0ZV9yYWZmbGUHY3JlYXRvcgRkcmF3CmRyYXdfYXRfbXMTZHJhd19wZXJtaXNzaW9ubGVzcwtkdW1teV9maWVsZARlbWl0B2VudHJhbnQIZW50cmFudHMGZXNjcm93DGVzY3Jvd192YWx1ZQVldmVudAdmZWVfYnBzEGZlZV9icHNfc25hcHNob3QLZmVlX2NsYWltZWQHZmVud2ljawRmaW5kBGZyZWUMZnJvbV9iYWxhbmNlFmdlbmVyYXRlX3UxMjhfaW5fcmFuZ2UCaWQFaW5kZXgEaW5pdARqb2luBGtpbmQGbGVuZ3RoD21heF9wZXJfZW50cmFudAdtaWdyYXRlC21pbl90aWNrZXRzC21pbmltdW1fbWV0A25ldw1uZXdfZ2VuZXJhdG9yBG5vbmUGb2JqZWN0C29wZW5zX2F0X21zCG9wZXJhdG9yEm9wZXJhdG9yX3dpbmRvd19tcwZvcHRpb24Ub3JnYW5pc2VyX2xlZ2FsX25hbWUEcGFpZAdwYWlkX2J5BnBhdXNlZAhwbGF0Zm9ybRBwbGF0Zm9ybV9mZWVfYnBzD3BsYXRmb3JtX3BhdXNlZBFwbGF0Zm9ybV90cmVhc3VyeQVwcml6ZRBwcm9jZWVkc19jbGFpbWVkD3B1YmxpY190cmFuc2ZlcglwdXNoX3Nsb3QGcmFmZmxlCXJhZmZsZV9vZglyYWZmbGVfdjEPcmFmZmxlc19jcmVhdGVkBnJhbmRvbQxyZWNvcmRfZW50cnkRcmVjb3JkX2ZyZWVfZW50cnkIcmVmdW5kZWQGc2VuZGVyC3NldF9mZWVfYnBzCnNldF9wYXVzZWQGc2V0dGxlDHNoYXJlX29iamVjdARzbG90CnNsb3Rfb3duZXIEc29sZApzb2xkX2FmdGVyBHNvbWUFc3BsaXQFc3RhdGUMc3RhdGVfY2xvc2VkC3N0YXRlX2RyYXduCnN0YXRlX29wZW4Pc3RhdGVfcmVmdW5kaW5nBnN0cmluZwNzdWkFdGFibGUMdGlja2V0X3ByaWNlB3RpY2tldHMKdGlja2V0c19vZgx0aW1lc3RhbXBfbXMFdGl0bGUFdG90YWwNdG90YWxfdGlja2V0cxV0b3RhbF90aWNrZXRzX2luX2RyYXcIdHJhbnNmZXIIdHJlYXN1cnkKdHhfY29udGV4dAx1aWRfdG9faW5uZXIFdmFsdWUHdmVyc2lvbgN3aG8Gd2lubmVyDndpbm5pbmdfdGlja2V0EXdpdGhkcmF3X3BsYXRmb3JtBHplcm9EqekuAFuTdXUARTBCaOpX6G+KFqaN+sQfWT13HPQKagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA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EQsCCwAPAhUCAA8BAAABCwoALgsBERELAA8hCwI4HgsDOB8CABABAAABFAoALgsBEREKABABFAcBIwQLBQ8LAAEHAScHAQsADwEVAgARAAAAAQwLARAdFAsAEAAROyEECQULBwonAgASAAAAAQwLARAiFAsANwAROyEECQULBwsnAgATAQAAAQQLADcEFAIAFAEAAAEECwA3BxQCABUBAAABBAsANwgUAgAWAQAAAQQLADcPFAIAFwEAAAEECwA3CRQCABgBAAABBAsANwo4GwIAGQEAAAEECwA3AhQCABoBAAABBAsANxIUAgAbAQAAAQQLADcTFAIAHAEAAAEECwA3ARQCAB0BAAAZEwoANwsKATgQBA0LADcLCwE4IBARFAwCBRELAAEGAAAAAAAAAAAMAgsCAgAeAQAAGRMKADcLCgE4EAQNCwA3CwsBOCAQExQMAgURCwABBgAAAAAAAAAADAILAgIAHwEAAAEECwAQAxQCACABAAABBAsAEAIUAgAhAQAAAQQLABAhOCECACIBAAABBAsAEAUUAgAjAQAAAQIHAAIAJAEAAAEECwAQIhQCACUBAAABAgcEAgAmAQAAAQIHBQIAJwEAAAECBwYCACgBAAABAgcHAgABAAEBAQMBAgUAAQUFBAUPBQEFEAULBQwFEQUIBQcFEgUTBAEFCgQCBAAFFQUUBQkFDQUOBRYFFwUZAgEFAgUYBAMBBAMBBCoGKgcqCCoJKgoqCyoMKg0qDioPKhAqEioVKhYqFyoYKhkqGiobKhwqHiofKgA="
+  },
+  "typeOriginTable": [
+    {
+      "module_name": "fenwick",
+      "datatype_name": "Fenwick",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "RAFFLE_V1",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "Platform",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "PlatformCap",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "OperatorCap",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "Entrant",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "Raffle",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "RaffleCreated",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "TicketsBought",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "RaffleClosed",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "WinnerDrawn",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    },
+    {
+      "module_name": "raffle_v1",
+      "datatype_name": "Claimed",
+      "package": "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a"
+    }
+  ],
+  "linkageTable": {
+    "0x0000000000000000000000000000000000000000000000000000000000000001": {
+      "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000001",
+      "upgraded_version": 25
+    },
+    "0x0000000000000000000000000000000000000000000000000000000000000002": {
+      "upgraded_id": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "upgraded_version": 57
+    }
+  },
+  "functionMap": {
+    "fenwick": {
+      "add": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::fenwick::Fenwick",
+          "u64",
+          "u128"
+        ],
+        "return": []
+      },
+      "destroy_empty": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::fenwick::Fenwick"
+        ],
+        "return": []
+      },
+      "find": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::fenwick::Fenwick",
+          "u128"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "highest_power_of_two_at_most": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "lowest_set_bit": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "u64"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "new": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::fenwick::Fenwick"
+        ]
+      },
+      "node_at": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::fenwick::Fenwick",
+          "u64"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "prefix_sum": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::fenwick::Fenwick",
+          "u64"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "push_slot": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::fenwick::Fenwick"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "size": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::fenwick::Fenwick"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::fenwick::Fenwick"
+        ],
+        "return": [
+          "u128"
+        ]
+      },
+      "weight_at": {
+        "visibility": "FRIEND",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::fenwick::Fenwick",
+          "u64"
+        ],
+        "return": [
+          "u128"
+        ]
+      }
+    },
+    "raffle_v1": {
+      "assert_operator": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::OperatorCap"
+        ],
+        "return": []
+      },
+      "assert_platform_cap": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::PlatformCap"
+        ],
+        "return": []
+      },
+      "buy_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "cancel": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::OperatorCap"
+        ],
+        "return": []
+      },
+      "claim_operator_proceeds": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::OperatorCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "claim_platform_fee": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::PlatformCap",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "claim_refund": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<T0>"
+        ]
+      },
+      "close": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "create_raffle": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::OperatorCap"
+        ]
+      },
+      "creator": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "address"
+        ]
+      },
+      "draw": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::OperatorCap",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "draw_permissionless": {
+        "visibility": "PRIVATE",
+        "is_entry": true,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "escrow_value": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "fee_bps_snapshot": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "init": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::RAFFLE_V1",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "migrate": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::PlatformCap"
+        ],
+        "return": []
+      },
+      "min_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "organiser_legal_name": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        ]
+      },
+      "paid_by": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "platform_fee_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "platform_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform"
+        ],
+        "return": [
+          "bool"
+        ]
+      },
+      "platform_treasury": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "raffle_of": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::OperatorCap"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::ID"
+        ]
+      },
+      "raffles_created": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "record_entry": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "address",
+          "u64",
+          "u64",
+          "bool"
+        ],
+        "return": []
+      },
+      "record_free_entry": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::OperatorCap",
+          "address",
+          "u64",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::clock::Clock"
+        ],
+        "return": []
+      },
+      "set_fee_bps": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::PlatformCap",
+          "u64"
+        ],
+        "return": []
+      },
+      "set_paused": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::PlatformCap",
+          "bool"
+        ],
+        "return": []
+      },
+      "settle": {
+        "visibility": "PRIVATE",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "&0x0000000000000000000000000000000000000000000000000000000000000002::random::Random",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": []
+      },
+      "sold": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "state": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>"
+        ],
+        "return": [
+          "u8"
+        ]
+      },
+      "state_closed": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u8"
+        ]
+      },
+      "state_drawn": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u8"
+        ]
+      },
+      "state_open": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u8"
+        ]
+      },
+      "state_refunding": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [],
+        "return": [
+          "u8"
+        ]
+      },
+      "ticket_price": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "tickets_of": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>",
+          "address"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "total_tickets": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>"
+        ],
+        "return": [
+          "u64"
+        ]
+      },
+      "winner": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<address>"
+        ]
+      },
+      "winning_ticket": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Raffle<T0>"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::option::Option<u64>"
+        ]
+      },
+      "withdraw_platform": {
+        "visibility": "PUBLIC",
+        "is_entry": false,
+        "params": [
+          "&mut 0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::Platform",
+          "&0x44a9e92e005b9375750045304268ea57e86f8a16a68dfac41f593d771cf40a6a::raffle_v1::PlatformCap",
+          "u64",
+          "&mut 0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::TxContext"
+        ],
+        "return": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::Coin<0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI>"
+        ]
+      }
+    }
+  }
+}
