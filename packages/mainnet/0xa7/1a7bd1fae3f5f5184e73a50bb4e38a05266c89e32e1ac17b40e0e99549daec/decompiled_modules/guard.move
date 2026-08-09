@@ -1,0 +1,24 @@
+module 0xa71a7bd1fae3f5f5184e73a50bb4e38a05266c89e32e1ac17b40e0e99549daec::guard {
+    public fun assert_bluefin_sqrt_between<T0, T1>(arg0: &mut 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::Pool<T0, T1>, arg1: u128, arg2: u128) {
+        let v0 = 0x3492c874c1e3b3e2984e8c41b589e642d4d0a5d6459e5a9cfc2d52fd7c89c267::pool::current_sqrt_price<T0, T1>(arg0);
+        assert!(arg1 <= v0 && v0 <= arg2, 902);
+    }
+
+    public fun assert_cetus_sqrt_between<T0, T1>(arg0: &mut 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::Pool<T0, T1>, arg1: u128, arg2: u128) {
+        let v0 = 0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price<T0, T1>(arg0);
+        assert!(arg1 <= v0 && v0 <= arg2, 902);
+    }
+
+    public fun assert_deepbook_mid_between<T0, T1>(arg0: &mut 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::Pool<T0, T1>, arg1: &0x2::clock::Clock, arg2: u64, arg3: u64) {
+        let v0 = 0x2c8d603bc51326b8c13cef9dd07031a408a48dddb541963357661df5d3204809::pool::mid_price<T0, T1>(arg0, arg1);
+        assert!(arg2 <= v0 && v0 <= arg3, 902);
+    }
+
+    public fun assert_turbos_sqrt_between<T0, T1, T2>(arg0: &mut 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::Pool<T0, T1, T2>, arg1: u128, arg2: u128) {
+        let v0 = 0x91bfbc386a41afcfd9b2533058d7e915a1d3829089cc268ff4333d54d6339ca1::pool::get_pool_sqrt_price<T0, T1, T2>(arg0);
+        assert!(arg1 <= v0 && v0 <= arg2, 902);
+    }
+
+    // decompiled from Move bytecode v7
+}
+
