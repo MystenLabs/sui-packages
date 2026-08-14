@@ -1,0 +1,35 @@
+module 0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::price_feed_storage {
+    public fun force_remove_price_feed<T0>(arg0: &0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::source::Source<0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::STORK>, arg1: &0x4e2df80a5e2fd0392878298c51ce15164222111ccea05504b9291b158f552677::authority::AuthorityCap<0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::authority::PACKAGE, T0>, arg2: &0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::config::Config, arg3: &mut 0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::price_feed_storage::PriceFeedStorage) {
+        0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::assert_version(arg0);
+        0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::price_feed_storage::force_remove_price_feed<T0>(arg3, arg1, arg2, 0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::source::source_id<0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::STORK>(arg0));
+    }
+
+    public fun new_price_feed<T0, T1>(arg0: &0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::source::Source<0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::STORK>, arg1: &0x4e2df80a5e2fd0392878298c51ce15164222111ccea05504b9291b158f552677::authority::AuthorityCap<0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::authority::VENDOR<T0>, T1>, arg2: &0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::config::Config, arg3: &mut 0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::price_feed_storage::PriceFeedStorage, arg4: &0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::state::StorkState, arg5: &0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::feed_info_object::FeedInfoObject, arg6: u64) {
+        0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::assert_version(arg0);
+        let v0 = 0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::stork::get_temporal_numeric_value_unchecked(arg4, 0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::feed_info_object::feed_id(arg5));
+        let v1 = 0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::temporal_numeric_value::get_quantized_value(&v0);
+        assert!(!0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::i128::is_negative(&v1), 13835058935750459393);
+        0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::price_feed_storage::new_price_feed<T0, T1, 0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::feed_info_object::FeedInfoObject>(arg3, arg1, arg2, 0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::source_cap(arg0), arg5, (0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::i128::get_magnitude(&v1) as u128), 0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::temporal_numeric_value::get_timestamp_ns(&v0) / 1000000, arg6);
+    }
+
+    public fun remove_price_feed<T0>(arg0: &0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::source::Source<0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::STORK>, arg1: &0x4e2df80a5e2fd0392878298c51ce15164222111ccea05504b9291b158f552677::authority::AuthorityCap<0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::authority::VENDOR<T0>, 0x4e2df80a5e2fd0392878298c51ce15164222111ccea05504b9291b158f552677::authority::ADMIN>, arg2: &0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::config::Config, arg3: &mut 0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::price_feed_storage::PriceFeedStorage) {
+        0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::assert_version(arg0);
+        0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::price_feed_storage::remove_price_feed<T0>(arg3, arg1, arg2, 0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::source_cap(arg0));
+    }
+
+    public fun set_twap_period_ms<T0, T1>(arg0: &0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::source::Source<0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::STORK>, arg1: &0x4e2df80a5e2fd0392878298c51ce15164222111ccea05504b9291b158f552677::authority::AuthorityCap<0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::authority::VENDOR<T0>, T1>, arg2: &0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::config::Config, arg3: &mut 0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::price_feed_storage::PriceFeedStorage, arg4: u64) {
+        0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::assert_version(arg0);
+        0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::price_feed_storage::set_twap_period_ms<T0, T1>(arg3, arg1, arg2, 0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::source::source_id<0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::STORK>(arg0), arg4);
+    }
+
+    public fun update_price_feed(arg0: &0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::source::Source<0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::STORK>, arg1: &0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::config::Config, arg2: &mut 0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::price_feed_storage::PriceFeedStorage, arg3: &0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::state::StorkState, arg4: &0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::feed_info_object::FeedInfoObject) {
+        0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::assert_version(arg0);
+        let v0 = 0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::stork::get_temporal_numeric_value_unchecked(arg3, 0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::feed_info_object::feed_id(arg4));
+        let v1 = 0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::temporal_numeric_value::get_quantized_value(&v0);
+        assert!(!0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::i128::is_negative(&v1), 13835058935750459393);
+        0xc14d5641833b51691b2ecaea10a3257d375000247a17806e99e2ec095f571a9b::price_feed_storage::update_price_feed<0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::feed_info_object::FeedInfoObject>(arg2, arg1, 0x29eb979ffe805aef1153327b8b840672743b601726e4300c8a594a6b45703267::source::source_cap(arg0), arg4, (0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::i128::get_magnitude(&v1) as u128), 0xbc96aa8e79e0831131f00e7d9568fb40f283e6b96c2516dd99aa26b67459b60a::temporal_numeric_value::get_timestamp_ns(&v0) / 1000000);
+    }
+
+    // decompiled from Move bytecode v7
+}
+
