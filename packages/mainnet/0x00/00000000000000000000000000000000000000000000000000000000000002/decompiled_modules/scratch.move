@@ -3,6 +3,18 @@ module 0x2::scratch {
         dummy_field: bool,
     }
 
+    struct BorrowMarker<phantom T0: drop> has drop {
+        pos0: u64,
+    }
+
+    struct BorrowMarkerKey has copy, drop {
+        dummy_field: bool,
+    }
+
+    public fun permit<T0: copy + drop>(arg0: 0x1::internal::Permit<T0>) : Permit<T0> {
+        Permit<T0>{dummy_field: false}
+    }
+
     fun hash_type_and_key<T0: copy + drop>(arg0: T0) : address {
         0x2::dynamic_field::hash_type_and_key<T0>(@0x0, arg0)
     }
@@ -12,6 +24,32 @@ module 0x2::scratch {
     }
 
     native fun add_impl<T0: drop>(arg0: address, arg1: T0);
+    public fun begin_borrow<T0: copy + drop, T1: drop>(arg0: &mut 0x2::tx_context::TxContext, arg1: Permit<T0>, arg2: T0) : (T1, BorrowMarker<T1>) {
+        let v0 = remove<T0, T1>(arg0, arg1, arg2);
+        let v1 = borrow_marker<T1>(arg0);
+        let v2 = BorrowMarker<T1>{pos0: v1.pos0};
+        add<T0, BorrowMarker<T1>>(arg0, arg1, arg2, v2);
+        (v0, v1)
+    }
+
+    fun borrow_marker<T0: drop>(arg0: &mut 0x2::tx_context::TxContext) : BorrowMarker<T0> {
+        let v0 = permit<BorrowMarkerKey>(0x1::internal::permit<BorrowMarkerKey>());
+        let v1 = BorrowMarkerKey{dummy_field: false};
+        let v2 = if (exists<BorrowMarkerKey>(arg0, v0, v1)) {
+            remove<BorrowMarkerKey, u64>(arg0, v0, v1)
+        } else {
+            0
+        };
+        add<BorrowMarkerKey, u64>(arg0, v0, v1, v2 + 1);
+        BorrowMarker<T0>{pos0: v2}
+    }
+
+    public fun end_borrow<T0: copy + drop, T1: drop>(arg0: &mut 0x2::tx_context::TxContext, arg1: Permit<T0>, arg2: T0, arg3: T1, arg4: BorrowMarker<T1>) {
+        let v0 = remove<T0, BorrowMarker<T1>>(arg0, arg1, arg2);
+        assert!(v0 == arg4, 3);
+        add<T0, T1>(arg0, arg1, arg2, arg3);
+    }
+
     public fun exists<T0: copy + drop>(arg0: &0x2::tx_context::TxContext, arg1: Permit<T0>, arg2: T0) : bool {
         exists_impl(hash_type_and_key<T0>(arg2))
     }
@@ -22,10 +60,6 @@ module 0x2::scratch {
     }
 
     native fun exists_with_type_impl<T0: drop>(arg0: address) : bool;
-    public fun permit<T0: copy + drop>(arg0: 0x1::internal::Permit<T0>) : Permit<T0> {
-        Permit<T0>{dummy_field: false}
-    }
-
     public fun read<T0: copy + drop, T1: copy + drop>(arg0: &0x2::tx_context::TxContext, arg1: Permit<T0>, arg2: T0) : T1 {
         read_impl<T1>(hash_type_and_key<T0>(arg2))
     }

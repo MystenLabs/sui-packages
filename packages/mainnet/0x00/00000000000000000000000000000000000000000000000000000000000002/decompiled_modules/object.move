@@ -39,6 +39,11 @@ module 0x2::object {
     }
 
     native fun delete_impl(arg0: address);
+    public(friend) fun forwarding_address_registry() : UID {
+        let v0 = ID{bytes: @0xfa};
+        UID{id: v0}
+    }
+
     public fun id<T0: key>(arg0: &T0) : ID {
         borrow_uid<T0>(arg0).id
     }
@@ -72,9 +77,9 @@ module 0x2::object {
         UID{id: v0}
     }
 
-    public(friend) fun new_uid_from_hash(arg0: address) : UID {
-        record_new_uid(arg0);
-        let v0 = ID{bytes: arg0};
+    public(friend) fun new_uid_from_hash(arg0: address, arg1: address) : UID {
+        record_new_uid_from_hash(arg0, arg1);
+        let v0 = ID{bytes: arg1};
         UID{id: v0}
     }
 
@@ -83,7 +88,7 @@ module 0x2::object {
         UID{id: v0}
     }
 
-    native fun record_new_uid(arg0: address);
+    native fun record_new_uid_from_hash(arg0: address, arg1: address);
     public(friend) fun sui_accumulator_root_address() : address {
         @0xacc
     }

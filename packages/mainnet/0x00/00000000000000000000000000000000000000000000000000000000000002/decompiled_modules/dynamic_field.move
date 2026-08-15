@@ -19,7 +19,7 @@ module 0x2::dynamic_field {
         let v1 = hash_type_and_key<T0>(v0, arg1);
         assert!(!has_child_object(v0, v1), 0);
         let v2 = Field<T0, T1>{
-            id    : 0x2::object::new_uid_from_hash(v1),
+            id    : 0x2::object::new_uid_from_hash(v0, v1),
             name  : arg1,
             value : arg2,
         };
