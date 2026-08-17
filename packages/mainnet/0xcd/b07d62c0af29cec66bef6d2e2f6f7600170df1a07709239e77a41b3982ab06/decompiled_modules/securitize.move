@@ -1,0 +1,8 @@
+module 0xcdb07d62c0af29cec66bef6d2e2f6f7600170df1a07709239e77a41b3982ab06::securitize {
+    struct SECURITIZE has drop {
+        dummy_field: bool,
+    }
+
+    // decompiled from Move bytecode v6
+}
+
