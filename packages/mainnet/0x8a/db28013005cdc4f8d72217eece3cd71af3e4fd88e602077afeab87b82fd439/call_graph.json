@@ -1,0 +1,608 @@
+{
+  "package_id": "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439",
+  "module_call_graphs": [
+    {
+      "module_name": "cetus_clmm_admin_entry",
+      "call_graph": {
+        "force_refresh_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::assert_pool_admin",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::force_refresh_quote_value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::observe_base_quote"
+        ],
+        "force_refresh_lst": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::assert_pool_admin",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::force_refresh_quote_value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::observe_lst_quote"
+        ],
+        "migrate": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::migrate_ext_version",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::migration_witness",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::package_version"
+        ],
+        "register_leg_auth": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::register_protocol_leg_auth",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize"
+        ]
+      }
+    },
+    {
+      "module_name": "cetus_clmm_entry",
+      "call_graph": {
+        "admin_recall_base": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::begin_recall_withdraw_base_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::complete_recall_withdraw_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::risk_params"
+        ],
+        "admin_recall_lst": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::begin_recall_withdraw_lst_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::complete_recall_withdraw_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::risk_params"
+        ],
+        "assert_admin_force_refresh_deviation": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_math::mul_div",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_protocol_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM"
+        ],
+        "assert_refresh_timestamp_advanced": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::last_refresh_ms"
+        ],
+        "assert_report_fresh": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_max_balance_age_ms",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::assert_report_fresh_values",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::last_refresh_ms"
+        ],
+        "assert_report_fresh_values": [],
+        "authorize": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::authorize_ext",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM"
+        ],
+        "begin_rebalance_deposit_to_cetus": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::begin_rebalance_deposit_leg",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::resolve_requested_rebalance_deposit_amount",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM"
+        ],
+        "begin_rebalance_withdraw_base_from_cetus": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_protocol_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::begin_rebalance_withdraw_leg",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::resolve_requested_rebalance_withdraw_amount",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::assert_report_fresh",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::store_rebalance_lp",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::validated_lp_total",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_accounting",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_base",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_plan"
+        ],
+        "begin_rebalance_withdraw_lst_from_cetus": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_protocol_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::begin_rebalance_withdraw_leg",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::resolve_requested_rebalance_withdraw_amount",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::assert_report_fresh",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::store_rebalance_lp",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::validated_lp_total",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_accounting",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_lst",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_plan"
+        ],
+        "begin_recall_withdraw_base_from_cetus": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_emergency::begin_recall_withdraw_leg",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_emergency::receipt_requested_amount",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_protocol_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::store_recall_lp",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::validated_lp_total",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_accounting",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_base",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_plan"
+        ],
+        "begin_recall_withdraw_lst_from_cetus": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_emergency::begin_recall_withdraw_leg",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_emergency::receipt_requested_amount",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_protocol_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::store_recall_lp",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::validated_lp_total",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_accounting",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_lst",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_plan"
+        ],
+        "begin_withdraw_base_from_cetus": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::begin_withdraw_leg",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::resolve_requested_withdraw_assets",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_protocol_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::assert_report_fresh",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::last_refresh_ms",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::store_withdraw_lp",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::validated_lp_total",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_accounting",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_base",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_plan",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::user_min_output"
+        ],
+        "begin_withdraw_lst_from_cetus": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::begin_withdraw_leg",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::resolve_requested_withdraw_assets",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_protocol_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::assert_report_fresh",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::last_refresh_ms",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::store_withdraw_lp",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::validated_lp_total",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_accounting",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_lst",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::exit_plan",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::user_min_output"
+        ],
+        "cetus_clmm_leg_auth_type": [
+          "0x0000000000000000000000000000000000000000000000000000000000000001::ascii::into_bytes",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::into_string",
+          "0x0000000000000000000000000000000000000000000000000000000000000001::type_name::with_defining_ids"
+        ],
+        "complete_rebalance_deposit_base_to_cetus": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::settle_rebalance_deposit",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::assert_pool_spot",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::enter_base",
+          "0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::vaults::get_position_amounts"
+        ],
+        "complete_rebalance_deposit_lst_to_cetus": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::settle_rebalance_deposit",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::assert_pool_spot",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::enter_lst",
+          "0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::vaults::get_position_amounts"
+        ],
+        "complete_rebalance_withdraw_from_cetus": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_socialized_loss_limit_bps",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::finish_rebalance_withdraw_leg_accounted_with_loss",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::withdraw_ticket_source_debit",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::emit_withdraw_accounted",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_loss",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::gap"
+        ],
+        "complete_recall_withdraw_from_cetus": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_emergency::finish_recall_withdraw_leg_with_loss",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_emergency::withdraw_ticket_source_debit",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::emit_withdraw_accounted",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_loss",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::gap"
+        ],
+        "complete_withdraw_from_cetus": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::finish_withdraw_leg",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::withdraw_ticket_source_debit",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::emit_withdraw_accounted",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::last_refresh_ms"
+        ],
+        "emit_withdraw_accounted": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::loss_bps"
+        ],
+        "force_refresh_quote_value": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::force_sync_protocol_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::assert_admin_force_refresh_deviation",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::last_refresh_ms"
+        ],
+        "last_refresh_ms": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_protocol_last_sync_ms",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM"
+        ],
+        "migration_witness": [],
+        "observe_base_quote": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::observe_quote_value"
+        ],
+        "observe_lst_quote": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::observe_quote_value"
+        ],
+        "observe_quote_value": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::risk_params",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::validated_refresh_lp_total",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::assert_pool_spot",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::conservative_value",
+          "0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::vaults::get_position_amounts"
+        ],
+        "package_version": [],
+        "rebalance_deposit_base": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::assert_report_fresh",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::begin_rebalance_deposit_to_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::complete_rebalance_deposit_base_to_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::risk_params",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::validate_full_objects"
+        ],
+        "rebalance_deposit_lst": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::assert_report_fresh",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::begin_rebalance_deposit_to_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::complete_rebalance_deposit_lst_to_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::risk_params",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::validate_full_objects"
+        ],
+        "rebalance_withdraw_base": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::sync_protocol_balance_for_rebalance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::begin_rebalance_withdraw_base_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::complete_rebalance_withdraw_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::observe_base_quote",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::risk_params"
+        ],
+        "rebalance_withdraw_lst": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::sync_protocol_balance_for_rebalance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::begin_rebalance_withdraw_lst_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::complete_rebalance_withdraw_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::observe_lst_quote",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::risk_params"
+        ],
+        "refresh_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::assert_keeper",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::observe_base_quote",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::refresh_quote_value"
+        ],
+        "refresh_lst": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::tx_context::sender",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::assert_keeper",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::observe_lst_quote",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::refresh_quote_value"
+        ],
+        "refresh_quote_value": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::clock::timestamp_ms",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::sync_protocol_balance_by_auth",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::assert_refresh_timestamp_advanced",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::last_refresh_ms"
+        ],
+        "risk_params": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_cetus_clmm_params_for_types"
+        ],
+        "settle_rebalance_deposit": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::event::emit",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::finish_rebalance_deposit_leg_accounted_with_leftover_and_loss",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::store_rebalance_lp",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_loss",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_u64",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::conservative_value_from_physical",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::consumed_input",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::min_u64",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::physical_value"
+        ],
+        "store_rebalance_lp": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::store_rebalance_holding",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM"
+        ],
+        "store_recall_lp": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_emergency::store_recall_holding",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM"
+        ],
+        "store_withdraw_lp": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::store_withdraw_holding",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM"
+        ],
+        "validate_full_objects": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_validation::validate_cetus_clmm_config_for_asset"
+        ],
+        "validated_lp_total": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::query_holding_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::validate_full_objects"
+        ],
+        "validated_refresh_lp_total": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::object::id",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::query_holding_balance",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_CETUS_CLMM",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_validation::validate_cetus_clmm_core_for_asset"
+        ],
+        "withdraw_base": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::begin_withdraw_base_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::complete_withdraw_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::risk_params"
+        ],
+        "withdraw_lst": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::authorize",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::begin_withdraw_lst_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::complete_withdraw_from_cetus",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_entry::risk_params"
+        ]
+      }
+    },
+    {
+      "module_name": "cetus_clmm_oracle",
+      "call_graph": {
+        "assert_pool_spot": [
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::assert_spot"
+        ],
+        "assert_spot": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_cetus_clmm_params::clmm_price_deviation_bps",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::assert_sqrt_price",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::div_up",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::rate",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::spot_bounds_x64"
+        ],
+        "assert_sqrt_price": [],
+        "composition_value_at_rate": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::quote_at_rate"
+        ],
+        "composition_value_hawal": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::composition_value_at_rate",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::rate"
+        ],
+        "composition_value_wal": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::composition_value_at_rate",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::rate"
+        ],
+        "discounted": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::discounted_at_bps"
+        ],
+        "discounted_at_bps": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::narrow"
+        ],
+        "div_up": [],
+        "hawal_to_wal": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::quote_at_rate",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::rate"
+        ],
+        "hawal_to_wal_sqrt_limit": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_cetus_clmm_params::clmm_price_deviation_bps",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::rate",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::spot_bounds_x64",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::sqrt_ceil"
+        ],
+        "hawal_to_wal_up": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::div_up",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::narrow",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::rate"
+        ],
+        "min_hawal_to_wal": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_cetus_clmm_params::max_swap_wal_amount",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_cetus_clmm_params::swap_deviation_bps",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::discounted",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::hawal_to_wal",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::hawal_to_wal_up"
+        ],
+        "min_wal_to_hawal": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_cetus_clmm_params::max_swap_wal_amount",
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_cetus_clmm_params::swap_deviation_bps",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::discounted",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::wal_to_hawal"
+        ],
+        "narrow": [],
+        "quote_at_rate": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::narrow"
+        ],
+        "rate": [
+          "0x8b4d553839b219c3fd47608a0cc3d5fcc572cb25d41b7df3833208586a8d2470::walstaking::get_hawal_supply",
+          "0x8b4d553839b219c3fd47608a0cc3d5fcc572cb25d41b7df3833208586a8d2470::walstaking::get_total_wal"
+        ],
+        "spot_bounds_x64": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::div_up"
+        ],
+        "sqrt_ceil": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::sqrt_floor"
+        ],
+        "sqrt_floor": [],
+        "wal_to_hawal": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::quote_at_rate",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::rate"
+        ],
+        "wal_to_hawal_sqrt_limit": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_cetus_clmm_params::clmm_price_deviation_bps",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::rate",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::spot_bounds_x64",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::sqrt_floor"
+        ]
+      }
+    },
+    {
+      "module_name": "cetus_clmm_pool",
+      "call_graph": {
+        "swap_all_base_to_lst": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::flash_swap",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::repay_flash_swap",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::swap_pay_amount",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::assert_pool_spot",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::min_wal_to_hawal",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::wal_to_hawal_sqrt_limit"
+        ],
+        "swap_all_lst_to_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::flash_swap",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::repay_flash_swap",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::swap_pay_amount",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::assert_pool_spot",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::hawal_to_wal_sqrt_limit",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::min_hawal_to_wal"
+        ]
+      }
+    },
+    {
+      "module_name": "cetus_clmm_position",
+      "call_graph": {
+        "assert_loss": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_cetus_clmm_params::configured_execution_loss_bps",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_loss_bps"
+        ],
+        "assert_loss_bps": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_math::mul_div"
+        ],
+        "assert_u64": [],
+        "assert_u64_u256": [],
+        "calculate_lp_to_withdraw": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_math::mul_div_ceil"
+        ],
+        "conservative_value": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::conservative_value_from_physical",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::physical_value"
+        ],
+        "conservative_value_from_physical": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_cetus_clmm_params::configured_nav_haircut_bps",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::haircut"
+        ],
+        "consumed_input": [],
+        "dynamic_supply_swap_amount": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::assert_sqrt_price",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_u64_u256"
+        ],
+        "enter_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_pool::swap_all_base_to_lst",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::dynamic_supply_swap_amount",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::safe_fixed_pair_amount",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_vault::composition",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_vault::deposit_base"
+        ],
+        "enter_lst": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_pool::swap_all_lst_to_base",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::dynamic_supply_swap_amount",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::safe_fixed_pair_amount",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_vault::composition",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_vault::deposit_lst"
+        ],
+        "exit_accounting": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::max_u64"
+        ],
+        "exit_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_pool::swap_all_lst_to_base",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_u64",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::conservative_value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_vault::remove"
+        ],
+        "exit_lst": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_pool::swap_all_base_to_lst",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_u64",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::conservative_value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_vault::remove"
+        ],
+        "exit_plan": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::calculate_lp_to_withdraw",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::proportional_accounted_value"
+        ],
+        "gap": [],
+        "haircut": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_math::mul_div"
+        ],
+        "loss_bps": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_math::mul_div",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_u64"
+        ],
+        "max_u64": [],
+        "min_u64": [],
+        "physical_value": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::composition_value_hawal",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::composition_value_wal"
+        ],
+        "proportional_accounted_value": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_math::mul_div",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_u64"
+        ],
+        "safe_fixed_pair_amount": [
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_u64_u256",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::min_u64"
+        ],
+        "user_min_output": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_cetus_clmm_params::configured_user_output_buffer_bps",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::user_min_output_with_buffer"
+        ],
+        "user_min_output_with_buffer": [
+          "0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_math::mul_div",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_position::assert_u64"
+        ]
+      }
+    },
+    {
+      "module_name": "cetus_clmm_vault",
+      "call_graph": {
+        "composition": [
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::current_sqrt_price",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::assert_pool_spot",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_oracle::assert_sqrt_price",
+          "0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::vaults::get_position_amounts",
+          "0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::vaults::total_token_amount"
+        ],
+        "deposit_base": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_pool::swap_all_lst_to_base",
+          "0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::vaults::deposit_v2"
+        ],
+        "deposit_lst": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::join",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::value",
+          "0x8adb28013005cdc4f8d72217eece3cd71af3e4fd88e602077afeab87b82fd439::cetus_clmm_pool::swap_all_base_to_lst",
+          "0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::vaults::deposit_v2"
+        ],
+        "remove": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::zero",
+          "0xd3453d9be7e35efe222f78a810bb3af1859fd1600926afced8b4936d825c9a05::vaults::remove"
+        ]
+      }
+    }
+  ]
+}
