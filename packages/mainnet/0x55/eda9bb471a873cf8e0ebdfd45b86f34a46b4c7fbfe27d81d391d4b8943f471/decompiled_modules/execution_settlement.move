@@ -1,0 +1,49 @@
+module 0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::execution_settlement {
+    public fun abort_expired_execution(arg0: &0xf868841f7dcd45f79d1eaf0a57206a1aaa5a8ed0f225103797b33218f02490f5::runtime_authority::RuntimeAuthority, arg1: &0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::dag::DAG, arg2: &mut 0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution::DAGExecution, arg3: &0x2::clock::Clock, arg4: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::scheduler::runtime_permit(arg0);
+        0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution_settlement::abort_expired_execution<0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::era::RuntimeV1>(&v0, arg1, arg2, arg3, arg4);
+    }
+
+    public fun cleanup_broken_onchain_tool_result(arg0: &0xf868841f7dcd45f79d1eaf0a57206a1aaa5a8ed0f225103797b33218f02490f5::runtime_authority::RuntimeAuthority, arg1: &0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::dag::DAG, arg2: &mut 0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution::DAGExecution, arg3: &0x68a3f8a6fbc02bafc88b22af820ce4223ae73e0a61e56724b5fd5665e6adf15::tool_registry::ToolRegistry, arg4: 0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::onchain_tool_result::OnchainToolResult, arg5: &0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::leader::LeaderRegistry, arg6: u64, arg7: 0x2::object::ID, arg8: &0x2::clock::Clock) {
+        let v0 = 0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::scheduler::runtime_permit(arg0);
+        0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution_settlement::cleanup_broken_onchain_tool_result<0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::era::RuntimeV1>(&v0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    }
+
+    public fun emit_payment_ready_walk_requests(arg0: &0xf868841f7dcd45f79d1eaf0a57206a1aaa5a8ed0f225103797b33218f02490f5::runtime_authority::RuntimeAuthority, arg1: &0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::dag::DAG, arg2: &mut 0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution::DAGExecution, arg3: &0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::leader::LeaderRegistry, arg4: &0x2::clock::Clock, arg5: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::scheduler::runtime_permit(arg0);
+        0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution_settlement::emit_payment_ready_walk_requests<0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::era::RuntimeV1>(&v0, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    public fun record_committed_tool_result_gas_charge_by_leader(arg0: &0xf868841f7dcd45f79d1eaf0a57206a1aaa5a8ed0f225103797b33218f02490f5::runtime_authority::RuntimeAuthority, arg1: &0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::dag::DAG, arg2: &mut 0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution::DAGExecution, arg3: &0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::leader::LeaderRegistry, arg4: &0xd44a0624c3e607933273e80140766f11aa35259ae64b4c47ee683afa044c1e6::owner_cap::CloneableOwnerCap<0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::leader_cap::OverNetwork>, arg5: u64, arg6: 0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::graph::RuntimeVertex, arg7: 0x1::option::Option<vector<u8>>, arg8: vector<u8>, arg9: u64, arg10: u64, arg11: &0x2::clock::Clock, arg12: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::scheduler::runtime_permit(arg0);
+        0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution_settlement::record_committed_tool_result_gas_charge_by_leader<0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::era::RuntimeV1>(&v0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12);
+    }
+
+    public fun refill_tap_execution_payment(arg0: &0xf868841f7dcd45f79d1eaf0a57206a1aaa5a8ed0f225103797b33218f02490f5::runtime_authority::RuntimeAuthority, arg1: &mut 0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution::DAGExecution, arg2: 0x2::coin::Coin<0x2::sui::SUI>, arg3: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::scheduler::runtime_permit(arg0);
+        0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution_settlement::refill_tap_execution_payment<0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::era::RuntimeV1>(&v0, arg1, arg2, arg3);
+    }
+
+    public fun refill_tap_execution_payment_from_agent_vault(arg0: &0xf868841f7dcd45f79d1eaf0a57206a1aaa5a8ed0f225103797b33218f02490f5::runtime_authority::RuntimeAuthority, arg1: &mut 0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::agent::Agent, arg2: &mut 0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution::DAGExecution, arg3: u64) {
+        let v0 = 0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::scheduler::runtime_permit(arg0);
+        0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution_settlement::refill_tap_execution_payment_from_agent_vault<0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::era::RuntimeV1>(&v0, arg1, arg2, arg3);
+    }
+
+    public fun settle_committed_tool_result_for_walk(arg0: &0xf868841f7dcd45f79d1eaf0a57206a1aaa5a8ed0f225103797b33218f02490f5::runtime_authority::RuntimeAuthority, arg1: &0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::dag::DAG, arg2: &mut 0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution::DAGExecution, arg3: &0x68a3f8a6fbc02bafc88b22af820ce4223ae73e0a61e56724b5fd5665e6adf15::tool_registry::ToolRegistry, arg4: &0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::leader::LeaderRegistry, arg5: &0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::priority_fee_vault::PriorityFeeVault, arg6: u64, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::scheduler::runtime_permit(arg0);
+        0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution_settlement::settle_committed_tool_result_for_walk<0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::era::RuntimeV1>(&v0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    }
+
+    public fun settle_committed_tool_result_for_walk_by_leader(arg0: &0xf868841f7dcd45f79d1eaf0a57206a1aaa5a8ed0f225103797b33218f02490f5::runtime_authority::RuntimeAuthority, arg1: &0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::dag::DAG, arg2: &mut 0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution::DAGExecution, arg3: &0x68a3f8a6fbc02bafc88b22af820ce4223ae73e0a61e56724b5fd5665e6adf15::tool_registry::ToolRegistry, arg4: &0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::leader::LeaderRegistry, arg5: &0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::priority_fee_vault::PriorityFeeVault, arg6: &0xd44a0624c3e607933273e80140766f11aa35259ae64b4c47ee683afa044c1e6::owner_cap::CloneableOwnerCap<0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::leader_cap::OverNetwork>, arg7: u64, arg8: 0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::graph::RuntimeVertex, arg9: 0x1::option::Option<vector<u8>>, arg10: vector<u8>, arg11: u64, arg12: u64, arg13: &0x2::clock::Clock, arg14: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::scheduler::runtime_permit(arg0);
+        0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution_settlement::settle_committed_tool_result_for_walk_by_leader<0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::era::RuntimeV1>(&v0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14);
+    }
+
+    public fun settle_onchain_tool_result_for_walk(arg0: &0xf868841f7dcd45f79d1eaf0a57206a1aaa5a8ed0f225103797b33218f02490f5::runtime_authority::RuntimeAuthority, arg1: &0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::dag::DAG, arg2: &mut 0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution::DAGExecution, arg3: &0x68a3f8a6fbc02bafc88b22af820ce4223ae73e0a61e56724b5fd5665e6adf15::tool_registry::ToolRegistry, arg4: 0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::onchain_tool_result::OnchainToolResult, arg5: &0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::leader::LeaderRegistry, arg6: &0xf01174d560a525a8b0635b5713ba334e26d7cd6f221701e785c28e46febf6fd4::priority_fee_vault::PriorityFeeVault, arg7: u64, arg8: 0x23333bd0bed47abb5e9fabfabd32a08fa6557bd89c5a6f61e2a44c1054f054ee::graph::RuntimeVertex, arg9: 0x2::object::ID, arg10: &0x2::clock::Clock, arg11: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::scheduler::runtime_permit(arg0);
+        0x4fa064aba168c1b8377dcf00c9f2bf53366ac93e0dd470ebdbcb1e703898413d::execution_settlement::settle_onchain_tool_result_for_walk<0x55eda9bb471a873cf8e0ebdfd45b86f34a46b4c7fbfe27d81d391d4b8943f471::era::RuntimeV1>(&v0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
+    }
+
+    // decompiled from Move bytecode v7
+}
+
