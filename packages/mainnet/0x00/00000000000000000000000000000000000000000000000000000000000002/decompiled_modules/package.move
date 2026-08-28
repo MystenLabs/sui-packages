@@ -112,6 +112,14 @@ module 0x2::package {
         restrict(arg0, 192);
     }
 
+    public fun original_package_id(arg0: &UpgradeCap) : 0x2::object::ID {
+        let v0 = upgrade_package(arg0);
+        assert!(0x2::object::id_to_address(&v0) != @0x0, 5);
+        assert!(arg0.version > 0, 6);
+        0x2::object::id_from_address(original_package_id_impl(0x2::object::id_to_address(&v0), arg0.version))
+    }
+
+    native fun original_package_id_impl(arg0: address, arg1: u64) : address;
     public fun published_module(arg0: &Publisher) : &0x1::ascii::String {
         &arg0.module_name
     }
