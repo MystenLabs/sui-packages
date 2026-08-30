@@ -1,0 +1,17 @@
+module 0x439af296fde2e60822468065ee3cf2a4f18720d5121fe3ad0713d4815da259d4::suipump {
+    struct SUIPUMP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUIPUMP, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::bcs::new(x"03484c320948616c664c69666532c302426f79732c20776520686176652020746f2074616c6b2e0a0a48616c66204c6966652032206f6e20444c53532035204e657572616c2052656e646572696e672e0a0a5765206861766520746f2074616c6b2e2e2e74686973206a7573742e2e2e74686973206a7573742062726561746873206e6577206c69666520696e746f206f6c642067616d65732e204974206d616b6573206d652077616e7420746f207265706c6179207468656d20616c6c206e6f772e0a0a466f6c6c6f77657220466c6176696f206d6164652061206d6f6420746f2067657420697420746f20776f726b20616e6420796561682e2e73656520666f7220796f757273656c662e7c7c7b2274776974746572223a2268747470733a2f2f782e636f6d2f656c6f6e6d75736b2f7374617475732f323039333937353838373137313530323135343f733d3230227d1f68747470733a2f2f692e696d6775722e636f6d2f73526d6a3368622e706e67");
+        let v1 = 0x2::bcs::into_remainder_bytes(v0);
+        assert!(0x1::vector::is_empty<u8>(&v1), 0);
+        let (v2, v3) = 0x2::coin::create_currency<SUIPUMP>(arg0, 6, 0x2::bcs::peel_vec_u8(&mut v0), 0x2::bcs::peel_vec_u8(&mut v0), 0x2::bcs::peel_vec_u8(&mut v0), 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(0x2::bcs::peel_vec_u8(&mut v0))), arg1);
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SUIPUMP>>(v3);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUIPUMP>>(v2, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v7
+}
+
