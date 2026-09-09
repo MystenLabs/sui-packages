@@ -1,0 +1,16 @@
+module 0x8e81d85384d5db3a0b1ca4ceccbc63ed12d8e8b20811afad05a38bddce9be49c::my_token {
+    struct MY_TOKEN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: MY_TOKEN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin::create_currency<MY_TOKEN>(arg0, 10, b"ALIENZ", b"Pumplienz", b"Token Pasokan Tetap 1x Mint", 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(b"https://pbs.twimg.com/profile_images/2077526042617470976/2bFa4uEp_400x400.jpg")), arg1);
+        let v2 = v0;
+        0x2::transfer::public_transfer<0x2::coin::Coin<MY_TOKEN>>(0x2::coin::mint<MY_TOKEN>(&mut v2, 1000000000000000000, arg1), 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_freeze_object<0x2::coin::CoinMetadata<MY_TOKEN>>(v1);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<MY_TOKEN>>(v2, @0x0);
+    }
+
+    // decompiled from Move bytecode v7
+}
+
