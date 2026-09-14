@@ -1,0 +1,33 @@
+module 0x9f3c025d8e2a1068721764c0cc21f8dd8143d1000c6e3c2a41d1021094465edf::math {
+    public fun convert_to_assets(arg0: u64, arg1: u64, arg2: u64) : u64 {
+        mul_div(arg0, arg1 + 1, arg2 + virtual_shares())
+    }
+
+    public fun convert_to_shares(arg0: u64, arg1: u64, arg2: u64) : u64 {
+        mul_div(arg0, arg2 + virtual_shares(), arg1 + 1)
+    }
+
+    public fun max_bps() : u64 {
+        10000
+    }
+
+    public fun mul_div(arg0: u64, arg1: u64, arg2: u64) : u64 {
+        safe_cast((arg0 as u256) * (arg1 as u256) / (arg2 as u256))
+    }
+
+    public fun safe_cast(arg0: u256) : u64 {
+        assert!(arg0 <= 18446744073709551615, 0x9f3c025d8e2a1068721764c0cc21f8dd8143d1000c6e3c2a41d1021094465edf::error::cast_overflow());
+        (arg0 as u64)
+    }
+
+    fun virtual_shares() : u64 {
+        1
+    }
+
+    public fun wad() : u64 {
+        1000000000000000000
+    }
+
+    // decompiled from Move bytecode v7
+}
+
