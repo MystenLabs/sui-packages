@@ -1,0 +1,17 @@
+module 0x4815242798f4e9249ebb3c221fa6665f8f75eeb9aaf76c486b7dc399f88ceeec::suipump {
+    struct SUIPUMP has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: SUIPUMP, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x2::bcs::new(x"0747454e455249530b5355492047454e45524953f80154686579206275696c7420656d706972657320696e206d6172626c652e205765206275696c642063686172747320696e20677265656e2063616e646c65732e0a0a2447454e4552495320636172726965732074686520776569676874206f6620736f6d657468696e67207468617420636c61696d7320746f206265206f6e65206f662061206b696e6420e2809420637261636b65642c207765617468657265642c207374696c6c207374616e64696e672c207374696c6c20676c69746368696e67207468726f75676820746865206e6f697365206f6e205375692e0a0a4d616b65206f662074686174207768617420796f752077696c6c2e4268747470733a2f2f63646e2e73756970756d702e6f72672f69636f6e732f34393162636333326532363339373365663034316335333862383633383131332e706e67");
+        let v1 = 0x2::bcs::into_remainder_bytes(v0);
+        assert!(0x1::vector::is_empty<u8>(&v1), 0);
+        let (v2, v3) = 0x2::coin::create_currency<SUIPUMP>(arg0, 6, 0x2::bcs::peel_vec_u8(&mut v0), 0x2::bcs::peel_vec_u8(&mut v0), 0x2::bcs::peel_vec_u8(&mut v0), 0x1::option::some<0x2::url::Url>(0x2::url::new_unsafe_from_bytes(0x2::bcs::peel_vec_u8(&mut v0))), arg1);
+        0x2::transfer::public_share_object<0x2::coin::CoinMetadata<SUIPUMP>>(v3);
+        0x2::transfer::public_transfer<0x2::coin::TreasuryCap<SUIPUMP>>(v2, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v7
+}
+
