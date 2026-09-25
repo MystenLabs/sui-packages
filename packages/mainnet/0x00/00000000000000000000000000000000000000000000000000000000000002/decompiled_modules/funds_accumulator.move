@@ -24,11 +24,14 @@ module 0x2::funds_accumulator {
         withdraw_impl<T0>(v0, v1)
     }
 
+    native fun reserve_object_funds_for_withdrawal<T0: store>(arg0: address, arg1: u256);
     native fun withdraw_from_accumulator_address<T0: store>(arg0: address, arg1: address, arg2: u256) : T0;
     public(friend) fun withdraw_from_object<T0: store>(arg0: &mut 0x2::object::UID, arg1: u256) : Withdrawal<T0> {
-        assert!(0x2::protocol_config::is_feature_enabled(b"enable_object_funds_withdraw"), 13835902892529483782);
+        assert!(0x2::protocol_config::is_feature_enabled(b"enable_object_funds_withdraw"), 13835902935479156742);
+        let v0 = 0x2::object::uid_to_address(arg0);
+        reserve_object_funds_for_withdrawal<T0>(v0, arg1);
         Withdrawal<T0>{
-            owner : 0x2::object::uid_to_address(arg0),
+            owner : v0,
             limit : arg1,
         }
     }
@@ -38,7 +41,7 @@ module 0x2::funds_accumulator {
     }
 
     public fun withdrawal_join<T0: store>(arg0: &mut Withdrawal<T0>, arg1: Withdrawal<T0>) {
-        assert!(arg0.owner == arg1.owner, 13835621323063361540);
+        assert!(arg0.owner == arg1.owner, 13835621344538198020);
         assert!(115792089237316195423570985008687907853269984665640564039457584007913129639935 - arg0.limit >= arg1.limit, 0);
         arg0.limit = arg0.limit + arg1.limit;
     }
@@ -52,7 +55,7 @@ module 0x2::funds_accumulator {
     }
 
     public fun withdrawal_split<T0: store>(arg0: &mut Withdrawal<T0>, arg1: u256) : Withdrawal<T0> {
-        assert!(arg0.limit >= arg1, 13835339809431814146);
+        assert!(arg0.limit >= arg1, 13835339830906650626);
         arg0.limit = arg0.limit - arg1;
         Withdrawal<T0>{
             owner : arg0.owner,
