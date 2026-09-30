@@ -1,0 +1,22 @@
+module 0x5c7f84e7294089caa12d34bfca19a716e477856986dd61d76aa53d8f6c094afa::cinema {
+    struct CINEMA has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: CINEMA, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin_registry::new_currency_with_otw<CINEMA>(arg0, 9, untag(b"SCINEMA"), untag(b"NABSOLUTE CINEMA"), untag(b"D||{\"twitter\":\"https://x.com/acinamerh\",\"website\":\"https://app.cinemahood.xyz/\",\"telegram\":\"https://t.me/Rhoodchain\"}"), untag(b"Ihttps://imortal.buzz/i/bafkreigojm2otzubovupt4j3o47dyfmfyw5xevvvlgakosv3x6qbywy4x4"), arg1);
+        let v2 = v1;
+        let v3 = v0;
+        0x2::coin_registry::make_supply_burn_only_init<CINEMA>(&mut v3, v2);
+        0x2::coin_registry::finalize_and_delete_metadata_cap<CINEMA>(v3, arg1);
+        0x2::transfer::public_transfer<0x2::coin::Coin<CINEMA>>(0x2::coin::mint<CINEMA>(&mut v2, 1000000000000000000, arg1), 0x2::tx_context::sender(arg1));
+    }
+
+    fun untag(arg0: vector<u8>) : 0x1::string::String {
+        0x1::vector::remove<u8>(&mut arg0, 0);
+        0x1::string::utf8(arg0)
+    }
+
+    // decompiled from Move bytecode v7
+}
+
