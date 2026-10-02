@@ -1,0 +1,22 @@
+module 0xda3ede5307d58172d6f9e51ac8a39c7315febf88205c1c79b0284b75de7756e2::xmn {
+    struct XMN has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: XMN, arg1: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x2::coin_registry::new_currency_with_otw<XMN>(arg0, 9, untag(b"SXMN"), untag(b"NxMoney Token"), untag(b"D"), untag(b"Ihttps://imortal.buzz/i/bafkreihx4rwrsncnbkipridf7jpmhiy6p4v2wqcfp5hflsofa72ceabvzy"), arg1);
+        let v2 = v1;
+        let v3 = v0;
+        0x2::coin_registry::make_supply_burn_only_init<XMN>(&mut v3, v2);
+        0x2::coin_registry::finalize_and_delete_metadata_cap<XMN>(v3, arg1);
+        0x2::transfer::public_transfer<0x2::coin::Coin<XMN>>(0x2::coin::mint<XMN>(&mut v2, 1000000000000000000, arg1), 0x2::tx_context::sender(arg1));
+    }
+
+    fun untag(arg0: vector<u8>) : 0x1::string::String {
+        0x1::vector::remove<u8>(&mut arg0, 0);
+        0x1::string::utf8(arg0)
+    }
+
+    // decompiled from Move bytecode v7
+}
+
