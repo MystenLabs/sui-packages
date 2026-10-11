@@ -1,0 +1,28 @@
+module 0xbc09eeb05b760ab4e97abf3d86846ef40ed98f60fe2dc6931109b91b37ddf9f4::treasury {
+    struct Treasury<phantom T0> has store {
+        funds: 0x2::balance::Balance<T0>,
+        funding_buffer: u64,
+    }
+
+    public fun value<T0>(arg0: &Treasury<T0>) : u64 {
+        0x2::balance::value<T0>(&arg0.funds)
+    }
+
+    public fun buffer<T0>(arg0: &Treasury<T0>) : u64 {
+        arg0.funding_buffer
+    }
+
+    public(friend) fun deposit<T0>(arg0: &mut Treasury<T0>, arg1: 0x2::balance::Balance<T0>) {
+        0x2::balance::join<T0>(&mut arg0.funds, arg1);
+    }
+
+    public(friend) fun new<T0>() : Treasury<T0> {
+        Treasury<T0>{
+            funds          : 0x2::balance::zero<T0>(),
+            funding_buffer : 0,
+        }
+    }
+
+    // decompiled from Move bytecode v7
+}
+
