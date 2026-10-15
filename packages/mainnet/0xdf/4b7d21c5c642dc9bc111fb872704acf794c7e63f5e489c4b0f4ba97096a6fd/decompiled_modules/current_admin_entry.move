@@ -1,0 +1,21 @@
+module 0x62217e9197056e187a788bf3d2ff934943a1a02403af9308ff806a33d7e715f6::current_admin_entry {
+    public fun init_current_obligation<T0, T1, T2>(arg0: &0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_admin::VaultGlobal, arg1: &mut 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_pool::VaultPool<T1, T2>, arg2: &mut 0xfe1d8929d13b00aaecd7642dec1c6d41cab82882a1b139efa46bf61dfd6380bf::app::ProtocolApp, arg3: &mut 0xfe1d8929d13b00aaecd7642dec1c6d41cab82882a1b139efa46bf61dfd6380bf::market::Market<T0>, arg4: &0xfe1d8929d13b00aaecd7642dec1c6d41cab82882a1b139efa46bf61dfd6380bf::coin_decimals_registry::CoinDecimalsRegistry, arg5: &0x144c57d6014488bc71c0902bddff482af090d13e2c61333ed903fe088220a92c::x_oracle::XOracle, arg6: &mut 0x2::tx_context::TxContext) {
+        0x62217e9197056e187a788bf3d2ff934943a1a02403af9308ff806a33d7e715f6::current_entry::authorize(arg0);
+        assert!(!0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_pool::has_protocol_cap<T1, T2, 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_pool::CurrentObligationCapKey>(arg1, 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_strategy::PROTOCOL_CURRENT(), 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_pool::current_obligation_cap_key()), 1);
+        0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_validation::validate_current_config<T1, T2>(arg1, 0x2::object::id<0xfe1d8929d13b00aaecd7642dec1c6d41cab82882a1b139efa46bf61dfd6380bf::app::ProtocolApp>(arg2), 0x2::object::id<0xfe1d8929d13b00aaecd7642dec1c6d41cab82882a1b139efa46bf61dfd6380bf::market::Market<T0>>(arg3), 0x2::object::id<0xfe1d8929d13b00aaecd7642dec1c6d41cab82882a1b139efa46bf61dfd6380bf::coin_decimals_registry::CoinDecimalsRegistry>(arg4), 0x2::object::id<0x144c57d6014488bc71c0902bddff482af090d13e2c61333ed903fe088220a92c::x_oracle::XOracle>(arg5));
+        0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_pool::store_protocol_cap<T1, T2, 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_pool::CurrentObligationCapKey, 0xfe1d8929d13b00aaecd7642dec1c6d41cab82882a1b139efa46bf61dfd6380bf::obligation::ObligationOwnerCap>(arg1, 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_strategy::PROTOCOL_CURRENT(), 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_pool::current_obligation_cap_key(), 0xfe1d8929d13b00aaecd7642dec1c6d41cab82882a1b139efa46bf61dfd6380bf::enter_market::enter_market_return<T0>(arg2, arg3, arg6), arg6);
+    }
+
+    public fun migrate(arg0: &mut 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_admin::VaultGlobal, arg1: &0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_admin::VaultGlobalAdminCap, arg2: &0x2::tx_context::TxContext) {
+        let v0 = 0x62217e9197056e187a788bf3d2ff934943a1a02403af9308ff806a33d7e715f6::current_entry::migration_witness();
+        0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_admin::migrate_ext_version<0x62217e9197056e187a788bf3d2ff934943a1a02403af9308ff806a33d7e715f6::current_entry::CurrentLegAuth>(arg0, arg1, 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_strategy::PROTOCOL_CURRENT(), 0x62217e9197056e187a788bf3d2ff934943a1a02403af9308ff806a33d7e715f6::current_entry::package_version(), &v0, arg2);
+    }
+
+    public fun register_current_leg_auth<T0, T1>(arg0: &0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_admin::VaultGlobal, arg1: &mut 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_pool::VaultPool<T0, T1>, arg2: &0x2::tx_context::TxContext) {
+        0x62217e9197056e187a788bf3d2ff934943a1a02403af9308ff806a33d7e715f6::current_entry::authorize(arg0);
+        0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_pool::register_protocol_leg_auth<T0, T1, 0x62217e9197056e187a788bf3d2ff934943a1a02403af9308ff806a33d7e715f6::current_entry::CurrentLegAuth>(arg1, 0xa6562b12f932b882b8c73add77ff54881295c053595749ec53694f841dfddcd2::vault_strategy::PROTOCOL_CURRENT(), arg2);
+    }
+
+    // decompiled from Move bytecode v7
+}
+
