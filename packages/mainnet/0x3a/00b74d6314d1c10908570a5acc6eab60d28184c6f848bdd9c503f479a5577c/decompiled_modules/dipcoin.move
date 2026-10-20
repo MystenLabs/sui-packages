@@ -1,0 +1,14 @@
+module 0x6adf7219f7509a1b51c861cf966d5df71de02d631cbcc3b3af281801bcbb3083::dipcoin {
+    public fun swap_a2b<T0, T1>(arg0: &mut 0x8a47bf3b893172b53942e6f6fdd811df99aa32ba93af77d7484cde6430bddea1::vault::Vault, arg1: &0xdae28ab9ab072c647c4e8f2057a8f17dcc4847e42d6a8258df4b376ae183c872::manage::Global, arg2: &mut 0xdae28ab9ab072c647c4e8f2057a8f17dcc4847e42d6a8258df4b376ae183c872::manage::Pool<T0, T1>, arg3: u64, arg4: u64, arg5: u64, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x8a47bf3b893172b53942e6f6fdd811df99aa32ba93af77d7484cde6430bddea1::vault::take<0x6adf7219f7509a1b51c861cf966d5df71de02d631cbcc3b3af281801bcbb3083::router::Witness, T0, T1>(arg0, 0x6adf7219f7509a1b51c861cf966d5df71de02d631cbcc3b3af281801bcbb3083::router::witness(), 0x2::object::id<0xdae28ab9ab072c647c4e8f2057a8f17dcc4847e42d6a8258df4b376ae183c872::manage::Pool<T0, T1>>(arg2), arg3, arg4, arg5, arg6, arg7);
+        0x8a47bf3b893172b53942e6f6fdd811df99aa32ba93af77d7484cde6430bddea1::vault::settle<0x6adf7219f7509a1b51c861cf966d5df71de02d631cbcc3b3af281801bcbb3083::router::Witness, T0, T1>(arg0, 0x6adf7219f7509a1b51c861cf966d5df71de02d631cbcc3b3af281801bcbb3083::router::witness(), v1, 0x2::balance::zero<T0>(), 0x2::coin::into_balance<T1>(0xdae28ab9ab072c647c4e8f2057a8f17dcc4847e42d6a8258df4b376ae183c872::router::swap_exact_x_to_y_with_return<T0, T1>(arg1, arg2, 0x2::coin::from_balance<T0>(v0, arg7), 0, arg7)));
+    }
+
+    public fun swap_b2a<T0, T1>(arg0: &mut 0x8a47bf3b893172b53942e6f6fdd811df99aa32ba93af77d7484cde6430bddea1::vault::Vault, arg1: &0xdae28ab9ab072c647c4e8f2057a8f17dcc4847e42d6a8258df4b376ae183c872::manage::Global, arg2: &mut 0xdae28ab9ab072c647c4e8f2057a8f17dcc4847e42d6a8258df4b376ae183c872::manage::Pool<T0, T1>, arg3: u64, arg4: u64, arg5: u64, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        let (v0, v1) = 0x8a47bf3b893172b53942e6f6fdd811df99aa32ba93af77d7484cde6430bddea1::vault::take<0x6adf7219f7509a1b51c861cf966d5df71de02d631cbcc3b3af281801bcbb3083::router::Witness, T1, T0>(arg0, 0x6adf7219f7509a1b51c861cf966d5df71de02d631cbcc3b3af281801bcbb3083::router::witness(), 0x2::object::id<0xdae28ab9ab072c647c4e8f2057a8f17dcc4847e42d6a8258df4b376ae183c872::manage::Pool<T0, T1>>(arg2), arg3, arg4, arg5, arg6, arg7);
+        0x8a47bf3b893172b53942e6f6fdd811df99aa32ba93af77d7484cde6430bddea1::vault::settle<0x6adf7219f7509a1b51c861cf966d5df71de02d631cbcc3b3af281801bcbb3083::router::Witness, T1, T0>(arg0, 0x6adf7219f7509a1b51c861cf966d5df71de02d631cbcc3b3af281801bcbb3083::router::witness(), v1, 0x2::balance::zero<T1>(), 0x2::coin::into_balance<T0>(0xdae28ab9ab072c647c4e8f2057a8f17dcc4847e42d6a8258df4b376ae183c872::router::swap_exact_y_to_x_with_return<T0, T1>(arg1, arg2, 0x2::coin::from_balance<T1>(v0, arg7), 0, arg7)));
+    }
+
+    // decompiled from Move bytecode v7
+}
+
