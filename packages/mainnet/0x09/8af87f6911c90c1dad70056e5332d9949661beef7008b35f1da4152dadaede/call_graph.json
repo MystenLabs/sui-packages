@@ -1,0 +1,117 @@
+{
+  "package_id": "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede",
+  "module_call_graphs": [
+    {
+      "module_name": "adapters",
+      "call_graph": {
+        "alphalend_liquidate": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0xd631cd66138909636fc3f73ed75820d0c5b76332d1644608ed1c85ea2b8219b4::alpha_lending::fulfill_promise",
+          "0xd631cd66138909636fc3f73ed75820d0c5b76332d1644608ed1c85ea2b8219b4::alpha_lending::liquidate"
+        ],
+        "alphalend_liquidate_sui": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0xd631cd66138909636fc3f73ed75820d0c5b76332d1644608ed1c85ea2b8219b4::alpha_lending::fulfill_promise_SUI",
+          "0xd631cd66138909636fc3f73ed75820d0c5b76332d1644608ed1c85ea2b8219b4::alpha_lending::liquidate"
+        ],
+        "alphalend_precheck": [
+          "0xd631cd66138909636fc3f73ed75820d0c5b76332d1644608ed1c85ea2b8219b4::alpha_lending::get_borrow_amount",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::guard::require_debt"
+        ],
+        "scallop_liquidate": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::from_balance",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::coin::into_balance",
+          "0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::liquidate::liquidate"
+        ],
+        "scallop_precheck_unlocked": [
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::guard::require_liquidatable",
+          "0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::obligation::liquidate_locked"
+        ]
+      }
+    },
+    {
+      "module_name": "cdex",
+      "call_graph": {
+        "cetus_flash_a": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::flash_swap",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::swap_pay_amount"
+        ],
+        "cetus_flash_b": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::destroy_zero",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::flash_swap",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::swap_pay_amount"
+        ],
+        "cetus_repay_a": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::repay_flash_swap"
+        ],
+        "cetus_repay_b": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::zero",
+          "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::pool::repay_flash_swap"
+        ]
+      }
+    },
+    {
+      "module_name": "oracle_pyth",
+      "call_graph": {
+        "needs_update": [
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::oracle_pyth::price_ts_secs",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::oracle_gate::needs_update",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::oracle_gate::now_secs"
+        ],
+        "price_ts_secs": [
+          "0x55300367a2d40813727ccac4ecee977a39fb9cdb46f2e6b2c354b9798f5de2c0::price::get_timestamp",
+          "0x55300367a2d40813727ccac4ecee977a39fb9cdb46f2e6b2c354b9798f5de2c0::pyth::get_price_unsafe"
+        ],
+        "require_fresh": [
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::freshness::check_pyth"
+        ],
+        "stub_verify_once_update": []
+      }
+    },
+    {
+      "module_name": "scallop",
+      "call_graph": {
+        "pre": [
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::adapters::scallop_precheck_unlocked",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::config::assert_can_strike",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::guard::require_deadline",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::guard::require_positive_repay"
+        ],
+        "race": [],
+        "scallop_cetus_flash_a": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::adapters::scallop_liquidate",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::cdex::cetus_flash_a",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::cdex::cetus_repay_b",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::scallop::pre",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::scallop::race",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::guard::require_cover",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::payout::pay"
+        ],
+        "scallop_cetus_flash_b": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::split",
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::adapters::scallop_liquidate",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::cdex::cetus_flash_b",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::cdex::cetus_repay_a",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::scallop::pre",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::scallop::race",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::guard::require_cover",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::payout::pay"
+        ],
+        "scallop_own": [
+          "0x0000000000000000000000000000000000000000000000000000000000000002::balance::value",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::adapters::scallop_liquidate",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::scallop::pre",
+          "0x098af87f6911c90c1dad70056e5332d9949661beef7008b35f1da4152dadaede::scallop::race",
+          "0xe81cbcc6c8d4f5e03c0039d5054cedf23957ef1508a445a7606c557f53b39533::guard::require_min_profit"
+        ]
+      }
+    }
+  ]
+}
