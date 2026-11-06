@@ -39,12 +39,8 @@ module 0x1::string {
     public fun insert(arg0: &mut String, arg1: u64, arg2: String) {
         let v0 = &arg0.bytes;
         assert!(arg1 <= 0x1::vector::length<u8>(v0) && internal_is_char_boundary(v0, arg1), 2);
-        let v1 = substring(arg0, 0, arg1);
-        let v2 = &mut v1;
-        append(v2, arg2);
-        let v3 = &mut v1;
-        append(v3, substring(arg0, arg1, length(arg0)));
-        *arg0 = v1;
+        let String { bytes: v1 } = arg2;
+        0x1::vector::destroy_empty<u8>(0x1::vector::replace_range<u8>(&mut arg0.bytes, arg1, arg1, v1));
     }
 
     native fun internal_check_utf8(arg0: &vector<u8>) : bool;

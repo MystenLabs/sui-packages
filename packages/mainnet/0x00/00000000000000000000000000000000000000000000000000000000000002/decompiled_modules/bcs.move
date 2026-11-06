@@ -264,14 +264,12 @@ module 0x2::bcs {
     }
 
     public fun peel_vec_u8(arg0: &mut BCS) : vector<u8> {
-        let v0 = b"";
-        let v1 = peel_vec_length(arg0);
-        let v2 = 0;
-        while (v2 < v1) {
-            0x1::vector::push_back<u8>(&mut v0, peel_u8(arg0));
-            v2 = v2 + 1;
-        };
-        v0
+        let v0 = peel_vec_length(arg0);
+        let v1 = 0x1::vector::length<u8>(&arg0.bytes);
+        assert!(v1 >= v0, 0);
+        let v2 = 0x1::vector::remove_range<u8>(&mut arg0.bytes, v1 - v0, v1);
+        0x1::vector::reverse<u8>(&mut v2);
+        v2
     }
 
     public fun peel_vec_vec_u8(arg0: &mut BCS) : vector<vector<u8>> {

@@ -101,6 +101,7 @@ module 0x3::validator {
         assert!(v0, 9);
         assert!(arg14 <= 2000, 8);
         assert!(arg13 < 100000, 102);
+        assert!(0x1::vector::length<u8>(&arg1) == 96, 16);
         let v1 = new_metadata(arg0, arg1, arg2, arg3, arg4, 0x1::string::from_ascii(0x1::ascii::string(arg5)), 0x1::string::from_ascii(0x1::ascii::string(arg6)), 0x2::url::new_unsafe_from_bytes(arg7), 0x2::url::new_unsafe_from_bytes(arg8), 0x1::string::from_ascii(0x1::ascii::string(arg9)), 0x1::string::from_ascii(0x1::ascii::string(arg10)), 0x1::string::from_ascii(0x1::ascii::string(arg11)), 0x1::string::from_ascii(0x1::ascii::string(arg12)), 0x2::bag::new(arg15));
         validate_metadata(&v1);
         new_from_metadata(v1, arg13, arg14, arg15)

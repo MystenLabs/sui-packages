@@ -82,13 +82,7 @@ module 0x1::ascii {
 
     public fun insert(arg0: &mut String, arg1: u64, arg2: String) {
         assert!(arg1 <= length(arg0), 65537);
-        let v0 = into_bytes(arg2);
-        let v1 = 0;
-        while (v1 < 0x1::vector::length<u8>(&v0)) {
-            0x1::vector::insert<u8>(&mut arg0.bytes, 0x1::vector::pop_back<u8>(&mut v0), arg1);
-            v1 = v1 + 1;
-        };
-        0x1::vector::destroy_empty<u8>(v0);
+        0x1::vector::destroy_empty<u8>(0x1::vector::replace_range<u8>(&mut arg0.bytes, arg1, arg1, into_bytes(arg2)));
     }
 
     public fun into_bytes(arg0: String) : vector<u8> {
@@ -124,12 +118,7 @@ module 0x1::ascii {
 
     public fun substring(arg0: &String, arg1: u64, arg2: u64) : String {
         assert!(arg1 <= arg2 && arg2 <= length(arg0), 65537);
-        let v0 = b"";
-        while (arg1 < arg2) {
-            0x1::vector::push_back<u8>(&mut v0, *0x1::vector::borrow<u8>(&arg0.bytes, arg1));
-            arg1 = arg1 + 1;
-        };
-        String{bytes: v0}
+        String{bytes: 0x1::vector::copy_range<u8>(&arg0.bytes, arg1, arg2)}
     }
 
     public fun to_lowercase(arg0: &String) : String {
