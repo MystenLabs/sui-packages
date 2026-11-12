@@ -1,0 +1,34 @@
+module 0xff422dd8d2be4dded1fbc9f8cf45b641cfbb5f32d5bdfd14c6a5d8405155dacb::cpmm {
+    public fun swap<T0, T1>(arg0: &mut 0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::SwapContext, arg1: &0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::router::Router, arg2: &0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::factory::Factory, arg3: &mut 0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::pair::Pair<T0, T1>, arg4: &0x2::clock::Clock, arg5: bool, arg6: u64, arg7: bool, arg8: &mut 0x2::tx_context::TxContext) {
+        if (arg5) {
+            swap_a2b<T0, T1>(arg0, arg1, arg2, arg3, arg4, arg6, arg7, arg8);
+        } else {
+            swap_b2a<T0, T1>(arg0, arg1, arg2, arg3, arg4, arg6, arg7, arg8);
+        };
+    }
+
+    fun swap_a2b<T0, T1>(arg0: &mut 0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::SwapContext, arg1: &0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::router::Router, arg2: &0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::factory::Factory, arg3: &mut 0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::pair::Pair<T0, T1>, arg4: &0x2::clock::Clock, arg5: u64, arg6: bool, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::take_balance<T0>(arg0, arg5);
+        if (0x2::balance::value<T0>(&v0) == 0) {
+            0x2::balance::destroy_zero<T0>(v0);
+            0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::sweep_if_last<T0>(arg0, arg6, arg7);
+            return
+        };
+        0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::merge_balance<T1>(arg0, 0x2::coin::into_balance<T1>(0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::router::swap_exact_tokens0_for_tokens1_composable<T0, T1>(arg1, arg2, arg3, 0x2::coin::from_balance<T0>(v0, arg7), 1, arg4, arg7)));
+        0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::sweep_if_last<T0>(arg0, arg6, arg7);
+    }
+
+    fun swap_b2a<T0, T1>(arg0: &mut 0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::SwapContext, arg1: &0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::router::Router, arg2: &0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::factory::Factory, arg3: &mut 0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::pair::Pair<T0, T1>, arg4: &0x2::clock::Clock, arg5: u64, arg6: bool, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = 0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::take_balance<T1>(arg0, arg5);
+        if (0x2::balance::value<T1>(&v0) == 0) {
+            0x2::balance::destroy_zero<T1>(v0);
+            0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::sweep_if_last<T1>(arg0, arg6, arg7);
+            return
+        };
+        0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::merge_balance<T0>(arg0, 0x2::coin::into_balance<T0>(0xbfac5e1c6bf6ef29b12f7723857695fd2f4da9a11a7d88162c15e9124c243a4a::router::swap_exact_tokens1_for_tokens0_composable<T0, T1>(arg1, arg2, arg3, 0x2::coin::from_balance<T1>(v0, arg7), 1, arg4, arg7)));
+        0x452e3f18946ae8de3f7f2e00a4bc64a043490ab2957a0c55de228678253d3d0e::router::sweep_if_last<T1>(arg0, arg6, arg7);
+    }
+
+    // decompiled from Move bytecode v7
+}
+
