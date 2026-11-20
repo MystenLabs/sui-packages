@@ -72,6 +72,11 @@ module 0x2::object {
         0x1::bcs::to_bytes<address>(&arg0.bytes)
     }
 
+    public(friend) fun is_shared_input(arg0: &UID) : bool {
+        is_shared_input_impl(arg0.id.bytes)
+    }
+
+    native fun is_shared_input_impl(arg0: address) : bool;
     public fun new(arg0: &mut 0x2::tx_context::TxContext) : UID {
         let v0 = ID{bytes: 0x2::tx_context::fresh_object_address(arg0)};
         UID{id: v0}

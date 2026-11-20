@@ -4,6 +4,10 @@ module 0x2::clock {
         timestamp_ms: u64,
     }
 
+    public fun borrow() : &Clock {
+        native_borrow()
+    }
+
     fun consensus_commit_prologue(arg0: &mut Clock, arg1: u64, arg2: &0x2::tx_context::TxContext) {
         assert!(0x2::tx_context::sender(arg2) == @0x0, 0);
         arg0.timestamp_ms = arg1;
@@ -18,6 +22,7 @@ module 0x2::clock {
         0x2::transfer::share_object<Clock>(v0);
     }
 
+    native fun native_borrow() : &Clock;
     public fun timestamp_ms(arg0: &Clock) : u64 {
         arg0.timestamp_ms
     }
