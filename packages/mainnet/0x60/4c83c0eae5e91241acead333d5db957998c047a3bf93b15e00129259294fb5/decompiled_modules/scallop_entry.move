@@ -1,0 +1,188 @@
+module 0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_entry {
+    struct ScallopLegAuth has drop {
+        dummy_field: bool,
+    }
+
+    public fun admin_force_refresh_scallop<T0, T1>(arg0: &0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::VaultGlobal, arg1: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::VaultPool<T0, T1>, arg2: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg3: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg4: &0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg5: &0x2::clock::Clock, arg6: &0x2::tx_context::TxContext) {
+        let v0 = authorize(arg0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::force_sync_protocol_balance<T0, T1, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), view_scallop_underlying<T0, T1>(arg0, arg1, arg2, arg3, arg4, arg5), arg5, arg6, &v0);
+    }
+
+    public fun admin_recall_scallop_to_idle<T0, T1>(arg0: &0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::VaultGlobal, arg1: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::VaultPool<T0, T1>, arg2: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_emergency::AdminRecallReceipt<T0>, arg3: u64, arg4: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg5: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg6: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) {
+        let v0 = authorize(arg0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_validation::validate_scallop_config_with_spool<T0, T1>(arg1, 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market>(arg5), 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version>(arg4), 0x2::object::id<0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool>(arg6));
+        0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_common::trigger_accrue_if_needed<T0, T1>(arg1, arg4, arg5, arg7);
+        let v1 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP();
+        let v2 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::extract_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, v1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0);
+        let v3 = query_scallop_underlying<T0>(&v2, arg5);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::return_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), v2, &v0);
+        let v4 = 0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_common::select_scoin_withdraw_amount<T0>(arg5, (arg3 as u128), 0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_adapter::get_spool_staked_amount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(&v2));
+        if (v4 == 0) {
+            return
+        };
+        let v5 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::extract_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, v1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0);
+        let v6 = &mut v5;
+        let v7 = withdraw_underlying<T0>(v4, arg4, arg5, arg6, v6, arg7, arg8);
+        let v8 = query_scallop_underlying<T0>(&v5, arg5);
+        let v9 = if (v3 > v8) {
+            v3 - v8
+        } else {
+            0
+        };
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::return_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), v5, &v0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_emergency::add_recall_withdraw_leg_accounted<T0, T1, ScallopLegAuth>(arg2, arg1, v1, v7, (v9 as u64), &v0);
+    }
+
+    public(friend) fun authorize(arg0: &0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::VaultGlobal) : 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::ExtAuthGuard<ScallopLegAuth> {
+        let v0 = ScallopLegAuth{dummy_field: false};
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::authorize_ext<ScallopLegAuth>(arg0, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 1, &v0)
+    }
+
+    public fun deposit_to_scallop<T0, T1>(arg0: &0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::VaultGlobal, arg1: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::VaultPool<T0, T1>, arg2: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::DepositReceipt<T0>, arg3: u64, arg4: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg5: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg6: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) {
+        let v0 = authorize(arg0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_validation::validate_scallop_config_with_spool<T0, T1>(arg1, 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market>(arg5), 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version>(arg4), 0x2::object::id<0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool>(arg6));
+        0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_common::trigger_accrue_if_needed<T0, T1>(arg1, arg4, arg5, arg7);
+        let v1 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::extract_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0);
+        let v2 = query_scallop_underlying<T0>(&v1, arg5);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::return_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), v1, &v0);
+        let v3 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::resolve_requested_deposit_amount<T0>(arg2, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), arg3);
+        if (v3 == 0) {
+            return
+        };
+        let (v4, v5) = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::begin_deposit_leg<T0, T1, ScallopLegAuth>(arg2, arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), v3, &v0);
+        let v6 = v4;
+        let v7 = 0x2::balance::value<T0>(&v6);
+        let v8 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::extract_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0);
+        let v9 = &mut v8;
+        deposit_underlying<T0>(v6, arg4, arg5, arg6, v9, arg7, arg8);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::return_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), v8, &v0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::finish_deposit_leg_accounted<T0, T1, ScallopLegAuth>(arg2, arg1, v5, v7, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_math::accounted_value_delta_capped(v2, query_scallop_underlying<T0>(&v8, arg5), v7), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::max_accounted_value_gap_for_input<T0, T1>(arg1, v7), &v0);
+    }
+
+    public(friend) fun deposit_underlying<T0>(arg0: 0x2::balance::Balance<T0>, arg1: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg2: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg3: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg4: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) {
+        0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_adapter::stake_to_spool<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(arg3, arg4, 0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_adapter::deposit<T0>(arg1, arg2, 0x2::coin::from_balance<T0>(arg0, arg6), arg5, arg6), arg5, arg6);
+    }
+
+    public(friend) fun migration_witness() : ScallopLegAuth {
+        ScallopLegAuth{dummy_field: false}
+    }
+
+    public(friend) fun package_version() : u64 {
+        1
+    }
+
+    fun query_scallop_underlying<T0>(arg0: &0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg1: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market) : u128 {
+        0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_common::query_underlying_from_scoin_amount<T0>(arg1, 0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_adapter::get_spool_staked_amount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(arg0))
+    }
+
+    public fun rebalance_deposit_to_scallop<T0, T1>(arg0: &0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::VaultGlobal, arg1: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::VaultPool<T0, T1>, arg2: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::RebalanceReceipt<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = authorize(arg0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_validation::validate_scallop_config_with_spool<T0, T1>(arg1, 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market>(arg4), 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version>(arg3), 0x2::object::id<0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool>(arg5));
+        0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_common::trigger_accrue_if_needed<T0, T1>(arg1, arg3, arg4, arg6);
+        let v1 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP();
+        let v2 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::extract_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, v1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0);
+        let v3 = query_scallop_underlying<T0>(&v2, arg4);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::return_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), v2, &v0);
+        let v4 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::get_amount(0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::expected_deposit_plan<T0>(arg2), v1);
+        if (v4 == 0) {
+            return
+        };
+        let v5 = (0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::rebalance_balance_value<T0>(arg2) as u128);
+        let v6 = if (v4 < v5) {
+            (v4 as u64)
+        } else {
+            (v5 as u64)
+        };
+        let v7 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::resolve_requested_rebalance_deposit_amount<T0>(arg2, v1, v6);
+        if (v7 == 0) {
+            return
+        };
+        let (v8, v9) = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::begin_rebalance_deposit_leg<T0, T1, ScallopLegAuth>(arg2, arg1, v1, v7, &v0);
+        let v10 = v8;
+        let v11 = 0x2::balance::value<T0>(&v10);
+        if (v11 == 0) {
+            0x2::balance::destroy_zero<T0>(v10);
+            0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::finish_rebalance_deposit_leg_accounted<T0, T1, ScallopLegAuth>(arg2, arg1, v9, 0, 0, 0, &v0);
+            return
+        };
+        let v12 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::extract_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, v1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0);
+        let v13 = &mut v12;
+        deposit_underlying<T0>(v10, arg3, arg4, arg5, v13, arg6, arg7);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::return_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), v12, &v0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::finish_rebalance_deposit_leg_accounted<T0, T1, ScallopLegAuth>(arg2, arg1, v9, v11, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_math::accounted_value_delta_capped(v3, query_scallop_underlying<T0>(&v12, arg4), v11), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::max_accounted_value_gap_for_input<T0, T1>(arg1, v11), &v0);
+    }
+
+    public fun rebalance_withdraw_from_scallop<T0, T1>(arg0: &0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::VaultGlobal, arg1: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::VaultPool<T0, T1>, arg2: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::RebalanceReceipt<T0>, arg3: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg4: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg5: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg6: &0x2::clock::Clock, arg7: &mut 0x2::tx_context::TxContext) {
+        let v0 = authorize(arg0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_validation::validate_scallop_config_with_spool<T0, T1>(arg1, 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market>(arg4), 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version>(arg3), 0x2::object::id<0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool>(arg5));
+        0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_common::trigger_accrue_if_needed<T0, T1>(arg1, arg3, arg4, arg6);
+        let v1 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP();
+        let v2 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::extract_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, v1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0);
+        let v3 = query_scallop_underlying<T0>(&v2, arg4);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::return_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), v2, &v0);
+        let v4 = 0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_common::select_scoin_withdraw_amount<T0>(arg4, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::get_amount(0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::expected_withdraw_plan<T0>(arg2), v1), 0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_adapter::get_spool_staked_amount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(&v2));
+        if (v4 == 0) {
+            return
+        };
+        let v5 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::extract_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, v1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0);
+        let v6 = &mut v5;
+        let v7 = withdraw_underlying<T0>(v4, arg3, arg4, arg5, v6, arg6, arg7);
+        let v8 = query_scallop_underlying<T0>(&v5, arg4);
+        let v9 = if (v3 > v8) {
+            v3 - v8
+        } else {
+            0
+        };
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::return_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), v5, &v0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::add_rebalance_withdraw_leg_accounted<T0, T1, ScallopLegAuth>(arg2, arg1, v1, v7, (v9 as u64), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::get_socialized_loss_limit_bps<T0, T1>(arg1), &v0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_rebalance::sync_protocol_balance_for_rebalance<T0, T1, ScallopLegAuth>(arg1, arg2, v1, v8, arg6, &v0);
+    }
+
+    public fun refresh_scallop<T0, T1>(arg0: &0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::VaultGlobal, arg1: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::VaultPool<T0, T1>, arg2: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg3: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg4: &0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg5: &0x2::clock::Clock, arg6: &0x2::tx_context::TxContext) {
+        let v0 = authorize(arg0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::assert_refresh_authority<T0, T1>(arg1, arg6);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::sync_protocol_balance_by_auth<T0, T1, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), view_scallop_underlying<T0, T1>(arg0, arg1, arg2, arg3, arg4, arg5), arg5, &v0);
+    }
+
+    public fun view_scallop_underlying<T0, T1>(arg0: &0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::VaultGlobal, arg1: &0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::VaultPool<T0, T1>, arg2: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg3: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg4: &0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg5: &0x2::clock::Clock) : u128 {
+        let v0 = authorize(arg0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_validation::validate_scallop_config_with_spool<T0, T1>(arg1, 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market>(arg3), 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version>(arg2), 0x2::object::id<0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool>(arg4));
+        0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_common::trigger_accrue_if_needed<T0, T1>(arg1, arg2, arg3, arg5);
+        query_scallop_underlying<T0>(0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::borrow_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0), arg3)
+    }
+
+    public fun withdraw_from_scallop<T0, T1>(arg0: &0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_admin::VaultGlobal, arg1: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::VaultPool<T0, T1>, arg2: &mut 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::WithdrawReceipt<T0, T1>, arg3: u128, arg4: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg5: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg6: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg7: &0x2::clock::Clock, arg8: &mut 0x2::tx_context::TxContext) {
+        let v0 = authorize(arg0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_validation::validate_scallop_config_with_spool<T0, T1>(arg1, 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market>(arg5), 0x2::object::id<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version>(arg4), 0x2::object::id<0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool>(arg6));
+        0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_common::trigger_accrue_if_needed<T0, T1>(arg1, arg4, arg5, arg7);
+        let v1 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::extract_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0);
+        let v2 = query_scallop_underlying<T0>(&v1, arg5);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::return_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), v1, &v0);
+        let v3 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::resolve_requested_withdraw_assets<T0, T1>(arg2, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), arg3);
+        if (v3 == 0) {
+            return
+        };
+        let v4 = 0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_common::select_scoin_withdraw_amount<T0>(arg5, v3, 0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_adapter::get_spool_staked_amount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(&v1));
+        if (v4 == 0) {
+            return
+        };
+        let v5 = 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::extract_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), &v0);
+        let v6 = &mut v5;
+        let v7 = withdraw_underlying<T0>(v4, arg4, arg5, arg6, v6, arg7, arg8);
+        let v8 = query_scallop_underlying<T0>(&v5, arg5);
+        let v9 = if (v2 > v8) {
+            v2 - v8
+        } else {
+            0
+        };
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::return_protocol_cap_by_auth<T0, T1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::ScallopSpoolAccountKey, 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, ScallopLegAuth>(arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_pool::scallop_spool_account_key(), v5, &v0);
+        0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_entry::add_withdraw_leg_accounted<T0, T1, ScallopLegAuth>(arg2, arg1, 0x3777fbddf314316bb4b3618538255b09eff5460de094f5084f21edbeacbec9a8::vault_strategy::PROTOCOL_SCALLOP(), v7, (v9 as u64), &v0);
+    }
+
+    public(friend) fun withdraw_underlying<T0>(arg0: u64, arg1: &0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::version::Version, arg2: &mut 0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::market::Market, arg3: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool::Spool, arg4: &mut 0xe87f1b2d498106a2c61421cec75b7b5c5e348512b0dc263949a0e7a3c256571a::spool_account::SpoolAccount<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>, arg5: &0x2::clock::Clock, arg6: &mut 0x2::tx_context::TxContext) : 0x2::balance::Balance<T0> {
+        0x2::coin::into_balance<T0>(0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_adapter::withdraw<T0>(arg1, arg2, 0x8c2fcc3af98331ee0f293bca262e26b6e2c8eeabc2042032d739cc83bd19697e::scallop_adapter::unstake_from_spool<0xefe8b36d5b2e43728cc323298626b83177803521d195cfb11e15b910e892fddf::reserve::MarketCoin<T0>>(arg3, arg4, arg0, arg5, arg6), arg5, arg6))
+    }
+
+    // decompiled from Move bytecode v7
+}
+
