@@ -1,0 +1,19 @@
+module 0x393e9c0cfa9e8168a32c2ef1fec88916994773e93e04d9859dbcbf0f2ec94566::dial {
+    struct DIAL has drop {
+        dummy_field: bool,
+    }
+
+    fun init(arg0: DIAL, arg1: &mut 0x2::tx_context::TxContext) {
+        let v0 = if (false) {
+            0x9c2cef371c0e80648136f7ae65378ac9476e3fdb860538d00290e6e4f975b192::creator_authority::new_account(x"056037c318ad41f787eaacbca5a23451e84fced39bd142f29859715450cd6717")
+        } else {
+            0x9c2cef371c0e80648136f7ae65378ac9476e3fdb860538d00290e6e4f975b192::creator_authority::new_address(0x2::address::from_bytes(x"056037c318ad41f787eaacbca5a23451e84fced39bd142f29859715450cd6717"))
+        };
+        let (v1, v2) = 0x9c2cef371c0e80648136f7ae65378ac9476e3fdb860538d00290e6e4f975b192::launch_ticket::new<DIAL>(arg0, 9, 0x1::string::utf8(b"DIAL"), 0x1::string::utf8(b"Dropdial"), 0x1::string::utf8(b"Coin launches on a falling auction clock. dropdial.fun"), 0x1::string::utf8(b"https://dropdial.fun/brand/token.png"), v0, false, 0, arg1);
+        0x2::transfer::public_transfer<0x9c2cef371c0e80648136f7ae65378ac9476e3fdb860538d00290e6e4f975b192::launch_ticket::LaunchTicket<DIAL>>(v1, 0x2::tx_context::sender(arg1));
+        0x2::transfer::public_transfer<0xd70a8d11582fd1997380bc59bfd56a2f9028ebe11da74514ea3d386258d932fc::sealed_treasury_cap::SealedTreasuryCap<DIAL>>(v2, 0x2::tx_context::sender(arg1));
+    }
+
+    // decompiled from Move bytecode v7
+}
+
