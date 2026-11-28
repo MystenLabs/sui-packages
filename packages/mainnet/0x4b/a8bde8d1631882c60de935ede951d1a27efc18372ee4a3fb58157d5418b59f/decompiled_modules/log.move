@@ -1,0 +1,250 @@
+module 0x4ba8bde8d1631882c60de935ede951d1a27efc18372ee4a3fb58157d5418b59f::log {
+    fun dec_out(arg0: u256, arg1: u256, arg2: u256, arg3: bool, arg4: u256, arg5: u256, arg6: u256) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        assert!(arg0 > 0, 1);
+        let (v0, v1) = log_raw(arg0, arg1, arg2, arg3);
+        let (v2, v3) = snap(arg0, 1000000000000000000, arg4, arg5, arg6, arg3, v0, v1);
+        0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::wrap(0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i256::from_parts(v2, v3))
+    }
+
+    fun grid_pt(arg0: u256, arg1: u256, arg2: u256, arg3: u256, arg4: bool, arg5: u256) : (bool, u256) {
+        if (arg4) {
+            if (arg5 <= arg3) {
+                (true, arg1 / 0x30cc7e3dc943e321fe01580cec162810e14fc92e37a518ab40c9268b823883b6::bits256::ipow(arg0, (arg5 as u8)))
+            } else {
+                (false, 0)
+            }
+        } else if (arg5 <= arg2) {
+            (true, arg1 * 0x30cc7e3dc943e321fe01580cec162810e14fc92e37a518ab40c9268b823883b6::bits256::ipow(arg0, (arg5 as u8)))
+        } else {
+            (false, 0)
+        }
+    }
+
+    public fun ln_down(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::UD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::unwrap(arg0), 3273295013171879848905885505232959985733, 924288542222312747990790371487003001700158833203020915389060975, false, 1, 0, 0)
+    }
+
+    public fun ln_up(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::UD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::unwrap(arg0), 3273295013171879848905893317736685276032, 924288542222312747990781618860658422855527384316893771290779113, true, 1, 0, 0)
+    }
+
+    public fun log10_down(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::UD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::unwrap(arg0), 1421573961861979425863760031587658990008, 401413413573551216547642928907670507107647488000000000000000000, false, 10, 59, 18)
+    }
+
+    public fun log10_up(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::UD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::unwrap(arg0), 1421573961861979425863770100371913374068, 401413413573551216547642928907670507107647488000000000000000000, true, 10, 59, 18)
+    }
+
+    public fun log1p_down(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::UD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::unwrap(arg0) + 1000000000000000000, 3273295013171879848905885505232959985733, 924288542222312747990790371487003001700158833203020915389060975, false, 1, 0, 0)
+    }
+
+    public fun log1p_up(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::UD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::unwrap(arg0) + 1000000000000000000, 3273295013171879848905893317736685276032, 924288542222312747990781618860658422855527384316893771290779113, true, 1, 0, 0)
+    }
+
+    public fun log2_down(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::UD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::unwrap(arg0), 4722366482869645213696000000000000000000, 1333466496214619870732766413302950505836707840000000000000000000, false, 2, 196, 18)
+    }
+
+    fun log2_fix(arg0: u256) : u256 {
+        let v0 = 0x30cc7e3dc943e321fe01580cec162810e14fc92e37a518ab40c9268b823883b6::bits256::ilog2(arg0);
+        let v1 = if (v0 <= 127) {
+            arg0 << 127 - v0
+        } else {
+            arg0 >> v0 - 127
+        };
+        let v2 = v1;
+        let v3 = (v0 as u256);
+        let v4 = 0;
+        while (v4 < 72) {
+            let v5 = v2 * v2;
+            if (v5 >= 57896044618658097711785492504343953926634992332820282019728792003956564819968) {
+                v2 = v5 >> 128;
+                let v6 = v3 * 2;
+                v3 = v6 + 1;
+            } else {
+                v2 = v5 >> 127;
+                v3 = v3 * 2;
+            };
+            v4 = v4 + 1;
+        };
+        v3
+    }
+
+    public fun log2_up(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::UD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::ud18::unwrap(arg0), 4722366482869645213696000000000000000000, 1333466496214619870732756968569984766546280448000000000000000000, true, 2, 196, 18)
+    }
+
+    fun log_raw(arg0: u256, arg1: u256, arg2: u256, arg3: bool) : (bool, u256) {
+        if (arg3) {
+            scaled((log2_fix(arg0) + 2) * arg1, arg2, true)
+        } else {
+            scaled(log2_fix(arg0) * arg1, arg2, false)
+        }
+    }
+
+    public fun q_ln_down(arg0: u128) : 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128 {
+        q_out((arg0 as u256), 60381635385731403299313627611021721993216, 18249229512091758093045882292010664529867697577587088060114272256, false, 1, 0, 0)
+    }
+
+    public fun q_ln_up(arg0: u128) : 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128 {
+        q_out((arg0 as u256), 60381635385731403299313771726278517325824, 18249229512091758093045838735846929462310234955123214808466325504, true, 1, 0, 0)
+    }
+
+    public fun q_log10_down(arg0: u128) : 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128 {
+        q_out((arg0 as u256), 26223411056317277120002948138764324380129, 7925539676087423215418712236691180718719386199853074915326088745, false, 10, 57, 0)
+    }
+
+    public fun q_log10_up(arg0: u128) : 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128 {
+        q_out((arg0 as u256), 26223411056317277120003133875050598399329, 7925539676087423215418656101343151719704519690818823552880726835, true, 10, 57, 0)
+    }
+
+    public fun q_log1p_down(arg0: 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128) : 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128 {
+        q_out(sq1p_in(arg0), 60381635385731403299313627611021721993216, 18249229512091758093045882292010664529867697577587088060114272256, false, 1, 0, 0)
+    }
+
+    public fun q_log1p_up(arg0: 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128) : 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128 {
+        q_out(sq1p_in(arg0), 60381635385731403299313771726278517325824, 18249229512091758093045838735846929462310234955123214808466325504, true, 1, 0, 0)
+    }
+
+    public fun q_log2_down(arg0: u128) : 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128 {
+        q_out((arg0 as u256), 87112285931760246646623899502532662132736, 26328072917139296674479506920917608079723773850137277813577744384, false, 2, 191, 64)
+    }
+
+    public fun q_log2_up(arg0: u128) : 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128 {
+        q_out((arg0 as u256), 87112285931760246646623899502532662132736, 26328072917139296674479506920917608079723773850137277813577744384, true, 2, 191, 64)
+    }
+
+    fun q_out(arg0: u256, arg1: u256, arg2: u256, arg3: bool, arg4: u256, arg5: u256, arg6: u256) : 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128 {
+        assert!(arg0 > 0, 1);
+        let (v0, v1) = log_raw(arg0, arg1, arg2, arg3);
+        let (v2, v3) = snap(arg0, 18446744073709551616, arg4, arg5, arg6, arg3, v0, v1);
+        0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::from_parts(v2, (v3 as u128))
+    }
+
+    fun scaled(arg0: u256, arg1: u256, arg2: bool) : (bool, u256) {
+        if (arg0 >= arg1) {
+            if (arg2) {
+                (false, arg0 - arg1 + 22300745198530623141535718272648361505980415 >> 144)
+            } else {
+                (false, arg0 - arg1 >> 144)
+            }
+        } else if (arg2) {
+            (true, arg1 - arg0 >> 144)
+        } else {
+            (true, arg1 - arg0 + 22300745198530623141535718272648361505980415 >> 144)
+        }
+    }
+
+    fun sd1p_in(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18) : u256 {
+        let v0 = 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::unwrap(arg0);
+        if (0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i256::is_neg(v0)) {
+            let v2 = 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i256::abs_u(v0);
+            assert!(v2 < 1000000000000000000, 1);
+            1000000000000000000 - v2
+        } else {
+            0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i256::bits(v0) + 1000000000000000000
+        }
+    }
+
+    fun sd_in(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18) : u256 {
+        let v0 = 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::unwrap(arg0);
+        assert!(!0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i256::is_neg(v0), 1);
+        0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i256::bits(v0)
+    }
+
+    public fun sd_ln_down(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(sd_in(arg0), 3273295013171879848905885505232959985733, 924288542222312747990790371487003001700158833203020915389060975, false, 1, 0, 0)
+    }
+
+    public fun sd_ln_up(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(sd_in(arg0), 3273295013171879848905893317736685276032, 924288542222312747990781618860658422855527384316893771290779113, true, 1, 0, 0)
+    }
+
+    public fun sd_log10_down(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(sd_in(arg0), 1421573961861979425863760031587658990008, 401413413573551216547642928907670507107647488000000000000000000, false, 10, 59, 18)
+    }
+
+    public fun sd_log10_up(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(sd_in(arg0), 1421573961861979425863770100371913374068, 401413413573551216547642928907670507107647488000000000000000000, true, 10, 59, 18)
+    }
+
+    public fun sd_log1p_down(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(sd1p_in(arg0), 3273295013171879848905885505232959985733, 924288542222312747990790371487003001700158833203020915389060975, false, 1, 0, 0)
+    }
+
+    public fun sd_log1p_up(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(sd1p_in(arg0), 3273295013171879848905893317736685276032, 924288542222312747990781618860658422855527384316893771290779113, true, 1, 0, 0)
+    }
+
+    public fun sd_log2_down(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(sd_in(arg0), 4722366482869645213696000000000000000000, 1333466496214619870732766413302950505836707840000000000000000000, false, 2, 196, 18)
+    }
+
+    public fun sd_log2_up(arg0: 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18) : 0x723d0b53c1303f490de96eb95b133023ed5b73a0f23351d1484b72f4a1d959bd::sd18::SD18 {
+        dec_out(sd_in(arg0), 4722366482869645213696000000000000000000, 1333466496214619870732756968569984766546280448000000000000000000, true, 2, 196, 18)
+    }
+
+    fun snap(arg0: u256, arg1: u256, arg2: u256, arg3: u256, arg4: u256, arg5: bool, arg6: bool, arg7: u256) : (bool, u256) {
+        if (arg5) {
+            snap_up(arg0, arg1, arg2, arg3, arg4, arg6, arg7)
+        } else {
+            snap_down(arg0, arg1, arg2, arg3, arg4, arg6, arg7)
+        }
+    }
+
+    fun snap_down(arg0: u256, arg1: u256, arg2: u256, arg3: u256, arg4: u256, arg5: bool, arg6: u256) : (bool, u256) {
+        let (v0, v1) = if (!arg5) {
+            (false, arg6 + 1)
+        } else if (arg6 == 0) {
+            (false, 1)
+        } else {
+            (true, arg6 - 1)
+        };
+        if (v1 % arg1 == 0) {
+            let (v4, v5) = grid_pt(arg2, arg1, arg3, arg4, v0, v1 / arg1);
+            if (v4 && arg0 >= v5) {
+                (v0, v1)
+            } else {
+                (arg5, arg6)
+            }
+        } else {
+            (arg5, arg6)
+        }
+    }
+
+    fun snap_up(arg0: u256, arg1: u256, arg2: u256, arg3: u256, arg4: u256, arg5: bool, arg6: u256) : (bool, u256) {
+        let (v0, v1) = if (arg5) {
+            (true, arg6 + 1)
+        } else if (arg6 == 0) {
+            (true, 1)
+        } else {
+            (false, arg6 - 1)
+        };
+        if (v1 % arg1 == 0) {
+            let (v4, v5) = grid_pt(arg2, arg1, arg3, arg4, v0, v1 / arg1);
+            if (v4 && arg0 <= v5) {
+                (v0, v1)
+            } else {
+                (arg5, arg6)
+            }
+        } else {
+            (arg5, arg6)
+        }
+    }
+
+    fun sq1p_in(arg0: 0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::I128) : u256 {
+        if (0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::is_neg(arg0)) {
+            let v1 = (0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::abs_u(arg0) as u256);
+            assert!(v1 < 18446744073709551616, 1);
+            18446744073709551616 - v1
+        } else {
+            (0xa4029d0dabd86cd3f9050b0e2d6ac32cdbc9098c134c46c6ba7f40765b4b5afb::i128::bits(arg0) as u256) + 18446744073709551616
+        }
+    }
+
+    // decompiled from Move bytecode v7
+}
+
